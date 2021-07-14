@@ -1,5 +1,5 @@
 ---
-title: "Delta Scenarios"
+title: "Trade-offs and Co-benefits of Landscape Change Scenarios on Bird Communities and Ecosystem Services in the Sacramento-San Joaquin River Delta"
 output: html_document
 ---
 
@@ -7,9 +7,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Trade-offs and Co-benefits of Landscape Change Scenarios on Bird Communities and Ecosystem Services in the Sacramento-San Joaquin River Delta
-
-### **Delta Water Quality and Ecosystem Restoration Program Grant Agreement Number – Q1996022**
+## *Delta Water Quality and Ecosystem Restoration Program Grant Agreement Number – Q1996022*
 
 
 ### Project overview
@@ -27,21 +25,20 @@ agricultural landscapes to address two science needs:
 
 The specific objectives of this Project are to: 
 
-1. Synthesize scientific information on indicators of ecosystem services associated with land cover types that occur in the Delta. [Science synthesis report](http://www.prbo.org/refs/files/12650_PetersonCA2020.pdf) 
+1. Synthesize scientific information on indicators of ecosystem services associated with land cover types that occur in the Delta. **[Science synthesis report](http://www.prbo.org/refs/files/12650_PetersonCA2020.pdf)** 
 
-2. Model the distributions of waterbirds and riparian landbirds in the Delta, and identify high priority bird conservation areas in the Delta. [Summary report](http://www.prbo.org/refs/files/12713_DybalaKE2021.pdf)
+2. Model the distributions of waterbirds and riparian landbirds in the Delta, and identify high priority bird conservation areas in the Delta. **[Summary report](http://www.prbo.org/refs/files/12713_DybalaKE2021.pdf)**
 
 3. Evaluate the net impact of scenarios of landscape change on bird populations and 
-ecosystem services [**In progress**]
+ecosystem services [*In progress*]
 
 4. Develop a flexible, science-based framework for assessing the trade-offs and co-benefits 
-of landscape changes [**In progress**]
+of landscape changes [*In progress*]
 
 5. Engage with partners to demonstrate the need to consider trade-offs and co-benefits in making land use decisions and provide training in how to use our science-based framework.
 
 6. Disseminate results to the broader scientific community through scientific manuscripts and conference presentations.
 
-Scenarios of landscape change under development for analysis of the net effects of these changes on birds and select ecosystem service metrics. 
 
 
 ### Work currently in progress (updated July 2021)
@@ -57,4 +54,7 @@ Our baseline landscape is based on the [Delta Vegetation and Land Use Update 201
 Explore the draft scenarios, in comparison to the baseline landscape, here:
 
 [Initial draft scenarios](draft_scenarios.html)
+
+
+
 
