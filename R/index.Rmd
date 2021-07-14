@@ -1,0 +1,15 @@
+---
+title: "Delta Scenarios"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Delta Scenarios
+
+Scenarios of landscape change under development for analysis of the net effects of these changes on birds and select ecosystem service metrics. 
+
+* [Initial draft scenarios](draft_scenarios.html)
+
