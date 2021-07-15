@@ -49,7 +49,7 @@ Our baseline landscape is based on the [Delta Vegetation and Land Use Update 201
 
 1) A restoration scenario, in which the total area of riparian vegetation and non-tidal, seasonal wetlands are expanded to meet the [performance measures targets](https://deltacouncil.ca.gov/pdf/delta-plan/2020-04-15-draft-ch-04-pm-4-16.pdf) for the total area of each of these land covers by 2050, as identified in the proposed amendment to the Delta Plan, and
 
-2) A scenario of continued expansion of perennial crops and urban development with no restoration, adapted from projections for the year 2100 under the "Bad Business As Usual" scenario developed by [Wilson et al. (2021)](https://www.sciencebase.gov/catalog/item/6042c93fd34eb1203119dcaa), which is in turn based on historical regional trends of land conversion probabilities in the Central Valley.
+2) An orchard expansion scenario, in which historical regional trends of conversion rates continue through the year 2100, with no restoration or loss of existing wetland and riparian area. This scenario is adapted from projections developed by [Wilson et al. (2021)](https://www.sciencebase.gov/catalog/item/6042c93fd34eb1203119dcaa).
 
 Explore the draft scenarios, in comparison to the baseline landscape, here:
 
