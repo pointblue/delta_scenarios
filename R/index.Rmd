@@ -25,9 +25,9 @@ agricultural landscapes to address two science needs:
 
 The specific objectives of this Project are to: 
 
-1. Synthesize scientific information on indicators of ecosystem services associated with land cover types that occur in the Delta. **[Science synthesis report](http://www.prbo.org/refs/files/12650_PetersonCA2020.pdf)** 
+1. Synthesize scientific information on indicators of ecosystem services associated with land cover types that occur in the Delta. **[[View science synthesis report]](http://www.prbo.org/refs/files/12650_PetersonCA2020.pdf)** 
 
-2. Model the distributions of waterbirds and riparian landbirds in the Delta, and identify high priority bird conservation areas in the Delta. **[Summary report](http://www.prbo.org/refs/files/12713_DybalaKE2021.pdf)**
+2. Model the distributions of waterbirds and riparian landbirds in the Delta, and identify high priority bird conservation areas in the Delta. **[[View summary report]](http://www.prbo.org/refs/files/12713_DybalaKE2021.pdf)**
 
 3. Evaluate the net impact of scenarios of landscape change on bird populations and 
 ecosystem services [*In progress*]
