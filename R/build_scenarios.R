@@ -384,6 +384,36 @@ scenario_restoration <- lapp(
 writeRaster(scenario_restoration,
             'data/proposed_scenarios/waterbirds/DeltaPlan_restoration_objectives.tif')
 
+# calculate change in area of each land cover
+delta_restoration = calculate_change(baseline = veg_baseline_waterbird_fall,
+                                     scenario = scenario_restoration)
+delta_restoration %>%
+  mutate(label = recode(label,
+                        'ip' = 'irrigated pasture',
+                        'wheat' = 'grain',
+                        'row' = 'row/field crop',
+                        'field' = 'row/field crop',
+                        'wet' = 'wetland',
+                        'orch' = 'orchard/vineyard',
+                        'fal' = 'fallow',
+                        'dev' = 'urban',
+                        'woodw' = 'riparian',
+                        'dryp' = 'dryland pasture',
+                        'alf' = 'alfalfa',
+                        'duwet' = 'wetland')) %>%
+  group_by(label) %>%
+  summarize(change = sum(change), .groups = 'drop') %>%
+  arrange(change) %>%
+  plot_change(scale = 1000000) +
+  labs(x = NULL, y = bquote(' ' *Delta~ 'total area ('~km^2*')')) +
+  theme_bw() + coord_flip() +
+  theme(axis.text = element_text(size = 18),
+        axis.title = element_text(size = 18))
+ggsave('fig/delta_restoration.png', height = 7.5, width = 6)
+# large increase in riparian and wetland cover, mostly at the expense of
+# orchard/vineyard, but also alfalfa, pasture
+
+
 # compare/check conversions between layers
 tab = crosstab(c(veg_baseline_waterbird_fall %>% mask(delta),
                  scenario_restoration))
@@ -431,34 +461,7 @@ scenario_restoration_riparian <- classify(scenario_restoration,
 writeRaster(scenario_restoration_riparian,
             'data/proposed_scenarios/riparian/DeltaPlan_restoration_objectives.tif')
 
-# calculate change in area of each land cover
-delta_restoration = calculate_change(baseline = veg_baseline_waterbird_fall,
-                                 scenario = scenario_restoration)
-delta_restoration %>%
-  mutate(label = recode(label,
-                         'ip' = 'irrigated pasture',
-                         'wheat' = 'grain',
-                         'row' = 'row/field crop',
-                         'field' = 'row/field crop',
-                         'wet' = 'wetland',
-                         'orch' = 'orchard/vineyard',
-                         'fal' = 'fallow',
-                         'dev' = 'urban',
-                         'woodw' = 'riparian',
-                         'dryp' = 'dryland pasture',
-                         'alf' = 'alfalfa',
-                         'duwet' = 'wetland')) %>%
-  group_by(label) %>%
-  summarize(change = sum(change), .groups = 'drop') %>%
-  arrange(change) %>%
-  plot_change(scale = 1000000) +
-  labs(x = NULL, y = bquote(' ' *Delta~ 'total area ('~km^2*')')) +
-  theme_bw() + coord_flip() +
-  theme(axis.text = element_text(size = 18),
-        axis.title = element_text(size = 18))
-ggsave('fig/delta_restoration.png', height = 7.5, width = 6)
-# large increase in riparian and wetland cover, mostly at the expense of
-# orchard/vineyard, but also alfalfa, pasture
+
 
 # compare/check conversions between layers
 tab = crosstab(c(veg_baseline_riparian %>% mask(delta),
@@ -481,6 +484,8 @@ tab %>% as_tibble() %>%
 #    no conversion from RICE, URBAN, WETLAND, or WATER
 # - wetland: 89% existing WETLAND; most conversion from GRASSPAS (6%), rice (2%);
 #    no conversion from URBAN, RIPARIAN, WATER, OAKWOODLAND, BARREN
+
+
 
 # SCENARIO 2. Perennial crop expansion---------
 # based on the Wilson et al. (2021) BBAU ("bad business as usual") scenario for
@@ -569,7 +574,7 @@ writeRaster(scenario_orchard_refine,
 
 
 # compare
-tab = crosstab(c(veg_baseline_waterbird_fall, scenario_bbau_fill))
+tab = crosstab(c(veg_baseline_waterbird_fall, scenario_orchard_refine))
 tab %>% as_tibble() %>%
   set_names(c('baseline', 'bbau', 'n')) %>%
   mutate_at(vars(baseline:bbau), as.numeric) %>%
@@ -586,6 +591,41 @@ tab %>% as_tibble() %>%
   # filter(bbau_landuse == 'orch')
   filter(bbau_landuse == 'wet')
 
+
+scenario_orchard_riparian <- classify(scenario_orchard_refine,
+                                   rcl = matrix(c(2, 20, #corn = AG
+                                                  3, 30, #rice = RICE
+                                                  4, 50, #ip = GRASSPAS
+                                                  5, 20, #wheat = AG
+                                                  6, 20, #row = AG
+                                                  7, 20, #field = AG
+                                                  8, 80, #wet = WETLAND
+                                                  9, 10, #orch = ORCHVIN
+                                                  10, 20, #grain = AG
+                                                  11, 40, #fallow = IDLE
+                                                  12, 60, #dev = URBAN
+                                                  13, 100, #forest = OAKWOODLAND/WOODLAND/SCRUB
+                                                  14, 90, #water = WATER
+                                                  15, 70, #woodw = RIPARIAN
+                                                  16, 50, #dryp = GRASSPAS
+                                                  17, 50, #alfalfa = GRASSPAS
+                                                  18, 80, #duwet = WETLAND
+                                                  99, 130), #barren = BARREN
+                                                byrow = TRUE, ncol = 2)
+)
+levels(scenario_orchard_riparian) <- rkey %>%
+  filter(type == 'veg' & code != 999) %>%
+  select(id = code, label = group) %>% as.data.frame()
+coltab(scenario_orchard_riparian) <- rkey %>%
+  filter(type == 'veg' & !code %in% c(110, 120, 999)) %>%
+  select(code) %>%
+  mutate(col = c('#9400D3', '#32CD32', '#FF1493', '#CCCCCC', '#FFE4C4',
+                 '#4D4D4D', '#FF0000', '#00008B', '#87CEFA', '#8B4513',
+                 '#FFFFFF')) %>%
+  complete(code = c(0:255)) %>% pull(col)
+plot(scenario_orchard_riparian)
+writeRaster(scenario_orchard_riparian,
+            'data/proposed_scenarios/riparian/orchard_expansion.tif')
 
 
 # SCENARIO X. Projected land use------
@@ -998,7 +1038,7 @@ full_join(area_baseline_rip, area_bbau_rip, by = c('baseline' = 'bbau')) %>%
 # increase primarily in: URBAN, ORCHVIN
 # decrease primarily in: GRASSPAS, IDLE, AG; also RIPARIAN, RICE, OAKWOODLAND, BARREN
 
-# SCENARIO 3. Flood risk?-----------
+# SCENARIO X. Flood risk?-----------
 # first combine separate layers representing flood risk
 filelist = paste0('GIS/DeltaAdapts/',
                   list.files('GIS/DeltaAdapts',
