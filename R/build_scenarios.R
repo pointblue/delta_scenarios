@@ -431,6 +431,34 @@ scenario_restoration_riparian <- classify(scenario_restoration,
 writeRaster(scenario_restoration_riparian,
             'data/proposed_scenarios/riparian/DeltaPlan_restoration_objectives.tif')
 
+# calculate change in area of each land cover
+delta_restoration = calculate_change(baseline = veg_baseline_waterbird_fall,
+                                 scenario = scenario_restoration)
+delta_restoration %>%
+  mutate(label = recode(label,
+                         'ip' = 'irrigated pasture',
+                         'wheat' = 'grain',
+                         'row' = 'row/field crop',
+                         'field' = 'row/field crop',
+                         'wet' = 'wetland',
+                         'orch' = 'orchard/vineyard',
+                         'fal' = 'fallow',
+                         'dev' = 'urban',
+                         'woodw' = 'riparian',
+                         'dryp' = 'dryland pasture',
+                         'alf' = 'alfalfa',
+                         'duwet' = 'wetland')) %>%
+  group_by(label) %>%
+  summarize(change = sum(change), .groups = 'drop') %>%
+  arrange(change) %>%
+  plot_change(scale = 1000000) +
+  labs(x = NULL, y = bquote(' ' *Delta~ 'total area ('~km^2*')')) +
+  theme_bw() + coord_flip() +
+  theme(axis.text = element_text(size = 18),
+        axis.title = element_text(size = 18))
+ggsave('fig/delta_restoration.png', height = 7.5, width = 6)
+# large increase in riparian and wetland cover, mostly at the expense of
+# orchard/vineyard, but also alfalfa, pasture
 
 # compare/check conversions between layers
 tab = crosstab(c(veg_baseline_riparian %>% mask(delta),
@@ -501,6 +529,29 @@ plot_change(delta_orchard, scale = 1000000) +
   labs(x = NULL, y = 'km^2') + theme_bw()
 # large increase in orchard cover, at the expense of most others, especially
 # row, alfalfa, corn, fallow, but also water and wet
+delta_orchard %>%
+  mutate(label = recode(label,
+                        'ip' = 'irrigated pasture',
+                        'wheat' = 'grain',
+                        'row' = 'row/field crop',
+                        'field' = 'row/field crop',
+                        'wet' = 'wetland',
+                        'orch' = 'orchard/vineyard',
+                        'fal' = 'fallow',
+                        'dev' = 'urban',
+                        'woodw' = 'riparian',
+                        'dryp' = 'dryland pasture',
+                        'alf' = 'alfalfa',
+                        'duwet' = 'wetland')) %>%
+  group_by(label) %>%
+  summarize(change = sum(change), .groups = 'drop') %>%
+  arrange(change) %>%
+  plot_change(scale = 1000000) +
+  labs(x = NULL, y = bquote(' ' *Delta~ 'total area ('~km^2*')')) +
+  theme_bw() + coord_flip() +
+  theme(axis.text = element_text(size = 18),
+        axis.title = element_text(size = 18))
+ggsave('fig/delta_orchard.png', height = 7.5, width = 6)
 
 levels(scenario_orchard_refine) <- wkey %>% select(id = code, label) %>%
   as.data.frame()
