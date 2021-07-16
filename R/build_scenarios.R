@@ -613,52 +613,7 @@ writeRaster(scenario_orchard_riparian,
 
 # INTERACTIVE MAP-----------
 
-map_scenarios = function(rast, key,
-                         leg_title = 'Land Cover Class') {
-  scenarios = terra::project(
-    rast,
-    y = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-    method = 'near') %>%
-    raster::stack()
-  names(scenarios) = names(rast)
 
-  pal <- leaflet::colorFactor(
-    palette = key$col,
-    domain = key$value,
-    alpha = TRUE,
-    na.color = 'transparent')
-
-  # allow multiple raster values to map to the same color/label
-  key_simple <- key %>% select(label, col) %>% distinct()
-
-  m <- leaflet::leaflet(scenarios[[1]]) %>%
-
-    # background terrain
-    leaflet::addProviderTiles("Stamen.TonerLite") %>%
-
-    # add layers control
-    leaflet::addLayersControl(
-      position = 'bottomleft',
-      options = leaflet::layersControlOptions(collapsed = F),
-      baseGroups = names(scenarios)) %>%
-
-    # add legend
-    leaflet::addLegend("topright",
-                       labels = key_simple$label,
-                       colors = key_simple$col,
-                       title = leg_title,
-                       opacity = 1)
-
-  ## add rasters
-  for (i in c(1:raster::nlayers(scenarios))) {
-    m <- m %>%
-      leaflet::addRasterImage(x = scenarios[[i]],
-                              group = names(scenarios)[i],
-                              colors = pal, opacity = 0.7,
-                              project = FALSE)
-    }
-  return(m)
-}
 
 # best to set the names of the raster layers (will transfer to the selector)
 testmap = map_scenarios(rast = c(veg_baseline_waterbird_fall,
