@@ -444,14 +444,15 @@ writeRaster(scenario_restoration,
             'data/proposed_scenarios/waterbirds/DeltaPlan_restoration_objectives.tif')
 
 # calculate change in area of each land cover
-delta_restoration = calculate_change(baseline = veg_baseline_waterbird_fall,
-                                     scenario = scenario_restoration)
+delta_restoration = DeltaMultipleBenefits::calculate_change(
+  baseline = veg_baseline_waterbird_fall,
+  scenario = scenario_restoration)
 delta_restoration %>%
   left_join(wkey %>% select(label.base = shortlab, label), by = 'label.base') %>%
   group_by(label) %>%
   summarize(change = sum(change), .groups = 'drop') %>%
   arrange(change) %>%
-  plot_change(scale = 1000000) +
+  DeltaMultipleBenefits::plot_change(scale = 1000000) +
   labs(x = NULL, y = bquote(' ' *Delta~ 'total area ('~km^2*')')) +
   theme_bw() + coord_flip() +
   theme(axis.text = element_text(size = 18),
@@ -484,7 +485,7 @@ tab %>% as_tibble() %>%
 #    no conversion from wet, dev, forest, water, woodw, or barren
 
 # convert encoding for use with riparian models
-scenario_restoration_riparian <- reclassify_ripmodels(scenario_restoration)
+scenario_restoration_riparian <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_restoration)
 levels(scenario_restoration_riparian) <- rkey %>%
   select(id = code, label = group) %>% as.data.frame()
 coltab(scenario_restoration_riparian) <- rkey %>% select(code, col) %>%
@@ -524,15 +525,15 @@ tab %>% as_tibble() %>%
 # the year 2100, including historically high rates of perennial crop expansion;
 # no restoration
 
-skey = read_csv('GIS/State Class Rasters/key.csv')
+skey = readr::read_csv('GIS/State Class Rasters/key.csv')
 
-bbau = rast('GIS/State Class Rasters/scn421.sc.it1.ts2100.tif') %>%
-  project(veg_baseline_waterbird_fall, method = 'near') %>%
-  mask(veg_baseline_waterbird_fall) %>%
+bbau = terra::rast('GIS/State Class Rasters/scn421.sc.it1.ts2100.tif') %>%
+  terra::project(veg_baseline_waterbird_fall, method = 'near') %>%
+  terra::mask(veg_baseline_waterbird_fall) %>%
   # keep only the footprint of expanded perennial crops (code=20) - reclassify
   # to waterbird code for orch (9); all others convert to NA
-  classify(rcl = matrix(c(20, 9), byrow = TRUE, ncol = 2),
-           othersNA = TRUE)
+  terra::classify(rcl = matrix(c(20, 9), byrow = TRUE, ncol = 2),
+                  othersNA = TRUE)
 # note: missing southwest corner of Delta
 
 # allow orchard footprint from bbau scenario to cover baseline footprint, except
@@ -540,35 +541,41 @@ bbau = rast('GIS/State Class Rasters/scn421.sc.it1.ts2100.tif') %>%
 #   dev (12), water (14), woodw (15), wetland (8), duwet (18)
 # (all else unchanged)
 
-exclude = classify(veg_baseline_waterbird_fall,
-                   rcl = matrix(c(8, 8,
-                                  12, 12,
-                                  14, 14,
-                                  15, 15,
-                                  18, 18), byrow = TRUE, ncol = 2),
-                   othersNA = TRUE)
+exclude = terra::classify(veg_baseline_waterbird_fall,
+                          rcl = matrix(c(8, 8,
+                                         12, 12,
+                                         14, 14,
+                                         15, 15,
+                                         18, 18),
+                                       byrow = TRUE, ncol = 2),
+                          othersNA = TRUE)
 
-scenario_orchard = cover(bbau, veg_baseline_waterbird_fall)
-scenario_orchard_refine = cover(exclude, scenario_orchard)
-levels(scenario_orchard_refine) <- wkey %>% select(id = code, shortlab) %>%
+scenario_orchard = terra::cover(bbau, veg_baseline_waterbird_fall)
+scenario_orchard_refine = terra::cover(exclude, scenario_orchard)
+levels(scenario_orchard_refine) <- wkey %>%
+  dplyr::select(id = code, shortlab) %>%
   as.data.frame()
-coltab(scenario_orchard_refine) <- wkey %>% select(code, col) %>%
-  complete(code = c(0:255)) %>% pull(col)
+coltab(scenario_orchard_refine) <- wkey %>%
+  dplyr::select(code, col) %>%
+  tidyr::complete(code = c(0:255)) %>%
+  dplyr::pull(col)
 names(scenario_orchard_refine) = 'scenario_orchard_expansion'
-writeRaster(scenario_orchard_refine,
-            'data/proposed_scenarios/waterbirds/orchard_expansion.tif')
+terra::writeRaster(
+  scenario_orchard_refine,
+  'data/proposed_scenarios/waterbirds/orchard_expansion.tif')
 # Note: levels may not be saved, but colors are?
 
 
 # calculate change in area of each land cover
-delta_orchard = calculate_change(baseline = veg_baseline_waterbird_fall,
-                                 scenario = scenario_orchard_refine)
+delta_orchard = DeltaMultipleBenefits::calculate_change(
+  baseline = veg_baseline_waterbird_fall,
+  scenario = scenario_orchard_refine)
 delta_orchard %>%
   left_join(wkey %>% select(label.base = shortlab, label), by = 'label.base') %>%
   group_by(label) %>%
   summarize(change = sum(change), .groups = 'drop') %>%
   arrange(change) %>%
-  plot_change(scale = 1000000) +
+  DeltaMultipleBenefits::plot_change(scale = 1000000) +
   labs(x = NULL, y = bquote(' ' *Delta~ 'total area ('~km^2*')')) +
   theme_bw() + coord_flip() +
   theme(axis.text = element_text(size = 18),
@@ -597,7 +604,7 @@ tab %>% as_tibble() %>%
   filter(bbau_landuse == 'wet')
 
 
-scenario_orchard_riparian <- reclassify_ripmodels(scenario_orchard_refine)
+scenario_orchard_riparian <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_orchard_refine)
 levels(scenario_orchard_riparian) <- rkey %>%
   select(id = code, label = group) %>% as.data.frame()
 coltab(scenario_orchard_riparian) <- rkey %>% select(code, col) %>%
@@ -616,10 +623,12 @@ writeRaster(scenario_orchard_riparian,
 
 
 # best to set the names of the raster layers (will transfer to the selector)
-testmap = map_scenarios(rast = c(veg_baseline_waterbird_fall,
-                                 scenario_restoration,
-                                 scenario_orchard_refine),
-                        key = wkey %>% select(value = code, col, label))
+testmap = DeltaMultipleBenefits::map_scenarios(
+  rast = c(veg_baseline_waterbird_fall,
+           scenario_restoration,
+           scenario_orchard_refine),
+  key = wkey %>% select(value = code, col, label))
+
 ## add delta boundary
 delta_poly = read_sf('V:/Data/geopolitical/california/Legal_Delta_Boundary/Legal_Delta_Boundary.shp') %>%
   st_transform(crs("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"))
