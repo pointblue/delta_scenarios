@@ -137,7 +137,7 @@ base = veg_baseline_waterbird_fall %>%
   freq() %>%
   filter(label %in% c('woodw', 'duwet')) %>%
   mutate(current_ha = count * 30 * 30 / 10000)
-# wetlands = 7,756 ha (consider 'du wetlands' only)
+# wetlands = 7,756 ha (consider managed wetlands only)
 # riparian = 8,019 ha
 
 targets = full_join(
@@ -148,26 +148,30 @@ targets = full_join(
 # riparian: 4,587 ha
 # wetlands: 1,733 ha
 
+## planned restoration---------
+# - ecorestore (already planned/under way)
+ecorestore = rast('GIS/DSLPT_Ecorestore.tif')
+base_plus_ecorestore = cover(ecorestore, veg_baseline_waterbird_fall)
+base_plus = base_plus_ecorestore %>%
+  mask(delta) %>%
+  freq() %>% as_tibble() %>%
+  filter(value %in% c(15, 18)) %>%
+  mutate(label = recode(value,
+                        '15' = 'woodw', '18' = 'duwet')) %>%
+  mutate(ecorestore_ha = count * 30 * 30 / 10000)
+targets_plus = full_join(
+  targets %>% select(label, total_ha),
+  base_plus %>% select(label, ecorestore_ha),
+  by = 'label') %>%
+  mutate(add_ha = total_ha - ecorestore_ha)
+# riparian: 4,601 ha (increased!)
+# wetlands: 931 ha
 
-## rank priority restoration locations-----
-## ASSUMPTIONS/QUESTIONS:
-## - minimum size of restoration to consider (is 1 acre reasonable?)
-## - feasibility of restoration on protected land, easements, public land?
-##   (and does it matter for this hypothetical?)
-## - more of a priority to focus restoration in "priority restoration areas" or
-##    protected land? [relevant mainly to wetlands]
-
-# exclude areas that are already wetland or riparian; also already urban or
+## restoration potential--------
+# (excluding areas that are already wetland or riparian; also already urban or
 # water (assume permanent)
-exclude = classify(veg_baseline_waterbird_fall,
-                   rcl = matrix(c(8, NA, #wetland
-                                  12, NA, #dev
-                                  14, NA, # water
-                                  15, NA, # woodw
-                                  18, NA), #duwet
-                                byrow = TRUE, ncol = 2))
+exclude = subst(base_plus_ecorestore, c(8, 12, 14, 15, 18), NA)
 
-# input data
 restoration_stack = c(rast('GIS/habpotential.tif'), #7000 = riparian, 8000 = wetland
                       rast('GIS/restorationpriority.tif'), # 100 = priority
                       rast('GIS/zoning.tif'), #10 = open space/recreation; 20 = public/quasi=public; 90 = designated for development
@@ -179,144 +183,122 @@ restoration_stack = c(rast('GIS/habpotential.tif'), #7000 = riparian, 8000 = wet
 # sum scores to classify each pixel with multiple pieces of data
 restoration_targets = sum(restoration_stack, na.rm = TRUE)
 
+# rank priority restoration locations:
+# - prioritize "priority restoration area" and protected land within potential
+
 # group pixels by priority for pixels classified as potential riparian & wetland
 restoration_targets_rip = classify(
   restoration_targets,
   rcl = matrix(c(0, 7000, NA,
-                 7000, 7001, 5, #potential but not priority, open space, or protected
-                 7001, 7003, 3, #potential but not priority; not open space but protected
-                 7010, 7011, 4, #potential but not priority; open space, unprotected
-                 7011, 7013, 3, #potential but not priority; open space, protected
-                 7020, 7021, 4, #potential but not priority; public/quasi-public, unprotected
-                 7090, 7092, 9, #potential but not priority, designed for development
-                 7100, 7101, 2, #priority, unprotected
                  7101, 7103, 1, #priority, protected
-                 7110, 7111, 2, #priority, open space, unprotected
-                 7111, 7113, 1, #priority, open space, protected
+                 7111, 7113, 1, #priority, protected, open space
+                 7100, 7101, 2, #priority, unprotected
+                 7110, 7111, 2, #priority, unprotected, open space
+                 7001, 7003, 3, #not priority, protected
+                 7011, 7013, 3, #not priority, protected, open space
+                 7010, 7011, 4, #not priority, unprotected, open space
+                 7020, 7021, 4, #not priority, unprotected, public/quasi-public
+                 7000, 7001, 5, #not priority, unprotected, not open space
+                 7090, 7092, 9, #not priority, designated for development
                  7190, Inf, NA),
-               byrow = TRUE, ncol = 3)
-)
+               byrow = TRUE, ncol = 3))
 writeRaster(restoration_targets_rip, 'GIS/restoration_targets_riparian.tif')
 
 restoration_targets_wet = classify(
   restoration_targets,
   rcl = matrix(c(0, 8000, NA,
-                 8000, 8001, 5, #potential but not priority, open space, or protected
-                 8001, 8003, 3, #potential but not priority; not open space but protected
-                 8010, 8011, 4, #potential but not priority; open space, unprotected
-                 8011, 8013, 3, #potential but not priority; open space, protected
-                 8020, 8021, 4, #potential but not priority; public/quasi-public, unprotected
-                 8021, 8023, 3, #potential but not priority; public/quasi-public, protected
-                 8090, 8092, 9, #potential but not priority, designed for development
-                 8100, 8101, 2, #priority, unprotected
                  8101, 8103, 1, #priority, protected
-                 8110, 8111, 2, #priority, open space, unprotected
-                 8111, 8113, 1, #priority, open space, protected
+                 8111, 8113, 1, #priority, protected, open space
+                 8100, 8101, 2, #priority, unprotected
+                 8110, 8111, 2, #priority, unprotected, open space
+                 8001, 8003, 3, #not priority, protected
+                 8011, 8013, 3, #not priority, protected, open space
+                 8021, 8023, 3, #not priority, protected, public/quasi-public
+                 8010, 8011, 4, #not priority, unprotected, open space
+                 8020, 8021, 4, #not priority, unprotected, public/quasi-public
+                 8000, 8001, 5, #not priority, unprotected
+                 8090, 8092, 9, #not priority, designated for development
                  8190, Inf, NA),
-               byrow = TRUE, ncol = 3)
-)
+               byrow = TRUE, ncol = 3))
 writeRaster(restoration_targets_wet, 'GIS/restoration_targets_wetlands.tif')
 
+## ASSUMPTIONS/QUESTIONS:
+## - minimum size of restoration to consider (is 1 acre reasonable?)
+## - feasibility of restoration on protected land, easements, public land?
+##   (and does it matter for this hypothetical?)
+## - more of a priority to focus restoration in "priority restoration areas" or
+##    protected land? [relevant mainly to wetlands]
 
-## riparian restoration-----
-# approach: select pixels by priority, but exclude very small patches of
-# potential riparian compare area of each priority level vs. objective; when not
-# all of a priority level is needed, randomly select a subset that will meet the
-# restoration objective
-#
-# objective: 4324 ha added
+### add riparian restoration-----
+# approach: select pixels by priority rankings as above
+# - exclude very small patches of potential riparian (minimum 1 acre?)
+# - compare remaining total area of each priority level vs. objective
+# - when not all of a priority level is needed, randomly select a subset that
+#     will meet the restoration objective
+# objective: 4601 ha added
 
-targets_area_rip = values(restoration_targets_rip) %>%
-  table() %>% as_tibble() %>%
-  set_names('code', 'n') %>%
-  mutate(area.ha = n * 30 * 30 / 10000,
-         code = as.numeric(code),
+targets_area_rip = freq(restoration_targets_rip) %>% as_tibble() %>%
+  mutate(area.ha = count * 30 * 30 / 10000,
          tot.ha = cumsum(area.ha))
-#  code     n area.ha tot.ha
-# <dbl> <int>   <dbl>  <dbl>
-#     1   616    55.4   55.4 # priority & protected
-#     2 12400  1116   1171.  # priority & unprotected
-#     3  2243   202.  1373.  # not priority but protected
-#     4  4342   391.  1764.  # not priority or protected but open space/quasi-public
-#     5 43319  3899.  5663.  # other potential riparian habitat
-#     9  7206   649.  6311.  # designated for development
+# --> to reach target, will need priority levels 1-4 plus some of level 5
 
-# --> to reach target of 4324 ha, will need most/all of priority levels 1-4 plus
-# some of priority level 5
-
-# PRIORITY LEVELS 1-4:
+# find patches in priority levels 1-4 of at least 1 acre (0.4 ha):
 # (exclude areas designated for development & priority level 5 for now)
-rip_targets1 = classify(restoration_targets_rip,
-                        rcl = matrix(c(5, NA,
-                                       9, NA),
-                                     byrow = TRUE, ncol = 2))
-
-# find patches & exclude those < 1 acre (0.4 ha) in size
-rip_targets1_patches = patches(rip_targets1, directions = 8)
-
-rip_targets1_keepID = values(rip_targets1_patches) %>%
-  table() %>% as_tibble() %>%
-  set_names(c('patchID', 'n')) %>%
-  mutate(area.ha = n * 30 * 30 / 10000) %>%
+rip_targets1 = subst(restoration_targets_rip, c(5, 9), NA) %>%
+  patches(directions = 8)
+rip_targets1_keepID = freq(rip_targets1) %>% as_tibble() %>%
+  mutate(area.ha = count * 30 * 30 / 10000) %>%
   filter(area.ha >= 0.4) %>%
-  pull(patchID)
+  pull(value)
+# classify all included patch IDs as riparian; rest to NA
+rip_targets1_keep = classify(rip_targets1,
+                             rcl = tibble(from = rip_targets1_keepID,
+                                          to = 15) %>% as.matrix(),
+                             othersNA = TRUE)
 
-keep = function(x, y) {
-  ifelse(x %in% y, 1, NA)
-}
-
-rip_targets1_keep = lapp(rip_targets1_patches,
-                         y = rip_targets1_keepID,
-                         fun = keep)
-
-# EVALUATE PRIORITY LEVEL 5:
 # how much additional area needed from priority level 5?
-rip_need2 = targets %>% filter(habitat == 'riparian') %>% pull(add.ha) - values(rip_targets1_patches) %>%
-  table() %>% as_tibble() %>%
-  set_names(c('patchID', 'n')) %>%
-  mutate(area.ha = n * 30 * 30 / 10000) %>%
-  filter(area.ha >= 0.4) %>%
+rip_need = targets_plus %>% filter(label == 'woodw') %>% pull(add_ha) -
+  freq(rip_targets1_keep) %>% as_tibble() %>%
+  mutate(area.ha = count * 30 * 30 / 10000) %>%
   pull(area.ha) %>% sum()
-# 2691.4 ha
+# 2975.371 ha
 
-rip_targets2 = classify(restoration_targets_rip,
-                        rcl = matrix(c(0, 5, NA,
-                                       6, Inf, NA),
-                                     byrow = TRUE, ncol = 3))
-
-rip_targets2_patches = patches(rip_targets2, directions = 8)
-
-rip_targets2_consider = values(rip_targets2_patches) %>%
-  table() %>% as_tibble() %>%
-  set_names(c('patchID', 'n')) %>%
-  mutate(area.ha = n * 30 * 30 / 10000) %>%
+rip_targets2 = subst(restoration_targets_rip, c(0:4,9), NA) %>%
+  patches(directions = 8)
+rip_targets2_consider = freq(rip_targets2) %>% as_tibble() %>%
+  mutate(area.ha = count * 30 * 30 / 10000) %>%
   filter(area.ha >= 0.4) %>%
   arrange(desc(area.ha)) %>%
   mutate(weight = area.ha / sum(area.ha))
-
-# random sample of priority level 5 patches > 1 acre, weighted by size
-rip_targets2_sampleorder = sample(rip_targets2_consider %>% pull(patchID),
+# take random sample of priority level 5 patches > 1 acre
+rip_targets2_sampleorder = sample(rip_targets2_consider %>% pull(value),
+                                  # weight by size? (leave out for now)
                                   # prob = rip_targets2_consider %>% pull(weight),
                                   nrow(rip_targets2_consider), replace = FALSE)
-
 rip_targets2_considerorder = rip_targets2_consider %>%
-  mutate(patchID = factor(patchID, levels =  rip_targets2_sampleorder)) %>%
-  arrange(patchID) %>%
+  mutate(value = factor(value, levels =  rip_targets2_sampleorder)) %>%
+  arrange(value) %>%
   mutate(tot.ha = cumsum(area.ha))
-
-# stop when cumulative sum reaches/exceeds target
+# keep all up until cumulative sum reaches/exceeds target
 rip_targets2_keepID = rip_targets2_considerorder %>%
-  filter(tot.ha <= rip_targets2_considerorder %>% filter(tot.ha > rip_need2) %>%
+  filter(tot.ha <=
+           rip_targets2_considerorder %>% filter(tot.ha > rip_need) %>%
            slice(1) %>% pull(tot.ha)) %>%
-  pull(patchID)
-
-rip_targets2_keep = lapp(rip_targets2_patches,
-                         y = rip_targets2_keepID,
-                         fun = keep)
+  pull(value)
+# classify all included patch IDs as riparian; rest to NA
+rip_targets2_keep = classify(rip_targets2,
+                             rcl = tibble(from = rip_targets2_keepID %>%
+                                            as.character() %>% as.numeric(),
+                                          to = 15) %>% as.matrix(),
+                             othersNA = TRUE)
 
 # COMBINE PROPOSED RIPARIAN RESTORATION
 # (convert all other patch IDs to NA)
-rip_targets_final = cover(rip_targets1_keep, rip_targets2_keep)
+rip_targets_final = ecorestore %>% subst(c(0:14,16:18), NA) %>%
+  cover(rip_targets1_keep) %>%
+  cover(rip_targets2_keep)
+freq(rip_targets_final) %>% as_tibble() %>% pull(count) * 30 * 30 / 10000
+# adding 4880.25 ha
 writeRaster(rip_targets_final,
             'GIS/restoration_targets_riparian_objectives.tif')
 
