@@ -645,39 +645,80 @@ plot(maxfloodrisk)
 
 writeRaster(maxfloodrisk, 'GIS/floodrisk2085.tif')
 
-# scenario assumption: all "very high" flood risk areas become wetlands
+# scenario assumption: all "very high" flood risk areas become wetlands, and
+# all perennial crops move out of "high" and "medium" risk areas
+
+## very high risk------
 veryhigh = classify(maxfloodrisk,
                     rcl = matrix(c(4, 18), byrow = TRUE, ncol = 2),
                     othersNA = TRUE)
 plot(veryhigh)
 
-# except pixels that are already water, riparian, urban
+# except pixels that are already water, riparian, urban, wet
 exclude = classify(veg_baseline_waterbird_fall,
-                   rcl = matrix(c(12, 12,
+                   rcl = matrix(c(8, 8,
+                                  12, 12,
                                   14, 14,
                                   15, 15),
                                 byrow = TRUE, ncol = 2),
                    othersNA = TRUE)
 
 # overlay on baseline
-scenario_floodrisk = cover(veryhigh, veg_baseline_waterbird_fall) %>%
+veryhigh_wetlands = cover(veryhigh, veg_baseline_waterbird_fall) %>%
   mask(veg_baseline_waterbird_fall) #exclude some extra areas in Suisun
-scenario_floodrisk_refine = cover(exclude, scenario_floodrisk)
+veryhigh_wetlands_refine = cover(exclude, veryhigh_wetlands)
+plot(veryhigh_wetlands_refine)
 
-levels(scenario_floodrisk_refine) <- wkey %>% select(id = code, shortlab) %>%
+# calculate change in area of each land cover
+delta_veryhigh = DeltaMultipleBenefits::calculate_change(
+  baseline = veg_baseline_waterbird_fall,
+  scenario = veryhigh_wetlands_refine)
+# lots of corn, alf, row lost
+
+## high & medium flood risk-----
+
+# identify contiguous patches of orchard pixels in the high and medium flood
+# risk areas
+highmed = subst(maxfloodrisk, c(0:1,4), NA)
+highmed_orch_patches = mask(veg_baseline_waterbird_fall, highmed) %>%
+  subst(c(0:8,10:99), NA) %>%
+  patches()
+plot(highmed_orch_patches)
+
+# map each contiguous patch of orchard to a new randomly selected crop, weighted
+# by the proportion lost to wetlands in the "very high" risk islands:
+prop_sample = delta_veryhigh %>%
+  select(value, label, change) %>%
+  filter(change<0 & !label %in% c('orch', 'forest', 'fal', 'barren', 'rice')) %>%
+  mutate(change = abs(change),
+         prop = change / sum(change))
+# --> a tiny proportion was rice; exclude because requires specific soil
+# properties
+
+new_crops = tibble(patchID = c(1:minmax(highmed_orch_patches)[2]),
+                   newID = sample(prop_sample$value,
+                                  minmax(highmed_orch_patches)[2],
+                                  replace = TRUE,
+                                  prob = prop_sample$prop))
+replace_orchard = classify(highmed_orch_patches,
+                           rcl = as.matrix(new_crops))
+
+## overlay on baseline------
+scenario_floodrisk = cover(replace_orchard, veryhigh_wetlands_refine)
+levels(scenario_floodrisk) <- wkey %>% select(id = code, shortlab) %>%
   as.data.frame()
-coltab(scenario_floodrisk_refine) <- wkey %>% select(code, col) %>%
+coltab(scenario_floodrisk) <- wkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
-names(scenario_floodrisk_refine) = 'scenario_floodrisk'
-writeRaster(scenario_floodrisk_refine,
+names(scenario_floodrisk) = 'scenario_floodrisk'
+writeRaster(scenario_floodrisk,
             'data/proposed_scenarios/waterbirds/DeltaAdapts_floodrisk.tif')
 
-plot(scenario_floodrisk_refine)
+plot(scenario_floodrisk)
 
 # calculate change in area of each land cover
 delta_floodrisk = DeltaMultipleBenefits::calculate_change(
   baseline = veg_baseline_waterbird_fall,
-  scenario = scenario_floodrisk_refine)
+  scenario = scenario_floodrisk)
 delta_floodrisk %>%
   left_join(wkey %>% select(label.base = shortlab, label), by = 'label.base') %>%
   group_by(label) %>%
@@ -694,7 +735,7 @@ ggsave('fig/delta_floodrisk.png', height = 7.5, width = 6)
 
 
 # convert to riparian
-scenario_floodrisk_riparian <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_floodrisk_refine)
+scenario_floodrisk_riparian <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_floodrisk)
 levels(scenario_floodrisk_riparian) <- rkey %>%
   select(id = code, label = group) %>% as.data.frame()
 coltab(scenario_floodrisk_riparian) <- rkey %>% select(code, col) %>%
@@ -711,7 +752,7 @@ writeRaster(scenario_floodrisk_riparian,
 mapstack = c(veg_baseline_waterbird_fall,
              scenario_restoration,
              scenario_orchard_refine,
-             scenario_floodrisk_refine)
+             scenario_floodrisk)
 names(mapstack) = c('baseline', 'scenario_restoration',
                     'scenario_orchard_expansion', 'scenario_flood_risk')
 
