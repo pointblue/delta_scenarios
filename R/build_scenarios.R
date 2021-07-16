@@ -53,6 +53,7 @@ levels(veg_baseline_waterbird_fall) <- wkey %>% select(id = code, shortlab) %>%
   as.data.frame()
 coltab(veg_baseline_waterbird_fall) <- wkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
+names(veg_baseline_waterbird_fall) = 'baseline'
 writeRaster(veg_baseline_waterbird_fall, 'data/veg_baseline_waterbird_fall.tif')
 
 veg_baseline_waterbird_winter = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_waterbirds_winter.tif'))
@@ -60,6 +61,7 @@ levels(veg_baseline_waterbird_winter) <- wkey %>%
   select(id = code, shortlab) %>% as.data.frame()
 coltab(veg_baseline_waterbird_winter) <- wkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
+names(veg_baseline_waterbird_winter) = 'baseline'
 writeRaster(veg_baseline_waterbird_winter, 'data/veg_baseline_waterbird_winter.tif')
 
 
@@ -90,6 +92,7 @@ levels(veg_baseline_riparian) <- rkey %>%
   select(id = code, label = group) %>% as.data.frame()
 coltab(veg_baseline_riparian) <- rkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
+names(veg_baseline_riparian) = 'baseline'
 writeRaster(veg_baseline_riparian, 'data/veg_baseline_riparian.tif')
 
 
@@ -436,6 +439,7 @@ levels(scenario_restoration) <- wkey %>% select(id = code, shortlab) %>%
   as.data.frame()
 coltab(scenario_restoration) <- wkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
+names(scenario_restoration) = 'scenario_restoration'
 writeRaster(scenario_restoration,
             'data/proposed_scenarios/waterbirds/DeltaPlan_restoration_objectives.tif')
 
@@ -485,6 +489,7 @@ levels(scenario_restoration_riparian) <- rkey %>%
   select(id = code, label = group) %>% as.data.frame()
 coltab(scenario_restoration_riparian) <- rkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
+names(scenario_restoration_riparian) = 'scenario_restoration'
 writeRaster(scenario_restoration_riparian,
             'data/proposed_scenarios/riparian/DeltaPlan_restoration_objectives.tif')
 
@@ -549,8 +554,7 @@ levels(scenario_orchard_refine) <- wkey %>% select(id = code, shortlab) %>%
   as.data.frame()
 coltab(scenario_orchard_refine) <- wkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
-
-plot(c(veg_baseline_waterbird_fall, scenario_orchard_refine))
+names(scenario_orchard_refine) = 'scenario_orchard_expansion'
 writeRaster(scenario_orchard_refine,
             'data/proposed_scenarios/waterbirds/orchard_expansion.tif')
 # Note: levels may not be saved, but colors are?
@@ -598,475 +602,78 @@ levels(scenario_orchard_riparian) <- rkey %>%
   select(id = code, label = group) %>% as.data.frame()
 coltab(scenario_orchard_riparian) <- rkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
+names(scenario_orchard_riparian) = 'scenario_orchard_expansion'
 plot(scenario_orchard_riparian)
 writeRaster(scenario_orchard_riparian,
             'data/proposed_scenarios/riparian/orchard_expansion.tif')
 
 
-# SCENARIO X. Projected land use------
-# under BBAU ("bad business as usual") scenario for the year 2100: historical
-# regional land conversion rates continue (orchard expansion, urban devel); no
-# restoration
 
-skey = read_csv('GIS/State Class Rasters/key.csv')
-ncell(veg_baseline_waterbird_fall[!is.na(veg_baseline_waterbird_fall)]) #7257416
-
-scenario_stack = rast(
-  paste0('GIS/State Class Rasters/',
-         list.files('GIS/State Class Rasters/', 'tif$'))
-  )
-names(scenario_stack) = c('DUST', 'DREAM', 'HBAU', 'BBAU', 'EEM')
-# in a different projection, and with a different resolution than our baseline landscape
-
-
-scenario_stack_proj = scenario_stack %>%
-
-  # first crop in the original projection to make the file smaller
-  crop(veg_baseline_riparian %>% project(scenario_stack)) %>%
-
-  # disaggregate to 30m pixels (staying in original projection)
-  disaggregate(fact = 270/30) %>%
-
-  # project to baseline crs; use "near" so we keep classifications intact (no
-  # bilinear interpolation)
-  project(veg_baseline_riparian, method = 'near') %>%
-
-  # exclude areas outside the 10km buffer
-  mask(veg_baseline_riparian)
-
-
-writeRaster(scenario_stack_proj,
-            filename = paste0('GIS/projected_landuse_2100_',
-                              names(scenario_stack_proj),
-                              '.tif'))
-
-plot(scenario_stack_proj, col = viridis::inferno(32)) #differences appear subtle
-ncell(scenario_stack$DUST[!is.na(scenario_stack$DUST)]) #5771648
-
-# compare baseline vs. BBAU: (mask out missing SW corner of Delta)
-tab = crosstab(c(veg_baseline_waterbird_fall %>% mask(scenario_stack_proj$BBAU),
-                 scenario_stack_proj$BBAU))
-tab_bbau = tab %>% as_tibble() %>%
-  set_names(c('baseline', 'bbau', 'n')) %>%
-  mutate_at(vars(baseline:bbau), as.numeric) %>%
-  left_join(wkey %>% dplyr::select(code, baseline_landuse = label),
-            by = c('baseline' = 'code')) %>%
-  left_join(skey %>% dplyr::select(code, bbau_landuse = label),
-            by = c('bbau' = 'code')) %>%
-  group_by(bbau_landuse) %>%
-  mutate(tot = sum(n),
-         prop = n/tot) %>%
-  ungroup() %>%
-  arrange(desc(n))
-
-tab_bbau %>%
-  filter(!(bbau_landuse == baseline_landuse) &
-           !(bbau_landuse == 'grass/shrub' & baseline_landuse == 'dryp')) %>%
-  # filter(!is.na(hbau_landuse)) %>% #area not included by the scenario
-  ggplot(aes(x = bbau_landuse, y = baseline_landuse, fill = n)) +
-  geom_tile() +
-  scale_fill_gradientn(name = '', colors = topo.colors(10))
-
-tab_bbau %>%
-  filter(!is.na(bbau_landuse) & bbau_landuse != baseline_landuse &
-           !(bbau_landuse == 'grass/shrub' & baseline_landuse == 'dryp') &
-           !(bbau_landuse == 'pasture' & baseline_landuse == 'ip') &
-           !(bbau_landuse == 'seas' & baseline_landuse == 'duwet')) %>%
-  # filter(bbau_landuse == 'orch') %>%
-  # filter(bbau_landuse == 'dev') %>%
-  arrange(desc(n))
-# - orch: 52% from existing orchard; most conversion from row (9%), alf (7%),
-#     corn (7%), fal (5%); some conversion from woodw, water, wet, rice, duwet
-# - dev: 61% from existing dev; most conversion from orch (10%), dryp (6%), fal
-#    (4%); includes conversion from woodw, wet, forest, rice, duwet
-
-# --> some inconsistencies introduced because conversions based on progressing
-# from 2007 VegCAMP layer
-
-
-
-
-# # # compare to each other and to new riparian/waterbird baseline:
-# # tab1 = crosstab(scenario_stack$DUST, scenario_stack$DREAM)
-# # tab_extremes = tab1 %>% as_tibble() %>%
-# #   mutate_at(vars(DUST:DREAM), as.numeric) %>%
-# #   left_join(skey %>% dplyr::select(code, dream_landuse = label),
-# #             by = c('DREAM' = 'code')) %>%
-# #   left_join(skey %>% dplyr::select(code, dust_landuse = label),
-# #             by = c('DUST' = 'code')) %>%
-# #   mutate(perc = n / 5771648 * 100) %>%
-# #   arrange(desc(n))
-# #
-# # tab_extremes %>%
-# #   filter(!(dream_landuse == dust_landuse)) %>%
-# #   ggplot(aes(x = dream_landuse, y = dust_landuse, fill = n)) +
-# #   geom_tile() +
-# #   scale_fill_gradientn(name = '', colors = topo.colors(10))
-# #
-# # tab_extremes %>%
-# #   filter(!(dream_landuse == dust_landuse)) %>%
-# #   arrange(desc(n))
-# # # largest differences are: (DREAM vs DUST)
-# # # - dev vs. corn;  corn vs. dev
-# # # - dev vs. orch; orch vs. dev
-# # # - dev vs. grass/shrub; grass/shrub vs. dev
-# # # - dev vs. seas
-# # # --> but all differences relatively small: < 1%
-# #
-# # tab2 = crosstab(scenario_stack$BBAU, scenario_stack$DREAM)
-# # tab_extremes2 = tab2 %>% as_tibble() %>%
-# #   mutate_at(vars(BBAU:DREAM), as.numeric) %>%
-# #   left_join(skey %>% dplyr::select(code, dream_landuse = label),
-# #             by = c('DREAM' = 'code')) %>%
-# #   left_join(skey %>% dplyr::select(code, bbau_landuse = label),
-# #             by = c('BBAU' = 'code')) %>%
-# #   mutate(perc = n / 5793303 * 100) %>%
-# #   arrange(desc(n))
-# #
-# # tab_extremes2 %>%
-# #   filter(!(dream_landuse == bbau_landuse)) %>%
-# #   ggplot(aes(x = dream_landuse, y = bbau_landuse, fill = n)) +
-# #   geom_tile() +
-# #   scale_fill_gradientn(name = '', colors = topo.colors(10))
-# #
-# # tab_extremes2 %>%
-# #   filter(!(dream_landuse == bbau_landuse)) %>%
-# #   arrange(desc(n))
-# # # largest differences are (DREAM vs BBAU)
-# # # - dev vs. corn; corn vs. dev (equal amts though)
-# # # - dev vs. orchard > orch vs. dev
-# # # - grass/shrub vs. dev > dev vs. grass/shrub
-# # # --> but all differences relatively small: < 1%
-#
-#
-#
-#
-# # total acres? but remember that scenarios exclude southwest corner
-# veg_baseline_mask = mask(veg_baseline_waterbird_fall, scenario_stack$BBAU)
-#
-# btot = getValues(veg_baseline_mask) %>% as.factor() %>% summary() %>%
-#   as_tibble(rownames = 'code') %>%
-#   mutate(code = as.numeric(code),
-#          area.ha = value * 30 * 30 / 10000) %>%
-#   filter(!is.na(code))
-#
-# bbautot = getValues(scenario_stack$BBAU) %>% as.factor() %>% summary() %>%
-#   as_tibble(rownames = 'code') %>%
-#   mutate(code = as.numeric(code),
-#          area.ha = value * 30 * 30 / 10000) %>%
-#   filter(!is.na(code))
-#
-# dusttot = getValues(scenario_stack$DUST) %>% as.factor() %>% summary() %>%
-#   as_tibble(rownames = 'code') %>%
-#   mutate(code = as.numeric(code),
-#          area.ha = value * 30 * 30 / 10000) %>%
-#   filter(!is.na(code))
-#
-# dreamtot = getValues(scenario_stack$DREAM) %>% as.factor() %>% summary() %>%
-#   as_tibble(rownames = 'code') %>%
-#   mutate(code = as.numeric(code),
-#          area.ha = value * 30 * 30 / 10000) %>%
-#   filter(!is.na(code))
-
-# bind_rows(
-#   btot %>%
-#     left_join(wkey) %>%
-#     mutate(label = case_when(label %in% c('dryp', 'woodw') ~ 'dryp & woodw',
-#                              label %in% c('fal', 'row', 'field') ~ 'fal & row & field',
-#                              label %in% c('grain', 'wheat') ~ 'grain & wheat',
-#                              TRUE ~ label)) %>%
-#     group_by(label) %>%
-#     summarize(area.ha = sum(area.ha)) %>%
-#     mutate(source = 'baseline'),
-#   bbautot %>%
-#     left_join(skey) %>%
-#     mutate(label = case_when(label %in% c('semiperm', 'seas') ~ 'duwet',
-#                              label == 'wetother' ~ 'wet',
-#                              label == 'grass/shrub' ~ 'dryp & woodw',
-#                              label == 'row' ~ 'fal & row & field',
-#                              label == 'pasture' ~ 'ip',
-#                              label == 'grain' ~ 'grain & wheat',
-#                              TRUE ~ label)) %>%
-#     group_by(label) %>%
-#     summarize(area.ha = sum(area.ha)) %>%
-#     mutate(source = 'BBAU'),
-#   dusttot %>%
-#     left_join(skey) %>%
-#     mutate(label = case_when(label %in% c('semiperm', 'seas') ~ 'duwet',
-#                              label == 'wetother' ~ 'wet',
-#                              label == 'grass/shrub' ~ 'dryp & woodw',
-#                              label == 'row' ~ 'fal & row & field',
-#                              label == 'pasture' ~ 'ip',
-#                              label == 'grain' ~ 'grain & wheat',
-#                              TRUE ~ label)) %>%
-#     group_by(label) %>%
-#     summarize(area.ha = sum(area.ha)) %>%
-#     mutate(source = 'DUST'),
-#   dreamtot %>%
-#     left_join(skey) %>%
-#     mutate(label = case_when(label %in% c('semiperm', 'seas') ~ 'duwet',
-#                              label == 'wetother' ~ 'wet',
-#                              label == 'grass/shrub' ~ 'dryp & woodw',
-#                              label == 'row' ~ 'fal & row & field',
-#                              label == 'pasture' ~ 'ip',
-#                              label == 'grain' ~ 'grain & wheat',
-#                              TRUE ~ label)) %>%
-#     group_by(label) %>%
-#     summarize(area.ha = sum(area.ha)) %>%
-#     mutate(source = 'DREAM')
-# ) %>%
-#   ggplot(aes(label, area.ha/1000, fill = source)) +
-#   geom_col(position = position_dodge())
-
-# biggest changes from baseline:
-# ALL SCENARIOS: more dev, less dryp & woodw, less ip, less water, more wet
-# BBAU: more orch; less alf, corn, fal/row/field, grain/wheat, rice
-# DREAM: more orch (but less of an increase), duwet; less alf, corn,
-#    fal/row/field, grain/wheat, rice
-# DUST: more alf, corn; less orch; less reduction in dryp/woodw, grain/wheat, ip, rice
-
-#--> note that riparian is lost completely at this resolution, and/or lumped in
-# with grass/shrub; propose to overlay baseline riparian, and possibly
-# dev, orchard, du wetlands, water just to make sure these don't change.
-
-#--> other issue: missing southwest corner and 10km buffer. A lot of it is
-# developed and then grasslands in the hills; can just fill in and assume no
-# change?
-
-#--> plus: field/row crops combined; grain/winter wheat combined and no way to
-# pull out separate winter map
-
-scenario_bbau <- classify(scenario_stack_proj$BBAU,
-                          rcl = matrix(
-                            c(1, 14, #water
-                              2, 12, #dev
-                              3, 99, #barren
-                              4, 13, #forest
-                              5, 16, #grass/shrub/riparian - dryp
-                              10, 6, #field/row - row
-                              11, 4, #pasture - ip
-                              12, 17, #alf
-                              13, 10, #grain
-                              14, 2, #corn
-                              15, 3, #rice
-                              20, 9, #orch/vin
-                              30, 18, #semiperm - DUwet
-                              31, 18, #seas - DUwet
-                              32, 8 #other/general wetland
-                            ),
-                            byrow = TRUE, ncol = 2)
-)
-
-# allow certain baseline pixels to over-rule scenario pixels:
-#   orch (9), dev (12), water (14), woodw (15), wetland (8), duwet (18)
-scenario_bbau_overrule <- lapp(
-  x = c(scenario_bbau, veg_baseline_waterbird_fall),
-  fun = function(x, y) {
-    ifelse (!is.na(x) & x == 12 & y %in% c(9, 15),
-            # allow orch (9) and woodw (15) get converted to dev (12)
-            x,
-            # otherwise, don't let new water or wetlands overwrite baseline land cover;
-            #   let baseline pixels overrule scenario pixels for
-            #   wetland (8), orch (9), dev (12), water(14), woodw(15), duwet(18)
-            #   (i.e., no conversion from these land cover types)
-            ifelse(!is.na(x) &
-                     ((x == 14 & y != 14) |
-                        (x %in% c(8, 18) & !(y %in% c(8, 18))) |
-                        y %in% c(8, 9, 12, 14, 15, 18)),
-                   y,
-                   # for all others, use scenario pixel value
-                   x))
-  })
-
-# then fill in baseline values where missing (primarily in southwest corner)
-scenario_bbau_fill = cover(scenario_bbau_overrule, veg_baseline_waterbird_fall)
-levels(scenario_bbau_fill) <- wkey %>% select(id = code, label) %>% as.data.frame()
-coltab(scenario_bbau_fill) <- wkey %>% select(code) %>%
-  mutate(col = c('#FFFF00', '#FF1493', '#2E8B57', '#FFA54F', '#FA8072',
-                 '#FA8072', '#00008B', '#9400D3', '#FFA54F', '#CCCCCC',
-                 '#4D4D4D', '#8B4513', '#87CEFA', '#FF0000', '#FFE4C4',
-                 '#32CD32', '#FFFFFF', '#00008B')) %>%
-  complete(code = c(0:255)) %>% pull(col)
-plot(scenario_bbau_fill)
-writeRaster(scenario_bbau_fill,
-            'data/proposed_scenarios/waterbirds/projected_landuse_2100_BBAU_labeled.tif')
-# Note: levels may not be saved, but colors are?
-
-# compare
-tab = crosstab(c(veg_baseline_waterbird_fall, scenario_bbau_fill))
-tab %>% as_tibble() %>%
-  set_names(c('baseline', 'bbau', 'n')) %>%
-  mutate_at(vars(baseline:bbau), as.numeric) %>%
-  left_join(wkey %>% dplyr::select(code, baseline_landuse = label),
-            by = c('baseline' = 'code')) %>%
-  left_join(wkey %>% dplyr::select(code, bbau_landuse = label),
-            by = c('bbau' = 'code')) %>%
-  group_by(bbau_landuse) %>%
-  mutate(tot = sum(n),
-         prop = n/tot) %>%
-  ungroup() %>%
-  arrange(desc(n)) %>%
-  # filter(bbau_landuse == 'dev')
-  # filter(bbau_landuse == 'orch')
-  filter(bbau_landuse == 'wet')
-
-# - dev: 78% from existing dev; most conversion from orch (8%), dryp (5%);
-#     none from water, woodw, duwet
-# - orch: 67% from existing orchard; most conversion from row (7%), alf (6%),
-#     corn (5%); none from dev, water, woodw, duwet
-
-# change in acreage by land cover type
-
-calculate_area = function(rast) {
-  terra::freq(rast) %>% as_tibble() %>%
-    mutate(area = count * prod(terra::res(rast)))
-}
-
-calculate_change = function(baseline, scenario, key = NULL, type = 'area', sort = TRUE) {
-  if (type == 'area') {
-    base = calculate_area(baseline)
-    scen = calculate_area(scenario)
-    res = full_join(base, scen, by = c('layer', 'value'),
-              suffix = c('.base', '.scen')) %>%
-      mutate(change = area.scen - area.base)
-    if (!is.null(key)) {
-      res = left_join(res, key, by = 'value')
-    }
-  }
-  if (sort) {
-    res = res %>% arrange(change)
-  }
-  return(res)
-}
-
-plot_change = function(df, scale = 1, col = c('orange', 'blue')) {
-  if (!'label' %in% names(df)) {
-    df = df %>% mutate(label = as.factor(value))
-  } else {
-    df = df %>% mutate(label = factor(label, levels = df$label))
-  }
-  if (!is.null(col)) {
-    df = df %>% mutate(bin = if_else(change < 0, 'decrease', 'increase'),
-                       bin = as.factor(bin))
-    ggplot(df, aes(label, change/scale, fill = bin)) + geom_col() +
-      scale_fill_manual(values = col) + guides(fill = 'none')
-  } else {
-    ggplot(df, aes(label, change/scale)) + geom_col()
-  }
-
-}
-delta = calculate_change(baseline = veg_baseline_waterbird_fall,
-                         scenario = scenario_bbau_fill,
-                         key = wkey %>% rename(value = code))
-plot_change(delta, scale = 1000000) + labs(x = NULL, y = 'km^2') +
-  theme_bw()
-# no change in water, wet, duwet
-# increase primarily in: dev, orch; also grain
-# decrease primarily in: alf, corn, dryp, fal, ip, wheat; also woodw, row/field, rice, forest
-
-scenario_bbau_riparian <- classify(scenario_bbau_fill,
-                                   rcl = matrix(c(2, 20, #corn = AG
-                                                  3, 30, #rice = RICE
-                                                  4, 50, #ip = GRASSPAS
-                                                  5, 20, #wheat = AG
-                                                  6, 20, #row = AG
-                                                  7, 20, #field = AG
-                                                  8, 80, #wet = WETLAND
-                                                  9, 10, #orch = ORCHVIN
-                                                  10, 20, #grain = AG
-                                                  11, 40, #fallow = IDLE
-                                                  12, 60, #dev = URBAN
-                                                  13, 100, #forest = OAKWOODLAND/WOODLAND/SCRUB
-                                                  14, 90, #water = WATER
-                                                  15, 70, #woodw = RIPARIAN
-                                                  16, 50, #dryp = GRASSPAS
-                                                  17, 50, #alfalfa = GRASSPAS
-                                                  18, 80, #duwet = WETLAND
-                                                  99, 130), #barren = BARREN
-                                                byrow = TRUE, ncol = 2)
-)
-plot(scenario_bbau_riparian)
-writeRaster(scenario_bbau_riparian,
-            'data/proposed_scenarios/riparian/projected_landuse_2100_BBAU.tif')
-
-# change in acreage by riparian land cover type
-area_baseline_rip = values(veg_baseline_riparian) %>% as.factor() %>% summary() %>%
-  as_tibble(rownames = 'code') %>%
-  mutate(code = as.numeric(code),
-         area.ha = value * 30 * 30 / 10000) %>%
-  filter(!is.na(code)) %>%
-  left_join(rkey %>% dplyr::select(code, baseline = group),
-            by = 'code')
-
-area_bbau_rip = values(scenario_bbau_riparian) %>% as.factor() %>% summary() %>%
-  as_tibble(rownames = 'code') %>%
-  mutate(code = as.numeric(code),
-         area.ha = value * 30 * 30 / 10000) %>%
-  filter(!is.na(code)) %>%
-  left_join(rkey %>% dplyr::select(code, bbau = group),
-            by = 'code')
-
-full_join(area_baseline_rip, area_bbau_rip, by = c('baseline' = 'bbau')) %>%
-  mutate(diff = area.ha.y - area.ha.x) %>%
-  ggplot(aes(baseline, diff)) + geom_col()
-# no change in water, wetland
-# increase primarily in: URBAN, ORCHVIN
-# decrease primarily in: GRASSPAS, IDLE, AG; also RIPARIAN, RICE, OAKWOODLAND, BARREN
-
-# SCENARIO X. Flood risk?-----------
-# first combine separate layers representing flood risk
-filelist = paste0('GIS/DeltaAdapts/',
-                  list.files('GIS/DeltaAdapts',
-                             'baseline_.*shp$|floodrisk2085_.*shp$'))
-
-tmp = purrr::map(filelist,
-                 ~st_read(.) %>%
-                   fasterize::fasterize(veg_baseline_riparian,
-                                        field = 'flood_risk')) %>%
-  stack()
-maxfloodrisk = max(tmp, na.rm = TRUE)
-plot(tmp)
-plot(maxfloodrisk)
-
-writeRaster(maxfloodrisk, 'GIS/floodrisk2085', format = 'GTiff')
-
-# suitable veg per elevation:
-elev = read_csv('data/SFEI_DSLPT/elevation_notifications_v5.csv')
-
-elev %>%
-  dplyr::select(Habitat_type, Elevation_band, Flag_type) %>%
-  filter(Habitat_type != 'Stabilized interior dune vegetation') %>%
-  pivot_wider(values_from = Flag_type, names_from = Elevation_band) %>%
-  dplyr::select(Habitat_type, `-2`, `-1`, `0`, `1`, `2`)
-
-elev %>%
-  dplyr::select(Habitat_type, Elevation_zone_DeltaPlan, Flag_type) %>%
-  filter(Habitat_type != 'Stabilized interior dune vegetation') %>%
-  pivot_wider(values_from = Flag_type, names_from = Elevation_zone_DeltaPlan) %>%
-  dplyr::select(Habitat_type, 'Deeply subsided (more than 8 ft below MLLW)',
-                'Shallowly subsided (up to 8 feet below MLLW)',
-                'Intertidal (between MLLW and MHHW)',
-                'Sea level rise projection (0 to +10 ft MHHW)',
-                'Floodplain (more than 10 feet MHHW)')
-
-
-elev %>%
-  dplyr::select(Elevation_zone_SFEI, Elevation_zone_DeltaPlan) %>%
-  table()
-# SFEI: Terrestrial; DeltaPlan: Deeply subsided?
-# SFEI: Terrestrial, DeltaPlan: Intertidal
 
 
 # INTERACTIVE MAP-----------
+
+map_scenarios = function(rast, key,
+                         leg_title = 'Land Cover Class') {
+  scenarios = terra::project(
+    rast,
+    y = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+    method = 'near') %>%
+    raster::stack()
+  names(scenarios) = names(rast)
+
+  pal <- leaflet::colorFactor(
+    palette = key$col,
+    domain = key$value,
+    alpha = TRUE,
+    na.color = 'transparent')
+
+  # allow multiple raster values to map to the same color/label
+  key_simple <- key %>% select(label, col) %>% distinct()
+
+  m <- leaflet::leaflet(scenarios[[1]]) %>%
+
+    # background terrain
+    leaflet::addProviderTiles("Stamen.TonerLite") %>%
+
+    # add layers control
+    leaflet::addLayersControl(
+      position = 'bottomleft',
+      options = leaflet::layersControlOptions(collapsed = F),
+      baseGroups = names(scenarios)) %>%
+
+    # add legend
+    leaflet::addLegend("topright",
+                       labels = key_simple$label,
+                       colors = key_simple$col,
+                       title = leg_title,
+                       opacity = 1)
+
+  ## add rasters
+  for (i in c(1:raster::nlayers(scenarios))) {
+    m <- m %>%
+      leaflet::addRasterImage(x = scenarios[[i]],
+                              group = names(scenarios)[i],
+                              colors = pal, opacity = 0.7,
+                              project = FALSE)
+    }
+  return(m)
+}
+
+# best to set the names of the raster layers (will transfer to the selector)
+testmap = map_scenarios(rast = c(veg_baseline_waterbird_fall,
+                                 scenario_restoration,
+                                 scenario_orchard_refine),
+                        key = wkey %>% select(value = code, col, label))
+## add delta boundary
+delta_poly = read_sf('V:/Data/geopolitical/california/Legal_Delta_Boundary/Legal_Delta_Boundary.shp') %>%
+  st_transform(crs("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"))
+testmap <- testmap %>%
+  leaflet::addPolygons(data = delta_poly, fill = FALSE, color = 'black',
+              weight = 2, opacity = 1)
+
 library(leaflet)
 
-# combined scenario rasters
-scenarios = c(veg_baseline_waterbird_fall,
-              scenario_restoration,
-              scenario_orchard_refine) %>%
-  project(y = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs", method = 'near')
-scenarios = raster::stack(scenarios) #convert to raster stack
-names(scenarios) = c('baseline', 'restoration scenario', 'orchard expansion scenario')
 
 # # resample rasters to prevent the file size from being too enormous (this is
 # # still fairly hi-res)
@@ -1074,88 +681,6 @@ names(scenarios) = c('baseline', 'restoration scenario', 'orchard expansion scen
 #   terra::spatSample(size = 5000000, as.raster = TRUE)
 
 
-# color palette
-key <- wkey %>%
-  mutate(color = c('#FFFF00', '#FF1493', '#2E8B57', '#FFA54F', '#FA8072',
-                   '#FA8072', '#00008B', '#9400D3', '#FFA54F', '#CCCCCC',
-                   '#4D4D4D', '#8B4513', '#87CEFA', '#FF0000', '#FFE4C4',
-                   '#32CD32', '#FFFFFF', '#00008B'),
-         label2 = recode(label,
-                        'ip' = 'irrigated pasture',
-                        'wheat' = 'grain',
-                        'row' = 'row/field crop',
-                        'field' = 'row/field crop',
-                        'wet' = 'wetland',
-                        'orch' = 'orchard/vineyard',
-                        'fal' = 'fallow',
-                        'dev' = 'urban',
-                        'woodw' = 'riparian',
-                        'dryp' = 'dryland pasture',
-                        'alf' = 'alfalfa',
-                        'duwet' = 'wetland'),
-         label2 = factor(label2,
-                        levels = c('wetland',
-                                   'riparian',
-                                   'corn',
-                                   'rice',
-                                   'alfalfa',
-                                   'irrigated pasture',
-                                   'dryland pasture',
-                                   'grain',
-                                   'row/field crop',
-                                   'orchard/vineyard',
-                                   'forest',
-                                   'fallow',
-                                   'urban',
-                                   'barren',
-                                   'water'))
-         ) %>%
-  arrange(code)
-
-key_simple = key %>% select(label2, color) %>%
-  distinct() %>%
-  arrange(label2)
-
-# for waterbird landcover classifications
-pal <- leaflet::colorFactor(
-  palette = key$color,
-  domain = key$code,
-  alpha = TRUE,
-  na.color = 'transparent')
-
-
-## base map with legends
-
-delta_poly = read_sf('V:/Data/geopolitical/california/Legal_Delta_Boundary/Legal_Delta_Boundary.shp') %>%
-  st_transform(crs(scenarios))
-
-m <- leaflet(delta_poly) %>%
-
-  # background terrain
-  addProviderTiles("Stamen.TonerLite") %>%
-
-  # add layers control
-  addLayersControl(position = 'bottomleft',
-                   options = layersControlOptions(collapsed = F),
-                   baseGroups = names(scenarios)) %>%
-  # add legend
-  addLegend("topright",
-            labels = key_simple$label2,
-            colors = key_simple$color,
-            title = "Land cover class",
-            opacity = 1)
-
-## add rasters
-for (i in c(1:raster::nlayers(scenarios))) {
-  m <- m %>%
-    addRasterImage(x = scenarios[[i]],
-                   group = names(scenarios)[i],
-                   colors = pal, opacity = 0.7,
-                   project = FALSE)
-}
-
-## add delta boundary
-m <- m %>% addPolygons(fill = FALSE, color = 'black', weight = 2, opacity = 1)
 
 ## save the interactive map as an html widget
 # --> you may want to change this to "selfcontained = TRUE", which would allow
