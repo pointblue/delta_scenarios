@@ -6,36 +6,92 @@ source('R/packages.R')
 # reference data:
 delta = rast('GIS/delta.tif')
 
+# BASELINE--------
+# make a local copy & add code details
 gisdir = 'V:/Project/Terrestrial/cv_riparian/distribution_modeling/'
-veg_baseline_waterbird_fall = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_waterbirds_fall.tif'))
-veg_baseline_riparian = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_riparian.tif'))
 
-rkey = read_csv(paste0(gisdir, 'GIS/landscape_rasters/key.csv'),
-                col_types = cols())
+## waterbirds---------
 wkey = read_csv('V:/Project/wetland/Delta/landscape_models/predrasters_baseline/baseline/VegCAMP_crosswalk.csv',
                 col_types = cols()) %>%
   dplyr::select(group = WATERBIRD, code) %>%
   distinct() %>%
-  mutate(label = case_when(group == 'Irrigated pasture' ~ 'ip',
-                           group == 'Dryland pasture' ~ 'dryp',
-                           group == 'wetland' ~ 'wet',
-                           group == 'orchard' ~ 'orch',
-                           group == 'alfalfa' ~ 'alf',
-                           group == 'woody wetland' ~ 'woodw',
-                           group == 'developed' ~ 'dev',
-                           group == 'fallow' ~ 'fal',
-                           TRUE ~ group)) %>%
   bind_rows(tibble(group = 'DUwetland',
-                   code = 18,
-                   label = 'duwet'))
-
-levels(veg_baseline_waterbird_fall) <- wkey %>% select(id = code, label) %>% as.data.frame()
-coltab(veg_baseline_waterbird_fall) <- wkey %>% select(code) %>%
-  mutate(col = c('#FFFF00', '#FF1493', '#2E8B57', '#FFA54F', '#FA8072',
+                   code = 18)) %>%
+  arrange(code) %>%
+  mutate(shortlab = case_when(group == 'Irrigated pasture' ~ 'ip',
+                              group == 'Dryland pasture' ~ 'dryp',
+                              group == 'wetland' ~ 'wet',
+                              group == 'orchard' ~ 'orch',
+                              group == 'alfalfa' ~ 'alf',
+                              group == 'woody wetland' ~ 'woodw',
+                              group == 'developed' ~ 'dev',
+                              group == 'fallow' ~ 'fal',
+                              group == 'DUwetland' ~ 'duwet',
+                              TRUE ~ group),
+         label = recode(shortlab,
+                        'ip' = 'irrigated pasture',
+                        'wheat' = 'grain',
+                        'row' = 'row/field crop',
+                        'field' = 'row/field crop',
+                        'wet' = 'wetland',
+                        'DUwetland' = 'wetland',
+                        'orch' = 'orchard/vineyard',
+                        'fal' = 'fallow',
+                        'dev' = 'urban',
+                        'woodw' = 'riparian',
+                        'dryp' = 'dryland pasture',
+                        'alf' = 'alfalfa',
+                        'duwet' = 'wetland'),
+         col = c('#FFFF00', '#FF1493', '#2E8B57', '#FFA54F', '#FA8072',
                  '#FA8072', '#00008B', '#9400D3', '#FFA54F', '#CCCCCC',
                  '#4D4D4D', '#8B4513', '#87CEFA', '#FF0000', '#FFE4C4',
-                 '#32CD32', '#FFFFFF', '#00008B')) %>%
+                 '#32CD32', '#00008B', '#FFFFFF'))
+write_csv(wkey, 'data/landcover_key_waterbirds.csv')
+
+veg_baseline_waterbird_fall = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_waterbirds_fall.tif'))
+levels(veg_baseline_waterbird_fall) <- wkey %>% select(id = code, shortlab) %>%
+  as.data.frame()
+coltab(veg_baseline_waterbird_fall) <- wkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
+writeRaster(veg_baseline_waterbird_fall, 'data/veg_baseline_waterbird_fall.tif')
+
+veg_baseline_waterbird_winter = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_waterbirds_winter.tif'))
+levels(veg_baseline_waterbird_winter) <- wkey %>%
+  select(id = code, shortlab) %>% as.data.frame()
+coltab(veg_baseline_waterbird_winter) <- wkey %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
+writeRaster(veg_baseline_waterbird_winter, 'data/veg_baseline_waterbird_winter.tif')
+
+
+## riparian-------
+rkey = read_csv(paste0(gisdir, 'GIS/landscape_rasters/key.csv'),
+                col_types = cols()) %>%
+  filter(type == 'veg' & !code %in% c(110, 120, 999)) %>%
+  select(-type) %>%
+  mutate(label = recode(group,
+                        'ORCHVIN' = 'orchard/vineyard',
+                        'RICE' = 'rice',
+                        'AG' = 'other crops',
+                        'IDLE' = 'fallow',
+                        'GRASSPAS' = 'grassland/pasture',
+                        'URBAN' = 'urban',
+                        'RIPARIAN' = 'riparian',
+                        'WETLAND' = 'wetland',
+                        'WATER' = 'water',
+                        'OAKWOODLAND' = 'forest',
+                        'BARREN' = 'barren'),
+         col = c('#9400D3', '#32CD32', '#FF1493', '#CCCCCC', '#FFE4C4',
+                 '#4D4D4D', '#FF0000', '#00008B', '#87CEFA', '#8B4513',
+                 '#FFFFFF'))
+write_csv(rkey, 'data/landcover_key_riparian.csv')
+
+veg_baseline_riparian = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_riparian.tif'))
+levels(veg_baseline_riparian) <- rkey %>%
+  select(id = code, label = group) %>% as.data.frame()
+coltab(veg_baseline_riparian) <- rkey %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
+writeRaster(veg_baseline_riparian, 'data/veg_baseline_riparian.tif')
+
 
 # #combined key
 # key = wkey %>% select(id = code, label_wat = label) %>%
@@ -375,12 +431,11 @@ wet_targets_final[wet_targets_final == 1] = 18
 targets_final = cover(rip_targets_final, wet_targets_final)
 
 # overlay on baseline layer
-scenario_restoration <- lapp(
-  x = c(veg_baseline_waterbird_fall, targets_final),
-  fun = function(x, y) {
-    ifelse(!is.na(y), y, x)
-  })
-
+scenario_restoration = cover(targets_final, veg_baseline_waterbird_fall)
+levels(scenario_restoration) <- wkey %>% select(id = code, shortlab) %>%
+  as.data.frame()
+coltab(scenario_restoration) <- wkey %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
 writeRaster(scenario_restoration,
             'data/proposed_scenarios/waterbirds/DeltaPlan_restoration_objectives.tif')
 
@@ -388,19 +443,7 @@ writeRaster(scenario_restoration,
 delta_restoration = calculate_change(baseline = veg_baseline_waterbird_fall,
                                      scenario = scenario_restoration)
 delta_restoration %>%
-  mutate(label = recode(label,
-                        'ip' = 'irrigated pasture',
-                        'wheat' = 'grain',
-                        'row' = 'row/field crop',
-                        'field' = 'row/field crop',
-                        'wet' = 'wetland',
-                        'orch' = 'orchard/vineyard',
-                        'fal' = 'fallow',
-                        'dev' = 'urban',
-                        'woodw' = 'riparian',
-                        'dryp' = 'dryland pasture',
-                        'alf' = 'alfalfa',
-                        'duwet' = 'wetland')) %>%
+  left_join(wkey %>% select(label.base = shortlab, label), by = 'label.base') %>%
   group_by(label) %>%
   summarize(change = sum(change), .groups = 'drop') %>%
   arrange(change) %>%
@@ -416,48 +459,32 @@ ggsave('fig/delta_restoration.png', height = 7.5, width = 6)
 
 # compare/check conversions between layers
 tab = crosstab(c(veg_baseline_waterbird_fall %>% mask(delta),
-                 scenario_restoration))
+                 scenario_restoration %>% mask(delta)))
 
 tab %>% as_tibble() %>%
   set_names(c('baseline', 'scenario', 'n')) %>%
   mutate_at(vars(baseline:scenario), as.numeric) %>%
-  left_join(wkey %>% dplyr::select(code, label), by = c('baseline' = 'code')) %>%
-  left_join(wkey %>% dplyr::select(code, label), by = c('scenario' = 'code')) %>%
+  left_join(wkey %>% dplyr::select(code, shortlab), by = c('baseline' = 'code')) %>%
+  left_join(wkey %>% dplyr::select(code, shortlab), by = c('scenario' = 'code')) %>%
   arrange(desc(n)) %>%
-  group_by(label.y) %>%
+  group_by(shortlab.y) %>%
   mutate(tot = sum(n),
          prop = n/tot) %>%
   ungroup() %>%
-  # filter(label.y == 'duwet')
-  filter(label.y == 'woodw')
+  filter(shortlab.y == 'duwet')
+  filter(shortlab.y == 'woodw')
 
-# - riparian: 64% existing riparian; most conversion from orch (20%);
+# - riparian: 64% existing riparian; most conversion from orch (17%);
 #    no conversion from rice, wet, duwet, dev, or water
 # - wetland: 75% existing duwet; most conversion from ip (6%), rice (5%), dryp (4%);
 #    no conversion from wet, dev, forest, water, woodw, or barren
 
 # convert encoding for use with riparian models
-scenario_restoration_riparian <- classify(scenario_restoration,
-                                     rcl = matrix(c(2, 20, #corn = AG
-                                                    3, 30, #rice = RICE
-                                                    4, 50, #ip = GRASSPAS
-                                                    5, 20, #wheat = AG
-                                                    6, 20, #row = AG
-                                                    7, 20, #field = AG
-                                                    8, 80, #wet = WETLAND
-                                                    9, 10, #orch = ORCHVIN
-                                                    10, 20, #grain = AG
-                                                    11, 40, #fallow = IDLE
-                                                    12, 60, #dev = URBAN
-                                                    13, 100, #forest = OAKWOODLAND/WOODLAND/SCRUB
-                                                    14, 90, #water = WATER
-                                                    15, 70, #woodw = RIPARIAN
-                                                    16, 50, #dryp = GRASSPAS
-                                                    17, 50, #alfalfa = GRASSPAS
-                                                    18, 80, #duwet = WETLAND
-                                                    99, 130), #barren = BARREN
-                                                  byrow = TRUE, ncol = 2))
-
+scenario_restoration_riparian <- reclassify_ripmodels(scenario_restoration)
+levels(scenario_restoration_riparian) <- rkey %>%
+  select(id = code, label = group) %>% as.data.frame()
+coltab(scenario_restoration_riparian) <- rkey %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
 writeRaster(scenario_restoration_riparian,
             'data/proposed_scenarios/riparian/DeltaPlan_restoration_objectives.tif')
 
@@ -465,7 +492,7 @@ writeRaster(scenario_restoration_riparian,
 
 # compare/check conversions between layers
 tab = crosstab(c(veg_baseline_riparian %>% mask(delta),
-                 scenario_restoration_riparian))
+                 scenario_restoration_riparian %>% mask(delta)))
 
 tab %>% as_tibble() %>%
   set_names(c('baseline', 'scenario', 'n')) %>%
@@ -518,36 +545,22 @@ exclude = classify(veg_baseline_waterbird_fall,
 
 scenario_orchard = cover(bbau, veg_baseline_waterbird_fall)
 scenario_orchard_refine = cover(exclude, scenario_orchard)
+levels(scenario_orchard_refine) <- wkey %>% select(id = code, shortlab) %>%
+  as.data.frame()
+coltab(scenario_orchard_refine) <- wkey %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
 
-# but allow certain baseline pixels to over-rule a change to orchard:
-scenario_orchard_refine <- lapp(
-    x = c(scenario_orchard, veg_baseline_waterbird_fall),
-    fun = function(x, y) {
-      ifelse (!is.na(x) & y %in% c(8, 12, 14, 15, 18), y, x)}
-    )
+plot(c(veg_baseline_waterbird_fall, scenario_orchard_refine))
+writeRaster(scenario_orchard_refine,
+            'data/proposed_scenarios/waterbirds/orchard_expansion.tif')
+# Note: levels may not be saved, but colors are?
 
 
 # calculate change in area of each land cover
 delta_orchard = calculate_change(baseline = veg_baseline_waterbird_fall,
                                  scenario = scenario_orchard_refine)
-plot_change(delta_orchard, scale = 1000000) +
-  labs(x = NULL, y = 'km^2') + theme_bw()
-# large increase in orchard cover, at the expense of most others, especially
-# row, alfalfa, corn, fallow, but also water and wet
 delta_orchard %>%
-  mutate(label = recode(label,
-                        'ip' = 'irrigated pasture',
-                        'wheat' = 'grain',
-                        'row' = 'row/field crop',
-                        'field' = 'row/field crop',
-                        'wet' = 'wetland',
-                        'orch' = 'orchard/vineyard',
-                        'fal' = 'fallow',
-                        'dev' = 'urban',
-                        'woodw' = 'riparian',
-                        'dryp' = 'dryland pasture',
-                        'alf' = 'alfalfa',
-                        'duwet' = 'wetland')) %>%
+  left_join(wkey %>% select(label.base = shortlab, label), by = 'label.base') %>%
   group_by(label) %>%
   summarize(change = sum(change), .groups = 'drop') %>%
   arrange(change) %>%
@@ -557,20 +570,8 @@ delta_orchard %>%
   theme(axis.text = element_text(size = 18),
         axis.title = element_text(size = 18))
 ggsave('fig/delta_orchard.png', height = 7.5, width = 6)
-
-levels(scenario_orchard_refine) <- wkey %>% select(id = code, label) %>%
-  as.data.frame()
-coltab(scenario_orchard_refine) <- wkey %>% select(code) %>%
-  mutate(col = c('#FFFF00', '#FF1493', '#2E8B57', '#FFA54F', '#FA8072',
-                 '#FA8072', '#00008B', '#9400D3', '#FFA54F', '#CCCCCC',
-                 '#4D4D4D', '#8B4513', '#87CEFA', '#FF0000', '#FFE4C4',
-                 '#32CD32', '#FFFFFF', '#00008B')) %>%
-  complete(code = c(0:255)) %>% pull(col)
-
-plot(c(veg_baseline_waterbird_fall, scenario_orchard_refine))
-writeRaster(scenario_orchard_refine,
-            'data/proposed_scenarios/waterbirds/orchard_expansion.tif')
-# Note: levels may not be saved, but colors are?
+# large increase in orchard cover, at the expense of most others, especially
+# row, alfalfa, corn, fallow, but also water and wet
 
 
 # compare
@@ -592,36 +593,10 @@ tab %>% as_tibble() %>%
   filter(bbau_landuse == 'wet')
 
 
-scenario_orchard_riparian <- classify(scenario_orchard_refine,
-                                   rcl = matrix(c(2, 20, #corn = AG
-                                                  3, 30, #rice = RICE
-                                                  4, 50, #ip = GRASSPAS
-                                                  5, 20, #wheat = AG
-                                                  6, 20, #row = AG
-                                                  7, 20, #field = AG
-                                                  8, 80, #wet = WETLAND
-                                                  9, 10, #orch = ORCHVIN
-                                                  10, 20, #grain = AG
-                                                  11, 40, #fallow = IDLE
-                                                  12, 60, #dev = URBAN
-                                                  13, 100, #forest = OAKWOODLAND/WOODLAND/SCRUB
-                                                  14, 90, #water = WATER
-                                                  15, 70, #woodw = RIPARIAN
-                                                  16, 50, #dryp = GRASSPAS
-                                                  17, 50, #alfalfa = GRASSPAS
-                                                  18, 80, #duwet = WETLAND
-                                                  99, 130), #barren = BARREN
-                                                byrow = TRUE, ncol = 2)
-)
+scenario_orchard_riparian <- reclassify_ripmodels(scenario_orchard_refine)
 levels(scenario_orchard_riparian) <- rkey %>%
-  filter(type == 'veg' & code != 999) %>%
   select(id = code, label = group) %>% as.data.frame()
-coltab(scenario_orchard_riparian) <- rkey %>%
-  filter(type == 'veg' & !code %in% c(110, 120, 999)) %>%
-  select(code) %>%
-  mutate(col = c('#9400D3', '#32CD32', '#FF1493', '#CCCCCC', '#FFE4C4',
-                 '#4D4D4D', '#FF0000', '#00008B', '#87CEFA', '#8B4513',
-                 '#FFFFFF')) %>%
+coltab(scenario_orchard_riparian) <- rkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
 plot(scenario_orchard_riparian)
 writeRaster(scenario_orchard_riparian,
