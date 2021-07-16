@@ -51,6 +51,8 @@ Our baseline landscape is based on the [Delta Vegetation and Land Use Update 201
 
 2) An orchard expansion scenario, in which historical regional trends of conversion rates continue through the year 2100, with no restoration or loss of existing wetland and riparian area. This scenario is adapted from projections developed by [Wilson et al. (2021)](https://www.sciencebase.gov/catalog/item/6042c93fd34eb1203119dcaa).
 
+3) A flood risk scenario, in which sea level rise results in some islands in the central Delta having a projected annual risk of flooding >10% by 2085, making them primarily suitable for wetlands only. This scenario is based on projections developed for the [Delta Adapts](https://deltacouncil.ca.gov/delta-plan/climate-change) climate change vulnerability analyses and [supporting maps](https://deltascience.shinyapps.io/delta_flood_map/).
+
 Explore the draft scenarios, in comparison to the baseline landscape, here:
 
 [Initial draft scenarios](draft_scenarios.html)
