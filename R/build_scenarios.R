@@ -616,17 +616,112 @@ writeRaster(scenario_orchard_riparian,
 
 
 
+# SCENARIO 3. Flood risk-----------
+veg_baseline_rast = raster::raster('data/veg_baseline_waterbird_fall.tif')
+
+# first combine separate layers representing flood risk
+filelist = paste0('GIS/DeltaAdapts/',
+                  list.files('GIS/DeltaAdapts',
+                             'baseline_.*shp$|floodrisk2085_.*shp$'))
+
+tmp = purrr::map(filelist,
+                 ~st_read(.) %>%
+                   fasterize::fasterize(veg_baseline_rast,
+                                        field = 'flood_risk')) %>%
+  raster::stack()
+maxfloodrisk = max(tmp, na.rm = TRUE)
+plot(maxfloodrisk, col = rev(hcl.colors(5)))
+
+key = data.frame(id = c(0:4),
+                 label = c('very low', 'low', 'medium', 'high', 'very high'),
+                 risk.annual = c('<0.5%', '0.5-1%', '1-2%', '2-10%', '>10%'),
+                 col = c('lightskyblue', 'dodgerblue', 'royalblue', 'blue3', 'midnightblue'))
+
+maxfloodrisk = terra::rast(maxfloodrisk)
+levels(maxfloodrisk) <- key
+coltab(maxfloodrisk) <- key %>% select(id, col) %>%
+  complete(id = c(0:255)) %>% pull(col)
+plot(maxfloodrisk)
+
+writeRaster(maxfloodrisk, 'GIS/floodrisk2085.tif')
+
+# scenario assumption: all "very high" flood risk areas become wetlands
+veryhigh = classify(maxfloodrisk,
+                    rcl = matrix(c(4, 18), byrow = TRUE, ncol = 2),
+                    othersNA = TRUE)
+plot(veryhigh)
+
+# except pixels that are already water, riparian, urban
+exclude = classify(veg_baseline_waterbird_fall,
+                   rcl = matrix(c(12, 12,
+                                  14, 14,
+                                  15, 15),
+                                byrow = TRUE, ncol = 2),
+                   othersNA = TRUE)
+
+# overlay on baseline
+scenario_floodrisk = cover(veryhigh, veg_baseline_waterbird_fall) %>%
+  mask(veg_baseline_waterbird_fall) #exclude some extra areas in Suisun
+scenario_floodrisk_refine = cover(exclude, scenario_floodrisk)
+
+levels(scenario_floodrisk_refine) <- wkey %>% select(id = code, shortlab) %>%
+  as.data.frame()
+coltab(scenario_floodrisk_refine) <- wkey %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
+names(scenario_floodrisk_refine) = 'scenario_floodrisk'
+writeRaster(scenario_floodrisk_refine,
+            'data/proposed_scenarios/waterbirds/DeltaAdapts_floodrisk.tif')
+
+plot(scenario_floodrisk_refine)
+
+# calculate change in area of each land cover
+delta_floodrisk = DeltaMultipleBenefits::calculate_change(
+  baseline = veg_baseline_waterbird_fall,
+  scenario = scenario_floodrisk_refine)
+delta_floodrisk %>%
+  left_join(wkey %>% select(label.base = shortlab, label), by = 'label.base') %>%
+  group_by(label) %>%
+  summarize(change = sum(change), .groups = 'drop') %>%
+  arrange(change) %>%
+  DeltaMultipleBenefits::plot_change(scale = 1000000) +
+  labs(x = NULL, y = bquote(' ' *Delta~ 'total area ('~km^2*')')) +
+  theme_bw() + coord_flip() +
+  theme(axis.text = element_text(size = 18),
+        axis.title = element_text(size = 18))
+ggsave('fig/delta_floodrisk.png', height = 7.5, width = 6)
+# large increase in wetland cover, at the expense of especially corn, orch, alf;
+# no change in water, urban, riparian
+
+
+# convert to riparian
+scenario_floodrisk_riparian <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_floodrisk_refine)
+levels(scenario_floodrisk_riparian) <- rkey %>%
+  select(id = code, label = group) %>% as.data.frame()
+coltab(scenario_floodrisk_riparian) <- rkey %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
+names(scenario_floodrisk_riparian) = 'scenario_floodrisk'
+plot(scenario_floodrisk_riparian)
+writeRaster(scenario_floodrisk_riparian,
+            'data/proposed_scenarios/riparian/DeltaAdapts_floodrisk.tif')
 
 
 # INTERACTIVE MAP-----------
 
-
-
 # best to set the names of the raster layers (will transfer to the selector)
+mapstack = c(veg_baseline_waterbird_fall,
+             scenario_restoration,
+             scenario_orchard_refine,
+             scenario_floodrisk_refine)
+names(mapstack) = c('baseline', 'scenario_restoration',
+                    'scenario_orchard_expansion', 'scenario_flood_risk')
+
+# # consider resampling rasters to prevent the file size from being too enormous (this is
+# # still fairly hi-res)
+# scenarios_sampled_hi = pred_cv %>%
+#   terra::spatSample(size = 5000000, as.raster = TRUE)
+
 testmap = DeltaMultipleBenefits::map_scenarios(
-  rast = c(veg_baseline_waterbird_fall,
-           scenario_restoration,
-           scenario_orchard_refine),
+  rast = mapstack,
   key = wkey %>% select(value = code, col, label))
 
 ## add delta boundary
@@ -636,21 +731,13 @@ testmap <- testmap %>%
   leaflet::addPolygons(data = delta_poly, fill = FALSE, color = 'black',
               weight = 2, opacity = 1)
 
-library(leaflet)
-
-
-# # resample rasters to prevent the file size from being too enormous (this is
-# # still fairly hi-res)
-# scenarios_sampled_hi = pred_cv %>%
-#   terra::spatSample(size = 5000000, as.raster = TRUE)
-
 
 
 ## save the interactive map as an html widget
 # --> you may want to change this to "selfcontained = TRUE", which would allow
 # you to email the html file to anyone to view -- the file size just might be super large!
 
-htmlwidgets::saveWidget(m,
+htmlwidgets::saveWidget(testmap,
                         'docs/draft_scenarios.html',
                         selfcontained = FALSE, libdir = 'lib',
                         title = 'Draft scenarios of landcover change in the Delta')
