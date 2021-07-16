@@ -96,16 +96,6 @@ names(veg_baseline_riparian) = 'baseline'
 writeRaster(veg_baseline_riparian, 'data/veg_baseline_riparian.tif')
 
 
-# #combined key
-# key = wkey %>% select(id = code, label_wat = label) %>%
-#   mutate(id_rip = c(20, 30, 50, 20, 20, 20, 80, 10, 20, 40, 60, 110, 90, 70, 50,
-#                     50, 130, 80),
-#          label_rip = c('AG', 'RICE', 'GRASSPAS', 'AG', 'AG', 'AG', 'WETLAND',
-#                        'ORCHVIN', 'AG', 'IDLE', 'URBAN', 'WOODLAND', 'WATER',
-#                        'RIPARIAN', 'GRASSPAS', 'GRASSPAS', 'BARREN', 'WETLAND')) %>%
-#   arrange(id)
-
-
 # SCENARIO 1. Restoration--------
 
 ## Restoring habitat to meet (some of) the proposed objectives in the draft
@@ -121,41 +111,42 @@ writeRaster(veg_baseline_riparian, 'data/veg_baseline_riparian.tif')
 ## d) within Legal Delta boundary?
 ## e) not already wetland or riparian habitat
 
+# Additional ideas/feedback:
+# - prioritize restoration near Zonation hotspots
+# - incorporate specific plans/projects underway for Sherman & Twichell Island
+# --> incorporate EcoRestore into restoration scenario (if not already shown)
+# - consider alternative restoration scenario that is more focused on subsided
+# islands (i.e. what we can get, short-term value)
+
 ## restoration objectives------
-obj = read_csv('data/SFEI_DSLPT/delta_targets.csv', col_types = cols())
-
-obj %>% dplyr::select(TYPE, TARGET_HECTARES) %>%
-  slice(1:2) %>% mutate(code = c(80, 70)) %>%
-  left_join(potential_area, by = 'code') %>%
-  mutate(prop = TARGET_HECTARES / area.ha)
-# 7,689 ha of wet meadow/seasonal wetland
-# 6,596 ha of riparian
-
-# objectives are to add this amount to the baseline amount from the 2007 VegCAMP
-# layer; so question is how much has already been added since 2007?
-# alternatively, aim for a total amount of 9,753 ha of wetlands and 12,343 ha of
-# riparian
+# from proposed performance measures to the Delta Plan
+obj = tibble(type = c('seasonal wetland, wet meadow, nontidal wetland',
+                      'willow riparian scrub/shrub, valley foothill riparian, willow thicket'),
+             target_acres = c(19000, 16300),
+             total_acres = c(24100, 30500)) %>%
+  mutate(target_ha = target_acres / 2.47105,
+         total_ha = total_acres / 2.47105)
 
 # (Note: DWR conservation plan goals for entire Lower Sac River and Lower San
 # Joaquin River conservation planning areas combined are less than the goals for
 # just the riparian and wetland habitat in the Delta)
 
 # current totals (from baseline layer)
-veg_baseline_waterbird_fall %>%
+base = veg_baseline_waterbird_fall %>%
   mask(delta) %>%
-  values(dataframe = TRUE) %>%
-  table() %>% as_tibble() %>%
-  set_names(c('code', 'n')) %>%
-  filter(code %in% c(15, 18)) %>%
-  mutate(area.ha = n * 30 * 30 / 10000,
-         code = as.numeric(code))
+  freq() %>%
+  filter(label %in% c('woodw', 'duwet')) %>%
+  mutate(current_ha = count * 30 * 30 / 10000)
 # wetlands = 7,756 ha (consider 'du wetlands' only)
 # riparian = 8,019 ha
 
-targets = tibble(habitat = c('riparian', 'wetlands'),
-                 add.ha = c(12343 - 8019, 9753 - 7756))
-# riparian: 4,324 ha
-# wetlands: 1,997 ha
+targets = full_join(
+  obj %>% mutate(label = c('duwet', 'woodw')) %>% select(label, total_ha),
+  base %>% select(label, current_ha),
+  by = 'label') %>%
+  mutate(add_ha = total_ha - current_ha)
+# riparian: 4,587 ha
+# wetlands: 1,733 ha
 
 
 ## rank priority restoration locations-----
@@ -702,6 +693,8 @@ new_crops = tibble(patchID = c(1:minmax(highmed_orch_patches)[2]),
                                   prob = prop_sample$prop))
 replace_orchard = classify(highmed_orch_patches,
                            rcl = as.matrix(new_crops))
+#Note: a lot of the orchard stringers (along roads?) get converted to corn,
+#which is maybe a bit odd...
 
 ## overlay on baseline------
 scenario_floodrisk = cover(replace_orchard, veryhigh_wetlands_refine)
@@ -744,6 +737,17 @@ names(scenario_floodrisk_riparian) = 'scenario_floodrisk'
 plot(scenario_floodrisk_riparian)
 writeRaster(scenario_floodrisk_riparian,
             'data/proposed_scenarios/riparian/DeltaAdapts_floodrisk.tif')
+
+# ADDITIONAL THOUGHTS/IDEAS/FEEDBACK--------
+# - SFEI carbon/subsidence reversal scenarios (but not waiting on this)
+# - prioritize restoration near Zonation hotspots
+# - incorporate specific plans/projects underway for Sherman & Twichell Island
+# --> incorporate EcoRestore into restoration scenario (if not already shown)
+# - consider alternative restoration scenario that is more focused on subsided
+# islands (i.e. what we can get, short-term value)
+# - shorter-term sea level rise scenario?
+# - consider rice in sea level rise scenario? but some think not much rice
+# feasible except on public lands/where subsidized
 
 
 # INTERACTIVE MAP-----------
