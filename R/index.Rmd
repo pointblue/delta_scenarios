@@ -45,17 +45,15 @@ of landscape changes [*In progress*]
 
 We are currently in the process of drafting and seeking input on spatially-explicit scenarios of future landscape change in the Delta to be evaluated under this project. We will apply our synthesis of ecosystem services and our distribution models of waterbirds and riparian land birds to each of these scenarios and to a baseline representation of the Delta's current landscape, to estimate the net effects of each scenario on ecosystem services and bird distributions and identify synergies and trade-offs among them.
 
-Our baseline landscape is based on the [Delta Vegetation and Land Use Update 2016](https://map.dfg.ca.gov/metadata/ds2855.html), which includes detailed crop data from 2014. We further modified this baseline landscape to reflect changes in annual crop distributions and continued expansion of perennial crops based on [Statewide Crop Mapping Data](https://data.cnra.ca.gov/dataset/statewide-crop-mapping) from 2016 and 2018. From this baseline layer, we have drafted two future scenarios: 
+Our baseline landscape is based on the [Delta Vegetation and Land Use Update 2016](https://map.dfg.ca.gov/metadata/ds2855.html), which includes detailed crop data from 2014. We further modified this baseline landscape to reflect changes in annual crop distributions and continued expansion of perennial crops based on [Statewide Crop Mapping Data](https://data.cnra.ca.gov/dataset/statewide-crop-mapping) from 2016 and 2018. From this baseline layer, we have drafted three future scenarios: 
 
-1) A restoration scenario, in which the total area of riparian vegetation and non-tidal, seasonal wetlands are expanded to meet the [performance measures targets](https://deltacouncil.ca.gov/pdf/delta-plan/2020-04-15-draft-ch-04-pm-4-16.pdf) for the total area of each of these land covers by 2050, as identified in the proposed amendment to the Delta Plan, and
+1) A restoration scenario, in which the total area of riparian vegetation and non-tidal, seasonal wetlands are expanded to meet the [performance measures targets](https://deltacouncil.ca.gov/pdf/delta-plan/2020-04-15-draft-ch-04-pm-4-16.pdf) for the total area of each of these land covers by 2050, as identified in the proposed amendment to the Delta Plan.
 
-2) An orchard expansion scenario, in which historical regional trends of conversion rates continue through the year 2100, with no restoration or loss of existing wetland and riparian area. This scenario is adapted from projections developed by [Wilson et al. (2021)](https://www.sciencebase.gov/catalog/item/6042c93fd34eb1203119dcaa).
+2) A perennial crops expansion scenario, in which historical regional trends of conversion rates continue through the year 2100, with no restoration or loss of existing wetland and riparian area. This scenario is adapted from projections developed by [Wilson et al. (2021)](https://www.sciencebase.gov/catalog/item/6042c93fd34eb1203119dcaa).
 
-3) A flood risk scenario, in which sea level rise results in some islands in the central Delta having a very high projected annual risk of flooding >10% by 2085, making them primarily suitable for wetlands only. In addition, island with a high (2-10%) or medium (1-2%) annual risk of flooding may become unsuitable for perennial crops. This scenario is based on projections developed for the [Delta Adapts](https://deltacouncil.ca.gov/delta-plan/climate-change) climate change vulnerability analyses and [supporting maps](https://deltascience.shinyapps.io/delta_flood_map/).
+3) A flood risk scenario, in which sea level rise results in some islands in the central Delta having a very high (>10%) projected annual risk of flooding by 2085, making them primarily suitable for wetlands only. In addition, areas with a high (2-10%) or medium (1-2%) annual risk of flooding may become unsuitable for perennial crops. This scenario is based on projections developed for the [Delta Adapts](https://deltacouncil.ca.gov/delta-plan/climate-change) climate change vulnerability analyses and [supporting maps](https://deltascience.shinyapps.io/delta_flood_map/).
 
-Explore the draft scenarios, in comparison to the baseline landscape, here:
-
-[Initial draft scenarios](draft_scenarios.html)
+Explore the draft scenarios, in comparison to the baseline landscape, here: [Initial draft scenarios](draft_scenarios.html)
 
 
 
