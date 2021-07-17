@@ -150,7 +150,17 @@ targets = full_join(
 
 ## planned restoration---------
 # - ecorestore (already planned/under way)
-ecorestore = rast('GIS/DSLPT_Ecorestore.tif')
+# but exclude areas that are already urban or water, or already managed wetlands
+# - assume base layer misalignment/double-counting)
+
+exclude = subst(veg_baseline_waterbird_fall, c(12, 14, 18), NA)
+ecorestore = rast('GIS/DSLPT_Ecorestore.tif') %>% mask(exclude)
+tab = crosstab(c(ecorestore,
+                 veg_baseline_waterbird_fall %>% mask(ecorestore)))
+tab %>% as_tibble() %>% arrange(DSLPT_Ecorestore) %>%
+  filter(DSLPT_Ecorestore == 18)
+# Note: some of the new managed wetland is coming from other wetland (?)
+
 base_plus_ecorestore = cover(ecorestore, veg_baseline_waterbird_fall)
 base_plus = base_plus_ecorestore %>%
   mask(delta) %>%
@@ -160,17 +170,19 @@ base_plus = base_plus_ecorestore %>%
                         '15' = 'woodw', '18' = 'duwet')) %>%
   mutate(ecorestore_ha = count * 30 * 30 / 10000)
 targets_plus = full_join(
-  targets %>% select(label, total_ha),
+  targets %>% select(label, total_ha, current_ha),
   base_plus %>% select(label, ecorestore_ha),
   by = 'label') %>%
   mutate(add_ha = total_ha - ecorestore_ha)
-# riparian: 4,601 ha (increased!)
-# wetlands: 931 ha
+# riparian: 4,616 ha (increased)
+# wetlands: 158 ha (decreased)
+
+
 
 ## restoration potential--------
 # (excluding areas that are already wetland or riparian; also already urban or
 # water (assume permanent)
-exclude = subst(base_plus_ecorestore, c(8, 12, 14, 15, 18), NA)
+exclude2 = subst(base_plus_ecorestore, c(8, 12, 14, 15, 18), NA)
 
 restoration_stack = c(rast('GIS/habpotential.tif'), #7000 = riparian, 8000 = wetland
                       rast('GIS/restorationpriority.tif'), # 100 = priority
@@ -178,7 +190,7 @@ restoration_stack = c(rast('GIS/habpotential.tif'), #7000 = riparian, 8000 = wet
                       rast('GIS/protectedareas.tif') # 1 = protected, 2 = easement
                       ) %>%
   mask(delta) %>%
-  mask(exclude)
+  mask(exclude2)
 
 # sum scores to classify each pixel with multiple pieces of data
 restoration_targets = sum(restoration_stack, na.rm = TRUE)
@@ -235,7 +247,7 @@ writeRaster(restoration_targets_wet, 'GIS/restoration_targets_wetlands.tif')
 # - compare remaining total area of each priority level vs. objective
 # - when not all of a priority level is needed, randomly select a subset that
 #     will meet the restoration objective
-# objective: 4601 ha added
+# objective: 4616 ha added
 
 targets_area_rip = freq(restoration_targets_rip) %>% as_tibble() %>%
   mutate(area.ha = count * 30 * 30 / 10000,
@@ -261,7 +273,7 @@ rip_need = targets_plus %>% filter(label == 'woodw') %>% pull(add_ha) -
   freq(rip_targets1_keep) %>% as_tibble() %>%
   mutate(area.ha = count * 30 * 30 / 10000) %>%
   pull(area.ha) %>% sum()
-# 2975.371 ha
+# 2990.131 ha
 
 rip_targets2 = subst(restoration_targets_rip, c(0:4,9), NA) %>%
   patches(directions = 8)
@@ -292,122 +304,69 @@ rip_targets2_keep = classify(rip_targets2,
                                           to = 15) %>% as.matrix(),
                              othersNA = TRUE)
 
-# COMBINE PROPOSED RIPARIAN RESTORATION
+# COMBINE PLANNED & PROPOSED RIPARIAN RESTORATION
 # (convert all other patch IDs to NA)
 rip_targets_final = ecorestore %>% subst(c(0:14,16:18), NA) %>%
   cover(rip_targets1_keep) %>%
   cover(rip_targets2_keep)
+names(rip_targets_final) = 'riparian_restoration'
 freq(rip_targets_final) %>% as_tibble() %>% pull(count) * 30 * 30 / 10000
-# adding 4880.25 ha
+# adding 4824.36 ha (target = 4616)
 writeRaster(rip_targets_final,
             'GIS/restoration_targets_riparian_objectives.tif')
 
-## wetland restoration---------
+### add wetland restoration---------
 # same approach as for riparian
-#
-# objective: 1,997 ha added
+# objective: 158 ha added
 
-targets_area_wet = values(restoration_targets_wet) %>%
-  table() %>% as_tibble() %>%
-  set_names('code', 'n') %>%
-  mutate(area.ha = n * 30 * 30 / 10000,
-         code = as.numeric(code),
+targets_area_wet = freq(restoration_targets_wet) %>% as_tibble() %>%
+  mutate(area.ha = count * 30 * 30 / 10000,
          tot.ha = cumsum(area.ha))
-#  code     n area.ha tot.ha
-# <dbl> <int>   <dbl>  <dbl>
-#     1 14827   1334.  1334. # priority & protected
-#     2 65751   5918.  7252. # priority & unprotected
-#     3  7881    709.  7961. # not priority but protected
-#     4  1217    110.  8071. # not priority or protected but open space/quasi-public
-#     5 61983   5578. 13649. # other potential wetland habitat
-#     9  2865    258. 13907. # designated for development
+# --> to reach target, only need part of priority level 1
 
-# --> to reach target of 1997 ha added, need most/all of priority level 1 plus
-# some of priority level 2 (or is 3 a higher priority?)
-
-# PRIORITY LEVEL 1:
-# (exclude areas designated for development & priority levels 2-5 for now)
-
-wet_targets1 = classify(restoration_targets_wet,
-                        rcl = matrix(c(2, Inf, NA),
-                                     byrow = TRUE, ncol = 3))
-
-# find patches & exclude those < 1 acre (0.4 ha) in size
-wet_targets1_patches = patches(wet_targets1, directions = 8)
-
-wet_targets1_keepID = values(wet_targets1_patches) %>%
-  table() %>% as_tibble() %>%
-  set_names(c('patchID', 'n')) %>%
-  mutate(area.ha = n * 30 * 30 / 10000) %>%
-  filter(area.ha >= 0.4) %>%
-  pull(patchID)
-
-wet_targets1_keep = lapp(wet_targets1_patches,
-                         y = wet_targets1_keepID,
-                         fun = keep)
-
-# EVALUATE PRIORITY LEVEL 2:
-# how much additional area needed from priority level 2?
-wet_need2 = targets %>% filter(habitat == 'wetlands') %>% pull(add.ha) - values(wet_targets1_patches) %>%
-  table() %>% as_tibble() %>%
-  set_names(c('patchID', 'n')) %>%
-  mutate(area.ha = n * 30 * 30 / 10000) %>%
-  filter(area.ha >= 0.4) %>%
-  pull(area.ha) %>% sum()
-# 676.79 ha
-
-wet_targets2 = classify(restoration_targets_wet,
-                        rcl = matrix(c(0, 2, NA,
-                                       3, Inf, NA),
-                                     byrow = TRUE, ncol = 3))
-
-wet_targets2_patches = patches(wet_targets2, directions = 8)
-
-wet_targets2_consider = values(wet_targets2_patches) %>%
-  table() %>% as_tibble() %>%
-  set_names(c('patchID', 'n')) %>%
-  mutate(area.ha = n * 30 * 30 / 10000) %>%
-  filter(area.ha >= 0.4) %>%
-  arrange(desc(area.ha)) %>%
-  mutate(weight = area.ha / sum(area.ha))
-
-# random sample of priority level 2 patches > 1 acre, weighted by size
-# --> CONSIDER STRATIFYING BY REGION?
-wet_targets2_sampleorder = sample(wet_targets2_consider %>% pull(patchID),
-                                  # prob = wet_targets2_consider %>% pull(weight),
-                                  nrow(wet_targets2_consider), replace = FALSE)
-
-wet_targets2_considerorder = wet_targets2_consider %>%
-  mutate(patchID = factor(patchID, levels =  wet_targets2_sampleorder)) %>%
-  arrange(patchID) %>%
+# find patches in priority level 1 of at least 1 acre (0.4 ha) and less than the
+# total target
+wet_targets1 = subst(restoration_targets_wet, c(2:9), NA) %>%
+  patches(directions = 8)
+wet_targets1_consider = freq(wet_targets1) %>% as_tibble() %>%
+  mutate(area.ha = count * 30 * 30 / 10000) %>%
+  filter(area.ha >= 0.4 &
+           area.ha < targets_plus %>% filter(label == 'duwet') %>% pull(add_ha))
+# take random sample of patches > 1 acre
+wet_targets1_sampleorder = sample(wet_targets1_consider %>% pull(value),
+                                  nrow(wet_targets1_consider), replace = FALSE)
+wet_targets1_considerorder = wet_targets1_consider %>%
+  mutate(value = factor(value, levels =  wet_targets1_sampleorder)) %>%
+  arrange(value) %>%
   mutate(tot.ha = cumsum(area.ha))
-
-# stop when cumulative sum reaches/exceeds target (only need first one!)
-wet_targets2_keepID = wet_targets2_considerorder %>%
-  filter(tot.ha <= wet_targets2_considerorder %>% filter(tot.ha > wet_need2) %>%
+# keep all up until cumulative sum reaches/exceeds target
+wet_targets1_keepID = wet_targets1_considerorder %>%
+  filter(tot.ha <= wet_targets1_considerorder %>%
+           filter(tot.ha >
+                    targets_plus %>% filter(label == 'duwet') %>% pull(add_ha)) %>%
            slice(1) %>% pull(tot.ha)) %>%
-  pull(patchID)
+  pull(value)
+# classify all included patch IDs as wetland; rest to NA
+wet_targets1_keep = classify(wet_targets1,
+                             rcl = tibble(from = wet_targets1_keepID %>%
+                                            as.character() %>% as.numeric(),
+                                          to = 18) %>% as.matrix(),
+                             othersNA = TRUE)
 
-wet_targets2_keep = lapp(wet_targets2_patches,
-                         y = wet_targets2_keepID,
-                         fun = keep)
-
-# COMBINE PROPOSED WETLAND RESTORATION
+# COMBINE PLANNED & POTENTIAL WETLAND RESTORATION
 # (convert all other patch IDs to NA)
-wet_targets_final = cover(wet_targets1_keep, wet_targets2_keep)
+wet_targets_final = ecorestore %>% subst(c(0:17), NA) %>%
+  cover(wet_targets1_keep)
+names(wet_targets_final) = 'wetland_restoration'
+freq(wet_targets_final) %>% as_tibble() %>% pull(count) * 30 * 30 / 10000
+# adding 1754.1 ha (compared to 1733 target)
 writeRaster(wet_targets_final,
             'GIS/restoration_targets_wetland_objectives.tif')
 
 
 ## overlay on baseline layer------------
-
-# combine restoration targets into one layer, coded according to waterbird key
-rip_targets_final[rip_targets_final == 1] = 15
-wet_targets_final[wet_targets_final == 1] = 18
-targets_final = cover(rip_targets_final, wet_targets_final)
-
-# overlay on baseline layer
-scenario_restoration = cover(targets_final, veg_baseline_waterbird_fall)
+scenario_restoration = cover(rip_targets_final, wet_targets_final) %>%
+  cover(veg_baseline_waterbird_fall)
 levels(scenario_restoration) <- wkey %>% select(id = code, shortlab) %>%
   as.data.frame()
 coltab(scenario_restoration) <- wkey %>% select(code, col) %>%
@@ -432,8 +391,7 @@ delta_restoration %>%
         axis.title = element_text(size = 18))
 ggsave('fig/delta_restoration.png', height = 7.5, width = 6)
 # large increase in riparian and wetland cover, mostly at the expense of
-# orchard/vineyard, but also alfalfa, pasture
-
+# orchard/vineyard, dry & irrigated pastures, alfalfa
 
 # compare/check conversions between layers
 tab = crosstab(c(veg_baseline_waterbird_fall %>% mask(delta),
@@ -450,12 +408,12 @@ tab %>% as_tibble() %>%
          prop = n/tot) %>%
   ungroup() %>%
   filter(shortlab.y == 'duwet')
-  filter(shortlab.y == 'woodw')
+  # filter(shortlab.y == 'woodw')
 
-# - riparian: 64% existing riparian; most conversion from orch (17%);
-#    no conversion from rice, wet, duwet, dev, or water
-# - wetland: 75% existing duwet; most conversion from ip (6%), rice (5%), dryp (4%);
-#    no conversion from wet, dev, forest, water, woodw, or barren
+# - riparian: 62% existing riparian; most conversion from orch (18%);
+#    no conversion from rice, duwet, dev, water
+# - wetland: 82% existing duwet; most conversion from ip (6%), wet (4%);
+#    no conversion from dev, forest, water, barren
 
 # convert encoding for use with riparian models
 scenario_restoration_riparian <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_restoration)
@@ -466,8 +424,6 @@ coltab(scenario_restoration_riparian) <- rkey %>% select(code, col) %>%
 names(scenario_restoration_riparian) = 'scenario_restoration'
 writeRaster(scenario_restoration_riparian,
             'data/proposed_scenarios/riparian/DeltaPlan_restoration_objectives.tif')
-
-
 
 # compare/check conversions between layers
 tab = crosstab(c(veg_baseline_riparian %>% mask(delta),
@@ -483,13 +439,13 @@ tab %>% as_tibble() %>%
   mutate(tot = sum(n),
          prop = n/tot) %>%
   ungroup() %>%
-  # filter(group.y == 'WETLAND')
-  filter(group.y == 'RIPARIAN')
+  filter(group.y == 'WETLAND')
+  # filter(group.y == 'RIPARIAN')
 
-# - riparian: 64% existing riparian; most conversion from ORCHVIN (20%);
-#    no conversion from RICE, URBAN, WETLAND, or WATER
-# - wetland: 89% existing WETLAND; most conversion from GRASSPAS (6%), rice (2%);
-#    no conversion from URBAN, RIPARIAN, WATER, OAKWOODLAND, BARREN
+# - riparian: 62% existing riparian; most conversion from ORCHVIN (18%);
+#    no conversion from RICE, URBAN, or WATER
+# - wetland: 94% existing WETLAND; most conversion from GRASSPAS (4%), AG (1%);
+#    no conversion from URBAN, WATER, OAKWOODLAND, BARREN
 
 
 
