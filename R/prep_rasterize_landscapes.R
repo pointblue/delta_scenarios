@@ -540,4 +540,19 @@ elev %>%
 # SFEI: Terrestrial, DeltaPlan: Intertidal
 
 
+# DSLPT: EcoRestore----------
+ecorestore = read_sf('GIS/DSLPT/DSLPT_EcoRestore.shp')
+ecorestore_rast = ecorestore %>%
+  mutate(shortlab = recode(Habitat_Ty,
+                        grassland = 'dryp',
+                        'open water' = 'water',
+                        'valley foothill riparian' = 'woodw',
+                        'non-tidal freshwater emergent wetland' = 'duwet',
+                        'tidal freshwater emergent wetland' = 'wet',
+                        'wet meadow/seasonal wetland' = 'duwet')) %>%
+  left_join(wkey %>% select(shortlab, code), by = 'shortlab') %>%
+  st_transform(crs = crs(veg_baseline_waterbird_fall)) %>%
+  fasterize::fasterize(raster::raster(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_waterbirds_fall.tif')),
+                       field = 'code')
+writeRaster(ecorestore_rast, 'GIS/DSLPT_Ecorestore.tif')
 
