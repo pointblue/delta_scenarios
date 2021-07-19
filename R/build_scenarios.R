@@ -95,6 +95,28 @@ coltab(veg_baseline_riparian) <- rkey %>% select(code, col) %>%
 names(veg_baseline_riparian) = 'baseline'
 writeRaster(veg_baseline_riparian, 'data/veg_baseline_riparian.tif')
 
+## multiple benefits-------
+mkey = tibble(group = c('orchard/vineyard', 'citrus', 'orchard', 'vineyard',
+                        'row/field', 'corn', 'grains', 'cotton',
+                        'tomato', 'rice', 'grassland/pasture', 'alfalfa',
+                        'riparian', 'wetland', 'other'),
+              code = c(10, 11, 12, 13,
+                       21, 22, 23, 24,
+                       25, 30, 50, 51,
+                       70, 80, 90),
+              col = c('#9400D3', NA, NA, NA,
+                      '#FA8072', '#FFFF00', '#FFA54F', NA,
+                      NA, '#FF1493', '#FFE4C4', '#32CD32',
+                      '#FF0000', '#00008B', '#4D4D4D'))
+
+veg_baseline_mb = DeltaMultipleBenefits::reclassify_multiplebenefits(veg_baseline_waterbird_fall)
+levels(veg_baseline_mb) <- mkey %>%
+  select(id = code, label = group) %>% as.data.frame()
+coltab(veg_baseline_mb) <- mkey %>% select(code, col) %>% filter(!is.na(col)) %>%
+  complete(code = c(0:255)) %>% pull(col)
+names(veg_baseline_mb) = 'baseline'
+plot(veg_baseline_mb)
+writeRaster(veg_baseline_mb, 'data/veg_baseline_multiplebenefits.tif')
 
 # SCENARIO 1. Restoration--------
 
@@ -447,6 +469,36 @@ tab %>% as_tibble() %>%
 # - wetland: 94% existing WETLAND; most conversion from GRASSPAS (4%), AG (1%);
 #    no conversion from URBAN, WATER, OAKWOODLAND, BARREN
 
+# convert encoding for use with multiple benefits models
+scenario_restoration_mb <- DeltaMultipleBenefits::reclassify_multiplebenefits(scenario_restoration)
+levels(scenario_restoration_mb) <- mkey %>%
+  select(id = code, label = group) %>% as.data.frame()
+coltab(scenario_restoration_mb) <- mkey %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
+names(scenario_restoration_mb) = 'scenario_restoration'
+writeRaster(scenario_restoration_mb,
+            'data/proposed_scenarios/multiplebenefits/DeltaPlan_restoration_objectives.tif')
+
+# compare/check conversions between layers
+tab = crosstab(c(veg_baseline_mb %>% mask(delta),
+                 scenario_restoration_mb %>% mask(delta)))
+
+tab %>% as_tibble() %>%
+  set_names(c('baseline', 'scenario', 'n')) %>%
+  mutate_at(vars(baseline:scenario), as.numeric) %>%
+  left_join(mkey %>% dplyr::select(code, group), by = c('baseline' = 'code')) %>%
+  left_join(mkey %>% dplyr::select(code, group), by = c('scenario' = 'code')) %>%
+  arrange(desc(n)) %>%
+  group_by(group.y) %>%
+  mutate(tot = sum(n),
+         prop = n/tot) %>%
+  ungroup() %>%
+  filter(group.y == 'wetland')
+# filter(group.y == 'riparian')
+
+# - riparian: 62% existing riparian; most conversion from orchard/vineyard (18%);
+#    no conversion from rice
+# - wetland: 94% existing WETLAND; most conversion from grassland/pasture (3%)
 
 
 # SCENARIO 2. Perennial crop expansion---------
@@ -532,7 +584,7 @@ tab %>% as_tibble() %>%
   # filter(bbau_landuse == 'orch')
   filter(bbau_landuse == 'wet')
 
-
+# convert to riparian
 scenario_orchard_riparian <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_orchard_refine)
 levels(scenario_orchard_riparian) <- rkey %>%
   select(id = code, label = group) %>% as.data.frame()
@@ -543,6 +595,16 @@ plot(scenario_orchard_riparian)
 writeRaster(scenario_orchard_riparian,
             'data/proposed_scenarios/riparian/orchard_expansion.tif')
 
+# convert to multiple benefits
+scenario_orchard_mb <- DeltaMultipleBenefits::reclassify_multiplebenefits(scenario_orchard_refine)
+levels(scenario_orchard_mb) <- mkey %>%
+  select(id = code, label = group) %>% as.data.frame()
+coltab(scenario_orchard_mb) <- mkey %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
+names(scenario_orchard_mb) = 'scenario_orchard_expansion'
+plot(scenario_orchard_mb)
+writeRaster(scenario_orchard_mb,
+            'data/proposed_scenarios/multiplebenefits/orchard_expansion.tif')
 
 
 # SCENARIO 3. Flood risk-----------
@@ -676,6 +738,17 @@ plot(scenario_floodrisk_riparian)
 writeRaster(scenario_floodrisk_riparian,
             'data/proposed_scenarios/riparian/DeltaAdapts_floodrisk.tif')
 
+# convert to multiple benefits
+scenario_floodrisk_mb <- DeltaMultipleBenefits::reclassify_multiplebenefits(scenario_floodrisk)
+levels(scenario_floodrisk_mb) <- mkey %>%
+  select(id = code, label = group) %>% as.data.frame()
+coltab(scenario_floodrisk_mb) <- mkey %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
+names(scenario_floodrisk_mb) = 'scenario_floodrisk'
+plot(scenario_floodrisk_mb)
+writeRaster(scenario_floodrisk_mb,
+            'data/proposed_scenarios/multiplebenefits/DeltaAdapts_floodrisk.tif')
+
 # ADDITIONAL THOUGHTS/IDEAS/FEEDBACK--------
 # - SFEI carbon/subsidence reversal scenarios (but not waiting on this)
 # - prioritize restoration near Zonation hotspots
@@ -713,8 +786,6 @@ delta_poly = read_sf('V:/Data/geopolitical/california/Legal_Delta_Boundary/Legal
 testmap <- testmap %>%
   leaflet::addPolygons(data = delta_poly, fill = FALSE, color = 'black',
               weight = 2, opacity = 1)
-
-
 
 ## save the interactive map as an html widget
 # --> you may want to change this to "selfcontained = TRUE", which would allow
