@@ -6,117 +6,17 @@ source('R/packages.R')
 # reference data:
 delta = rast('GIS/delta.tif')
 
-# BASELINE--------
-# make a local copy & add code details
-gisdir = 'V:/Project/Terrestrial/cv_riparian/distribution_modeling/'
+# baseline layers:
+baseline_rip = rast('data/landcover_riparian/baseline_riparian.tif')
+baseline_wat_fall = rast('data/landcover_waterbirds_fall/baseline_waterbird_fall.tif')
+baseline_wat_win = rast('data/landcover_waterbirds_winter/baseline_waterbird_winter.tif')
+baseline_mb = rast('data/landcover_multiplebenefits/baseline_mb.tif')
 
-## waterbirds---------
-wkey = read_csv('V:/Project/wetland/Delta/landscape_models/predrasters_baseline/baseline/VegCAMP_crosswalk.csv',
-                col_types = cols()) %>%
-  dplyr::select(group = WATERBIRD, code) %>%
-  distinct() %>%
-  bind_rows(tibble(group = 'DUwetland',
-                   code = 18)) %>%
-  arrange(code) %>%
-  mutate(shortlab = case_when(group == 'Irrigated pasture' ~ 'ip',
-                              group == 'Dryland pasture' ~ 'dryp',
-                              group == 'wetland' ~ 'wet',
-                              group == 'orchard' ~ 'orch',
-                              group == 'alfalfa' ~ 'alf',
-                              group == 'woody wetland' ~ 'woodw',
-                              group == 'developed' ~ 'dev',
-                              group == 'fallow' ~ 'fal',
-                              group == 'DUwetland' ~ 'duwet',
-                              TRUE ~ group),
-         label = recode(shortlab,
-                        'ip' = 'irrigated pasture',
-                        'wheat' = 'grain',
-                        'row' = 'row/field crop',
-                        'field' = 'row/field crop',
-                        'wet' = 'wetland',
-                        'DUwetland' = 'wetland',
-                        'orch' = 'orchard/vineyard',
-                        'fal' = 'fallow',
-                        'dev' = 'urban',
-                        'woodw' = 'riparian',
-                        'dryp' = 'dryland pasture',
-                        'alf' = 'alfalfa',
-                        'duwet' = 'wetland'),
-         col = c('#FFFF00', '#FF1493', '#2E8B57', '#FFA54F', '#FA8072',
-                 '#FA8072', '#00008B', '#9400D3', '#FFA54F', '#CCCCCC',
-                 '#4D4D4D', '#8B4513', '#87CEFA', '#FF0000', '#FFE4C4',
-                 '#32CD32', '#00008B', '#FFFFFF'))
-write_csv(wkey, 'data/landcover_key_waterbirds.csv')
+# keys:
+rkey = read_csv('data/landcover_key_riparian.csv')
+wkey = read_csv('data/landcover_key_waterbirds.csv')
+mkey = read_csv('data/landcover_key_multiplebenefits.csv')
 
-veg_baseline_waterbird_fall = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_waterbirds_fall.tif'))
-levels(veg_baseline_waterbird_fall) <- wkey %>% select(id = code, shortlab) %>%
-  as.data.frame()
-coltab(veg_baseline_waterbird_fall) <- wkey %>% select(code, col) %>%
-  complete(code = c(0:255)) %>% pull(col)
-names(veg_baseline_waterbird_fall) = 'baseline'
-writeRaster(veg_baseline_waterbird_fall, 'data/veg_baseline_waterbird_fall.tif')
-
-veg_baseline_waterbird_winter = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_waterbirds_winter.tif'))
-levels(veg_baseline_waterbird_winter) <- wkey %>%
-  select(id = code, shortlab) %>% as.data.frame()
-coltab(veg_baseline_waterbird_winter) <- wkey %>% select(code, col) %>%
-  complete(code = c(0:255)) %>% pull(col)
-names(veg_baseline_waterbird_winter) = 'baseline'
-writeRaster(veg_baseline_waterbird_winter, 'data/veg_baseline_waterbird_winter.tif')
-
-
-## riparian-------
-rkey = read_csv(paste0(gisdir, 'GIS/landscape_rasters/key.csv'),
-                col_types = cols()) %>%
-  filter(type == 'veg' & !code %in% c(110, 120, 999)) %>%
-  select(-type) %>%
-  mutate(label = recode(group,
-                        'ORCHVIN' = 'orchard/vineyard',
-                        'RICE' = 'rice',
-                        'AG' = 'other crops',
-                        'IDLE' = 'fallow',
-                        'GRASSPAS' = 'grassland/pasture',
-                        'URBAN' = 'urban',
-                        'RIPARIAN' = 'riparian',
-                        'WETLAND' = 'wetland',
-                        'WATER' = 'water',
-                        'OAKWOODLAND' = 'forest',
-                        'BARREN' = 'barren'),
-         col = c('#9400D3', '#32CD32', '#FF1493', '#CCCCCC', '#FFE4C4',
-                 '#4D4D4D', '#FF0000', '#00008B', '#87CEFA', '#8B4513',
-                 '#FFFFFF'))
-write_csv(rkey, 'data/landcover_key_riparian.csv')
-
-veg_baseline_riparian = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_riparian.tif'))
-levels(veg_baseline_riparian) <- rkey %>%
-  select(id = code, label = group) %>% as.data.frame()
-coltab(veg_baseline_riparian) <- rkey %>% select(code, col) %>%
-  complete(code = c(0:255)) %>% pull(col)
-names(veg_baseline_riparian) = 'baseline'
-writeRaster(veg_baseline_riparian, 'data/veg_baseline_riparian.tif')
-
-## multiple benefits-------
-mkey = tibble(group = c('orchard/vineyard', 'citrus', 'orchard', 'vineyard',
-                        'row/field', 'corn', 'grains', 'cotton',
-                        'tomato', 'rice', 'grassland/pasture', 'alfalfa',
-                        'riparian', 'wetland', 'other'),
-              code = c(10, 11, 12, 13,
-                       21, 22, 23, 24,
-                       25, 30, 50, 51,
-                       70, 80, 90),
-              col = c('#9400D3', NA, NA, NA,
-                      '#FA8072', '#FFFF00', '#FFA54F', NA,
-                      NA, '#FF1493', '#FFE4C4', '#32CD32',
-                      '#FF0000', '#00008B', '#4D4D4D'))
-
-veg_baseline_mb = DeltaMultipleBenefits::reclassify_multiplebenefits(veg_baseline_waterbird_fall)
-levels(veg_baseline_mb) <- mkey %>%
-  select(id = code, label = group) %>% as.data.frame()
-coltab(veg_baseline_mb) <- mkey %>% select(code, col) %>% filter(!is.na(col)) %>%
-  complete(code = c(0:255)) %>% pull(col)
-names(veg_baseline_mb) = 'baseline'
-plot(veg_baseline_mb)
-writeRaster(veg_baseline_mb, 'data/veg_baseline_multiplebenefits.tif')
 
 # SCENARIO 1. Restoration--------
 
@@ -386,20 +286,22 @@ writeRaster(wet_targets_final,
             'GIS/restoration_targets_wetland_objectives.tif')
 
 
-## overlay on baseline layer------------
+## overlay on baseline layers------------
+
+### waterbirds-fall----------
 scenario_restoration = cover(rip_targets_final, wet_targets_final) %>%
-  cover(veg_baseline_waterbird_fall)
+  cover(baseline_wat_fall)
 levels(scenario_restoration) <- wkey %>% select(id = code, shortlab) %>%
   as.data.frame()
 coltab(scenario_restoration) <- wkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
 names(scenario_restoration) = 'scenario_restoration'
 writeRaster(scenario_restoration,
-            'data/proposed_scenarios/waterbirds/DeltaPlan_restoration_objectives.tif')
+            'data/landcover_waterbirds_fall/scenario1_restoration_waterbird_fall.tif')
 
 # calculate change in area of each land cover
 delta_restoration = DeltaMultipleBenefits::calculate_change(
-  baseline = veg_baseline_waterbird_fall,
+  baseline = baseline_wat_fall,
   scenario = scenario_restoration)
 delta_restoration %>%
   left_join(wkey %>% select(label.base = shortlab, label), by = 'label.base') %>%
@@ -416,7 +318,7 @@ ggsave('fig/delta_restoration.png', height = 7.5, width = 6)
 # orchard/vineyard, dry & irrigated pastures, alfalfa
 
 # compare/check conversions between layers
-tab = crosstab(c(veg_baseline_waterbird_fall %>% mask(delta),
+tab = crosstab(c(baseline_wat_fall %>% mask(delta),
                  scenario_restoration %>% mask(delta)))
 
 tab %>% as_tibble() %>%
@@ -437,19 +339,30 @@ tab %>% as_tibble() %>%
 # - wetland: 82% existing duwet; most conversion from ip (6%), wet (4%);
 #    no conversion from dev, forest, water, barren
 
-# convert encoding for use with riparian models
-scenario_restoration_riparian <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_restoration)
-levels(scenario_restoration_riparian) <- rkey %>%
-  select(id = code, label = group) %>% as.data.frame()
-coltab(scenario_restoration_riparian) <- rkey %>% select(code, col) %>%
+### waterbirds-winter--------
+scenario_restoration_win = cover(rip_targets_final, wet_targets_final) %>%
+  cover(baseline_wat_win)
+levels(scenario_restoration_win) <- wkey %>% select(id = code, shortlab) %>%
+  as.data.frame()
+coltab(scenario_restoration_win) <- wkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
-names(scenario_restoration_riparian) = 'scenario_restoration'
-writeRaster(scenario_restoration_riparian,
-            'data/proposed_scenarios/riparian/DeltaPlan_restoration_objectives.tif')
+names(scenario_restoration_win) = 'scenario_restoration'
+writeRaster(scenario_restoration_win,
+            'data/landcover_waterbirds_winter/scenario1_restoration_waterbird_winter.tif')
+
+### riparian----------
+scenario_restoration_rip <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_restoration)
+levels(scenario_restoration_rip) <- rkey %>%
+  select(id = code, label = group) %>% as.data.frame()
+coltab(scenario_restoration_rip) <- rkey %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
+names(scenario_restoration_rip) = 'scenario_restoration'
+writeRaster(scenario_restoration_rip,
+            'data/landcover_riparian/scenario1_restoration_riparian.tif')
 
 # compare/check conversions between layers
-tab = crosstab(c(veg_baseline_riparian %>% mask(delta),
-                 scenario_restoration_riparian %>% mask(delta)))
+tab = crosstab(c(baseline_rip %>% mask(delta),
+                 scenario_restoration_rip %>% mask(delta)))
 
 tab %>% as_tibble() %>%
   set_names(c('baseline', 'scenario', 'n')) %>%
@@ -469,7 +382,8 @@ tab %>% as_tibble() %>%
 # - wetland: 94% existing WETLAND; most conversion from GRASSPAS (4%), AG (1%);
 #    no conversion from URBAN, WATER, OAKWOODLAND, BARREN
 
-# convert encoding for use with multiple benefits models
+
+### multiple benefits--------
 scenario_restoration_mb <- DeltaMultipleBenefits::reclassify_multiplebenefits(scenario_restoration)
 levels(scenario_restoration_mb) <- mkey %>%
   select(id = code, label = group) %>% as.data.frame()
@@ -477,28 +391,7 @@ coltab(scenario_restoration_mb) <- mkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
 names(scenario_restoration_mb) = 'scenario_restoration'
 writeRaster(scenario_restoration_mb,
-            'data/proposed_scenarios/multiplebenefits/DeltaPlan_restoration_objectives.tif')
-
-# compare/check conversions between layers
-tab = crosstab(c(veg_baseline_mb %>% mask(delta),
-                 scenario_restoration_mb %>% mask(delta)))
-
-tab %>% as_tibble() %>%
-  set_names(c('baseline', 'scenario', 'n')) %>%
-  mutate_at(vars(baseline:scenario), as.numeric) %>%
-  left_join(mkey %>% dplyr::select(code, group), by = c('baseline' = 'code')) %>%
-  left_join(mkey %>% dplyr::select(code, group), by = c('scenario' = 'code')) %>%
-  arrange(desc(n)) %>%
-  group_by(group.y) %>%
-  mutate(tot = sum(n),
-         prop = n/tot) %>%
-  ungroup() %>%
-  filter(group.y == 'wetland')
-# filter(group.y == 'riparian')
-
-# - riparian: 62% existing riparian; most conversion from orchard/vineyard (18%);
-#    no conversion from rice
-# - wetland: 94% existing WETLAND; most conversion from grassland/pasture (3%)
+            'data/landcover_multiplebenefits/scenario1_restoration_mb.tif')
 
 
 # SCENARIO 2. Perennial crop expansion---------
@@ -509,20 +402,20 @@ tab %>% as_tibble() %>%
 skey = readr::read_csv('GIS/State Class Rasters/key.csv')
 
 bbau = terra::rast('GIS/State Class Rasters/scn421.sc.it1.ts2100.tif') %>%
-  terra::project(veg_baseline_waterbird_fall, method = 'near') %>%
-  terra::mask(veg_baseline_waterbird_fall) %>%
+  terra::project(baseline_wat_fall, method = 'near') %>%
+  terra::mask(baseline_wat_fall) %>%
   # keep only the footprint of expanded perennial crops (code=20) - reclassify
   # to waterbird code for orch (9); all others convert to NA
   terra::classify(rcl = matrix(c(20, 9), byrow = TRUE, ncol = 2),
                   othersNA = TRUE)
 # note: missing southwest corner of Delta
 
-# allow orchard footprint from bbau scenario to cover baseline footprint, except
-#  where baseline is a land cover that shouldn't change to orchard
+# allow perennial crop footprint from bbau scenario to cover baseline footprint,
+# except where baseline is a land cover that shouldn't change to orchard:
 #   dev (12), water (14), woodw (15), wetland (8), duwet (18)
 # (all else unchanged)
 
-exclude = terra::classify(veg_baseline_waterbird_fall,
+exclude = terra::classify(baseline_wat_fall,
                           rcl = matrix(c(8, 8,
                                          12, 12,
                                          14, 14,
@@ -531,27 +424,24 @@ exclude = terra::classify(veg_baseline_waterbird_fall,
                                        byrow = TRUE, ncol = 2),
                           othersNA = TRUE)
 
-scenario_orchard = terra::cover(bbau, veg_baseline_waterbird_fall)
-scenario_orchard_refine = terra::cover(exclude, scenario_orchard)
-levels(scenario_orchard_refine) <- wkey %>%
-  dplyr::select(id = code, shortlab) %>%
-  as.data.frame()
-coltab(scenario_orchard_refine) <- wkey %>%
-  dplyr::select(code, col) %>%
-  tidyr::complete(code = c(0:255)) %>%
-  dplyr::pull(col)
-names(scenario_orchard_refine) = 'scenario_orchard_expansion'
-terra::writeRaster(
-  scenario_orchard_refine,
-  'data/proposed_scenarios/waterbirds/orchard_expansion.tif')
-# Note: levels may not be saved, but colors are?
+## overlay on baseline layers------
 
+### waterbirds-fall--------------
+scenario_perex = terra::cover(exclude,
+                              terra::cover(bbau, baseline_wat_fall))
+levels(scenario_perex) <- wkey %>% select(id = code, shortlab) %>%
+  as.data.frame()
+coltab(scenario_perex) <- wkey %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
+names(scenario_perex) = 'scenario_perennial_expansion'
+terra::writeRaster(scenario_perex,
+                   'data/landcover_waterbirds_fall/scenario2_perennialexpand_waterbird_fall.tif')
 
 # calculate change in area of each land cover
-delta_orchard = DeltaMultipleBenefits::calculate_change(
-  baseline = veg_baseline_waterbird_fall,
-  scenario = scenario_orchard_refine)
-delta_orchard %>%
+delta_perex = DeltaMultipleBenefits::calculate_change(
+  baseline = baseline_wat_fall,
+  scenario = scenario_perex)
+delta_perex %>%
   left_join(wkey %>% select(label.base = shortlab, label), by = 'label.base') %>%
   group_by(label) %>%
   summarize(change = sum(change), .groups = 'drop') %>%
@@ -561,13 +451,12 @@ delta_orchard %>%
   theme_bw() + coord_flip() +
   theme(axis.text = element_text(size = 18),
         axis.title = element_text(size = 18))
-ggsave('fig/delta_orchard.png', height = 7.5, width = 6)
+ggsave('fig/delta_perennialexpand.png', height = 7.5, width = 6)
 # large increase in orchard cover, at the expense of most others, especially
 # row, alfalfa, corn, fallow, but also water and wet
 
-
 # compare
-tab = crosstab(c(veg_baseline_waterbird_fall, scenario_orchard_refine))
+tab = crosstab(c(baseline_wat_fall, scenario_perex))
 tab %>% as_tibble() %>%
   set_names(c('baseline', 'bbau', 'n')) %>%
   mutate_at(vars(baseline:bbau), as.numeric) %>%
@@ -584,69 +473,57 @@ tab %>% as_tibble() %>%
   # filter(bbau_landuse == 'orch')
   filter(bbau_landuse == 'wet')
 
-# convert to riparian
-scenario_orchard_riparian <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_orchard_refine)
-levels(scenario_orchard_riparian) <- rkey %>%
-  select(id = code, label = group) %>% as.data.frame()
-coltab(scenario_orchard_riparian) <- rkey %>% select(code, col) %>%
+### waterbirds-winter-------------
+scenario_perex_win = terra::cover(exclude,
+                                  terra::cover(bbau, baseline_wat_win))
+levels(scenario_perex_win) <- wkey %>% select(id = code, shortlab) %>%
+  as.data.frame()
+coltab(scenario_perex_win) <- wkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
-names(scenario_orchard_riparian) = 'scenario_orchard_expansion'
-plot(scenario_orchard_riparian)
-writeRaster(scenario_orchard_riparian,
-            'data/proposed_scenarios/riparian/orchard_expansion.tif')
+names(scenario_perex_win) = 'scenario_perennial_expansion'
+terra::writeRaster(scenario_perex_win,
+                   'data/landcover_waterbirds_winter/scenario2_perennialexpand_waterbird_winter.tif')
 
-# convert to multiple benefits
-scenario_orchard_mb <- DeltaMultipleBenefits::reclassify_multiplebenefits(scenario_orchard_refine)
-levels(scenario_orchard_mb) <- mkey %>%
-  select(id = code, label = group) %>% as.data.frame()
-coltab(scenario_orchard_mb) <- mkey %>% select(code, col) %>%
+
+### riparian-------
+scenario_perex_rip <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_perex)
+levels(scenario_perex_rip) <- rkey %>% select(id = code, label = group) %>%
+  as.data.frame()
+coltab(scenario_perex_rip) <- rkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
-names(scenario_orchard_mb) = 'scenario_orchard_expansion'
-plot(scenario_orchard_mb)
-writeRaster(scenario_orchard_mb,
-            'data/proposed_scenarios/multiplebenefits/orchard_expansion.tif')
+names(scenario_perex_rip) = 'scenario_perennial_expansion'
+plot(scenario_perex_rip)
+writeRaster(scenario_perex_rip,
+            'data/landcover_riparian/scenario2_perennialexpand_riparian.tif')
+
+### multiple benefits-------
+scenario_perex_mb <- DeltaMultipleBenefits::reclassify_multiplebenefits(scenario_perex)
+levels(scenario_perex_mb) <- mkey %>% select(id = code, label = group) %>%
+  as.data.frame()
+coltab(scenario_perex_mb) <- mkey %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
+names(scenario_perex_mb) = 'scenario_perennial_expansion'
+plot(scenario_perex_mb)
+writeRaster(scenario_perex_mb,
+            'data/landcover_multiplebenefits/scenario2_perennialexpand_mb.tif')
 
 
 # SCENARIO 3. Flood risk-----------
-veg_baseline_rast = raster::raster('data/veg_baseline_waterbird_fall.tif')
-
-# first combine separate layers representing flood risk
-filelist = paste0('GIS/DeltaAdapts/',
-                  list.files('GIS/DeltaAdapts',
-                             'baseline_.*shp$|floodrisk2085_.*shp$'))
-
-tmp = purrr::map(filelist,
-                 ~st_read(.) %>%
-                   fasterize::fasterize(veg_baseline_rast,
-                                        field = 'flood_risk')) %>%
-  raster::stack()
-maxfloodrisk = max(tmp, na.rm = TRUE)
-plot(maxfloodrisk, col = rev(hcl.colors(5)))
-
-key = data.frame(id = c(0:4),
-                 label = c('very low', 'low', 'medium', 'high', 'very high'),
-                 risk.annual = c('<0.5%', '0.5-1%', '1-2%', '2-10%', '>10%'),
-                 col = c('lightskyblue', 'dodgerblue', 'royalblue', 'blue3', 'midnightblue'))
-
-maxfloodrisk = terra::rast(maxfloodrisk)
-levels(maxfloodrisk) <- key
-coltab(maxfloodrisk) <- key %>% select(id, col) %>%
-  complete(id = c(0:255)) %>% pull(col)
-plot(maxfloodrisk)
-
-writeRaster(maxfloodrisk, 'GIS/floodrisk2085.tif')
-
 # scenario assumption: all "very high" flood risk areas become wetlands, and
 # all perennial crops move out of "high" and "medium" risk areas
+
+maxfloodrisk = rast('GIS/floodrisk2085.tif')
+plot(maxfloodrisk)
 
 ## very high risk------
 veryhigh = classify(maxfloodrisk,
                     rcl = matrix(c(4, 18), byrow = TRUE, ncol = 2),
-                    othersNA = TRUE)
+                    othersNA = TRUE) %>%
+  mask(delta) #exclude some extra areas in Suisun
 plot(veryhigh)
 
 # except pixels that are already water, riparian, urban, wet
-exclude = classify(veg_baseline_waterbird_fall,
+exclude = classify(baseline_wat_fall,
                    rcl = matrix(c(8, 8,
                                   12, 12,
                                   14, 14,
@@ -655,23 +532,29 @@ exclude = classify(veg_baseline_waterbird_fall,
                    othersNA = TRUE)
 
 # overlay on baseline
-veryhigh_wetlands = cover(veryhigh, veg_baseline_waterbird_fall) %>%
-  mask(veg_baseline_waterbird_fall) #exclude some extra areas in Suisun
-veryhigh_wetlands_refine = cover(exclude, veryhigh_wetlands)
-plot(veryhigh_wetlands_refine)
+veryhigh_wetlands = cover(exclude,
+                          cover(veryhigh, baseline_wat_fall))
+veryhigh_wetlands_win = cover(exclude,
+                             cover(veryhigh, baseline_wat_win))
 
-# calculate change in area of each land cover
+# calculate change in area of each land cover (separate for fall and winter)
 delta_veryhigh = DeltaMultipleBenefits::calculate_change(
-  baseline = veg_baseline_waterbird_fall,
-  scenario = veryhigh_wetlands_refine)
-# lots of corn, alf, row lost
+  baseline = baseline_wat_fall,
+  scenario = veryhigh_wetlands)
+# lots of corn, alf, row lost (plus orch); zero wet, dev, water, woodw
+
+delta_veryhigh_win = DeltaMultipleBenefits::calculate_change(
+  baseline = baseline_wat_win,
+  scenario = veryhigh_wetlands)
+# lots of grain, wheat, corn lost (plus orch); zero wet, dev, water, woodw
+
 
 ## high & medium flood risk-----
 
 # identify contiguous patches of orchard pixels in the high and medium flood
 # risk areas
 highmed = subst(maxfloodrisk, c(0:1,4), NA)
-highmed_orch_patches = mask(veg_baseline_waterbird_fall, highmed) %>%
+highmed_orch_patches = mask(baseline_wat_fall, highmed) %>%
   subst(c(0:8,10:99), NA) %>%
   patches()
 plot(highmed_orch_patches)
@@ -680,9 +563,10 @@ plot(highmed_orch_patches)
 # by the proportion lost to wetlands in the "very high" risk islands:
 prop_sample = delta_veryhigh %>%
   select(value, label, change) %>%
-  filter(change<0 & !label %in% c('orch', 'forest', 'fal', 'barren', 'rice')) %>%
+  filter(change < 0 & !label %in% c('orch', 'forest', 'fal', 'barren', 'rice')) %>%
   mutate(change = abs(change),
          prop = change / sum(change))
+# mostly corn
 # --> a tiny proportion was rice; exclude because requires specific soil
 # properties
 
@@ -696,15 +580,34 @@ replace_orchard = classify(highmed_orch_patches,
 #Note: a lot of the orchard stringers (along roads?) get converted to corn,
 #which is maybe a bit odd...
 
+# repeat for winter baseline
+prop_sample_win = delta_veryhigh_win %>%
+  select(value, label, change) %>%
+  filter(change < 0 & !label %in% c('orch', 'forest', 'fal', 'barren', 'rice')) %>%
+  mutate(change = abs(change),
+         prop = change / sum(change))
+# mostly grain
+
+new_crops_win = tibble(patchID = c(1:minmax(highmed_orch_patches)[2]),
+                       newID = sample(prop_sample_win$value,
+                                      minmax(highmed_orch_patches)[2],
+                                      replace = TRUE,
+                                      prob = prop_sample_win$prop))
+replace_orchard_win = classify(highmed_orch_patches,
+                               rcl = as.matrix(new_crops_win))
+
+
 ## overlay on baseline------
-scenario_floodrisk = cover(replace_orchard, veryhigh_wetlands_refine)
+
+### waterbirds-fall---------
+scenario_floodrisk = cover(replace_orchard, veryhigh_wetlands)
 levels(scenario_floodrisk) <- wkey %>% select(id = code, shortlab) %>%
   as.data.frame()
 coltab(scenario_floodrisk) <- wkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
 names(scenario_floodrisk) = 'scenario_floodrisk'
 writeRaster(scenario_floodrisk,
-            'data/proposed_scenarios/waterbirds/DeltaAdapts_floodrisk.tif')
+            'data/landcover_waterbirds_fall/scenario3_floodrisk_waterbird_fall.tif')
 
 plot(scenario_floodrisk)
 
@@ -726,8 +629,39 @@ ggsave('fig/delta_floodrisk.png', height = 7.5, width = 6)
 # large increase in wetland cover, at the expense of especially corn, orch, alf;
 # no change in water, urban, riparian
 
+### waterbirds-winter---------
+scenario_floodrisk_win = cover(replace_orchard_win, veryhigh_wetlands)
+levels(scenario_floodrisk_win) <- wkey %>% select(id = code, shortlab) %>%
+  as.data.frame()
+coltab(scenario_floodrisk_win) <- wkey %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
+names(scenario_floodrisk_win) = 'scenario_floodrisk'
+writeRaster(scenario_floodrisk_win,
+            'data/landcover_waterbirds_winter/scenario3_floodrisk_waterbird_winter.tif')
 
-# convert to riparian
+plot(scenario_floodrisk_winter)
+
+# compare to fall
+tab = crosstab(c(scenario_floodrisk, scenario_floodrisk_win))
+tab %>% as_tibble() %>%
+  set_names(c('fall', 'winter', 'n')) %>%
+  mutate_at(vars(fall:winter), as.numeric) %>%
+  left_join(wkey %>% dplyr::select(code, fall_lc = label),
+            by = c('fall' = 'code')) %>%
+  left_join(wkey %>% dplyr::select(code, winter_lc = label),
+            by = c('winter' = 'code')) %>%
+  group_by(winter_lc) %>%
+  mutate(tot = sum(n),
+         prop = n/tot) %>%
+  ungroup() %>%
+  arrange(desc(n)) %>%
+  filter(fall_lc != winter_lc) %>%
+  ggplot(aes(fall_lc, winter_lc, fill = n)) + geom_tile()
+# conversions mostly from corn to grain, ip, row/field
+#   from dryp to ip, grain
+#   from alf to corn, grain
+
+### riparian------
 scenario_floodrisk_riparian <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_floodrisk)
 levels(scenario_floodrisk_riparian) <- rkey %>%
   select(id = code, label = group) %>% as.data.frame()
@@ -736,9 +670,9 @@ coltab(scenario_floodrisk_riparian) <- rkey %>% select(code, col) %>%
 names(scenario_floodrisk_riparian) = 'scenario_floodrisk'
 plot(scenario_floodrisk_riparian)
 writeRaster(scenario_floodrisk_riparian,
-            'data/proposed_scenarios/riparian/DeltaAdapts_floodrisk.tif')
+            'data/landcover_riparian/scenario3_floodrisk_riparian.tif')
 
-# convert to multiple benefits
+### multiple benefits---------
 scenario_floodrisk_mb <- DeltaMultipleBenefits::reclassify_multiplebenefits(scenario_floodrisk)
 levels(scenario_floodrisk_mb) <- mkey %>%
   select(id = code, label = group) %>% as.data.frame()
@@ -747,7 +681,7 @@ coltab(scenario_floodrisk_mb) <- mkey %>% select(code, col) %>%
 names(scenario_floodrisk_mb) = 'scenario_floodrisk'
 plot(scenario_floodrisk_mb)
 writeRaster(scenario_floodrisk_mb,
-            'data/proposed_scenarios/multiplebenefits/DeltaAdapts_floodrisk.tif')
+            'data/landcover_multiplebenefits/scenario3_floodrisk_mb.tif')
 
 # ADDITIONAL THOUGHTS/IDEAS/FEEDBACK--------
 # - SFEI carbon/subsidence reversal scenarios (but not waiting on this)
