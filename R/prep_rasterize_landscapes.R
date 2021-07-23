@@ -501,7 +501,7 @@ test_focal_2k = focal(bigr, w = wt, fun = 'sum', na.rm = TRUE,
 filelist = paste0('GIS/DeltaAdapts/',
                   list.files('GIS/DeltaAdapts',
                              'baseline_.*shp$|floodrisk2085_.*shp$'))
-
+baseline_rast = raster::raster('data/landcover_waterbirds_fall/baseline_waterbird_fall.tif')
 tmp = purrr::map(filelist,
                  ~st_read(.) %>%
                    fasterize::fasterize(veg_baseline_riparian,
@@ -511,7 +511,19 @@ maxfloodrisk = max(tmp, na.rm = TRUE)
 plot(tmp)
 plot(maxfloodrisk)
 
-writeRaster(maxfloodrisk, 'GIS/floodrisk2085', format = 'GTiff')
+key = data.frame(id = c(0:4),
+                 label = c('very low', 'low', 'medium', 'high', 'very high'),
+                 risk.annual = c('<0.5%', '0.5-1%', '1-2%', '2-10%', '>10%'),
+                 col = c('lightskyblue', 'dodgerblue', 'royalblue', 'blue3', 'midnightblue'))
+
+maxfloodrisk = terra::rast(maxfloodrisk)
+levels(maxfloodrisk) <- key
+coltab(maxfloodrisk) <- key %>% select(id, col) %>%
+  complete(id = c(0:255)) %>% pull(col)
+plot(maxfloodrisk)
+
+writeRaster(maxfloodrisk, 'GIS/floodrisk2085.tif')
+
 
 # suitable veg per elevation:
 elev = read_csv('data/SFEI_DSLPT/elevation_notifications_v5.csv')
