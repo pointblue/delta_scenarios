@@ -1,0 +1,19 @@
+group,code,shortlab,label,col
+corn,2,corn,corn,#FFFF00
+rice,3,rice,rice,#FF1493
+Irrigated pasture,4,ip,irrigated pasture,#2E8B57
+wheat,5,wheat,grain,#FFA54F
+row,6,row,row/field crop,#FA8072
+field,7,field,row/field crop,#FA8072
+wetland,8,wet,wetland,#00008B
+orchard,9,orch,orchard/vineyard,#9400D3
+grain,10,grain,grain,#FFA54F
+fallow,11,fal,fallow,#CCCCCC
+developed,12,dev,urban,#4D4D4D
+forest,13,forest,forest,#8B4513
+water,14,water,water,#87CEFA
+woody wetland,15,woodw,riparian,#FF0000
+Dryland pasture,16,dryp,dryland pasture,#FFE4C4
+alfalfa,17,alf,alfalfa,#32CD32
+DUwetland,18,duwet,wetland,#00008B
+barren,99,barren,barren,#FFFFFF

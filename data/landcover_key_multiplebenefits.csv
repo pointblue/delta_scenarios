@@ -1,0 +1,16 @@
+group,code,col
+orchard/vineyard,10,#9400D3
+citrus,11,NA
+orchard,12,NA
+vineyard,13,NA
+row/field,21,#FA8072
+corn,22,#FFFF00
+grains,23,#FFA54F
+cotton,24,NA
+tomato,25,NA
+rice,30,#FF1493
+grassland/pasture,50,#FFE4C4
+alfalfa,51,#32CD32
+riparian,70,#FF0000
+wetland,80,#00008B
+other,90,#4D4D4D

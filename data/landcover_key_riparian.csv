@@ -1,0 +1,12 @@
+group,code,label,col
+ORCHVIN,10,orchard/vineyard,#9400D3
+AG,20,other crops,#32CD32
+RICE,30,rice,#FF1493
+IDLE,40,fallow,#CCCCCC
+GRASSPAS,50,grassland/pasture,#FFE4C4
+URBAN,60,urban,#4D4D4D
+RIPARIAN,70,riparian,#FF0000
+WETLAND,80,wetland,#00008B
+WATER,90,water,#87CEFA
+OAKWOODLAND,100,forest,#8B4513
+BARREN,130,barren,#FFFFFF
