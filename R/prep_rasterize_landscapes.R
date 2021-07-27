@@ -5,7 +5,7 @@
 library(tidyverse)
 library(sf)
 library(raster)
-library(terra)
+# library(terra)
 
 # reference raster:
 gisdir = 'V:/Project/Terrestrial/cv_riparian/distribution_modeling/'
@@ -51,8 +51,14 @@ tmp = do.call(rbind,
                            'willow riparian scrub/shrub',
                            'wet meadow/seasonal wetland')) %>%
   mutate(code = case_when(Habitat_Ty == 'wet meadow/seasonal wetland' ~ 8000,
-                          TRUE ~ 7000)) %>%
+                          Habitat_Ty == 'valley foothill riparian' ~ 7100,
+                          Habitat_Ty == 'willow riparian scrub/shrub' ~ 7600)) %>%
   st_transform(crs = proj4string(veg_baseline_riparian))
+# Note: coding "valley foothill riparian" as POFR, but should be ~22% QULO, 21%
+# POFR, 12% SALIX, 7% MIXEDFOREST; also, SALIXSHRUB_2000 left out of main models
+# due to CV-wide correlation with total RIPARIAN_2000, but Delta baseline is
+# ~25% SALIXSHRUB [was SALIXSHRUB_50 important to any individual spp?]
+
 
 habpotential = fasterize::fasterize(tmp, veg_baseline_riparian, field = 'code') %>%
   mask(veg_baseline_riparian)
@@ -68,7 +74,8 @@ writeRaster(habpotential, 'GIS/habpotential', format = 'GTiff')
 # plot(veg_riparian_details, col = viridis::plasma(n = 7))
 #
 # getValues(veg_riparian_details) %>% as.factor() %>% summary()
-# # lots of QULO & POFR, SALIXSHRUB; then SALIX, INTROSCRUB, MIXEDFORST, AND mixedshrub a distant last; no "other"
+# # lots of QULO & POFR, SALIXSHRUB;
+# # then SALIX, INTROSCRUB, MIXEDFOREST, AND mixedshrub a distant last; no "other"
 
 # PRIORITY RESTORATION AREAS---------
 priority = st_read('GIS/ER_P3/ER_P3.shp') %>%
