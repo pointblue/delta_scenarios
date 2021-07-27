@@ -98,6 +98,55 @@ names(veg_baseline_riparian) = 'baseline'
 writeRaster(veg_baseline_riparian,
             'data/landcover_riparian/baseline_riparian.tif')
 
+## riparian detail------
+rkey2 = read_csv(paste0(gisdir, 'GIS/landscape_rasters/key.csv'),
+                 col_types = cols()) %>%
+  filter(type == 'rip') %>%
+  select(-type) %>%
+  mutate(label = recode(group,
+                        'POFR' = 'cottonwood forest',
+                        'QULO' = 'oak forest',
+                        'SALIX' = 'willow forest',
+                        'MIXEDFOREST' = 'mixed forest',
+                        'INTROSCRUB' = 'introduced scrub',
+                        'SALIXSHRUB' = 'willow shrub',
+                        'MIXEDSHRUB' = 'mixed shrub',
+                        'OTHER' = 'other riparian'),
+         col = c('#32CD32', '#8B4513', '#FF1493', '#9400D3',
+                 '#CCCCCC', '#FF0000', '#FFA54F', '#FFFFFF'))
+write_csv(rkey2, 'data/landcover_key_riparian_detail.csv')
+
+veg_baseline_ripdetail = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_riparian_detail.tif'))
+levels(veg_baseline_ripdetail) <- rkey2 %>%
+  select(id = code, label = group) %>% as.data.frame()
+coltab(veg_baseline_ripdetail) <- rkey2 %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
+names(veg_baseline_ripdetail) = 'baseline_ripdetail'
+plot(veg_baseline_ripdetail)
+writeRaster(veg_baseline_ripdetail,
+            'data/landcover_riparian/baseline_riparian_detail.tif')
+
+## perm wetlands-------
+rkey3 = read_csv(paste0(gisdir, 'GIS/landscape_rasters/key.csv'),
+                 col_types = cols()) %>%
+  filter(type == 'wet') %>%
+  select(-type) %>%
+  mutate(label = recode(group,
+                        'PERM' = 'permanent wetland'),
+         col = c('#00008B'))
+write_csv(rkey3, 'data/landcover_key_riparian_permwetland.csv')
+
+veg_baseline_ripperm = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_riparian_permwetland.tif'))
+levels(veg_baseline_ripperm) <- rkey3 %>%
+  select(id = code, label = group) %>% as.data.frame()
+coltab(veg_baseline_ripperm) <- rkey3 %>% select(code, col) %>%
+  complete(code = c(0:255)) %>% pull(col)
+names(veg_baseline_ripperm) = 'baseline_ripperm'
+plot(veg_baseline_ripperm)
+writeRaster(veg_baseline_ripperm,
+            'data/landcover_riparian/baseline_riparian_permwetland.tif')
+
+
 # multiple benefits-------
 mkey = tibble(group = c('orchard/vineyard', 'citrus', 'orchard', 'vineyard',
                         'row/field', 'corn', 'grains', 'cotton',
