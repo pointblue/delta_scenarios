@@ -42,13 +42,6 @@ mkey = read_csv('data/landcover_key_multiplebenefits.csv')
 ## designated for development and areas that are already urban in the baseline
 ## veg layer
 
-# Additional ideas/feedback:
-# - prioritize restoration near Zonation hotspots?
-# - incorporate specific plans/projects underway for Sherman & Twitchell Island
-# --> incorporate EcoRestore into restoration scenario (if not already shown)
-# - consider alternative restoration scenario that is more focused on subsided
-# islands (i.e. what we can get, short-term value)
-
 ## restoration objectives------
 # from proposed performance measures to the Delta Plan
 obj = tibble(type = c('seasonal wetland, wet meadow, nontidal wetland',
@@ -58,9 +51,6 @@ obj = tibble(type = c('seasonal wetland, wet meadow, nontidal wetland',
   mutate(target_ha = target_acres / 2.47105,
          total_ha = total_acres / 2.47105)
 
-# (Note: DWR conservation plan goals for entire Lower Sac River and Lower San
-# Joaquin River conservation planning areas combined are less than the goals for
-# just the riparian and wetland habitat in the Delta)
 
 # current totals (from baseline layer)
 base = baseline_wat_fall %>%
@@ -202,13 +192,6 @@ crosstab(c(restoration_targets_wet, restoration_stack$habpotential),
          useNA = TRUE, long = TRUE)
 # all potential wetland pixels assigned a priority level 1-5, or 9
 writeRaster(restoration_targets_wet, 'GIS/restoration_targets_wetlands.tif')
-
-## ASSUMPTIONS/QUESTIONS:
-## - minimum size of restoration to consider (is 1 acre reasonable?)
-## - feasibility of restoration on protected land, easements, public land?
-##   (and does it matter for this hypothetical?)
-## - more of a priority to focus restoration in "priority restoration areas" or
-##    protected land? [relevant mainly to wetlands]
 
 ### add riparian restoration-----
 # approach: select pixels by priority rankings as above
@@ -850,7 +833,7 @@ crosstab(c(scenario_floodrisk_riparian %>% subst(from = c(10:70,90:130), to = NA
 crosstab(c(scenario_floodrisk_riparian %>% subst(from = c(10:70,90:130), to = NA),
            baseline_ripperm),
          useNA = TRUE, long = TRUE)
-# assume all permanent wetlands??
+# assume all new wetlands are seasonal wetlands - no change from baseline
 
 ### multiple benefits---------
 scenario_floodrisk_mb <- DeltaMultipleBenefits::reclassify_multiplebenefits(scenario_floodrisk)
@@ -863,26 +846,16 @@ plot(c(baseline_mb, scenario_floodrisk_mb))
 writeRaster(scenario_floodrisk_mb,
             'data/landcover_multiplebenefits/scenario3_floodrisk_mb.tif')
 
-# ADDITIONAL THOUGHTS/IDEAS/FEEDBACK--------
-# - SFEI carbon/subsidence reversal scenarios (but not waiting on this)
-# - prioritize restoration near Zonation hotspots
-# - incorporate specific plans/projects underway for Sherman & Twitchell Island
-# - consider alternative restoration scenario that is more focused on subsided
-# islands (i.e. what we can get, short-term value)
-# - shorter-term sea level rise scenario?
-# - consider rice in sea level rise scenario? but some think not much rice
-# feasible except on public lands/where subsidized
-
 
 # INTERACTIVE MAP-----------
 
 # best to set the names of the raster layers (will transfer to the selector)
-mapstack = c(veg_baseline_waterbird_fall,
+mapstack = c(baseline_wat_fall,
              scenario_restoration,
-             scenario_orchard_refine,
+             scenario_perex,
              scenario_floodrisk)
-names(mapstack) = c('baseline', 'scenario_restoration',
-                    'scenario_orchard_expansion', 'scenario_flood_risk')
+names(mapstack) = c('baseline', 'restoration',
+                    'perennial_crop_expansion', 'flood_risk')
 
 # # consider resampling rasters to prevent the file size from being too enormous (this is
 # # still fairly hi-res)
@@ -909,3 +882,20 @@ htmlwidgets::saveWidget(testmap,
                         selfcontained = FALSE, libdir = 'lib',
                         title = 'Draft scenarios of landcover change in the Delta')
 
+# # try alternative:
+# m1 = DeltaMultipleBenefits::map_scenarios(
+#   rast = mapstack$baseline,
+#   key = wkey %>% select(value = code, col, label)) %>%
+#   leaflet::addPolygons(data = delta_poly, fill = FALSE, color = 'black',
+#                        weight = 2, opacity = 1)
+# m2 = DeltaMultipleBenefits::map_scenarios(
+#   rast = mapstack[[2:4]],
+#   key = wkey %>% select(value = code, col, label)) %>%
+#   leaflet::addPolygons(data = delta_poly, fill = FALSE, color = 'black',
+#                        weight = 2, opacity = 1)
+# testsyncmap = leafsync::sync(m1, m2, ncol = 2)
+#
+# htmlwidgets::saveWidget(testsyncmap,
+#                         'docs/draft_scenarios.html',
+#                         selfcontained = FALSE, libdir = 'lib',
+#                         title = 'Draft scenarios of landcover change in the Delta')
