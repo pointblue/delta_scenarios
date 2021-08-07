@@ -18,7 +18,7 @@ baseline_mb = rast('data/landcover_multiplebenefits/baseline_mb.tif')
 rkey = read_csv('data/landcover_key_riparian.csv')
 rkey2 = read_csv('data/landcover_key_riparian_detail.csv')
 rkey3 = read_csv('data/landcover_key_riparian_permwetland.csv')
-wkey = read_csv('data/landcover_key_waterbirds.csv')
+wkey = read_csv('data/landcover_key_waterbirds.csv', col_types = cols())
 mkey = read_csv('data/landcover_key_multiplebenefits.csv')
 
 
@@ -58,7 +58,7 @@ base = baseline_wat_fall %>%
   freq() %>%
   filter(label %in% c('woodw', 'duwet')) %>%
   mutate(current_ha = count * 30 * 30 / 10000)
-# wetlands = 7,449.75 ha (consider managed wetlands only)
+# wetlands = 6,919.56 ha (consider nontidal wetlands only)
 # riparian = 8,216.73 ha
 
 # how much more needed to meet proposed 2050 targets?
@@ -68,7 +68,7 @@ targets = full_join(
   by = 'label') %>%
   mutate(add_ha = total_ha - current_ha)
 # riparian: add 4,126 ha
-# wetlands: add 2,303 ha
+# wetlands: add 2,833 ha
 
 ## planned restoration---------
 # - ecorestore (already planned/under way)
@@ -98,11 +98,11 @@ ecorestore_subset2 = lapp(c(ecorestore_subset, baseline_wat_fall),
 tab = crosstab(c(ecorestore_subset2,
                  baseline_wat_fall %>% mask(ecorestore)),
                useNA = TRUE, long = TRUE)
-tab %>% set_names(c('ecorestore', 'baseline', 'n')) %>%
+tab %>% rlang::set_names(c('ecorestore', 'baseline', 'n')) %>%
   left_join(wkey %>% select(code, label), by = c('baseline' = 'code')) %>%
   arrange(ecorestore, desc(n))
 # Note: some of the new managed wetland is coming from other wetland (?)
-#  also ip, rice, corn, alf, row/field, orch/vin, dryp, grain, fallow
+#  also pasture, rice, corn, alf, row/field, orch/vin, grassland, grain, fallow
 # --> and riparian! (but this seems correct)
 
 base_plus_ecorestore = cover(ecorestore_subset2, baseline_wat_fall)
@@ -119,14 +119,14 @@ targets_plus = full_join(
   by = 'label') %>%
   mutate(add_ha = total_ha - ecorestore_ha)
 # riparian: add 4,016 ha (decreased a bit)
-# wetlands: add 694 ha (decreased a lot)
+# wetlands: add 1,224 ha (decreased a lot)
 
 
 
 ## restoration potential--------
 # (excluding areas that are already wetland or riparian; also already urban or
 # water (assume permanent)
-exclude = subst(base_plus_ecorestore, c(8, 12, 14, 15, 18), NA)
+exclude = subst(base_plus_ecorestore, c(8, 12, 14, 15, 18, 19, 20), NA)
 
 restoration_stack = c(rast('GIS/habpotential.tif'), #7100 = valley foothill riparian, 7600 = willow shrub/scrub, 8000 = wetland
                       rast('GIS/restorationpriority.tif'), # 100 = priority
@@ -168,7 +168,8 @@ restoration_targets_rip = classify(
 crosstab(c(restoration_targets_rip, restoration_stack$habpotential),
          useNA = TRUE, long = TRUE)
 # all potential riparian pixels assigned a priority level 1-5, or 9
-writeRaster(restoration_targets_rip, 'GIS/restoration_targets_riparian.tif')
+writeRaster(restoration_targets_rip, 'GIS/restoration_targets_riparian.tif',
+            overwrite = TRUE)
 
 
 restoration_targets_wet = classify(
@@ -191,7 +192,8 @@ restoration_targets_wet = classify(
 crosstab(c(restoration_targets_wet, restoration_stack$habpotential),
          useNA = TRUE, long = TRUE)
 # all potential wetland pixels assigned a priority level 1-5, or 9
-writeRaster(restoration_targets_wet, 'GIS/restoration_targets_wetlands.tif')
+writeRaster(restoration_targets_wet, 'GIS/restoration_targets_wetlands.tif',
+            overwrite = TRUE)
 
 ### add riparian restoration-----
 # approach: select pixels by priority rankings as above
@@ -199,7 +201,7 @@ writeRaster(restoration_targets_wet, 'GIS/restoration_targets_wetlands.tif')
 # - compare remaining total area of each priority level vs. objective
 # - when not all of a priority level is needed, randomly select a subset that
 #     will meet the restoration objective
-# objective: 4,016 ha added (on top of ecorestore)
+# objective: 4,016 ha added to ecorestore for a total of 4126 added to baseline
 
 targets_area_rip = freq(restoration_targets_rip) %>% as_tibble() %>%
   mutate(area.ha = count * 30 * 30 / 10000,
@@ -266,13 +268,14 @@ rip_targets_final = ecorestore_subset2 %>% subst(from = 18, to = NA) %>%
   cover(rip_targets2_keep)
 names(rip_targets_final) = 'riparian_restoration'
 freq(rip_targets_final) %>% as_tibble() %>% pull(count) * 30 * 30 / 10000
-# adding 4172.4 ha (target = 4126)
+# adding 4161.2 ha (target = 4126)
 writeRaster(rip_targets_final,
-            'GIS/restoration_targets_riparian_objectives.tif')
+            'GIS/restoration_targets_riparian_objectives.tif',
+            overwrite = TRUE)
 
 ### add wetland restoration---------
 # same approach as for riparian
-# objective: 694 ha added
+# objective: 1224 ha added to ecorestore for a total of 2833 added to baseline
 
 targets_area_wet = freq(restoration_targets_wet) %>% as_tibble() %>%
   mutate(area.ha = count * 30 * 30 / 10000,
@@ -312,7 +315,7 @@ targets_plus %>% filter(label == 'duwet') %>% pull(add_ha) -
   freq(wet_targets1_keep) %>% as_tibble() %>%
   mutate(area.ha = count * 30 * 30 / 10000) %>%
   pull(area.ha) %>% sum()
-# -78 ha
+# -23 ha
 
 # wet_targets2 = subst(restoration_targets_wet, c(1, 3:9), NA) %>%
 #   patches(directions = 8)
@@ -345,9 +348,11 @@ wet_targets_final = ecorestore_subset2 %>% subst(from = 15, to = NA) %>%
   cover(wet_targets1_keep)
 names(wet_targets_final) = 'wetland_restoration'
 freq(wet_targets_final) %>% as_tibble() %>% pull(count) * 30 * 30 / 10000
-# adding 2381.49 ha (compared to 2303 target)
+# adding 2856.33 ha (compared to 2833 target)
+plot(wet_targets_final)
 writeRaster(wet_targets_final,
-            'GIS/restoration_targets_wetland_objectives.tif')
+            'GIS/restoration_targets_wetland_objectives.tif',
+            overwrite = TRUE)
 
 
 ## overlay on baseline layers------------
@@ -362,7 +367,8 @@ coltab(scenario_restoration) <- wkey %>% select(code, col) %>%
 names(scenario_restoration) = 'scenario_restoration'
 plot(c(baseline_wat_fall, scenario_restoration))
 writeRaster(scenario_restoration,
-            'data/landcover_waterbirds_fall/scenario1_restoration_waterbird_fall.tif')
+            'data/landcover_waterbirds_fall/scenario1_restoration_waterbird_fall.tif',
+            overwrite = TRUE)
 
 # calculate change in area of each land cover
 delta_restoration = DeltaMultipleBenefits::calculate_change(
@@ -387,7 +393,7 @@ tab = crosstab(c(baseline_wat_fall %>% mask(delta),
                  scenario_restoration %>% mask(delta)),
                useNA = TRUE, long = TRUE)
 
-tab %>% set_names(c('baseline', 'scenario', 'n')) %>%
+tab %>% rlang::set_names(c('baseline', 'scenario', 'n')) %>%
   mutate_at(vars(baseline:scenario), as.numeric) %>%
   left_join(wkey %>% dplyr::select(code, shortlab), by = c('baseline' = 'code')) %>%
   left_join(wkey %>% dplyr::select(code, shortlab), by = c('scenario' = 'code')) %>%
@@ -396,12 +402,12 @@ tab %>% set_names(c('baseline', 'scenario', 'n')) %>%
   mutate(tot = sum(n),
          prop = n/tot) %>%
   ungroup() %>%
-  # filter(shortlab.y == 'duwet')
+  filter(shortlab.y == 'duwet')
   filter(shortlab.y == 'woodw')
 
-# - riparian: 66% existing riparian; most conversion from orch (16%);
+# - riparian: 66% existing riparian; most conversion from orch (17%);
 #    no conversion from rice, duwet, dev, water
-# - wetland: 76% existing duwet; most conversion from ip (10%), wet (4%);
+# - wetland: 71% existing duwet; most conversion from ip (10%), rice (5%);
 #    no conversion from dev, forest, barren
 
 ### waterbirds-winter--------
@@ -549,7 +555,7 @@ writeRaster(scenario_restoration_mb,
 # the year 2100, including historically high rates of perennial crop expansion;
 # no restoration
 
-skey = readr::read_csv('GIS/State Class Rasters/key.csv')
+skey = readr::read_csv('GIS/State Class Rasters/key.csv', show_col_types = FALSE)
 
 bbau = terra::rast('GIS/State Class Rasters/scn421.sc.it1.ts2100.tif') %>%
   terra::project(baseline_wat_fall, method = 'near') %>%
@@ -576,7 +582,8 @@ coltab(scenario_perex) <- wkey %>% select(code, col) %>%
 names(scenario_perex) = 'scenario_perennial_expansion'
 plot(c(baseline_wat_fall, scenario_perex))
 writeRaster(scenario_perex,
-            'data/landcover_waterbirds_fall/scenario2_perennialexpand_waterbird_fall.tif')
+            'data/landcover_waterbirds_fall/scenario2_perennialexpand_waterbird_fall.tif',
+            overwrite = TRUE)
 
 # calculate change in area of each land cover
 delta_perex = DeltaMultipleBenefits::calculate_change(
@@ -598,7 +605,7 @@ ggsave('fig/delta_perennialexpand.png', height = 7.5, width = 6)
 
 # compare
 tab = crosstab(c(baseline_wat_fall, scenario_perex), useNA = TRUE, long = TRUE)
-tab %>% set_names(c('baseline', 'bbau', 'n')) %>%
+tab %>% rlang::set_names(c('baseline', 'bbau', 'n')) %>%
   mutate_at(vars(baseline:bbau), as.numeric) %>%
   left_join(wkey %>% dplyr::select(code, baseline_landuse = label),
             by = c('baseline' = 'code')) %>%
@@ -637,7 +644,7 @@ plot(c(baseline_rip, scenario_perex_rip))
 writeRaster(scenario_perex_rip,
             'data/landcover_riparian/scenario2_perennialexpand_riparian.tif')
 
-### riparIan detail------
+### riparian detail------
 # should be no change
 crosstab(c(scenario_perex_rip %>% subst(from = c(20:130), to = NA),
            baseline_ripdetail),
@@ -675,12 +682,13 @@ veryhigh = classify(maxfloodrisk,
   mask(delta) #exclude some extra areas in Suisun
 plot(veryhigh)
 
-# except pixels that are already water, riparian, urban, wet
+# except pixels that are already water, riparian, urban, tidal wetland
 exclude = classify(baseline_wat_fall,
-                   rcl = matrix(c(8, 8,
-                                  12, 12,
+                   rcl = matrix(c(12, 12,
                                   14, 14,
-                                  15, 15),
+                                  15, 15,
+                                  19, 19,
+                                  20, 20),
                                 byrow = TRUE, ncol = 2),
                    othersNA = TRUE)
 
@@ -761,7 +769,8 @@ coltab(scenario_floodrisk) <- wkey %>% select(code, col) %>%
 names(scenario_floodrisk) = 'scenario_floodrisk'
 plot(c(baseline_wat_fall, scenario_floodrisk))
 writeRaster(scenario_floodrisk,
-            'data/landcover_waterbirds_fall/scenario3_floodrisk_waterbird_fall.tif')
+            'data/landcover_waterbirds_fall/scenario3_floodrisk_waterbird_fall.tif',
+            overwrite = TRUE)
 
 # calculate change in area of each land cover
 delta_floodrisk = DeltaMultipleBenefits::calculate_change(
@@ -849,18 +858,27 @@ writeRaster(scenario_floodrisk_mb,
 
 # INTERACTIVE MAP-----------
 
-# best to set the names of the raster layers (will transfer to the selector)
-mapstack = c(baseline_wat_fall,
-             scenario_restoration,
-             scenario_perex,
-             scenario_floodrisk)
-names(mapstack) = c('baseline', 'restoration',
-                    'perennial_crop_expansion', 'flood_risk')
+mapstack = paste0('data/landcover_waterbirds_fall/',
+                  list.files('data/landcover_waterbirds_fall/', '.tif$')) %>%
+  rast()
 
 # # consider resampling rasters to prevent the file size from being too enormous (this is
 # # still fairly hi-res)
 # scenarios_sampled_hi = pred_cv %>%
 #   terra::spatSample(size = 5000000, as.raster = TRUE)
+
+cl <- colors()
+cl[grep('blue', cl)]
+scales::show_col(cl[grep('blue', cl)])
+
+wkey2 = wkey %>%
+  mutate(label = factor(label, levels = c('alfalfa', 'corn', 'rice', 'grain',
+                                          'row/field crop','orchard/vineyard',
+                                          'pasture', 'grassland', 'water',
+                                          'wetland', 'managed wetland',
+                                          'riparian', 'forest/shrub',
+                                          'fallow', 'barren', 'urban')))
+scales::show_col(wkey2$col)
 
 testmap = DeltaMultipleBenefits::map_scenarios(
   rast = mapstack,
