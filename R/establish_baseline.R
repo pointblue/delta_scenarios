@@ -11,12 +11,11 @@ delta = rast('GIS/delta.tif')
 gisdir = 'V:/Project/Terrestrial/cv_riparian/distribution_modeling/'
 
 # waterbirds---------
-wkey = read_csv('V:/Project/wetland/Delta/landscape_models/predrasters_baseline/baseline/VegCAMP_crosswalk.csv',
-                col_types = cols()) %>%
+wkey = read_csv('GIS/VegCAMP_crosswalk.csv', col_types = cols()) %>%
   dplyr::select(group = WATERBIRD, code) %>%
   distinct() %>%
-  bind_rows(tibble(group = 'DUwetland',
-                   code = 18)) %>%
+  bind_rows(tibble(group = c('DUwetland', 'DUwetland_tidal', 'wetland_tidal'),
+                   code = c(18, 19, 20))) %>%
   arrange(code) %>%
   mutate(shortlab = case_when(group == 'Irrigated pasture' ~ 'ip',
                               group == 'Dryland pasture' ~ 'dryp',
@@ -27,13 +26,15 @@ wkey = read_csv('V:/Project/wetland/Delta/landscape_models/predrasters_baseline/
                               group == 'developed' ~ 'dev',
                               group == 'fallow' ~ 'fal',
                               group == 'DUwetland' ~ 'duwet',
+                              group == 'DUwetland_tidal' ~ 'duwet_tidal',
+                              group == 'wetland_tidal' ~ 'wet_tidal',
                               TRUE ~ group),
          label = recode(shortlab,
                         'ip' = 'pasture',
                         'wheat' = 'grain',
                         'row' = 'field/row',
                         'field' = 'field/row',
-                        'wet' = 'wetland',
+                        'wet' = 'other wetland',
                         'orch' = 'orchard/vineyard',
                         'fal' = 'fallow',
                         'dev' = 'urban',
@@ -41,23 +42,28 @@ wkey = read_csv('V:/Project/wetland/Delta/landscape_models/predrasters_baseline/
                         'dryp' = 'grassland',
                         'alf' = 'alfalfa',
                         'duwet' = 'managed wetland',
+                        'duwet_tidal' = 'tidal wetland',
+                        'wet_tidal' = 'tidal wetland',
                         'forest' = 'forest/shrub'),
          col = c('#FFFF00', '#FF1493', '#2E8B57', '#FFA54F', '#FA8072',
                  '#FA8072', 'royalblue', '#9400D3', '#FFA54F', '#CCCCCC',
                  '#4D4D4D', '#8B4513', '#87CEFA', '#FF0000', '#FFE4C4',
-                 '#32CD32', '#00008B', '#FFFFFF'))
+                 '#32CD32', '#00008B', 'turquoise', 'turquoise', '#FFFFFF'))
 write_csv(wkey, 'data/landcover_key_waterbirds.csv')
 
-veg_baseline_waterbird_fall = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_waterbirds_fall.tif'))
+veg_baseline_waterbird_fall = rast('GIS/landscape_rasters_orig/veg_baseline_waterbirds_fall.tif')
+# veg_baseline_waterbird_fall = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_waterbirds_fall.tif'))
 levels(veg_baseline_waterbird_fall) <- wkey %>% select(id = code, shortlab) %>%
   as.data.frame()
 coltab(veg_baseline_waterbird_fall) <- wkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
 names(veg_baseline_waterbird_fall) = 'baseline'
+plot(veg_baseline_waterbird_fall)
 writeRaster(veg_baseline_waterbird_fall,
-            'data/landcover_waterbirds_fall/baseline_waterbird_fall.tif')
+            'data/landcover_waterbirds_fall/baseline_waterbird_fall.tif',
+            overwrite = TRUE)
 
-veg_baseline_waterbird_winter = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_waterbirds_winter.tif'))
+# veg_baseline_waterbird_winter = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_waterbirds_winter.tif'))
 levels(veg_baseline_waterbird_winter) <- wkey %>%
   select(id = code, shortlab) %>% as.data.frame()
 coltab(veg_baseline_waterbird_winter) <- wkey %>% select(code, col) %>%
@@ -171,3 +177,55 @@ names(veg_baseline_mb) = 'baseline'
 plot(veg_baseline_mb)
 writeRaster(veg_baseline_mb,
             'data/landcover_multiplebenefits/baseline_mb.tif')
+
+# compare SFEI "modern" layer-------
+modern = read_sf('GIS/DSLPT/habitat_types_modern.shp')
+modern %>% st_drop_geometry() %>%
+  select(Habitat_Ty, SFEI_2014_) %>%
+  distinct() %>% print(n = 31)
+
+# compare National Wetlands Inventory layer------
+
+nwi = read_sf('GIS/ds2630_Delta10k.shp')
+
+nwi %>% st_drop_geometry() %>% filter(WATER_RE_1 == 'Saltwater Tidal') %>%
+  select(WATER_RE_1, WATER_REGI, WETLAND_TY, MODIFIER_1, WATER_RE_2) %>%
+  distinct() %>% arrange(WATER_RE_1, WATER_REGI, WETLAND_TY) %>%
+  print(width = Inf)
+# WATER REGIME NOTES:
+# SALTWATER TIDAL:
+# - Irregularly Exposed = SEW; tides expose < daily
+# - Irregularly Flooded = SEW; tides flood < daily
+# - Regularly Flooded (v1) = SEW; tides alternately flood/expose substrate 1+ daily
+# - Subtidal = DEEPWATER; tidal salt water continuously present
+# FRESHWATER TIDAL:
+# - Permanently Flooded-Tidal = POND, LAKE, RIVERINE; flooded throughout year
+# - Regularly Flooded (v2) = RIVERINE; tides alternately flood/expose substrate
+#     daily for variable periods
+# - Seasonally Flooded-Tidal = FEW, RIP, POND; tidal fresh surface water present
+#     for extended periods (>1 month) during growing season
+# - Semipermanently Flooded-Tidal = FEW, RIP, POND, RIVERINE; tidal fresh
+#     surface water persists throughout growing season in most years
+# - Temporary Flooded-Tidal = FEW, RIP; tidal fresh surface water present for
+#     brief periods
+# NONTIDAL:
+# - Artificially Flooded = includes FEW, RIP, POND, LAKE; controlled by pumps,
+#    dikes, etc; any may be specified as "Excavated"
+# - Intermittently Flooded = FEW; surface water variably present without seasonality;
+#    may be modified as "diked/impounded"
+# - Permanently Flooded = POND, LAKE, RIVERINE; flooded throughout year in all
+#    years; may be modified as "diked/impounded", excavated, or artificial substrate
+# - Seasonally Flooded = FEW, RIP, POND, LAKE, RIVERINE; surface water present
+#    for extended periods, esp early in growing season and absent by end; FEW
+#    may be modified as diked/impounded, excavated, alkaline, farmed, partially
+#    drained/ditched
+# - Seasonally Saturated = FEW, RIP; saturated at/near surface for extended
+#    periods during growing season
+# - Semipermanently Flooded = FEW, RIP, POND, LAKE, RIVERINE; surface water
+#    persists throughout growing season in most years; FEW may be modified as
+#    diked/impounded or excavated
+# - Temporary Flooded = FEW, RIP, POND, LAKE, RIVERINE; surface water present
+#    for brief periods (up to a few weeks) during the growing season; FEW may be
+#    modified as diked/impounded, excavated, partially drained/ditched, alkaline
+# --> rip has two classes: Forested and Scrub-Shrub
+
