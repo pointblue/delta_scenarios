@@ -7,18 +7,18 @@ source('R/packages.R')
 delta = rast('GIS/delta.tif')
 
 # baseline layers:
+baseline_wat_fall = rast('data/landcover_waterbirds_fall/baseline_waterbird_fall.tif')
+baseline_wat_win = rast('data/landcover_waterbirds_winter/baseline_waterbird_winter.tif')
 baseline_rip = rast('data/landcover_riparian/baseline_riparian.tif')
 baseline_ripdetail = rast('data/landcover_riparian/baseline_riparian_detail.tif')
 baseline_ripperm = rast('data/landcover_riparian/baseline_riparian_permwetland.tif')
-baseline_wat_fall = rast('data/landcover_waterbirds_fall/baseline_waterbird_fall.tif')
-baseline_wat_win = rast('data/landcover_waterbirds_winter/baseline_waterbird_winter.tif')
 baseline_mb = rast('data/landcover_multiplebenefits/baseline_mb.tif')
 
 # keys:
+wkey = read_csv('data/landcover_key_waterbirds.csv', col_types = cols())
 rkey = read_csv('data/landcover_key_riparian.csv')
 rkey2 = read_csv('data/landcover_key_riparian_detail.csv')
 rkey3 = read_csv('data/landcover_key_riparian_permwetland.csv')
-wkey = read_csv('data/landcover_key_waterbirds.csv', col_types = cols())
 mkey = read_csv('data/landcover_key_multiplebenefits.csv')
 
 
@@ -57,18 +57,21 @@ base = baseline_wat_fall %>%
   mask(delta) %>%
   freq() %>%
   filter(label %in% c('woodw', 'duwet')) %>%
+  mutate(label = recode(label, 'duwet' = 'wet')) %>%
+  group_by(label) %>%
+  summarize(count = sum(count)) %>%
   mutate(current_ha = count * 30 * 30 / 10000)
-# wetlands = 6,919.56 ha (consider nontidal wetlands only)
+# wetlands = 6,585 ha (consider nontidal wetlands only)
 # riparian = 8,216.73 ha
 
 # how much more needed to meet proposed 2050 targets?
 targets = full_join(
-  obj %>% mutate(label = c('duwet', 'woodw')) %>% select(label, total_ha),
+  obj %>% mutate(label = c('wet', 'woodw')) %>% select(label, total_ha),
   base %>% select(label, current_ha),
   by = 'label') %>%
   mutate(add_ha = total_ha - current_ha)
 # riparian: add 4,126 ha
-# wetlands: add 2,833 ha
+# wetlands: add 3,168 ha
 
 ## planned restoration---------
 # - ecorestore (already planned/under way)
@@ -111,7 +114,7 @@ base_plus = base_plus_ecorestore %>%
   freq() %>% as_tibble() %>%
   filter(value %in% c(15, 18)) %>%
   mutate(label = recode(value,
-                        '15' = 'woodw', '18' = 'duwet')) %>%
+                        '15' = 'woodw', '18' = 'wet')) %>%
   mutate(ecorestore_ha = count * 30 * 30 / 10000)
 targets_plus = full_join(
   targets %>% select(label, total_ha, current_ha),
@@ -119,7 +122,7 @@ targets_plus = full_join(
   by = 'label') %>%
   mutate(add_ha = total_ha - ecorestore_ha)
 # riparian: add 4,016 ha (decreased a bit)
-# wetlands: add 1,224 ha (decreased a lot)
+# wetlands: add 1,558 ha (decreased a lot)
 
 
 
@@ -230,7 +233,7 @@ rip_need = targets_plus %>% filter(label == 'woodw') %>% pull(add_ha) -
   freq(rip_targets1_keep) %>% as_tibble() %>%
   mutate(area.ha = count * 30 * 30 / 10000) %>%
   pull(area.ha) %>% sum()
-# 2373.001 ha
+# 2372.101 ha
 
 rip_targets2 = subst(restoration_targets_rip, c(0:4,9), NA) %>%
   patches(directions = 8)
@@ -268,87 +271,83 @@ rip_targets_final = ecorestore_subset2 %>% subst(from = 18, to = NA) %>%
   cover(rip_targets2_keep)
 names(rip_targets_final) = 'riparian_restoration'
 freq(rip_targets_final) %>% as_tibble() %>% pull(count) * 30 * 30 / 10000
-# adding 4161.2 ha (target = 4126)
+# adding 4140.81 ha (target = 4126)
 writeRaster(rip_targets_final,
             'GIS/restoration_targets_riparian_objectives.tif',
             overwrite = TRUE)
 
 ### add wetland restoration---------
 # same approach as for riparian
-# objective: 1224 ha added to ecorestore for a total of 2833 added to baseline
+# objective: 1558 ha added to ecorestore for a total of 3168 added to baseline
 
 targets_area_wet = freq(restoration_targets_wet) %>% as_tibble() %>%
   mutate(area.ha = count * 30 * 30 / 10000,
          tot.ha = cumsum(area.ha))
-# --> to reach target, only need part of priority level 1
-wet_need = targets_plus %>% filter(label == 'duwet') %>% pull(add_ha)
+# --> to reach target, need priority level 1 and part of priority level 2
+# wet_need = targets_plus %>% filter(label == 'wet') %>% pull(add_ha)
 
 # find patches in priority level 1 of at least 1 acre (0.4 ha) and less than the
 # total target
 wet_targets1 = subst(restoration_targets_wet, c(2:9), NA) %>%
   patches(directions = 8)
-wet_targets1_consider = freq(wet_targets1) %>% as_tibble() %>%
+wet_targets1_keepID = freq(wet_targets1) %>% as_tibble() %>%
+  mutate(area.ha = count * 30 * 30 / 10000) %>%
+  filter(area.ha >= 0.4) %>%
+  pull(value) #54 patches
+# classify all included patch IDs as new wetland; rest to NA
+wet_targets1_keep = classify(wet_targets1,
+                             rcl = tibble(from = wet_targets1_keepID,
+                                          to = 18) %>% as.matrix(),
+                             othersNA = TRUE) %>%
+  sum(na.rm = TRUE) #combine into one layer again
+
+# how much additional area needed from priority level 5?
+wet_need = targets_plus %>% filter(label == 'wet') %>% pull(add_ha) -
+  freq(wet_targets1_keep) %>% as_tibble() %>%
+  mutate(area.ha = count * 30 * 30 / 10000) %>%
+  pull(area.ha) %>% sum()
+# 226.799 ha
+
+wet_targets2 = subst(restoration_targets_wet, c(0:1,3:9), NA) %>%
+  patches(directions = 8)
+wet_targets2_consider = freq(wet_targets2) %>% as_tibble() %>%
   mutate(area.ha = count * 30 * 30 / 10000) %>%
   filter(area.ha >= 0.4 & area.ha < 1.25 * wet_need)
 # take random sample of patches > 1 acre
-wet_targets1_sampleorder = sample(wet_targets1_consider %>% pull(value),
-                                 nrow(wet_targets1_consider), replace = FALSE)
-wet_targets1_considerorder = wet_targets1_consider %>%
-  mutate(value = factor(value, levels =  wet_targets1_sampleorder)) %>%
+wet_targets2_sampleorder = sample(wet_targets2_consider %>% pull(value),
+                                 nrow(wet_targets2_consider), replace = FALSE)
+wet_targets2_considerorder = wet_targets2_consider %>%
+  mutate(value = factor(value, levels =  wet_targets2_sampleorder)) %>%
   arrange(value) %>%
   mutate(tot.ha = cumsum(area.ha))
 # keep all up until cumulative sum reaches/exceeds target
-wet_targets1_keepID = wet_targets1_considerorder %>%
-  filter(tot.ha <= wet_targets1_considerorder %>% filter(tot.ha > wet_need) %>%
+wet_targets2_keepID = wet_targets2_considerorder %>%
+  filter(tot.ha <= wet_targets2_considerorder %>% filter(tot.ha > wet_need) %>%
            slice(1) %>% pull(tot.ha)
          ) %>%
   pull(value)
 # classify all included patch IDs as wetland; rest to NA
-wet_targets1_keep = classify(wet_targets1,
-                             rcl = tibble(from = wet_targets1_keepID %>%
+wet_targets2_keep = classify(wet_targets2,
+                             rcl = tibble(from = wet_targets2_keepID %>%
                                             as.character() %>% as.numeric(),
                                           to = 18) %>% as.matrix(),
                              othersNA = TRUE)
 
-# sufficient?
-targets_plus %>% filter(label == 'duwet') %>% pull(add_ha) -
-  freq(wet_targets1_keep) %>% as_tibble() %>%
-  mutate(area.ha = count * 30 * 30 / 10000) %>%
-  pull(area.ha) %>% sum()
-# -23 ha
-
-# wet_targets2 = subst(restoration_targets_wet, c(1, 3:9), NA) %>%
-#   patches(directions = 8)
-# wet_targets2_consider = freq(wet_targets2) %>% as_tibble() %>%
+# # sufficient?
+# targets_plus %>% filter(label == 'duwet') %>% pull(add_ha) -
+#   freq(wet_targets1_keep) %>% as_tibble() %>%
 #   mutate(area.ha = count * 30 * 30 / 10000) %>%
-#   filter(area.ha >= 0.4 & area.ha < 1.25 * wet_need)
-# # take random sample of patches > 1 acre
-# wet_targets2_sampleorder = sample(wet_targets2_consider %>% pull(value),
-#                                   nrow(wet_targets2_consider), replace = FALSE)
-# wet_targets2_considerorder = wet_targets2_consider %>%
-#   mutate(value = factor(value, levels =  wet_targets2_sampleorder)) %>%
-#   arrange(value) %>%
-#   mutate(tot.ha = cumsum(area.ha))
-# # keep all up until cumulative sum reaches/exceeds target
-# wet_targets2_keepID = wet_targets2_considerorder %>%
-#   filter(tot.ha <= wet_targets2_considerorder %>% filter(tot.ha > wet_need) %>%
-#            slice(1) %>% pull(tot.ha)
-#          ) %>%
-#   pull(value)
-# # classify all included patch IDs as wetland; rest to NA
-# wet_targets2_keep = classify(wet_targets2,
-#                              rcl = tibble(from = wet_targets2_keepID %>%
-#                                             as.character() %>% as.numeric(),
-#                                           to = 18) %>% as.matrix(),
-#                              othersNA = TRUE)
+#   pull(area.ha) %>% sum()
+# # -23 ha
 
 # COMBINE PLANNED & POTENTIAL WETLAND RESTORATION
 # (convert all other patch IDs to NA)
 wet_targets_final = ecorestore_subset2 %>% subst(from = 15, to = NA) %>%
-  cover(wet_targets1_keep)
+  cover(wet_targets1_keep) %>%
+  cover(wet_targets2_keep)
 names(wet_targets_final) = 'wetland_restoration'
 freq(wet_targets_final) %>% as_tibble() %>% pull(count) * 30 * 30 / 10000
-# adding 2856.33 ha (compared to 2833 target)
+# adding 3172.41 ha (compared to 3168 target)
 plot(wet_targets_final)
 writeRaster(wet_targets_final,
             'GIS/restoration_targets_wetland_objectives.tif',
@@ -402,152 +401,152 @@ tab %>% rlang::set_names(c('baseline', 'scenario', 'n')) %>%
   mutate(tot = sum(n),
          prop = n/tot) %>%
   ungroup() %>%
-  filter(shortlab.y == 'duwet')
+  # filter(shortlab.y == 'duwet')
   filter(shortlab.y == 'woodw')
 
-# - riparian: 66% existing riparian; most conversion from orch (17%);
+# - riparian: 67% existing riparian; most conversion from orch (16%);
 #    no conversion from rice, duwet, dev, water
-# - wetland: 71% existing duwet; most conversion from ip (10%), rice (5%);
+# - wetland: 68% existing duwet; most conversion from ip (13%), rice (5%);
 #    no conversion from dev, forest, barren
 
-### waterbirds-winter--------
-scenario_restoration_win = cover(rip_targets_final, wet_targets_final) %>%
-  cover(baseline_wat_win)
-levels(scenario_restoration_win) <- wkey %>% select(id = code, shortlab) %>%
-  as.data.frame()
-coltab(scenario_restoration_win) <- wkey %>% select(code, col) %>%
-  complete(code = c(0:255)) %>% pull(col)
-names(scenario_restoration_win) = 'scenario_restoration'
-plot(c(baseline_wat_win, scenario_restoration_win))
-writeRaster(scenario_restoration_win,
-            'data/landcover_waterbirds_winter/scenario1_restoration_waterbird_winter.tif')
-
-### riparian----------
-scenario_restoration_rip <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_restoration)
-levels(scenario_restoration_rip) <- rkey %>%
-  select(id = code, label = group) %>% as.data.frame()
-coltab(scenario_restoration_rip) <- rkey %>% select(code, col) %>%
-  complete(code = c(0:255)) %>% pull(col)
-names(scenario_restoration_rip) = 'scenario_restoration'
-plot(c(baseline_rip, scenario_restoration_rip))
-writeRaster(scenario_restoration_rip,
-            'data/landcover_riparian/scenario1_restoration_riparian.tif')
-
-# compare/check conversions between layers
-tab = crosstab(c(baseline_rip %>% mask(delta),
-                 scenario_restoration_rip %>% mask(delta)),
-               useNA = TRUE, long = TRUE)
-
-tab %>% set_names(c('baseline', 'scenario', 'n')) %>%
-  mutate_at(vars(baseline:scenario), as.numeric) %>%
-  left_join(rkey %>% dplyr::select(code, group), by = c('baseline' = 'code')) %>%
-  left_join(rkey %>% dplyr::select(code, group), by = c('scenario' = 'code')) %>%
-  arrange(desc(n)) %>%
-  group_by(group.y) %>%
-  mutate(tot = sum(n),
-         prop = n/tot) %>%
-  ungroup() %>%
-  # filter(group.y == 'WETLAND')
-  filter(group.y == 'RIPARIAN')
-
-# - riparian: 66% existing riparian; most conversion from ORCHVIN (16%);
-#    no conversion from RICE, URBAN, or WATER
-# - wetland: 91% existing WETLAND; most conversion from GRASSPAS (6%);
-#    no conversion from URBAN, OAKWOODLAND, BARREN
-
-### riparian detail---------
-# use veg types from restoration opportunities analysis to inform riparian
-# sub-types; pixels not in restoration opportunities analysis likely from
-# ecorestore = 'valley foothill riparian'
-
-rip_targets_type = lapp(c(rast('GIS/habpotential.tif') %>% mask(rip_targets_final),
-                          rip_targets_final),
-                        fun = function(x, y) {
-                          ifelse(y == 15 & is.na(x), 7100, x)
-                        })
-# 7100 = undefined "valley foothill riparian"
-# 7600 = SALIXSHRUB ("willow shrub/scrub")
-plot(rip_targets_type)
-crosstab(c(rip_targets_final, rip_targets_type), useNA = TRUE, long = TRUE)
-
-# ASSIGN FOREST TYPES
-# keep only pixels that could be forest
-rip_targets_forestpts = rip_targets_type %>% subst(from = 7600, to = NA) %>%
-  as.points()
-# 41,979 points
-
-# assign the most frequent ripforest value from surrounding area in baseline
-# landscape
-rip_targets_forest_buff1000 = buffer(rip_targets_forestpts, width = 1000)
-baseline_ripforest = subst(baseline_ripdetail, from = c(75:78), to = NA)
-ripforest_assignments = extract(baseline_ripforest, rip_targets_forest_buff1000,
-                                method = 'simple', fun = modal, na.rm = TRUE,
-                                ties = 'random')
-values(rip_targets_forestpts) <- ripforest_assignments$baseline_ripdetail
-ripforest = rasterize(rip_targets_forestpts, scenario_restoration_rip,
-                      field = 'value')
-plot(ripforest)
-#817 cells still unassigned (not bad out of 41979)
-
-# repeat for remaining unassigned pixels
-rip_targets_forestpts2 = rip_targets_type %>% subst(from = 7600, to = NA) %>%
-  mask(ripforest, inverse = TRUE) %>% as.points() #remaining 817 points
-rip_targets_forest_buff2000 = rip_targets_forestpts2 %>%
-  buffer(width = 2000)
-ripforest_assignments2 = extract(baseline_ripforest, rip_targets_forest_buff2000,
-                                method = 'simple', fun = modal, na.rm = TRUE,
-                                ties = 'random')
-values(rip_targets_forestpts2) <- ripforest_assignments2$baseline_ripdetail
-ripforest2 = rasterize(rip_targets_forestpts2, scenario_restoration_rip,
-                       field = 'value')
-
-# ASSIGN SHRUBS
-rip_targets_shrubpts = rip_targets_type %>% subst(from = 7100, to = NA) %>%
-  as.points()
-# 4,381 points
-# assign all to 76 (SALIXSHRUB) - by far the most frequent ripshrub
-values(rip_targets_shrubpts) <- 76
-ripshrub = rasterize(rip_targets_shrubpts, scenario_restoration_rip,
-                      field = 'value')
-plot(ripshrub)
-
-# COMBINE
-scenario_restoration_ripdetail = cover(ripforest, ripforest2) %>%
-  cover(ripshrub) %>%
-  cover(baseline_ripdetail) # original unchanged riparian detail
-levels(scenario_restoration_ripdetail) <- rkey2 %>% select(ID = code, label) %>%
-  as.data.frame()
-coltab(scenario_restoration_ripdetail) <- rkey2 %>% select(code, col) %>%
-  complete(code = c(0:255)) %>% pull(col)
-plot(scenario_restoration_ripdetail)
-writeRaster(scenario_restoration_ripdetail,
-            'data/landcover_riparian/scenario1_restoration_ripdetail.tif')
-
-# all restoration targets assigned a rip detail
-crosstab(c(rip_targets_final, scenario_restoration_ripdetail),
-         useNA = TRUE, long = TRUE)
-
-# all riparian pixels assigned a ripdetail
-crosstab(c(scenario_restoration_rip, scenario_restoration_ripdetail),
-         useNA = TRUE, long = TRUE)
-
-
-### riparian perm wetlands--------
-# assume all restored wetlands are seasonal?
-plot(baseline_ripperm)
-crosstab(c(baseline_ripperm, wet_targets_final), useNA = TRUE, long = TRUE)
-# nothing in common - no changes needed
-
-
-### multiple benefits--------
-scenario_restoration_mb <- DeltaMultipleBenefits::reclassify_multiplebenefits(scenario_restoration)
-levels(scenario_restoration_mb) <- mkey %>%
-  select(id = code, label = group) %>% as.data.frame()
-coltab(scenario_restoration_mb) <- mkey %>% select(code, col) %>%
-  complete(code = c(0:255)) %>% pull(col)
-names(scenario_restoration_mb) = 'scenario_restoration'
-writeRaster(scenario_restoration_mb,
-            'data/landcover_multiplebenefits/scenario1_restoration_mb.tif')
+# ### waterbirds-winter--------
+# scenario_restoration_win = cover(rip_targets_final, wet_targets_final) %>%
+#   cover(baseline_wat_win)
+# levels(scenario_restoration_win) <- wkey %>% select(id = code, shortlab) %>%
+#   as.data.frame()
+# coltab(scenario_restoration_win) <- wkey %>% select(code, col) %>%
+#   complete(code = c(0:255)) %>% pull(col)
+# names(scenario_restoration_win) = 'scenario_restoration'
+# plot(c(baseline_wat_win, scenario_restoration_win))
+# writeRaster(scenario_restoration_win,
+#             'data/landcover_waterbirds_winter/scenario1_restoration_waterbird_winter.tif')
+#
+# ### riparian----------
+# scenario_restoration_rip <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_restoration)
+# levels(scenario_restoration_rip) <- rkey %>%
+#   select(id = code, label = group) %>% as.data.frame()
+# coltab(scenario_restoration_rip) <- rkey %>% select(code, col) %>%
+#   complete(code = c(0:255)) %>% pull(col)
+# names(scenario_restoration_rip) = 'scenario_restoration'
+# plot(c(baseline_rip, scenario_restoration_rip))
+# writeRaster(scenario_restoration_rip,
+#             'data/landcover_riparian/scenario1_restoration_riparian.tif')
+#
+# # compare/check conversions between layers
+# tab = crosstab(c(baseline_rip %>% mask(delta),
+#                  scenario_restoration_rip %>% mask(delta)),
+#                useNA = TRUE, long = TRUE)
+#
+# tab %>% set_names(c('baseline', 'scenario', 'n')) %>%
+#   mutate_at(vars(baseline:scenario), as.numeric) %>%
+#   left_join(rkey %>% dplyr::select(code, group), by = c('baseline' = 'code')) %>%
+#   left_join(rkey %>% dplyr::select(code, group), by = c('scenario' = 'code')) %>%
+#   arrange(desc(n)) %>%
+#   group_by(group.y) %>%
+#   mutate(tot = sum(n),
+#          prop = n/tot) %>%
+#   ungroup() %>%
+#   # filter(group.y == 'WETLAND')
+#   filter(group.y == 'RIPARIAN')
+#
+# # - riparian: 66% existing riparian; most conversion from ORCHVIN (16%);
+# #    no conversion from RICE, URBAN, or WATER
+# # - wetland: 91% existing WETLAND; most conversion from GRASSPAS (6%);
+# #    no conversion from URBAN, OAKWOODLAND, BARREN
+#
+# ### riparian detail---------
+# # use veg types from restoration opportunities analysis to inform riparian
+# # sub-types; pixels not in restoration opportunities analysis likely from
+# # ecorestore = 'valley foothill riparian'
+#
+# rip_targets_type = lapp(c(rast('GIS/habpotential.tif') %>% mask(rip_targets_final),
+#                           rip_targets_final),
+#                         fun = function(x, y) {
+#                           ifelse(y == 15 & is.na(x), 7100, x)
+#                         })
+# # 7100 = undefined "valley foothill riparian"
+# # 7600 = SALIXSHRUB ("willow shrub/scrub")
+# plot(rip_targets_type)
+# crosstab(c(rip_targets_final, rip_targets_type), useNA = TRUE, long = TRUE)
+#
+# # ASSIGN FOREST TYPES
+# # keep only pixels that could be forest
+# rip_targets_forestpts = rip_targets_type %>% subst(from = 7600, to = NA) %>%
+#   as.points()
+# # 41,979 points
+#
+# # assign the most frequent ripforest value from surrounding area in baseline
+# # landscape
+# rip_targets_forest_buff1000 = buffer(rip_targets_forestpts, width = 1000)
+# baseline_ripforest = subst(baseline_ripdetail, from = c(75:78), to = NA)
+# ripforest_assignments = extract(baseline_ripforest, rip_targets_forest_buff1000,
+#                                 method = 'simple', fun = modal, na.rm = TRUE,
+#                                 ties = 'random')
+# values(rip_targets_forestpts) <- ripforest_assignments$baseline_ripdetail
+# ripforest = rasterize(rip_targets_forestpts, scenario_restoration_rip,
+#                       field = 'value')
+# plot(ripforest)
+# #817 cells still unassigned (not bad out of 41979)
+#
+# # repeat for remaining unassigned pixels
+# rip_targets_forestpts2 = rip_targets_type %>% subst(from = 7600, to = NA) %>%
+#   mask(ripforest, inverse = TRUE) %>% as.points() #remaining 817 points
+# rip_targets_forest_buff2000 = rip_targets_forestpts2 %>%
+#   buffer(width = 2000)
+# ripforest_assignments2 = extract(baseline_ripforest, rip_targets_forest_buff2000,
+#                                 method = 'simple', fun = modal, na.rm = TRUE,
+#                                 ties = 'random')
+# values(rip_targets_forestpts2) <- ripforest_assignments2$baseline_ripdetail
+# ripforest2 = rasterize(rip_targets_forestpts2, scenario_restoration_rip,
+#                        field = 'value')
+#
+# # ASSIGN SHRUBS
+# rip_targets_shrubpts = rip_targets_type %>% subst(from = 7100, to = NA) %>%
+#   as.points()
+# # 4,381 points
+# # assign all to 76 (SALIXSHRUB) - by far the most frequent ripshrub
+# values(rip_targets_shrubpts) <- 76
+# ripshrub = rasterize(rip_targets_shrubpts, scenario_restoration_rip,
+#                       field = 'value')
+# plot(ripshrub)
+#
+# # COMBINE
+# scenario_restoration_ripdetail = cover(ripforest, ripforest2) %>%
+#   cover(ripshrub) %>%
+#   cover(baseline_ripdetail) # original unchanged riparian detail
+# levels(scenario_restoration_ripdetail) <- rkey2 %>% select(ID = code, label) %>%
+#   as.data.frame()
+# coltab(scenario_restoration_ripdetail) <- rkey2 %>% select(code, col) %>%
+#   complete(code = c(0:255)) %>% pull(col)
+# plot(scenario_restoration_ripdetail)
+# writeRaster(scenario_restoration_ripdetail,
+#             'data/landcover_riparian/scenario1_restoration_ripdetail.tif')
+#
+# # all restoration targets assigned a rip detail
+# crosstab(c(rip_targets_final, scenario_restoration_ripdetail),
+#          useNA = TRUE, long = TRUE)
+#
+# # all riparian pixels assigned a ripdetail
+# crosstab(c(scenario_restoration_rip, scenario_restoration_ripdetail),
+#          useNA = TRUE, long = TRUE)
+#
+#
+# ### riparian perm wetlands--------
+# # assume all restored wetlands are seasonal?
+# plot(baseline_ripperm)
+# crosstab(c(baseline_ripperm, wet_targets_final), useNA = TRUE, long = TRUE)
+# # nothing in common - no changes needed
+#
+#
+# ### multiple benefits--------
+# scenario_restoration_mb <- DeltaMultipleBenefits::reclassify_multiplebenefits(scenario_restoration)
+# levels(scenario_restoration_mb) <- mkey %>%
+#   select(id = code, label = group) %>% as.data.frame()
+# coltab(scenario_restoration_mb) <- mkey %>% select(code, col) %>%
+#   complete(code = c(0:255)) %>% pull(col)
+# names(scenario_restoration_mb) = 'scenario_restoration'
+# writeRaster(scenario_restoration_mb,
+#             'data/landcover_multiplebenefits/scenario1_restoration_mb.tif')
 
 
 # SCENARIO 2. Perennial crop expansion---------
@@ -619,53 +618,53 @@ tab %>% rlang::set_names(c('baseline', 'bbau', 'n')) %>%
   filter(baseline_landuse != bbau_landuse)
 # all changes are conversions to orchard/vineyard - as expected!
 
-### waterbirds-winter-------------
-scenario_perex_win = baseline_wat_win %>%
-  subst(from = c(1:7, 9:11, 13, 16:17, 99), to = NA) %>% #create layer of "permanent" land covers
-  cover(cover(bbau, baseline_wat_win))
-levels(scenario_perex_win) <- wkey %>% select(id = code, shortlab) %>%
-  as.data.frame()
-coltab(scenario_perex_win) <- wkey %>% select(code, col) %>%
-  complete(code = c(0:255)) %>% pull(col)
-names(scenario_perex_win) = 'scenario_perennial_expansion'
-plot(c(baseline_wat_win, scenario_perex_win))
-writeRaster(scenario_perex_win,
-            'data/landcover_waterbirds_winter/scenario2_perennialexpand_waterbird_winter.tif')
-
-
-### riparian-------
-scenario_perex_rip <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_perex)
-levels(scenario_perex_rip) <- rkey %>% select(id = code, label = group) %>%
-  as.data.frame()
-coltab(scenario_perex_rip) <- rkey %>% select(code, col) %>%
-  complete(code = c(0:255)) %>% pull(col)
-names(scenario_perex_rip) = 'scenario_perennial_expansion'
-plot(c(baseline_rip, scenario_perex_rip))
-writeRaster(scenario_perex_rip,
-            'data/landcover_riparian/scenario2_perennialexpand_riparian.tif')
-
-### riparian detail------
-# should be no change
-crosstab(c(scenario_perex_rip %>% subst(from = c(20:130), to = NA),
-           baseline_ripdetail),
-         useNA = TRUE, long = TRUE)
-# no pixels in common - no change from baseline
-
-crosstab(c(scenario_perex_rip %>% subst(from = c(20:130), to = NA),
-           baseline_ripperm),
-         useNA = TRUE, long = TRUE)
-# no pixels in common - no change from baseline
-
-### multiple benefits-------
-scenario_perex_mb <- DeltaMultipleBenefits::reclassify_multiplebenefits(scenario_perex)
-levels(scenario_perex_mb) <- mkey %>% select(id = code, label = group) %>%
-  as.data.frame()
-coltab(scenario_perex_mb) <- mkey %>% select(code, col) %>%
-  complete(code = c(0:255)) %>% pull(col)
-names(scenario_perex_mb) = 'scenario_perennial_expansion'
-plot(c(baseline_mb, scenario_perex_mb))
-writeRaster(scenario_perex_mb,
-            'data/landcover_multiplebenefits/scenario2_perennialexpand_mb.tif')
+# ### waterbirds-winter-------------
+# scenario_perex_win = baseline_wat_win %>%
+#   subst(from = c(1:7, 9:11, 13, 16:17, 99), to = NA) %>% #create layer of "permanent" land covers
+#   cover(cover(bbau, baseline_wat_win))
+# levels(scenario_perex_win) <- wkey %>% select(id = code, shortlab) %>%
+#   as.data.frame()
+# coltab(scenario_perex_win) <- wkey %>% select(code, col) %>%
+#   complete(code = c(0:255)) %>% pull(col)
+# names(scenario_perex_win) = 'scenario_perennial_expansion'
+# plot(c(baseline_wat_win, scenario_perex_win))
+# writeRaster(scenario_perex_win,
+#             'data/landcover_waterbirds_winter/scenario2_perennialexpand_waterbird_winter.tif')
+#
+#
+# ### riparian-------
+# scenario_perex_rip <- DeltaMultipleBenefits::reclassify_ripmodels(scenario_perex)
+# levels(scenario_perex_rip) <- rkey %>% select(id = code, label = group) %>%
+#   as.data.frame()
+# coltab(scenario_perex_rip) <- rkey %>% select(code, col) %>%
+#   complete(code = c(0:255)) %>% pull(col)
+# names(scenario_perex_rip) = 'scenario_perennial_expansion'
+# plot(c(baseline_rip, scenario_perex_rip))
+# writeRaster(scenario_perex_rip,
+#             'data/landcover_riparian/scenario2_perennialexpand_riparian.tif')
+#
+# ### riparian detail------
+# # should be no change
+# crosstab(c(scenario_perex_rip %>% subst(from = c(20:130), to = NA),
+#            baseline_ripdetail),
+#          useNA = TRUE, long = TRUE)
+# # no pixels in common - no change from baseline
+#
+# crosstab(c(scenario_perex_rip %>% subst(from = c(20:130), to = NA),
+#            baseline_ripperm),
+#          useNA = TRUE, long = TRUE)
+# # no pixels in common - no change from baseline
+#
+# ### multiple benefits-------
+# scenario_perex_mb <- DeltaMultipleBenefits::reclassify_multiplebenefits(scenario_perex)
+# levels(scenario_perex_mb) <- mkey %>% select(id = code, label = group) %>%
+#   as.data.frame()
+# coltab(scenario_perex_mb) <- mkey %>% select(code, col) %>%
+#   complete(code = c(0:255)) %>% pull(col)
+# names(scenario_perex_mb) = 'scenario_perennial_expansion'
+# plot(c(baseline_mb, scenario_perex_mb))
+# writeRaster(scenario_perex_mb,
+#             'data/landcover_multiplebenefits/scenario2_perennialexpand_mb.tif')
 
 
 # SCENARIO 3. Flood risk-----------
@@ -867,25 +866,25 @@ mapstack = paste0('data/landcover_waterbirds_fall/',
 # scenarios_sampled_hi = pred_cv %>%
 #   terra::spatSample(size = 5000000, as.raster = TRUE)
 
-cl <- colors()
-cl[grep('blue', cl)]
-scales::show_col(cl[grep('blue', cl)])
-
-wkey2 = wkey %>%
-  mutate(label = factor(label, levels = c('alfalfa', 'corn', 'rice', 'grain',
-                                          'row/field crop','orchard/vineyard',
-                                          'pasture', 'grassland', 'water',
-                                          'wetland', 'managed wetland',
-                                          'riparian', 'forest/shrub',
-                                          'fallow', 'barren', 'urban')))
-scales::show_col(wkey2$col)
+# cl <- colors()
+# cl[grep('blue', cl)]
+# scales::show_col(cl[grep('blue', cl)])
+#
+# wkey2 = wkey %>%
+#   mutate(label = factor(label, levels = c('alfalfa', 'corn', 'rice', 'grain',
+#                                           'row/field crop','orchard/vineyard',
+#                                           'pasture', 'grassland', 'water',
+#                                           'wetland', 'managed wetland',
+#                                           'riparian', 'forest/shrub',
+#                                           'fallow', 'barren', 'urban')))
+# scales::show_col(wkey2$col)
 
 testmap = DeltaMultipleBenefits::map_scenarios(
   rast = mapstack,
   key = wkey %>% select(value = code, col, label))
 
 ## add delta boundary
-delta_poly = read_sf('V:/Data/geopolitical/california/Legal_Delta_Boundary/Legal_Delta_Boundary.shp') %>%
+delta_poly = read_sf('GIS/Legal_Delta_Boundary.shp') %>%
   st_transform(crs("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"))
 testmap <- testmap %>%
   leaflet::addPolygons(data = delta_poly, fill = FALSE, color = 'black',
