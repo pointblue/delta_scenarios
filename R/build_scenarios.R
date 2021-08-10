@@ -859,7 +859,43 @@ writeRaster(scenario_floodrisk_mb,
 
 mapstack = paste0('data/landcover_waterbirds_fall/',
                   list.files('data/landcover_waterbirds_fall/', '.tif$')) %>%
-  rast()
+  rast() %>%
+  # project(y = "espg:3857", method = 'near')
+  project(y = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext+no_defs",
+          method = 'near')
+
+scenarios = raster::stack(mapstack)
+# %>%
+#   raster::projectRaster(crs = '+proj=longlat +datum=WGS84', method = 'ngb')
+
+pal <- leaflet::colorFactor(palette = wkey$col, domain = wkey$code,
+                            alpha = TRUE, na.color = "transparent")
+key_simple <- wkey %>% select(label, col) %>% distinct() %>%
+  mutate(label = factor(label,
+                        levels = c('water', 'tidal wetland', 'managed wetland',
+                                   'other wetland', 'riparian', 'corn',
+                                   'alfalfa', 'grain', 'field/row', 'rice',
+                                   'orchard/vineyard', 'fallow', 'pasture',
+                                   'grassland', 'forest/shrub', 'barren', 'urban'))) %>%
+  arrange(label)
+
+m <- leaflet::leaflet(scenarios[[1]]) %>%
+  leaflet::addProviderTiles("Stamen.TonerLite") %>%
+  leaflet::addLayersControl(
+    position = "bottomleft",
+    options = leaflet::layersControlOptions(collapsed = F),
+    baseGroups = names(mapstack)) %>%
+  leaflet::addLegend("topright",
+                     labels = key_simple$label,
+                     colors = key_simple$col,
+                     title = 'Land Cover Class',
+                     opacity = 1)
+for (i in c(1:raster::nlayers(scenarios))) {
+  m <- m %>% leaflet::addRasterImage(x = scenarios[[i]],
+                                     group = names(scenarios)[i], colors = pal,
+                                     opacity = 0.7,
+                                     project = FALSE)
+}
 
 # # consider resampling rasters to prevent the file size from being too enormous (this is
 # # still fairly hi-res)
