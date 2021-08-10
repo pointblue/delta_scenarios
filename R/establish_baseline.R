@@ -14,7 +14,7 @@ gisdir = 'V:/Project/Terrestrial/cv_riparian/distribution_modeling/'
 wkey = read_csv('GIS/VegCAMP_crosswalk.csv', col_types = cols()) %>%
   dplyr::select(group = WATERBIRD, code) %>%
   distinct() %>%
-  bind_rows(tibble(group = c('DUwetland', 'DUwetland_tidal', 'wetland_tidal'),
+  bind_rows(tibble(group = c('DUwetland', 'wetland_tidal', 'DUwetland_tidal'),
                    code = c(18, 19, 20))) %>%
   arrange(code) %>%
   mutate(shortlab = case_when(group == 'Irrigated pasture' ~ 'ip',
@@ -42,36 +42,37 @@ wkey = read_csv('GIS/VegCAMP_crosswalk.csv', col_types = cols()) %>%
                         'dryp' = 'grassland',
                         'alf' = 'alfalfa',
                         'duwet' = 'managed wetland',
-                        'duwet_tidal' = 'tidal wetland',
                         'wet_tidal' = 'tidal wetland',
+                        'duwet_tidal' = 'tidal wetland',
                         'forest' = 'forest/shrub'),
          col = c('#FFFF00', '#FF1493', '#2E8B57', '#FFA54F', '#FA8072',
-                 '#FA8072', 'royalblue', '#9400D3', '#FFA54F', '#CCCCCC',
+                 '#FA8072', '#4169E1', '#9400D3', '#FFA54F', '#CCCCCC',
                  '#4D4D4D', '#8B4513', '#87CEFA', '#FF0000', '#FFE4C4',
-                 '#32CD32', '#00008B', 'turquoise', 'turquoise', '#FFFFFF'))
+                 '#32CD32', '#00008B', '#40E0D0', '#40E0D0', '#FFFFFF'))
 write_csv(wkey, 'data/landcover_key_waterbirds.csv')
 
-veg_baseline_waterbird_fall = rast('GIS/landscape_rasters_orig/veg_baseline_waterbirds_fall.tif')
+baseline_fall = rast('GIS/landscape_rasters_orig/vegcamp_update_landiq_du_nwi.tif')
 # veg_baseline_waterbird_fall = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_waterbirds_fall.tif'))
-levels(veg_baseline_waterbird_fall) <- wkey %>% select(id = code, shortlab) %>%
+levels(baseline_fall) <- wkey %>% select(id = code, shortlab) %>%
   as.data.frame()
-coltab(veg_baseline_waterbird_fall) <- wkey %>% select(code, col) %>%
+coltab(baseline_fall) <- wkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
-names(veg_baseline_waterbird_fall) = 'baseline'
-plot(veg_baseline_waterbird_fall)
-writeRaster(veg_baseline_waterbird_fall,
+names(baseline_fall) = 'baseline'
+plot(baseline_fall)
+writeRaster(baseline_fall,
             'data/landcover_waterbirds_fall/baseline_waterbird_fall.tif',
             overwrite = TRUE)
 
+baseline_win = rast('GIS/landscape_rasters_orig/vegcamp_update_landiq_winter.tif')
 # veg_baseline_waterbird_winter = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_waterbirds_winter.tif'))
-levels(veg_baseline_waterbird_winter) <- wkey %>%
-  select(id = code, shortlab) %>% as.data.frame()
-coltab(veg_baseline_waterbird_winter) <- wkey %>% select(code, col) %>%
+levels(baseline_win) <- wkey %>% select(id = code, shortlab) %>% as.data.frame()
+coltab(baseline_win) <- wkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
-names(veg_baseline_waterbird_winter) = 'baseline'
-writeRaster(veg_baseline_waterbird_winter,
-            'data/landcover_waterbirds_winter/baseline_waterbird_winter.tif')
-
+names(baseline_win) = 'baseline'
+plot(baseline_win)
+writeRaster(baseline_win,
+            'data/landcover_waterbirds_winter/baseline_waterbird_winter.tif',
+            overwrite = TRUE)
 
 # riparian-------
 rkey = read_csv(paste0(gisdir, 'GIS/landscape_rasters/key.csv'),
@@ -95,14 +96,16 @@ rkey = read_csv(paste0(gisdir, 'GIS/landscape_rasters/key.csv'),
                  '#FFFFFF'))
 write_csv(rkey, 'data/landcover_key_riparian.csv')
 
-veg_baseline_riparian = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_riparian.tif'))
-levels(veg_baseline_riparian) <- rkey %>%
+baseline_rip = rast('GIS/landscape_rasters_orig/vegcamp_update_landiq_riparian.tif')
+# veg_baseline_riparian = rast(paste0(gisdir, 'GIS/landscape_rasters/veg_baseline_riparian.tif'))
+levels(baseline_rip) <- rkey %>%
   select(id = code, label = group) %>% as.data.frame()
-coltab(veg_baseline_riparian) <- rkey %>% select(code, col) %>%
+coltab(baseline_rip) <- rkey %>% select(code, col) %>%
   complete(code = c(0:255)) %>% pull(col)
-names(veg_baseline_riparian) = 'baseline'
-writeRaster(veg_baseline_riparian,
-            'data/landcover_riparian/baseline_riparian.tif')
+names(baseline_rip) = 'baseline'
+writeRaster(baseline_rip,
+            'data/landcover_riparian/baseline_riparian.tif',
+            overwrite = TRUE)
 
 ## riparian detail------
 rkey2 = read_csv(paste0(gisdir, 'GIS/landscape_rasters/key.csv'),
