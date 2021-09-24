@@ -8,6 +8,7 @@ mapstack = c(rast('GIS/landscape_rasters/veg_baseline_fall.tif'),
              rast('GIS/scenario_rasters/scenario1_restoration.tif'),
              rast('GIS/scenario_rasters/scenario2_perennialexpand.tif'),
              rast('GIS/scenario_rasters/scenario3_floodrisk_fall.tif'))
+names(mapstack)[1] = 'baseline'
 
 wkey = read_csv('data/landcover_key_waterbirds.csv', col_types = cols())
 
