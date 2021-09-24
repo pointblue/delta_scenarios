@@ -1,4 +1,4 @@
-group,code,label,col
+RIPARIAN_CLASS,RIPARIAN_CODE,label,col
 ORCHVIN,10,orchard/vineyard,#9400D3
 AG,20,other crops,#32CD32
 RICE,30,rice,#FF1493
@@ -10,3 +10,12 @@ WETLAND,80,wetland,#00008B
 WATER,90,water,#87CEFA
 OAKWOODLAND,100,forest,#8B4513
 BARREN,130,barren,#FFFFFF
+POFR,71,cottonwood forest,#32CD32
+QULO,72,oak forest,#8B4513
+SALIX,73,willow forest,#FF1493
+MIXEDFOREST,74,mixed forest,#9400D3
+INTROSCRUB,75,introduced scrub,#CCCCCC
+SALIXSHRUB,76,willow shrub,#FF0000
+MIXEDSHRUB,77,mixed shrub,#FFA54F
+OTHER,78,other riparian,#FFFFFF
+PERM,81,PERM,#00008B

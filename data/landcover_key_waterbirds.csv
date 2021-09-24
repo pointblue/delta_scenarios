@@ -1,11 +1,11 @@
-group,code,shortlab,label,col
+WATERBIRD_CLASS,WATERBIRD_CODE,shortlab,label,col
 corn,2,corn,corn,#FFFF00
 rice,3,rice,rice,#FF1493
 Irrigated pasture,4,ip,pasture,#2E8B57
 wheat,5,wheat,grain,#FFA54F
 row,6,row,field/row,#FA8072
 field,7,field,field/row,#FA8072
-wetland,8,wet,other wetland,#4169E1
+wetland,8,wet,other wetland,#40E0D0
 orchard,9,orch,orchard/vineyard,#9400D3
 grain,10,grain,grain,#FFA54F
 fallow,11,fal,fallow,#CCCCCC
@@ -15,7 +15,6 @@ water,14,water,water,#87CEFA
 woody wetland,15,woodw,riparian,#FF0000
 Dryland pasture,16,dryp,grassland,#FFE4C4
 alfalfa,17,alf,alfalfa,#32CD32
-DUwetland,18,duwet,managed wetland,#00008B
-wetland_tidal,19,wet_tidal,tidal wetland,#40E0D0
-DUwetland_tidal,20,duwet_tidal,tidal wetland,#40E0D0
+DU wetland,18,duwet,managed wetland,#4169E1
+tidal marsh,19,tidal,tidal marsh,#EDDD82
 barren,99,barren,barren,#FFFFFF
