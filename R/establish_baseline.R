@@ -17,9 +17,6 @@ delta_buff10k = read_sf('GIS/boundaries/Legal_Delta_boundary_buff10k.shp') %>%
   st_transform(crs = '+proj=utm +zone=10 +datum=WGS84 +units=m +no_defs')
 template = rasterize(vect(delta_buff10k), extend(delta, delta_buff10k))
 
-# # directory containing layers developed for species distribution modeling
-# gisdir = 'V:/Project/Terrestrial/cv_riparian/distribution_modeling/'
-
 # REFINE FALL BASELINE LAYER---------
 # start with revised primary veg layer - initially created for riparian
 # landbirds (stitched together from VegCAMP, broader CV layer, and LandIQ 2014),
@@ -70,7 +67,6 @@ writeRaster(veg_raster, 'GIS/landscape_rasters/veg_baseline.tif',
             overwrite = TRUE)
 
 ## waterbird key---------
-# original cross-walk/key:
 wkey = veg_codify %>% st_drop_geometry() %>%
   select(WATERBIRD_CLASS, WATERBIRD_CODE) %>%
   distinct() %>%
