@@ -1,0 +1,45 @@
+---
+title: "Trade-offs and Co-benefits of Landscape Change Scenarios on Bird Communities and Ecosystem Services in the Sacramento-San Joaquin River Delta"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## *Delta Water Quality and Ecosystem Restoration Program Grant Agreement Number – Q1996022*
+
+
+### Project overview
+
+Achieving the long-term vision of a resilient Sacramento-San Joaquin River Delta ecosystem requires meeting multiple goals simultaneously in a landscape that continues to evolve. To help meet this challenge, Point Blue Conservation Science is leading research to examine the effects of future landscape change in the Delta on bird populations and on the ecosystem services that benefit people in the Delta. Our goal is to develop a transparent and flexible framework for evaluating co-benefits and trade-offs among multiple goals under different scenarios of future landscape change.
+
+
+### Objectives & Current status
+
+The specific objectives of this Project are to: 
+
+* Synthesize scientific information on indicators of ecosystem services associated with land cover types that occur in the Delta. **[[View science synthesis report]](http://www.prbo.org/refs/files/12650_PetersonCA2020.pdf)** 
+
+* Model the distributions of waterbirds and riparian landbirds in the Delta, and identify high priority bird conservation areas in the Delta. **[[View summary report]](http://www.prbo.org/refs/files/12713_DybalaKE2021.pdf)**
+
+* Evaluate the net impact of scenarios of landscape change on bird populations and 
+ecosystem services [*In progress*]
+
+* Develop a flexible, science-based framework for assessing the trade-offs and co-benefits 
+of landscape changes [*In progress*]
+
+* Engage with partners to demonstrate the need to consider trade-offs and co-benefits in making land use decisions and provide training in how to use our science-based framework.
+
+* Disseminate results to the broader scientific community through scientific manuscripts and conference presentations.
+
+
+### Work currently in progress (updated September 2021)
+
+We are currently refining several spatially-explicit scenarios of future landscape change in the Delta. [Explore the draft scenarios here.](draft_scenarios.html)
+
+
+### How to engage
+
+We anticipate reaching out to partners at several stages of the project, both to gather input as the project is developing, and to share results. If you have questions or would like to be on our list, please contact: [Dr. Kristen Dybala, Principal Ecologist, Point Blue Conservation Science](mailto:kdybala@pointblue.org).
+
