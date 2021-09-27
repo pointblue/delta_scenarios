@@ -1,11 +1,20 @@
 ---
-title: "Trade-offs and Co-benefits of Landscape Change Scenarios on Bird Communities and Ecosystem Services in the Sacramento-San Joaquin River Delta"
-output: html_document
+title: "Draft Scenarios"
+output:
+  html_document:
+    theme: NULL
+    css: delta_scenarios.css
 ---
 
-## *Delta Water Quality and Ecosystem Restoration Program Grant Agreement Number – Q1996022*
+### Grant information
 
-### Work currently in progress (updated September 2021)
+"Trade-offs and Co-benefits of Landscape Change Scenarios on Bird Communities and Ecosystem Services in the Sacramento-San Joaquin River Delta"  
+
+*Delta Water Quality and Ecosystem Restoration Program Grant Agreement Number – Q1996022*
+
+
+### Work currently in progress
+*(updated September 2021)*
 
 We are currently refining several spatially-explicit scenarios of future landscape change in the Delta. These are purely speculative scenarios chosen to represent distinct major drivers of landscape change, allowing us to estimate the direction and magnitude of the effects each scenario would have on multiple metrics of interest in the Delta. Aside from the planned restoration projects incorporated into the restoration scenario, these scenarios do not represent actual plans or recommendations, and while they are meant to represent reasonably plausible changes to the landscape, they are not realistic scenarios in the sense that we are only evaluating one driver of change at a time. The Delta's landscape is much more likely to evolve due to a combination of these drivers and others not considered here.
 
@@ -23,7 +32,7 @@ Our baseline landscape is based on the [Delta Vegetation and Land Use Update 201
 
 3) A flood risk scenario, reflecting preparation for increasing flood risk due to sea level rise, based on projections of annual flood risk by 2050 developed for the [Delta Adapts](https://deltacouncil.ca.gov/delta-plan/climate-change) climate change vulnerability analyses and [supporting maps](https://deltascience.shinyapps.io/delta_flood_map/). Under this scenario, there are no changes to existing levees (no failures and no improvements), but areas with high (2-10%) and very high (>10%) annual risk of flooding are converted to managed wetlands as they become unsuitable for agriculture, and areas with a medium (1-2%) annual projected risk of flooding are converted to annual crops as they become unsuitable for perennial crops.
 
-Explore the draft scenarios, in comparison to the baseline landscape, here: [[View fullscreen](widget/scenario_map.html)]  
+Explore the draft scenarios here: [[View fullscreen](widget/scenario_map.html)]  
 
 <center>
 <iframe src="widget/scenario_map.html" style="border: none;" width = 100%; height = 550px; data-external="1"></iframe>
@@ -31,4 +40,4 @@ Explore the draft scenarios, in comparison to the baseline landscape, here: [[Vi
 
 ### For more information
 
-Please visit our [project overview](index.html), or contact [Dr. Kristen Dybala, Principal Ecologist, Point Blue Conservation Science](mailto:kdybala@pointblue.org).
+Please visit our [project overview](index.html), or contact [Dr. Kristen Dybala](mailto:kdybala@pointblue.org), Principal Ecologist, Point Blue Conservation Science.
