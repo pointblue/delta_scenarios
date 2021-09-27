@@ -43,7 +43,7 @@ m <- m %>%
 # be super large!
 
 htmlwidgets::saveWidget(m,
-                        'docs/draft_scenarios.html',
+                        'docs/widget/scenario_map.html',
                         selfcontained = FALSE, libdir = 'lib',
                         title = 'Draft scenarios of landcover change in the Delta')
 
