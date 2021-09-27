@@ -60,7 +60,7 @@ targets = full_join(
   base %>% select(label, current_ha),
   by = 'label') %>%
   mutate(add_ha = total_ha - current_ha)
-# wetlands: add 4,110 ha
+# wetlands: add 4,044 ha
 # riparian: add 4,125 ha
 
 
@@ -215,7 +215,7 @@ targets_plus = full_join(targets %>% select(label, total_ha),
                          change_plans %>% select(label, plans_ha),
                          by = 'label') %>%
   mutate(add_ha = total_ha - plans_ha)
-# wetlands: still need 2381 ha
+# wetlands: still need 2337 ha
 # riparian: still need 3708 ha
 
 # 2. prioritize potential restoration areas-------
@@ -300,7 +300,7 @@ freq(restoration_targets_limited) %>% as_tibble() %>%
          area.ha = count * 30 * 30 / 10000,
          tot.ha = cumsum(area.ha))
 # to reach riparian target of 3708 additional ha, need all of priority levels
-# 1-5 and some of 6; to reach wetland target of 2381 additional ha, need all of
+# 1-5 and some of 6; to reach wetland target of 2337 additional ha, need all of
 # priority levels 1-2 and some of 3
 
 ## top priority restoration-------
@@ -415,7 +415,7 @@ targets_plus2 = full_join(targets %>% select(label, total_ha),
                           change_targets1 %>% select(label, targets1_ha),
                           by = 'label') %>%
   mutate(add_ha = total_ha - targets1_ha)
-# wetlands: still need 637 ha
+# wetlands: still need 593 ha
 # riparian: still need 2075 ha
 
 ## close the gap-------
@@ -458,11 +458,11 @@ targets2_order = targets2_consider[targets2_sample,] %>%
   # calculate cumulative area of all preceding patches
   mutate(tot.ha = cumsum(area.ha)) %>%
   ungroup() %>%
-  left_join(need %>% select(label, targets2_need))
+  left_join(targets_plus2 %>% select(label, add_ha))
 
 # for each habitat type, find the first patch where tot.ha exceeds targets2_need:
 targets2_keepID = targets2_order %>%
-  left_join(targets2_order %>% filter(tot.ha > targets2_need) %>%
+  left_join(targets2_order %>% filter(tot.ha > add_ha) %>%
               group_by(label, code) %>% slice_min(order_by = tot.ha) %>% ungroup() %>%
               select(label, max = tot.ha)) %>%
   filter(tot.ha <= max)
@@ -471,7 +471,7 @@ targets2_keepID = targets2_order %>%
 # (can try random sampling again to reduce)
 targets2_keepID %>%
   group_by(label, code) %>% slice_max(order_by = tot.ha) %>% ungroup() %>%
-  mutate(diff.ha = tot.ha - targets2_need) %>% select(label, diff.ha)
+  mutate(diff.ha = tot.ha - add_ha) %>% select(label, diff.ha)
 
 # classify all included patch IDs as new riparian or wetlands; rest to NA
 # --> have to classify each layer/sublayer separately, since patch names are
@@ -533,21 +533,6 @@ targets2_keep = c(classify(targets2_rip,
                            rcl = tlist2_split[[7]] %>%
                              select(from = value, to = code) %>%
                              as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets2_wet_subset[[8]],
-                           rcl = tlist2_split[[8]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets2_wet_subset[[9]],
-                           rcl = tlist2_split[[9]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets2_wet_subset[[10]],
-                           rcl = tlist2_split[[10]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
                            othersNA = TRUE)) %>%
   #combine into one layer again
   sum(na.rm = TRUE)
@@ -568,8 +553,8 @@ targets_plus2 = full_join(targets %>% select(label, total_ha),
                           change_targets2 %>% select(label, targets2_ha),
                           by = 'label') %>%
   mutate(add_ha = total_ha - targets2_ha)
-# wetlands: overshot by 6.6 ha
-# riparian: overshot by 21.6ha
+# wetlands: overshot by 6.3 ha
+# riparian: overshot by 3.8 ha
 
 
 # 3. combine new restoration into one layer--------
@@ -587,7 +572,8 @@ coltab(scenario_restoration) <- wkey %>% select(WATERBIRD_CODE, col) %>%
 names(scenario_restoration) = 'scenario_restoration'
 plot(c(baseline, scenario_restoration))
 writeRaster(scenario_restoration,
-            'GIS/scenario_rasters/scenario1_restoration.tif')
+            'GIS/scenario_rasters/scenario1_restoration.tif',
+            overwrite = TRUE)
 
 # calculate change------
 delta_restoration = DeltaMultipleBenefits::calculate_change(
@@ -605,5 +591,5 @@ delta_restoration %>%
         axis.title = element_text(size = 18))
 ggsave('fig/change_scenario1_restoration.png', height = 7.5, width = 6)
 # large increase in riparian and wetland cover, mostly at the expense of
-# orchard/vineyard
+# orchard/vineyard AND pasture
 
