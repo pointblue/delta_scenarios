@@ -13,6 +13,7 @@ template = rasterize(vect(delta_buff10k), extend(delta, delta_buff10k))
 
 baseline = rast('GIS/landscape_rasters/veg_baseline_fall.tif')
 wkey = read_csv('data/landcover_key_waterbirds.csv', col_types = cols())
+rkey = read_csv('data/landcover_key_riparian.csv', col_types = cols())
 
 # Scenario development approach:
 #
@@ -563,7 +564,7 @@ writeRaster(restore_all,
             'GIS/scenario_inputs/restoration_added.tif',
             overwrite = TRUE)
 
-# overlay on baseline----------
+## overlay on baseline----------
 scenario_restoration = cover(restore_all, baseline)
 levels(scenario_restoration) <- wkey %>% select(WATERBIRD_CODE, label) %>%
   as.data.frame()
@@ -575,7 +576,7 @@ writeRaster(scenario_restoration,
             'GIS/scenario_rasters/scenario1_restoration.tif',
             overwrite = TRUE)
 
-# calculate change------
+## calculate change------
 delta_restoration = DeltaMultipleBenefits::calculate_change(
   baseline = baseline %>% mask(delta),
   scenario = scenario_restoration %>% mask(delta))
@@ -593,3 +594,89 @@ ggsave('fig/change_scenario1_restoration.png', height = 7.5, width = 6)
 # large increase in riparian and wetland cover, mostly at the expense of
 # orchard/vineyard AND pasture
 
+# 4. specify riparian subtypes---------
+# restored riparian veg needs to be assigned subtypes for use with riparian
+# distribution models; use veg types from restoration opportunities analysis to
+# inform riparian sub-types: valley foothill riparian (7100) vs. willow riparian
+# scrub/shrub (7600)
+# --> pixels not in restoration opportunities analysis likely from restoration
+# plans; assume 'valley foothill riparian'
+
+
+rip_targets_type = lapp(c(habpotential %>% subst(8000, NA) %>%
+                            mask(restore_all %>% subst(18, NA)),
+                          restore_all),
+                        fun = function(x, y) {
+                          ifelse(y == 15 & is.na(x), 7100, x)
+                          })
+# 7100 = undefined "valley foothill riparian" (most)
+# 7600 = SALIXSHRUB ("willow shrub/scrub")
+plot(rip_targets_type)
+
+# ASSIGN FOREST TYPES
+# keep only pixels that could be forest (valley foothill riparian), and find
+# distinct patches
+rip_targets_vri = rip_targets_type %>% subst(7600, NA) %>%
+  patches(directions = 8) #values up to 1737
+patchlist = freq(rip_targets_vri) %>% as_tibble() %>%
+  mutate(ID = c(1:nrow(freq(rip_targets_vri))))
+
+# convert to polygons and find centroids
+rip_targets_vri_ctr = as.polygons(rip_targets_vri) %>% centroids()
+# find 2km buffer
+rip_targets_vri_ctr_buff2k = buffer(rip_targets_vri_ctr,
+                                   width = 2000)
+
+# for each buffer, find frequency of riparian subtypes in surrounding area
+# from baseline
+baseline_ripdetail = rast('GIS/landscape_rasters/veg_baseline_ripdetail.tif')
+freq(baseline_ripdetail)
+# exclude introscrub as an option
+baseline_ripdetail_limited = classify(baseline_ripdetail,
+                                      rcl = matrix(c(75, NA),
+                                                   ncol = 2, byrow = TRUE))
+buff_values = extract(baseline_ripdetail_limited, rip_targets_vri_ctr_buff2k)
+buff_values_prop = buff_values %>% filter(!is.na(veg_baseline_ripdetail)) %>%
+  group_by(ID, veg_baseline_ripdetail) %>% count() %>%
+  group_by(ID) %>% mutate(total = sum(n)) %>% ungroup() %>%
+  mutate(prop = n/total) %>%
+  left_join(patchlist %>% select(ID, patchID = value, ncells = count)) %>%
+  split(.$ID)
+
+# for each value in ID/patchID, use list of riparian subtype codes and the
+# relative proportion of each to randomly assign the total number of cells in
+# each patch to one of the subtypes
+new = purrr::map(buff_values_prop,
+                 ~sample(x = .x %>% pull(veg_baseline_ripdetail),
+                         size = .$ncells[1],
+                         prob = .$prop,
+                         replace = TRUE))
+names(new) = patchlist$value
+
+# now transfer these random assignments back to corresponding patch IDs
+ripforest = rip_targets_vri
+for(i in c(1:length(new))) {
+  target = names(new)[i] %>% as.numeric()
+  cell_id = cells(ripforest, target)[[1]]
+  ripforest[cell_id] <- new[[i]]
+}
+freq(ripforest)
+
+
+# ASSIGN SHRUBS
+ripshrub = rip_targets_type %>% subst(7100, NA) %>% subst(7600, 76)
+# assign all to 76 (SALIXSHRUB) - by far the most frequent ripshrub
+
+# COMBINE
+scenario_restoration_ripdetail = cover(ripforest, ripshrub) %>%
+  cover(baseline_ripdetail)
+# original unchanged riparian detail
+levels(scenario_restoration_ripdetail) <- rkey %>%
+  filter(RIPARIAN_CODE %in% c(71:78)) %>% select(RIPARIAN_CODE, label) %>%
+  as.data.frame()
+coltab(scenario_restoration_ripdetail) <- rkey %>%
+  filter(RIPARIAN_CODE %in% c(71:78)) %>% select(RIPARIAN_CODE, col) %>%
+  complete(RIPARIAN_CODE = c(0:255)) %>% pull(col)
+plot(scenario_restoration_ripdetail)
+writeRaster(scenario_restoration_ripdetail,
+            'GIS/scenario_rasters/scenario1_restoration_ripdetail.tif')
