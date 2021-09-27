@@ -12,10 +12,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Grant information
 
-"Trade-offs and Co-benefits of Landscape Change Scenarios on Bird Communities and Ecosystem Services in the Sacramento-San Joaquin River Delta"  
+"Trade-offs and Co-benefits of Landscape Change Scenarios on Bird Communities and Ecosystem Services in the Sacramento-San Joaquin River Delta"
 
-*Delta Water Quality and Ecosystem Restoration Program Grant Agreement Number – Q1996022*
+Delta Water Quality and Ecosystem Restoration Program Grant Agreement Number – Q1996022, administered by the California Department of Fish and Wildlife
 
+**Project Team:** Kristen Dybala (PI), Tom Gardali, Catherine Hickey, Matt Reiter, Kristin Sesser
 
 ### Project overview
 
