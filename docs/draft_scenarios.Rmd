@@ -23,9 +23,10 @@ Our baseline landscape is based on the [Delta Vegetation and Land Use Update 201
 
 3) A flood risk scenario, reflecting preparation for increasing flood risk due to sea level rise, based on projections of annual flood risk by 2050 developed for the [Delta Adapts](https://deltacouncil.ca.gov/delta-plan/climate-change) climate change vulnerability analyses and [supporting maps](https://deltascience.shinyapps.io/delta_flood_map/). Under this scenario, there are no changes to existing levees (no failures and no improvements), but areas with high (2-10%) and very high (>10%) annual risk of flooding are converted to managed wetlands as they become unsuitable for agriculture, and areas with a medium (1-2%) annual projected risk of flooding are converted to annual crops as they become unsuitable for perennial crops.
 
-Explore the draft scenarios, in comparison to the baseline landscape, here: [[View fullscreen](widget/scenario_map.html)]
+Explore the draft scenarios, in comparison to the baseline landscape, here: [[View fullscreen](widget/scenario_map.html)]  
+
 <center>
-<iframe src="widget/scenario_map.html" style="border: none;" width = 100%; height = 550px;></iframe>
+<iframe src="widget/scenario_map.html" style="border: none;" width = 100%; height = 550px; data-external="1"></iframe>
 </center>
 
 ### For more information
