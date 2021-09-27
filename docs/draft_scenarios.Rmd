@@ -6,17 +6,10 @@ output:
     css: delta_scenarios.css
 ---
 
-### Grant information
-
-"Trade-offs and Co-benefits of Landscape Change Scenarios on Bird Communities and Ecosystem Services in the Sacramento-San Joaquin River Delta"  
-
-*Delta Water Quality and Ecosystem Restoration Program Grant Agreement Number – Q1996022*
-
-
 ### Work currently in progress
 *(updated September 2021)*
 
-We are currently refining several spatially-explicit scenarios of future landscape change in the Delta. These are purely speculative scenarios chosen to represent distinct major drivers of landscape change, allowing us to estimate the direction and magnitude of the effects each scenario would have on multiple metrics of interest in the Delta. Aside from the planned restoration projects incorporated into the restoration scenario, these scenarios do not represent actual plans or recommendations, and while they are meant to represent reasonably plausible changes to the landscape, they are not realistic scenarios in the sense that we are only evaluating one driver of change at a time. The Delta's landscape is much more likely to evolve due to a combination of these drivers and others not considered here.
+As part of Point Blue's research examining multiple benefits in the Delta (see [project overview](index.html)), we are currently refining several spatially-explicit scenarios of future landscape change in the Delta. These are purely speculative scenarios chosen to represent distinct major drivers of landscape change, allowing us to estimate the direction and magnitude of the effects each scenario would have on multiple metrics of interest in the Delta. Aside from the planned restoration projects incorporated into the restoration scenario, these scenarios do not represent actual plans or recommendations, and while they are meant to represent reasonably plausible changes to the landscape, they are not realistic scenarios in the sense that we are only evaluating one driver of change at a time. The Delta's landscape is much more likely to evolve due to a combination of these drivers and others not considered here.
 
 The goals for this phase include:
 

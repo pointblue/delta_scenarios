@@ -10,11 +10,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Grant information
+### About
 
-"Trade-offs and Co-benefits of Landscape Change Scenarios on Bird Communities and Ecosystem Services in the Sacramento-San Joaquin River Delta"
-
-Delta Water Quality and Ecosystem Restoration Program Grant Agreement Number – Q1996022, administered by the California Department of Fish and Wildlife
+This project is part of Point Blue Conservation Science's grant "Trade-offs and Co-benefits of Landscape Change Scenarios on Bird Communities and Ecosystem Services in the Sacramento-San Joaquin River Delta", funded by Delta Water Quality and Ecosystem Restoration Program Grant Agreement Number – Q1996022, administered by the California Department of Fish and Wildlife. 
 
 **Project Team:** Kristen Dybala (PI), Tom Gardali, Catherine Hickey, Matt Reiter, Kristin Sesser
 
