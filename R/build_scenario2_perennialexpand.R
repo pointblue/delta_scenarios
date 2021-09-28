@@ -53,7 +53,7 @@ bbau_limited = lapp(c(bbau, baseline),
 
 # 2. overlay
 scenario_perex = cover(bbau_limited, baseline)
-levels(scenario_perex) <- wkey %>% select(id = WATERBIRD_CODE, shortlab) %>%
+levels(scenario_perex) <- wkey %>% select(id = WATERBIRD_CODE, label) %>%
   as.data.frame()
 coltab(scenario_perex) <- wkey %>% select(WATERBIRD_CODE, col) %>%
   complete(WATERBIRD_CODE = c(0:255)) %>% pull(col)
