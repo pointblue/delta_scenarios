@@ -173,7 +173,7 @@ delta_floodrisk %>%
   rename(label = label.base) %>%
   DeltaMultipleBenefits::plot_change(scale = 1000000) +
   labs(x = NULL, y = bquote(' ' *Delta~ 'total area ('~km^2*')')) +
-  theme_bw() + coord_flip() +
+  theme_bw() + coord_flip() + ylim(-100, 410) +
   theme(axis.text = element_text(size = 18),
         axis.title = element_text(size = 18))
 ggsave('fig/change_scenario3_floodrisk.png', height = 7.5, width = 6)

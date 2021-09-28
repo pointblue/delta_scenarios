@@ -74,7 +74,7 @@ delta_perex %>% rename(label = label.base) %>%
   arrange(change) %>%
   DeltaMultipleBenefits::plot_change(scale = 1000000) +
   labs(x = NULL, y = bquote(' ' *Delta~ 'total area ('~km^2*')')) +
-  theme_bw() + coord_flip() +
+  theme_bw() + coord_flip() + ylim(-50, 150) +
   theme(axis.text = element_text(size = 18),
         axis.title = element_text(size = 18))
 ggsave('fig/change_scenario2_perennialexpand.png', height = 7.5, width = 6)
