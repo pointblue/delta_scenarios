@@ -17,16 +17,21 @@ delta_buff10k = read_sf('GIS/boundaries/Legal_Delta_boundary_buff10k.shp') %>%
   st_transform(crs = '+proj=utm +zone=10 +datum=WGS84 +units=m +no_defs')
 template = rasterize(vect(delta_buff10k), extend(delta, delta_buff10k))
 
-# REFINE FALL BASELINE LAYER---------
+key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
+
+# REFINE BASELINE SHP---------
 # start with revised primary veg layer - initially created for riparian
 # landbirds (stitched together from VegCAMP, broader CV layer, and LandIQ 2014),
 # manually updated to include:
 # - River Islands development
-# - marking group 1 as "WETWATER" for water bodies within/adjacent to
+# - marking "group 1" field  as "WETWATER" for water bodies within/adjacent to
 # off-channel wetlands that should be counted as part of the wetland
 # - labeling "comment" field to identify probable managed wetlands as SEASONAL
 # or SEMIPERM (cross-referencing with water tracker data on frequency of
 # inundation and DU layer)
+# - labeling "comment" field as SUBSIDENCE REVERSAL for managed wetlands known
+# to be specifically aimed at this (often dense emergent veg, so little shows up
+# on water tracker)
 # - labeling all other WETLAND and WETWATER polygons as CHANNEL (directly
 # adjacent to or surrounded by a water channel) or UNMANAGED (off-channel and
 # apparently not a managed wetland, often labeled wet meadow and some called
@@ -37,6 +42,8 @@ template = rasterize(vect(delta_buff10k), extend(delta, delta_buff10k))
 # channel themselves (narrow)
 # - Also incorporated some replacements of XXX or IDLE with more recent LandIQ
 # info from 2018 by updating Crp2014 field in addition to group1
+# - keep most detailed classfication possible, for potential use with multiple
+# benefits data; can lump together for use with waterbird and riparian models
 
 veg_primary = read_sf('GIS/VEG_Delta10k_update.shp') %>%
   st_transform(crs = "+proj=utm +zone=10 +datum=WGS84 +units=m +no_defs") %>%
@@ -48,141 +55,129 @@ veg_primary = read_sf('GIS/VEG_Delta10k_update.shp') %>%
 # NVCS_Nm for these to match adjacent riparian polygons (for use in identifying
 # riparian sub-types)
 
-# group cover types to match waterbird models (most detailed version required),
-# but also keep NVCS_Nm, CWHRCODE, and comment fields to be able to specify
-# riparian and wetland subtypes
-veg_codify = veg_primary %>% codify_landcovers() %>%
-  select(WATERBIRD_CLASS, WATERBIRD_CODE, NVCS_Nm, CWHRCODE = CWHRCOD,
-         CROP = Crp2014, comment) %>%
-  filter(!is.na(WATERBIRD_CLASS)) #just one erroneous row of all NA values
+# clean up land cover groupings and comments:
+veg_clean = veg_primary %>% cleanup_landcovers() %>%
+  filter(!is.na(CLASS)) %>% #empty geometry
+  select(CLASS, CROP = Crp2014, CWHRCOD, NVCS_Nm)
 
-veg_codify %>% st_drop_geometry() %>%
-  select(WATERBIRD_CLASS, WATERBIRD_CODE) %>%
-  distinct() %>% arrange(WATERBIRD_CODE)
-# Note: new code 19 added to specify tidal marsh separately from other wetland
-# types
+veg_clean %>% st_drop_geometry() %>% select(CLASS, CROP) %>% distinct() %>%
+  arrange(CLASS, CROP) %>% print(n = 61)
 
-veg_raster = rasterize(vect(veg_codify), template, field = 'WATERBIRD_CODE')
+write_sf(veg_clean, 'GIS/VEG_Delta10k_baseline.shp', append = FALSE)
+
+# CREATE BASELINE RASTER---------
+# generic raster version of baseline shp, coded to include the most detailed
+# land cover classes expected to be needed in the models and scenario analyses
+
+veg_codify = veg_clean %>%
+  codify_baseline(
+    codekey = key) %>%
+  select(CODE_BASELINE, CLASS, everything())
+
+veg_codify %>% st_drop_geometry() %>% select(CODE_BASELINE, CLASS) %>%
+  distinct() %>% arrange(CODE_BASELINE) %>% print(n = 64)
+
+veg_raster = rasterize(vect(veg_codify), template, field = 'CODE_BASELINE')
 writeRaster(veg_raster, 'GIS/landscape_rasters/veg_baseline.tif',
             overwrite = TRUE)
-
-## waterbird key---------
-wkey = veg_codify %>% st_drop_geometry() %>%
-  select(WATERBIRD_CLASS, WATERBIRD_CODE) %>%
-  distinct() %>%
-  arrange(WATERBIRD_CODE) %>%
-  mutate(shortlab = case_when(WATERBIRD_CLASS == 'Irrigated pasture' ~ 'ip',
-                              WATERBIRD_CLASS == 'Dryland pasture' ~ 'dryp',
-                              WATERBIRD_CLASS == 'wetland' ~ 'wet',
-                              WATERBIRD_CLASS == 'orchard' ~ 'orch',
-                              WATERBIRD_CLASS == 'alfalfa' ~ 'alf',
-                              WATERBIRD_CLASS == 'woody wetland' ~ 'woodw',
-                              WATERBIRD_CLASS == 'developed' ~ 'dev',
-                              WATERBIRD_CLASS == 'fallow' ~ 'fal',
-                              WATERBIRD_CLASS == 'DU wetland' ~ 'duwet',
-                              WATERBIRD_CLASS == 'tidal marsh' ~ 'tidal',
-                              TRUE ~ as.character(WATERBIRD_CLASS)),
-         label = recode(shortlab,
-                        'ip' = 'pasture',
-                        'wheat' = 'grain',
-                        'row' = 'field/row',
-                        'field' = 'field/row',
-                        'wet' = 'other wetland',
-                        'orch' = 'orchard/vineyard',
-                        'fal' = 'fallow',
-                        'dev' = 'urban',
-                        'woodw' = 'riparian',
-                        'dryp' = 'grassland',
-                        'alf' = 'alfalfa',
-                        'duwet' = 'managed wetland',
-                        'tidal' = 'tidal marsh',
-                        'forest' = 'forest/shrub'),
-         col = c('#FFFF00', '#FF1493', '#2E8B57', '#FFA54F', '#FA8072',
-                 '#FA8072', '#40E0D0', '#9400D3', '#FFA54F', '#CCCCCC',
-                 '#4D4D4D', '#8B4513', '#87CEFA', '#FF0000', '#FFE4C4',
-                 '#32CD32', '#4169E1', '#EDDD82',
-                 # '#40E0D0',
-                 '#FFFFFF'))
-write_csv(wkey, 'data/landcover_key_waterbirds.csv')
 
 ## NASS------
 # fill in rest of 10k buffer with NASS raster from 2014
 # (same as used in waterbird study)
-NASS14_fall_bufferfill = rast('GIS/landscape_rasters/CDL_2014_06_fall_prj.tif') %>%
-  crop(template) %>% mask(template, updatevalue = NA)
-plot(NASS14_fall_bufferfill)
+NASS18 = rast('GIS/original_source_data/CDL/CDL_2018_clip_20211108202757_1802460488.tif') %>%
+  crop(template) %>% mask(template) %>%
+  codify_NASS(season = 'fall', codekey = key)
+
+plot(NASS18)
+freq(NASS18)
+
+# NASS14_fall_bufferfill = rast('GIS/landscape_rasters/CDL_2014_06_fall_prj.tif') %>%
+#   crop(template) %>% mask(template, updatevalue = NA) %>%
+#   # recode from CODE_WATERBIRD to CODE_BASELINE
+#   classify(rcl = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx') %>%
+#              select(from = CODE_WATERBIRD, to = CODE_BASELINE) %>%
+#              filter(!is.na(from)) %>% arrange(from) %>% as.matrix())
+# plot(NASS14_fall_bufferfill)
 
 # update coding for wetlands in Suisun using National Wetlands Inventory to
 # separate tidal vs. managed wetlands
 nwi = read_sf('GIS/original_source_data/ds2630/ds2630_Delta10k_subset.shp') %>%
   st_transform(crs = "+proj=utm +zone=10 +datum=WGS84 +units=m +no_defs") %>%
-  mutate(code = case_when(NWI_group == 'salt tidal marsh' ~ 19,
-                          TRUE ~ 18))
+  mutate(code = case_when(NWI_group == 'salt tidal marsh' ~ 86,
+                          TRUE ~ 82))
 nwi_rast = rasterize(vect(nwi), template, field = 'code')
 
-NASS14_fall_bufferfill_wet = lapp(c(NASS14_fall_bufferfill,
-                                    nwi_rast),
-                                  fun = function(x, y) {
-                                    ifelse(!is.na(y) & x == 8,
-                                           y, x)
-                                  })
-crosstab(c(NASS14_fall_bufferfill, NASS14_fall_bufferfill_wet),
-         useNA = TRUE, long = TRUE)
-# check that only values of 8 switch to 18 or 19
+NASS18_wet = lapp(c(NASS18, nwi_rast),
+                  fun = function(x, y) {
+                    ifelse(!is.na(y) & x == 80,
+                           y,
+                           ifelse(x == 80,
+                                  87,
+                                  x))
+                  })
+crosstab(c(NASS18, NASS18_wet), useNA = TRUE, long = TRUE)
+# check that only values of 80 switch to 82 (seasonal), 86 (tidal), or 87 (other)
+# --> note that NASS data includes generic perennial crops and riparian categories
 
 # let NASS layer fill in blank space behind veg_raster
-veg_raster_fill = merge(veg_raster, NASS14_fall_bufferfill_wet)
-writeRaster(veg_raster_fill, 'GIS/landscape_rasters/veg_baseline_fillNASS.tif',
+veg_raster_fill = merge(veg_raster, NASS18_wet)
+freq(veg_raster_fill)
+plot(c(veg_raster, veg_raster_fill))
+writeRaster(veg_raster_fill,
+            'GIS/landscape_rasters/veg_baseline_fillNASS.tif',
             overwrite = TRUE)
 
 ## Land IQ update------
 # overlay edited veg data with more recent Land IQ data to replace
-# idle/fallow/orchard stringers with actual crop types; allow more recent
+# idle/fallow/orchard stringers with actual crop types; also allow more recent
 # orchard to overwrite annual crops
 
 landiq_2018 = read_sf('GIS/original_source_data/i15_crop_mapping_2018_shp/i15_Crop_Mapping_2018_deltabuff10k.shp') %>%
   st_make_valid() %>%
-  st_transform(crs = st_crs(veg_primary)) %>%
+  st_transform(crs = st_crs(delta_buff10k)) %>%
   st_cast(to = 'MULTIPOLYGON')
 
-metadat_2018 = readxl::read_excel('GIS/original_source_data/i15_crop_mapping_2018_shp/metadata.xlsx',
-                                  na = 'NA')
+metadat_2018 = readxl::read_excel(
+  'GIS/original_source_data/i15_crop_mapping_2018_shp/metadata.xlsx',
+  na = 'NA')
 
 # codify landiq codes to same groupings as veg_raster, but separately
 # identifying summer/fall vs. winter crops
 landiq_2018_simplify = landiq_2018 %>%
-  codify_landiq(meta = metadat_2018) %>%
-  left_join(wkey %>%
-              select(waterbird_fall = WATERBIRD_CLASS,
-                     fall_code = WATERBIRD_CODE),
-            by = 'waterbird_fall') %>%
-  left_join(wkey %>%
-              select(waterbird_winter = WATERBIRD_CLASS,
-                     winter_code = WATERBIRD_CODE),
-            by = 'waterbird_winter')
+  codify_landiq(meta = metadat_2018,
+                codekey = key)
 
 landiq_2018_simplify %>% st_drop_geometry() %>%
-  select(waterbird_fall, waterbird_winter) %>% distinct() %>% table()
+  select(CODE_BASELINE, CLASS, CLASS_MAIN, SUBCLASS_MAIN) %>% distinct() %>%
+  arrange(CODE_BASELINE, CLASS_MAIN, SUBCLASS_MAIN) %>% print(n = 50)
+landiq_2018_simplify %>% st_drop_geometry() %>%
+  select(CODE_BASELINE_WINTER, CLASS_WINTER, SUBCLASS_WINTER) %>% distinct() %>%
+  arrange(CODE_BASELINE_WINTER, CLASS_WINTER, SUBCLASS_WINTER) %>% print(n = 50)
+landiq_2018_simplify %>% st_drop_geometry() %>%
+  select(CLASS, CLASS_WINTER) %>% distinct() %>% table()
 # fall to winter transitions do NOT include any changes for developed, fallow,
 #  or orchard, but do include rice to alfalfa or grain (?)
 
 landiq_2018_stack = c(rasterize(vect(landiq_2018_simplify), template,
-                                field = 'fall_code'),
+                                field = 'CODE_BASELINE'),
                       rasterize(vect(landiq_2018_simplify), template,
-                                field = 'winter_code'))
+                                field = 'CODE_BASELINE_WINTER'))
 names(landiq_2018_stack) = c('landiq_2018_fall',
                              'landiq_2018_winter')
 writeRaster(landiq_2018_stack,
             filename = paste0('GIS/landscape_rasters/',
-                              names(landiq_2018_stack), '.tif'))
+                              names(landiq_2018_stack), '.tif'),
+            overwrite = TRUE)
 plot(landiq_2018_stack)
 
+### fall baseline--------
 # fill in ag data from Land IQ:
 # where baseline raster is "fallow" or any annual crop, fill in corresponding
 # value from land iq 2018
-veg_raster_fill_landiq = lapp(c(veg_raster_fill, landiq_2018_stack$landiq_2018_fall),
+veg_raster_fill_landiq = lapp(c(veg_raster_fill,
+                                landiq_2018_stack$landiq_2018_fall),
                               fun = function(x, y) {
-                                ifelse(x %in% c(2:7, 10:11, 16:17, 99) &
+                                ifelse(x %in% c(20:56, 130) &
                                          !is.na(y), y, x)
                               })
 writeRaster(veg_raster_fill_landiq,
@@ -192,47 +187,46 @@ writeRaster(veg_raster_fill_landiq,
 # compare to original:
 fall_stack = c(veg_raster_fill,
                veg_raster_fill_landiq)
-levels(fall_stack[[1]]) <- wkey %>% select(WATERBIRD_CODE, label) %>%
+levels(fall_stack[[1]]) <- key %>%
+  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
   as.data.frame()
-levels(fall_stack[[2]]) <- wkey %>% select(WATERBIRD_CODE, label) %>%
+levels(fall_stack[[2]]) <- key %>%
+  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
   as.data.frame()
-coltab(fall_stack[[1]]) <- wkey %>% select(WATERBIRD_CODE, col) %>%
-  complete(WATERBIRD_CODE = c(0:255)) %>% pull(col)
-coltab(fall_stack[[2]]) <- wkey %>% select(WATERBIRD_CODE, col) %>%
-  complete(WATERBIRD_CODE = c(0:255)) %>% pull(col)
+coltab(fall_stack[[1]]) <- key %>% select(CODE_BASELINE, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+coltab(fall_stack[[2]]) <- key %>% select(CODE_BASELINE, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
 names(fall_stack) = c('baseline', 'lyr1')
 plot(fall_stack, colNA = 'gray90')
 
 tab = crosstab(fall_stack, useNA = TRUE, long = TRUE) %>%
   rlang::set_names(c('baseline', 'new', 'n'))
 tab %>%
-  left_join(wkey %>% select(baseline = WATERBIRD_CODE, from = WATERBIRD_CLASS)) %>%
-  left_join(wkey %>% select(new = WATERBIRD_CODE, to = WATERBIRD_CLASS))
+  left_join(key %>% select(baseline = CODE_BASELINE, from = CODE_NAME)) %>%
+  left_join(key %>% select(new = CODE_BASELINE, to = CODE_NAME)) %>%
+  arrange(from, desc(n))
 tab %>%
-  mutate_at(vars(baseline:new), as.numeric) %>%
-  left_join(wkey %>% select(baseline = WATERBIRD_CODE, from = WATERBIRD_CLASS)) %>%
-  left_join(wkey %>% select(new = WATERBIRD_CODE, to = WATERBIRD_CLASS)) %>%
+  left_join(key %>% select(baseline = CODE_BASELINE, from = CODE_NAME)) %>%
+  left_join(key %>% select(new = CODE_BASELINE, to = CODE_NAME)) %>%
   group_by(from) %>%
   mutate(total_baseline = sum(n),
          prop = n/total_baseline) %>%
-  filter(from == to) %>% arrange(desc(prop))
-  # ggplot(aes(label_baseline, label_mode, fill = prop)) + geom_tile() +
-  # scale_fill_viridis_c()
+  ungroup() %>%
+  filter(from == to) %>% arrange(desc(prop)) %>%
+  print(n = 30)
+# 100% agreement on: perennial crops, riparian, wetlands, water, woodland&scrub,
+# (none of these allowed to change); high (>80%) agreement on rice, grassland,
+# pasture, barren; less agreement on idle fields & annual crops (makes sense)
 
-# 100% agreement on: wet, orchard, dev, forest, water, woodw, DU wetland, tidal
-#   marsh (none allowed to change)
-# high (>80%) agreement on rice, dryp, ip
-# least agreement on fallow, barren, annual crops (makes sense)
-
-
-# WINTER BASELINE----------
-
-# where baseline raster is suitable for a second winter crop, fill in
-# corresponding winter value from land iq 2018
+### winter baseline----------
+# where baseline raster is suitable for a second winter crop (annual crops
+# besides rice, fallow, grassland & pasture, barren), fill in corresponding
+# winter value from land iq 2018
 veg_raster_fill_landiq_win = lapp(c(veg_raster_fill_landiq,
                                     landiq_2018_stack$landiq_2018_winter),
                                   fun = function(x, y) {
-                                    ifelse(x %in% c(2, 4:7, 10:11, 16:17, 99) &
+                                    ifelse(x %in% c(21:28, 40, 51:56, 130) &
                                              !is.na(y), y, x)
                                   })
 
@@ -243,191 +237,245 @@ writeRaster(veg_raster_fill_landiq_win,
 # compare to fall:
 win_stack = c(veg_raster_fill_landiq,
               veg_raster_fill_landiq_win)
-levels(win_stack[[1]]) <- wkey %>% select(WATERBIRD_CODE, label) %>%
+levels(win_stack[[1]]) <- key %>%
+  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
   as.data.frame()
-levels(win_stack[[2]]) <- wkey %>% select(WATERBIRD_CODE, label) %>%
+levels(win_stack[[2]]) <- key %>%
+  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
   as.data.frame()
-coltab(win_stack[[1]]) <- wkey %>% select(WATERBIRD_CODE, col) %>%
-  complete(WATERBIRD_CODE = c(0:255)) %>% pull(col)
-coltab(win_stack[[2]]) <- wkey %>% select(WATERBIRD_CODE, col) %>%
-  complete(WATERBIRD_CODE = c(0:255)) %>% pull(col)
+coltab(win_stack[[1]]) <- key %>% select(CODE_BASELINE, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+coltab(win_stack[[2]]) <- key %>% select(CODE_BASELINE, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
 names(win_stack) = c('baseline', 'lyr1')
 plot(win_stack, colNA = 'gray90')
-
 
 tab2 = crosstab(win_stack, useNA = TRUE, long = TRUE) %>%
   rlang::set_names(c('baseline', 'new', 'n'))
 tab2 %>%
-  left_join(wkey %>% select(baseline = WATERBIRD_CODE, from = WATERBIRD_CLASS)) %>%
-  left_join(wkey %>% select(new = WATERBIRD_CODE, to = WATERBIRD_CLASS))
-# alf, corn, ip, wheat, row, field, grain to one of:
-#   wheat, row, field, grain, (ip, alfalfa)
+  left_join(key %>% select(baseline = CODE_BASELINE, from = CODE_NAME)) %>%
+  left_join(key %>% select(new = CODE_BASELINE, to = CODE_NAME)) %>%
+  filter(from != to) %>%
+  arrange(from, desc(n))
+tab2 %>%
+  left_join(key %>% select(baseline = CODE_BASELINE, from = CODE_NAME)) %>%
+  left_join(key %>% select(new = CODE_BASELINE, to = CODE_NAME)) %>%
+  group_by(from) %>%
+  mutate(total_baseline = sum(n),
+         prop = n/total_baseline) %>%
+  ungroup() %>%
+  filter(from == to) %>% arrange(desc(prop)) %>%
+  print(n = 30)
+# swaps among: pasture/alfalfa, grain/wheat, row, field, corn (except nothing
+# converts to corn)
 
 
-# RIPARIAN BASELINE-------------
-
-## reclassify the new baseline layer for riparian landcover categories
-veg_raster_rip = classify(veg_raster_fill_landiq,
-                         rcl = matrix(c(2, 20, #corn = AG
-                                        3, 30, #rice = RICE
-                                        4, 50, #ip = GRASSPAS
-                                        5, 20, #wheat = AG
-                                        6, 20, #row = AG
-                                        7, 20, #field = AG
-                                        8, 80, #wet = WETLAND
-                                        9, 10, #orch = ORCHVIN
-                                        10, 20, #grain = AG
-                                        11, 40, #fallow = IDLE
-                                        12, 60, #dev = URBAN
-                                        13, 100, #forest = OAKWOODLAND/WOODLAND/SCRUB
-                                        14, 90, #water = WATER
-                                        15, 70, #woodw = RIPARIAN
-                                        16, 50, #dryp = GRASSPAS
-                                        17, 50, #alfalfa = GRASSPAS
-                                        18, 80, #duwet = WETLAND
-                                        19, 80, #tidal marsh = WETLAND
-                                        99, 130), #barren = BARREN
-                                      byrow = TRUE, ncol = 2)
-)
-
-writeRaster(veg_raster_rip,
-            filename = 'GIS/landscape_rasters/veg_baseline_riparian.tif',
-            overwrite = TRUE)
-
-## riparian keys----------
-rkey = read_csv('GIS/landscape_rasters/rkey.csv', col_types = cols()) %>%
-  filter(!code %in% c(110, 120, 999)) %>%
-  select(-type) %>%
-  rename(RIPARIAN_CLASS = group, RIPARIAN_CODE = code) %>%
-  mutate(label = recode(RIPARIAN_CLASS,
-                        'ORCHVIN' = 'orchard/vineyard',
-                        'RICE' = 'rice',
-                        'AG' = 'other crops',
-                        'IDLE' = 'fallow',
-                        'GRASSPAS' = 'grassland/pasture',
-                        'URBAN' = 'urban',
-                        'RIPARIAN' = 'riparian',
-                        'WETLAND' = 'wetland',
-                        'WATER' = 'water',
-                        'OAKWOODLAND' = 'forest',
-                        'BARREN' = 'barren',
-                        # riparian subtypes:
-                        'POFR' = 'cottonwood forest',
-                        'QULO' = 'oak forest',
-                        'SALIX' = 'willow forest',
-                        'MIXEDFOREST' = 'mixed forest',
-                        'INTROSCRUB' = 'introduced scrub',
-                        'SALIXSHRUB' = 'willow shrub',
-                        'MIXEDSHRUB' = 'mixed shrub',
-                        'OTHER' = 'other riparian'),
-         col = c('#9400D3', '#32CD32', '#FF1493', '#CCCCCC', '#FFE4C4',
-                 '#4D4D4D', '#FF0000', '#00008B', '#87CEFA', '#8B4513',
-                 '#FFFFFF',
-                 # riparian subtypes:
-                 '#32CD32', '#8B4513', '#FF1493', '#9400D3',
-                 '#CCCCCC', '#FF0000', '#FFA54F', '#FFFFFF',
-                 # wetland subtype:
-                 '#00008B'))
-write_csv(rkey, 'data/landcover_key_riparian.csv')
-
-
-## riparian detail----------
-
-# classify updated baseline veg layer with riparian detail:
-veg_codify_ripdetail = veg_codify %>% codify_ripdetail() %>%
-  vect() %>%
-  rasterize(template, field = 'RIPDETAIL_CODE')
-
-# fill in rest of delta 10k buffer with riparian pixels from NASS layer
-veg_codify_ripdetail_fill = merge(veg_codify_ripdetail,
-                                  classify(NASS14_fall_bufferfill_wet,
-                                           rcl = matrix(c(15, 78), ncol = 2),
-                                           othersNA = TRUE))
-tab4 = crosstab(c(veg_codify_ripdetail, veg_codify_ripdetail_fill),
-                useNA = TRUE, long = TRUE)
-# added 11,061 pixels of "other" riparian
-
-writeRaster(veg_codify_ripdetail_fill,
-            filename = 'GIS/landscape_rasters/veg_baseline_ripdetail.tif',
-            overwrite = TRUE)
-
-
-## wetland detail----------
-veg_codify_wetdetail = veg_codify %>%
-  filter(WATERBIRD_CLASS == 'DU wetland' & comment == 'SEMIPERM') %>%
-  mutate(WETDETAIL = 'PERM',
-         WETDETAIL_CODE = 81) %>%
-  vect() %>%
-  rasterize(template, field = 'WETDETAIL_CODE')
-
-# --> assume no perm/semiperm pixels in rest of 10k buffer (from NASS)
-
-writeRaster(veg_codify_wetdetail,
-            filename = 'GIS/landscape_rasters/veg_baseline_wetdetail.tif',
-            overwrite = TRUE)
-
-
-# MULTIPLE BENEFITS BASELINE-------
-mkey = tibble(MB_CLASS = c('orchard/vineyard', 'citrus', 'orchard', 'vineyard',
-                        'row/field', 'corn', 'grains', 'cotton',
-                        'tomato', 'rice', 'grassland/pasture', 'alfalfa',
-                        'riparian', 'wetland', 'other'),
-              MB_CODE = c(10, 11, 12, 13,
-                       21, 22, 23, 24,
-                       25, 30, 50, 51,
-                       70, 80, 90),
-              col = c('#9400D3', NA, NA, NA,
-                      '#FA8072', '#FFFF00', '#FFA54F', NA,
-                      NA, '#FF1493', '#FFE4C4', '#32CD32',
-                      '#FF0000', '#00008B', '#4D4D4D'))
-write_csv(mkey, 'data/landcover_key_multiplebenefits.csv')
-
-veg_baseline_mb = DeltaMultipleBenefits::reclassify_multiplebenefits(veg_raster_fill_landiq)
-
-writeRaster(veg_baseline_mb,
-            'data/landcover_multiplebenefits/baseline_mb.tif',
-            overwrite = TRUE)
-
-
-# FULL BASELINE STACK----------
-# ensure alignment, set levels and coltab
-
-baseline = c(veg_raster_fill_landiq,
-             veg_raster_fill_landiq_win,
-             veg_raster_rip,
-             veg_codify_ripdetail,
-             veg_codify_wetdetail,
-             veg_baseline_mb)
-
-key1 = wkey %>% select(WATERBIRD_CODE, label) %>% as.data.frame()
-key2 = rkey %>% select(RIPARIAN_CODE, label) %>% as.data.frame()
-key3 = mkey %>% select(MB_CODE, label = MB_CLASS) %>% as.data.frame
-levels(baseline) <- list(key1, key1, key2, key2, key2, key3)
-
-col1 = wkey %>% select(WATERBIRD_CODE, col) %>%
-  complete(WATERBIRD_CODE = c(0:255)) %>% pull(col)
-col2 = rkey %>% select(RIPARIAN_CODE, col) %>%
-  complete(RIPARIAN_CODE = c(0:255)) %>% pull(col)
-col3 = mkey %>% select(MB_CODE, col) %>%
-  complete(MB_CODE = c(0:255)) %>% pull(col)
-
-coltab(baseline, layer = 1) = col1
-coltab(baseline, layer = 2) = col1
-coltab(baseline, layer = 3) = col2
-coltab(baseline, layer = 4) = col2
-coltab(baseline, layer = 5) = col2
-coltab(baseline, layer = 6) = col3
-
-names(baseline) = c('veg_baseline_fall', 'veg_baseline_winter',
-                    'veg_baseline_riparian', 'veg_baseline_ripdetail',
-                    'veg_baseline_wetdetail', 'veg_baseline_mb')
-
-plot(baseline)
-
-writeRaster(baseline,
-            filename = paste0('GIS/landscape_rasters/',
-                              names(baseline), '.tif'),
-            overwrite = TRUE)
+# waterbird key---------
+# wkey = veg_codify %>% st_drop_geometry() %>%
+#   select(WATERBIRD_CLASS, WATERBIRD_CODE) %>%
+#   distinct() %>%
+#   arrange(WATERBIRD_CODE) %>%
+#   mutate(shortlab = case_when(WATERBIRD_CLASS == 'Irrigated pasture' ~ 'ip',
+#                               WATERBIRD_CLASS == 'Dryland pasture' ~ 'dryp',
+#                               WATERBIRD_CLASS == 'wetland' ~ 'wet',
+#                               WATERBIRD_CLASS == 'orchard' ~ 'orch',
+#                               WATERBIRD_CLASS == 'alfalfa' ~ 'alf',
+#                               WATERBIRD_CLASS == 'woody wetland' ~ 'woodw',
+#                               WATERBIRD_CLASS == 'developed' ~ 'dev',
+#                               WATERBIRD_CLASS == 'fallow' ~ 'fal',
+#                               WATERBIRD_CLASS == 'DU wetland' ~ 'duwet',
+#                               WATERBIRD_CLASS == 'tidal marsh' ~ 'tidal',
+#                               TRUE ~ as.character(WATERBIRD_CLASS)),
+#          label = recode(shortlab,
+#                         'ip' = 'pasture',
+#                         'wheat' = 'grain',
+#                         'row' = 'field/row',
+#                         'field' = 'field/row',
+#                         'wet' = 'other wetland',
+#                         'orch' = 'orchard/vineyard',
+#                         'fal' = 'fallow',
+#                         'dev' = 'urban',
+#                         'woodw' = 'riparian',
+#                         'dryp' = 'grassland',
+#                         'alf' = 'alfalfa',
+#                         'duwet' = 'managed wetland',
+#                         'tidal' = 'tidal marsh',
+#                         'forest' = 'forest/shrub'),
+#          col = c('#FFFF00', '#FF1493', '#2E8B57', '#FFA54F', '#FA8072',
+#                  '#FA8072', '#40E0D0', '#9400D3', '#FFA54F', '#CCCCCC',
+#                  '#4D4D4D', '#8B4513', '#87CEFA', '#FF0000', '#FFE4C4',
+#                  '#32CD32', '#4169E1', '#EDDD82',
+#                  # '#40E0D0',
+#                  '#FFFFFF'))
+# write_csv(wkey, 'data/landcover_key_waterbirds.csv')
+#
+#
+#
+#
+# # RIPARIAN BASELINE-------------
+#
+# ## reclassify the new baseline layer for riparian landcover categories
+# veg_raster_rip = classify(veg_raster_fill_landiq,
+#                          rcl = matrix(c(2, 20, #corn = AG
+#                                         3, 30, #rice = RICE
+#                                         4, 50, #ip = GRASSPAS
+#                                         5, 20, #wheat = AG
+#                                         6, 20, #row = AG
+#                                         7, 20, #field = AG
+#                                         8, 80, #wet = WETLAND
+#                                         9, 10, #orch = ORCHVIN
+#                                         10, 20, #grain = AG
+#                                         11, 40, #fallow = IDLE
+#                                         12, 60, #dev = URBAN
+#                                         13, 100, #forest = OAKWOODLAND/WOODLAND/SCRUB
+#                                         14, 90, #water = WATER
+#                                         15, 70, #woodw = RIPARIAN
+#                                         16, 50, #dryp = GRASSPAS
+#                                         17, 50, #alfalfa = GRASSPAS
+#                                         18, 80, #duwet = WETLAND
+#                                         19, 80, #tidal marsh = WETLAND
+#                                         99, 130), #barren = BARREN
+#                                       byrow = TRUE, ncol = 2)
+# )
+#
+# writeRaster(veg_raster_rip,
+#             filename = 'GIS/landscape_rasters/veg_baseline_riparian.tif',
+#             overwrite = TRUE)
+#
+# ## riparian keys----------
+# rkey = read_csv('GIS/landscape_rasters/rkey.csv', col_types = cols()) %>%
+#   filter(!code %in% c(110, 120, 999)) %>%
+#   select(-type) %>%
+#   rename(RIPARIAN_CLASS = group, RIPARIAN_CODE = code) %>%
+#   mutate(label = recode(RIPARIAN_CLASS,
+#                         'ORCHVIN' = 'orchard/vineyard',
+#                         'RICE' = 'rice',
+#                         'AG' = 'other crops',
+#                         'IDLE' = 'fallow',
+#                         'GRASSPAS' = 'grassland/pasture',
+#                         'URBAN' = 'urban',
+#                         'RIPARIAN' = 'riparian',
+#                         'WETLAND' = 'wetland',
+#                         'WATER' = 'water',
+#                         'OAKWOODLAND' = 'forest',
+#                         'BARREN' = 'barren',
+#                         # riparian subtypes:
+#                         'POFR' = 'cottonwood forest',
+#                         'QULO' = 'oak forest',
+#                         'SALIX' = 'willow forest',
+#                         'MIXEDFOREST' = 'mixed forest',
+#                         'INTROSCRUB' = 'introduced scrub',
+#                         'SALIXSHRUB' = 'willow shrub',
+#                         'MIXEDSHRUB' = 'mixed shrub',
+#                         'OTHER' = 'other riparian'),
+#          col = c('#9400D3', '#32CD32', '#FF1493', '#CCCCCC', '#FFE4C4',
+#                  '#4D4D4D', '#FF0000', '#00008B', '#87CEFA', '#8B4513',
+#                  '#FFFFFF',
+#                  # riparian subtypes:
+#                  '#32CD32', '#8B4513', '#FF1493', '#9400D3',
+#                  '#CCCCCC', '#FF0000', '#FFA54F', '#FFFFFF',
+#                  # wetland subtype:
+#                  '#00008B'))
+# write_csv(rkey, 'data/landcover_key_riparian.csv')
+#
+#
+# ## riparian detail----------
+#
+# # classify updated baseline veg layer with riparian detail:
+# veg_codify_ripdetail = veg_codify %>% codify_ripdetail() %>%
+#   vect() %>%
+#   rasterize(template, field = 'RIPDETAIL_CODE')
+#
+# # fill in rest of delta 10k buffer with riparian pixels from NASS layer
+# veg_codify_ripdetail_fill = merge(veg_codify_ripdetail,
+#                                   classify(NASS14_fall_bufferfill_wet,
+#                                            rcl = matrix(c(15, 78), ncol = 2),
+#                                            othersNA = TRUE))
+# tab4 = crosstab(c(veg_codify_ripdetail, veg_codify_ripdetail_fill),
+#                 useNA = TRUE, long = TRUE)
+# # added 11,061 pixels of "other" riparian
+#
+# writeRaster(veg_codify_ripdetail_fill,
+#             filename = 'GIS/landscape_rasters/veg_baseline_ripdetail.tif',
+#             overwrite = TRUE)
+#
+#
+# ## wetland detail----------
+# veg_codify_wetdetail = veg_codify %>%
+#   filter(WATERBIRD_CLASS == 'DU wetland' & comment == 'SEMIPERM') %>%
+#   mutate(WETDETAIL = 'PERM',
+#          WETDETAIL_CODE = 81) %>%
+#   vect() %>%
+#   rasterize(template, field = 'WETDETAIL_CODE')
+#
+# # --> assume no perm/semiperm pixels in rest of 10k buffer (from NASS)
+#
+# writeRaster(veg_codify_wetdetail,
+#             filename = 'GIS/landscape_rasters/veg_baseline_wetdetail.tif',
+#             overwrite = TRUE)
+#
+#
+# # MULTIPLE BENEFITS BASELINE-------
+# mkey = tibble(MB_CLASS = c('orchard/vineyard', 'citrus', 'orchard', 'vineyard',
+#                         'row/field', 'corn', 'grains', 'cotton',
+#                         'tomato', 'rice', 'grassland/pasture', 'alfalfa',
+#                         'riparian', 'wetland', 'other'),
+#               MB_CODE = c(10, 11, 12, 13,
+#                        21, 22, 23, 24,
+#                        25, 30, 50, 51,
+#                        70, 80, 90),
+#               col = c('#9400D3', NA, NA, NA,
+#                       '#FA8072', '#FFFF00', '#FFA54F', NA,
+#                       NA, '#FF1493', '#FFE4C4', '#32CD32',
+#                       '#FF0000', '#00008B', '#4D4D4D'))
+# write_csv(mkey, 'data/landcover_key_multiplebenefits.csv')
+#
+# veg_baseline_mb = DeltaMultipleBenefits::reclassify_multiplebenefits(veg_raster_fill_landiq)
+#
+# writeRaster(veg_baseline_mb,
+#             'data/landcover_multiplebenefits/baseline_mb.tif',
+#             overwrite = TRUE)
+#
+#
+# # FULL BASELINE STACK----------
+# # ensure alignment, set levels and coltab
+#
+# baseline = c(veg_raster_fill_landiq,
+#              veg_raster_fill_landiq_win,
+#              veg_raster_rip,
+#              veg_codify_ripdetail,
+#              veg_codify_wetdetail,
+#              veg_baseline_mb)
+#
+# key1 = wkey %>% select(WATERBIRD_CODE, label) %>% as.data.frame()
+# key2 = rkey %>% select(RIPARIAN_CODE, label) %>% as.data.frame()
+# key3 = mkey %>% select(MB_CODE, label = MB_CLASS) %>% as.data.frame
+# levels(baseline) <- list(key1, key1, key2, key2, key2, key3)
+#
+# col1 = wkey %>% select(WATERBIRD_CODE, col) %>%
+#   complete(WATERBIRD_CODE = c(0:255)) %>% pull(col)
+# col2 = rkey %>% select(RIPARIAN_CODE, col) %>%
+#   complete(RIPARIAN_CODE = c(0:255)) %>% pull(col)
+# col3 = mkey %>% select(MB_CODE, col) %>%
+#   complete(MB_CODE = c(0:255)) %>% pull(col)
+#
+# coltab(baseline, layer = 1) = col1
+# coltab(baseline, layer = 2) = col1
+# coltab(baseline, layer = 3) = col2
+# coltab(baseline, layer = 4) = col2
+# coltab(baseline, layer = 5) = col2
+# coltab(baseline, layer = 6) = col3
+#
+# names(baseline) = c('veg_baseline_fall', 'veg_baseline_winter',
+#                     'veg_baseline_riparian', 'veg_baseline_ripdetail',
+#                     'veg_baseline_wetdetail', 'veg_baseline_mb')
+#
+# plot(baseline)
+#
+# writeRaster(baseline,
+#             filename = paste0('GIS/landscape_rasters/',
+#                               names(baseline), '.tif'),
+#             overwrite = TRUE)
 
 # SPLIT BY VALUE--------
 # # convert individual cover types into separate layers in a raster stack for use
