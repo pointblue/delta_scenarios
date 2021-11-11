@@ -8,6 +8,7 @@ source('R/packages.R')
 # reference data:
 delta = rast('GIS/boundaries/delta.tif')
 baseline = rast('GIS/landscape_rasters/veg_baseline_fall.tif')
+baseline_win = rast('GIS/landscape_rasters/veg_baseline_winter.tif')
 key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
 
 # Scenario development approach:
@@ -694,6 +695,18 @@ plot(c(baseline, scenario_restoration))
 
 writeRaster(scenario_restoration,
             'GIS/scenario_rasters/scenario1_restoration.tif',
+            overwrite = TRUE)
+
+scenario_restoration_win = cover(restore_all_ripdetail, baseline_win)
+levels(scenario_restoration_win) <- key %>%
+  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
+  as.data.frame()
+coltab(scenario_restoration_win) <- key %>% select(CODE_BASELINE, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+names(scenario_restoration_win) = 'scenario1_restoration_win'
+plot(scenario_restoration_win)
+writeRaster(scenario_restoration_win,
+            'GIS/scenario_rasters/scenario1_restoration_win.tif',
             overwrite = TRUE)
 
 ## calculate change------
