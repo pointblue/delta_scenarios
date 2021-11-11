@@ -29,15 +29,23 @@ plans = read_sf('GIS/scenario_inputs/habitatprojects_Deltabuff10k.shp') %>%
              'managed non-tidal wetland semi-perm')) %>%
   # exclude Delta Wetlands Project Compensatory Mitigation (because not showing
   # corresponding losses from other areas)
-  filter(name != 'Delta Wetlands Project Compensatory Mitigation') %>%
-  mutate(code = if_else(habitat_ty == 'valley foothill riparian', 15, 18)) %>%
+  filter(!name %in% c('Delta Wetlands Project Compensatory Mitigation', 'Holland Tract')) %>%
+  mutate(
+    code = case_when(
+      name %in% c('Sherman Island - Belly Wetland Restoration',
+                  'Twitchell Island - West End Wetlands') ~ 81, #perennial
+      habitat_ty == 'valley foothill riparian' ~ 70,
+      #assume other wetlands are seasonal
+      TRUE ~ 82)) %>%
   vect() %>%
   rasterize(template, field = 'code')
 writeRaster(plans, 'GIS/scenario_inputs/restoration_plans.tif',
             overwrite = TRUE)
+plot(plans)
 freq(plans)
-# 15: 7909
-# 18: 19210
+# 70: 7909
+# 81: 13128
+# 82: 2837
 
 # restoration potential------
 
