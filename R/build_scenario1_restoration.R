@@ -8,8 +8,7 @@ source('R/packages.R')
 # reference data:
 delta = rast('GIS/boundaries/delta.tif')
 baseline = rast('GIS/landscape_rasters/veg_baseline_fall.tif')
-wkey = read_csv('data/landcover_key_waterbirds.csv', col_types = cols())
-rkey = read_csv('data/landcover_key_riparian.csv', col_types = cols())
+key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
 
 # Scenario development approach:
 #
@@ -47,19 +46,23 @@ obj = tibble(type = c('seasonal wetland, wet meadow, nontidal wetland',
 base = baseline %>%
   mask(delta) %>%
   freq() %>%
-  filter(label %in% c('riparian', 'managed wetland')) %>%
+  as_tibble() %>%
+  filter(value %in% c(70:77, 89, 81:82)) %>% #exclude tidal and "other" wetlands
+  mutate(label = if_else(value %in% c(70:77), 'RIPARIAN', 'WETLAND')) %>%
+  group_by(label) %>%
+  summarize(count = sum(count), .groups = 'drop') %>%
   mutate(current_ha = count * 30 * 30 / 10000)
 # riparian = 8,218 ha
-# wetlands = 5,709 ha
+# wetlands = 6,009 ha
 
 # how much more needed to meet proposed 2050 targets?
 targets = full_join(
-  obj %>% mutate(label = c('managed wetland', 'riparian')) %>%
+  obj %>% mutate(label = c('WETLAND', 'RIPARIAN')) %>%
     select(label, total_ha),
   base %>% select(label, current_ha),
   by = 'label') %>%
   mutate(add_ha = total_ha - current_ha)
-# wetlands: add 4,044 ha
+# wetlands: add 3,744 ha
 # riparian: add 4,125 ha
 
 
@@ -97,12 +100,13 @@ restoration_sum = sum(restoration_stack, na.rm = TRUE) %>%
   subst(from = c(0:200), to = NA)
 freq(restoration_sum)
 
-# 1. overlay restoration plans on baseline-------
+# EXISTING PLANS------
+# overlay existing restoration plans on baseline
 # check conversions:
 tab = crosstab(c(baseline, plans), useNA = TRUE, long = TRUE)
 tab %>% rlang::set_names(c('baseline', 'plans', 'n')) %>%
-  left_join(wkey %>% select(baseline = WATERBIRD_CODE, from = label)) %>%
-  left_join(wkey %>% select(plans = WATERBIRD_CODE, to = label)) %>%
+  left_join(key %>% select(baseline = CODE_BASELINE, from = CODE_NAME)) %>%
+  left_join(key %>% select(plans = CODE_BASELINE, to = CODE_NAME)) %>%
   filter(!is.na(plans)) %>%
   arrange(plans, desc(n))
 # existing restoration plans will convert:
@@ -111,26 +115,33 @@ tab %>% rlang::set_names(c('baseline', 'plans', 'n')) %>%
 # - to wetland from: pasture, other wetland, corn, rice, fallow, grassland...;
 # some pixels from riparian, existing managed wetland
 
-# --> allow conversion from urban to riparian for urban restoration projects
+# --> allow conversion from urban to riparian for urban restoration projects;
+# don't allow conversion from riparian to wetlands (assume it will stay as
+# riparian)
 
-base_plus_plans = cover(plans, baseline)
+base_plus_plans = lapp(c(plans, baseline),
+                       function(x, y) {
+                         ifelse(!is.na(x) & !y %in% c(71:79, 81:82), x, y)
+                       })
 
 # * checkpoint: calculate how much still needed----
 change_plans = base_plus_plans %>% mask(delta) %>%
   freq() %>% as_tibble() %>%
-  filter(value %in% c(15, 18)) %>%
-  mutate(label = recode(value,
-                        '15' = 'riparian', '18' = 'managed wetland')) %>%
+  filter(value %in% c(70:82,89)) %>%
+  mutate(label = if_else(value %in% c(70:77), 'RIPARIAN', 'WETLAND')) %>%
+  group_by(label) %>%
+  summarize(count = sum(count), .groups = 'drop') %>%
   mutate(plans_ha = count * 30 * 30 / 10000)
 
 targets_plus = full_join(targets %>% select(label, total_ha),
                          change_plans %>% select(label, plans_ha),
                          by = 'label') %>%
   mutate(add_ha = total_ha - plans_ha)
-# wetlands: still need 2337 ha
-# riparian: still need 3708 ha
+# wetlands: still need 2342 ha
+# riparian: still need 3690 ha
 
-# 2. prioritize potential restoration areas-------
+# ADDITIONAL PRIORITIES-----------
+# prioritize potential restoration areas
 
 ## group pixels into priority levels--------
 # 7000 = potential riparian; 8000 = potential seasonal wetland
@@ -194,7 +205,7 @@ restoration_targets = classify(
 tab = crosstab(c(base_plus_plans, restoration_targets),
                useNA = TRUE, long = TRUE)
 tab %>% rlang::set_names(c('base', 'new', 'n')) %>%
-  left_join(wkey %>% select(base = WATERBIRD_CODE, from = label)) %>%
+  left_join(key %>% select(base = CODE_BASELINE, from = CODE_NAME)) %>%
   mutate(to = case_when(new %in% c(1:4) ~ 'riparian',
                         new %in% c(5:6) ~ 'riparian2',
                         new %in% c(9, 19) ~ 'development',
@@ -204,38 +215,28 @@ tab %>% rlang::set_names(c('base', 'new', 'n')) %>%
   summarize(n = sum(n, na.rm = TRUE), .groups = 'drop') %>%
   filter(!is.na(to)) %>%
   arrange(to, desc(n)) %>% print(n = 100)
-# to riparian largely from grassland, fallow, orch/vin; also corn, field/row,
-#   grain, alfalfa...
-# to riparian2 largely from orch/vin
+# to riparian largely from grassland, fallow, orch, wheat, row, alfalfa
+# to riparian2 largely from vineyard, fallow, orchard
 
 # to wetland largely from pasture, existing managed wetland, fallow
-# to wetland2 largely from pasture, orch/vin
+# to wetland2 largely from pasture
 
 # don't allow "restoration" of existing managed wetland, tidal marsh, water, or
-# riparian; also exclude existing forest/shrub and urban; deprioritize existing orch/vin
+# riparian; also exclude existing urban; deprioritize existing orch/vin
 restoration_targets_limited = lapp(c(restoration_targets, base_plus_plans),
                                    function(x, y) {
-                                     ifelse(!is.na(x) & y %in% c(12:15, 18:19),
+                                     ifelse(!is.na(x) &
+                                              y %in% c(60, 70:77, 81:82, 86, 89, 90),
                                             NA,
-                                            ifelse(!is.na(x) & y == 9,
+                                            ifelse(!is.na(x) & y %in% c(10:19),
                                                    x + 20,
                                                    x))
                                    })
 
-# restoration_targets_limited = lapp(c(restoration_targets, base_plus_plans),
-#                                    function(x, y) {
-#                                      ifelse(!is.na(x) & y %in% c(12:15, 18:19),
-#                                             NA,
-#                                             ifelse(x %in% c(1:7) & y == 9,
-#                                                    8,
-#                                                    ifelse(x %in% c(11:17) & y == 9,
-#                                                           18,
-#                                                           x)))
-#                                    })
 tab = crosstab(c(base_plus_plans, restoration_targets_limited),
                useNA = TRUE, long = TRUE)
 tab %>% rlang::set_names(c('base', 'new', 'n')) %>%
-  left_join(wkey %>% select(base = WATERBIRD_CODE, from = label)) %>%
+  left_join(key %>% select(base = CODE_BASELINE, from = CODE_NAME)) %>%
   mutate(to = case_when(new %in% c(1:4) ~ 'riparian',
                         new %in% c(5:7) ~ 'riparian2',
                         new %in% c(21:27) ~ 'riparian3',
@@ -246,13 +247,13 @@ tab %>% rlang::set_names(c('base', 'new', 'n')) %>%
   group_by(to, from) %>%
   summarize(n = sum(n, na.rm = TRUE), .groups = 'drop') %>%
   filter(!is.na(to)) %>%
-  arrange(to, desc(n)) %>% print(n = 51)
+  arrange(to, desc(n)) %>% print(n = 100)
 # to riparian primarily from grassland, fallow; not wetland, urban, or orch/vin
-# to riparian2 primarily from grassland, fallow, field/row, grain
-# to riparian3 entirely from existing orch/vin
-# to wetland primarily from pasture
+# to riparian2 primarily from grassland, fallow, alfalfa, row
+# to riparian3 entirely from existing vin, orch
+# to wetland primarily from pasture, fallow
 # to wetland2 primarily from pasture
-# to wetland3 entirely from existing orch/vin
+# to wetland3 entirely from existing vin, orch
 
 # all potential riparian pixels assigned a priority level 1-6, 9, or 22-29 and
 #  potential wetland pixels assigned 11-16, 19, or 32-39
@@ -271,22 +272,22 @@ freq(restoration_targets_limited) %>% as_tibble() %>%
   group_by(label) %>%
   mutate(tot.ha = cumsum(area.ha)) %>%
   print(n = 50)
-# to reach wetland target of 2337 additional ha, need all of priority
+# to reach wetland target of 2342 additional ha, need all of priority
 # levels 1-2 and some of 3
 # to reach riparian target of 3708 additional ha (while excluding existing
 # orchard and vineyard), need all of priority levels 1-6 plus 22-25 and some of
 # 26!
 
 
-## top priority restoration-------
+## ROUND 1: top priority restoration-------
 # start with priority levels for which entire level is needed (as above), but
 # exclude very small patches of potential restoration (minimum 1 acre)
 
 # find all pixels in top priority levels:
 targets1 = restoration_targets_limited %>%
   subst(c(26, 9, 29, 13:19, 32:39), NA) %>%
-  subst(c(1:6, 22:25), 15) %>%
-  subst(c(11:12), 18) %>%
+  subst(c(1:6, 22:25), 70) %>%
+  subst(c(11:12), 89) %>%
   segregate(keep = TRUE, other = NA)
 
 # find all patches of at least 1 acre (0.4 ha): base on original land cover
@@ -295,142 +296,80 @@ targets1 = restoration_targets_limited %>%
 
 # rip patches
 targets1_rip = mask(baseline, targets1[[1]]) %>%
+  # lump perennial crops, annual crops, and natural lands
+  classify(rcl = matrix(c(9.5, 19.5, 10,
+                          19.5, 28.5, 20,
+                          49.5, 56.5, 50,
+                          #lump other wetland, wood/scrub, barren with grassland
+                          86.5, 87.5, 50,
+                          99.5, 100.5, 50,
+                          129.5, 130.5, 50), byrow = TRUE, ncol = 3)) %>%
   segregate(keep = TRUE, other = NA) %>%
   patches(directions = 8)
 
 # wetland patches
 targets1_wet = mask(baseline, targets1[[2]]) %>%
+  # lump annual crops, and other wetlands with grassland; keep pasture and alfalfa separate
+  classify(rcl = matrix(c(19.5, 28.5, 20,
+                          51.5, 52.5, 51, #combine alfalfa with other pasture
+                          55.5, 87.5, 56 #combine other wetland with grassland
+                          ), byrow = TRUE, ncol = 3)) %>%
   segregate(keep = TRUE, other = NA) %>%
   patches(directions = 8)
 
 # find the size of each patch and filter out those < 1 acre (0.4 ha)
 targets1_keepID = bind_rows(
-  freq(targets1_rip) %>% as_tibble() %>% mutate(label = 'riparian', code = 15),
-  freq(targets1_wet) %>% as_tibble() %>% mutate(label = 'managed wetland', code = 18)
+  freq(targets1_rip) %>% as_tibble() %>% mutate(label = 'RIPARIAN', code = 70),
+  freq(targets1_wet) %>% as_tibble() %>% mutate(label = 'WETLAND', code = 89)
   ) %>%
   mutate(area.ha = count * 30 * 30 / 10000) %>%
   filter(area.ha >= 0.4)
 targets1_keepID %>% group_by(label) %>% count()
-# 1022 patches: 917 riparian; 105 wetland
+# 1064 patches: 895 riparian; 81 wetland
 
 # classify all included patch IDs as new riparian or wetlands; rest to NA
 # --> have to classify each layer/sublayer separately, since patch names are
 # duplicated across values
 
 # riparian:
-rlist = targets1_keepID %>% filter(label == 'riparian') %>%
+rlist = targets1_keepID %>% filter(label == 'RIPARIAN') %>%
   left_join(names(targets1_rip) %>% as_tibble(rownames = 'layer') %>%
               rename(baseline = value) %>% mutate(layer = as.numeric(layer))) %>%
   select(layer, baseline, value, code)
 # keep only the baseline layers included:
 targets1_rip_subset = subset(targets1_rip, subset = unique(rlist$baseline))
 rlist_split = rlist %>% split(.$layer)
+# reclassify included patches:
+targets1_rip_keep = targets1_rip_subset
+for (i in c(1:length(rlist_split))) {
+  targets1_rip_keep[[i]] = classify(targets1_rip_keep[[i]],
+                                    rcl = rlist_split[[i]] %>%
+                                      select(from = value, to = code) %>%
+                                      as.matrix(),
+                                    othersNA = TRUE)
+}
+plot(sum(targets1_rip_keep, na.rm = TRUE))
 
 # wetlands:
-tlist = targets1_keepID %>% filter(label == 'managed wetland') %>%
+tlist = targets1_keepID %>% filter(label == 'WETLAND') %>%
   left_join(names(targets1_wet) %>% as_tibble(rownames = 'layer') %>%
               rename(baseline = value) %>% mutate(layer = as.numeric(layer))) %>%
   select(layer, baseline, value, code)
 # keep only the baseline layers included:
 targets1_wet_subset = subset(targets1_wet, subset = unique(tlist$baseline))
 tlist_split = tlist %>% split(.$layer)
+# reclassify included patches:
+targets1_wet_keep = targets1_wet_subset
+for (i in c(1:length(tlist_split))) {
+  targets1_wet_keep[[i]] = classify(targets1_wet_keep[[i]],
+                                    rcl = tlist_split[[i]] %>%
+                                      select(from = value, to = code) %>%
+                                      as.matrix(),
+                                    othersNA = TRUE)
+}
+plot(sum(targets1_wet_keep, na.rm = TRUE))
 
-# reclassify included patches as riparian/managed wetlands:
-targets1_keep = c(classify(targets1_rip_subset[[1]],
-                           rcl = rlist_split[[1]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_rip_subset[[2]],
-                           rcl = rlist_split[[2]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_rip_subset[[3]],
-                           rcl = rlist_split[[3]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_rip_subset[[4]],
-                           rcl = rlist_split[[4]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_rip_subset[[5]],
-                           rcl = rlist_split[[6]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_rip_subset[[6]],
-                           rcl = rlist_split[[6]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_rip_subset[[7]],
-                           rcl = rlist_split[[7]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_rip_subset[[8]],
-                           rcl = rlist_split[[8]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_rip_subset[[9]],
-                           rcl = rlist_split[[9]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_rip_subset[[10]],
-                           rcl = rlist_split[[10]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_rip_subset[[11]],
-                           rcl = rlist_split[[11]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_rip_subset[[12]],
-                           rcl = rlist_split[[12]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_wet_subset[[1]],
-                           rcl = tlist_split[[1]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_wet_subset[[2]],
-                           rcl = tlist_split[[2]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_wet_subset[[3]],
-                           rcl = tlist_split[[3]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_wet_subset[[4]],
-                           rcl = tlist_split[[4]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_wet_subset[[5]],
-                           rcl = tlist_split[[5]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_wet_subset[[6]],
-                           rcl = tlist_split[[6]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets1_wet_subset[[7]],
-                           rcl = tlist_split[[7]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE)) %>%
+targets1_keep = c(targets1_rip_keep, targets1_wet_keep) %>%
   #combine into one layer again
   sum(na.rm = TRUE)
 plot(targets1_keep)
@@ -441,30 +380,28 @@ base_plus_targets1 = cover(targets1_keep, base_plus_plans)
 
 change_targets1 = base_plus_targets1 %>% mask(delta) %>%
   freq() %>% as_tibble() %>%
-  filter(value %in% c(15, 18)) %>%
-  mutate(label = recode(value,
-                        '15' = 'riparian', '18' = 'managed wetland')) %>%
+  filter(value %in% c(70:77, 81:82, 89)) %>%
+  mutate(label = if_else(value %in% c(70:77), 'RIPARIAN', 'WETLAND')) %>%
+  group_by(label) %>%
+  summarize(count = sum(count), .groups = 'drop') %>%
   mutate(targets1_ha = count * 30 * 30 / 10000)
 
 targets_plus2 = full_join(targets %>% select(label, total_ha),
                           change_targets1 %>% select(label, targets1_ha),
                           by = 'label') %>%
   mutate(add_ha = total_ha - targets1_ha)
-# wetlands: still need 948 ha
-# riparian: still need 1103 ha
+# wetlands: still need 947 ha
+# riparian: still need 847 ha
 
-## close the gap-------
+## ROUND 2: close the gap-------
 # randomly distribute additional pixels to a subset of the next priority level
-subst(c(26, 9, 29, 13:19, 32:39), NA) %>%
-  subst(c(1:6, 22:25), 15) %>%
-  subst(c(11:12), 18)
 
-# identify candidate patches in the next priority level: 26 for riparian and 13
-# for wetland
+# - identify candidate patches in the next priority level: 26 for riparian and
+# 13 for wetland
 targets2 = restoration_targets_limited %>%
   subst(c(1:6, 9, 22:25, 29, 11:12, 14:19, 32:39), NA) %>%
-  subst(26, 15) %>%
-  subst(13, 18) %>%
+  subst(26, 70) %>%
+  subst(13, 89) %>%
   segregate(keep = TRUE, other = NA)
 
 # find all patches of at least 1 acre (0.4 ha): base on original land cover
@@ -473,23 +410,33 @@ targets2 = restoration_targets_limited %>%
 
 # rip patches
 targets2_rip = mask(baseline, targets2[[1]]) %>%
+  # lump annual crops, and other wetlands with grassland; keep pasture and alfalfa separate
+  classify(rcl = matrix(c(19.5, 28.5, 20,
+                          51.5, 52.5, 51, #combine alfalfa with other pasture
+                          55.5, 87.5, 56 #combine other wetland with grassland
+  ), byrow = TRUE, ncol = 3)) %>%
   segregate(keep = TRUE, other = NA) %>%
   patches(directions = 8)
 
 # wetland patches
 targets2_wet = mask(baseline, targets2[[2]]) %>%
+  # lump annual crops, and other wetlands with grassland; keep pasture and alfalfa separate
+  classify(rcl = matrix(c(19.5, 28.5, 20,
+                          51.5, 52.5, 51, #combine alfalfa with other pasture
+                          55.5, 87.5, 56 #combine other wetland with grassland
+  ), byrow = TRUE, ncol = 3)) %>%
   segregate(keep = TRUE, other = NA) %>%
   patches(directions = 8)
 
 # find the size of each patch and filter out those < 1 acre (0.4 ha)
 targets2_consider = bind_rows(
-  freq(targets2_rip) %>% as_tibble() %>% mutate(label = 'riparian', code = 15),
-  freq(targets2_wet) %>% as_tibble() %>% mutate(label = 'managed wetland', code = 18)
-) %>%
+  freq(targets2_rip) %>% as_tibble() %>% mutate(label = 'RIPARIAN', code = 70),
+  freq(targets2_wet) %>% as_tibble() %>% mutate(label = 'WETLAND', code = 89)
+  ) %>%
   mutate(area.ha = count * 30 * 30 / 10000) %>%
   filter(area.ha >= 0.4)
 targets2_consider %>% group_by(label) %>% count()
-#519 patches: 163 riparian; 356 wetland
+#528 patches: 187 riparian; 341 wetland
 
 # take random sample of candidate patches by putting them in a random order
 targets2_sample = sample(c(1:nrow(targets2_consider)),
@@ -521,7 +468,7 @@ targets2_keepID %>%
 # duplicated across values
 
 # riparian:
-rlist2 = targets2_keepID %>% filter(label == 'riparian') %>%
+rlist2 = targets2_keepID %>% filter(label == 'RIPARIAN') %>%
   left_join(names(targets2_rip) %>% as_tibble(rownames = 'layer') %>%
               rename(baseline = value) %>%
               mutate(layer = as.numeric(layer),
@@ -532,11 +479,19 @@ rlist2 = targets2_keepID %>% filter(label == 'riparian') %>%
 targets2_rip_subset = subset(targets2_rip,
                              subset = as.character(unique(rlist2$baseline)))
 rlist2_split = rlist2 %>% split(.$layer)
-#--> only one layer (orch/vin)
-
+# reclassify included patches:
+targets2_rip_keep = targets2_rip_subset
+for (i in c(1:length(rlist2_split))) {
+  targets2_rip_keep[[i]] = classify(targets2_rip_keep[[i]],
+                                    rcl = rlist2_split[[i]] %>%
+                                      select(from = value, to = code) %>%
+                                      as.matrix(),
+                                    othersNA = TRUE)
+}
+plot(sum(targets2_rip_keep, na.rm = TRUE))
 
 # wetlands:
-tlist2 = targets2_keepID %>% filter(label == 'managed wetland') %>%
+tlist2 = targets2_keepID %>% filter(label == 'WETLAND') %>%
   left_join(names(targets2_wet) %>% as_tibble(rownames = 'layer') %>%
               rename(baseline = value) %>%
               mutate(layer = as.numeric(layer),
@@ -547,58 +502,19 @@ tlist2 = targets2_keepID %>% filter(label == 'managed wetland') %>%
 targets2_wet_subset = subset(targets2_wet,
                              subset = as.character(unique(tlist2$baseline)))
 tlist2_split = tlist2 %>% split(.$layer)
+# reclassify included patches:
+targets2_wet_keep = targets2_wet_subset
+for (i in c(1:length(tlist2_split))) {
+  targets2_wet_keep[[i]] = classify(targets2_wet_keep[[i]],
+                                    rcl = tlist2_split[[i]] %>%
+                                      select(from = value, to = code) %>%
+                                      as.matrix(),
+                                    othersNA = TRUE)
+}
+plot(sum(targets2_wet_keep, na.rm = TRUE))
 
 # reclassify included patches as riparian/managed wetlands:
-targets2_keep = c(classify(targets2_rip_subset[[1]],
-                           rcl = rlist2_split[[1]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets2_wet_subset[[1]],
-                           rcl = tlist2_split[[1]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets2_wet_subset[[2]],
-                           rcl = tlist2_split[[2]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets2_wet_subset[[3]],
-                           rcl = tlist2_split[[3]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets2_wet_subset[[4]],
-                           rcl = tlist2_split[[4]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets2_wet_subset[[5]],
-                           rcl = tlist2_split[[5]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets2_wet_subset[[6]],
-                           rcl = tlist2_split[[6]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets2_wet_subset[[7]],
-                           rcl = tlist2_split[[7]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets2_wet_subset[[8]],
-                           rcl = tlist2_split[[8]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE),
-                  classify(targets2_wet_subset[[9]],
-                           rcl = tlist2_split[[9]] %>%
-                             select(from = value, to = code) %>%
-                             as.matrix(),
-                           othersNA = TRUE)) %>%
+targets2_keep = c(targets2_rip_keep, targets2_wet_keep) %>%
   #combine into one layer again
   sum(na.rm = TRUE)
 plot(targets2_keep)
@@ -609,33 +525,173 @@ base_plus_targets2 = cover(targets2_keep, base_plus_targets1)
 
 change_targets2 = base_plus_targets2 %>% mask(delta) %>%
   freq() %>% as_tibble() %>%
-  filter(value %in% c(15, 18)) %>%
-  mutate(label = recode(value,
-                        '15' = 'riparian', '18' = 'managed wetland')) %>%
+  filter(value %in% c(70:77, 81:82, 89)) %>%
+  mutate(label = if_else(value %in% c(70:77), 'RIPARIAN', 'WETLAND')) %>%
+  group_by(label) %>%
+  summarize(count = sum(count), .groups = 'drop') %>%
   mutate(targets2_ha = count * 30 * 30 / 10000)
 
 targets_plus2 = full_join(targets %>% select(label, total_ha),
                           change_targets2 %>% select(label, targets2_ha),
                           by = 'label') %>%
   mutate(add_ha = total_ha - targets2_ha)
-# wetlands: overshot by 6.75 ha
-# riparian: overshot by 13.0 ha
+# wetlands: overshot by 3.96 ha
+# riparian: overshot by 6.42 ha
 
 
-# 3. combine new restoration into one layer--------
-restore_all = c(plans, targets1_keep, targets2_keep) %>% sum(na.rm = TRUE)
+# COMBINED RESTORATION--------
+# combine new restoration into one layer
+
+# -->assume additional new wetlands are seasonal (except those otherwise
+# designated in existing restoration plans)
+
+restore_all = c(plans,
+                targets1_keep %>% subst(89, 82),
+                targets2_keep %>% subst(89, 82)) %>% sum(na.rm = TRUE)
 writeRaster(restore_all,
             'GIS/scenario_inputs/restoration_added.tif',
             overwrite = TRUE)
 
-## overlay on baseline----------
-scenario_restoration = cover(restore_all, baseline)
-levels(scenario_restoration) <- wkey %>% select(WATERBIRD_CODE, label) %>%
-  as.data.frame()
-coltab(scenario_restoration) <- wkey %>% select(WATERBIRD_CODE, col) %>%
-  complete(WATERBIRD_CODE = c(0:255)) %>% pull(col)
+## assign riparian subclasses--------
+# restored riparian veg needs to be assigned subclasses for use with riparian
+# distribution models; use details from restoration opportunities analysis to
+# inform riparian subclasses: valley foothill riparian (7100) vs. willow
+# riparian scrub/shrub (7600)
+# --> pixels not in restoration opportunities analysis likely from restoration
+# plans; assume 'valley foothill riparian'
+
+
+rip_targets_type = lapp(
+  c(rast('GIS/scenario_inputs/restoration_potential.tif') %>%
+      subst(8000, NA) %>%
+      mask(restore_all %>% subst(81, NA) %>% subst(82, NA)),
+    restore_all),
+  fun = function(x, y) {
+    ifelse(y==70 & is.na(x), 7100, x)
+  })
+plot(rip_targets_type)
+freq(rip_targets_type)
+# 7100: 44991 (undefined "valley foothill riparian")
+# 7600:  4037 (SALIXSHRUB/"willow shrub/scrub")
+
+
+## * riparian forest----
+# keep only pixels that could be forest (valley foothill riparian), and find
+# distinct patches
+rip_targets_vri = rip_targets_type %>% subst(7600, NA) %>%
+  patches(directions = 8) #values up to 1737
+patchlist = freq(rip_targets_vri) %>% as_tibble() %>%
+  mutate(ID = c(1:nrow(freq(rip_targets_vri))))
+
+# convert to polygons, find centroids, and 2km buffers
+rip_targets_vri_buff = as.polygons(rip_targets_vri) %>% centroids() %>%
+  buffer(width = 2000)
+
+# for each buffer, find frequency of riparian subclasses in surrounding area
+# from baseline (excluding INTROSCRUB and generic RIPARIAN)
+baseline_ripdetail = baseline %>% subst(c(1:69, 70, 75, 80:130), NA)
+freq(baseline_ripdetail) #should only 71-74, 76-77
+buff_values = extract(baseline_ripdetail, rip_targets_vri_buff)
+buff_values_prop = buff_values %>% filter(!is.na(lyr1)) %>%
+  rename(polygon_num = ID, class = lyr1) %>%
+  group_by(polygon_num, class) %>% count() %>%
+  group_by(polygon_num) %>% mutate(total = sum(n)) %>% ungroup() %>%
+  mutate(prop = n/total) %>%
+  # eliminate tiny proportions & recalculate prop
+  filter(prop >= 0.05) %>%
+  group_by(polygon_num) %>%
+  mutate(total = sum(n)) %>%
+  # how many subclasses per patch?
+  add_count(name = 'n_subclasses') %>%
+  ungroup() %>%
+  mutate(prop = n/total) %>%
+  left_join(patchlist %>% select(polygon_num = ID, patchID = value, ncells = count))
+
+# SINGLES: for patches with only a single option for a subclass, make the
+# assignments straight-forward (can't fold into sampling procedure below because
+# sample function doesn't work as expected with only one option)
+singles = classify(
+  rip_targets_vri,
+  rcl = buff_values_prop %>% filter(n_subclasses == 1) %>%
+    select(from = patchID, to = class) %>% as.matrix(),
+  othersNA = TRUE)
+freq(singles)
+
+# DOUBLES & TRIPLES: for patches with more than one possible subclass,
+# randomly assign the total number of cells in each patch to one of the
+# subclasses
+# - first find the polygon numbers that are relevant:
+buff_doubles = buff_values_prop %>% filter(n_subclasses > 1) %>%
+  select(polygon_num, patchID) %>% distinct()
+#503 patches
+
+# - remove any patches not included in this set:
+doubles = classify(
+  rip_targets_vri,
+  rcl = buff_doubles %>% select(from = patchID, to = patchID) %>% as.matrix(),
+  othersNA = TRUE)
+
+# - SEMI-SLOW STEP: find cell numbers for each of these unique patches
+cellnum = buff_doubles %>% split(.$patchID) %>%
+  purrr::map_df(~cells(doubles, .x$patchID),
+                .id = 'patchID') %>%
+  rename(cellnum = lyr1) %>%
+  mutate(patchID = as.numeric(patchID)) %>%
+  left_join(buff_doubles, by = 'patchID')
+
+# - randomly assign the total number of cells in each patch to one of the
+# subclasses according to the proportion in the surrounding buffer
+new = buff_values_prop %>% filter(n_subclasses > 1) %>% split(.$patchID) %>%
+  purrr::map_df(~sample(x = .x %>% pull(class), # possible values
+                        size = .$ncells[1],
+                        prob = .x %>% pull(prop),
+                        replace = TRUE) %>% as_tibble(),
+                .id = 'patchID') %>%
+  mutate(patchID = as.numeric(patchID))
+
+# - match the new random values to the cell numbers
+assignments = bind_cols(cellnum, new)
+assignments %>% filter(patchID...1 != patchID...4)  # should be none!
+# 44745 cells
+
+# transfer the random assignments to the corresponding patch IDs
+doubles[assignments$cellnum] <- assignments$value
+
+# combine:
+ripforest = cover(singles, doubles)
+plot(ripforest)
+plot(cover(ripforest, baseline_ripdetail))
+
+
+## * riparian scrub--------
+# labeled as willow scrub in restoration opportunities analysis, so just assign
+# all to SALIXSHRUB
+
+ripshrub = rip_targets_type %>% subst(7100, NA) %>% subst(7600, 76)
+
+
+## final restoration layer-------
+restore_all_ripdetail = cover(ripforest, ripshrub) %>% cover(restore_all)
+freq(restore_all_ripdetail) #no generic 70 riparian left
+plot(restore_all_ripdetail)
+writeRaster(restore_all_ripdetail,
+            'GIS/scenario_inputs/restoration_added_ripdetail.tif',
+            overwrite = TRUE)
+
+# OVERLAY ON BASELINE------------
+scenario_restoration = cover(restore_all_ripdetail, baseline)
+levels(scenario_restoration) <- key %>% select(CODE_BASELINE, CODE_NAME) %>%
+  drop_na() %>% as.data.frame()
+coltab(scenario_restoration) <- key %>% select(CODE_BASELINE, CODE_NAME, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
 names(scenario_restoration) = 'scenario_restoration'
+
+levels(baseline) <- key %>% select(CODE_BASELINE, CODE_NAME) %>%
+  drop_na() %>% as.data.frame()
+coltab(baseline) <- key %>% select(CODE_BASELINE, CODE_NAME, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
 plot(c(baseline, scenario_restoration))
+
 writeRaster(scenario_restoration,
             'GIS/scenario_rasters/scenario1_restoration.tif',
             overwrite = TRUE)
@@ -645,10 +701,20 @@ delta_restoration = DeltaMultipleBenefits::calculate_change(
   baseline = baseline %>% mask(delta),
   scenario = scenario_restoration %>% mask(delta))
 delta_restoration %>%
-  group_by(label.base) %>%
+  # mutate(label = label.base) %>%
+  mutate(label = case_when(label.base == 'FIELD_CORN' ~ 'CORN',
+                           label.base == 'PASTURE_ALFALFA' ~ 'ALFALFA',
+                           label.base == 'GRAIN&HAY' ~ 'GRAIN',
+                           label.base == 'GRAIN&HAY_WHEAT' ~ 'GRAIN',
+                           label.base %in% c('ROW', 'FIELD') ~ 'ROW & FIELD CROPS',
+                           label.base == 'WOODLAND&SCRUB' ~ 'WOODLAND & SCRUB',
+                           grepl('RIPARIAN', label.base) ~ 'RIPARIAN',
+                           grepl('WETLAND', label.base) ~ 'WETLANDS',
+                           grepl('ORCHARD', label.base) ~ 'ORCHARD',
+                           TRUE ~ label.base)) %>%
+  group_by(label) %>%
   summarize(change = sum(change), .groups = 'drop') %>%
   arrange(change) %>%
-  rename(label = label.base) %>%
   DeltaMultipleBenefits::plot_change(scale = 1000000) +
   labs(x = NULL, y = bquote(' ' *Delta~ 'total area ('~km^2*')')) +
   theme_bw() + coord_flip() +
@@ -656,97 +722,7 @@ delta_restoration %>%
         axis.title = element_text(size = 18))
 ggsave('fig/change_scenario1_restoration.png', height = 7.5, width = 6)
 # large increase in riparian and wetland cover, mostly at the expense of
-# pasture, orchard/vineyard, grassland [minimized reduction of orchard/vineyard
-# to only that necessary to meet objectives]
+# pasture, grassland, idle, row&field crops, corn, grain, rice, alfalfa,
+# --> impacts to orchard/vineyard [minimized to only that necessary to meet
+# riparian objectives
 
-# 4. specify riparian subtypes---------
-# restored riparian veg needs to be assigned subtypes for use with riparian
-# distribution models; use veg types from restoration opportunities analysis to
-# inform riparian sub-types: valley foothill riparian (7100) vs. willow riparian
-# scrub/shrub (7600)
-# --> pixels not in restoration opportunities analysis likely from restoration
-# plans; assume 'valley foothill riparian'
-
-
-rip_targets_type = lapp(
-  c(rast('GIS/scenario_inputs/restoration_potential.tif') %>%
-      subst(8000, NA) %>%
-      mask(restore_all %>% subst(18, NA)),
-    restore_all),
-  fun = function(x, y) {
-    ifelse(y == 15 & is.na(x), 7100, x)
-  })
-plot(rip_targets_type)
-freq(rip_targets_type)
-# 7100: 45415 (undefined "valley foothill riparian")
-# 7600: 3840 (SALIXSHRUB/"willow shrub/scrub")
-
-
-# ASSIGN FOREST TYPES
-# keep only pixels that could be forest (valley foothill riparian), and find
-# distinct patches
-rip_targets_vri = rip_targets_type %>% subst(7600, NA) %>%
-  patches(directions = 8) #values up to 1737
-patchlist = freq(rip_targets_vri) %>% as_tibble() %>%
-  mutate(ID = c(1:nrow(freq(rip_targets_vri))))
-
-# convert to polygons and find centroids
-rip_targets_vri_ctr = as.polygons(rip_targets_vri) %>% centroids()
-# find 2km buffer
-rip_targets_vri_ctr_buff2k = buffer(rip_targets_vri_ctr,
-                                   width = 2000)
-
-# for each buffer, find frequency of riparian subtypes in surrounding area
-# from baseline
-baseline_ripdetail = rast('GIS/landscape_rasters/veg_baseline_ripdetail.tif')
-freq(baseline_ripdetail)
-# exclude introscrub as an option
-baseline_ripdetail_limited = classify(baseline_ripdetail,
-                                      rcl = matrix(c(75, NA),
-                                                   ncol = 2, byrow = TRUE))
-buff_values = extract(baseline_ripdetail_limited, rip_targets_vri_ctr_buff2k)
-buff_values_prop = buff_values %>% filter(!is.na(veg_baseline_ripdetail)) %>%
-  group_by(ID, veg_baseline_ripdetail) %>% count() %>%
-  group_by(ID) %>% mutate(total = sum(n)) %>% ungroup() %>%
-  mutate(prop = n/total) %>%
-  left_join(patchlist %>% select(ID, patchID = value, ncells = count)) %>%
-  split(.$ID)
-
-# for each value in ID/patchID, use list of riparian subtype codes and the
-# relative proportion of each to randomly assign the total number of cells in
-# each patch to one of the subtypes
-new = purrr::map(buff_values_prop,
-                 ~sample(x = .x %>% pull(veg_baseline_ripdetail),
-                         size = .$ncells[1],
-                         prob = .$prop,
-                         replace = TRUE))
-names(new) = patchlist$value
-
-# now transfer these random assignments back to corresponding patch IDs
-ripforest = rip_targets_vri
-for(i in c(1:length(new))) {
-  target = names(new)[i] %>% as.numeric()
-  cell_id = cells(ripforest, target)[[1]]
-  ripforest[cell_id] <- new[[i]]
-}
-freq(ripforest)
-
-
-# ASSIGN SHRUBS
-ripshrub = rip_targets_type %>% subst(7100, NA) %>% subst(7600, 76)
-# assign all to 76 (SALIXSHRUB) - by far the most frequent ripshrub
-
-# COMBINE
-scenario_restoration_ripdetail = cover(ripforest, ripshrub) %>%
-  cover(baseline_ripdetail)
-# original unchanged riparian detail
-levels(scenario_restoration_ripdetail) <- rkey %>%
-  filter(RIPARIAN_CODE %in% c(71:78)) %>% select(RIPARIAN_CODE, label) %>%
-  as.data.frame()
-coltab(scenario_restoration_ripdetail) <- rkey %>%
-  filter(RIPARIAN_CODE %in% c(71:78)) %>% select(RIPARIAN_CODE, col) %>%
-  complete(RIPARIAN_CODE = c(0:255)) %>% pull(col)
-plot(scenario_restoration_ripdetail)
-writeRaster(scenario_restoration_ripdetail,
-            'GIS/scenario_rasters/scenario1_restoration_ripdetail.tif',
-            overwrite = TRUE)
