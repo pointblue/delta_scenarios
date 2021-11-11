@@ -15,7 +15,7 @@ template = rasterize(vect(delta_buff10k), extend(delta, delta_buff10k))
 
 baseline = rast('GIS/landscape_rasters/veg_baseline_fall.tif')
 baseline_win = rast('GIS/landscape_rasters/veg_baseline_winter.tif')
-wkey = read_csv('data/landcover_key_waterbirds.csv', col_types = cols())
+key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
 
 # scenario assumption: all "high" and "very high" flood risk areas become
 # managed wetlands, and all perennial crops move out of "medium" risk areas
@@ -53,19 +53,20 @@ coltab(floodrisk) <- fkey %>% select(id, col) %>%
   complete(id = c(0:255)) %>% pull(col)
 plot(floodrisk)
 
-writeRaster(floodrisk, 'GIS/scenario_inputs/floodrisk2050.tif')
+writeRaster(floodrisk, 'GIS/scenario_inputs/floodrisk2050.tif', overwrite = TRUE)
 
 # add managed wetlands-------
 
-# 1. erase areas unsuitable for conversion to managed wetland
+# 1. recode all high risk wetlands as perennial managed wetlands
 highrisk = classify(floodrisk,
-                    rcl = matrix(c(4, 18,
-                                   5, 18), byrow = TRUE, ncol = 2),
+                    rcl = matrix(c(4, 82,
+                                   5, 82), byrow = TRUE, ncol = 2),
                     othersNA = TRUE)
+# --> but mask out areas unsuitable for conversion to managed wetland
+# (urban, riparian, water, tidal marsh, rice)
 highrisk_limited = lapp(c(highrisk, baseline),
                         function(x, y) {
-                          ifelse(y %in% c('water', 'riparian', 'urban',
-                                          'tidal marsh', 'rice') &
+                          ifelse(y %in% c(60, 70:77, 86, 90, 30) &
                                    !is.na(x),
                                  NA, x)
                         })
@@ -91,24 +92,24 @@ change_win = DeltaMultipleBenefits::calculate_change(
   scenario = added_wetlands_win)
 # similar - lots of fallow, alfalfa, corn, field/row, orch/vin)
 
-# identify contiguous patches of orchard pixels in the medium flood risk areas
+# identify contiguous patches of orch & vin pixels in the medium flood risk areas
 medrisk = subst(floodrisk, c(1:2, 4:5), NA)
 med_orch_patches = mask(baseline, medrisk) %>%
-  subst(c(0:8,10:99), NA) %>%
+  subst(c(20:130), NA) %>%
   patches()
 plot(med_orch_patches)
 
 # map each contiguous patch of orchard to a new randomly selected crop, weighted
 # by the proportion lost to wetlands in the "very high" risk islands:
 prop_sample = change_fall %>%
-  select(value, label, change) %>%
+  select(value, change) %>%
+  left_join(key %>% select(value = CODE_BASELINE, label = CODE_NAME)) %>%
   filter(change < 0 &
-           label %in% c('corn', 'field/row', 'alfalfa', 'grassland', 'grain',
-           'pasture')) %>%
-  left_join(wkey %>% select(value = WATERBIRD_CODE, shortlab)) %>%
+           label %in% c('FIELD_CORN', 'FIELD', 'ROW', 'PASTURE_ALFALFA',
+                        'PASTURE', 'GRAIN&HAY_WHEAT', 'GRAIN&HAY')) %>%
   mutate(change = abs(change),
          prop = change / sum(change))
-# 32% corn, ~20% each row and alfalfa
+# 35% corn, ~20% each row and alfalfa
 
 new_crops = tibble(patchID = c(1:minmax(med_orch_patches)[2]),
                    newID = sample(prop_sample$value,
@@ -120,14 +121,14 @@ replace_orchard = classify(med_orch_patches,
 
 # repeat for winter baseline
 prop_sample_win = change_win %>%
-  select(value, label, change) %>%
+  select(value, change) %>%
+  left_join(key %>% select(value = CODE_BASELINE, label = CODE_NAME)) %>%
   filter(change < 0 &
-           label %in% c('corn', 'field/row', 'alfalfa', 'grassland', 'grain',
-                        'pasture')) %>%
-  left_join(wkey %>% select(value = WATERBIRD_CODE, shortlab)) %>%
+           label %in% c('FIELD_CORN', 'FIELD', 'ROW', 'PASTURE_ALFALFA',
+                        'PASTURE', 'GRAIN&HAY_WHEAT', 'GRAIN&HAY')) %>%
   mutate(change = abs(change),
          prop = change / sum(change))
-# 20% alfalfa
+# 22% alfalfa
 
 new_crops_win = tibble(patchID = c(1:minmax(med_orch_patches)[2]),
                        newID = sample(prop_sample_win$value,
@@ -140,25 +141,35 @@ replace_orchard_win = classify(med_orch_patches,
 
 # overlay on baseline------
 scenario_floodrisk = cover(replace_orchard, added_wetlands)
-levels(scenario_floodrisk) <- wkey %>% select(WATERBIRD_CODE, label) %>%
+levels(scenario_floodrisk) <- key %>%
+  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
   as.data.frame()
-coltab(scenario_floodrisk) <- wkey %>% select(WATERBIRD_CODE, col) %>%
-  complete(WATERBIRD_CODE = c(0:255)) %>% pull(col)
+coltab(scenario_floodrisk) <- key %>% select(CODE_BASELINE, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
 names(scenario_floodrisk) = 'scenario_floodrisk'
-plot(c(baseline, scenario_floodrisk))
 writeRaster(scenario_floodrisk,
-            'GIS/scenario_rasters/scenario3_floodrisk_fall.tif',
+            'GIS/scenario_rasters/scenario3_floodrisk.tif',
             overwrite = TRUE)
 
-scenario_floodrisk_win = cover(replace_orchard_win, added_wetlands_win)
-levels(scenario_floodrisk_win) <- wkey %>% select(WATERBIRD_CODE, label) %>%
+levels(baseline) <- key %>%
+  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
   as.data.frame()
-coltab(scenario_floodrisk_win) <- wkey %>% select(WATERBIRD_CODE, col) %>%
-  complete(WATERBIRD_CODE = c(0:255)) %>% pull(col)
-names(scenario_floodrisk_win) = 'scenario_floodrisk'
+coltab(baseline) <- key %>% select(CODE_BASELINE, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+names(baseline) = 'baseline'
+plot(c(baseline, scenario_floodrisk))
+
+
+scenario_floodrisk_win = cover(replace_orchard_win, added_wetlands_win)
+levels(scenario_floodrisk_win) <- key %>%
+  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
+  as.data.frame()
+coltab(scenario_floodrisk_win) <- key %>% select(CODE_BASELINE, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+names(scenario_floodrisk_win) = 'scenario_floodrisk_win'
 plot(c(baseline_win, scenario_floodrisk_win))
 writeRaster(scenario_floodrisk_win,
-            'GIS/scenario_rasters/scenario3_floodrisk_winter.tif',
+            'GIS/scenario_rasters/scenario3_floodrisk_win.tif',
             overwrite = TRUE)
 
 # calculate change------
@@ -167,16 +178,25 @@ delta_floodrisk = DeltaMultipleBenefits::calculate_change(
   baseline = baseline %>% mask(delta),
   scenario = scenario_floodrisk %>% mask(delta))
 delta_floodrisk %>%
-  group_by(label.base) %>%
+  mutate(label = case_when(label.base == 'FIELD_CORN' ~ 'CORN',
+                           label.base == 'PASTURE_ALFALFA' ~ 'ALFALFA',
+                           label.base == 'GRAIN&HAY' ~ 'GRAIN',
+                           label.base == 'GRAIN&HAY_WHEAT' ~ 'GRAIN',
+                           label.base %in% c('ROW', 'FIELD') ~ 'ROW & FIELD CROPS',
+                           label.base == 'WOODLAND&SCRUB' ~ 'WOODLAND & SCRUB',
+                           grepl('RIPARIAN', label.base) ~ 'RIPARIAN',
+                           grepl('WETLAND', label.base) ~ 'WETLANDS',
+                           grepl('ORCHARD', label.base) ~ 'ORCHARD',
+                           TRUE ~ label.base)) %>%
+  group_by(label) %>%
   summarize(change = sum(change), .groups = 'drop') %>%
   arrange(change) %>%
-  rename(label = label.base) %>%
   DeltaMultipleBenefits::plot_change(scale = 1000000) +
   labs(x = NULL, y = bquote(' ' *Delta~ 'total area ('~km^2*')')) +
   theme_bw() + coord_flip() + ylim(-100, 410) +
   theme(axis.text = element_text(size = 18),
         axis.title = element_text(size = 18))
 ggsave('fig/change_scenario3_floodrisk.png', height = 7.5, width = 6)
-# large increase in wetland cover, at the expense of especially orch/vin, corn,
-# fallow, field/row, alf
+# large increase in wetland cover, at the expense of especially idle, corn,
+# row&field, orch, vin, alf, grain, grassland, pasture
 
