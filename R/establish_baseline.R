@@ -13,6 +13,8 @@ source('R/functions.R')
 
 # reference data:
 delta = rast('GIS/boundaries/delta.tif')
+delta_shp = read_sf('GIS/boundaries/Legal_Delta_Boundary.shp') %>%
+  st_transform(crs = '+proj=utm +zone=10 +datum=WGS84 +units=m +no_defs')
 delta_buff10k = read_sf('GIS/boundaries/Legal_Delta_boundary_buff10k.shp') %>%
   st_transform(crs = '+proj=utm +zone=10 +datum=WGS84 +units=m +no_defs')
 template = rasterize(vect(delta_buff10k), extend(delta, delta_buff10k))
@@ -146,6 +148,25 @@ metadat_2018 = readxl::read_excel(
 landiq_2018_simplify = landiq_2018 %>%
   codify_landiq(meta = metadat_2018,
                 codekey = key)
+
+# get acreage of specific crop types within each class within the Delta boundary
+ag_details = landiq_2018_simplify %>%
+  st_make_valid() %>%
+  st_intersection(delta_shp) %>%
+  select(CODE_BASELINE, CLASS, CLASS_MAIN, SUBCLASS_MAIN) %>%
+  mutate(area_ha = as.numeric(st_area(.))/10000) %>%
+  st_drop_geometry() %>%
+  group_by(CODE_BASELINE, CLASS, SUBCLASS_MAIN) %>%
+  summarize(area_ha = sum(area_ha), .groups = 'drop') %>%
+  group_by(CODE_BASELINE, CLASS) %>%
+  mutate(total_area = sum(area_ha)) %>%
+  ungroup() %>%
+  mutate(prop = area_ha/total_area)
+write_csv(ag_details, 'data/landiq2018_area_detail.csv')
+# orchard_citrus&subtropical: 97% olives
+# orchard_deciduous: 51% almonds, 14% pears, 13% walnuts, 11% unknown?, 7% cherries
+# row: 59% tomatoes (processing); 15% cucurbits; 9% potato
+# field (other than corn): 61% safflower, 25% beans (dry), 11% sunflowers
 
 landiq_2018_simplify %>% st_drop_geometry() %>%
   select(CODE_BASELINE, CLASS, CLASS_MAIN, SUBCLASS_MAIN) %>% distinct() %>%
