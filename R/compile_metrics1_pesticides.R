@@ -590,10 +590,13 @@ pur_details %>% filter(CONCERN != 'total') %>%
 pur_details_subclass = pur_details %>%
   group_by(CODE_NAME, CONCERN, SUBCLASS) %>%
   summarize(rate = mean(rate), .groups = 'drop') %>%
-  mutate(METRIC_CATEGORY = 'healthy environment',
-         METRIC_SUBTYPE = 'pesticide exposure risk',
-         METRIC = 'pesticide application rate',
-         UNIT = 'pounds per ha') %>%
+  mutate(
+    METRIC_CATEGORY = if_else(
+      CONCERN == 'aquatic', 'biodiversity', 'healthy environment'),
+    METRIC_SUBTYPE = if_else(
+      CONCERN == 'aquatic', 'aquatic contaminant', 'pesticide exposure risk'),
+    METRIC = 'pesticide application rate',
+    UNIT = 'pounds per ha') %>%
   select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CONCERN, CODE_NAME, SUBCLASS, SCORE = rate, UNIT)
 write_csv(pur_details_subclass, 'data/multiplebenefits/pesticide_exposure_subclass.csv')
 
@@ -604,10 +607,13 @@ pur_details_class = pur_details %>%
   mutate(rate = lbs_chm_used / CLASS_AREA) %>%
   group_by(CODE_NAME, CONCERN) %>%
   summarize(rate = mean(rate), .groups = 'drop') %>%
-  mutate(METRIC_CATEGORY = 'healthy environment',
-         METRIC_SUBTYPE = 'pesticide exposure risk',
-         METRIC = 'pesticide application rate',
-         UNIT = 'pounds per ha') %>%
+  mutate(
+    METRIC_CATEGORY = if_else(
+      CONCERN == 'aquatic', 'biodiversity', 'healthy environment'),
+    METRIC_SUBTYPE = if_else(
+      CONCERN == 'aquatic', 'aquatic contaminant', 'pesticide exposure risk'),
+    METRIC = 'pesticide application rate',
+    UNIT = 'pounds per ha') %>%
   select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CONCERN, CODE_NAME, SCORE = rate, UNIT)
 
 write_csv(pur_details_class, 'data/multiplebenefits/pesticide_exposure.csv')
