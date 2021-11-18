@@ -529,8 +529,10 @@ ag_details = read_csv('data/landiq2018_area_detail.csv') %>%
                              is.na(area_ha) ~ baseline_total,
                              TRUE ~ area_ha),
          prop = area_ha/total_area,
-         SUBCLASS = if_else(is.na(SUBCLASS), CLASS, SUBCLASS))
-
+         SUBCLASS = if_else(is.na(SUBCLASS), CLASS, SUBCLASS)) %>%
+  select(CLASS, CLASS_AREA = total_area, SUBCLASS, SUBCLASS_AREA = area_ha,
+         SUBCLASS_PROP = prop)
+write_csv(ag_details, 'data/baseline_area.csv')
 
 pur_details = pur_simplify %>%
   mutate(total = TRUE) %>% select(year:critical, total, everything()) %>%
