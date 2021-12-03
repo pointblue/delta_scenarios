@@ -2,7 +2,7 @@ from arcpy import env
 from arcpy.sa import *  
 arcpy.CheckOutExtension("Spatial")
 
-def focal_stats(pathin, regex = '*', pathout, buffer, fun = 'SUM'):
+def focal_stats(pathin, pathout, buffer, fun = 'SUM', regex = '*'):
   # Set environment settings
   env.workspace = pathin
 
