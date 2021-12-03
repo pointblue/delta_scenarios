@@ -7,7 +7,7 @@ source('R/packages.R')
 
 # reference data:
 delta = rast('GIS/boundaries/delta.tif')
-baseline = rast('GIS/landscape_rasters/veg_baseline_fall.tif')
+baseline = rast('GIS/landscape_rasters/veg_baseline.tif')
 baseline_win = rast('GIS/landscape_rasters/veg_baseline_winter.tif')
 key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
 
@@ -53,7 +53,7 @@ base = baseline %>%
   group_by(label) %>%
   summarize(count = sum(count), .groups = 'drop') %>%
   mutate(current_ha = count * 30 * 30 / 10000)
-# riparian = 8,218 ha
+# riparian = 8,354 ha
 # wetlands = 6,009 ha
 
 # how much more needed to meet proposed 2050 targets?
@@ -64,7 +64,7 @@ targets = full_join(
   by = 'label') %>%
   mutate(add_ha = total_ha - current_ha)
 # wetlands: add 3,744 ha
-# riparian: add 4,125 ha
+# riparian: add 3,989 ha
 
 
 # source data---------
@@ -111,35 +111,35 @@ tab %>% rlang::set_names(c('baseline', 'plans', 'n')) %>%
   filter(!is.na(plans)) %>%
   arrange(plans, desc(n))
 # existing restoration plans will convert:
-# - to riparian from: fallow, grassland, existing riparian; some pixels from
+# - to riparian from: idle, grassland, existing riparian; some pixels from
 # water, other wetland, urban
 # - to wetland from: pasture, other wetland, corn, rice, fallow, grassland...;
 # some pixels from riparian, existing managed wetland
 
 # --> allow conversion from urban to riparian for urban restoration projects;
-# don't allow conversion from riparian to wetlands (assume it will stay as
-# riparian)
+# don't allow conversion between riparian and managed wetlands, or conversion
+# from water to riparian (change plans pixels to NA in these cases)
+plans_limited = lapp(c(plans, baseline),
+                     function(x, y) {
+                       ifelse(!is.na(x) & !y %in% c(71:79, 81:82, 86, 90), x, NA)
+                     })
 
-base_plus_plans = lapp(c(plans, baseline),
-                       function(x, y) {
-                         ifelse(!is.na(x) & !y %in% c(71:79, 81:82), x, y)
-                       })
+base_plus_plans = cover(plans_limited, baseline)
 
 # * checkpoint: calculate how much still needed----
 change_plans = base_plus_plans %>% mask(delta) %>%
-  freq() %>% as_tibble() %>%
-  filter(value %in% c(70:82,89)) %>%
-  mutate(label = if_else(value %in% c(70:77), 'RIPARIAN', 'WETLAND')) %>%
+  calculate_area(unit = 'ha') %>%
+  filter(CODE_NAME %in% c(70:82,89)) %>%
+  mutate(label = if_else(CODE_NAME %in% c(70:77), 'RIPARIAN', 'WETLAND')) %>%
   group_by(label) %>%
-  summarize(count = sum(count), .groups = 'drop') %>%
-  mutate(plans_ha = count * 30 * 30 / 10000)
+  summarize(area_ha = sum(area), .groups = 'drop')
 
 targets_plus = full_join(targets %>% select(label, total_ha),
-                         change_plans %>% select(label, plans_ha),
+                         change_plans %>% select(label, plans_ha = area_ha),
                          by = 'label') %>%
   mutate(add_ha = total_ha - plans_ha)
 # wetlands: still need 2342 ha
-# riparian: still need 3690 ha
+# riparian: still need 3596 ha
 
 # ADDITIONAL PRIORITIES-----------
 # prioritize potential restoration areas
@@ -223,7 +223,8 @@ tab %>% rlang::set_names(c('base', 'new', 'n')) %>%
 # to wetland2 largely from pasture
 
 # don't allow "restoration" of existing managed wetland, tidal marsh, water, or
-# riparian; also exclude existing urban; deprioritize existing orch/vin
+# riparian; also exclude existing urban; deprioritize existing orch/vin;
+# allow existing idle, even though some of this is field edges/roads/developed
 restoration_targets_limited = lapp(c(restoration_targets, base_plus_plans),
                                    function(x, y) {
                                      ifelse(!is.na(x) &
@@ -244,15 +245,15 @@ tab %>% rlang::set_names(c('base', 'new', 'n')) %>%
                         new %in% c(11:14) ~ 'wetland',
                         new %in% c(15:17) ~ 'wetland2',
                         new %in% c(32:37) ~ 'wetland3',
-                        new %in% c(9, 19, 29, 39) ~ 'development')) %>%
+                        new %in% c(9, 19, 29, 39) ~ 'urban')) %>%
   group_by(to, from) %>%
   summarize(n = sum(n, na.rm = TRUE), .groups = 'drop') %>%
   filter(!is.na(to)) %>%
   arrange(to, desc(n)) %>% print(n = 100)
-# to riparian primarily from grassland, fallow; not wetland, urban, or orch/vin
-# to riparian2 primarily from grassland, fallow, alfalfa, row
+# to riparian primarily from grassland, idle
+# to riparian2 primarily from idle, grassland
 # to riparian3 entirely from existing vin, orch
-# to wetland primarily from pasture, fallow
+# to wetland primarily from pasture, idle
 # to wetland2 primarily from pasture
 # to wetland3 entirely from existing vin, orch
 
@@ -274,8 +275,8 @@ freq(restoration_targets_limited) %>% as_tibble() %>%
   mutate(tot.ha = cumsum(area.ha)) %>%
   print(n = 50)
 # to reach wetland target of 2342 additional ha, need all of priority
-# levels 1-2 and some of 3
-# to reach riparian target of 3708 additional ha (while excluding existing
+# levels 11-12 and some of 13
+# to reach riparian target of 3596 additional ha (while excluding existing
 # orchard and vineyard), need all of priority levels 1-6 plus 22-25 and some of
 # 26!
 
@@ -326,7 +327,7 @@ targets1_keepID = bind_rows(
   mutate(area.ha = count * 30 * 30 / 10000) %>%
   filter(area.ha >= 0.4)
 targets1_keepID %>% group_by(label) %>% count()
-# 1064 patches: 895 riparian; 81 wetland
+# 980 patches: 899 riparian; 81 wetland
 
 # classify all included patch IDs as new riparian or wetlands; rest to NA
 # --> have to classify each layer/sublayer separately, since patch names are
@@ -380,19 +381,18 @@ plot(targets1_keep)
 base_plus_targets1 = cover(targets1_keep, base_plus_plans)
 
 change_targets1 = base_plus_targets1 %>% mask(delta) %>%
-  freq() %>% as_tibble() %>%
-  filter(value %in% c(70:77, 81:82, 89)) %>%
-  mutate(label = if_else(value %in% c(70:77), 'RIPARIAN', 'WETLAND')) %>%
+  calculate_area(unit = 'ha') %>%
+  filter(CODE_NAME %in% c(70:77, 81:82, 89)) %>%
+  mutate(label = if_else(CODE_NAME %in% c(70:77), 'RIPARIAN', 'WETLAND')) %>%
   group_by(label) %>%
-  summarize(count = sum(count), .groups = 'drop') %>%
-  mutate(targets1_ha = count * 30 * 30 / 10000)
+  summarize(area_ha = sum(area), .groups = 'drop')
 
 targets_plus2 = full_join(targets %>% select(label, total_ha),
-                          change_targets1 %>% select(label, targets1_ha),
+                          change_targets1 %>% select(label, targets1_ha = area_ha),
                           by = 'label') %>%
   mutate(add_ha = total_ha - targets1_ha)
 # wetlands: still need 947 ha
-# riparian: still need 847 ha
+# riparian: still need 684 ha
 
 ## ROUND 2: close the gap-------
 # randomly distribute additional pixels to a subset of the next priority level
@@ -525,19 +525,18 @@ plot(targets2_keep)
 base_plus_targets2 = cover(targets2_keep, base_plus_targets1)
 
 change_targets2 = base_plus_targets2 %>% mask(delta) %>%
-  freq() %>% as_tibble() %>%
-  filter(value %in% c(70:77, 81:82, 89)) %>%
-  mutate(label = if_else(value %in% c(70:77), 'RIPARIAN', 'WETLAND')) %>%
+  calculate_area(unit = 'ha') %>%
+  filter(CODE_NAME %in% c(70:77, 81:82, 89)) %>%
+  mutate(label = if_else(CODE_NAME %in% c(70:77), 'RIPARIAN', 'WETLAND')) %>%
   group_by(label) %>%
-  summarize(count = sum(count), .groups = 'drop') %>%
-  mutate(targets2_ha = count * 30 * 30 / 10000)
+  summarize(area_ha = sum(area), .groups = 'drop')
 
 targets_plus2 = full_join(targets %>% select(label, total_ha),
-                          change_targets2 %>% select(label, targets2_ha),
+                          change_targets2 %>% select(label, targets2_ha = area_ha),
                           by = 'label') %>%
   mutate(add_ha = total_ha - targets2_ha)
-# wetlands: overshot by 3.96 ha
-# riparian: overshot by 6.42 ha
+# wetlands: overshot by 0.09 ha
+# riparian: overshot by 2.19 ha
 
 
 # COMBINED RESTORATION--------
@@ -546,7 +545,7 @@ targets_plus2 = full_join(targets %>% select(label, total_ha),
 # -->assume additional new wetlands are seasonal (except those otherwise
 # designated in existing restoration plans)
 
-restore_all = c(plans,
+restore_all = c(plans_limited,
                 targets1_keep %>% subst(89, 82),
                 targets2_keep %>% subst(89, 82)) %>% sum(na.rm = TRUE)
 writeRaster(restore_all,
@@ -572,8 +571,8 @@ rip_targets_type = lapp(
   })
 plot(rip_targets_type)
 freq(rip_targets_type)
-# 7100: 44991 (undefined "valley foothill riparian")
-# 7600:  4037 (SALIXSHRUB/"willow shrub/scrub")
+# 7100: 42029 (undefined "valley foothill riparian")
+# 7600:  4122 (SALIXSHRUB/"willow shrub/scrub")
 
 
 ## * riparian forest----
@@ -624,7 +623,7 @@ freq(singles)
 # - first find the polygon numbers that are relevant:
 buff_doubles = buff_values_prop %>% filter(n_subclasses > 1) %>%
   select(polygon_num, patchID) %>% distinct()
-#503 patches
+#544 patches
 
 # - remove any patches not included in this set:
 doubles = classify(
@@ -653,7 +652,7 @@ new = buff_values_prop %>% filter(n_subclasses > 1) %>% split(.$patchID) %>%
 # - match the new random values to the cell numbers
 assignments = bind_cols(cellnum, new)
 assignments %>% filter(patchID...1 != patchID...4)  # should be none!
-# 44745 cells
+# 41811 cells
 
 # transfer the random assignments to the corresponding patch IDs
 doubles[assignments$cellnum] <- assignments$value
@@ -681,6 +680,13 @@ writeRaster(restore_all_ripdetail,
 
 # OVERLAY ON BASELINE------------
 scenario_restoration = cover(restore_all_ripdetail, baseline)
+
+# final check against objectives:
+scenario_restoration %>% mask(delta) %>% calculate_area(unit = 'ha') %>%
+  filter(CODE_NAME %in% c(70:82, 89)) %>%
+  mutate(label = if_else(CODE_NAME %in% c(71:77), 'RIPARIAN', 'WETLAND')) %>%
+  group_by(label) %>% summarize(area = sum(area))
+
 levels(scenario_restoration) <- key %>% select(CODE_BASELINE, CODE_NAME) %>%
   drop_na() %>% as.data.frame()
 coltab(scenario_restoration) <- key %>% select(CODE_BASELINE, CODE_NAME, COLOR) %>%
@@ -730,7 +736,7 @@ delta_restoration %>%
   arrange(change) %>%
   DeltaMultipleBenefits::plot_change(scale = 1000000) +
   labs(x = NULL, y = bquote(' ' *Delta~ 'total area ('~km^2*')')) +
-  theme_bw() + coord_flip() +
+  theme_bw() + coord_flip() +  ylim(-50, 100) +
   theme(axis.text = element_text(size = 18),
         axis.title = element_text(size = 18))
 ggsave('fig/change_scenario1_restoration.png', height = 7.5, width = 6)
