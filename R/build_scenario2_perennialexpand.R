@@ -26,7 +26,7 @@ delta_buff10k = read_sf('GIS/boundaries/Legal_Delta_boundary_buff10k.shp') %>%
   st_transform(crs = '+proj=utm +zone=10 +datum=WGS84 +units=m +no_defs')
 template = rasterize(vect(delta_buff10k), extend(delta, delta_buff10k))
 
-baseline = rast('GIS/landscape_rasters/veg_baseline_fall.tif')
+baseline = rast('GIS/landscape_rasters/veg_baseline.tif')
 baseline_win = rast('GIS/landscape_rasters/veg_baseline_winter.tif')
 key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
 
@@ -60,20 +60,19 @@ tab %>% rlang::set_names(c('baseline', 'bbau', 'n')) %>%
 
 bbau_limited = lapp(c(bbau, baseline),
                     function(x, y) {
-                      ifelse(y %in% c(11:19, 30, 60, 70:100) &
-                               !is.na(x), NA, x)
+                      ifelse(y %in% c(11:19, 30, 60, 70:100), NA, x)
                     })
 freq(bbau); freq(bbau_limited)
 #dropped a lot (but a lot of existing perennial crops)
 
 # of the remaining projected perennial crops, keep only patches > 1 acre
 # (eliminate many single pixel additions)
-bbau_patches = bbau_limited %>% patches(directions = 8) #values up to 15607
+bbau_patches = bbau_limited %>% patches(directions = 8) #values up to 15599
 patchlist = freq(bbau_patches) %>% as_tibble() %>%
   mutate(ID = c(1:nrow(freq(bbau_patches))),
          area.ha = count * 30 * 30 / 10000) %>%
   filter(area.ha >= 0.4)
-# 3419 patches remaining, representing nearly 25k ha
+# 3392 patches remaining
 
 # classify all included patch IDs as new perennial cropland; rest to NA
 bbau_clean = classify(bbau_patches,
@@ -105,7 +104,7 @@ bbau_patches1 = bbau_clean %>% patches(directions = 8)
 patchlist1 = freq(bbau_patches1) %>% as_tibble() %>%
   mutate(order = c(1:nrow(freq(bbau_patches1)))) %>%
   select(order, patch_name = value, count)
-#3419 distinct patches
+#3392 distinct patches
 
 # convert to polygons, find centroids and buffer
 bbau_patches1_buff = as.polygons(bbau_patches1) %>% centroids() %>%
@@ -117,7 +116,7 @@ buff_values1 = extract(baseline_perennials, bbau_patches1_buff)
 # check for missing buffers (with all cells within 5km NA)
 buff_values1 %>% filter(!is.na(lyr1)) %>%
   pull(ID) %>% unique() %>% length()
-#3405 (which means 14 not yet covered)
+#3383 (which means 9 not yet covered)
 
 # for each buffer, calculate the proportions in each subclass
 buff_values1_prop = buff_values1 %>%
@@ -216,11 +215,11 @@ plot(bbau_patches2)
 patchlist2 = freq(bbau_patches2) %>% as_tibble() %>%
   mutate(order = c(1:nrow(freq(bbau_patches2)))) %>%
   select(order, patch_name = value, count)
-#14 distinct patches left
+#9 distinct patches left
 
-# convert to polygons, find centroids and 2km buffer
+# convert to polygons, find centroids and buffer
 bbau_patches2_buff = as.polygons(bbau_patches2) %>% centroids() %>%
-  buffer(width = 5000)
+  buffer(width = 20000)
 
 # extract baseline cell values for all cells in each buffer
 buff_values2 = extract(baseline_perennials2, bbau_patches2_buff)
@@ -228,7 +227,7 @@ buff_values2 = extract(baseline_perennials2, bbau_patches2_buff)
 # check for missing buffers (with all cells within 5km NA)
 buff_values2 %>% filter(!is.na(lyr1)) %>%
   pull(ID) %>% unique() %>% length()
-#14 (ALL ARE COVERED)
+#97 (all are covered)
 
 # for each buffer, calculate the proportions in each subclass
 buff_values2_prop = buff_values2 %>%
@@ -296,7 +295,7 @@ plot(cover(bbau_round2_doubles, bbau_patches2))
 
 # OVERLAY round 1 results on baseline
 bbau_round2 = cover(bbau_round2_doubles, bbau_round1)
-plot(bbau_round2)
+plot(as.factor(bbau_round2))
 
 ## CROSSTAB-------
 crosstab(c(bbau_clean,
@@ -366,7 +365,7 @@ delta_perex %>%
   arrange(change) %>%
   DeltaMultipleBenefits::plot_change(scale = 1000000) +
   labs(x = NULL, y = bquote(' ' *Delta~ 'total area ('~km^2*')')) +
-  theme_bw() + coord_flip() + ylim(-50, 150) +
+  theme_bw() + coord_flip() + ylim(-50, 100) +
   theme(axis.text = element_text(size = 18),
         axis.title = element_text(size = 18))
 ggsave('fig/change_scenario2_perennialexpand.png', height = 7.5, width = 6)
