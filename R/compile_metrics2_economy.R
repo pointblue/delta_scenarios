@@ -18,20 +18,29 @@ source('R/packages.R')
 
 
 ## compile raw data-----
-cropdat_raw = purrr::map_df(paste0('data_orig/AgComm/', list.files('data_orig/AgComm')),
-                        read_csv,
-                        col_types = cols('Crop Name' = 'f',
-                                         Unit = 'f')) %>%
+cropdat_raw = purrr::map_dfr(
+  paste0('data_orig/AgComm/', list.files('data_orig/AgComm')),
+  read_csv,
+  col_types = cols('Crop Name' = 'f',
+                   Unit = 'f')
+  ) %>%
   filter(County %in% c('Sacramento', 'San Joaquin', 'Yolo', 'Contra Costa',
                        'Solano')) %>% #leave out Alameda - mostly not in Delta
+  # combine new columns from 2020
+  mutate(price_per_unit = case_when(!is.na(`Price P/U`) ~ `Price P/U`,
+                                    !is.na(`Price (Dollars/Unit)`) ~ `Price (Dollars/Unit)`,
+                                    TRUE ~ `Price P/U`),
+         value = case_when(!is.na(Value) ~ Value,
+                           !is.na(`Value (Dollars)`) ~ `Value (Dollars)`,
+                           TRUE ~ Value)) %>%
   select(year = Year, crop = `Crop Name`, county = County,
          harvest_ac = `Harvested Acres`, #may be << total acres
          production = Production, # total number of "units" produced
          unit = Unit,
-         price_per_unit = `Price P/U`, #$ per production unit
-         value = Value #dollars = price per unit * production
+         price_per_unit, #$ per production unit
+         value #dollars = price per unit * production
          ) %>%
-  filter(!grepl('apiary|cattle|chicken|fish|livestock|manure|milk|nursery|poultry|flowers foliage|sheep|turkey|wool|firewood',
+  filter(!grepl('apiary|cattle|chicken|fish|livestock|manure|milk|nursery|poultry|flowers foliage|flowering & foliage|sheep|turkey|wool|firewood',
                 crop, ignore.case = TRUE))
 
 ## classify landcovers----------
@@ -46,7 +55,7 @@ cropdat_classify = cropdat_raw %>%
             crop, ignore.case = TRUE) ~ 'ORCHARD_DECIDUOUS',
       grepl('orchard|peaches|pears|plums|walnuts|pistachios',
             crop, ignore.case = TRUE) ~ 'ORCHARD_DECIDUOUS',
-      grepl('olive', crop, ignore.case = TRUE) ~ 'ORCHARD_CITRUS&SUBTROPICAL',
+      grepl('olive|carob', crop, ignore.case = TRUE) ~ 'ORCHARD_CITRUS&SUBTROPICAL',
       grepl('grape', crop, ignore.case = TRUE) ~ 'VINEYARD',
       grepl('corn|sorghum|sudan', crop, ignore.case = TRUE) ~ 'FIELD_CORN',
       grepl('alfalfa', crop, ignore.case = TRUE) ~ 'PASTURE_ALFALFA',
@@ -71,6 +80,7 @@ cropdat_classify = cropdat_raw %>%
       crop == 'WALNUTS ENGLISH' ~ 'WALNUTS',
       CODE_NAME == 'ORCHARD_DECIDUOUS' ~ 'MISCELLANEOUS DECIDUOUS',
       crop == 'OLIVES' ~ 'OLIVES',
+      crop == 'CAROBS' ~ 'CAROBS',
       CODE_NAME == 'PASTURE_ALFALFA' ~ 'ALFALFA & ALFALFA MIXTURES',
       CODE_NAME == 'FIELD_CORN' ~ 'CORN, SORGHUM, OR SUDAN',
       CODE_NAME == 'GRAIN&HAY_WHEAT' ~ 'WHEAT',
@@ -108,6 +118,7 @@ cropdat_sum = cropdat_classify %>%
   group_by(CODE_NAME, SUBCLASS, year) %>%
   summarize(across(c(harvest_ac, production, value), sum, na.rm = TRUE),
             .groups = 'drop')
+write_csv(cropdat_sum, 'data_orig/cropdat_summary.csv')
 
 ## calculate average production value------
 # $ per ha of each land cover class and subclass, averaged over all 5 years
@@ -129,7 +140,7 @@ cropdat_subclass = cropdat_sum %>%
          UNIT = 'USD per ha per year (thousands)') %>%
   select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, SUBCLASS,
          SCORE, SCORE_MIN, SCORE_MAX, UNIT)
-write_csv(cropdat_subclass, 'data/multiplebenefits/crop_production_value_subclass.csv')
+write_csv(cropdat_subclass, 'data/crop_production_value_subclass.csv')
 
 ## by class:
 cropdat_class = cropdat_sum %>%
@@ -150,17 +161,35 @@ cropdat_class = cropdat_sum %>%
          UNIT = 'USD per ha per year (thousands)') %>%
   select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, SCORE,
          SCORE_MIN, SCORE_MAX, UNIT)
-write_csv(cropdat_class, 'data/multiplebenefits/crop_production_value.csv')
+
+# check for missing:
+cropdat_class %>% select(METRIC, CODE_NAME, SCORE) %>%
+  pivot_wider(names_from = 'METRIC', values_from = 'SCORE') %>%
+  mutate(CODE_NAME = factor(CODE_NAME, levels = key %>% pull(CODE_NAME))) %>%
+  complete(CODE_NAME) %>% print(n = 40)
+# IDLE, URBAN, RIPARIAN, WETLAND_MANAGED, WETLAND_OTHER, WATER, WOODLAND&SCRUB,
+# BARREN: assume zero crop production value
+
+cropdat_class_fill = cropdat_class %>%
+  bind_rows(
+    expand_grid(
+      tibble(CODE_NAME = c('IDLE', 'URBAN', 'RIPARIAN', 'WETLAND_MANAGED',
+                           'WETLAND_OTHER', 'WOODLAND&SCRUB', 'BARREN')),
+      cropdat_class %>% filter(CODE_NAME == 'GRASSLAND') %>%
+        mutate(SCORE = 0, SCORE_MIN = NA, SCORE_MAX = NA) %>% select(-CODE_NAME)
+    )
+  )
+write_csv(cropdat_class_fill, 'data/crop_production_value.csv')
 
 # summary plots
-cropdat_class %>%
+cropdat_class_fill %>%
   mutate(CODE_NAME = factor(
     CODE_NAME,
-    levels = cropdat_class %>% arrange(SCORE) %>% pull(CODE_NAME))) %>%
+    levels = cropdat_class_fill %>% arrange(SCORE) %>% pull(CODE_NAME))) %>%
   ggplot(aes(SCORE, CODE_NAME, xmin = SCORE_MIN, xmax = SCORE_MAX)) +
   geom_col() + geom_errorbar(width = 0)
 # highest gross production value in ORCHARD_DECIDUOUS, ROW, VINEYARD
-# ORCHARD_CITRUS&SUBTROPICAL, RICE
+# ORCHARD_CITRUS&SUBTROPICAL
 
 cropdat_subclass %>%
   mutate(SUBCLASS = factor(SUBCLASS,
@@ -173,52 +202,52 @@ cropdat_subclass %>%
 # within these classes, highest rates for BUSH BERRIES and STRAWBERRIES
 
 
-## compare to report---------
-# The State of Delta Agriculture
-library(tabulizer)
-report_acres = extract_tables(
-  'data_orig/Ag-ESP-update-agricultural-trends-FINAL-508.pdf',
-  pages = 9, output = 'data.frame')[[1]] %>%
-  slice(3:15) %>%
-  rlang::set_names(c('Crop_Category', 'Alameda', 'Contra Costa', 'Sacramento',
-              'San Joaquin', 'Solano', 'Yolo', 'Total')) %>%
-  select(Crop_Category, Acres = Total) %>%
-  mutate(
-    Crop_Category = case_when(
-      Crop_Category == 'Truck, Nursery &' ~ 'Truck, Nursery & Berry Crops',
-      Crop_Category == 'Deciduous Fruit &' ~ 'Deciduous Fruit & Nuts',
-      Crop_Category == '' ~ 'Citrus & Subtropical',
-      TRUE ~ Crop_Category)) %>%
-  filter(!Acres == '') %>%
-  mutate(Acres = gsub(',', '', Acres),
-         Acres = as.numeric(Acres),
-         ha = Acres / 2.47105)
-# very similar to baseline_area$CLASS_AREA estimates, with increases in
-# ORCHARD_DECIDUOUS since 2016
-
-report_revenue = extract_tables(
-  'data_orig/Ag-ESP-update-agricultural-trends-FINAL-508.pdf',
-  pages = 21, output = 'data.frame')[[1]] %>%
-  slice(2:14) %>%
-  select(Crop_Category = Crop.Category, Revenue = TOTAL) %>%
-  mutate(
-    Crop_Category = case_when(
-      Crop_Category == 'Deciduous Fruit' ~ 'Deciduous Fruit & Nuts',
-      Crop_Category == 'Citrus &' ~ 'Citrus & Subtropical',
-      Crop_Category == 'Grain & Hay' ~ 'Grain & Hay Crops',
-      Crop_Category == 'Truck, Nursery &' ~ 'Truck, Nursery & Berry Crops',
-      TRUE ~ Crop_Category
-    )
-  ) %>%
-  filter(!Revenue == '') %>%
-  mutate(Revenue = gsub(',', '', Revenue),
-         Revenue = as.numeric(Revenue) * 1000) %>% #reported in thousands
-  left_join(report_acres) %>%
-  mutate(revenue_ha = Revenue/ha)
-# fairly similar -- correct order of magnitude and general rankings
-# - lower in the report: ORCHARD_DECIDUOUS, RICE
-# - higher in the report: ROW/TRUCK, CITRUS, VINEYARD
-# - rest generally in the right range
+# ## compare to report---------
+# # The State of Delta Agriculture
+# library(tabulizer)
+# report_acres = extract_tables(
+#   'data_orig/Ag-ESP-update-agricultural-trends-FINAL-508.pdf',
+#   pages = 9, output = 'data.frame')[[1]] %>%
+#   slice(3:15) %>%
+#   rlang::set_names(c('Crop_Category', 'Alameda', 'Contra Costa', 'Sacramento',
+#               'San Joaquin', 'Solano', 'Yolo', 'Total')) %>%
+#   select(Crop_Category, Acres = Total) %>%
+#   mutate(
+#     Crop_Category = case_when(
+#       Crop_Category == 'Truck, Nursery &' ~ 'Truck, Nursery & Berry Crops',
+#       Crop_Category == 'Deciduous Fruit &' ~ 'Deciduous Fruit & Nuts',
+#       Crop_Category == '' ~ 'Citrus & Subtropical',
+#       TRUE ~ Crop_Category)) %>%
+#   filter(!Acres == '') %>%
+#   mutate(Acres = gsub(',', '', Acres),
+#          Acres = as.numeric(Acres),
+#          ha = Acres / 2.47105)
+# # very similar to baseline_area$CLASS_AREA estimates, with increases in
+# # ORCHARD_DECIDUOUS since 2016
+#
+# report_revenue = extract_tables(
+#   'data_orig/Ag-ESP-update-agricultural-trends-FINAL-508.pdf',
+#   pages = 21, output = 'data.frame')[[1]] %>%
+#   slice(2:14) %>%
+#   select(Crop_Category = Crop.Category, Revenue = TOTAL) %>%
+#   mutate(
+#     Crop_Category = case_when(
+#       Crop_Category == 'Deciduous Fruit' ~ 'Deciduous Fruit & Nuts',
+#       Crop_Category == 'Citrus &' ~ 'Citrus & Subtropical',
+#       Crop_Category == 'Grain & Hay' ~ 'Grain & Hay Crops',
+#       Crop_Category == 'Truck, Nursery &' ~ 'Truck, Nursery & Berry Crops',
+#       TRUE ~ Crop_Category
+#     )
+#   ) %>%
+#   filter(!Revenue == '') %>%
+#   mutate(Revenue = gsub(',', '', Revenue),
+#          Revenue = as.numeric(Revenue) * 1000) %>% #reported in thousands
+#   left_join(report_acres) %>%
+#   mutate(revenue_ha = Revenue/ha)
+# # fairly similar -- correct order of magnitude and general rankings
+# # - lower in the report: ORCHARD_DECIDUOUS, RICE
+# # - higher in the report: ROW/TRUCK, CITRUS, VINEYARD
+# # - rest generally in the right range
 
 # "Truck crops have high revenue per acre, as this category generates about
 # one-third of total Delta crop revenue on about one-eighth of Delta crop land.
@@ -231,7 +260,7 @@ report_revenue = extract_tables(
 
 # JOBS & WAGES-------
 # Data on average monthly employees & average weekly wages for CA, 2015-2019,
-# for Sacramento, San Joaquin, Solano, Yolo, Alameda, Contra Costa counties
+# for Sacramento, San Joaquin, Solano, Yolo, <Alameda>, Contra Costa counties
 #
 # Source: CA Employment Development Dept
 # https://data.edd.ca.gov/Industry-Information-/Quarterly-Census-of-Employment-and-Wages-QCEW-/fisq-v939/data
@@ -249,9 +278,13 @@ report_revenue = extract_tables(
 # - notes tourism benefits of wineries/orchards, higher economic returns
 
 ## compile raw data------
-edat_raw <- read_csv('data_orig/Quarterly_Census_of_Employment_and_Wages__QCEW_.csv',
+edat_raw <- read_csv('data_orig/Quarterly_Census_of_Employment_and_Wages__QCEW_2014-2020.csv',
                  col_types = cols()) %>%
-  filter(Quarter == 'Annual') %>%
+  # filter(Quarter == 'Annual') %>%
+  # # as above, leave out Alameda county data, because only a sliver in Delta proper
+  # filter(`Area Name` %in%
+  #          c('Sacramento County', 'San Joaquin County', 'Yolo County',
+  #            'Contra Costa County', 'Solano County')) %>%
   select(county = `Area Name`,
          year = Year,
          industry = `Industry Name`,
@@ -261,10 +294,8 @@ edat_raw <- read_csv('data_orig/Quarterly_Census_of_Employment_and_Wages__QCEW_.
          # wages_weekly = `Average Weekly Wages`,
          NAICS_level = `NAICS Level`,
          NAICS_code = `NAICS Code`) %>%
-  # as above, leave out Alameda county data, because only a sliver in Delta proper
-  filter(county %in%
-           c('Sacramento County', 'San Joaquin County', 'Yolo County',
-             'Contra Costa County', 'Solano County'))
+  mutate(county = gsub(' County', '', county))
+
 
 # subset to relevant industries:
 
@@ -284,7 +315,8 @@ edat_raw %>% filter(NAICS_level == 3) %>% select(NAICS_code, industry) %>%
 # 115 = ag/forestry support activities (soil prep, farm labor mgmt)
 
 edat_table = edat_raw %>%
-  filter(grepl('^111|^1151|^31213|^487|^712|^72121|^81331|^924', NAICS_code)) %>%
+  filter(NAICS_level == 6 & grepl('^111', NAICS_code)) %>%
+  # filter(grepl('^111|^1151|^31213|^487|^712|^72121|^81331|^924', NAICS_code)) %>%
   select(NAICS_level, NAICS_code, industry) %>%
   distinct() %>% arrange(NAICS_code)
 
@@ -309,16 +341,16 @@ edat_subset = edat_raw %>%
 edat_classify = edat_subset %>%
   mutate(
     CODE_NAME = case_when(
-      NAICS_code == 111140 ~ 'GRAIN&HAY_WHEAT',
-      NAICS_code == 111150 ~ 'FIELD_CORN',
-      NAICS_code == 111160 ~ 'RICE',
-      NAICS_code == 111120 ~ 'FIELD', #(SUNFLOWER, SAFFLOWER OIL SEEDS)
-      NAICS_code == 111940 ~ 'PASTURE', #probably includes alfalfa
-      NAICS_code %in% c(111191, 111199) ~ 'GRAIN&HAY',
-      NAICS_code %in% c(111331, 111335, 111336, 111339) ~ 'ORCHARD_DECIDUOUS',
+      NAICS_code == 111140 ~ 'GRAIN&HAY_WHEAT', #wheat
+      NAICS_code == 111150 ~ 'FIELD_CORN', #corn
+      NAICS_code == 111160 ~ 'RICE', #rice
+      NAICS_code == 111120 ~ 'FIELD', #oilseed (SUNFLOWER, SAFFLOWER OIL SEEDS)
+      NAICS_code == 111940 ~ 'PASTURE', #hay farming (probably includes alfalfa?)
+      NAICS_code %in% c(111191, 111199) ~ 'GRAIN&HAY', #oilseed and grain combo; all other grain farming
+      NAICS_code %in% c(111331, 111335, 111336, 111339) ~ 'ORCHARD_DECIDUOUS', #apple, grape, tree nut, fruit/treenut combo
       NAICS_code == 111332 ~ 'VINEYARD',
-      NAICS_code == 111219 ~ 'ROW',
-      NAICS_code == 111998 ~ 'OTHER'
+      NAICS_code == 111219 ~ 'ROW', #other vegetable and melon
+      NAICS_code == 111998 ~ 'OTHER' # all other misc
     ),
     SUBCLASS = case_when(
       NAICS_code == 111331 ~ 'APPLES',
@@ -360,7 +392,7 @@ edat_sum = edat_classify %>%
               summarize(harvest_ac = sum(harvest_ac), .groups = 'drop'),
             by = c('CODE_NAME', 'SUBCLASS', 'year')) %>%
   mutate(harvest_ha = harvest_ac / 2.47105)
-write_csv(edat_classify, 'data_orig/employment_summary.csv')
+write_csv(edat_sum, 'data_orig/employment_summary.csv')
 
 ## calculate averages------
 # employees per ha and wages per employee for each land cover class and
@@ -386,7 +418,7 @@ edat_subclass = edat_sum %>%
   select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, SUBCLASS, SCORE,
          SCORE_MIN, SCORE_MAX, UNIT) %>%
   arrange(METRIC)
-write_csv(edat_subclass, 'data/multiplebenefits/livelihoods_subclass.csv')
+write_csv(edat_subclass, 'data/livelihoods_subclass.csv')
 
 ## by class:
 edat_class = edat_sum %>%
@@ -410,14 +442,47 @@ edat_class = edat_sum %>%
   select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, SCORE,
          SCORE_MIN, SCORE_MAX, UNIT) %>%
   arrange(METRIC)
-write_csv(edat_class, 'data/multiplebenefits/livelihoods.csv')
+
+# check for missing:
+edat_class %>% select(METRIC, CODE_NAME, SCORE) %>%
+  pivot_wider(names_from = 'METRIC', values_from = 'SCORE') %>%
+  mutate(CODE_NAME = factor(CODE_NAME, levels = key %>% pull(CODE_NAME))) %>%
+  complete(CODE_NAME) %>% print(n = 40)
+# ORCHARD_CITRUS&SUBTROPICAL, PASTURE_ALFALFA -- assume same as other orchard
+# and general grain & hay?
+
+# IDLE, GRASSLAND, URBAN, RIPARIAN, WETLAND_MANAGED, WETLAND_OTHER, WATER,
+# WOODLAND&SCRUB, BARREN -- assume these provide zero ag jobs -- BUT note that
+# grassland does have a crop production value
+
+edat_class_fill = edat_class %>%
+  bind_rows(
+    edat_class %>% filter(CODE_NAME == 'ORCHARD_DECIDUOUS') %>%
+      mutate(CODE_NAME = 'ORCHARD_CITRUS&SUBTROPICAL'),
+    edat_class %>% filter(CODE_NAME == 'GRAIN&HAY') %>%
+      mutate(CODE_NAME = 'PASTURE_ALFALFA'),
+    expand_grid(
+      tibble(CODE_NAME = c('IDLE', 'GRASSLAND', 'URBAN', 'RIPARIAN',
+                           'WETLAND_MANAGED', 'WETLAND_OTHER', 'WOODLAND&SCRUB',
+                           'BARREN')),
+      edat_class %>% filter(CODE_NAME == 'VINEYARD') %>%
+        mutate(SCORE = 0, SCORE_MIN = NA, SCORE_MAX = NA) %>% select(-CODE_NAME)
+    )
+  )
+edat_class_fill %>% select(METRIC, CODE_NAME, SCORE) %>%
+  pivot_wider(names_from = 'METRIC', values_from = 'SCORE') %>%
+  mutate(CODE_NAME = factor(CODE_NAME, levels = key %>% pull(CODE_NAME))) %>%
+  complete(CODE_NAME) %>% print(n = 40)
+
+
+write_csv(edat_class_fill, 'data/livelihoods.csv')
 
 
 # summary plots:
-edat_class %>%
+edat_class_fill %>%
   mutate(CODE_NAME = factor(
     CODE_NAME,
-    levels = edat_class %>% filter(METRIC == 'WAGES') %>%
+    levels = edat_class_fill %>% filter(METRIC == 'WAGES') %>%
       arrange(SCORE) %>% pull(CODE_NAME))) %>%
   ggplot(aes(SCORE, CODE_NAME, xmin = SCORE_MIN, xmax = SCORE_MAX)) +
   geom_col() + geom_errorbar(width = 0) + facet_wrap(~METRIC, scales = 'free')
@@ -427,10 +492,10 @@ edat_class %>%
 edat_subclass %>%
   mutate(SUBCLASS = factor(
     SUBCLASS,
-    levels = edat_subclass %>% filter(metric == 'WAGES') %>%
+    levels = edat_subclass %>% filter(METRIC == 'WAGES') %>%
       arrange(SCORE) %>% pull(SUBCLASS))) %>%
   # filter(CODE_NAME %in% c('ORCHARD_DECIDUOUS', 'VINEYARD', 'ROW')) %>%
   ggplot(aes(SCORE/1000, SUBCLASS, xmin = SCORE_MIN/1000, xmax = SCORE_MAX/1000)) +
   geom_col() + geom_errorbar(width = 0) +
-  labs(x = 'value ($/ha, thousands)', y = NULL) + facet_wrap(~metric, scales = 'free')
+  labs(x = 'value ($/ha, thousands)', y = NULL) + facet_wrap(~METRIC, scales = 'free')
 # not much subclass data available....
