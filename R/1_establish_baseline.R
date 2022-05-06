@@ -8,8 +8,8 @@
 # types of wetlands: tidal, non-tidal, and "managed".
 
 # PACKAGES & FUNCTIONS
-source('R/packages.R')
-source('R/functions.R')
+source('R/0_packages.R')
+source('R/0_functions.R')
 
 # reference data:
 delta_shp = read_sf('GIS/boundaries/Legal_Delta_Boundary.shp') %>%
