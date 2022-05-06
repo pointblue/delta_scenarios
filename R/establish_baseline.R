@@ -18,9 +18,6 @@ delta_buff10k = st_buffer(delta_shp, dist = 10100)
 delta = rast('GIS/boundaries/delta.tif')
 template = rasterize(vect(delta_buff10k), extend(delta, delta_buff10k))
 
-# ggplot(delta_buff10k) + geom_sf() + geom_sf(data = delta_shp)
-# ggplot(delta) + ggspatial::layer_spatial()
-
 key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
 
 # REFINE BASELINE SHP---------
@@ -77,15 +74,14 @@ write_sf(veg_clean, 'GIS/VEG_Delta10k_baseline.shp', append = FALSE)
 # land cover classes expected to be needed in the models and scenario analyses
 
 veg_codify = veg_clean %>%
-  codify_baseline(
-    codekey = key) %>%
+  codify_baseline(codekey = key) %>%
   select(CODE_BASELINE, CLASS, everything())
 
 veg_codify %>% st_drop_geometry() %>% select(CODE_BASELINE, CLASS) %>%
   distinct() %>% arrange(CODE_BASELINE) %>% print(n = 64)
 
 veg_raster = rasterize(vect(veg_codify), template, field = 'CODE_BASELINE')
-writeRaster(veg_raster, 'GIS/landscape_rasters/veg_baseline.tif',
+writeRaster(veg_raster, 'GIS/landscape_rasters/veg_baseline_core.tif',
             overwrite = TRUE)
 
 ## NASS------
@@ -152,12 +148,14 @@ landiq_2018_simplify %>%
   write_sf('GIS/VEG_LandIQ_2018_simplify.shp', append = FALSE)
 
 # get acreage of specific crop types within each class within the Delta boundary
-ag_details = landiq_2018_simplify %>%
+landiq_2018_simplify_delta = landiq_2018_simplify %>%
   st_make_valid() %>%
   st_intersection(delta_shp) %>%
-  select(CODE_BASELINE, CLASS, CLASS_MAIN, SUBCLASS_MAIN) %>%
-  mutate(area_ha = as.numeric(st_area(.))/10000) %>%
-  st_drop_geometry() %>%
+  select(CODE_BASELINE, CLASS, CLASS_MAIN, SUBCLASS_MAIN,
+         CODE_BASELINE_WINTER, CLASS_WINTER, SUBCLASS_WINTER) %>%
+  mutate(area_ha = as.numeric(st_area(.))/10000)
+
+ag_details = landiq_2018_simplify_delta %>% st_drop_geometry() %>%
   group_by(CODE_BASELINE, CLASS, SUBCLASS_MAIN) %>%
   summarize(area_ha = sum(area_ha), .groups = 'drop') %>%
   group_by(CODE_BASELINE, CLASS) %>%
@@ -248,7 +246,7 @@ tab %>%
 
 ### winter baseline----------
 # where baseline raster is suitable for a second winter crop (annual crops
-# besides rice, fallow, grassland & pasture, barren), fill in corresponding
+# besides rice, plus fallow, grassland & pasture, barren), fill in corresponding
 # winter value from land iq 2018
 veg_raster_fill_landiq_win = lapp(c(veg_raster_fill_landiq,
                                     landiq_2018_stack$landiq_2018_winter),
@@ -295,3 +293,70 @@ tab2 %>%
   print(n = 30)
 # swaps among: pasture/alfalfa, grain/wheat, row, field, corn (except nothing
 # converts to corn for the winter)
+
+# SUMMARIZE BASELINE LAND USE DATA------
+baseline = rast('GIS/landscape_rasters/veg_baseline.tif')
+baseline_win = rast('GIS/landscape_rasters/veg_baseline_winter.tif')
+
+# for total area of each class, start with primary baseline layer
+baseline_ha = baseline %>% mask(delta) %>%
+  calculate_area() %>%
+  left_join(key %>% select(class = CODE_BASELINE, label = CODE_NAME),
+            by = 'class') %>%
+  mutate(label = case_when(grepl('RIPARIAN', label) ~ 'RIPARIAN',
+                           grepl('WETLAND_MANAGED', label) ~ 'WETLAND_MANAGED',
+                           TRUE ~ label)) %>%
+  group_by(label) %>%
+  summarize(area = sum(area), .groups = 'drop')
+
+# for details on specific crops, use ag_details from Land IQ layer:
+ag_details = read_csv('data/landiq2018_area_detail.csv') %>%
+  select(CLASS, SUBCLASS = SUBCLASS_MAIN, area_ha, total_area, prop) %>%
+  mutate(SUBCLASS = case_when(
+    SUBCLASS %in%
+      c('PEACHES AND NECTARINES', 'PLUMS, PRUNES OR APRICOTS', 'CHERRIES') ~
+      'STONE FRUIT',
+    SUBCLASS == 'PISTACHIOS' ~ 'MISCELLANEOUS DECIDUOUS',
+    SUBCLASS == 'KIWIS' ~ 'MISCELLANEOUS SUBTROPICAL FRUIT',
+    CLASS == 'ORCHARD_DECIDUOUS' & is.na(SUBCLASS) ~ 'MISCELLANEOUS DECIDUOUS',
+    CLASS == 'ORCHARD_CITRUS&SUBTROPICAL' & is.na(SUBCLASS) ~ 'MISCELLANEOUS SUBTROPICAL FRUIT',
+    CLASS == 'GRAIN&HAY' & is.na(SUBCLASS) ~ 'MISCELLANEOUS GRAIN AND HAY',
+    SUBCLASS %in% c('FLOWERS, NURSERY, AND CHRISTMAS TREE FARMS') ~ 'MISCELLANEOUS TRUCK',
+    CLASS == 'ROW' & is.na(SUBCLASS) ~ 'MISCELLANEOUS TRUCK',
+    CLASS == 'IDLE' ~ 'IDLE',
+    CLASS %in% c('URBAN', 'VINEYARD', 'WATER') ~ CLASS,
+    TRUE ~ SUBCLASS)) %>%
+  group_by(CLASS, SUBCLASS, total_area) %>%
+  summarize(area_ha = sum(area_ha), .groups = 'drop') %>%
+  full_join(baseline_ha %>% select(CLASS = label, baseline_total = area)) %>%
+  mutate(total_area = case_when(CLASS %in% c('IDLE', 'URBAN') ~ baseline_total,
+                                is.na(total_area) ~ baseline_total,
+                                TRUE ~ total_area),
+         area_ha = case_when(CLASS %in% c('IDLE', 'URBAN') ~ baseline_total,
+                             is.na(area_ha) ~ baseline_total,
+                             TRUE ~ area_ha),
+         prop = area_ha/total_area,
+         SUBCLASS = if_else(is.na(SUBCLASS), CLASS, SUBCLASS)) %>%
+  select(CLASS, CLASS_AREA = total_area, SUBCLASS, SUBCLASS_AREA = area_ha,
+         SUBCLASS_PROP = prop)
+write_csv(ag_details, 'data/baseline_area.csv')
+
+# identify additional area of different winter crops
+winter_mask = lapp(c(baseline, baseline_win),
+                   function(x, y) {ifelse(x == y, NA, y)})
+writeRaster(winter_mask,
+            filename = 'GIS/landscape_rasters/veg_baseline_winter_mask.tif',
+            overwrite = TRUE)
+
+gains = winter_mask %>% mask(delta) %>% calculate_area() %>%
+  left_join(key %>% select(class = CODE_BASELINE, label = CODE_NAME),
+            by = 'class')
+losses = baseline %>% mask(winter_mask %>% subst(c(0:130), 1) %>% mask(delta)) %>%
+  calculate_area() %>%
+  left_join(key %>% select(class = CODE_BASELINE, label = CODE_NAME),
+            by = 'class')
+net = bind_rows(gains,
+                losses %>% mutate(area = area * -1)) %>%
+  group_by(class, label) %>%
+  summarize(area = sum(area), .groups = 'drop')
+write_csv(net, 'data/baseline_area_winterchange.csv')
