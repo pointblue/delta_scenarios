@@ -13,12 +13,14 @@ source('R/packages.R')
 library(tabulizer)
 
 # reference data:
-baseline = rast('GIS/landscape_rasters/veg_baseline_fall.tif')
+baseline = rast('GIS/landscape_rasters/veg_baseline.tif')
+baseline_win = rast('GIS/landscape_rasters/veg_baseline_winter.tif')
+
 key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
-levels(baseline) = key %>%
-  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
-  as.data.frame()
 delta = rast('GIS/boundaries/delta.tif')
+
+ag_details = read_csv('data/baseline_area.csv')
+winter_change = read_csv('data/baseline_area_winterchange.csv')
 
 # NOTES & OBJECTIVES---------
 # Delta Plan performance measures
@@ -45,6 +47,8 @@ delta = rast('GIS/boundaries/delta.tif')
 # https://www.epa.gov/ingredients-used-pesticide-products/brief-overviews-about-individual-pesticides
 # PubChem notes: https://pubchem.ncbi.nlm.nih.gov/ Pyrethroids:
 # https://www.epa.gov/ingredients-used-pesticide-products/registration-review-pyrethrins-and-pyrethroids
+
+
 
 
 # PESTICIDE RISK LISTS---------
@@ -132,32 +136,6 @@ air$chemname[64] = paste(air$chemname[64], air$chemname[65])
 air$chemname[69] = paste(air$chemname[69], air$chemname[70])
 air = air %>% filter(X2018 != '')
 
-## aquatic risk------------
-# water board report (2009)
-# https://www.waterboards.ca.gov/centralvalley/water_issues/tmdl/central_valley_projects/central_valley_pesticides/risk_evaluation/rre_stff_rpt_feb2009_final.pdf
-
-high_risk = tabulizer::extract_tables('data_orig/pesticides/rre_stff_rpt_feb2009_final.pdf',
-                                      pages = 24)[[1]] %>% as_tibble()
-names(high_risk) <- high_risk %>% slice(1) %>% unlist() %>% gsub('\r', ' ', .)
-high_risk <- high_risk %>% slice(-1) %>% mutate(aquatic_risk = 'high')
-
-mod_risk = tabulizer::extract_tables('data_orig/pesticides/rre_stff_rpt_feb2009_final.pdf',
-                                     pages = 25)[[1]] %>% as_tibble() %>%
-  separate(V3, into = c('V3', 'V4'), sep = ' ')
-names(mod_risk) <- mod_risk %>% slice(1:3) %>%
-  # mutate(rownum = c(1:3)) %>%
-  pivot_longer(V1:V7) %>%
-  group_by(name) %>% summarize(title = paste(value, collapse = ' ')) %>%
-  mutate(title = stringr::str_trim(title),
-         title = gsub('NA ', '', title),
-         title = recode(title, 'Rank Toxicity' = 'Rank of Toxicity')) %>%
-  pull(title)
-mod_risk <- mod_risk %>% slice(-(1:3)) %>%
-  mutate(aquatic_risk = 'moderate')
-
-aquatic_risk = bind_rows(high_risk, mod_risk) %>%
-  select(chemname = ChemName)
-write_csv(aquatic_risk, 'data_orig/pesticides/pesticide_risk_aquatic.csv')
 
 ## Delta Plan critical pesticides---------
 # Performance website for Delta Plan lists "critical pesticides" by water body
@@ -204,6 +182,47 @@ critical_pesticides = read_csv('data_orig/pesticides/Critical Pesticides  Delta 
 # (CHLORPYRIFOS) or in declining use (DISULFOTON)
 
 
+## aquatic risk------------
+# water board report (2009)
+# https://www.waterboards.ca.gov/centralvalley/water_issues/tmdl/central_valley_projects/central_valley_pesticides/risk_evaluation/rre_stff_rpt_feb2009_final.pdf
+
+high_risk = tabulizer::extract_tables('data_orig/pesticides/rre_stff_rpt_feb2009_final.pdf',
+                                      pages = 24)[[1]] %>% as_tibble()
+names(high_risk) <- high_risk %>% slice(1) %>% unlist() %>% gsub('\r', ' ', .)
+high_risk <- high_risk %>% slice(-1) %>% mutate(aquatic_risk = 'high')
+
+mod_risk = tabulizer::extract_tables('data_orig/pesticides/rre_stff_rpt_feb2009_final.pdf',
+                                     pages = 25)[[1]] %>% as_tibble() %>%
+  separate(V3, into = c('V3', 'V4'), sep = ' ')
+names(mod_risk) <- mod_risk %>% slice(1:3) %>%
+  # mutate(rownum = c(1:3)) %>%
+  pivot_longer(V1:V7) %>%
+  group_by(name) %>% summarize(title = paste(value, collapse = ' ')) %>%
+  mutate(title = stringr::str_trim(title),
+         title = gsub('NA ', '', title),
+         title = recode(title, 'Rank Toxicity' = 'Rank of Toxicity')) %>%
+  pull(title)
+mod_risk <- mod_risk %>% slice(-(1:3)) %>%
+  mutate(aquatic_risk = 'moderate')
+
+aquatic_risk = bind_rows(high_risk, mod_risk) %>%
+  select(chemname = ChemName)
+write_csv(aquatic_risk, 'data_orig/pesticides/pesticide_risk_aquatic.csv')
+
+## all---------
+pesticide_table = bind_rows(repro %>% select(chemname) %>% mutate(group = 'repro'),
+          carcinogens %>% select(chemname) %>% mutate(group = 'carcinogen'),
+          organop %>% select(chemname) %>% mutate(group = 'organop'),
+          groundwater %>% select(chemname) %>% mutate(group = 'groundwater'),
+          air %>% select(chemname) %>% mutate(group = 'air'),
+          aquatic_risk %>% select(chemname) %>% mutate(group = 'aquatic'),
+          critical_pesticides %>% select(chemname) %>% mutate(group = 'critical')) %>%
+  distinct() %>%
+  mutate(value = TRUE) %>%
+  pivot_wider(names_from = group, values_from = value) %>%
+  arrange(chemname)
+write_csv(pesticide_table, 'data_orig/pesticides/pesticide_risk_groups.csv')
+
 
 # PESTICIDE USE DATA--------------
 # original data from: ftp://transfer.cdpr.ca.gov/pub/outgoing/pur_archives
@@ -212,71 +231,69 @@ critical_pesticides = read_csv('data_orig/pesticides/Critical Pesticides  Delta 
 # 2016, 2017, and 2018 (most recent available as of Nov 2021)
 
 ## compile raw data--------
-pur_raw =
-  bind_rows(
-    purrr::map_df(paste0('data_orig/pesticides/pur2018/',
-                         list.files('data_orig/pesticides/pur2018/',
-                                    pattern = 'udc18_01|udc18_07|udc18_34|udc18_29|udc18_48|udc18_50|udc18_57')),
-                  read_csv,
-                  col_types = cols(county_cd = 'c',
-                                   township = 'c',
-                                   grower_id = 'c',
-                                   license_no = 'c')) %>%
-      mutate(year = 2018),
-    purrr::map_df(paste0('data_orig/pesticides/pur2017/',
-                         list.files('data_orig/pesticides/pur2017/',
-                                    pattern = 'udc17_01|udc17_07|udc17_34|udc17_29|udc17_48|udc17_50|udc17_57')),
-                  read_csv,
-                  col_types = cols(county_cd = 'c',
-                                   township = 'c',
-                                   grower_id = 'c',
-                                   license_no = 'c')) %>%
-      mutate(year = 2017),
-    purrr::map_df(paste0('data_orig/pesticides/pur2016/',
-                         list.files('data_orig/pesticides/pur2016/',
-                                    pattern = 'udc16_01|udc16_07|udc16_34|udc16_29|udc16_48|udc16_50|udc16_57')),
-                  read_csv,
-                  col_types = cols(county_cd = 'c',
-                                   township = 'c',
-                                   grower_id = 'c',
-                                   license_no = 'c')) %>%
-      mutate(year = 2016)
-  ) %>%
-  # add land cover details
-  left_join(
-    bind_rows(
-      read_csv('data_orig/pesticides/pur2018/site.txt', col_types = cols()) %>%
-        mutate(year = 2018),
-      read_csv('data_orig/pesticides/pur2017/site.txt', col_types = cols()) %>%
-        mutate(year = 2017),
-      read_csv('data_orig/pesticides/pur2016/site.txt', col_types = cols()) %>%
-        mutate(year = 2016)
-    ), by = c('site_code', 'year')) %>%
-  # add pesticide product info
-  left_join(
-    bind_rows(
-      read_csv('data_orig/pesticides/pur2018/product.txt',
-               col_types = cols(condreg_sw = 'c', agriccom_sw = 'c')) %>%
-        mutate(year = 2018),
-      read_csv('data_orig/pesticides/pur2017/product.txt',
-               col_types = cols(condreg_sw = 'c', agriccom_sw = 'c')) %>%
-        mutate(year = 2017),
-      read_csv('data_orig/pesticides/pur2016/product.txt',
-               col_types = cols(condreg_sw = 'c', agriccom_sw = 'c')) %>%
-        mutate(year = 2016)
-    ) %>% select(prodno, product_name, gen_pest_ind, signlwrd_ind, year),
-    by = c('prodno', 'year')) %>%
-  # add chemical name info
-  left_join(
-    bind_rows(
-      read_csv('data_orig/pesticides/pur2018/chemical.txt', col_types = cols()) %>%
-        mutate(year = 2018),
-      read_csv('data_orig/pesticides/pur2017/chemical.txt', col_types = cols()) %>%
-        mutate(year = 2017),
-      read_csv('data_orig/pesticides/pur2016/chemical.txt', col_types = cols()) %>%
-        mutate(year = 2016)
-    ), by = c('chem_code', 'year')) %>%
-  # format
+# include only the 5 counties in the Delta
+# 07 = Contra Costa
+# 34 = Sacramento
+# 39 = San Joaquin
+# 48 = Solano
+# 57 = Yolo
+
+years = c(2014:2018)
+
+pur_raw = purrr::map_df(years %>% setNames(years),
+                        function(x) {
+                          fl = list.files(
+                            paste0('data_orig/pesticides/pur', x, '/'),
+                            pattern = '_07|_34|_39|_48|_57',
+                            full.names = TRUE)
+                          purrr::map_df(fl, read_csv,
+                                        col_types = cols(county_cd = 'c',
+                                                         township = 'c',
+                                                         grower_id = 'c',
+                                                         license_no = 'c',
+                                                         site_loc_id = 'c',
+                                                         aer_gnd_ind = 'c',
+                                                         acre_planted = 'n',
+                                                         unit_planted = 'c',
+                                                         error_flag = 'c',
+                                                         applic_time = 'c',
+                                                         base_ln_mer = 'c',
+                                                         tship_dir = 'c',
+                                                         range = 'c',
+                                                         range_dir = 'c',
+                                                         section = 'n',
+                                                         comtrs = 'c'))
+                        }, .id = 'year')
+
+# compile land cover details
+landcover = purrr::map_dfr(years %>% setNames(years),
+                           ~read_csv(
+                             paste0('data_orig/pesticides/pur', .x, '/site.txt'),
+                             col_types = cols()),
+                          .id = 'year')
+
+# pesticide product info
+product = purrr::map_dfr(years %>% setNames(years),
+                         ~read_csv(
+                           paste0('data_orig/pesticides/pur', .x, '/product.txt'),
+                           col_types = cols(condreg_sw = 'c',
+                                            agriccom_sw = 'c')) %>%
+                           select(prodno, product_name, gen_pest_ind,
+                                  signlwrd_ind),
+                         .id = 'year')
+
+# chemical name info
+chemname = purrr::map_dfr(years %>% setNames(years),
+                          ~read_csv(
+                            paste0('data_orig/pesticides/pur', .x, '/chemical.txt'),
+                            col_types = cols()),
+                          .id = 'year')
+
+pur_raw = pur_raw %>%
+  left_join(landcover, by = c('site_code', 'year'))  %>%
+  left_join(product, by = c('prodno', 'year')) %>%
+  left_join(chemname, by = c('chem_code', 'year')) %>%
+  # format:
   mutate(gen_pest_ind = recode(gen_pest_ind,
                                'C' = 'Chemical',
                                'M' = 'Microbial',
@@ -302,22 +319,25 @@ write_csv(pur_raw, 'data_orig/pesticides/pesticide_use_raw.csv')
 
 ## address error codes-----
 # error list
-errors = bind_rows(
-  full_join(read_csv('data_orig/pesticides/pur2018/errors2018.txt'),
-            read_csv('data_orig/pesticides/pur2018/changes2018.txt'),
-            by = c('use_no', 'error_id')) %>%
-    mutate(year = 2018),
-  full_join(read_csv('data_orig/pesticides/pur2017/errors2017.txt'),
-            read_csv('data_orig/pesticides/pur2017/changes2017.txt'),
-            by = c('use_no', 'error_id')) %>%
-    mutate(year = 2017),
-  full_join(read_csv('data_orig/pesticides/pur2016/errors2016.txt'),
-            read_csv('data_orig/pesticides/pur2016/changes2016.txt'),
-            by = c('use_no', 'error_id')) %>%
-    mutate(year = 2016)
-)
+errors = purrr::map_dfr(years %>% setNames(years),
+                        function(x) {
+                          full_join(
+                            read_csv(
+                              paste0('data_orig/pesticides/pur', x, '/errors',
+                                     x, '.txt'),
+                              col_types = cols()),
+                            read_csv(
+                              paste0('data_orig/pesticides/pur', x, '/changes',
+                                     x, '.txt'),
+                              col_types = cols()),
+                            by = c('use_no', 'error_id')
+                          )
+                        }, .id = 'year')
+
+# error_code 80: duplicates
 duplist = errors %>% filter(error_code == 80) %>% select(year, use_no) %>%
   mutate(use_id = paste(year, use_no, sep = '_'))
+
 # ignore error_code 14: invalid site code
 
 # error_code 47: area treated > area planted (update area planted with new value)
@@ -335,10 +355,13 @@ trtlist = errors %>% filter(error_code == 23) %>%
 
 pur_clean = pur_raw %>%
   mutate(use_id = paste(year, use_no, sep = '_')) %>%
-  filter(!use_id %in% duplist$use_id) %>%  # remove duplicates (42,004)
-  left_join(arealist %>% select(use_id, new_value), by = 'use_id') %>% #fix acre planted data
+  # remove duplicates (42,004)
+  filter(!use_id %in% duplist$use_id) %>%
+  #fix acre planted data
+  left_join(arealist %>% select(use_id, new_value), by = 'use_id') %>%
   mutate(acre_planted = if_else(!is.na(new_value), as.numeric(new_value), acre_planted)) %>%
   select(-new_value) %>%
+  # fix acre treated data
   left_join(trtlist %>% select(use_id, new_value), by = 'use_id') %>%
   mutate(acre_treated = if_else(!is.na(new_value), as.numeric(new_value), acre_treated)) %>%
   select(-new_value)
@@ -352,25 +375,19 @@ plss = sf::read_sf('GIS/boundaries/PLSS_Delta.shp')
 pur_clean_delta = pur_clean %>% filter(comtrs %in% plss$CO_MTRS) %>%
   # exclude those without active ingredients?
   filter(!is.na(chemname))
-# 114188 obs of 43 variables
+# 298597 obs of 43 variables
 
 ## add risk info----------
 
 pur_delta_risks = pur_clean_delta %>%
-  left_join(repro %>% select(chemname) %>% mutate(repro = TRUE)) %>%
-  left_join(carcinogens %>% select(chemname) %>% mutate(carcinogen = TRUE)) %>%
-  left_join(organop %>% select(chemname) %>% mutate(organop = TRUE)) %>%
-  left_join(groundwater %>% select(chemname) %>% mutate(groundwater = TRUE)) %>%
-  left_join(air %>% select(chemname) %>% mutate(air = TRUE)) %>%
-  left_join(aquatic_risk %>% select(chemname) %>% mutate(aquatic = TRUE)) %>%
-  left_join(critical_pesticides %>% select(chemname) %>% mutate(critical = TRUE)) %>%
+  left_join(pesticide_table, by = 'chemname') %>%
   select(year, site_name, county_cd, product_name, chemname, signlwrd_ind,
-         repro, carcinogen, organop, groundwater, air, aquatic, critical,
+         repro, carcinogen, groundwater, air, aquatic, critical,
          gen_pest_ind, aer_gnd_ind, lbs_chm_used, acre_treated, acre_planted) %>%
-  filter(!(signlwrd_ind == 'None' & is.na(repro) & is.na(carcinogen) &
-             is.na(organop) & is.na(groundwater) & is.na(air) & is.na(aquatic) &
-             is.na(critical)))
+  filter(!(is.na(repro) & is.na(carcinogen) & is.na(groundwater) & is.na(air) &
+             is.na(aquatic) & is.na(critical)))
 write_csv(pur_delta_risks, 'data_orig/pesticides/pesticide_use_compiled.csv')
+# --> including only those pesticides listed in one of the risk groups (excluding the organop group)
 
 # gen_pest_in: general pesticide type; C = chemical, M = microbial, K = both
 # rodent_sw: X = product registered as a pesticide
@@ -485,54 +502,14 @@ pur_simplify = pur_delta_risks %>%
   filter(CODE_NAME != 'UNKNOWN') %>% #outdoor plants in containers, greenhouse plants, rights of way, research commodity
   # summarize by all pesticide groups
   group_by(year, CODE_NAME, SUBCLASS, site_name, chemname, repro, carcinogen,
-           organop, groundwater, air, aquatic, critical) %>%
+           groundwater, air, aquatic, critical) %>%
   summarize(across(c(lbs_chm_used, acre_treated, acre_planted), sum, na.rm = TRUE),
             .groups = 'drop')
 write_csv(pur_simplify, 'data_orig/pesticides/pesticide_use_annual_summary.csv')
 
 ## calculate annual use rates------
-# lbs of chemical used per ha of each land cover class and subclass
+# lbs of chemical used per ha of each land cover class and subclass by concern group and overall
 
-# for total area of each class, start with baseline layer
-baseline_ha = baseline %>% mask(delta) %>% freq() %>% as_tibble() %>%
-  mutate(label = case_when(grepl('RIPARIAN', label) ~ 'RIPARIAN',
-                           grepl('WETLAND_MANAGED', label) ~ 'WETLAND_MANAGED',
-                           TRUE ~ label)) %>%
-  group_by(label) %>%
-  summarize(count = sum(count), .groups = 'drop') %>%
-  mutate(area_ha = count * 30 * 30 / 10000)
-
-# for details on specific crops, use ag_details from Land IQ layer:
-ag_details = read_csv('data/landiq2018_area_detail.csv') %>%
-  select(CLASS, SUBCLASS = SUBCLASS_MAIN, area_ha, total_area, prop) %>%
-  mutate(SUBCLASS = case_when(
-    SUBCLASS %in%
-      c('PEACHES AND NECTARINES', 'PLUMS, PRUNES OR APRICOTS', 'CHERRIES') ~
-      'STONE FRUIT',
-    SUBCLASS == 'PISTACHIOS' ~ 'MISCELLANEOUS DECIDUOUS',
-    SUBCLASS == 'KIWIS' ~ 'MISCELLANEOUS SUBTROPICAL FRUIT',
-    CLASS == 'ORCHARD_DECIDUOUS' & is.na(SUBCLASS) ~ 'MISCELLANEOUS DECIDUOUS',
-    CLASS == 'ORCHARD_CITRUS&SUBTROPICAL' & is.na(SUBCLASS) ~ 'MISCELLANEOUS SUBTROPICAL FRUIT',
-    CLASS == 'GRAIN&HAY' & is.na(SUBCLASS) ~ 'MISCELLANEOUS GRAIN AND HAY',
-    SUBCLASS %in% c('FLOWERS, NURSERY, AND CHRISTMAS TREE FARMS') ~ 'MISCELLANEOUS TRUCK',
-    CLASS == 'ROW' & is.na(SUBCLASS) ~ 'MISCELLANEOUS TRUCK',
-    CLASS == 'IDLE' ~ 'IDLE',
-    CLASS %in% c('URBAN', 'VINEYARD', 'WATER') ~ CLASS,
-    TRUE ~ SUBCLASS)) %>%
-  group_by(CLASS, SUBCLASS, total_area) %>%
-  summarize(area_ha = sum(area_ha), .groups = 'drop') %>%
-  full_join(baseline_ha %>% select(CLASS = label, baseline_total = area_ha)) %>%
-  mutate(total_area = case_when(CLASS %in% c('IDLE', 'URBAN') ~ baseline_total,
-                                is.na(total_area) ~ baseline_total,
-                                TRUE ~ total_area),
-         area_ha = case_when(CLASS %in% c('IDLE', 'URBAN') ~ baseline_total,
-                             is.na(area_ha) ~ baseline_total,
-                             TRUE ~ area_ha),
-         prop = area_ha/total_area,
-         SUBCLASS = if_else(is.na(SUBCLASS), CLASS, SUBCLASS)) %>%
-  select(CLASS, CLASS_AREA = total_area, SUBCLASS, SUBCLASS_AREA = area_ha,
-         SUBCLASS_PROP = prop)
-write_csv(ag_details, 'data/baseline_area.csv')
 
 pur_details = pur_simplify %>%
   mutate(total = TRUE) %>% select(year:critical, total, everything()) %>%
@@ -540,67 +517,46 @@ pur_details = pur_simplify %>%
   filter(!is.na(value)) %>%
   group_by(CONCERN, CODE_NAME, SUBCLASS, year) %>%
   summarize(lbs_chm_used = sum(lbs_chm_used), .groups = 'drop') %>%
-  bind_rows(
-    tibble(CONCERN = 'total',
-           CODE_NAME = c('RIPARIAN', 'WETLAND_MANAGED', 'WETLAND_TIDAL',
-                         'WETLAND_OTHER', 'WOODLAND&SCRUB', 'BARREN', 'FIELD'),
-           SUBCLASS = c('RIPARIAN', 'WETLAND_MANAGED', 'WETLAND_TIDAL',
-                         'WETLAND_OTHER', 'WOODLAND&SCRUB', 'BARREN',
-                        'MISCELLANEOUS FIELD'),
-           year = 2016,
-           lbs_chm_used = 0)
-  ) %>%
-  mutate(CODE_NAME = factor(
-           CODE_NAME,
-           levels = c('ORCHARD_DECIDUOUS', 'ORCHARD_CITRUS&SUBTROPICAL',
-                      'VINEYARD', 'GRAIN&HAY', 'GRAIN&HAY_WHEAT', 'FIELD',
-                      'FIELD_CORN', 'ROW', 'RICE', 'IDLE', 'PASTURE',
-                      'PASTURE_ALFALFA', 'GRASSLAND', 'URBAN', 'RIPARIAN',
-                      'WETLAND_MANAGED', 'WETLAND_TIDAL', 'WETLAND_OTHER',
-                      'WATER', 'WOODLAND&SCRUB', 'BARREN')),
-         SUBCLASS = factor(
-           SUBCLASS,
-           levels = c(unique(pur_simplify$SUBCLASS),
-                      'RIPARIAN', 'WETLAND_MANAGED', 'WETLAND_TIDAL',
-                      'WETLAND_OTHER', 'WOODLAND&SCRUB', 'BARREN',
-                      'MISCELLANEOUS FIELD'))) %>%
-  complete(nesting(CODE_NAME, SUBCLASS), CONCERN, year,
-           fill = list(lbs_chm_used = 0, rate = 0)) %>%
   # total acreage of each crop type and class
-  full_join(ag_details %>%
-              select(CODE_NAME = CLASS, CLASS_AREA = total_area,
-                     SUBCLASS, SUBCLASS_AREA = area_ha, SUBCLASS_PROP = prop),
+  left_join(ag_details %>%
+              select(CODE_NAME = CLASS, CLASS_AREA,
+                     SUBCLASS, SUBCLASS_AREA, SUBCLASS_PROP),
             by = c("CODE_NAME", "SUBCLASS")) %>%
   mutate(rate = lbs_chm_used / SUBCLASS_AREA)
 write_csv(pur_details, 'data_orig/pesticides/pesticide_use_annual_bysubclass.csv')
 
 pur_details %>% filter(CONCERN == 'total') %>%
-  ggplot(aes(rate, SUBCLASS, fill = as.factor(year))) +
+  ggplot(aes(rate, CODE_NAME, fill = as.factor(year))) +
   geom_col(position = 'dodge')
-# rates for total lbs/ha are highest for cole crops, then pears, vineyard, and
-# applies
-pur_details %>% filter(CONCERN != 'total') %>%
-  ggplot(aes(rate, SUBCLASS, fill = as.factor(year))) +
-  geom_col(position = 'dodge') + facet_wrap(~CONCERN)
-# BUT relative rates vary depending on the concern: pears stand out for air,
-# aquatic, carcinogen; cole crops for critical pesticides, organop
+# rates for total lbs/ha are highest for row, but highly variable by year
 
 ## calculate average rates---------
-## over all 3 years
+## over all 5 years
 
 ## by subclass:
 pur_details_subclass = pur_details %>%
   group_by(CODE_NAME, CONCERN, SUBCLASS) %>%
-  summarize(rate = mean(rate), .groups = 'drop') %>%
+  summarize(SCORE = mean(rate),
+            SCORE_MIN = min(rate),
+            SCORE_MAX = max(rate),
+            .groups = 'drop') %>%
   mutate(
     METRIC_CATEGORY = if_else(
       CONCERN == 'aquatic', 'biodiversity', 'healthy environment'),
-    METRIC_SUBTYPE = if_else(
-      CONCERN == 'aquatic', 'aquatic contaminant', 'pesticide exposure risk'),
-    METRIC = 'pesticide application rate',
+    METRIC_SUBTYPE = 'pesticide application rate',
+    METRIC = case_when(
+      CONCERN == 'aquatic' ~ 'aquatic contaminant',
+      CONCERN == 'air' ~ 'air pollution',
+      CONCERN == 'carcinogen' ~ 'carcinogen',
+      CONCERN == 'groundwater' ~ 'groundwater contaminant',
+      CONCERN == 'organop' ~ 'organophosphorus',
+      CONCERN == 'repro' ~ 'reproductive toxicity',
+      CONCERN == 'critical' ~ 'critical pesticides',
+      CONCERN == 'total' ~ 'total pesticides'),
     UNIT = 'pounds per ha') %>%
-  select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CONCERN, CODE_NAME, SUBCLASS, SCORE = rate, UNIT)
-write_csv(pur_details_subclass, 'data/multiplebenefits/pesticide_exposure_subclass.csv')
+  select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, SUBCLASS,
+         SCORE, SCORE_MIN, SCORE_MAX, UNIT)
+write_csv(pur_details_subclass, 'data/pesticide_exposure_subclass.csv')
 
 ## by class:
 pur_details_class = pur_details %>%
@@ -608,27 +564,77 @@ pur_details_class = pur_details %>%
   summarize(lbs_chm_used = sum(lbs_chm_used), .groups = 'drop') %>%
   mutate(rate = lbs_chm_used / CLASS_AREA) %>%
   group_by(CODE_NAME, CONCERN) %>%
-  summarize(rate = mean(rate), .groups = 'drop') %>%
+  summarize(SCORE = mean(rate),
+            SCORE_MIN = min(rate),
+            SCORE_MAX = max(rate),
+            .groups = 'drop') %>%
   mutate(
     METRIC_CATEGORY = if_else(
       CONCERN == 'aquatic', 'biodiversity', 'healthy environment'),
-    METRIC_SUBTYPE = if_else(
-      CONCERN == 'aquatic', 'aquatic contaminant', 'pesticide exposure risk'),
-    METRIC = 'pesticide application rate',
+    METRIC_SUBTYPE = 'pesticide application rate',
+    METRIC = case_when(
+      CONCERN == 'aquatic' ~ 'aquatic contaminant',
+      CONCERN == 'air' ~ 'air pollution',
+      CONCERN == 'carcinogen' ~ 'carcinogen',
+      CONCERN == 'groundwater' ~ 'groundwater contaminant',
+      CONCERN == 'repro' ~ 'reproductive toxicity',
+      CONCERN == 'critical' ~ 'critical pesticides',
+      CONCERN == 'total' ~ 'total pesticides'),
     UNIT = 'pounds per ha') %>%
-  select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CONCERN, CODE_NAME, SCORE = rate, UNIT)
+  select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, SCORE, SCORE_MIN,
+         SCORE_MAX, UNIT)
 
-write_csv(pur_details_class, 'data/multiplebenefits/pesticide_exposure.csv')
+# check for missing:
+pur_details_class %>% select(METRIC, CODE_NAME, SCORE) %>%
+  pivot_wider(names_from = 'METRIC', values_from = 'SCORE') %>%
+  mutate(CODE_NAME = factor(CODE_NAME, levels = key %>% pull(CODE_NAME))) %>%
+  complete(CODE_NAME) %>% print(n = 40)
 
-pur_details_class %>% filter(CONCERN != 'total') %>%
-  ggplot(aes(SCORE, CODE_NAME, fill = CONCERN)) + geom_col(position = 'dodge')
-# highest use rates in ORCHARD_DECIDUOUS and VINEYARD, depending on the concern
+# fill in missing:
+# assume none for grassland, riparian, wetland, woodland&scrub, barren
+pur_details_fill = pur_details_class %>%
+  bind_rows(
+    pur_details_class %>% filter(CODE_NAME == 'URBAN') %>%
+      mutate(CODE_NAME = 'RIPARIAN', SCORE = 0, SCORE_MIN = NA, SCORE_MAX = NA),
+    pur_details_class %>% filter(CODE_NAME == 'URBAN') %>%
+      mutate(CODE_NAME = 'WETLAND_MANAGED', SCORE = 0, SCORE_MIN = NA, SCORE_MAX = NA),
+    pur_details_class %>% filter(CODE_NAME == 'URBAN') %>%
+      mutate(CODE_NAME = 'WETLAND_OTHER', SCORE = 0, SCORE_MIN = NA, SCORE_MAX = NA),
+    pur_details_class %>% filter(CODE_NAME == 'URBAN') %>%
+      mutate(CODE_NAME = 'GRASSLAND', SCORE = 0, SCORE_MIN = NA, SCORE_MAX = NA),
+    pur_details_class %>% filter(CODE_NAME == 'URBAN') %>%
+      mutate(CODE_NAME = 'WOODLAND&SCRUB', SCORE = 0, SCORE_MIN = NA, SCORE_MAX = NA),
+    pur_details_class %>% filter(CODE_NAME == 'URBAN') %>%
+      mutate(CODE_NAME = 'BARREN', SCORE = 0, SCORE_MIN = NA, SCORE_MAX = NA)
+  )
+# complete other missing values (if NA, then none)
+pur_details_fill = pur_details_fill %>%
+  mutate(CODE_NAME = factor(CODE_NAME,
+                            levels = pur_details_fill %>% pull(CODE_NAME) %>% unique())) %>%
+  complete(CODE_NAME, nesting(METRIC, METRIC_CATEGORY, METRIC_SUBTYPE, UNIT),
+           fill = list(SCORE = 0, SCORE_MIN = NA, SCORE_MAX = NA))
+
+pur_details_fill %>% select(METRIC, CODE_NAME, SCORE) %>%
+  pivot_wider(names_from = 'METRIC', values_from = 'SCORE') %>%
+  mutate(CODE_NAME = factor(CODE_NAME, levels = key %>% pull(CODE_NAME))) %>%
+  complete(CODE_NAME) %>% print(n = 40)
+
+write_csv(pur_details_fill, 'data/pesticide_exposure.csv')
+
+
+pur_details_fill %>% filter(METRIC == 'total pesticides') %>%
+  arrange(desc(SCORE)) %>%
+  ggplot(aes(SCORE, CODE_NAME)) + geom_col(position = 'dodge')
+
+pur_details_fill %>% filter(METRIC != 'total pesticides') %>%
+  ggplot(aes(SCORE, CODE_NAME, fill = METRIC)) + geom_col(position = 'dodge')
+# by concern, highest use rates among ROW, ORCHARD_DECIDUOUS, RICE, VINEYARD
+
 pur_details_subclass %>%
-  filter(CONCERN != 'total' & CODE_NAME %in% c('ORCHARD_DECIDUOUS', 'VINEYARD')) %>%
-  ggplot(aes(SCORE, SUBCLASS, fill = CONCERN)) + geom_col(position = 'dodge')
-# within these classes, highest rates are for pears
+  filter(METRIC != 'total pesticides' &
+           CODE_NAME %in% c('ORCHARD_DECIDUOUS', 'VINEYARD', 'ORCHARD_CITRUS&SUBTROPICAL', 'ROW')) %>%
+  arrange(desc(SCORE)) %>%
+  ggplot(aes(SCORE, SUBCLASS, fill = METRIC)) +
+  geom_col(position = 'dodge')
+# within these classes, highest rates are for potato/sweet potato, pears, apples, vineyard
 
-
-plot_metric(pur2018_sum %>% filter(CONCERN == 'total'),
-            xlab = "Pesticide Application Rate (lbs/ha planted, 2018)",
-            range = FALSE)
