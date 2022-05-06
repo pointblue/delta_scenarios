@@ -3,7 +3,7 @@
 # restoration objectives for riparian vegetation and managed/seasonal wetlands.
 
 # PACKAGES & FUNCTIONS
-source('R/packages.R')
+source('R/0_packages.R')
 
 # reference data:
 delta = rast('GIS/boundaries/delta.tif')

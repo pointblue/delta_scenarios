@@ -18,7 +18,7 @@
 # maps.
 
 # PACKAGES & FUNCTIONS
-source('R/packages.R')
+source('R/0_packages.R')
 
 # reference data:
 delta = rast('GIS/boundaries/delta.tif')
@@ -332,6 +332,10 @@ bbau_singles2 = classify(
 # OVERLAY round 2 results on baseline
 bbau_round2 = cover(bbau_singles2, bbau_round1)
 plot(bbau_round2)
+
+writeRaster(bbau_round2,
+            'GIS/scenario_inputs/perex_added_detail.tif',
+            overwrite = TRUE)
 
 # CROSSTAB-------
 crosstab(c(bbau_clean, bbau_round2), useNA = TRUE, long = TRUE)
