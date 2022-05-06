@@ -6,15 +6,15 @@ cleanup_landcovers = function(sf) {
   #  idle --> VegCAMP layer defaulted to ORCHARD when no data from Land IQ and
   #  otherwise not identified; often includes field edges and road edges
   sf %>%
-    mutate(CLASS = case_when(group1 == 'ORCHARD' & comment == 'STRINGER' ~
-                               'IDLE', #usually field edges or unspecified ag
+    mutate(CLASS = case_when(group1 %in% c('ORCHARD', 'IDLE') &
+                               comment == 'STRINGER' ~ 'IDLE', #usually field edges/roads
                              group1 == 'ORCHARD' & Crp2014 %in%
                                c('Citrus', 'Olives') ~
                                'ORCHARD_CITRUS&SUBTROPICAL',
                              group1 == 'ORCHARD' & Crp2014 %in%
                                c('Almonds', 'Apples', 'Cherries', 'Kiwis',
                                  'Miscellaneous Deciduous',
-                                 'Peaches/Nectarines',
+                                 'Peaches/Nectarines', 'Peaches and Nectarines',
                                  'Pears', 'Pistachios',
                                  'Plums, Prunes and Apricots', 'Pomegranates',
                                  'Walnuts', 'Young Perennials',
@@ -50,6 +50,7 @@ cleanup_landcovers = function(sf) {
                                group1 == 'URBAN' & !is.na(Crp2014) & Crp2014 != 'Urban' ~ NA_character_,
                                group1 == 'ORCHARD' & Crp2014 == 'Wheat' ~ 'Young Perennials',
                                CLASS == 'IDLE' & !is.na(Crp2014) & Crp2014 != 'Idle' ~ NA_character_,
+                               CLASS == 'WOODLAND' & !is.na(Crp2014) ~ NA_character_,
                                TRUE ~ Crp2014))
 }
 
@@ -84,11 +85,14 @@ codify_baseline = function(sf, codekey) {
         CLASS %in% c('WETLAND_TIDAL_FRESH', 'WETLAND_TIDAL_SALT') ~ 'WETLAND_TIDAL',
         # pull out riparian subclasses needed for riparian models
         CLASS == 'RIPARIAN' & NVCS_Nm == 'Populus fremontii' ~ 'RIPARIAN_FOREST_POFR',
-        CLASS == 'RIPARIAN' & NVCS_Nm == 'Quercus lobata' ~ 'RIPARIAN_FOREST_QULO',
+        CLASS == 'RIPARIAN' & NVCS_Nm %in%
+          c('Quercus lobata', 'Quercus agrifolia', 'Quercus wislizeni (tree)',
+            'Californian broadleaf forest and woodland') ~ 'RIPARIAN_FOREST_QULO',
         CLASS == 'RIPARIAN' &
           NVCS_Nm %in% c('Salix gooddingii', 'Salix laevigata') ~ 'RIPARIAN_FOREST_SALIX',
         CLASS == 'RIPARIAN' &
           NVCS_Nm %in% c('Acer negundo',
+                         'Aesculus californica',
                          'Fraxinus latifolia',
                          'Juglans hindsii and Hybrids',
                          'Southwestern North American riparian evergreen and deciduous woodland',
@@ -296,6 +300,13 @@ codify_landiq = function(df, meta, codekey) {
            CROPTYP1, CLASS1, CLASS_NAME1, SUBCLASS_NAME1, ADOY1,
            CROPTYP2, CLASS2, CLASS_NAME2, SUBCLASS_NAME2, ADOY2,
            CROPTYP3, CLASS3, CLASS_NAME3, SUBCLASS_NAME3, ADOY3) %>%
+
+    # - SYMB_CLASS = MAIN SEASON (SUMMER) SYMBOLOGY
+    # - MULTIUSE = MULTIPLE LAND USES: S = SINGLE-CROPPED, D = DOUBLE, T =
+    #    TRIPLE, Q = QUADRUPLE; I = INTERCROPPED, M = MIXED USE
+    # - ALL MAIN SEASON SUMMER CROPS START WITH CLASS2, AND ONLY DISTINCT EARLY
+    #    CROPS (MULTIUSE = D OR M) WILL HAVE A CLASS1
+
     mutate(CLASS_MAIN = case_when(MULTIUSE %in% c('S', 'D', 'T') &
                                     SYMB_CLASS == CLASS2 ~ CLASS_NAME2,
                                   MULTIUSE %in% c('M', 'I') & CLASS1 == '**' &
@@ -416,3 +427,202 @@ capwords <- function(s, strict = FALSE) {
                            sep = "", collapse = " " )
   sapply(strsplit(s, split = " "), cap, USE.NAMES = !is.null(names(s)))
 }
+
+summarize_vegdat <- function(pathin, buffer, type = 'circle',
+                             pathout, ...) {
+  ras = rast(list.files(pathin, '.tif', full.names = TRUE))
+  # codevec = codevec %>% rlang::set_names(labelvec)
+  wt = focalMat(ras, d = buffer, type = type)
+
+  for (i in c(1:nlyr(ras))) {
+    focal(ras[[i]], w = wt, fun = 'sum', na.rm = TRUE,
+          filename = paste0(pathout, '/', names(ras)[i], '_', buffer, '.tif'),
+          ...)
+  }
+  # purrr::map(codevec,
+  #            function(c) {
+  #              lab = names(codevec[codevec == c])
+  #              r = ras == c
+  #              focal(r, w = wt, fun = 'sum', na.rm = TRUE,
+  #                    filename = paste0(path, '/', lab, '_', buffer, '.tif'),
+  #                    ...)
+  #            })
+  # names(sdat) = paste(labelvec, buffer, sep = '_')
+  # stack(sdat)
+}
+
+summarize_fragdat <- function(r, target = 70, buffer = 2000,
+                              stats = c('lsm_c_shape_mn'),
+                              ...) {
+
+  n = round((buffer * 2) / res(r)[1], digits = 0)
+  wt = matrix(rep(rep(1, n), n), nrow = n, ncol = n)
+
+  # reclassify raster so anything but target value is NA (assume max value of 999)
+  r = reclassify(r,
+                 rcl = matrix(c(0, target, NA,
+                                target, target + 1, target,
+                                target + 1, 1000, NA),
+                              ncol = 3, byrow = TRUE),
+                 right = FALSE)
+
+  # for each stat, compute values in focal areas (moving windows) throughout r
+  sdat = landscapemetrics::window_lsm(r, window = wt,
+                                      what = 'lsm_l_shape_mn',
+                                      ...)
+  stack(sdat)
+}
+
+#---> move to R package!
+python_prep = function(stack, masklayers = NULL, pixel_value = NULL,
+                       path, subdir = NULL, layernames, suffix,
+                       overwrite = FALSE) {
+  nlayer = nlyr(stack)
+  # for each layer (scenario):
+  purrr::map(c(1:nlayer),
+             function(x) {
+               # split by land cover classes
+               newstack = segregate(stack[[x]], other = 0)
+               names(newstack) = paste0(layernames, suffix[1])
+
+               if (!is.null(masklayers)) {# mask by presence of each land cover type
+                 newstack_mask = mask(masklayers[[x]], newstack, maskvalue = 0)
+                 names(newstack_mask) = paste0(layernames, suffix[2])
+                 writeRaster(newstack_mask,
+                             filename = paste0(path, '/', names(stack)[x], '/',
+                                               names(newstack_mask), '.tif'),
+                             overwrite = overwrite)
+               }
+
+               if (!is.null(pixel_value)) {
+                 # replace presence (1) with another value (e.g., pixel area)
+                 newstack = subst(newstack, from = 1, to = pixel_value)
+               }
+
+               if (is.null(subdir)) {
+                 writeRaster(newstack,
+                             filename = paste0(path, '/', names(stack)[x], '/',
+                                               names(newstack), '.tif'),
+                             overwrite = overwrite)
+               } else {
+                 writeRaster(newstack,
+                             filename = paste0(path, '/', names(stack)[x], '/',
+                                               subdir, '/',
+                                               names(newstack), '.tif'),
+                             overwrite = overwrite)
+               }
+
+              }
+  )}
+
+python_run = function(scenario, scale, type = 'waterbird',
+                      pathin, pathout,
+                      zero_ras = NULL, mask = NULL, suffix = NULL,
+                      overwrite = FALSE) {
+
+  if (type == 'waterbird') {
+
+    if (scale == '2k') {
+      bufflabel = '2000'
+    } else if (scale == '5k') {
+      bufflabel = '5000'
+    } else if (scale == '10k') {
+      bufflabel = '10000'
+    }
+
+    # calculate sum of total area:
+    focal_stats(
+      pathin = paste0(pathin, scenario),
+      pathout = paste0(pathout, scenario, '/buffer', scale, '/raw'),
+      buffer = bufflabel, fun = 'SUM', regex = '*_area.tif')
+
+    # calculate mean probability of open water
+    focal_stats(
+      pathin = paste0(pathin, scenario),
+      pathout = paste0(pathout, scenario, '/buffer', scale, '/raw'),
+      buffer = bufflabel, fun = 'MEAN', regex = '*_pfld.tif')
+
+    # clean up results
+    process_focal_stats(
+      pathin = paste0(pathout, scenario, '/buffer', scale, '/raw'),
+      pathout = paste0(pathout, scenario, '/buffer', scale, '/'),
+      suffix = paste0('_', scale), zero_ras = zero_ras, mask = mask,
+      overwrite = overwrite)
+
+  } else if (type == 'riparian') {
+
+    # calculate sum of pixels:
+    focal_stats(
+      pathin = paste0(pathin, scenario, '/buffer', scale),
+      pathout = paste0(pathout, scenario, '/buffer', scale),
+      buffer = scale, fun = 'SUM',
+      # regex added after code was actually run - should allow shape_raw.tif to
+      # go in the same directory, but needs testing
+      regex = paste0('*_', scale, '.tif'))
+
+    # clean up results
+    process_focal_stats(
+      pathin = paste0(pathout, scenario, '/buffer', scale),
+      pathout = paste0(pathout, scenario, '/'),
+      suffix = NULL, zero_ras = zero_ras, mask = mask,
+      overwrite = overwrite)
+  }
+}
+
+process_focal_stats = function(pathin, pathout, zero_ras = NULL, mask = NULL,
+                               suffix = NULL, overwrite = FALSE) {
+
+  ras = list.files(pathin, '.tif$', full.names = TRUE) %>% rast()
+
+  if (!is.null(zero_ras)) {
+    ras = cover(ras, zero_ras)
+  }
+  if (!is.null(mask)) {
+    ras = mask(ras, mask)
+  }
+  if (!is.null(suffix)) {
+    names(ras) = paste0(names(ras), suffix)
+  }
+
+  writeRaster(ras,
+              filename = paste0(pathout, names(ras), '.tif'),
+              overwrite = overwrite)
+}
+
+map_predictions <- function(df,
+                            palette = c("#2b83ba", "#80bfab", "#c7e8ad",
+                                        "#ffffbf", "#fdc980", "#f07c4a",
+                                        "#d7191c"),
+                            facet = TRUE, ncol = 3, title = NULL,
+                            boundary_polygon = NULL,
+                            range = c(0, 1),
+                            fill_lab = 'Probability\nof presence',
+                            ...) {
+  p = ggplot(df) +
+    geom_raster(aes(x, y, fill = value)) +
+    scale_fill_gradientn(colors = palette,
+                         na.value = 'transparent',
+                         limits = range) +
+    labs(x = NULL, y = NULL, fill = fill_lab) +
+    theme_minimal() +
+    theme(axis.text = element_blank(),
+          panel.grid = element_blank(),
+          strip.text = element_text(size = 8, hjust = 0),
+          legend.title = element_text(size = 8),
+          legend.text = element_text(size = 8),
+          legend.margin = margin(0, 0, 0, 5.5, unit = 'pt'),
+          plot.margin = margin(2, 2, 2, 2, unit = 'pt'),
+          panel.spacing = unit(3, 'pt'),
+          ...)
+  if (!is.null(boundary_polygon)) {
+    p = p + geom_sf(data = boundary_polygon, fill = NA)
+  }
+  if (facet) {
+    p = p + facet_wrap(~name, ncol = ncol)
+  } else {
+    p = p + ggtitle(label = title)
+  }
+  return(p)
+}
+
+
