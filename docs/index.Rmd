@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This project is part of Point Blue Conservation Science's grant "Trade-offs and Co-benefits of Landscape Change Scenarios on Bird Communities and Ecosystem Services in the Sacramento-San Joaquin River Delta", funded by Delta Water Quality and Ecosystem Restoration Program Grant Agreement Number – Q1996022, administered by the California Department of Fish and Wildlife. 
 
-**Project Team:** Kristen Dybala (PI), Tom Gardali, Catherine Hickey, Matt Reiter, Kristin Sesser
+**Current Project Team:** Kristen Dybala (PI), Catherine Hickey, Matt Reiter, Kristin Sesser
 
 ### Project overview
 
@@ -30,7 +30,7 @@ The specific objectives of this Project are to:
 * Model the distributions of waterbirds and riparian landbirds in the Delta, and identify high priority bird conservation areas in the Delta. [[View summary report](http://www.prbo.org/refs/files/12713_DybalaKE2021.pdf)]
 
 * Evaluate the net impact of scenarios of landscape change on bird populations and 
-ecosystem services [*In progress*]
+ecosystem services [[View scenarios](scenarios.html)]
 
 * Develop a flexible, science-based framework for assessing the trade-offs and co-benefits 
 of landscape changes [*In progress*]
@@ -38,11 +38,6 @@ of landscape changes [*In progress*]
 * Engage with partners to demonstrate the need to consider trade-offs and co-benefits in making land use decisions and provide training in how to use our science-based framework.
 
 * Disseminate results to the broader scientific community through scientific manuscripts and conference presentations.
-
-
-### Work currently in progress
-
-We are currently refining several spatially-explicit scenarios of future landscape change in the Delta. [Explore the draft scenarios here.](draft_scenarios.html)
 
 
 ### How to engage
