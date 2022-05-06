@@ -1,3 +1,11 @@
+palette = c("#2b83ba", "#80bfab", "#c7e8ad", "#ffffbf", "#fdc980", "#f07c4a",
+            "#d7191c")
+
+pointblue.palette <- c('#4495d1', '#74b743', '#f7941d', '#005baa', '#bfd730',
+                       '#a7a9ac', '#666666', '#456d28',
+                       #add a few more complementary colors
+                       '#b74374', '#5e2a84', '#d2c921')
+
 cleanup_landcovers = function(sf) {
   # when group1 = PASTURE: use Crp2014 to distinguish Alfalfa vs. irrigated pasture
   # when group1 = TRUCK AND FIELD, use Crp2014 to distinguish Corn from others
