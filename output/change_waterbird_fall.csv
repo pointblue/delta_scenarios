@@ -1,0 +1,21 @@
+combo,value_baseline,value_scenario,area_unit,net_change,scenario,species,name,plot_lab,species_name,change_area,change_pct,scenario_lab
+3,120088.00790995266,163650.25873169582,px,43562.25082174316,scenario1,dblr,A. Dabbling Ducks,A,Dabbling Ducks,3.9206025739568844,0.3627527142794148,"Scenario 1.
+Habitat Restoration"
+5,180611.17475638725,217056.3334216047,px,36445.15866521746,scenario1,shore,B. Shorebirds,B,Shorebirds,3.2800642798695714,0.20178794980086684,"Scenario 1.
+Habitat Restoration"
+1,404463.68363785744,422930.5566814244,px,18466.873043566942,scenario1,cicon,C. Herons/Egrets,C,Herons/Egrets,1.6620185739210247,0.04565767902193545,"Scenario 1.
+Habitat Restoration"
+2,93707.51624458467,95530.52046698009,px,1823.0042223954224,scenario1,crane,D. Cranes,D,Cranes,0.164070380015588,0.01945419423600157,"Scenario 1.
+Habitat Restoration"
+4,84656.41393961525,89934.37264041114,px,5277.958700795891,scenario1,geese,E. Geese,E,Geese,0.47501628307163013,0.062345644649684985,"Scenario 1.
+Habitat Restoration"
+8,120088.00790995266,111067.48297736328,px,-9020.524932589382,scenario2,dblr,A. Dabbling Ducks,A,Dabbling Ducks,-0.8118472439330443,-0.0751159511227247,"Scenario 2.
+Perennial Crop Expansion"
+10,180611.17475638725,174592.86258366983,px,-6018.312172717415,scenario2,shore,B. Shorebirds,B,Shorebirds,-0.5416480955445674,-0.03332192584891306,"Scenario 2.
+Perennial Crop Expansion"
+6,404463.68363785744,380391.52241286635,px,-24072.161224991083,scenario2,cicon,C. Herons/Egrets,C,Herons/Egrets,-2.1664945102491973,-0.05951624879761628,"Scenario 2.
+Perennial Crop Expansion"
+7,93707.51624458467,94982.2799759843,px,1274.7637313996383,scenario2,crane,D. Cranes,D,Cranes,0.11472873582596745,0.013603644429891787,"Scenario 2.
+Perennial Crop Expansion"
+9,84656.41393961525,129288.31127941073,px,44631.89733979548,scenario2,geese,E. Geese,E,Geese,4.016870760581593,0.5272122366490868,"Scenario 2.
+Perennial Crop Expansion"
