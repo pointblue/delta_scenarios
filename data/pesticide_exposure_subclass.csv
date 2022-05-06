@@ -1,0 +1,196 @@
+METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,CODE_NAME,SUBCLASS,SCORE,SCORE_MIN,SCORE_MAX,UNIT
+healthy environment,pesticide application rate,air pollution,FIELD,BEANS (DRY),0.32865411117901894,0.21653232932894537,0.418369411280041,pounds per ha
+healthy environment,pesticide application rate,air pollution,FIELD,SAFFLOWER,0.9034788536316612,0.49598541994181566,1.4855714429426365,pounds per ha
+healthy environment,pesticide application rate,air pollution,FIELD,SUNFLOWERS,0.36814463657441765,0.12375746751605436,0.7673960345216172,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,FIELD,BEANS (DRY),2.065779575504802,1.4964895601701673,3.086055490485066,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,FIELD,SAFFLOWER,0.9089338276254362,0.4965759189225562,1.498711236219827,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,FIELD,SUNFLOWERS,0.6773676025541987,0.23308252815871505,1.071330383511474,pounds per ha
+healthy environment,pesticide application rate,carcinogen,FIELD,BEANS (DRY),0.7277814689983718,0.3920442139246794,1.2352085372022648,pounds per ha
+healthy environment,pesticide application rate,carcinogen,FIELD,SAFFLOWER,0.4737234530595941,0.21854733449056649,1.0772059139151116,pounds per ha
+healthy environment,pesticide application rate,carcinogen,FIELD,SUNFLOWERS,0.2449787383202812,0.2076690445224703,0.26847960836793394,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,FIELD,BEANS (DRY),2.6355681386040777,0.901663307788977,4.133083180787089,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,FIELD,SAFFLOWER,0.029227463936845933,0.00209991721410312,0.06319542311037969,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,FIELD,SUNFLOWERS,0.01746283977815151,0.002888740142065568,0.03254299608582313,pounds per ha
+healthy environment,pesticide application rate,groundwater contaminant,FIELD,BEANS (DRY),0.011687426945629307,0.0016100690056411718,0.018427516565718387,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,FIELD,BEANS (DRY),0.04486300258393575,0.012506494401971305,0.09131452042630672,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,FIELD,SAFFLOWER,0.054976407525418144,0.0467573919404566,0.06319542311037969,pounds per ha
+healthy environment,pesticide application rate,total pesticides,FIELD,BEANS (DRY),3.9254114564830695,1.9035584693603749,5.874742259168214,pounds per ha
+healthy environment,pesticide application rate,total pesticides,FIELD,SAFFLOWER,1.4050678271380184,0.7851859279596413,2.151805155160277,pounds per ha
+healthy environment,pesticide application rate,total pesticides,FIELD,SUNFLOWERS,0.8243548455463674,0.31482763743800624,1.339809991879408,pounds per ha
+healthy environment,pesticide application rate,air pollution,FIELD_CORN,"CORN, SORGHUM, OR SUDAN",0.20347036809915822,0.10126607096856634,0.4156024815052373,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,FIELD_CORN,"CORN, SORGHUM, OR SUDAN",0.5966863072502369,0.49417130530867825,0.7114958690747586,pounds per ha
+healthy environment,pesticide application rate,carcinogen,FIELD_CORN,"CORN, SORGHUM, OR SUDAN",2.0445977870170706,1.6716626730415982,2.3168330375270734,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,FIELD_CORN,"CORN, SORGHUM, OR SUDAN",0.579622664836537,0.39487629716572703,0.7773534540399467,pounds per ha
+healthy environment,pesticide application rate,groundwater contaminant,FIELD_CORN,"CORN, SORGHUM, OR SUDAN",0.03251912657849203,0.00157834987435798,0.05483613573532664,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,FIELD_CORN,"CORN, SORGHUM, OR SUDAN",0.18372695389496368,0.11149407500337462,0.24901978016704013,pounds per ha
+healthy environment,pesticide application rate,total pesticides,FIELD_CORN,"CORN, SORGHUM, OR SUDAN",2.8745068400405676,2.530492668681698,3.2599254209408284,pounds per ha
+healthy environment,pesticide application rate,air pollution,GRAIN&HAY,MISCELLANEOUS GRAIN AND HAY,0.41565237098842917,0.0959029403086629,0.5639170322676902,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,GRAIN&HAY,MISCELLANEOUS GRAIN AND HAY,0.010326606997189439,0.00034630845697333047,0.03240149234496624,pounds per ha
+healthy environment,pesticide application rate,carcinogen,GRAIN&HAY,MISCELLANEOUS GRAIN AND HAY,0.029420547210096553,0.020464424703706074,0.040093463421366236,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,GRAIN&HAY,MISCELLANEOUS GRAIN AND HAY,0.006397984102354882,0.00034630845697333047,0.015210962013141746,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,GRAIN&HAY,MISCELLANEOUS GRAIN AND HAY,0.03588400690690764,0.005852321868883759,0.08390770586937862,pounds per ha
+healthy environment,pesticide application rate,total pesticides,GRAIN&HAY,MISCELLANEOUS GRAIN AND HAY,0.47234719827890226,0.15890092034758102,0.5938708842208376,pounds per ha
+healthy environment,pesticide application rate,air pollution,GRAIN&HAY_WHEAT,WHEAT,0.661005801074141,0.29308362775412067,0.9121321888730206,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,GRAIN&HAY_WHEAT,WHEAT,0.018144287894426236,0.0041247165710741485,0.03316661342348636,pounds per ha
+healthy environment,pesticide application rate,carcinogen,GRAIN&HAY_WHEAT,WHEAT,0.07538090085460719,0.007603516593848527,0.12025563222492239,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,GRAIN&HAY_WHEAT,WHEAT,0.01501791344065551,0.0014448254860836235,0.026785000657337826,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,GRAIN&HAY_WHEAT,WHEAT,0.0622063613860627,0.010106777521918344,0.11060467651572185,pounds per ha
+healthy environment,pesticide application rate,total pesticides,GRAIN&HAY_WHEAT,WHEAT,0.7896299562244149,0.32247662927899606,1.093469482810625,pounds per ha
+healthy environment,pesticide application rate,air pollution,IDLE,IDLE,0.08126775802848116,0.022300587937046618,0.11410704199002412,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,IDLE,IDLE,0.13474302456601722,0.0740567737061624,0.2157662134723381,pounds per ha
+healthy environment,pesticide application rate,carcinogen,IDLE,IDLE,1.4172159037090766,1.2020869889806733,1.848077479777876,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,IDLE,IDLE,0.049237616312714914,5.389525602121615e-4,0.08093355349638368,pounds per ha
+healthy environment,pesticide application rate,groundwater contaminant,IDLE,IDLE,0.005969084780844306,3.738282353050674e-4,0.0187250237604535,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,IDLE,IDLE,0.013272643661916998,6.576645542471587e-4,0.029656686513060592,pounds per ha
+healthy environment,pesticide application rate,total pesticides,IDLE,IDLE,1.6145814475780582,1.3546828365898023,2.046655019481547,pounds per ha
+healthy environment,pesticide application rate,air pollution,ORCHARD_CITRUS&SUBTROPICAL,OLIVES,2.1622237031690448,0.926276205956183,3.0156711654024946,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ORCHARD_CITRUS&SUBTROPICAL,MISCELLANEOUS SUBTROPICAL FRUIT,9.1016951086246909,9.1016951086246909,9.1016951086246909,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ORCHARD_CITRUS&SUBTROPICAL,OLIVES,5.350550134442756,2.9160109889217782,6.93959790488511,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ORCHARD_CITRUS&SUBTROPICAL,MISCELLANEOUS SUBTROPICAL FRUIT,2.4513928544421497,2.4513928544421497,2.4513928544421497,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ORCHARD_CITRUS&SUBTROPICAL,OLIVES,6.005580428072015,4.565026106784837,6.769593079186798,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ORCHARD_CITRUS&SUBTROPICAL,MISCELLANEOUS SUBTROPICAL FRUIT,1.7163282287869854e-4,1.7163282287869854e-4,1.7163282287869854e-4,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ORCHARD_CITRUS&SUBTROPICAL,OLIVES,2.9045889221789825,2.007233029069633,3.9855615437772376,pounds per ha
+healthy environment,pesticide application rate,groundwater contaminant,ORCHARD_CITRUS&SUBTROPICAL,OLIVES,0.6881595463382617,0.31221601322899545,1.08095682311345,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ORCHARD_CITRUS&SUBTROPICAL,OLIVES,2.619318856723707,1.693934027210832,3.6693118171143655,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ORCHARD_CITRUS&SUBTROPICAL,MISCELLANEOUS SUBTROPICAL FRUIT,5.776629797944859,1.7163282287869854e-4,11.55308796306684,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ORCHARD_CITRUS&SUBTROPICAL,OLIVES,9.017048139233802,6.2414618878916315,11.474103023821314,pounds per ha
+healthy environment,pesticide application rate,air pollution,ORCHARD_DECIDUOUS,ALMONDS,5.762888300790555,0.07454733925327886,22.340721970507072,pounds per ha
+healthy environment,pesticide application rate,air pollution,ORCHARD_DECIDUOUS,APPLES,15.4825561710498,6.402107154971158,21.681098006387117,pounds per ha
+healthy environment,pesticide application rate,air pollution,ORCHARD_DECIDUOUS,PEARS,20.215916636035345,14.939022597169442,22.271144774410526,pounds per ha
+healthy environment,pesticide application rate,air pollution,ORCHARD_DECIDUOUS,STONE FRUIT,3.6674737412141982,0.017799680379324622,11.294722752104468,pounds per ha
+healthy environment,pesticide application rate,air pollution,ORCHARD_DECIDUOUS,WALNUTS,5.180992974750788,1.0467322813110804,19.9338405191924,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ORCHARD_DECIDUOUS,ALMONDS,3.178691808997495,2.063259700397512,3.9943002252542272,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ORCHARD_DECIDUOUS,APPLES,25.63781071707901,17.846815726469327,33.15958065023173,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ORCHARD_DECIDUOUS,MISCELLANEOUS DECIDUOUS,0.008284245197398225,2.0858967283405075e-4,0.012492088958878312,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ORCHARD_DECIDUOUS,PEARS,23.064724062767898,18.05342624004582,25.272301582678296,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ORCHARD_DECIDUOUS,POMEGRANATES,5.992709691843079,3.728308769159576,12.525037586811205,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ORCHARD_DECIDUOUS,STONE FRUIT,4.909590833797569,2.526012991139435,6.199560157331732,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ORCHARD_DECIDUOUS,WALNUTS,4.66560295917699,2.7189223384453407,6.459751321018464,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ORCHARD_DECIDUOUS,ALMONDS,9.734670956513643,4.215446700946128,25.40215229188097,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ORCHARD_DECIDUOUS,APPLES,17.57796526991981,8.559884287716812,25.743781030978894,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ORCHARD_DECIDUOUS,MISCELLANEOUS DECIDUOUS,0.07142375776618708,0.022474474453728077,0.12607656963448702,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ORCHARD_DECIDUOUS,PEARS,22.40502083295848,17.581802169272514,24.178501869056834,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ORCHARD_DECIDUOUS,STONE FRUIT,7.8479156586679215,3.963680738509002,17.26845758985848,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ORCHARD_DECIDUOUS,WALNUTS,11.366490767054241,7.2934428019133675,23.84935766176843,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ORCHARD_DECIDUOUS,ALMONDS,0.3646995308101888,0.21564916448404065,0.5508295295839803,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ORCHARD_DECIDUOUS,APPLES,11.378278054720976,7.754711277945976,15.190594435257875,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ORCHARD_DECIDUOUS,MISCELLANEOUS DECIDUOUS,2.494646616196675e-4,1.699083876247408e-4,3.6104902955604056e-4,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ORCHARD_DECIDUOUS,PEARS,3.2467095096071374,2.661013208126884,3.7609604295627874,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ORCHARD_DECIDUOUS,POMEGRANATES,2.89444776541575,2.237126424173111,3.635330439281305,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ORCHARD_DECIDUOUS,STONE FRUIT,1.556500258159868,0.8695500188132772,1.948699042737854,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ORCHARD_DECIDUOUS,WALNUTS,1.4539705973479367,1.1313065184110116,1.8853741063762446,pounds per ha
+healthy environment,pesticide application rate,groundwater contaminant,ORCHARD_DECIDUOUS,ALMONDS,0.04032183965025797,0.012842005904348919,0.12411770322141198,pounds per ha
+healthy environment,pesticide application rate,groundwater contaminant,ORCHARD_DECIDUOUS,APPLES,1.7746110069838985,1.1525162444954529,2.3967057694723444,pounds per ha
+healthy environment,pesticide application rate,groundwater contaminant,ORCHARD_DECIDUOUS,PEARS,0.3590648388551448,0.18567572176319125,0.46522744071637007,pounds per ha
+healthy environment,pesticide application rate,groundwater contaminant,ORCHARD_DECIDUOUS,STONE FRUIT,0.007194646899757139,0.007194646899757139,0.007194646899757139,pounds per ha
+healthy environment,pesticide application rate,groundwater contaminant,ORCHARD_DECIDUOUS,WALNUTS,0.19114130685015263,0.10310906272637321,0.40598450296876964,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ORCHARD_DECIDUOUS,ALMONDS,0.5334950700404921,0.3868507230744819,0.6644428331174967,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ORCHARD_DECIDUOUS,APPLES,7.330490096718867,1.7861077195730002,11.34034868922291,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ORCHARD_DECIDUOUS,MISCELLANEOUS DECIDUOUS,4.577250018933471e-4,4.577250018933471e-4,4.577250018933471e-4,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ORCHARD_DECIDUOUS,PEARS,4.74605643420247,1.4648787865384678,7.819905862519541,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ORCHARD_DECIDUOUS,STONE FRUIT,0.5601758427187528,0.25008313846274527,1.102536608492679,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ORCHARD_DECIDUOUS,WALNUTS,0.9520054311512176,0.431861982247317,1.5202776591279927,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ORCHARD_DECIDUOUS,ALMONDS,12.60425327872912,5.550042423669503,27.87988314517466,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ORCHARD_DECIDUOUS,APPLES,32.84470182022805,25.55915922291852,36.64228728993962,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ORCHARD_DECIDUOUS,MISCELLANEOUS DECIDUOUS,0.06215359326872662,4.2602624051227197e-4,0.13833834850661395,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ORCHARD_DECIDUOUS,PEARS,28.5768850318608,20.959126293169835,34.23567509108107,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ORCHARD_DECIDUOUS,POMEGRANATES,6.0152133193982404,3.728308769159576,12.525037586811205,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ORCHARD_DECIDUOUS,STONE FRUIT,12.943820106902535,6.602093699574828,22.434636839694324,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ORCHARD_DECIDUOUS,WALNUTS,15.096140794436561,9.189424377874397,26.57503741954827,pounds per ha
+healthy environment,pesticide application rate,air pollution,PASTURE,MISCELLANEOUS GRASSES,1.4458727936876037,0.9994215850248295,2.2444727436434375,pounds per ha
+healthy environment,pesticide application rate,air pollution,PASTURE,MIXED PASTURE,0.05822266569100916,0.046201824072487366,0.06752017516576955,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,PASTURE,MISCELLANEOUS GRASSES,0.45132064286396856,0.3015465235587166,0.8910571902539671,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,PASTURE,MIXED PASTURE,3.225458476792379e-4,8.547579619966356e-5,4.891009439454574e-4,pounds per ha
+healthy environment,pesticide application rate,carcinogen,PASTURE,MISCELLANEOUS GRASSES,0.2241604332279682,0.09072382395953725,0.5617487662273484,pounds per ha
+healthy environment,pesticide application rate,carcinogen,PASTURE,MIXED PASTURE,0.00343629369309108,4.983233415214062e-4,0.009319730720169622,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,PASTURE,MISCELLANEOUS GRASSES,0.0015391620832662012,3.09603959393543e-4,0.004444902754722618,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,PASTURE,MIXED PASTURE,2.658119906073153e-4,8.547579619966356e-5,4.4614818501496705e-4,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,PASTURE,MISCELLANEOUS GRASSES,0.0374287156548695,0.00295026283783897,0.12395648293662768,pounds per ha
+healthy environment,pesticide application rate,total pesticides,PASTURE,MISCELLANEOUS GRASSES,1.7666281772276284,1.256899701758736,2.604408459854245,pounds per ha
+healthy environment,pesticide application rate,total pesticides,PASTURE,MIXED PASTURE,0.061916996062243636,0.04678562321020844,0.0743305023428249,pounds per ha
+healthy environment,pesticide application rate,air pollution,PASTURE_ALFALFA,ALFALFA & ALFALFA MIXTURES,0.505718158023764,0.1714960259725791,1.1264787295176812,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,PASTURE_ALFALFA,ALFALFA & ALFALFA MIXTURES,4.875236635103077,2.6225735704839397,6.203474399651293,pounds per ha
+healthy environment,pesticide application rate,carcinogen,PASTURE_ALFALFA,ALFALFA & ALFALFA MIXTURES,4.57222693131967,4.007221631958063,5.465157332821628,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,PASTURE_ALFALFA,ALFALFA & ALFALFA MIXTURES,2.2098613610297337,1.0814328459271576,3.912365293386693,pounds per ha
+healthy environment,pesticide application rate,groundwater contaminant,PASTURE_ALFALFA,ALFALFA & ALFALFA MIXTURES,0.34223084476174587,0.12045165691784594,0.7116328921182878,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,PASTURE_ALFALFA,ALFALFA & ALFALFA MIXTURES,0.40828915018878914,0.0847167008832201,1.0666764256626,pounds per ha
+healthy environment,pesticide application rate,total pesticides,PASTURE_ALFALFA,ALFALFA & ALFALFA MIXTURES,8.901971198204048,6.522600258757895,10.065792962391582,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,RICE,RICE,8.23397189417839,5.453212544960892,12.127496760119213,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,RICE,WILD RICE,1.3691066272475843,0.03746232879562304,5.997397220900926,pounds per ha
+healthy environment,pesticide application rate,carcinogen,RICE,RICE,0.7661892346689613,0.5295547315637907,0.9931447223999361,pounds per ha
+healthy environment,pesticide application rate,carcinogen,RICE,WILD RICE,0.5265095585754415,0.5265095585754415,0.5265095585754415,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,RICE,RICE,1.347418918177269,0.31779261259380603,2.1987644777009727,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,RICE,WILD RICE,1.2394164827308516,0.03746232879562304,5.348946498317263,pounds per ha
+healthy environment,pesticide application rate,total pesticides,RICE,RICE,10.025784747832226,6.541499224540504,14.952702754006896,pounds per ha
+healthy environment,pesticide application rate,total pesticides,RICE,WILD RICE,2.4090737565589104,0.03746232879562304,11.197232867457556,pounds per ha
+healthy environment,pesticide application rate,air pollution,ROW,CARROTS,26.245453989233628,7.632545384418634,44.848600010769964,pounds per ha
+healthy environment,pesticide application rate,air pollution,ROW,COLE CROPS (MIXTURE OF 22-25),0.981335476988883,0.981335476988883,0.981335476988883,pounds per ha
+healthy environment,pesticide application rate,air pollution,ROW,"MELONS, SQUASH, AND CUCUMBERS (ALL TYPES)",0.6555458711971156,0.023504223755611592,1.906847651205998,pounds per ha
+healthy environment,pesticide application rate,air pollution,ROW,MISCELLANEOUS TRUCK,2.5444934227518994,0.275500391871322,4.477641590912163,pounds per ha
+healthy environment,pesticide application rate,air pollution,ROW,ONIONS & GARLIC,1.8516926226582808,0.4720555976168982,2.960612271910166,pounds per ha
+healthy environment,pesticide application rate,air pollution,ROW,"PEPPERS (CHILI, BELL, ETC)",1.8739200401110458,0.13263188368308246,6.331918957583212,pounds per ha
+healthy environment,pesticide application rate,air pollution,ROW,POTATO OR SWEET POTATO,122.73093230717905,35.492928843731484,281.66003185540853,pounds per ha
+healthy environment,pesticide application rate,air pollution,ROW,TOMATOES (PROCESSING),8.485907038149477,0.825192171812705,21.88755705355534,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ROW,CARROTS,2.441906046572244,1.1460380922868552,4.383537441240576,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ROW,COLE CROPS (MIXTURE OF 22-25),1.7158535190380786,0.053893227268425006,3.615432418766637,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ROW,"MELONS, SQUASH, AND CUCUMBERS (ALL TYPES)",1.12894662182843,0.6601486208374222,1.7003520695403689,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ROW,MISCELLANEOUS TRUCK,7.095990030201496,3.7904550538795037,12.359127133668165,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ROW,ONIONS & GARLIC,4.135136799430493,2.204516786750527,5.774169214544834,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ROW,"PEPPERS (CHILI, BELL, ETC)",7.618695950520513,1.0999448938690608,13.101739788276811,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ROW,POTATO OR SWEET POTATO,5.427515377315922,4.006748943402316,6.00918677808615,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ROW,STRAWBERRIES,4.549335900441056,0.03704199341800571,13.124590773726103,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,ROW,TOMATOES (PROCESSING),7.912380615660097,5.926632477815127,9.87025248469621,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ROW,BUSH BERRIES,0.006516193677635221,0.006516193677635221,0.006516193677635221,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ROW,CARROTS,22.661865876772243,1.9575585669815787,45.19162056836981,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ROW,COLE CROPS (MIXTURE OF 22-25),2.0221238745410233,2.0221238745410233,2.0221238745410233,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ROW,"MELONS, SQUASH, AND CUCUMBERS (ALL TYPES)",1.4199559919828761,1.1264776794609141,1.8705898425804846,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ROW,MISCELLANEOUS TRUCK,4.978387797482548,2.0330969760678697,8.939454025523832,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ROW,ONIONS & GARLIC,3.095154982375042,2.3647662155650897,3.7716688113309647,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ROW,"PEPPERS (CHILI, BELL, ETC)",4.149555601335272,0.0036477801459235196,7.618037851926788,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ROW,POTATO OR SWEET POTATO,42.53285238816291,20.82722724790661,58.525878210719625,pounds per ha
+healthy environment,pesticide application rate,carcinogen,ROW,TOMATOES (PROCESSING),11.069875074361175,4.834279831073925,27.833911817585513,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ROW,CARROTS,2.4019538251749233,2.3959729228945865,2.40793472745526,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ROW,COLE CROPS (MIXTURE OF 22-25),0.801791502002985,0.028387579042685192,1.8934127044776337,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ROW,"MELONS, SQUASH, AND CUCUMBERS (ALL TYPES)",0.20756510905662248,0.09451322409616289,0.3222249902074563,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ROW,MISCELLANEOUS TRUCK,1.6301199804068602,0.29174613272924926,2.8199148799779343,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ROW,ONIONS & GARLIC,0.19797224453753037,0.0016887180365978158,0.5332427043413644,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ROW,"PEPPERS (CHILI, BELL, ETC)",4.881754222547607,0.19238947068642306,12.92237338508273,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ROW,POTATO OR SWEET POTATO,2.6140517769562894,2.12224719430716,2.94074045980868,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ROW,STRAWBERRIES,2.1092707457819015,0.029364661419262396,5.303154488710592,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,ROW,TOMATOES (PROCESSING),1.850557240751104,1.4196903520564308,2.3196938691728097,pounds per ha
+healthy environment,pesticide application rate,groundwater contaminant,ROW,MISCELLANEOUS TRUCK,0.23513724713501538,0.07291366150846336,0.44178674813312135,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ROW,CARROTS,2.8969632818285294,1.8715107440018268,3.8300036943454563,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ROW,COLE CROPS (MIXTURE OF 22-25),0.981335476988883,0.981335476988883,0.981335476988883,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ROW,"MELONS, SQUASH, AND CUCUMBERS (ALL TYPES)",0.10441195182839524,0.030246397641373466,0.21674555078184,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ROW,MISCELLANEOUS TRUCK,0.2789673279047892,0.003541348372876251,0.7058499655166681,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ROW,ONIONS & GARLIC,0.40397585835814065,0.13873212286384934,0.9935548227686792,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ROW,"PEPPERS (CHILI, BELL, ETC)",0.6034230295558776,0.08357829891528848,0.9833130772287171,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ROW,POTATO OR SWEET POTATO,0.42229409363454745,0.22257027837071516,0.6206478322936333,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ROW,STRAWBERRIES,0.6430559886530647,0.0057983460438475526,1.1305587102406964,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,ROW,TOMATOES (PROCESSING),0.3249276827451338,0.21750460669561053,0.4227101169745391,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ROW,BUSH BERRIES,0.006516193677635221,0.006516193677635221,0.006516193677635221,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ROW,CARROTS,28.000735205173015,7.711343226367676,53.405161703955834,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ROW,COLE CROPS (MIXTURE OF 22-25),1.4725032588968774,0.0609901220290963,3.615432418766637,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ROW,"MELONS, SQUASH, AND CUCUMBERS (ALL TYPES)",2.320625529469479,1.343883444703259,3.554147909853309,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ROW,MISCELLANEOUS TRUCK,9.817443890854593,4.487152515458316,15.03918808651449,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ROW,ONIONS & GARLIC,5.310640140647117,4.24096016015351,6.761382426494867,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ROW,"PEPPERS (CHILI, BELL, ETC)",11.057551023147306,1.2921035055303778,17.05094735811996,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ROW,POTATO OR SWEET POTATO,128.52363381909103,40.50078026889854,285.8443552845546,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ROW,STRAWBERRIES,5.191705528894798,0.7711585288995656,14.18171858481955,pounds per ha
+healthy environment,pesticide application rate,total pesticides,ROW,TOMATOES (PROCESSING),17.34631170454576,8.65207950688606,32.57647382885372,pounds per ha
+healthy environment,pesticide application rate,air pollution,URBAN,URBAN,0.013731249999427552,0.004398533394349803,0.020344621510785584,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,URBAN,URBAN,0.03901781990119487,0.005062300309410828,0.09104940294573743,pounds per ha
+healthy environment,pesticide application rate,carcinogen,URBAN,URBAN,0.17231781246187206,0.10016997548182688,0.31017590033725023,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,URBAN,URBAN,0.02562865464592569,0.0019255823032182909,0.0670297948949475,pounds per ha
+healthy environment,pesticide application rate,groundwater contaminant,URBAN,URBAN,0.025554192332556243,0.0019255823032182909,0.06665748332810027,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,URBAN,URBAN,2.736927724787773e-4,2.9903875352033645e-6,5.443951574223512e-4,pounds per ha
+healthy environment,pesticide application rate,total pesticides,URBAN,URBAN,0.20136961202405354,0.11667732267375061,0.3550845250562481,pounds per ha
+healthy environment,pesticide application rate,air pollution,VINEYARD,VINEYARD,2.6905738725507793,0.23210850592352672,7.599887731095916,pounds per ha
+biodiversity,pesticide application rate,aquatic contaminant,VINEYARD,VINEYARD,2.4645189647690797,1.8026776528974584,2.910032413311415,pounds per ha
+healthy environment,pesticide application rate,carcinogen,VINEYARD,VINEYARD,6.333918505921902,3.900545103603366,11.683828427566977,pounds per ha
+healthy environment,pesticide application rate,critical pesticides,VINEYARD,VINEYARD,0.388026774905255,0.28108622586192467,0.4675288818414653,pounds per ha
+healthy environment,pesticide application rate,groundwater contaminant,VINEYARD,VINEYARD,0.3162555352208334,0.26034524139543863,0.41940761963938383,pounds per ha
+healthy environment,pesticide application rate,reproductive toxicity,VINEYARD,VINEYARD,0.46729105332962,0.2701591546576862,0.6070466350300879,pounds per ha
+healthy environment,pesticide application rate,total pesticides,VINEYARD,VINEYARD,8.887845340057103,5.699483035349272,14.374664389718045,pounds per ha
+healthy environment,pesticide application rate,carcinogen,WATER,WATER,0.004084776967205302,0.0015128805815138825,0.006656673352896722,pounds per ha
+healthy environment,pesticide application rate,total pesticides,WATER,WATER,0.004084776967205302,0.0015128805815138825,0.006656673352896722,pounds per ha
