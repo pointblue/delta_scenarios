@@ -11,11 +11,16 @@ source('R/packages.R')
 delta = rast('GIS/boundaries/delta.tif')
 delta_buff10k = read_sf('GIS/boundaries/Legal_Delta_boundary_buff10k.shp') %>%
   st_transform(crs = '+proj=utm +zone=10 +datum=WGS84 +units=m +no_defs')
+delta_boundary = read_sf('GIS/boundaries/Legal_Delta_Boundary.shp') %>%
+  st_transform(st_crs(delta_buff10k))
 template = rasterize(vect(delta_buff10k), extend(delta, delta_buff10k))
 
 # restoration plans------
 # existing planned/in-progress restoration projects: based on EcoAtlas, with
 # additional info/edits from DSLPT EcoRestore and examining project plans
+
+# EcoAtlas data access: https://www.ecoatlas.org/regions/ecoregion/statewide
+# (see "tools" button to right, for an option to download .shp or .csv)
 plans = read_sf('GIS/scenario_inputs/habitatprojects_Deltabuff10k.shp') %>%
   st_transform(crs = st_crs(delta_buff10k)) %>%
   # exclude baseline (already completed), unknown status, and "proposed" (early stages)
@@ -45,7 +50,7 @@ plot(plans)
 freq(plans)
 # 70: 7909
 # 81: 13128
-# 82: 2837
+# 82: 2042
 
 # restoration potential------
 
