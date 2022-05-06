@@ -7,7 +7,12 @@ library(sf)
 library(terra)
 library(DeltaMultipleBenefits)
 library(ggplot2)
+library(dismo)
+library(gbm)
 
+conflicted::conflict_prefer('select', 'dplyr')
+conflicted::conflict_prefer('filter', 'dplyr')
+conflicted::conflict_prefer('extract', 'terra')
 # remotes::install_local('C:/Users/kdybala/Documents/DeltaMultipleBenefits/')
 # recommended:
 # library(htmlwidgets)
