@@ -5,7 +5,7 @@
 # covered by spatial distribution models)
 
 # PACKAGES & FUNCTIONS
-source('R/packages.R')
+source('R/0_packages.R')
 
 # compile raw data--------
 acs_raw <- read_csv('data_orig/Peterson_et_al_2020/Avian_conservation_scores.csv',
