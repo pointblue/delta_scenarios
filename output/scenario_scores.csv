@@ -1,0 +1,61 @@
+scenario,METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,UNIT,SCORE_TOTAL,SCORE_TOTAL_SE
+baseline,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,2513.7578620599315,144.2187288955117
+baseline,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),814558.3476816936,20702.285798169465
+baseline,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,125430.863485304,9894.388055583227
+baseline,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,16239.360345045463,2134.8198858076667
+baseline,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,392864.74040887435,16782.85648398727
+baseline,Climate Change Resilience,climate change resilience,Drought,ranking,1501446.1687507308,70863.98466605773
+baseline,Climate Change Resilience,climate change resilience,Flood,ranking,1540246.6373877635,73762.51566575798
+baseline,Climate Change Resilience,climate change resilience,Heat,ranking,1838578.5900009822,80618.64100986463
+baseline,Climate Change Resilience,climate change resilience,Overall,ranking,1641544.4021599048,43412.71999767642
+baseline,Climate Change Resilience,climate change resilience,Salinity,ranking,1685906.212500143,0
+baseline,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,595973.6100008204,NA
+baseline,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,418458.69000043476,NA
+baseline,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,ranking,208087.3800001224,NA
+baseline,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,ranking,202861.80000013768,NA
+baseline,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,ranking,169444.44000014526,NA
+baseline,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,ranking,859796.4600010676,NA
+baseline,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,ranking,562853.5199998701,NA
+baseline,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ranking,631185.6599999794,NA
+baseline,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ranking,674310.9599999557,NA
+scenario1_restoration,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,2458.302966676867,142.09091772567044
+scenario1_restoration,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),797689.1866727817,20401.462508506775
+scenario1_restoration,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,122354.35630913381,9666.007524457018
+scenario1_restoration,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,15981.145438332755,2092.4123698496933
+scenario1_restoration,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,382439.8916201204,16383.405798711623
+scenario1_restoration,Climate Change Resilience,climate change resilience,Drought,ranking,1479319.2037508024,69305.14344221234
+scenario1_restoration,Climate Change Resilience,climate change resilience,Flood,ranking,1558555.070115119,72117.24701061654
+scenario1_restoration,Climate Change Resilience,climate change resilience,Heat,ranking,1838232.0916082468,79688.64764350372
+scenario1_restoration,Climate Change Resilience,climate change resilience,Overall,ranking,1642810.7913686002,42628.0825372018
+scenario1_restoration,Climate Change Resilience,climate change resilience,Salinity,ranking,1695136.8000002322,0
+scenario1_restoration,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,565294.5000007681,NA
+scenario1_restoration,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,440423.28000045376,NA
+scenario1_restoration,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,ranking,262271.88000017975,NA
+scenario1_restoration,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,ranking,251809.20000018133,NA
+scenario1_restoration,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,ranking,202435.56000016996,NA
+scenario1_restoration,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,ranking,856559.3400010337,NA
+scenario1_restoration,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,ranking,589041.8100001006,NA
+scenario1_restoration,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ranking,651717.7200002025,NA
+scenario1_restoration,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ranking,713966.4900002012,NA
+scenario2_perennialexpand,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,2989.4394028270826,214.91119036699388
+scenario2_perennialexpand,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),956471.5464054388,30431.946104233648
+scenario2_perennialexpand,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,128998.91559903901,9100.625756624524
+scenario2_perennialexpand,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,18735.59895719281,2066.7115256664374
+scenario2_perennialexpand,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,441990.2298667642,17850.193388624135
+scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Drought,ranking,1434119.376251099,73274.26120152937
+scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Flood,ranking,1523136.9044335773,74613.809547739
+scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Heat,ranking,1762174.4303586232,85349.25674715094
+scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Overall,ranking,1573506.484010924,44994.85594937778
+scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Salinity,ranking,1574595.2250003961,0
+scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,568127.4300007754,NA
+scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,414021.0600004427,NA
+scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,ranking,214893.90000014857,NA
+scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,ranking,195334.47000013324,NA
+scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,ranking,164728.35000013924,NA
+scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,ranking,813402.3600009942,NA
+scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,ranking,528018.9300006689,NA
+scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ranking,590911.9200007679,NA
+scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ranking,628751.9700007433,NA
+baseline,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,38726.84112935419,613.8994828298515
+scenario1_restoration,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,38697.50096778964,613.3768124229416
+scenario2_perennialexpand,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,38487.27663199474,573.3275564218537
