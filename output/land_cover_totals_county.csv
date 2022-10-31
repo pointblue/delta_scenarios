@@ -1,0 +1,571 @@
+scenario,county,CODE_NAME,area,area_unit
+baseline,Contra Costa & Alameda,ORCHARD_DECIDUOUS,1211.2200481295586,ha
+baseline,Contra Costa & Alameda,ORCHARD_CITRUS&SUBTROPICAL,5.850000232458115,ha
+baseline,Contra Costa & Alameda,VINEYARD,752.4000298976898,ha
+baseline,Contra Costa & Alameda,GRAIN&HAY_WHEAT,1102.230043798685,ha
+baseline,Contra Costa & Alameda,GRAIN&HAY_OTHER,665.4600264430046,ha
+baseline,Contra Costa & Alameda,FIELD_CORN,4278.870170027018,ha
+baseline,Contra Costa & Alameda,FIELD_OTHER,522.3600207567215,ha
+baseline,Contra Costa & Alameda,ROW,1829.790072709322,ha
+baseline,Contra Costa & Alameda,RICE,0,ha
+baseline,Contra Costa & Alameda,IDLE,2932.020116508007,ha
+baseline,Contra Costa & Alameda,PASTURE_ALFALFA,1282.2300509512424,ha
+baseline,Contra Costa & Alameda,PASTURE_OTHER,4013.7301594913006,ha
+baseline,Contra Costa & Alameda,GRASSLAND,4193.9101666510105,ha
+baseline,Contra Costa & Alameda,URBAN,12869.190511375666,ha
+baseline,Contra Costa & Alameda,RIPARIAN_FOREST_POFR,178.2000070810318,ha
+baseline,Contra Costa & Alameda,RIPARIAN_FOREST_QULO,25.38000100851059,ha
+baseline,Contra Costa & Alameda,RIPARIAN_FOREST_SALIX,123.3000048995018,ha
+baseline,Contra Costa & Alameda,RIPARIAN_FOREST_MIXED,71.55000284314156,ha
+baseline,Contra Costa & Alameda,RIPARIAN_SCRUB_INTRO,343.98001366853714,ha
+baseline,Contra Costa & Alameda,RIPARIAN_SCRUB_SALIX,389.88001549243927,ha
+baseline,Contra Costa & Alameda,RIPARIAN_SCRUB_MIXED,24.840000987052917,ha
+baseline,Contra Costa & Alameda,WETLAND_MANAGED_PERENNIAL,0,ha
+baseline,Contra Costa & Alameda,WETLAND_MANAGED_SEASONAL,0,ha
+baseline,Contra Costa & Alameda,WETLAND_TIDAL,763.7400303483009,ha
+baseline,Contra Costa & Alameda,WETLAND_OTHER,2119.0500842034817,ha
+baseline,Contra Costa & Alameda,WATER,7042.230279833078,ha
+baseline,Contra Costa & Alameda,WOODLAND,174.60000693798065,ha
+baseline,Contra Costa & Alameda,SCRUB,174.60000693798065,ha
+baseline,Contra Costa & Alameda,BARREN,17.01000067591667,ha
+baseline,Sacramento,ORCHARD_DECIDUOUS,2755.620109498501,ha
+baseline,Sacramento,ORCHARD_CITRUS&SUBTROPICAL,8.010000318288803,ha
+baseline,Sacramento,VINEYARD,4879.890193909407,ha
+baseline,Sacramento,GRAIN&HAY_WHEAT,1326.4200527071953,ha
+baseline,Sacramento,GRAIN&HAY_OTHER,1197.5400475859642,ha
+baseline,Sacramento,FIELD_CORN,6886.800273656845,ha
+baseline,Sacramento,FIELD_OTHER,1415.160056233406,ha
+baseline,Sacramento,ROW,780.0300309956074,ha
+baseline,Sacramento,RICE,377.8200150132179,ha
+baseline,Sacramento,IDLE,4144.050164669752,ha
+baseline,Sacramento,PASTURE_ALFALFA,2372.5800942778587,ha
+baseline,Sacramento,PASTURE_OTHER,4359.420173227787,ha
+baseline,Sacramento,GRASSLAND,2056.9500817358494,ha
+baseline,Sacramento,URBAN,3327.7501322329044,ha
+baseline,Sacramento,RIPARIAN_FOREST_POFR,432.7200171947479,ha
+baseline,Sacramento,RIPARIAN_FOREST_QULO,853.2900339066982,ha
+baseline,Sacramento,RIPARIAN_FOREST_SALIX,227.88000905513763,ha
+baseline,Sacramento,RIPARIAN_FOREST_MIXED,188.46000748872757,ha
+baseline,Sacramento,RIPARIAN_SCRUB_INTRO,219.24000871181488,ha
+baseline,Sacramento,RIPARIAN_SCRUB_SALIX,451.7100179493427,ha
+baseline,Sacramento,RIPARIAN_SCRUB_MIXED,31.320001244544983,ha
+baseline,Sacramento,WETLAND_MANAGED_PERENNIAL,798.6600317358971,ha
+baseline,Sacramento,WETLAND_MANAGED_SEASONAL,717.4800285100937,ha
+baseline,Sacramento,WETLAND_TIDAL,1042.2000414133072,ha
+baseline,Sacramento,WETLAND_OTHER,1423.0800565481186,ha
+baseline,Sacramento,WATER,5684.850225895643,ha
+baseline,Sacramento,WOODLAND,168.9300067126751,ha
+baseline,Sacramento,SCRUB,4.050000160932541,ha
+baseline,Sacramento,BARREN,3.960000157356262,ha
+baseline,San Joaquin,ORCHARD_DECIDUOUS,10368.540412008762,ha
+baseline,San Joaquin,ORCHARD_CITRUS&SUBTROPICAL,577.7100229561329,ha
+baseline,San Joaquin,VINEYARD,5103.810202807188,ha
+baseline,San Joaquin,GRAIN&HAY_WHEAT,6184.710245758295,ha
+baseline,San Joaquin,GRAIN&HAY_OTHER,2597.400103211403,ha
+baseline,San Joaquin,FIELD_CORN,20821.770827382803,ha
+baseline,San Joaquin,FIELD_OTHER,2676.600106358528,ha
+baseline,San Joaquin,ROW,12461.31049516797,ha
+baseline,San Joaquin,RICE,1211.4000481367111,ha
+baseline,San Joaquin,IDLE,14213.970564812422,ha
+baseline,San Joaquin,PASTURE_ALFALFA,11286.1804484725,ha
+baseline,San Joaquin,PASTURE_OTHER,3944.8801567554474,ha
+baseline,San Joaquin,GRASSLAND,5516.550219208002,ha
+baseline,San Joaquin,URBAN,16702.110663682222,ha
+baseline,San Joaquin,RIPARIAN_FOREST_POFR,686.3400272727013,ha
+baseline,San Joaquin,RIPARIAN_FOREST_QULO,652.2300259172916,ha
+baseline,San Joaquin,RIPARIAN_FOREST_SALIX,391.1400155425072,ha
+baseline,San Joaquin,RIPARIAN_FOREST_MIXED,125.46000498533249,ha
+baseline,San Joaquin,RIPARIAN_SCRUB_INTRO,192.6000076532364,ha
+baseline,San Joaquin,RIPARIAN_SCRUB_SALIX,864.5400343537331,ha
+baseline,San Joaquin,RIPARIAN_SCRUB_MIXED,51.9300020635128,ha
+baseline,San Joaquin,WETLAND_MANAGED_PERENNIAL,2.9700001180171967,ha
+baseline,San Joaquin,WETLAND_MANAGED_SEASONAL,336.78001338243484,ha
+baseline,San Joaquin,WETLAND_TIDAL,449.2800178527832,ha
+baseline,San Joaquin,WETLAND_OTHER,2920.1401160359383,ha
+baseline,San Joaquin,WATER,7714.980306565762,ha
+baseline,San Joaquin,WOODLAND,317.5200126171112,ha
+baseline,San Joaquin,SCRUB,28.17000111937523,ha
+baseline,San Joaquin,BARREN,161.7300064265728,ha
+baseline,Solano,ORCHARD_DECIDUOUS,1073.430042654276,ha
+baseline,Solano,ORCHARD_CITRUS&SUBTROPICAL,18.990000754594803,ha
+baseline,Solano,VINEYARD,706.590028077364,ha
+baseline,Solano,GRAIN&HAY_WHEAT,1296.9900515377522,ha
+baseline,Solano,GRAIN&HAY_OTHER,1633.9500649273396,ha
+baseline,Solano,FIELD_CORN,2421.360096216202,ha
+baseline,Solano,FIELD_OTHER,1804.7700717151165,ha
+baseline,Solano,ROW,587.5200233459473,ha
+baseline,Solano,RICE,0,ha
+baseline,Solano,IDLE,2252.9700895249844,ha
+baseline,Solano,PASTURE_ALFALFA,3235.1401285529137,ha
+baseline,Solano,PASTURE_OTHER,7880.040313124657,ha
+baseline,Solano,GRASSLAND,5168.430205374956,ha
+baseline,Solano,URBAN,622.1700247228146,ha
+baseline,Solano,RIPARIAN_FOREST_POFR,99.81000396609306,ha
+baseline,Solano,RIPARIAN_FOREST_QULO,53.730002135038376,ha
+baseline,Solano,RIPARIAN_FOREST_SALIX,84.24000334739685,ha
+baseline,Solano,RIPARIAN_FOREST_MIXED,103.8600041270256,ha
+baseline,Solano,RIPARIAN_SCRUB_INTRO,135.72000539302826,ha
+baseline,Solano,RIPARIAN_SCRUB_SALIX,214.29000851511955,ha
+baseline,Solano,RIPARIAN_SCRUB_MIXED,1.5300000607967377,ha
+baseline,Solano,WETLAND_MANAGED_PERENNIAL,33.48000133037567,ha
+baseline,Solano,WETLAND_MANAGED_SEASONAL,790.7400314211845,ha
+baseline,Solano,WETLAND_TIDAL,687.5100273191929,ha
+baseline,Solano,WETLAND_OTHER,1694.16006731987,ha
+baseline,Solano,WATER,4576.950181871653,ha
+baseline,Solano,WOODLAND,43.11000171303749,ha
+baseline,Solano,SCRUB,33.57000133395195,ha
+baseline,Solano,BARREN,7.830000311136246,ha
+baseline,Yolo,ORCHARD_DECIDUOUS,378.7200150489807,ha
+baseline,Yolo,ORCHARD_CITRUS&SUBTROPICAL,33.210001319646835,ha
+baseline,Yolo,VINEYARD,4862.250193208456,ha
+baseline,Yolo,GRAIN&HAY_WHEAT,1759.2300699055195,ha
+baseline,Yolo,GRAIN&HAY_OTHER,1746.0900693833828,ha
+baseline,Yolo,FIELD_CORN,470.61001870036125,ha
+baseline,Yolo,FIELD_OTHER,1586.7900630533695,ha
+baseline,Yolo,ROW,1440.630057245493,ha
+baseline,Yolo,RICE,1090.7100433409214,ha
+baseline,Yolo,IDLE,3066.300121843815,ha
+baseline,Yolo,PASTURE_ALFALFA,995.4900395572186,ha
+baseline,Yolo,PASTURE_OTHER,3840.0301525890827,ha
+baseline,Yolo,GRASSLAND,3555.900141298771,ha
+baseline,Yolo,URBAN,3263.310129672289,ha
+baseline,Yolo,RIPARIAN_FOREST_POFR,317.0700125992298,ha
+baseline,Yolo,RIPARIAN_FOREST_QULO,394.7400156855583,ha
+baseline,Yolo,RIPARIAN_FOREST_SALIX,145.44000577926636,ha
+baseline,Yolo,RIPARIAN_FOREST_MIXED,105.66000419855118,ha
+baseline,Yolo,RIPARIAN_SCRUB_INTRO,25.200001001358032,ha
+baseline,Yolo,RIPARIAN_SCRUB_SALIX,141.9300056397915,ha
+baseline,Yolo,RIPARIAN_SCRUB_MIXED,5.130000203847885,ha
+baseline,Yolo,WETLAND_MANAGED_PERENNIAL,104.49000415205956,ha
+baseline,Yolo,WETLAND_MANAGED_SEASONAL,3224.520128130913,ha
+baseline,Yolo,WETLAND_TIDAL,616.1400244832039,ha
+baseline,Yolo,WETLAND_OTHER,2341.710093051195,ha
+baseline,Yolo,WATER,1752.1200696229935,ha
+baseline,Yolo,WOODLAND,58.500002324581146,ha
+baseline,Yolo,SCRUB,0,ha
+baseline,Yolo,BARREN,0,ha
+scenario1_restoration,Contra Costa & Alameda,ORCHARD_DECIDUOUS,1211.2200481295586,ha
+scenario1_restoration,Contra Costa & Alameda,ORCHARD_CITRUS&SUBTROPICAL,5.850000232458115,ha
+scenario1_restoration,Contra Costa & Alameda,VINEYARD,752.4000298976898,ha
+scenario1_restoration,Contra Costa & Alameda,GRAIN&HAY_WHEAT,1102.230043798685,ha
+scenario1_restoration,Contra Costa & Alameda,GRAIN&HAY_OTHER,665.4600264430046,ha
+scenario1_restoration,Contra Costa & Alameda,FIELD_CORN,4278.870170027018,ha
+scenario1_restoration,Contra Costa & Alameda,FIELD_OTHER,522.3600207567215,ha
+scenario1_restoration,Contra Costa & Alameda,ROW,1829.790072709322,ha
+scenario1_restoration,Contra Costa & Alameda,RICE,0,ha
+scenario1_restoration,Contra Costa & Alameda,IDLE,2930.760116457939,ha
+scenario1_restoration,Contra Costa & Alameda,PASTURE_ALFALFA,1282.2300509512424,ha
+scenario1_restoration,Contra Costa & Alameda,PASTURE_OTHER,3991.320158600807,ha
+scenario1_restoration,Contra Costa & Alameda,GRASSLAND,4192.110166579485,ha
+scenario1_restoration,Contra Costa & Alameda,URBAN,12868.11051133275,ha
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_FOREST_POFR,179.0100071132183,ha
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_FOREST_QULO,25.650001019239426,ha
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_FOREST_SALIX,123.3000048995018,ha
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_FOREST_MIXED,71.55000284314156,ha
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_SCRUB_INTRO,343.98001366853714,ha
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_SCRUB_SALIX,390.42001551389694,ha
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_SCRUB_MIXED,24.840000987052917,ha
+scenario1_restoration,Contra Costa & Alameda,WETLAND_MANAGED_PERENNIAL,0,ha
+scenario1_restoration,Contra Costa & Alameda,WETLAND_MANAGED_SEASONAL,32.580001294612885,ha
+scenario1_restoration,Contra Costa & Alameda,WETLAND_TIDAL,763.7400303483009,ha
+scenario1_restoration,Contra Costa & Alameda,WETLAND_OTHER,2111.4900839030743,ha
+scenario1_restoration,Contra Costa & Alameda,WATER,7042.230279833078,ha
+scenario1_restoration,Contra Costa & Alameda,WOODLAND,174.51000693440437,ha
+scenario1_restoration,Contra Costa & Alameda,SCRUB,174.60000693798065,ha
+scenario1_restoration,Contra Costa & Alameda,BARREN,17.01000067591667,ha
+scenario1_restoration,Sacramento,ORCHARD_DECIDUOUS,2694.060107052326,ha
+scenario1_restoration,Sacramento,ORCHARD_CITRUS&SUBTROPICAL,8.010000318288803,ha
+scenario1_restoration,Sacramento,VINEYARD,4875.750193744898,ha
+scenario1_restoration,Sacramento,GRAIN&HAY_WHEAT,1241.5500493347645,ha
+scenario1_restoration,Sacramento,GRAIN&HAY_OTHER,1135.0800451040268,ha
+scenario1_restoration,Sacramento,FIELD_CORN,6646.500264108181,ha
+scenario1_restoration,Sacramento,FIELD_OTHER,1384.0200549960136,ha
+scenario1_restoration,Sacramento,ROW,759.5100301802158,ha
+scenario1_restoration,Sacramento,RICE,213.93000850081444,ha
+scenario1_restoration,Sacramento,IDLE,3870.450153797865,ha
+scenario1_restoration,Sacramento,PASTURE_ALFALFA,2300.2200914025307,ha
+scenario1_restoration,Sacramento,PASTURE_OTHER,3747.420148909092,ha
+scenario1_restoration,Sacramento,GRASSLAND,1866.7800741791725,ha
+scenario1_restoration,Sacramento,URBAN,3325.950132161379,ha
+scenario1_restoration,Sacramento,RIPARIAN_FOREST_POFR,535.3200212717056,ha
+scenario1_restoration,Sacramento,RIPARIAN_FOREST_QULO,1245.8700495064259,ha
+scenario1_restoration,Sacramento,RIPARIAN_FOREST_SALIX,261.8100104033947,ha
+scenario1_restoration,Sacramento,RIPARIAN_FOREST_MIXED,281.07001116871834,ha
+scenario1_restoration,Sacramento,RIPARIAN_SCRUB_INTRO,219.24000871181488,ha
+scenario1_restoration,Sacramento,RIPARIAN_SCRUB_SALIX,594.6300236284733,ha
+scenario1_restoration,Sacramento,RIPARIAN_SCRUB_MIXED,32.40000128746033,ha
+scenario1_restoration,Sacramento,WETLAND_MANAGED_PERENNIAL,1970.280078291893,ha
+scenario1_restoration,Sacramento,WETLAND_MANAGED_SEASONAL,833.7600331306458,ha
+scenario1_restoration,Sacramento,WETLAND_TIDAL,1042.2000414133072,ha
+scenario1_restoration,Sacramento,WETLAND_OTHER,1210.410048097372,ha
+scenario1_restoration,Sacramento,WATER,5684.850225895643,ha
+scenario1_restoration,Sacramento,WOODLAND,148.50000590085983,ha
+scenario1_restoration,Sacramento,SCRUB,2.9700001180171967,ha
+scenario1_restoration,Sacramento,BARREN,3.3300001323223114,ha
+scenario1_restoration,San Joaquin,ORCHARD_DECIDUOUS,10231.200406551361,ha
+scenario1_restoration,San Joaquin,ORCHARD_CITRUS&SUBTROPICAL,577.7100229561329,ha
+scenario1_restoration,San Joaquin,VINEYARD,5043.0602003932,ha
+scenario1_restoration,San Joaquin,GRAIN&HAY_WHEAT,6064.290240973234,ha
+scenario1_restoration,San Joaquin,GRAIN&HAY_OTHER,2574.900102317333,ha
+scenario1_restoration,San Joaquin,FIELD_CORN,20597.67081847787,ha
+scenario1_restoration,San Joaquin,FIELD_OTHER,2565.6301019489765,ha
+scenario1_restoration,San Joaquin,ROW,12292.560488462448,ha
+scenario1_restoration,San Joaquin,RICE,1211.4000481367111,ha
+scenario1_restoration,San Joaquin,IDLE,13847.310550242662,ha
+scenario1_restoration,San Joaquin,PASTURE_ALFALFA,11116.89044174552,ha
+scenario1_restoration,San Joaquin,PASTURE_OTHER,3840.120152592659,ha
+scenario1_restoration,San Joaquin,GRASSLAND,5026.410199731588,ha
+scenario1_restoration,San Joaquin,URBAN,16701.750663667917,ha
+scenario1_restoration,San Joaquin,RIPARIAN_FOREST_POFR,1172.7000465989113,ha
+scenario1_restoration,San Joaquin,RIPARIAN_FOREST_QULO,1461.6900580823421,ha
+scenario1_restoration,San Joaquin,RIPARIAN_FOREST_SALIX,542.0700215399265,ha
+scenario1_restoration,San Joaquin,RIPARIAN_FOREST_MIXED,161.10000640153885,ha
+scenario1_restoration,San Joaquin,RIPARIAN_SCRUB_INTRO,192.6000076532364,ha
+scenario1_restoration,San Joaquin,RIPARIAN_SCRUB_SALIX,1387.0800551176071,ha
+scenario1_restoration,San Joaquin,RIPARIAN_SCRUB_MIXED,51.9300020635128,ha
+scenario1_restoration,San Joaquin,WETLAND_MANAGED_PERENNIAL,2.9700001180171967,ha
+scenario1_restoration,San Joaquin,WETLAND_MANAGED_SEASONAL,366.66001456975937,ha
+scenario1_restoration,San Joaquin,WETLAND_TIDAL,449.2800178527832,ha
+scenario1_restoration,San Joaquin,WETLAND_OTHER,2889.990114837885,ha
+scenario1_restoration,San Joaquin,WATER,7714.980306565762,ha
+scenario1_restoration,San Joaquin,WOODLAND,301.5900119841099,ha
+scenario1_restoration,San Joaquin,SCRUB,28.17000111937523,ha
+scenario1_restoration,San Joaquin,BARREN,149.0400059223175,ha
+scenario1_restoration,Solano,ORCHARD_DECIDUOUS,1073.430042654276,ha
+scenario1_restoration,Solano,ORCHARD_CITRUS&SUBTROPICAL,18.990000754594803,ha
+scenario1_restoration,Solano,VINEYARD,706.590028077364,ha
+scenario1_restoration,Solano,GRAIN&HAY_WHEAT,1293.8400514125824,ha
+scenario1_restoration,Solano,GRAIN&HAY_OTHER,1629.900064766407,ha
+scenario1_restoration,Solano,FIELD_CORN,2405.970095604658,ha
+scenario1_restoration,Solano,FIELD_OTHER,1800.5400715470314,ha
+scenario1_restoration,Solano,ROW,578.2500229775906,ha
+scenario1_restoration,Solano,RICE,0,ha
+scenario1_restoration,Solano,IDLE,2230.920088648796,ha
+scenario1_restoration,Solano,PASTURE_ALFALFA,3197.6101270616055,ha
+scenario1_restoration,Solano,PASTURE_OTHER,7821.18031078577,ha
+scenario1_restoration,Solano,GRASSLAND,5069.250201433897,ha
+scenario1_restoration,Solano,URBAN,622.1700247228146,ha
+scenario1_restoration,Solano,RIPARIAN_FOREST_POFR,107.01000425219536,ha
+scenario1_restoration,Solano,RIPARIAN_FOREST_QULO,74.07000294327736,ha
+scenario1_restoration,Solano,RIPARIAN_FOREST_SALIX,91.6200036406517,ha
+scenario1_restoration,Solano,RIPARIAN_FOREST_MIXED,159.30000633001328,ha
+scenario1_restoration,Solano,RIPARIAN_SCRUB_INTRO,135.72000539302826,ha
+scenario1_restoration,Solano,RIPARIAN_SCRUB_SALIX,256.05001017451286,ha
+scenario1_restoration,Solano,RIPARIAN_SCRUB_MIXED,1.5300000607967377,ha
+scenario1_restoration,Solano,WETLAND_MANAGED_PERENNIAL,33.48000133037567,ha
+scenario1_restoration,Solano,WETLAND_MANAGED_SEASONAL,938.7000373005867,ha
+scenario1_restoration,Solano,WETLAND_TIDAL,687.5100273191929,ha
+scenario1_restoration,Solano,WETLAND_OTHER,1670.7600663900375,ha
+scenario1_restoration,Solano,WATER,4576.950181871653,ha
+scenario1_restoration,Solano,WOODLAND,40.32000160217285,ha
+scenario1_restoration,Solano,SCRUB,33.39000132679939,ha
+scenario1_restoration,Solano,BARREN,7.830000311136246,ha
+scenario1_restoration,Yolo,ORCHARD_DECIDUOUS,378.63001504540443,ha
+scenario1_restoration,Yolo,ORCHARD_CITRUS&SUBTROPICAL,33.210001319646835,ha
+scenario1_restoration,Yolo,VINEYARD,4719.870187550783,ha
+scenario1_restoration,Yolo,GRAIN&HAY_WHEAT,1579.230062752962,ha
+scenario1_restoration,Yolo,GRAIN&HAY_OTHER,1601.2800636291504,ha
+scenario1_restoration,Yolo,FIELD_CORN,414.00001645088196,ha
+scenario1_restoration,Yolo,FIELD_OTHER,1278.9000508189201,ha
+scenario1_restoration,Yolo,ROW,1276.8300507366657,ha
+scenario1_restoration,Yolo,RICE,785.8800312280655,ha
+scenario1_restoration,Yolo,IDLE,2658.780105650425,ha
+scenario1_restoration,Yolo,PASTURE_ALFALFA,857.8800340890884,ha
+scenario1_restoration,Yolo,PASTURE_OTHER,3069.3601219654083,ha
+scenario1_restoration,Yolo,GRASSLAND,3127.770124286413,ha
+scenario1_restoration,Yolo,URBAN,3263.310129672289,ha
+scenario1_restoration,Yolo,RIPARIAN_FOREST_POFR,326.3400129675865,ha
+scenario1_restoration,Yolo,RIPARIAN_FOREST_QULO,1437.0300571024418,ha
+scenario1_restoration,Yolo,RIPARIAN_FOREST_SALIX,146.88000583648682,ha
+scenario1_restoration,Yolo,RIPARIAN_FOREST_MIXED,131.760005235672,ha
+scenario1_restoration,Yolo,RIPARIAN_SCRUB_INTRO,25.200001001358032,ha
+scenario1_restoration,Yolo,RIPARIAN_SCRUB_SALIX,147.51000586152077,ha
+scenario1_restoration,Yolo,RIPARIAN_SCRUB_MIXED,5.130000203847885,ha
+scenario1_restoration,Yolo,WETLAND_MANAGED_PERENNIAL,104.49000415205956,ha
+scenario1_restoration,Yolo,WETLAND_MANAGED_SEASONAL,5470.200217366219,ha
+scenario1_restoration,Yolo,WETLAND_TIDAL,616.1400244832039,ha
+scenario1_restoration,Yolo,WETLAND_OTHER,2059.6500818431377,ha
+scenario1_restoration,Yolo,WATER,1752.1200696229935,ha
+scenario1_restoration,Yolo,WOODLAND,54.540002167224884,ha
+scenario1_restoration,Yolo,SCRUB,0,ha
+scenario1_restoration,Yolo,BARREN,0,ha
+scenario2_perennialexpand,Contra Costa & Alameda,ORCHARD_DECIDUOUS,1213.4700482189655,ha
+scenario2_perennialexpand,Contra Costa & Alameda,ORCHARD_CITRUS&SUBTROPICAL,5.850000232458115,ha
+scenario2_perennialexpand,Contra Costa & Alameda,VINEYARD,810.0000321865082,ha
+scenario2_perennialexpand,Contra Costa & Alameda,GRAIN&HAY_WHEAT,1102.230043798685,ha
+scenario2_perennialexpand,Contra Costa & Alameda,GRAIN&HAY_OTHER,665.3700264394283,ha
+scenario2_perennialexpand,Contra Costa & Alameda,FIELD_CORN,4271.580169737339,ha
+scenario2_perennialexpand,Contra Costa & Alameda,FIELD_OTHER,522.3600207567215,ha
+scenario2_perennialexpand,Contra Costa & Alameda,ROW,1829.790072709322,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RICE,0,ha
+scenario2_perennialexpand,Contra Costa & Alameda,IDLE,2928.8701163828373,ha
+scenario2_perennialexpand,Contra Costa & Alameda,PASTURE_ALFALFA,1278.3600507974625,ha
+scenario2_perennialexpand,Contra Costa & Alameda,PASTURE_OTHER,4003.7401590943336,ha
+scenario2_perennialexpand,Contra Costa & Alameda,GRASSLAND,4191.210166543722,ha
+scenario2_perennialexpand,Contra Costa & Alameda,URBAN,12869.190511375666,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_FOREST_POFR,169.20000672340393,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_FOREST_QULO,25.38000100851059,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_FOREST_SALIX,119.34000474214554,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_FOREST_MIXED,71.55000284314156,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_SCRUB_INTRO,343.8000136613846,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_SCRUB_SALIX,382.1400151848793,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_SCRUB_MIXED,24.840000987052917,ha
+scenario2_perennialexpand,Contra Costa & Alameda,WETLAND_MANAGED_PERENNIAL,0,ha
+scenario2_perennialexpand,Contra Costa & Alameda,WETLAND_MANAGED_SEASONAL,0,ha
+scenario2_perennialexpand,Contra Costa & Alameda,WETLAND_TIDAL,763.7400303483009,ha
+scenario2_perennialexpand,Contra Costa & Alameda,WETLAND_OTHER,2107.170083731413,ha
+scenario2_perennialexpand,Contra Costa & Alameda,WATER,7042.230279833078,ha
+scenario2_perennialexpand,Contra Costa & Alameda,WOODLAND,174.60000693798065,ha
+scenario2_perennialexpand,Contra Costa & Alameda,SCRUB,174.60000693798065,ha
+scenario2_perennialexpand,Contra Costa & Alameda,BARREN,17.01000067591667,ha
+scenario2_perennialexpand,Sacramento,ORCHARD_DECIDUOUS,3317.22013181448,ha
+scenario2_perennialexpand,Sacramento,ORCHARD_CITRUS&SUBTROPICAL,148.5900059044361,ha
+scenario2_perennialexpand,Sacramento,VINEYARD,6656.0402644872665,ha
+scenario2_perennialexpand,Sacramento,GRAIN&HAY_WHEAT,1136.2500451505184,ha
+scenario2_perennialexpand,Sacramento,GRAIN&HAY_OTHER,1073.5200426578522,ha
+scenario2_perennialexpand,Sacramento,FIELD_CORN,6362.4602528214455,ha
+scenario2_perennialexpand,Sacramento,FIELD_OTHER,1292.3100513517857,ha
+scenario2_perennialexpand,Sacramento,ROW,701.4600278735161,ha
+scenario2_perennialexpand,Sacramento,RICE,377.8200150132179,ha
+scenario2_perennialexpand,Sacramento,IDLE,3482.370138376951,ha
+scenario2_perennialexpand,Sacramento,PASTURE_ALFALFA,2142.0000851154327,ha
+scenario2_perennialexpand,Sacramento,PASTURE_OTHER,4159.620165288448,ha
+scenario2_perennialexpand,Sacramento,GRASSLAND,1943.0100772082806,ha
+scenario2_perennialexpand,Sacramento,URBAN,3327.7501322329044,ha
+scenario2_perennialexpand,Sacramento,RIPARIAN_FOREST_POFR,407.70001620054245,ha
+scenario2_perennialexpand,Sacramento,RIPARIAN_FOREST_QULO,761.9400302767754,ha
+scenario2_perennialexpand,Sacramento,RIPARIAN_FOREST_SALIX,222.39000883698463,ha
+scenario2_perennialexpand,Sacramento,RIPARIAN_FOREST_MIXED,167.13000664114952,ha
+scenario2_perennialexpand,Sacramento,RIPARIAN_SCRUB_INTRO,194.58000773191452,ha
+scenario2_perennialexpand,Sacramento,RIPARIAN_SCRUB_SALIX,423.9000168442726,ha
+scenario2_perennialexpand,Sacramento,RIPARIAN_SCRUB_MIXED,29.610001176595688,ha
+scenario2_perennialexpand,Sacramento,WETLAND_MANAGED_PERENNIAL,796.6800316572189,ha
+scenario2_perennialexpand,Sacramento,WETLAND_MANAGED_SEASONAL,717.4800285100937,ha
+scenario2_perennialexpand,Sacramento,WETLAND_TIDAL,1036.8900412023067,ha
+scenario2_perennialexpand,Sacramento,WETLAND_OTHER,1395.3600554466248,ha
+scenario2_perennialexpand,Sacramento,WATER,5684.850225895643,ha
+scenario2_perennialexpand,Sacramento,WOODLAND,168.9300067126751,ha
+scenario2_perennialexpand,Sacramento,SCRUB,4.050000160932541,ha
+scenario2_perennialexpand,Sacramento,BARREN,3.960000157356262,ha
+scenario2_perennialexpand,San Joaquin,ORCHARD_DECIDUOUS,18195.030723005533,ha
+scenario2_perennialexpand,San Joaquin,ORCHARD_CITRUS&SUBTROPICAL,608.3100241720676,ha
+scenario2_perennialexpand,San Joaquin,VINEYARD,8187.930325359106,ha
+scenario2_perennialexpand,San Joaquin,GRAIN&HAY_WHEAT,5284.710209995508,ha
+scenario2_perennialexpand,San Joaquin,GRAIN&HAY_OTHER,2329.2900925576687,ha
+scenario2_perennialexpand,San Joaquin,FIELD_CORN,19102.590759068727,ha
+scenario2_perennialexpand,San Joaquin,FIELD_OTHER,2276.370090454817,ha
+scenario2_perennialexpand,San Joaquin,ROW,9870.120392203331,ha
+scenario2_perennialexpand,San Joaquin,RICE,1211.4000481367111,ha
+scenario2_perennialexpand,San Joaquin,IDLE,11898.450472801924,ha
+scenario2_perennialexpand,San Joaquin,PASTURE_ALFALFA,10203.750405460596,ha
+scenario2_perennialexpand,San Joaquin,PASTURE_OTHER,3414.780135691166,ha
+scenario2_perennialexpand,San Joaquin,GRASSLAND,5003.370198816061,ha
+scenario2_perennialexpand,San Joaquin,URBAN,16702.110663682222,ha
+scenario2_perennialexpand,San Joaquin,RIPARIAN_FOREST_POFR,612.3600243330002,ha
+scenario2_perennialexpand,San Joaquin,RIPARIAN_FOREST_QULO,521.550020724535,ha
+scenario2_perennialexpand,San Joaquin,RIPARIAN_FOREST_SALIX,354.600014090538,ha
+scenario2_perennialexpand,San Joaquin,RIPARIAN_FOREST_MIXED,111.24000442028046,ha
+scenario2_perennialexpand,San Joaquin,RIPARIAN_SCRUB_INTRO,174.15000692009926,ha
+scenario2_perennialexpand,San Joaquin,RIPARIAN_SCRUB_SALIX,816.0300324261189,ha
+scenario2_perennialexpand,San Joaquin,RIPARIAN_SCRUB_MIXED,51.48000204563141,ha
+scenario2_perennialexpand,San Joaquin,WETLAND_MANAGED_PERENNIAL,0.7200000286102295,ha
+scenario2_perennialexpand,San Joaquin,WETLAND_MANAGED_SEASONAL,336.510013371706,ha
+scenario2_perennialexpand,San Joaquin,WETLAND_TIDAL,444.42001765966415,ha
+scenario2_perennialexpand,San Joaquin,WETLAND_OTHER,2633.0401046276093,ha
+scenario2_perennialexpand,San Joaquin,WATER,7714.980306565762,ha
+scenario2_perennialexpand,San Joaquin,WOODLAND,317.5200126171112,ha
+scenario2_perennialexpand,San Joaquin,SCRUB,28.17000111937523,ha
+scenario2_perennialexpand,San Joaquin,BARREN,157.77000626921654,ha
+scenario2_perennialexpand,Solano,ORCHARD_DECIDUOUS,1471.680058479309,ha
+scenario2_perennialexpand,Solano,ORCHARD_CITRUS&SUBTROPICAL,18.990000754594803,ha
+scenario2_perennialexpand,Solano,VINEYARD,1165.9500463306904,ha
+scenario2_perennialexpand,Solano,GRAIN&HAY_WHEAT,1222.4700485765934,ha
+scenario2_perennialexpand,Solano,GRAIN&HAY_OTHER,1561.0500620305538,ha
+scenario2_perennialexpand,Solano,FIELD_CORN,2302.7400915026665,ha
+scenario2_perennialexpand,Solano,FIELD_OTHER,1717.38006824255,ha
+scenario2_perennialexpand,Solano,ROW,540.0000214576721,ha
+scenario2_perennialexpand,Solano,RICE,0,ha
+scenario2_perennialexpand,Solano,IDLE,2141.6400851011276,ha
+scenario2_perennialexpand,Solano,PASTURE_ALFALFA,3098.700123131275,ha
+scenario2_perennialexpand,Solano,PASTURE_OTHER,7863.300312459469,ha
+scenario2_perennialexpand,Solano,GRASSLAND,5073.030201584101,ha
+scenario2_perennialexpand,Solano,URBAN,622.1700247228146,ha
+scenario2_perennialexpand,Solano,RIPARIAN_FOREST_POFR,99.6300039589405,ha
+scenario2_perennialexpand,Solano,RIPARIAN_FOREST_QULO,47.700001895427704,ha
+scenario2_perennialexpand,Solano,RIPARIAN_FOREST_SALIX,78.39000311493874,ha
+scenario2_perennialexpand,Solano,RIPARIAN_FOREST_MIXED,95.0400037765503,ha
+scenario2_perennialexpand,Solano,RIPARIAN_SCRUB_INTRO,132.1200052499771,ha
+scenario2_perennialexpand,Solano,RIPARIAN_SCRUB_SALIX,206.0100081861019,ha
+scenario2_perennialexpand,Solano,RIPARIAN_SCRUB_MIXED,1.5300000607967377,ha
+scenario2_perennialexpand,Solano,WETLAND_MANAGED_PERENNIAL,33.48000133037567,ha
+scenario2_perennialexpand,Solano,WETLAND_MANAGED_SEASONAL,790.7400314211845,ha
+scenario2_perennialexpand,Solano,WETLAND_TIDAL,687.5100273191929,ha
+scenario2_perennialexpand,Solano,WETLAND_OTHER,1630.1700647771358,ha
+scenario2_perennialexpand,Solano,WATER,4576.950181871653,ha
+scenario2_perennialexpand,Solano,WOODLAND,43.11000171303749,ha
+scenario2_perennialexpand,Solano,SCRUB,33.57000133395195,ha
+scenario2_perennialexpand,Solano,BARREN,7.830000311136246,ha
+scenario2_perennialexpand,Yolo,ORCHARD_DECIDUOUS,1278.0000507831573,ha
+scenario2_perennialexpand,Yolo,ORCHARD_CITRUS&SUBTROPICAL,33.210001319646835,ha
+scenario2_perennialexpand,Yolo,VINEYARD,5915.880235075951,ha
+scenario2_perennialexpand,Yolo,GRAIN&HAY_WHEAT,1617.300064265728,ha
+scenario2_perennialexpand,Yolo,GRAIN&HAY_OTHER,1539.5400611758232,ha
+scenario2_perennialexpand,Yolo,FIELD_CORN,390.5100155174732,ha
+scenario2_perennialexpand,Yolo,FIELD_OTHER,1445.2200574278831,ha
+scenario2_perennialexpand,Yolo,ROW,1265.0400502681732,ha
+scenario2_perennialexpand,Yolo,RICE,1090.7100433409214,ha
+scenario2_perennialexpand,Yolo,IDLE,2630.5201045274734,ha
+scenario2_perennialexpand,Yolo,PASTURE_ALFALFA,913.3200362920761,ha
+scenario2_perennialexpand,Yolo,PASTURE_OTHER,3374.460134088993,ha
+scenario2_perennialexpand,Yolo,GRASSLAND,3472.1101379692554,ha
+scenario2_perennialexpand,Yolo,URBAN,3263.310129672289,ha
+scenario2_perennialexpand,Yolo,RIPARIAN_FOREST_POFR,302.22001200914383,ha
+scenario2_perennialexpand,Yolo,RIPARIAN_FOREST_QULO,300.9600119590759,ha
+scenario2_perennialexpand,Yolo,RIPARIAN_FOREST_SALIX,145.17000576853752,ha
+scenario2_perennialexpand,Yolo,RIPARIAN_FOREST_MIXED,92.25000366568565,ha
+scenario2_perennialexpand,Yolo,RIPARIAN_SCRUB_INTRO,23.580000936985016,ha
+scenario2_perennialexpand,Yolo,RIPARIAN_SCRUB_SALIX,136.89000543951988,ha
+scenario2_perennialexpand,Yolo,RIPARIAN_SCRUB_MIXED,5.130000203847885,ha
+scenario2_perennialexpand,Yolo,WETLAND_MANAGED_PERENNIAL,104.49000415205956,ha
+scenario2_perennialexpand,Yolo,WETLAND_MANAGED_SEASONAL,3224.520128130913,ha
+scenario2_perennialexpand,Yolo,WETLAND_TIDAL,616.1400244832039,ha
+scenario2_perennialexpand,Yolo,WETLAND_OTHER,2330.8200926184654,ha
+scenario2_perennialexpand,Yolo,WATER,1752.1200696229935,ha
+scenario2_perennialexpand,Yolo,WOODLAND,58.500002324581146,ha
+scenario2_perennialexpand,Yolo,SCRUB,0,ha
+scenario2_perennialexpand,Yolo,BARREN,0,ha
+baseline,Contra Costa & Alameda,RIPARIAN_FOREST_MIXED,71.55000284314156,ha
+baseline,Contra Costa & Alameda,RIPARIAN_FOREST_POFR,178.2000070810318,ha
+baseline,Contra Costa & Alameda,RIPARIAN_FOREST_QULO,25.38000100851059,ha
+baseline,Contra Costa & Alameda,RIPARIAN_FOREST_SALIX,123.3000048995018,ha
+baseline,Contra Costa & Alameda,RIPARIAN_SCRUB_INTRO,343.98001366853714,ha
+baseline,Contra Costa & Alameda,RIPARIAN_SCRUB_MIXED,24.840000987052917,ha
+baseline,Contra Costa & Alameda,RIPARIAN_SCRUB_SALIX,389.88001549243927,ha
+baseline,Contra Costa & Alameda,WETLAND_MANAGED_PERENNIAL,0,ha
+baseline,Contra Costa & Alameda,WETLAND_MANAGED_SEASONAL,0,ha
+baseline,Sacramento,RIPARIAN_FOREST_MIXED,188.46000748872757,ha
+baseline,Sacramento,RIPARIAN_FOREST_POFR,432.7200171947479,ha
+baseline,Sacramento,RIPARIAN_FOREST_QULO,853.2900339066982,ha
+baseline,Sacramento,RIPARIAN_FOREST_SALIX,227.88000905513763,ha
+baseline,Sacramento,RIPARIAN_SCRUB_INTRO,219.24000871181488,ha
+baseline,Sacramento,RIPARIAN_SCRUB_MIXED,31.320001244544983,ha
+baseline,Sacramento,RIPARIAN_SCRUB_SALIX,451.7100179493427,ha
+baseline,Sacramento,WETLAND_MANAGED_PERENNIAL,798.6600317358971,ha
+baseline,Sacramento,WETLAND_MANAGED_SEASONAL,717.4800285100937,ha
+baseline,San Joaquin,RIPARIAN_FOREST_MIXED,125.46000498533249,ha
+baseline,San Joaquin,RIPARIAN_FOREST_POFR,686.3400272727013,ha
+baseline,San Joaquin,RIPARIAN_FOREST_QULO,652.2300259172916,ha
+baseline,San Joaquin,RIPARIAN_FOREST_SALIX,391.1400155425072,ha
+baseline,San Joaquin,RIPARIAN_SCRUB_INTRO,192.6000076532364,ha
+baseline,San Joaquin,RIPARIAN_SCRUB_MIXED,51.9300020635128,ha
+baseline,San Joaquin,RIPARIAN_SCRUB_SALIX,864.5400343537331,ha
+baseline,San Joaquin,WETLAND_MANAGED_PERENNIAL,2.9700001180171967,ha
+baseline,San Joaquin,WETLAND_MANAGED_SEASONAL,336.78001338243484,ha
+baseline,Solano,RIPARIAN_FOREST_MIXED,103.8600041270256,ha
+baseline,Solano,RIPARIAN_FOREST_POFR,99.81000396609306,ha
+baseline,Solano,RIPARIAN_FOREST_QULO,53.730002135038376,ha
+baseline,Solano,RIPARIAN_FOREST_SALIX,84.24000334739685,ha
+baseline,Solano,RIPARIAN_SCRUB_INTRO,135.72000539302826,ha
+baseline,Solano,RIPARIAN_SCRUB_MIXED,1.5300000607967377,ha
+baseline,Solano,RIPARIAN_SCRUB_SALIX,214.29000851511955,ha
+baseline,Solano,WETLAND_MANAGED_PERENNIAL,33.48000133037567,ha
+baseline,Solano,WETLAND_MANAGED_SEASONAL,790.7400314211845,ha
+baseline,Yolo,RIPARIAN_FOREST_MIXED,105.66000419855118,ha
+baseline,Yolo,RIPARIAN_FOREST_POFR,317.0700125992298,ha
+baseline,Yolo,RIPARIAN_FOREST_QULO,394.7400156855583,ha
+baseline,Yolo,RIPARIAN_FOREST_SALIX,145.44000577926636,ha
+baseline,Yolo,RIPARIAN_SCRUB_INTRO,25.200001001358032,ha
+baseline,Yolo,RIPARIAN_SCRUB_MIXED,5.130000203847885,ha
+baseline,Yolo,RIPARIAN_SCRUB_SALIX,141.9300056397915,ha
+baseline,Yolo,WETLAND_MANAGED_PERENNIAL,104.49000415205956,ha
+baseline,Yolo,WETLAND_MANAGED_SEASONAL,3224.520128130913,ha
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_FOREST_MIXED,71.55000284314156,ha
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_FOREST_POFR,179.0100071132183,ha
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_FOREST_QULO,25.650001019239426,ha
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_FOREST_SALIX,123.3000048995018,ha
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_SCRUB_INTRO,343.98001366853714,ha
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_SCRUB_MIXED,24.840000987052917,ha
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_SCRUB_SALIX,390.42001551389694,ha
+scenario1_restoration,Contra Costa & Alameda,WETLAND_MANAGED_PERENNIAL,0,ha
+scenario1_restoration,Contra Costa & Alameda,WETLAND_MANAGED_SEASONAL,32.580001294612885,ha
+scenario1_restoration,Sacramento,RIPARIAN_FOREST_MIXED,281.07001116871834,ha
+scenario1_restoration,Sacramento,RIPARIAN_FOREST_POFR,535.3200212717056,ha
+scenario1_restoration,Sacramento,RIPARIAN_FOREST_QULO,1245.8700495064259,ha
+scenario1_restoration,Sacramento,RIPARIAN_FOREST_SALIX,261.8100104033947,ha
+scenario1_restoration,Sacramento,RIPARIAN_SCRUB_INTRO,219.24000871181488,ha
+scenario1_restoration,Sacramento,RIPARIAN_SCRUB_MIXED,32.40000128746033,ha
+scenario1_restoration,Sacramento,RIPARIAN_SCRUB_SALIX,594.6300236284733,ha
+scenario1_restoration,Sacramento,WETLAND_MANAGED_PERENNIAL,1970.280078291893,ha
+scenario1_restoration,Sacramento,WETLAND_MANAGED_SEASONAL,833.7600331306458,ha
+scenario1_restoration,San Joaquin,RIPARIAN_FOREST_MIXED,161.10000640153885,ha
+scenario1_restoration,San Joaquin,RIPARIAN_FOREST_POFR,1172.7000465989113,ha
+scenario1_restoration,San Joaquin,RIPARIAN_FOREST_QULO,1461.6900580823421,ha
+scenario1_restoration,San Joaquin,RIPARIAN_FOREST_SALIX,542.0700215399265,ha
+scenario1_restoration,San Joaquin,RIPARIAN_SCRUB_INTRO,192.6000076532364,ha
+scenario1_restoration,San Joaquin,RIPARIAN_SCRUB_MIXED,51.9300020635128,ha
+scenario1_restoration,San Joaquin,RIPARIAN_SCRUB_SALIX,1387.0800551176071,ha
+scenario1_restoration,San Joaquin,WETLAND_MANAGED_PERENNIAL,2.9700001180171967,ha
+scenario1_restoration,San Joaquin,WETLAND_MANAGED_SEASONAL,366.66001456975937,ha
+scenario1_restoration,Solano,RIPARIAN_FOREST_MIXED,159.30000633001328,ha
+scenario1_restoration,Solano,RIPARIAN_FOREST_POFR,107.01000425219536,ha
+scenario1_restoration,Solano,RIPARIAN_FOREST_QULO,74.07000294327736,ha
+scenario1_restoration,Solano,RIPARIAN_FOREST_SALIX,91.6200036406517,ha
+scenario1_restoration,Solano,RIPARIAN_SCRUB_INTRO,135.72000539302826,ha
+scenario1_restoration,Solano,RIPARIAN_SCRUB_MIXED,1.5300000607967377,ha
+scenario1_restoration,Solano,RIPARIAN_SCRUB_SALIX,256.05001017451286,ha
+scenario1_restoration,Solano,WETLAND_MANAGED_PERENNIAL,33.48000133037567,ha
+scenario1_restoration,Solano,WETLAND_MANAGED_SEASONAL,938.7000373005867,ha
+scenario1_restoration,Yolo,RIPARIAN_FOREST_MIXED,131.760005235672,ha
+scenario1_restoration,Yolo,RIPARIAN_FOREST_POFR,326.3400129675865,ha
+scenario1_restoration,Yolo,RIPARIAN_FOREST_QULO,1437.0300571024418,ha
+scenario1_restoration,Yolo,RIPARIAN_FOREST_SALIX,146.88000583648682,ha
+scenario1_restoration,Yolo,RIPARIAN_SCRUB_INTRO,25.200001001358032,ha
+scenario1_restoration,Yolo,RIPARIAN_SCRUB_MIXED,5.130000203847885,ha
+scenario1_restoration,Yolo,RIPARIAN_SCRUB_SALIX,147.51000586152077,ha
+scenario1_restoration,Yolo,WETLAND_MANAGED_PERENNIAL,104.49000415205956,ha
+scenario1_restoration,Yolo,WETLAND_MANAGED_SEASONAL,5470.200217366219,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_FOREST_MIXED,71.55000284314156,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_FOREST_POFR,169.20000672340393,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_FOREST_QULO,25.38000100851059,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_FOREST_SALIX,119.34000474214554,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_SCRUB_INTRO,343.8000136613846,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_SCRUB_MIXED,24.840000987052917,ha
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_SCRUB_SALIX,382.1400151848793,ha
+scenario2_perennialexpand,Contra Costa & Alameda,WETLAND_MANAGED_PERENNIAL,0,ha
+scenario2_perennialexpand,Contra Costa & Alameda,WETLAND_MANAGED_SEASONAL,0,ha
+scenario2_perennialexpand,Sacramento,RIPARIAN_FOREST_MIXED,167.13000664114952,ha
+scenario2_perennialexpand,Sacramento,RIPARIAN_FOREST_POFR,407.70001620054245,ha
+scenario2_perennialexpand,Sacramento,RIPARIAN_FOREST_QULO,761.9400302767754,ha
+scenario2_perennialexpand,Sacramento,RIPARIAN_FOREST_SALIX,222.39000883698463,ha
+scenario2_perennialexpand,Sacramento,RIPARIAN_SCRUB_INTRO,194.58000773191452,ha
+scenario2_perennialexpand,Sacramento,RIPARIAN_SCRUB_MIXED,29.610001176595688,ha
+scenario2_perennialexpand,Sacramento,RIPARIAN_SCRUB_SALIX,423.9000168442726,ha
+scenario2_perennialexpand,Sacramento,WETLAND_MANAGED_PERENNIAL,796.6800316572189,ha
+scenario2_perennialexpand,Sacramento,WETLAND_MANAGED_SEASONAL,717.4800285100937,ha
+scenario2_perennialexpand,San Joaquin,RIPARIAN_FOREST_MIXED,111.24000442028046,ha
+scenario2_perennialexpand,San Joaquin,RIPARIAN_FOREST_POFR,612.3600243330002,ha
+scenario2_perennialexpand,San Joaquin,RIPARIAN_FOREST_QULO,521.550020724535,ha
+scenario2_perennialexpand,San Joaquin,RIPARIAN_FOREST_SALIX,354.600014090538,ha
+scenario2_perennialexpand,San Joaquin,RIPARIAN_SCRUB_INTRO,174.15000692009926,ha
+scenario2_perennialexpand,San Joaquin,RIPARIAN_SCRUB_MIXED,51.48000204563141,ha
+scenario2_perennialexpand,San Joaquin,RIPARIAN_SCRUB_SALIX,816.0300324261189,ha
+scenario2_perennialexpand,San Joaquin,WETLAND_MANAGED_PERENNIAL,0.7200000286102295,ha
+scenario2_perennialexpand,San Joaquin,WETLAND_MANAGED_SEASONAL,336.510013371706,ha
+scenario2_perennialexpand,Solano,RIPARIAN_FOREST_MIXED,95.0400037765503,ha
+scenario2_perennialexpand,Solano,RIPARIAN_FOREST_POFR,99.6300039589405,ha
+scenario2_perennialexpand,Solano,RIPARIAN_FOREST_QULO,47.700001895427704,ha
+scenario2_perennialexpand,Solano,RIPARIAN_FOREST_SALIX,78.39000311493874,ha
+scenario2_perennialexpand,Solano,RIPARIAN_SCRUB_INTRO,132.1200052499771,ha
+scenario2_perennialexpand,Solano,RIPARIAN_SCRUB_MIXED,1.5300000607967377,ha
+scenario2_perennialexpand,Solano,RIPARIAN_SCRUB_SALIX,206.0100081861019,ha
+scenario2_perennialexpand,Solano,WETLAND_MANAGED_PERENNIAL,33.48000133037567,ha
+scenario2_perennialexpand,Solano,WETLAND_MANAGED_SEASONAL,790.7400314211845,ha
+scenario2_perennialexpand,Yolo,RIPARIAN_FOREST_MIXED,92.25000366568565,ha
+scenario2_perennialexpand,Yolo,RIPARIAN_FOREST_POFR,302.22001200914383,ha
+scenario2_perennialexpand,Yolo,RIPARIAN_FOREST_QULO,300.9600119590759,ha
+scenario2_perennialexpand,Yolo,RIPARIAN_FOREST_SALIX,145.17000576853752,ha
+scenario2_perennialexpand,Yolo,RIPARIAN_SCRUB_INTRO,23.580000936985016,ha
+scenario2_perennialexpand,Yolo,RIPARIAN_SCRUB_MIXED,5.130000203847885,ha
+scenario2_perennialexpand,Yolo,RIPARIAN_SCRUB_SALIX,136.89000543951988,ha
+scenario2_perennialexpand,Yolo,WETLAND_MANAGED_PERENNIAL,104.49000415205956,ha
+scenario2_perennialexpand,Yolo,WETLAND_MANAGED_SEASONAL,3224.520128130913,ha
