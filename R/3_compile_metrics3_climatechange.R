@@ -9,6 +9,8 @@
 
 # PACKAGES & FUNCTIONS
 source('R/0_packages.R')
+source('R/0_functions.R')
+key = readxl::read_excel('GIS/VEG_key.xlsx')
 
 # ORIGINAL DATA----------
 # Scores for each factor within a land cover were 1, 2, or 3 (also N/A or 0=no
@@ -16,7 +18,7 @@ source('R/0_packages.R')
 # 3 being the highest sensitivity/exposure.
 
 ccv_raw <- read_csv('data_orig/Peterson_et_al_2020/ccvulnerability_index_full.csv',
-                        col_types = cols()) %>%
+                    col_types = cols()) %>%
   pivot_longer(-scorer,
                names_to = c('FACTOR', 'LANDCOVER'), names_pattern = '(.*)_(.*)',
                values_to = 'value') %>%
@@ -45,39 +47,47 @@ ccv_invert = ccv_raw %>%
          FACTOR_TYPE = 'RESILIENCE',
          FACTOR = gsub(' sensitivity| intolerance', '', FACTOR))
 
+# rescale?
+ccv_invert2 = ccv_invert %>%
+  mutate(value = case_when(value == 3 ~ 10,
+                           value == 2 ~ 5,
+                           value == 1 ~ 0))
+
 ## estimate average------
 # across scorers, average score for each factor and landcover
 
 ccv_avg = ccv_invert %>%
   group_by(LANDCOVER, FACTOR_TYPE, FACTOR) %>%
-  summarize(SCORE = mean(value, na.rm = TRUE),
+  summarize(SCORE_MEAN = mean(value, na.rm = TRUE),
+            SCORE_SE = sd(value, na.rm = TRUE)/sqrt(length(!is.na(value))),
             SCORE_MIN = min(value, na.rm = TRUE),
             SCORE_MAX = max(value, na.rm = TRUE),
             .groups = 'drop') %>%
   arrange(LANDCOVER, FACTOR_TYPE, FACTOR)
 
-ccv_avg %>% select(LANDCOVER:SCORE) %>% pivot_wider(names_from = 'FACTOR', values_from = SCORE)
+ccv_avg %>% select(LANDCOVER:SCORE_MEAN) %>%
+  pivot_wider(names_from = 'FACTOR', values_from = SCORE_MEAN)
+
+ccv_avg2 = ccv_invert2 %>%
+  group_by(LANDCOVER, FACTOR_TYPE, FACTOR) %>%
+  summarize(SCORE_MEAN = mean(value, na.rm = TRUE),
+            SCORE_SE = sd(value, na.rm = TRUE)/sqrt(length(!is.na(value))),
+            SCORE_MIN = min(value, na.rm = TRUE),
+            SCORE_MAX = max(value, na.rm = TRUE),
+            .groups = 'drop') %>%
+  arrange(LANDCOVER, FACTOR_TYPE, FACTOR)
 
 ## classify--------
-ccv_classify = ccv_avg %>%
-  mutate(CODE_NAME = case_when(
-    LANDCOVER == 'orchard' ~ 'ORCHARD_DECIDUOUS',
-    LANDCOVER %in% c('citrus', 'olives') ~ 'ORCHARD_CITRUS&SUBTROPICAL',
-    LANDCOVER == 'vineyard' ~ 'VINEYARD',
-    LANDCOVER %in% c('cereal', 'grain') ~ 'GRAIN&HAY',
-    LANDCOVER %in% c('cotton','field crops') ~ 'FIELD', #is cotton relevant to Delta?
-    LANDCOVER %in% c('corn', 'cotn') ~ 'FIELD_CORN', # assume cotn is a typo for corn?
-    LANDCOVER %in% c('tomato', 'truck crops') ~ 'ROW',
-    LANDCOVER == 'rice' ~ 'RICE',
-    LANDCOVER %in% c('pasture', 'irrigated pasture') ~ 'PASTURE',
-    LANDCOVER == 'alfalfa' ~ 'PASTURE_ALFALFA',
-    LANDCOVER %in% c('grass', 'grassland', 'dryland pasture') ~ 'GRASSLAND',
-    LANDCOVER == 'riparian' ~ 'RIPARIAN',
-    LANDCOVER %in% c('wetl', 'wetland') ~ 'WETLAND_MANAGED')) %>%
-  filter(LANDCOVER != 'cotton')
+ccv_classify = codify_ccv(ccv_avg) %>%
+  filter(LANDCOVER != 'cotton') #is cotton relevant to Delta?
 
-ccv_classify %>% select(CODE_NAME, FACTOR, SCORE) %>%
-  pivot_wider(names_from = 'FACTOR', values_from = SCORE)
+ccv_classify %>% select(CODE_NAME, FACTOR, SCORE_MEAN) %>%
+  pivot_wider(names_from = 'FACTOR', values_from = SCORE_MEAN)
+
+write_csv(ccv_classify, 'data_orig/cc_resilience_Peterson.csv')
+
+ccv_classify2 = codify_ccv(ccv_avg2) %>%
+  filter(LANDCOVER != 'cotton')
 
 # SUPPLEMENTAL DATA--------
 ## Delta Adapts-----
@@ -93,63 +103,67 @@ da_raw = bind_rows(
          LANDCOVER = c('truck crops', 'corn', 'alfalfa',
                        'vineyard', 'orchard',
                        'grain', 'rice', 'field crops', 'olives'),
-         SCORE = c(2, 2, 2, #mod sensitive
+         SCORE_MEAN = c(2, 2, 2, #mod sensitive
                    1, 1,  #sensitive
                    3, 3, 3, 3)), #mod tolerant (assume "grains" includes rice?)
   tibble(scorer = 'medellin',
          FACTOR = 'salinity',
          FACTOR_TYPE = 'RESILIENCE',
          LANDCOVER = c('irrigated pasture', 'dryland pasture'),
-         SCORE = c(2, 2) #mod sensitive
-         ),
+         SCORE_MEAN = c(2, 2) #mod sensitive
+  ),
   tibble(scorer = 'CVSALTS',
          FACTOR = 'salinity',
          FACTOR_TYPE = 'RESILIENCE',
          LANDCOVER = c('wetland'),
-         SCORE = 3) #common wetland plants less sensitive than most crops
+         SCORE_MEAN = 3) #common wetland plants less sensitive than most crops
 )
 
 da_classify = da_raw %>%
   mutate(CODE_NAME = case_when(
     LANDCOVER == 'orchard' ~ 'ORCHARD_DECIDUOUS',
-    LANDCOVER %in% c('citrus', 'olives') ~ 'ORCHARD_CITRUS&SUBTROPICAL',
+    LANDCOVER == 'olives' ~ 'ORCHARD_CITRUS&SUBTROPICAL',
     LANDCOVER == 'vineyard' ~ 'VINEYARD',
-    LANDCOVER %in% c('cereal', 'grain') ~ 'GRAIN&HAY',
-    LANDCOVER %in% c('cotton','field crops') ~ 'FIELD', #is cotton relevant to Delta?
-    LANDCOVER %in% c('corn', 'cotn') ~ 'FIELD_CORN', # assume cotn is a typo for corn?
-    LANDCOVER %in% c('tomato', 'truck crops') ~ 'ROW',
+    LANDCOVER == 'grain' ~ 'GRAIN&HAY', #assume this includes wheat
+    LANDCOVER == 'corn' ~ 'FIELD_CORN',
+    LANDCOVER == 'field crops' ~ 'FIELD_OTHER', #is cotton relevant to Delta?
+    LANDCOVER == 'truck crops' ~ 'ROW',
     LANDCOVER == 'rice' ~ 'RICE',
-    LANDCOVER %in% c('pasture', 'irrigated pasture') ~ 'PASTURE',
     LANDCOVER == 'alfalfa' ~ 'PASTURE_ALFALFA',
-    LANDCOVER %in% c('grass', 'grassland', 'dryland pasture') ~ 'GRASSLAND',
-    LANDCOVER == 'riparian' ~ 'RIPARIAN',
-    LANDCOVER %in% c('wetl', 'wetland') ~ 'WETLAND_MANAGED'))
+    LANDCOVER == 'irrigated pasture' ~ 'PASTURE_OTHER',
+    LANDCOVER == 'dryland pasture' ~ 'GRASSLAND',
+    LANDCOVER == 'wetland' ~ 'WETLAND_MANAGED'))
 
 # --> missing data for riparian; wetland data filled in from a search -
 # references to wetland plants (swamp timothy, watergrass) being less sensitive
 # than many crops
 
+write_csv(da_classify, 'data_orig/cc_resilience_supplemental.csv')
+
+da_classify2 = da_classify %>%
+  mutate(SCORE_MEAN = case_when(SCORE_MEAN == 3 ~ 10, SCORE_MEAN == 2 ~ 5,
+                                SCORE_MEAN == 1 ~ 0))
 ## DRERIP conceptual model-----
 # sensitivity data for specific riparian species
 
 # riptable = tabulizer::locate_areas('data_orig/DRERIP_Rip_Veg_Model_ Oct08-EMG_FINAL_fmtd3.pdf',
 #                                    pages = 37)
 
-ripdat_raw = tabulizer::extract_tables(
-  'data_orig/DRERIP_Rip_Veg_Model_ Oct08-EMG_FINAL_fmtd3.pdf',
-  pages = 37, area = list(c(100, 24, 1122, 1122)))[[1]] %>%
-  as_tibble() %>%
-  rlang::set_names(
-    c('scientific_name', 'common_name', 'growth_form', 'evergreen',
-      'foliage_porosity_summer', 'foliage_porosity_winter', 'shade_tolerance',
-      'root_depth_min_in', 'height_20yrs_ft', 'height_max_ft',
-      'precip_min_in', 'precip_max_in', 'temp_min_F', 'CA_wetl_ind',
-      'flood_tolerance', 'drought_tolerance', 'moisture_use', 'growth_rate',
-      'herbivory_tolerance', 'fruit_seed_period',
-      'repro_spread_rate', 'veg_spread_rate', 'adapted_fines', 'adapted_medium',
-      'adapted_coarse', 'n_fixation', 'fertility_req', 'CN_ratio',
-      'CaCO3_tolerance', 'pH_min', 'pH_max', 'salinity_tolerance', 'impact_IPC',
-      'invasiveness_IPC', 'protection_status', 'comments'))
+# ripdat_raw = tabulizer::extract_tables(
+#  'data_orig/DRERIP_Rip_Veg_Model_ Oct08-EMG_FINAL_fmtd3.pdf',
+#  pages = 37, area = list(c(100, 24, 1122, 1122)))[[1]] %>%
+#  as_tibble() %>%
+# rlang::set_names(
+#   c('scientific_name', 'common_name', 'growth_form', 'evergreen',
+#     'foliage_porosity_summer', 'foliage_porosity_winter', 'shade_tolerance',
+#     'root_depth_min_in', 'height_20yrs_ft', 'height_max_ft',
+#     'precip_min_in', 'precip_max_in', 'temp_min_F', 'CA_wetl_ind',
+#     'flood_tolerance', 'drought_tolerance', 'moisture_use', 'growth_rate',
+#     'herbivory_tolerance', 'fruit_seed_period',
+#     'repro_spread_rate', 'veg_spread_rate', 'adapted_fines', 'adapted_medium',
+#     'adapted_coarse', 'n_fixation', 'fertility_req', 'CN_ratio',
+#     'CaCO3_tolerance', 'pH_min', 'pH_max', 'salinity_tolerance', 'impact_IPC',
+#     'invasiveness_IPC', 'protection_status', 'comments'))
 
 ripdat_classify = ripdat_raw %>%
   select(scientific_name, common_name, drought_tolerance, flood_tolerance,
@@ -195,54 +209,104 @@ ripdat_classify = ripdat_raw %>%
   select(scorer, FACTOR_TYPE, FACTOR, CODE_NAME, LANDCOVER = scientific_name,
          SCORE)
 
-write_csv(ripdat_classify, 'data_orig/riparian_sensitivity.csv')
+write_csv(ripdat_classify, 'data_orig/cc_resilience_riparian_raw.csv')
 
 ripdat_avg = ripdat_classify %>%
   group_by(CODE_NAME, FACTOR_TYPE, FACTOR, scorer) %>%
-  summarize(SCORE = mean(SCORE, na.rm = TRUE),
-         SCORE_MIN = min(SCORE, na.rm = TRUE),
-         SCORE_MAX = max(SCORE, na.rm = TRUE), .groups = 'drop')
+  summarize(SCORE_MEAN = mean(SCORE, na.rm = TRUE),
+            SCORE_SE = sd(SCORE, na.rm = TRUE)/sqrt(length(!is.na(SCORE))),
+            SCORE_MIN = min(SCORE, na.rm = TRUE),
+            SCORE_MAX = max(SCORE, na.rm = TRUE), .groups = 'drop')
+
+write_csv(ripdat_avg, 'data_orig/cc_resilience_riparian.csv')
+
+ripdat_classify2 = ripdat_classify %>%
+  mutate(SCORE = case_when(SCORE == 2 ~ 5,
+                           SCORE == 2.25 ~ 6.25,
+                           SCORE == 2.5 ~ 7.5,
+                           SCORE == 2.75 ~ 8.75,
+                           SCORE == 3 ~ 10))
+ripdat_avg2 = ripdat_classify2 %>%
+  group_by(CODE_NAME, FACTOR_TYPE, FACTOR, scorer) %>%
+  summarize(SCORE_MEAN = min(SCORE, na.rm = TRUE), #resilience = minimum resilience of any of the species considered
+            # SCORE_SE = sd(SCORE, na.rm = TRUE)/sqrt(length(!is.na(SCORE))),
+            # SCORE_MIN = min(SCORE, na.rm = TRUE),
+            # SCORE_MAX = max(SCORE, na.rm = TRUE),
+            .groups = 'drop')
 
 # COMPILED-------
 ccv_compiled = bind_rows(ccv_classify %>% mutate(scorer = 'Peterson'),
                          da_classify, ripdat_avg) %>%
   select(-LANDCOVER)
+write_csv(ccv_compiled, 'data_orig/cc_resilience_all.csv')
 
-ccv_compiled %>% select(FACTOR, SCORE, CODE_NAME) %>%
-  pivot_wider(names_from = FACTOR, values_from = SCORE) %>%
+ccv_compiled2 = bind_rows(ccv_classify2 %>% mutate(scorer = 'Peterson'),
+                          da_classify2, ripdat_avg2)
+
+# check for missing landcovers
+ccv_compiled %>% select(FACTOR, SCORE_MEAN, CODE_NAME) %>%
+  pivot_wider(names_from = FACTOR, values_from = SCORE_MEAN) %>%
   mutate(CODE_NAME = factor(CODE_NAME, levels = key %>% pull(CODE_NAME))) %>%
   complete(CODE_NAME) %>% print(n = 40)
 
-## fill in missing------
-# - wheat: assume equivalent to grain&hay
-# - field: assume equivalent to row (except for salinity, which has its own value)
+# fill in missing
+# - wheat & grain&hay_other: assume equivalent to grain&hay overall (salinity),
+#    and wheat is equivalent to grain&hay_other for all other factors
+# - field_other: assume equivalent to row? (except for salinity, which has its own value)
+# - wetland_other: assume equivalent to grassland
+
+# - urban: resilient to salinity, mod to drought/heat, low to flood?
 # - idle & barren: assume low sensitivity to all/high resilience
+# - water, wetland_tidal: IGNORE
+
 # - riparian: missing general salinity (equivalent to average of subclasses?)
 # - riparian subclasses: missing heat (equivalent to overall riparian)
-# - wetland_other: assume equivalent to grassland
-# - woodland & scrub: assume equivalent to riparian
-# - urban: resilient to salinity, mod to drought/heat, low to flood?
-# - water, wetland_tidal: IGNORE
+# - woodland & scrub: assume equivalent to riparian?
+
 
 ccv_fill = ccv_compiled %>%
   bind_rows(
-    ccv_compiled %>% filter(CODE_NAME == 'GRAIN&HAY') %>%
-      mutate(CODE_NAME = 'GRAIN&HAY_WHEAT', scorer = 'new'),
+    # for those assumed to be equivalent to others
+    ccv_compiled %>% filter(CODE_NAME == 'GRAIN&HAY_OTHER') %>%
+      mutate(CODE_NAME = 'GRAIN&HAY_WHEAT', scorer = 'assumed'),
+    ccv_compiled %>% filter(CODE_NAME == 'GRAIN&HAY') %>% select(-CODE_NAME) %>%
+      expand_grid(tibble(CODE_NAME = c('GRAIN&HAY_WHEAT', 'GRAIN&HAY_OTHER'))),
     ccv_compiled %>% filter(CODE_NAME == 'ROW' & FACTOR != 'salinity') %>%
-      mutate(CODE_NAME = 'FIELD', scorer = 'new'),
-    ccv_compiled %>% filter(CODE_NAME == 'ROW') %>%
-      mutate(CODE_NAME = 'IDLE', SCORE = 3, SCORE_MIN = NA, SCORE_MAX = NA, scorer = 'new'),
-    ccv_compiled %>% filter(CODE_NAME == 'ROW') %>%
-      mutate(CODE_NAME = 'BARREN', SCORE = 3, SCORE_MIN = NA, SCORE_MAX = NA, scorer = 'new'),
+      mutate(CODE_NAME = 'FIELD_OTHER', scorer = 'assumed'),
     ccv_compiled %>% filter(CODE_NAME == 'GRASSLAND') %>%
-      mutate(CODE_NAME = 'WETLAND_OTHER', scorer = 'new'),
-    ccv_compiled %>% filter(CODE_NAME == 'GRASSLAND') %>%
-      mutate(CODE_NAME = 'URBAN', scorer = 'new',
-             SCORE = case_when(FACTOR == 'drought' ~ 2,
-                               FACTOR == 'heat' ~ 2,
-                               FACTOR == 'flood' ~ 1,
-                               FACTOR == 'salinity' ~ 3)),
-    # overall salinity tolerance scores for riparian
+      mutate(CODE_NAME = 'WETLAND_OTHER', scorer = 'assumed'),
+    ccv_compiled %>% filter(CODE_NAME == 'WETLAND_MANAGED') %>%
+      mutate(CODE_NAME = 'WETLAND_MANAGED_PERENNIAL', scorer = 'assumed'),
+    ccv_compiled %>% filter(CODE_NAME == 'WETLAND_MANAGED') %>%
+      mutate(CODE_NAME = 'WETLAND_MANAGED_SEASONAL', scorer = 'assumed'),
+    ccv_compiled %>% filter(CODE_NAME == 'RIPARIAN') %>%
+      mutate(CODE_NAME = 'WOODLAND', scorer = 'assumed'),
+    ccv_compiled %>% filter(CODE_NAME == 'RIPARIAN') %>%
+      mutate(CODE_NAME = 'SCRUB', scorer = 'assumed'),
+    # for those with newly assigned values
+    ccv_compiled %>% filter(CODE_NAME == 'ROW') %>%
+      select(FACTOR_TYPE:FACTOR) %>%
+      mutate(SCORE_MEAN = 3, SCORE_SE = NA, SCORE_MIN = 3, SCORE_MAX = 3,
+             scorer = 'assumed') %>%
+      expand_grid(tibble(CODE_NAME = c('IDLE', 'BARREN'))),
+    ccv_compiled %>% filter(CODE_NAME == 'ROW') %>%
+      select(FACTOR_TYPE:SCORE_MEAN) %>%
+      mutate(CODE_NAME = 'URBAN', scorer = 'assumed',
+             SCORE_MEAN = case_when(FACTOR == 'drought' ~ 2,
+                                    FACTOR == 'heat' ~ 2,
+                                    FACTOR == 'flood' ~ 1,
+                                    FACTOR == 'salinity' ~ 3),
+             SCORE_SE = NA,
+             SCORE_MIN = SCORE_MEAN,
+             SCORE_MAX = SCORE_MEAN),
+    # heat tolerance scores for riparian subclasses
+    expand_grid(
+      ccv_compiled %>%
+        filter(CODE_NAME == 'RIPARIAN' & FACTOR == 'heat') %>%
+        select(-CODE_NAME),
+      ripdat_avg %>% select(CODE_NAME) %>% distinct()
+      ),
+    # roll up overall salinity tolerance scores for riparian?
     ripdat_avg %>%
       filter(
         FACTOR == 'salinity' &
@@ -250,50 +314,144 @@ ccv_fill = ccv_compiled %>%
           CODE_NAME %in% c('RIPARIAN_FOREST_POFR', 'RIPARIAN_FOREST_QULO',
                            'RIPARIAN_SCRUB_SALIX')) %>%
       group_by(scorer, FACTOR_TYPE, FACTOR) %>%
-      summarize(SCORE = mean(SCORE), .groups = 'drop') %>%
-      mutate(CODE_NAME = 'RIPARIAN'),
+      summarize(SCORE_MEAN = mean(SCORE_MEAN), .groups = 'drop') %>%
+      expand_grid(tibble(CODE_NAME = c('RIPARIAN', 'WOODLAND', 'SCRUB')))
+  ) %>%
+  filter(CODE_NAME != 'GRAIN&HAY')
+
+ccv_fill2 = ccv_compiled2 %>%
+  bind_rows(
+    # for those assumed to be equivalent to others
+    ccv_compiled2 %>% filter(CODE_NAME == 'GRAIN&HAY_OTHER') %>%
+      mutate(CODE_NAME = 'GRAIN&HAY_WHEAT', scorer = 'assumed'),
+    ccv_compiled2 %>% filter(CODE_NAME == 'GRAIN&HAY') %>% select(-CODE_NAME) %>%
+      expand_grid(tibble(CODE_NAME = c('GRAIN&HAY_WHEAT', 'GRAIN&HAY_OTHER'))),
+    ccv_compiled2 %>% filter(CODE_NAME == 'ROW' & FACTOR != 'salinity') %>%
+      mutate(CODE_NAME = 'FIELD_OTHER', scorer = 'assumed'),
+    ccv_compiled2 %>% filter(CODE_NAME == 'GRASSLAND') %>%
+      mutate(CODE_NAME = 'WETLAND_OTHER', scorer = 'assumed'),
+    ccv_compiled2 %>% filter(CODE_NAME == 'WETLAND_MANAGED') %>%
+      mutate(CODE_NAME = 'WETLAND_MANAGED_PERENNIAL', scorer = 'assumed'),
+    ccv_compiled2 %>% filter(CODE_NAME == 'WETLAND_MANAGED') %>%
+      mutate(CODE_NAME = 'WETLAND_MANAGED_SEASONAL', scorer = 'assumed'),
+    ccv_compiled2 %>% filter(CODE_NAME == 'RIPARIAN') %>%
+      mutate(CODE_NAME = 'WOODLAND', scorer = 'assumed'),
+    ccv_compiled2 %>% filter(CODE_NAME == 'RIPARIAN') %>%
+      mutate(CODE_NAME = 'SCRUB', scorer = 'assumed'),
+    # for those with newly assigned values
+    ccv_compiled2 %>% filter(CODE_NAME == 'ROW') %>%
+      select(FACTOR_TYPE:FACTOR) %>%
+      mutate(SCORE_MEAN = 10, SCORE_SE = NA, SCORE_MIN = 10, SCORE_MAX = 10,
+             scorer = 'assumed') %>%
+      expand_grid(tibble(CODE_NAME = c('IDLE', 'BARREN'))),
+    ccv_compiled2 %>% filter(CODE_NAME == 'ROW') %>%
+      select(FACTOR_TYPE:SCORE_MEAN) %>%
+      mutate(CODE_NAME = 'URBAN', scorer = 'assumed',
+             SCORE_MEAN = case_when(FACTOR == 'drought' ~ 5,
+                                    FACTOR == 'heat' ~ 5,
+                                    FACTOR == 'flood' ~ 1,
+                                    FACTOR == 'salinity' ~ 10),
+             SCORE_SE = NA,
+             SCORE_MIN = SCORE_MEAN,
+             SCORE_MAX = SCORE_MEAN),
     # heat tolerance scores for riparian subclasses
     expand_grid(
-      ccv_compiled %>%
+      ccv_compiled2 %>%
         filter(CODE_NAME == 'RIPARIAN' & FACTOR == 'heat') %>%
         select(-CODE_NAME),
-      ripdat_avg %>% select(CODE_NAME) %>% distinct())
-  )
-ccv_fill = ccv_fill %>%
-  bind_rows(
-    ccv_fill %>% filter(CODE_NAME == 'RIPARIAN') %>%
-      mutate(CODE_NAME = 'WOODLAND&SCRUB', scorer = 'new'))
+      ripdat_avg2 %>% select(CODE_NAME) %>% distinct()
+    ),
+    # roll up overall salinity tolerance scores for riparian?
+    ripdat_avg2 %>%
+      filter(
+        FACTOR == 'salinity' &
+          # average over most relevant subclasses to the Delta
+          CODE_NAME %in% c('RIPARIAN_FOREST_POFR', 'RIPARIAN_FOREST_QULO',
+                           'RIPARIAN_SCRUB_SALIX')) %>%
+      group_by(scorer, FACTOR_TYPE, FACTOR) %>%
+      summarize(SCORE_MEAN = mean(SCORE_MEAN), .groups = 'drop') %>%
+      expand_grid(tibble(CODE_NAME = c('RIPARIAN', 'WOODLAND', 'SCRUB')))
+  ) %>%
+  filter(CODE_NAME != 'GRAIN&HAY')
 
 # check again for missing:
-ccv_fill %>% select(FACTOR, SCORE, CODE_NAME) %>%
-  pivot_wider(names_from = FACTOR, values_from = SCORE) %>%
+ccv_fill %>% select(FACTOR, SCORE_MEAN, CODE_NAME) %>%
+  pivot_wider(names_from = FACTOR, values_from = SCORE_MEAN) %>%
   mutate(CODE_NAME = factor(CODE_NAME, levels = key %>% pull(CODE_NAME))) %>%
   complete(CODE_NAME) %>% print(n = 40)
-
 
 # explore plot
 ccv_fill %>%
   filter(!grepl('_FOREST|_SCRUB', CODE_NAME)) %>%
-  # mutate(CODE_NAME = factor(CODE_NAME,
-  #                           levels = ccv_sum %>%
-  #                             filter(FACTOR == 'climate change resilience') %>%
-  #                             arrange(SCORE) %>% pull(CODE_NAME))) %>%
-  ggplot(aes(SCORE, CODE_NAME)) +
-  geom_col(aes(fill = SCORE)) +
+  ggplot(aes(SCORE_MEAN, CODE_NAME, xmin = SCORE_MEAN-SCORE_SE, xmax = SCORE_MEAN + SCORE_SE)) +
+  geom_col(aes(fill = SCORE_MEAN)) + geom_errorbar() +
+  facet_wrap(~FACTOR)
+ccv_fill %>%
+  filter(grepl('RIPARIAN', CODE_NAME)) %>%
+  ggplot(aes(SCORE_MEAN, CODE_NAME, xmin = SCORE_MEAN-SCORE_SE, xmax = SCORE_MEAN + SCORE_SE)) +
+  geom_col(aes(fill = SCORE_MEAN)) + geom_errorbar() +
   facet_wrap(~FACTOR)
 
-# # rescale--------
-# # rescale each factor to range 0-5
-# ccv_rescale = ccv_fill %>%
-#   group_by(FACTOR) %>%
-#   mutate(max = max(SCORE),
-#          min = min(SCORE),
+# FINALIZE--------
+# add overall score and metadata
+
+ccv_final = ccv_fill %>%
+  bind_rows(ccv_fill %>%
+              # just to make the following calculations simpler
+              mutate(SCORE_SE = replace_na(SCORE_SE, replace = 0),
+                     SCORE_SE_SQ = SCORE_SE^2) %>%
+              group_by(CODE_NAME, FACTOR_TYPE) %>%
+              summarize(SCORE_MEAN = mean(SCORE_MEAN),
+                        n = length(SCORE_SE),
+                        SCORE_SE = sqrt(sum(SCORE_SE_SQ))/(n - 1), #don't count salinity in the mean SE
+                        .groups = 'drop') %>%
+              mutate(FACTOR = 'Overall') %>%
+              select(-n)) %>%
+  mutate(METRIC_CATEGORY = 'climate',
+         METRIC_SUBTYPE = 'climate change resilience',
+         UNIT = 'ranking') %>%
+  select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC = FACTOR, CODE_NAME,
+         SCORE_MEAN, SCORE_SE, SCORE_MIN, SCORE_MAX, UNIT) %>%
+  mutate(METRIC = recode(METRIC, drought = 'Drought', flood = 'Flood',
+                         heat = 'Heat', salinity = 'Salinity'))
+write_csv(ccv_final,
+          'data/climate_change_resilience.csv')
+
+# rescale?--------
+# experiment with rescaling each factor to range 0-10 --> decided aginst this!
+
+ccv_final2 = ccv_fill2 %>%
+  bind_rows(ccv_fill2 %>%
+              # just to make the following calculations simpler
+              mutate(SCORE_SE = replace_na(SCORE_SE, replace = 0),
+                     SCORE_SE_SQ = SCORE_SE^2) %>%
+              group_by(CODE_NAME, FACTOR_TYPE) %>%
+              summarize(SCORE_MEAN = mean(SCORE_MEAN),
+                        n = length(SCORE_SE),
+                        SCORE_SE = sqrt(sum(SCORE_SE_SQ))/(n - 1), #don't count salinity in the mean SE
+                        .groups = 'drop') %>%
+              mutate(FACTOR = 'Overall') %>%
+              select(-n)) %>%
+  mutate(METRIC_CATEGORY = 'climate',
+         METRIC_SUBTYPE = 'climate change resilience',
+         UNIT = 'ranking') %>%
+  select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC = FACTOR, CODE_NAME,
+         SCORE_MEAN, SCORE_SE, SCORE_MIN, SCORE_MAX, UNIT) %>%
+  mutate(METRIC = recode(METRIC, drought = 'Drought', flood = 'Flood',
+                         heat = 'Heat', salinity = 'Salinity'))
+write_csv(ccv_final2,
+          'data/climate_change_resilience2.csv')
+
+# ccv_rescale = ccv_final %>%
+#   group_by(METRIC) %>%
+#   mutate(max = max(SCORE_MEAN),
+#          min = min(SCORE_MEAN),
 #          range = max - min) %>%
 #   ungroup() %>%
 #   mutate(diff = SCORE - min,
 #          diff_perc = diff / range,
 #          SCORE_NEW = diff_perc * 3)
-#
+
 # # explore plot
 # ccv_rescale %>%
 #   filter(!grepl('_FOREST|_SCRUB', CODE_NAME)) %>%
@@ -306,34 +464,3 @@ ccv_fill %>%
 #   facet_wrap(~FACTOR)
 #
 # ggplot(ccv_rescale, aes(SCORE, SCORE_NEW)) + geom_point()
-
-# FINALIZE--------
-# add overall average score and metadata
-
-ccv_final = ccv_fill %>%
-  select(CODE_NAME, FACTOR, SCORE) %>%
-  # bind_rows(
-  #   ccv_rescale %>%
-  #     group_by(CODE_NAME, FACTOR_TYPE) %>%
-  #     summarize(SCORE = mean(SCORE_NEW),
-  #               .groups = 'drop') %>%
-  #     mutate(FACTOR = 'climate change resilience')) %>%
-  mutate(METRIC_CATEGORY = 'climate',
-         METRIC_SUBTYPE = 'climate change resilience',
-         UNIT = 'ranking') %>%
-  select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC = FACTOR, CODE_NAME,
-         SCORE, UNIT)
-write_csv(ccv_final,
-          'data/climate_change_sensitivity.csv')
-
-# explore plot
-lc.order = ccv_final %>%
-  filter(METRIC_SUBTYPE == 'climate change resilience') %>%
-  arrange(SCORE) %>% pull(CODE_NAME) %>% unique()
-
-ccv_final %>%
-  filter(!grepl('_FOREST|_SCRUB', CODE_NAME)) %>%
-  mutate(CODE_NAME = factor(CODE_NAME, levels = lc.order)) %>%
-  ggplot(aes(SCORE, CODE_NAME)) +
-  geom_col(aes(fill = SCORE), color = 'black') +
-  facet_wrap(~METRIC)

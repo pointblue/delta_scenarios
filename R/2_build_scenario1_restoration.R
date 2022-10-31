@@ -7,9 +7,11 @@ source('R/0_packages.R')
 
 # reference data:
 delta = rast('GIS/boundaries/delta.tif')
-baseline = rast('GIS/landscape_rasters/veg_baseline.tif')
-baseline_win = rast('GIS/landscape_rasters/veg_baseline_winter.tif')
-key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
+baseline = c(rast('GIS/landscape_rasters/veg_baseline.tif'),
+             rast('GIS/landscape_rasters/veg_baseline_winter.tif'))
+
+# key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
+key = readxl::read_excel('GIS/VEG_key.xlsx')
 
 # Scenario development approach:
 #
@@ -708,41 +710,36 @@ writeRaster(restore_all_ripdetail,
             overwrite = TRUE)
 
 # OVERLAY ON BASELINE------------
+levels(baseline$baseline) <- NULL
+levels(baseline$baseline_win) <- NULL
 scenario_restoration = cover(restore_all_ripdetail, baseline)
+names(scenario_restoration) = c('scenario1_restoration', 'scenario1_restoration_win')
 
 # final check against objectives:
-scenario_restoration %>% mask(delta) %>% calculate_area(unit = 'ha') %>%
+scenario_restoration$scenario1_restoration %>% mask(delta) %>%
+  calculate_area(unit = 'ha') %>%
   filter(class %in% c(70:82, 89)) %>%
   mutate(label = if_else(class %in% c(70:77), 'RIPARIAN', 'WETLAND')) %>%
   group_by(label) %>% summarize(area = sum(area))
 #12343 riparian; 9753 wetland
 obj
 # matches!
+
+levels(scenario_restoration[[1]]) <- key %>% select(CODE_BASELINE, CODE_NAME) %>%
+  drop_na() %>% as.data.frame()
+levels(scenario_restoration[[2]]) <- key %>% select(CODE_BASELINE, CODE_NAME) %>%
+  drop_na() %>% as.data.frame()
+coltab(scenario_restoration[[1]]) <- key %>% select(CODE_BASELINE, CODE_NAME, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+coltab(scenario_restoration[[2]]) <- key %>% select(CODE_BASELINE, CODE_NAME, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+plot(scenario_restoration)
 writeRaster(scenario_restoration,
-            'GIS/scenario_rasters/scenario1_restoration.tif',
+            paste0('GIS/scenario_rasters/', names(scenario_restoration), '.tif'),
             overwrite = TRUE)
 
-# side-by-side plots
-levels(scenario_restoration) <- key %>% select(CODE_BASELINE, CODE_NAME) %>%
-  drop_na() %>% as.data.frame()
-coltab(scenario_restoration) <- key %>% select(CODE_BASELINE, CODE_NAME, COLOR) %>%
-  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
-names(scenario_restoration) = 'scenario_restoration'
+# side-by-side comparison to baseline
+baseline = c(rast('GIS/landscape_rasters/veg_baseline.tif'),
+             rast('GIS/landscape_rasters/veg_baseline_winter.tif'))
+plot(c(baseline[[1]], scenario_restoration[[1]]))
 
-levels(baseline) <- key %>% select(CODE_BASELINE, CODE_NAME) %>%
-  drop_na() %>% as.data.frame()
-coltab(baseline) <- key %>% select(CODE_BASELINE, CODE_NAME, COLOR) %>%
-  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
-plot(c(baseline, scenario_restoration))
-
-scenario_restoration_win = cover(restore_all_ripdetail, baseline_win)
-levels(scenario_restoration_win) <- key %>%
-  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
-  as.data.frame()
-coltab(scenario_restoration_win) <- key %>% select(CODE_BASELINE, COLOR) %>%
-  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
-names(scenario_restoration_win) = 'scenario1_restoration_win'
-plot(scenario_restoration_win)
-writeRaster(scenario_restoration_win,
-            'GIS/scenario_rasters/scenario1_restoration_win.tif',
-            overwrite = TRUE)

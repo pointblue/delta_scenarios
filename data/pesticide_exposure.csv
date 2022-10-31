@@ -1,141 +1,218 @@
-CODE_NAME,METRIC,METRIC_CATEGORY,METRIC_SUBTYPE,UNIT,SCORE,SCORE_MIN,SCORE_MAX
-FIELD,air pollution,healthy environment,pesticide application rate,pounds per ha,0.6707953110499622,0.485972407842342,0.990786706061199
-FIELD,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,1.1491388636867332,0.7973292695971298,1.7176057013841388
-FIELD,carcinogen,healthy environment,pesticide application rate,pounds per ha,0.4879077810287692,0.28234646711867,0.8335805422660421
-FIELD,critical pesticides,healthy environment,pesticide application rate,pounds per ha,0.6859325375013596,0.2327005105064519,1.0537484828906922
-FIELD,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0.0029705565395251234,4.092261740795477e-4,0.004683663914748417
-FIELD,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0.024725272996267127,0.0031787363382154436,0.041953502793159875
-FIELD,total pesticides,healthy environment,pesticide application rate,pounds per ha,1.9383025273965402,1.104744403212445,2.7687719622587403
-FIELD_CORN,air pollution,healthy environment,pesticide application rate,pounds per ha,0.20347036809915822,0.10126607096856634,0.4156024815052373
-FIELD_CORN,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,0.5966863072502369,0.49417130530867825,0.7114958690747586
-FIELD_CORN,carcinogen,healthy environment,pesticide application rate,pounds per ha,2.0445977870170706,1.6716626730415982,2.3168330375270734
-FIELD_CORN,critical pesticides,healthy environment,pesticide application rate,pounds per ha,0.579622664836537,0.39487629716572703,0.7773534540399467
-FIELD_CORN,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0.03251912657849203,0.00157834987435798,0.05483613573532664
-FIELD_CORN,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0.18372695389496368,0.11149407500337462,0.24901978016704013
-FIELD_CORN,total pesticides,healthy environment,pesticide application rate,pounds per ha,2.8745068400405676,2.530492668681698,3.2599254209408284
-GRAIN&HAY,air pollution,healthy environment,pesticide application rate,pounds per ha,0.41565237098842917,0.0959029403086629,0.5639170322676902
-GRAIN&HAY,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,0.010326606997189439,0.00034630845697333047,0.03240149234496624
-GRAIN&HAY,carcinogen,healthy environment,pesticide application rate,pounds per ha,0.029420547210096553,0.020464424703706074,0.040093463421366236
-GRAIN&HAY,critical pesticides,healthy environment,pesticide application rate,pounds per ha,0.006397984102354882,0.00034630845697333047,0.015210962013141746
-GRAIN&HAY,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-GRAIN&HAY,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0.03588400690690764,0.005852321868883759,0.08390770586937862
-GRAIN&HAY,total pesticides,healthy environment,pesticide application rate,pounds per ha,0.47234719827890226,0.15890092034758102,0.5938708842208376
-GRAIN&HAY_WHEAT,air pollution,healthy environment,pesticide application rate,pounds per ha,0.661005801074141,0.29308362775412067,0.9121321888730206
-GRAIN&HAY_WHEAT,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,0.018144287894426236,0.0041247165710741485,0.03316661342348636
-GRAIN&HAY_WHEAT,carcinogen,healthy environment,pesticide application rate,pounds per ha,0.07538090085460719,0.007603516593848527,0.12025563222492239
-GRAIN&HAY_WHEAT,critical pesticides,healthy environment,pesticide application rate,pounds per ha,0.01501791344065551,0.0014448254860836235,0.026785000657337826
-GRAIN&HAY_WHEAT,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-GRAIN&HAY_WHEAT,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0.0622063613860627,0.010106777521918344,0.11060467651572185
-GRAIN&HAY_WHEAT,total pesticides,healthy environment,pesticide application rate,pounds per ha,0.7896299562244149,0.32247662927899606,1.093469482810625
-IDLE,air pollution,healthy environment,pesticide application rate,pounds per ha,0.08126775802848116,0.022300587937046618,0.11410704199002412
-IDLE,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,0.13474302456601722,0.0740567737061624,0.2157662134723381
-IDLE,carcinogen,healthy environment,pesticide application rate,pounds per ha,1.4172159037090766,1.2020869889806733,1.848077479777876
-IDLE,critical pesticides,healthy environment,pesticide application rate,pounds per ha,0.049237616312714914,5.389525602121615e-4,0.08093355349638368
-IDLE,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0.005969084780844306,3.738282353050674e-4,0.0187250237604535
-IDLE,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0.013272643661916998,6.576645542471587e-4,0.029656686513060592
-IDLE,total pesticides,healthy environment,pesticide application rate,pounds per ha,1.6145814475780582,1.3546828365898023,2.046655019481547
-ORCHARD_CITRUS&SUBTROPICAL,air pollution,healthy environment,pesticide application rate,pounds per ha,2.100778787798191,0.8999537847369558,2.9299734370532495
-ORCHARD_CITRUS&SUBTROPICAL,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,5.2502304853961395,2.8331453501018116,7.0010392254629155
-ORCHARD_CITRUS&SUBTROPICAL,carcinogen,healthy environment,pesticide application rate,pounds per ha,5.848849533223961,4.435299639358723,6.646880777506378
-ORCHARD_CITRUS&SUBTROPICAL,critical pesticides,healthy environment,pesticide application rate,pounds per ha,2.8220488450093644,1.9501925556810555,3.8723019900114566
-ORCHARD_CITRUS&SUBTROPICAL,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0.6686037968455397,0.30334362575023277,1.0502387709441
-ORCHARD_CITRUS&SUBTROPICAL,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,2.5448844560440813,1.6457967170919812,3.5650392787357412
-ORCHARD_CITRUS&SUBTROPICAL,total pesticides,healthy environment,pesticide application rate,pounds per ha,8.826469362587893,6.064095366134504,11.476347575530003
-ORCHARD_DECIDUOUS,air pollution,healthy environment,pesticide application rate,pounds per ha,6.917102109884934,4.182906726256877,14.81239015838694
-ORCHARD_DECIDUOUS,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,6.195785736420011,4.677141698958628,7.011890978974635
-ORCHARD_DECIDUOUS,carcinogen,healthy environment,pesticide application rate,pounds per ha,10.526670479794147,7.789620008851873,18.125259256479406
-ORCHARD_DECIDUOUS,critical pesticides,healthy environment,pesticide application rate,pounds per ha,1.085672565772502,1.038118929453965,1.1413163048273682
-ORCHARD_DECIDUOUS,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0.10411758323200765,0.050101870173317783,0.15173776697432317
-ORCHARD_DECIDUOUS,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,1.1939161953679427,0.7940257802045121,1.553016658237491
-ORCHARD_DECIDUOUS,total pesticides,healthy environment,pesticide application rate,pounds per ha,13.954620522811565,10.275786322743507,20.926085883881818
-PASTURE,air pollution,healthy environment,pesticide application rate,pounds per ha,0.18123059746656875,0.1453480567201967,0.24106705259314778
-PASTURE,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,0.040242379394500094,0.027137122865380912,0.07906546192872958
-PASTURE,carcinogen,healthy environment,pesticide application rate,pounds per ha,0.019028204943014732,0.008493585298161615,0.05025024192288288
-PASTURE,critical pesticides,healthy environment,pesticide application rate,pounds per ha,2.0605059855408989e-4,4.688962758370789e-5,4.065994800518919e-4
-PASTURE,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-PASTURE,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0.0033178600346241635,2.615253820505938e-4,0.010988094396835188
-PASTURE,total pesticides,healthy environment,pesticide application rate,pounds per ha,0.21303073319176585,0.16868268910212317,0.27350552115143856
-PASTURE_ALFALFA,air pollution,healthy environment,pesticide application rate,pounds per ha,0.505718158023764,0.1714960259725791,1.1264787295176812
-PASTURE_ALFALFA,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,4.875236635103077,2.6225735704839397,6.203474399651293
-PASTURE_ALFALFA,carcinogen,healthy environment,pesticide application rate,pounds per ha,4.57222693131967,4.007221631958063,5.465157332821628
-PASTURE_ALFALFA,critical pesticides,healthy environment,pesticide application rate,pounds per ha,2.2098613610297337,1.0814328459271576,3.912365293386693
-PASTURE_ALFALFA,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0.34223084476174587,0.12045165691784594,0.7116328921182878
-PASTURE_ALFALFA,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0.40828915018878914,0.0847167008832201,1.0666764256626
-PASTURE_ALFALFA,total pesticides,healthy environment,pesticide application rate,pounds per ha,8.901971198204048,6.522600258757895,10.065792962391582
-RICE,air pollution,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-RICE,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,7.308868823226923,4.7318067957687076,10.576409862123583
-RICE,carcinogen,healthy environment,pesticide application rate,pounds per ha,0.6865889138809169,0.45819241207786626,0.9302613872895615
-RICE,critical pesticides,healthy environment,pesticide application rate,pounds per ha,1.332864607084957,0.28843143606694654,1.9756141006059131
-RICE,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-RICE,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-RICE,total pesticides,healthy environment,pesticide application rate,pounds per ha,8.999363623076924,5.673436940921564,13.020893636508116
-ROW,air pollution,healthy environment,pesticide application rate,pounds per ha,16.458659734339665,6.150153028362625,38.541780829304194
-ROW,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,5.973093522907556,4.937834947885412,7.082748105304379
-ROW,carcinogen,healthy environment,pesticide application rate,pounds per ha,11.495000597823308,6.90887739103515,23.372398626607815
-ROW,critical pesticides,healthy environment,pesticide application rate,pounds per ha,1.5214991765883048,1.1925194441217621,1.9520261854815424
-ROW,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0.011147188434809127,0.0034566294120132826,0.020943853810679855
-ROW,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0.3666630966099285,0.29682490453388855,0.46187217732481145
-ROW,total pesticides,healthy environment,pesticide application rate,pounds per ha,23.2834781263149,12.509054641942125,46.29628693614495
-URBAN,air pollution,healthy environment,pesticide application rate,pounds per ha,0.013731249999427552,0.004398533394349803,0.020344621510785584
-URBAN,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,0.03901781990119487,0.005062300309410828,0.09104940294573743
-URBAN,carcinogen,healthy environment,pesticide application rate,pounds per ha,0.17231781246187206,0.10016997548182688,0.31017590033725023
-URBAN,critical pesticides,healthy environment,pesticide application rate,pounds per ha,0.02562865464592569,0.0019255823032182909,0.0670297948949475
-URBAN,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0.025554192332556243,0.0019255823032182909,0.06665748332810027
-URBAN,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,2.736927724787773e-4,2.9903875352033645e-6,5.443951574223512e-4
-URBAN,total pesticides,healthy environment,pesticide application rate,pounds per ha,0.20136961202405354,0.11667732267375061,0.3550845250562481
-VINEYARD,air pollution,healthy environment,pesticide application rate,pounds per ha,2.6905738725507793,0.23210850592352672,7.599887731095916
-VINEYARD,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,2.4645189647690797,1.8026776528974584,2.910032413311415
-VINEYARD,carcinogen,healthy environment,pesticide application rate,pounds per ha,6.333918505921902,3.900545103603366,11.683828427566977
-VINEYARD,critical pesticides,healthy environment,pesticide application rate,pounds per ha,0.388026774905255,0.28108622586192467,0.4675288818414653
-VINEYARD,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0.3162555352208334,0.26034524139543863,0.41940761963938383
-VINEYARD,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0.46729105332962,0.2701591546576862,0.6070466350300879
-VINEYARD,total pesticides,healthy environment,pesticide application rate,pounds per ha,8.887845340057103,5.699483035349272,14.374664389718045
-WATER,air pollution,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WATER,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,0,NA,NA
-WATER,carcinogen,healthy environment,pesticide application rate,pounds per ha,0.004084776967205302,0.0015128805815138825,0.006656673352896722
-WATER,critical pesticides,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WATER,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WATER,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WATER,total pesticides,healthy environment,pesticide application rate,pounds per ha,0.004084776967205302,0.0015128805815138825,0.006656673352896722
-RIPARIAN,air pollution,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-RIPARIAN,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,0,NA,NA
-RIPARIAN,carcinogen,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-RIPARIAN,critical pesticides,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-RIPARIAN,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-RIPARIAN,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-RIPARIAN,total pesticides,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WETLAND_MANAGED,air pollution,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WETLAND_MANAGED,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,0,NA,NA
-WETLAND_MANAGED,carcinogen,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WETLAND_MANAGED,critical pesticides,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WETLAND_MANAGED,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WETLAND_MANAGED,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WETLAND_MANAGED,total pesticides,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WETLAND_OTHER,air pollution,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WETLAND_OTHER,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,0,NA,NA
-WETLAND_OTHER,carcinogen,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WETLAND_OTHER,critical pesticides,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WETLAND_OTHER,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WETLAND_OTHER,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WETLAND_OTHER,total pesticides,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-GRASSLAND,air pollution,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-GRASSLAND,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,0,NA,NA
-GRASSLAND,carcinogen,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-GRASSLAND,critical pesticides,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-GRASSLAND,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-GRASSLAND,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-GRASSLAND,total pesticides,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WOODLAND&SCRUB,air pollution,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WOODLAND&SCRUB,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,0,NA,NA
-WOODLAND&SCRUB,carcinogen,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WOODLAND&SCRUB,critical pesticides,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WOODLAND&SCRUB,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WOODLAND&SCRUB,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-WOODLAND&SCRUB,total pesticides,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-BARREN,air pollution,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-BARREN,aquatic contaminant,biodiversity,pesticide application rate,pounds per ha,0,NA,NA
-BARREN,carcinogen,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-BARREN,critical pesticides,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-BARREN,groundwater contaminant,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-BARREN,reproductive toxicity,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
-BARREN,total pesticides,healthy environment,pesticide application rate,pounds per ha,0,NA,NA
+CODE_NAME,METRIC,METRIC_CATEGORY,METRIC_SUBTYPE,UNIT,SCORE_MEAN,SCORE_SE,SCORE_MIN,SCORE_MAX
+FIELD_CORN,Air Pollutant,water quality,pesticide application rate,kg per ha,0.20347036809915822,0.05612402246128218,0.10126607096856634,0.4156024815052373
+FIELD_CORN,Carcinogen,water quality,pesticide application rate,kg per ha,2.0445977870170706,0.13112241635643768,1.6716626730415982,2.3168330375270734
+FIELD_CORN,Critical Pesticides,water quality,pesticide application rate,kg per ha,0.579622664836537,0.06458417031529763,0.39487629716572703,0.7773534540399467
+FIELD_CORN,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0.03251912657849203,0.008631178140841678,0.00157834987435798,0.05483613573532664
+FIELD_CORN,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0.18372695389496368,0.023769624271840553,0.11149407500337462,0.24901978016704013
+FIELD_CORN,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0.5966863072502369,0.03704411700209074,0.49417130530867825,0.7114958690747585
+FIELD_CORN,Total Pesticides,water quality,pesticide application rate,kg per ha,2.8745068400405676,0.13055523534864377,2.530492668681698,3.2599254209408284
+FIELD_OTHER,Air Pollutant,water quality,pesticide application rate,kg per ha,0.6707953110499622,0.09298347794107964,0.485972407842342,0.990786706061199
+FIELD_OTHER,Carcinogen,water quality,pesticide application rate,kg per ha,0.4879077810287692,0.10943246051246333,0.28234646711867,0.8335805422660421
+FIELD_OTHER,Critical Pesticides,water quality,pesticide application rate,kg per ha,0.6859325375013596,0.165080401984823,0.2327005105064519,1.0537484828906922
+FIELD_OTHER,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0.0029705565395251234,0.0013047753549391583,4.092261740795477e-4,0.004683663914748417
+FIELD_OTHER,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0.024725272996267127,0.006793721127120498,0.0031787363382154436,0.041953502793159875
+FIELD_OTHER,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,1.1491388636867332,0.1623867193371374,0.7973292695971298,1.7176057013841388
+FIELD_OTHER,Total Pesticides,water quality,pesticide application rate,kg per ha,1.9383025273965402,0.31208455792641493,1.104744403212445,2.7687719622587403
+GRAIN&HAY_OTHER,Air Pollutant,water quality,pesticide application rate,kg per ha,0.4156523709884291,0.08227261478909484,0.0959029403086629,0.5639170322676902
+GRAIN&HAY_OTHER,Carcinogen,water quality,pesticide application rate,kg per ha,0.029420547210096553,0.00324188758352504,0.020464424703706074,0.040093463421366236
+GRAIN&HAY_OTHER,Critical Pesticides,water quality,pesticide application rate,kg per ha,0.006397984102354882,0.002845487714075377,0.00034630845697333047,0.015210962013141746
+GRAIN&HAY_OTHER,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+GRAIN&HAY_OTHER,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0.03588400690690764,0.0133529427755966,0.005852321868883759,0.08390770586937862
+GRAIN&HAY_OTHER,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0.010326606997189439,0.006074427523294361,0.00034630845697333047,0.03240149234496624
+GRAIN&HAY_OTHER,Total Pesticides,water quality,pesticide application rate,kg per ha,0.4723471982789022,0.08059246610984856,0.15890092034758102,0.5938708842208376
+GRAIN&HAY_WHEAT,Air Pollutant,water quality,pesticide application rate,kg per ha,0.661005801074141,0.10685755320187834,0.29308362775412067,0.9121321888730206
+GRAIN&HAY_WHEAT,Carcinogen,water quality,pesticide application rate,kg per ha,0.07538090085460719,0.019943232141915342,0.007603516593848527,0.12025563222492237
+GRAIN&HAY_WHEAT,Critical Pesticides,water quality,pesticide application rate,kg per ha,0.01501791344065551,0.005525040796904179,0.0014448254860836235,0.026785000657337826
+GRAIN&HAY_WHEAT,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+GRAIN&HAY_WHEAT,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0.0622063613860627,0.020521588445032633,0.010106777521918344,0.11060467651572185
+GRAIN&HAY_WHEAT,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0.018144287894426236,0.00473346097255171,0.0041247165710741485,0.03316661342348636
+GRAIN&HAY_WHEAT,Total Pesticides,water quality,pesticide application rate,kg per ha,0.7896299562244149,0.13537696489712397,0.32247662927899606,1.093469482810625
+IDLE,Air Pollutant,water quality,pesticide application rate,kg per ha,0.08126775802848096,0.017165556365202794,0.022300587937046562,0.11410704199002385
+IDLE,Carcinogen,water quality,pesticide application rate,kg per ha,1.417215903709073,0.1188523623576928,1.2020869889806705,1.8480774797778716
+IDLE,Critical Pesticides,water quality,pesticide application rate,kg per ha,0.04923761631271479,0.01481685444041195,5.389525602121601e-4,0.08093355349638347
+IDLE,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0.005969084780844292,0.004314984875966253,3.738282353050665e-4,0.018725023760453454
+IDLE,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0.013272643661916965,0.005577206804740674,6.57664554247157e-4,0.02965668651306052
+IDLE,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0.1347430245660169,0.025035626708274132,0.07405677370616222,0.21576621347233757
+IDLE,Total Pesticides,water quality,pesticide application rate,kg per ha,1.6145814475780542,0.11984584566182313,1.354682836589799,2.046655019481542
+ORCHARD_CITRUS&SUBTROPICAL,Air Pollutant,water quality,pesticide application rate,kg per ha,2.100778787798191,0.36855103637455555,0.8999537847369558,2.9299734370532495
+ORCHARD_CITRUS&SUBTROPICAL,Carcinogen,water quality,pesticide application rate,kg per ha,5.848849533223961,0.41922845247075424,4.435299639358723,6.646880777506378
+ORCHARD_CITRUS&SUBTROPICAL,Critical Pesticides,water quality,pesticide application rate,kg per ha,2.8220488450093644,0.3235840361499295,1.9501925556810555,3.8723019900114566
+ORCHARD_CITRUS&SUBTROPICAL,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0.6686037968455397,0.15587681541362863,0.30334362575023277,1.0502387709440997
+ORCHARD_CITRUS&SUBTROPICAL,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,2.5448844560440813,0.32687710181689306,1.6457967170919812,3.5650392787357412
+ORCHARD_CITRUS&SUBTROPICAL,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,5.2502304853961395,0.6824221266491314,2.833145350101811,7.0010392254629155
+ORCHARD_CITRUS&SUBTROPICAL,Total Pesticides,water quality,pesticide application rate,kg per ha,8.826469362587893,0.8778217667718288,6.064095366134504,11.476347575530003
+ORCHARD_DECIDUOUS,Air Pollutant,water quality,pesticide application rate,kg per ha,6.917102109884935,1.9948860613682216,4.182906726256878,14.812390158386942
+ORCHARD_DECIDUOUS,Carcinogen,water quality,pesticide application rate,kg per ha,10.526670479794147,1.927958166063101,7.789620008851874,18.125259256479406
+ORCHARD_DECIDUOUS,Critical Pesticides,water quality,pesticide application rate,kg per ha,1.0856725657725022,0.017241285635755006,1.038118929453965,1.1413163048273685
+ORCHARD_DECIDUOUS,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0.10411758323200766,0.01683532250100008,0.050101870173317783,0.1517377669743232
+ORCHARD_DECIDUOUS,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,1.193916195367943,0.14514476045678995,0.7940257802045122,1.5530166582374911
+ORCHARD_DECIDUOUS,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,6.195785736420012,0.42134886428464746,4.6771416989586285,7.011890978974636
+ORCHARD_DECIDUOUS,Total Pesticides,water quality,pesticide application rate,kg per ha,13.954620522811567,1.8274464139110866,10.275786322743507,20.92608588388182
+PASTURE_ALFALFA,Air Pollutant,water quality,pesticide application rate,kg per ha,0.5057181580237639,0.17416177494568638,0.1714960259725791,1.126478729517681
+PASTURE_ALFALFA,Carcinogen,water quality,pesticide application rate,kg per ha,4.57222693131967,0.26920275137034083,4.007221631958063,5.465157332821628
+PASTURE_ALFALFA,Critical Pesticides,water quality,pesticide application rate,kg per ha,2.2098613610297337,0.481163820209236,1.0814328459271576,3.912365293386693
+PASTURE_ALFALFA,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0.34223084476174587,0.10298241857787184,0.12045165691784597,0.7116328921182878
+PASTURE_ALFALFA,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0.4082891501887891,0.18446865825593736,0.0847167008832201,1.0666764256625998
+PASTURE_ALFALFA,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,4.875236635103077,0.6532909739830662,2.6225735704839397,6.203474399651293
+PASTURE_ALFALFA,Total Pesticides,water quality,pesticide application rate,kg per ha,8.901971198204048,0.6264653969353658,6.522600258757895,10.065792962391582
+PASTURE_OTHER,Air Pollutant,water quality,pesticide application rate,kg per ha,0.18123059746656875,0.017190873287514452,0.1453480567201967,0.24106705259314778
+PASTURE_OTHER,Carcinogen,water quality,pesticide application rate,kg per ha,0.019028204943014732,0.007955902598543016,0.008493585298161615,0.05025024192288288
+PASTURE_OTHER,Critical Pesticides,water quality,pesticide application rate,kg per ha,2.0605059855408989e-4,7.986730233063945e-5,4.688962758370789e-5,4.065994800518919e-4
+PASTURE_OTHER,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+PASTURE_OTHER,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0.0033178600346241635,0.002562889513616004,2.615253820505938e-4,0.010988094396835188
+PASTURE_OTHER,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0.040242379394500094,0.009885367943197837,0.027137122865380912,0.07906546192872958
+PASTURE_OTHER,Total Pesticides,water quality,pesticide application rate,kg per ha,0.21303073319176585,0.017851567257459133,0.16868268910212317,0.27350552115143856
+ROW,Air Pollutant,water quality,pesticide application rate,kg per ha,16.458659734339665,6.030149382170082,6.150153028362625,38.541780829304194
+ROW,Carcinogen,water quality,pesticide application rate,kg per ha,11.495000597823308,3.0336778763503576,6.90887739103515,23.372398626607815
+ROW,Critical Pesticides,water quality,pesticide application rate,kg per ha,1.5214991765883048,0.12248271819121011,1.1925194441217621,1.9520261854815424
+ROW,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0.011147188434809127,0.005156792196387747,0.0034566294120132826,0.020943853810679855
+ROW,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0.3666630966099285,0.030877873394277687,0.29682490453388855,0.46187217732481145
+ROW,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,5.973093522907556,0.4495419411672446,4.937834947885412,7.082748105304379
+ROW,Total Pesticides,water quality,pesticide application rate,kg per ha,23.2834781263149,6.164935339839535,12.509054641942125,46.29628693614495
+URBAN,Air Pollutant,water quality,pesticide application rate,kg per ha,0.013731249999428274,0.0029240318796861266,0.004398533394350035,0.020344621510786653
+URBAN,Carcinogen,water quality,pesticide application rate,kg per ha,0.1723178124618811,0.043160376664876716,0.10016997548183215,0.31017590033726655
+URBAN,Critical Pesticides,water quality,pesticide application rate,kg per ha,0.025628654645927038,0.013450167016749564,0.0019255823032183924,0.06702979489495102
+URBAN,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0.02555419233255759,0.013392950573903889,0.0019255823032183924,0.06665748332810377
+URBAN,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,2.736927724787917e-4,2.707023849435881e-4,2.9903875352035217e-6,5.443951574223799e-4
+URBAN,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0.039017819901196925,0.017584856804966374,0.005062300309411095,0.09104940294574222
+URBAN,Total Pesticides,water quality,pesticide application rate,kg per ha,0.20136961202406414,0.04802337421490879,0.11667732267375674,0.35508452505626675
+VINEYARD,Air Pollutant,water quality,pesticide application rate,kg per ha,2.6905738725507793,1.3910684535994478,0.23210850592352672,7.599887731095916
+VINEYARD,Carcinogen,water quality,pesticide application rate,kg per ha,6.333918505921902,1.4555325344070258,3.900545103603366,11.683828427566977
+VINEYARD,Critical Pesticides,water quality,pesticide application rate,kg per ha,0.388026774905255,0.03224041603197426,0.28108622586192467,0.4675288818414653
+VINEYARD,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0.3162555352208334,0.029047503575751615,0.26034524139543863,0.41940761963938383
+VINEYARD,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0.46729105332962,0.05961840151933624,0.2701591546576862,0.6070466350300879
+VINEYARD,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,2.4645189647690797,0.18876230100449953,1.8026776528974584,2.910032413311415
+VINEYARD,Total Pesticides,water quality,pesticide application rate,kg per ha,8.887845340057103,1.5467842818071749,5.699483035349272,14.374664389718045
+RICE,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RICE,Carcinogen,water quality,pesticide application rate,kg per ha,0.6865889138809169,0.13648845594741243,0.45819241207786626,0.9302613872895615
+RICE,Critical Pesticides,water quality,pesticide application rate,kg per ha,1.332864607084957,0.3333075750452675,0.28843143606694654,1.9756141006059131
+RICE,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RICE,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RICE,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,7.308868823226923,1.0224380070564352,4.7318067957687076,10.576409862123583
+RICE,Total Pesticides,water quality,pesticide application rate,kg per ha,8.999363623076924,1.286004298348891,5.673436940921564,13.020893636508116
+WATER,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WATER,Carcinogen,water quality,pesticide application rate,kg per ha,0.004084776967205302,0.00257189638569142,0.0015128805815138825,0.006656673352896722
+WATER,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WATER,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WATER,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WATER,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WATER,Total Pesticides,water quality,pesticide application rate,kg per ha,0.004084776967205302,0.00257189638569142,0.0015128805815138825,0.006656673352896722
+GRASSLAND,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+GRASSLAND,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+GRASSLAND,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+GRASSLAND,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+GRASSLAND,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+GRASSLAND,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+GRASSLAND,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_POFR,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_POFR,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_POFR,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_POFR,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_POFR,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_POFR,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_POFR,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_QULO,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_QULO,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_QULO,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_QULO,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_QULO,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_QULO,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_QULO,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_SALIX,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_SALIX,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_SALIX,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_SALIX,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_SALIX,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_SALIX,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_SALIX,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_MIXED,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_MIXED,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_MIXED,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_MIXED,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_MIXED,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_MIXED,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_FOREST_MIXED,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_INTRO,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_INTRO,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_INTRO,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_INTRO,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_INTRO,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_INTRO,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_INTRO,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_SALIX,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_SALIX,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_SALIX,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_SALIX,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_SALIX,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_SALIX,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_SALIX,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_MIXED,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_MIXED,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_MIXED,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_MIXED,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_MIXED,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_MIXED,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+RIPARIAN_SCRUB_MIXED,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED_PERENNIAL,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED_PERENNIAL,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED_PERENNIAL,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED_PERENNIAL,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED_PERENNIAL,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED_PERENNIAL,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED_PERENNIAL,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED_SEASONAL,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED_SEASONAL,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED_SEASONAL,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED_SEASONAL,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED_SEASONAL,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED_SEASONAL,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_MANAGED_SEASONAL,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_TIDAL,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_TIDAL,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_TIDAL,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_TIDAL,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_TIDAL,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_TIDAL,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_TIDAL,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_OTHER,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_OTHER,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_OTHER,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_OTHER,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_OTHER,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_OTHER,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WETLAND_OTHER,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WOODLAND,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WOODLAND,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WOODLAND,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WOODLAND,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WOODLAND,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WOODLAND,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+WOODLAND,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+SCRUB,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+SCRUB,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+SCRUB,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+SCRUB,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+SCRUB,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+SCRUB,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+SCRUB,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+BARREN,Air Pollutant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+BARREN,Carcinogen,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+BARREN,Critical Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+BARREN,Groundwater Contaminant,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+BARREN,Reproductive Toxicity,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+BARREN,Risk to Aquatic Organisms,water quality,pesticide application rate,kg per ha,0,NA,NA,NA
+BARREN,Total Pesticides,water quality,pesticide application rate,kg per ha,0,NA,NA,NA

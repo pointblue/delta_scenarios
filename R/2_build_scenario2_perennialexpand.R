@@ -26,9 +26,10 @@ delta_buff10k = read_sf('GIS/boundaries/Legal_Delta_boundary_buff10k.shp') %>%
   st_transform(crs = '+proj=utm +zone=10 +datum=WGS84 +units=m +no_defs')
 template = rasterize(vect(delta_buff10k), extend(delta, delta_buff10k))
 
-baseline = rast('GIS/landscape_rasters/veg_baseline.tif')
-baseline_win = rast('GIS/landscape_rasters/veg_baseline_winter.tif')
-key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
+baseline = c(rast('GIS/landscape_rasters/veg_baseline.tif'),
+             rast('GIS/landscape_rasters/veg_baseline_winter.tif'))
+# key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
+key = readxl::read_excel('GIS/VEG_key.xlsx')
 
 # source data---------
 skey = read_csv('GIS/original_source_data/State Class Rasters/key.csv')
@@ -347,65 +348,58 @@ crosstab(c(baseline, bbau_round2), useNA = TRUE, long = TRUE)
 
 # FINALIZE-----------
 # overlay perennial crop footprint details on baseline
+levels(baseline$baseline) <- NULL
+levels(baseline$baseline_win) <- NULL
+scenario_perex = cover(bbau_round2, baseline)
 
-scenario_perex = bbau_round2
-levels(scenario_perex) <- key %>%
+levels(scenario_perex[[1]]) <- key %>%
   select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
   as.data.frame()
-coltab(scenario_perex) <- key %>% select(CODE_BASELINE, COLOR) %>%
+levels(scenario_perex[[2]]) <- key %>%
+  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
+  as.data.frame()
+coltab(scenario_perex[[1]]) <- key %>% select(CODE_BASELINE, COLOR) %>%
   drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
-names(scenario_perex) = 'scenario_perennial_expansion'
-
+coltab(scenario_perex[[2]]) <- key %>% select(CODE_BASELINE, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+names(scenario_perex) = c('scenario2_perennialexpand',
+                          'scenario2_perennialexpand_win')
+plot(scenario_perex)
 writeRaster(scenario_perex,
-            'GIS/scenario_rasters/scenario2_perennialexpand.tif',
+            paste0('GIS/scenario_rasters/', names(scenario_perex), '.tif'),
             overwrite = TRUE)
 
-scenario_perex_win = cover(bbau_singles, bbau_doubles) %>%
-  cover(bbau_singles2) %>%
-  cover(baseline_win)
-levels(scenario_perex_win) <- key %>%
-  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
-  as.data.frame()
-coltab(scenario_perex_win) <- key %>% select(CODE_BASELINE, COLOR) %>%
-  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
-names(scenario_perex_win) = 'scenario_perennial_expansion_win'
+# side-by-side comparison to baseline
+baseline = c(rast('GIS/landscape_rasters/veg_baseline.tif'),
+             rast('GIS/landscape_rasters/veg_baseline_winter.tif'))
+plot(c(baseline[[1]], scenario_perex[[1]]))
 
-writeRaster(scenario_perex_win,
-            'GIS/scenario_rasters/scenario2_perennialexpand_win.tif',
-            overwrite = TRUE)
-
-
-levels(baseline) <- key %>%
-  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
-  as.data.frame()
-coltab(baseline) <- key %>% select(CODE_BASELINE, COLOR) %>%
-  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
-names(baseline) = 'baseline'
-plot(c(baseline, scenario_perex))
-
-# calculate change-------
-delta_perex = DeltaMultipleBenefits::calculate_change(
-  baseline = baseline %>% mask(delta),
-  scenario = scenario_perex %>% mask(delta))
-delta_perex %>%
-  mutate(class = case_when(class == 'FIELD_CORN' ~ 'CORN',
-                           class == 'PASTURE_ALFALFA' ~ 'ALFALFA',
-                           class == 'GRAIN&HAY' ~ 'GRAIN',
-                           class == 'GRAIN&HAY_WHEAT' ~ 'GRAIN',
-                           class %in% c('ROW', 'FIELD') ~ 'ROW & FIELD CROPS',
-                           class == 'WOODLAND&SCRUB' ~ 'WOODLAND & SCRUB',
-                           grepl('RIPARIAN', class) ~ 'RIPARIAN',
-                           grepl('WETLAND', class) ~ 'WETLANDS',
-                           grepl('ORCHARD', class) ~ 'ORCHARD',
-                           TRUE ~ class)) %>%
-  group_by(class) %>%
-  summarize(net_change = sum(net_change), .groups = 'drop') %>%
-  arrange(net_change) %>%
-  DeltaMultipleBenefits::plot_change() +
-  labs(x = bquote(' ' *Delta~ 'total area (ha)'), y = NULL) +
-  theme_bw() + xlim(-5000, 10000) +
-  theme(axis.text = element_text(size = 18),
-        axis.title = element_text(size = 18))
-ggsave('fig/change_scenario2_perennialexpand.png', height = 7.5, width = 6.5)
-# large increase in orchard & vineyard cover, at the expense of: row/field,
-# idle, corn, grain, alfalfa, pasture, grassland, riparian, wetlands
+# # calculate change-------
+# levels(baseline) <- NULL
+# levels(scenario_perex) <- NULL
+# delta_perex = DeltaMultipleBenefits::calculate_change(
+#   baseline = baseline %>% mask(delta),
+#   scenario = scenario_perex %>% mask(delta))
+# delta_perex %>%
+#   mutate(class = case_when(class == 'FIELD_CORN' ~ 'CORN',
+#                            class == 'PASTURE_ALFALFA' ~ 'ALFALFA',
+#                            class == 'GRAIN&HAY_OTHER' ~ 'GRAIN',
+#                            class == 'GRAIN&HAY_WHEAT' ~ 'GRAIN',
+#                            class == 'PASTURE_OTHER' ~ 'PASTURE',
+#                            class %in% c('ROW', 'FIELD_OTHER') ~ 'ROW & FIELD CROPS',
+#                            class %in% c('WOODLAND', 'SCRUB') ~ 'WOODLAND & SCRUB',
+#                            grepl('RIPARIAN', class) ~ 'RIPARIAN',
+#                            grepl('WETLAND', class) ~ 'WETLANDS',
+#                            grepl('ORCHARD', class) ~ 'ORCHARD',
+#                            TRUE ~ class)) %>%
+#   group_by(class) %>%
+#   summarize(net_change = sum(net_change), .groups = 'drop') %>%
+#   arrange(net_change) %>%
+#   DeltaMultipleBenefits::plot_change() +
+#   labs(x = bquote(' ' *Delta~ 'total area (ha)'), y = NULL) +
+#   theme_bw() + xlim(-5000, 10000) +
+#   theme(axis.text = element_text(size = 18),
+#         axis.title = element_text(size = 18))
+# # ggsave('fig/change_scenario2_perennialexpand.png', height = 7.5, width = 6.5)
+# # large increase in orchard & vineyard cover, at the expense of: row/field,
+# # idle, corn, grain, alfalfa, pasture, grassland, riparian, wetlands

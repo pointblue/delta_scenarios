@@ -18,7 +18,8 @@ delta_buff10k = st_buffer(delta_shp, dist = 10100)
 delta = rast('GIS/boundaries/delta.tif')
 template = rasterize(vect(delta_buff10k), extend(delta, delta_buff10k))
 
-key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
+# key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
+key = readxl::read_excel('GIS/VEG_key.xlsx')
 
 # REFINE BASELINE SHP---------
 # start with revised primary veg layer - initially created for riparian
@@ -204,57 +205,72 @@ veg_raster_fill_landiq = lapp(c(veg_raster_fill,
                                 ifelse((x %in% c(11:60, 130) | is.na(x)) &
                                          !is.na(y), y, x)
                               })
+levels(veg_raster_fill_landiq) <- key %>%
+  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
+  as.data.frame()
+coltab(veg_raster_fill_landiq) <- key %>% select(CODE_BASELINE, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+names(veg_raster_fill_landiq) <- 'baseline'
+plot(veg_raster_fill_landiq)
 writeRaster(veg_raster_fill_landiq,
             filename = 'GIS/landscape_rasters/veg_baseline.tif',
             overwrite = TRUE)
 
-# compare to original:
-fall_stack = c(veg_raster_fill,
-               veg_raster_fill_landiq)
-levels(fall_stack[[1]]) <- key %>%
-  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
-  as.data.frame()
-levels(fall_stack[[2]]) <- key %>%
-  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
-  as.data.frame()
-coltab(fall_stack[[1]]) <- key %>% select(CODE_BASELINE, COLOR) %>%
-  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
-coltab(fall_stack[[2]]) <- key %>% select(CODE_BASELINE, COLOR) %>%
-  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
-names(fall_stack) = c('baseline', 'lyr1')
-plot(fall_stack, colNA = 'gray90')
-
-tab = crosstab(fall_stack, useNA = TRUE, long = TRUE) %>%
-  rlang::set_names(c('baseline', 'new', 'n'))
-tab %>%
-  left_join(key %>% select(baseline = CODE_BASELINE, from = CODE_NAME)) %>%
-  left_join(key %>% select(new = CODE_BASELINE, to = CODE_NAME)) %>%
-  arrange(from, desc(n))
-tab %>%
-  left_join(key %>% select(baseline = CODE_BASELINE, from = CODE_NAME)) %>%
-  left_join(key %>% select(new = CODE_BASELINE, to = CODE_NAME)) %>%
-  group_by(from) %>%
-  mutate(total_baseline = sum(n),
-         prop = n/total_baseline) %>%
-  ungroup() %>%
-  filter(from == to) %>% arrange(desc(prop)) %>%
-  print(n = 30)
-# 100% agreement on: riparian, wetlands, water, woodland&scrub (none of these
-# allowed to change); high (>80%) agreement on urban, orchard_deciduous,
-# vineyard, barren, rice, orchard_citrus&subtropical, grassland, pasture; less
-# agreement on idle fields & annual crops (makes sense)
+# # compare to original:
+# fall_stack = c(veg_raster_fill,
+#                veg_raster_fill_landiq)
+# levels(fall_stack[[1]]) <- key %>%
+#   select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
+#   as.data.frame()
+# levels(fall_stack[[2]]) <- key %>%
+#   select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
+#   as.data.frame()
+# coltab(fall_stack[[1]]) <- key %>% select(CODE_BASELINE, COLOR) %>%
+#   drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+# coltab(fall_stack[[2]]) <- key %>% select(CODE_BASELINE, COLOR) %>%
+#   drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+# names(fall_stack) = c('baseline', 'lyr1')
+# plot(fall_stack, colNA = 'gray90')
+#
+# tab = crosstab(fall_stack, useNA = TRUE, long = TRUE) %>%
+#   rlang::set_names(c('baseline', 'new', 'n'))
+# tab %>%
+#   left_join(key %>% select(baseline = CODE_BASELINE, from = CODE_NAME)) %>%
+#   left_join(key %>% select(new = CODE_BASELINE, to = CODE_NAME)) %>%
+#   arrange(from, desc(n))
+# tab %>%
+#   left_join(key %>% select(baseline = CODE_BASELINE, from = CODE_NAME)) %>%
+#   left_join(key %>% select(new = CODE_BASELINE, to = CODE_NAME)) %>%
+#   group_by(from) %>%
+#   mutate(total_baseline = sum(n),
+#          prop = n/total_baseline) %>%
+#   ungroup() %>%
+#   filter(from == to) %>% arrange(desc(prop)) %>%
+#   print(n = 30)
+# # 100% agreement on: riparian, wetlands, water, woodland&scrub (none of these
+# # allowed to change); high (>80%) agreement on urban, orchard_deciduous,
+# # vineyard, barren, rice, orchard_citrus&subtropical, grassland, pasture; less
+# # agreement on idle fields & annual crops (makes sense)
 
 ### winter baseline----------
 # where baseline raster is suitable for a second winter crop (annual crops
 # besides rice, plus fallow, grassland & pasture, barren), fill in corresponding
 # winter value from land iq 2018
-veg_raster_fill_landiq_win = lapp(c(veg_raster_fill_landiq,
+baseline = veg_raster_fill_landiq
+levels(baseline) <- NULL
+veg_raster_fill_landiq_win = lapp(c(baseline,
                                     landiq_2018_stack$landiq_2018_winter),
                                   fun = function(x, y) {
                                     ifelse(x %in% c(21:28, 40, 51:56, 130) &
                                              !is.na(y), y, x)
                                   })
-
+levels(veg_raster_fill_landiq_win) <- key %>%
+  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
+  as.data.frame()
+coltab(veg_raster_fill_landiq_win) <- key %>% select(CODE_BASELINE, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+names(veg_raster_fill_landiq_win) <- 'baseline_win'
+plot(veg_raster_fill_landiq_win)
 writeRaster(veg_raster_fill_landiq_win,
             filename = 'GIS/landscape_rasters/veg_baseline_winter.tif',
             overwrite = TRUE)
@@ -262,101 +278,94 @@ writeRaster(veg_raster_fill_landiq_win,
 # compare to fall:
 win_stack = c(veg_raster_fill_landiq,
               veg_raster_fill_landiq_win)
-levels(win_stack[[1]]) <- key %>%
-  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
-  as.data.frame()
-levels(win_stack[[2]]) <- key %>%
-  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
-  as.data.frame()
-coltab(win_stack[[1]]) <- key %>% select(CODE_BASELINE, COLOR) %>%
-  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
-coltab(win_stack[[2]]) <- key %>% select(CODE_BASELINE, COLOR) %>%
-  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
-names(win_stack) = c('baseline', 'lyr1')
 plot(win_stack, colNA = 'gray90')
 
 tab2 = crosstab(win_stack, useNA = TRUE, long = TRUE) %>%
-  rlang::set_names(c('baseline', 'new', 'n'))
+  rlang::set_names(c('baseline', 'winter', 'n'))
 tab2 %>%
   left_join(key %>% select(baseline = CODE_BASELINE, from = CODE_NAME)) %>%
-  left_join(key %>% select(new = CODE_BASELINE, to = CODE_NAME)) %>%
+  left_join(key %>% select(winter = CODE_BASELINE, to = CODE_NAME)) %>%
   filter(from != to) %>%
   arrange(from, desc(n))
 tab2 %>%
   left_join(key %>% select(baseline = CODE_BASELINE, from = CODE_NAME)) %>%
-  left_join(key %>% select(new = CODE_BASELINE, to = CODE_NAME)) %>%
+  left_join(key %>% select(winter = CODE_BASELINE, to = CODE_NAME)) %>%
   group_by(from) %>%
   mutate(total_baseline = sum(n),
          prop = n/total_baseline) %>%
   ungroup() %>%
-  filter(from == to) %>% arrange(desc(prop)) %>%
+  filter(from != to) %>% arrange(desc(prop)) %>%
   print(n = 30)
 # swaps among: pasture/alfalfa, grain/wheat, row, field, corn (except nothing
 # converts to corn for the winter)
 
-# SUMMARIZE BASELINE LAND USE DATA------
-baseline = rast('GIS/landscape_rasters/veg_baseline.tif')
-baseline_win = rast('GIS/landscape_rasters/veg_baseline_winter.tif')
-
-# for total area of each class, start with primary baseline layer
-baseline_ha = baseline %>% mask(delta) %>%
-  calculate_area() %>%
-  left_join(key %>% select(class = CODE_BASELINE, label = CODE_NAME),
-            by = 'class') %>%
-  mutate(label = case_when(grepl('RIPARIAN', label) ~ 'RIPARIAN',
-                           grepl('WETLAND_MANAGED', label) ~ 'WETLAND_MANAGED',
-                           TRUE ~ label)) %>%
-  group_by(label) %>%
-  summarize(area = sum(area), .groups = 'drop')
-
-# for details on specific crops, use ag_details from Land IQ layer:
-ag_details = read_csv('data/landiq2018_area_detail.csv') %>%
-  select(CLASS, SUBCLASS = SUBCLASS_MAIN, area_ha, total_area, prop) %>%
-  mutate(SUBCLASS = case_when(
-    SUBCLASS %in%
-      c('PEACHES AND NECTARINES', 'PLUMS, PRUNES OR APRICOTS', 'CHERRIES') ~
-      'STONE FRUIT',
-    SUBCLASS == 'PISTACHIOS' ~ 'MISCELLANEOUS DECIDUOUS',
-    SUBCLASS == 'KIWIS' ~ 'MISCELLANEOUS SUBTROPICAL FRUIT',
-    CLASS == 'ORCHARD_DECIDUOUS' & is.na(SUBCLASS) ~ 'MISCELLANEOUS DECIDUOUS',
-    CLASS == 'ORCHARD_CITRUS&SUBTROPICAL' & is.na(SUBCLASS) ~ 'MISCELLANEOUS SUBTROPICAL FRUIT',
-    CLASS == 'GRAIN&HAY' & is.na(SUBCLASS) ~ 'MISCELLANEOUS GRAIN AND HAY',
-    SUBCLASS %in% c('FLOWERS, NURSERY, AND CHRISTMAS TREE FARMS') ~ 'MISCELLANEOUS TRUCK',
-    CLASS == 'ROW' & is.na(SUBCLASS) ~ 'MISCELLANEOUS TRUCK',
-    CLASS == 'IDLE' ~ 'IDLE',
-    CLASS %in% c('URBAN', 'VINEYARD', 'WATER') ~ CLASS,
-    TRUE ~ SUBCLASS)) %>%
-  group_by(CLASS, SUBCLASS, total_area) %>%
-  summarize(area_ha = sum(area_ha), .groups = 'drop') %>%
-  full_join(baseline_ha %>% select(CLASS = label, baseline_total = area)) %>%
-  mutate(total_area = case_when(CLASS %in% c('IDLE', 'URBAN') ~ baseline_total,
-                                is.na(total_area) ~ baseline_total,
-                                TRUE ~ total_area),
-         area_ha = case_when(CLASS %in% c('IDLE', 'URBAN') ~ baseline_total,
-                             is.na(area_ha) ~ baseline_total,
-                             TRUE ~ area_ha),
-         prop = area_ha/total_area,
-         SUBCLASS = if_else(is.na(SUBCLASS), CLASS, SUBCLASS)) %>%
-  select(CLASS, CLASS_AREA = total_area, SUBCLASS, SUBCLASS_AREA = area_ha,
-         SUBCLASS_PROP = prop)
-write_csv(ag_details, 'data/baseline_area.csv')
-
-# identify additional area of different winter crops
-winter_mask = lapp(c(baseline, baseline_win),
-                   function(x, y) {ifelse(x == y, NA, y)})
-writeRaster(winter_mask,
-            filename = 'GIS/landscape_rasters/veg_baseline_winter_mask.tif',
-            overwrite = TRUE)
-
-gains = winter_mask %>% mask(delta) %>% calculate_area() %>%
-  left_join(key %>% select(class = CODE_BASELINE, label = CODE_NAME),
-            by = 'class')
-losses = baseline %>% mask(winter_mask %>% subst(c(0:130), 1) %>% mask(delta)) %>%
-  calculate_area() %>%
-  left_join(key %>% select(class = CODE_BASELINE, label = CODE_NAME),
-            by = 'class')
-net = bind_rows(gains,
-                losses %>% mutate(area = area * -1)) %>%
-  group_by(class, label) %>%
-  summarize(area = sum(area), .groups = 'drop')
-write_csv(net, 'data/baseline_area_winterchange.csv')
+# # SUMMARIZE BASELINE LAND USE DATA------
+# baseline = c(rast('GIS/landscape_rasters/veg_baseline.tif'),
+#              rast('GIS/landscape_rasters/veg_baseline_winter.tif'))
+#
+# # total area of each class
+# baseline_ha = baseline %>% mask(delta) %>% as.list() %>%
+#   purrr::set_names(names(baseline)) %>%
+#   purrr::map_dfr(calculate_area, .id = 'layer') %>%
+#   left_join(key %>% select(CODE_BASELINE, class = CODE_NAME),
+#             by = 'class') %>%
+#   mutate(label = case_when(grepl('RIPARIAN', class) ~ 'RIPARIAN',
+#                            grepl('WETLAND_MANAGED', class) ~ 'WETLAND_MANAGED',
+#                            TRUE ~ class)) %>%
+#   group_by(layer, label) %>%
+#   summarize(area = sum(area), .groups = 'drop')
+#
+# # for details on specific crops, use ag_details from Land IQ layer:
+# ag_details = read_csv('data/landiq2018_area_detail.csv') %>%
+#   select(CLASS, SUBCLASS = SUBCLASS_MAIN, area_ha, total_area, prop) %>%
+#   mutate(SUBCLASS = case_when(
+#     SUBCLASS %in%
+#       c('PEACHES AND NECTARINES', 'PLUMS, PRUNES OR APRICOTS', 'CHERRIES') ~
+#       'STONE FRUIT',
+#     SUBCLASS == 'PISTACHIOS' ~ 'MISCELLANEOUS DECIDUOUS',
+#     SUBCLASS == 'KIWIS' ~ 'MISCELLANEOUS SUBTROPICAL FRUIT',
+#     CLASS == 'ORCHARD_DECIDUOUS' & is.na(SUBCLASS) ~ 'MISCELLANEOUS DECIDUOUS',
+#     CLASS == 'ORCHARD_CITRUS&SUBTROPICAL' & is.na(SUBCLASS) ~ 'MISCELLANEOUS SUBTROPICAL FRUIT',
+#     CLASS == 'GRAIN&HAY' & is.na(SUBCLASS) ~ 'MISCELLANEOUS GRAIN AND HAY',
+#     SUBCLASS %in% c('FLOWERS, NURSERY, AND CHRISTMAS TREE FARMS') ~ 'MISCELLANEOUS TRUCK',
+#     CLASS == 'ROW' & is.na(SUBCLASS) ~ 'MISCELLANEOUS TRUCK',
+#     CLASS == 'IDLE' ~ 'IDLE',
+#     CLASS %in% c('URBAN', 'VINEYARD', 'WATER') ~ CLASS,
+#     TRUE ~ SUBCLASS)) %>%
+#   group_by(CLASS, SUBCLASS, total_area) %>%
+#   summarize(area_ha = sum(area_ha), .groups = 'drop') %>%
+#   full_join(baseline_ha %>% filter(layer == 'baseline') %>%
+#               select(CLASS = label, baseline_total = area)) %>%
+#   mutate(total_area = case_when(CLASS %in% c('IDLE', 'URBAN') ~ baseline_total,
+#                                 is.na(total_area) ~ baseline_total,
+#                                 TRUE ~ total_area),
+#          area_ha = case_when(CLASS %in% c('IDLE', 'URBAN') ~ baseline_total,
+#                              is.na(area_ha) ~ baseline_total,
+#                              TRUE ~ area_ha),
+#          prop = area_ha/total_area,
+#          SUBCLASS = if_else(is.na(SUBCLASS), CLASS, SUBCLASS)) %>%
+#   select(CLASS, CLASS_AREA = total_area, SUBCLASS, SUBCLASS_AREA = area_ha,
+#          SUBCLASS_PROP = prop)
+# write_csv(ag_details, 'data/baseline_area.csv')
+#
+# # identify additional area of different winter crops
+# levels(baseline) <- NULL
+# levels(baseline_win) <- NULL
+# winter_mask = lapp(c(baseline, baseline_win),
+#                    function(x, y) {ifelse(x == y, NA, y)})
+# writeRaster(winter_mask,
+#             filename = 'GIS/landscape_rasters/veg_baseline_winter_mask.tif',
+#             overwrite = TRUE)
+#
+# gains = winter_mask %>% mask(delta) %>% calculate_area() %>%
+#   left_join(key %>% select(class = CODE_BASELINE, label = CODE_NAME),
+#             by = 'class')
+# losses = baseline %>% mask(winter_mask %>% subst(c(0:130), 1) %>% mask(delta)) %>%
+#   calculate_area() %>%
+#   left_join(key %>% select(class = CODE_BASELINE, label = CODE_NAME),
+#             by = 'class')
+# net = bind_rows(gains,
+#                 losses %>% mutate(area = area * -1)) %>%
+#   group_by(class, label) %>%
+#   summarize(area = sum(area), .groups = 'drop')
+# write_csv(net, 'data/baseline_area_winterchange.csv')

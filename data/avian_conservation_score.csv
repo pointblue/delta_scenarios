@@ -1,229 +1,262 @@
-METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,CODE_NAME,SCORE,UNIT
-biodiversity,avian conservation contribution,Grassland_landbirds,WETLAND_MANAGED,1,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,WETLAND_MANAGED,0,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,WETLAND_MANAGED,2,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,WETLAND_MANAGED,3,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,WETLAND_MANAGED,3,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,WETLAND_MANAGED,3,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,WETLAND_MANAGED,3,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,WETLAND_MANAGED,3,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,WETLAND_MANAGED,3,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,RIPARIAN,0,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,RIPARIAN,3,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,RIPARIAN,3,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,RIPARIAN,2,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,RIPARIAN,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,RIPARIAN,1,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,RIPARIAN,1,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,RIPARIAN,1,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,RIPARIAN,2,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,ORCHARD_DECIDUOUS,0,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,ORCHARD_DECIDUOUS,1,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,ORCHARD_DECIDUOUS,1,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,ORCHARD_DECIDUOUS,0,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,ORCHARD_DECIDUOUS,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,ORCHARD_DECIDUOUS,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,ORCHARD_DECIDUOUS,0,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,ORCHARD_DECIDUOUS,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,ORCHARD_DECIDUOUS,0,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,ORCHARD_CITRUS&SUBTROPICAL,0,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,ORCHARD_CITRUS&SUBTROPICAL,1,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,ORCHARD_CITRUS&SUBTROPICAL,1,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,ORCHARD_CITRUS&SUBTROPICAL,0,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,ORCHARD_CITRUS&SUBTROPICAL,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,ORCHARD_CITRUS&SUBTROPICAL,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,ORCHARD_CITRUS&SUBTROPICAL,0,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,ORCHARD_CITRUS&SUBTROPICAL,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,ORCHARD_CITRUS&SUBTROPICAL,0,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,VINEYARD,0,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,VINEYARD,1,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,VINEYARD,1,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,VINEYARD,0,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,VINEYARD,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,VINEYARD,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,VINEYARD,0,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,VINEYARD,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,VINEYARD,0,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,GRASSLAND,3,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,GRASSLAND,2,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,GRASSLAND,1,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,GRASSLAND,1,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,GRASSLAND,1,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,GRASSLAND,1,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,GRASSLAND,3,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,GRASSLAND,1,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,GRASSLAND,1,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,PASTURE,3,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,PASTURE,2,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,PASTURE,1,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,PASTURE,1,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,PASTURE,1,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,PASTURE,1,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,PASTURE,3,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,PASTURE,1,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,PASTURE,1,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,PASTURE_ALFALFA,1,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,PASTURE_ALFALFA,1,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,PASTURE_ALFALFA,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,PASTURE_ALFALFA,1,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,PASTURE_ALFALFA,2,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,PASTURE_ALFALFA,1,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,PASTURE_ALFALFA,1,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,PASTURE_ALFALFA,1,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,PASTURE_ALFALFA,1,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,RICE,0,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,RICE,0,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,RICE,1,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,RICE,3,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,RICE,3,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,RICE,3,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,RICE,3,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,RICE,3,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,RICE,3,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,FIELD_CORN,0,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,FIELD_CORN,0,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,FIELD_CORN,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,FIELD_CORN,3,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,FIELD_CORN,3,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,FIELD_CORN,3,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,FIELD_CORN,0,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,FIELD_CORN,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,FIELD_CORN,0,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,GRAIN&HAY,1,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,GRAIN&HAY,0,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,GRAIN&HAY,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,GRAIN&HAY,2,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,GRAIN&HAY,1,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,GRAIN&HAY,1,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,GRAIN&HAY,3,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,GRAIN&HAY,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,GRAIN&HAY,0,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,ROW,0,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,ROW,0,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,ROW,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,ROW,1,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,ROW,1,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,ROW,1,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,ROW,0,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,ROW,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,ROW,0,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,FIELD,0,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,FIELD,0,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,FIELD,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,FIELD,1,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,FIELD,1,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,FIELD,1,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,FIELD,0,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,FIELD,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,FIELD,0,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,GRAIN&HAY_WHEAT,1,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,GRAIN&HAY_WHEAT,0,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,GRAIN&HAY_WHEAT,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,GRAIN&HAY_WHEAT,2,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,GRAIN&HAY_WHEAT,1,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,GRAIN&HAY_WHEAT,1,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,GRAIN&HAY_WHEAT,3,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,GRAIN&HAY_WHEAT,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,GRAIN&HAY_WHEAT,0,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,WOODLAND&SCRUB,1,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,WOODLAND&SCRUB,3,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,WOODLAND&SCRUB,2,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,WOODLAND&SCRUB,0,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,WOODLAND&SCRUB,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,WOODLAND&SCRUB,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,WOODLAND&SCRUB,0,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,WOODLAND&SCRUB,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,WOODLAND&SCRUB,0,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,WETLAND_OTHER,3,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,WETLAND_OTHER,2,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,WETLAND_OTHER,1,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,WETLAND_OTHER,1,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,WETLAND_OTHER,1,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,WETLAND_OTHER,1,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,WETLAND_OTHER,3,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,WETLAND_OTHER,1,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,WETLAND_OTHER,1,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,IDLE,0,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,IDLE,0,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,IDLE,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,IDLE,0,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,IDLE,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,IDLE,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,IDLE,0,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,IDLE,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,IDLE,0,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,BARREN,0,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,BARREN,0,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,BARREN,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,BARREN,0,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,BARREN,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,BARREN,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,BARREN,0,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,BARREN,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,BARREN,0,ranking
-biodiversity,avian conservation contribution,Grassland_landbirds,URBAN,0,ranking
-biodiversity,avian conservation contribution,Oaksavannah_landbirds,URBAN,0,ranking
-biodiversity,avian conservation contribution,Riparian_landbirds,URBAN,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterfowl,URBAN,0,ranking
-biodiversity,avian conservation contribution,Wintering_shorebirds,URBAN,0,ranking
-biodiversity,avian conservation contribution,Wintering_waterbirds,URBAN,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterfowl,URBAN,0,ranking
-biodiversity,avian conservation contribution,Breeding_shorebirds,URBAN,0,ranking
-biodiversity,avian conservation contribution,Breeding_waterbirds,URBAN,0,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,BARREN,0,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,FIELD,0,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,FIELD_CORN,0,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,GRAIN&HAY,1,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,GRAIN&HAY_WHEAT,1,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,GRASSLAND,1.6666666666666667,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,IDLE,0,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,ORCHARD_CITRUS&SUBTROPICAL,0,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,ORCHARD_DECIDUOUS,0,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,PASTURE,1.6666666666666667,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,PASTURE_ALFALFA,1,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,RICE,3,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,RIPARIAN,1.3333333333333333,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,ROW,0,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,URBAN,0,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,VINEYARD,0,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,WETLAND_MANAGED,3,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,WETLAND_OTHER,1.6666666666666667,ranking
-biodiversity,avian conservation contribution,breeding waterbirds,WOODLAND&SCRUB,0,ranking
-biodiversity,avian conservation contribution,breeding landbirds,BARREN,0,ranking
-biodiversity,avian conservation contribution,breeding landbirds,FIELD,0,ranking
-biodiversity,avian conservation contribution,breeding landbirds,FIELD_CORN,0,ranking
-biodiversity,avian conservation contribution,breeding landbirds,GRAIN&HAY,0.3333333333333333,ranking
-biodiversity,avian conservation contribution,breeding landbirds,GRAIN&HAY_WHEAT,0.3333333333333333,ranking
-biodiversity,avian conservation contribution,breeding landbirds,GRASSLAND,2,ranking
-biodiversity,avian conservation contribution,breeding landbirds,IDLE,0,ranking
-biodiversity,avian conservation contribution,breeding landbirds,ORCHARD_CITRUS&SUBTROPICAL,0.6666666666666666,ranking
-biodiversity,avian conservation contribution,breeding landbirds,ORCHARD_DECIDUOUS,0.6666666666666666,ranking
-biodiversity,avian conservation contribution,breeding landbirds,PASTURE,2,ranking
-biodiversity,avian conservation contribution,breeding landbirds,PASTURE_ALFALFA,0.6666666666666666,ranking
-biodiversity,avian conservation contribution,breeding landbirds,RICE,0.3333333333333333,ranking
-biodiversity,avian conservation contribution,breeding landbirds,RIPARIAN,2,ranking
-biodiversity,avian conservation contribution,breeding landbirds,ROW,0,ranking
-biodiversity,avian conservation contribution,breeding landbirds,URBAN,0,ranking
-biodiversity,avian conservation contribution,breeding landbirds,VINEYARD,0.6666666666666666,ranking
-biodiversity,avian conservation contribution,breeding landbirds,WETLAND_MANAGED,1,ranking
-biodiversity,avian conservation contribution,breeding landbirds,WETLAND_OTHER,2,ranking
-biodiversity,avian conservation contribution,breeding landbirds,WOODLAND&SCRUB,2,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,BARREN,0,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,FIELD,1,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,FIELD_CORN,3,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,GRAIN&HAY,1.3333333333333333,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,GRAIN&HAY_WHEAT,1.3333333333333333,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,GRASSLAND,1,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,IDLE,0,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,ORCHARD_CITRUS&SUBTROPICAL,0,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,ORCHARD_DECIDUOUS,0,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,PASTURE,1,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,PASTURE_ALFALFA,1.3333333333333333,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,RICE,3,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,RIPARIAN,1,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,ROW,1,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,URBAN,0,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,VINEYARD,0,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,WETLAND_MANAGED,3,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,WETLAND_OTHER,1,ranking
-biodiversity,avian conservation contribution,wintering waterbirds,WOODLAND&SCRUB,0,ranking
+METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,CODE_NAME,SCORE_MEAN,SCORE_SE,SCORE_MIN,SCORE_MAX,UNIT
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,WETLAND_MANAGED,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,WETLAND_MANAGED,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,WETLAND_MANAGED,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,WETLAND_MANAGED,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,WETLAND_MANAGED,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,WETLAND_MANAGED,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,WETLAND_MANAGED,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,WETLAND_MANAGED,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,WETLAND_MANAGED,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,RIPARIAN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,RIPARIAN,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,RIPARIAN,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,RIPARIAN,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,RIPARIAN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,RIPARIAN,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,RIPARIAN,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,RIPARIAN,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,RIPARIAN,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,ORCHARD_DECIDUOUS,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,ORCHARD_DECIDUOUS,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,ORCHARD_DECIDUOUS,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,ORCHARD_DECIDUOUS,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,ORCHARD_DECIDUOUS,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,ORCHARD_DECIDUOUS,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,ORCHARD_DECIDUOUS,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,ORCHARD_DECIDUOUS,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,ORCHARD_DECIDUOUS,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,ORCHARD_CITRUS&SUBTROPICAL,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,ORCHARD_CITRUS&SUBTROPICAL,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,ORCHARD_CITRUS&SUBTROPICAL,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,ORCHARD_CITRUS&SUBTROPICAL,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,ORCHARD_CITRUS&SUBTROPICAL,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,ORCHARD_CITRUS&SUBTROPICAL,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,ORCHARD_CITRUS&SUBTROPICAL,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,ORCHARD_CITRUS&SUBTROPICAL,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,ORCHARD_CITRUS&SUBTROPICAL,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,VINEYARD,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,VINEYARD,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,VINEYARD,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,VINEYARD,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,VINEYARD,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,VINEYARD,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,VINEYARD,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,VINEYARD,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,VINEYARD,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,GRASSLAND,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,GRASSLAND,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,GRASSLAND,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,GRASSLAND,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,GRASSLAND,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,GRASSLAND,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,GRASSLAND,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,GRASSLAND,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,GRASSLAND,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,PASTURE_OTHER,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,PASTURE_OTHER,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,PASTURE_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,PASTURE_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,PASTURE_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,PASTURE_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,PASTURE_OTHER,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,PASTURE_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,PASTURE_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,PASTURE_ALFALFA,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,PASTURE_ALFALFA,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,PASTURE_ALFALFA,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,PASTURE_ALFALFA,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,PASTURE_ALFALFA,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,PASTURE_ALFALFA,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,PASTURE_ALFALFA,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,PASTURE_ALFALFA,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,PASTURE_ALFALFA,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,RICE,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,RICE,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,RICE,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,RICE,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,RICE,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,RICE,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,RICE,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,RICE,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,RICE,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,FIELD_CORN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,FIELD_CORN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,FIELD_CORN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,FIELD_CORN,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,FIELD_CORN,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,FIELD_CORN,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,FIELD_CORN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,FIELD_CORN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,FIELD_CORN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,ROW,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,ROW,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,ROW,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,ROW,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,ROW,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,ROW,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,ROW,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,ROW,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,ROW,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,FIELD_OTHER,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,FIELD_OTHER,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,FIELD_OTHER,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,FIELD_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,FIELD_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,FIELD_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,FIELD_OTHER,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,FIELD_OTHER,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,FIELD_OTHER,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,GRAIN&HAY_WHEAT,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,GRAIN&HAY_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,GRAIN&HAY_WHEAT,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,GRAIN&HAY_OTHER,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,GRAIN&HAY_WHEAT,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,GRAIN&HAY_OTHER,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,GRAIN&HAY_WHEAT,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,GRAIN&HAY_OTHER,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,GRAIN&HAY_WHEAT,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,GRAIN&HAY_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,GRAIN&HAY_WHEAT,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,GRAIN&HAY_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,GRAIN&HAY_WHEAT,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,GRAIN&HAY_OTHER,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,GRAIN&HAY_WHEAT,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,GRAIN&HAY_OTHER,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,GRAIN&HAY_WHEAT,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,GRAIN&HAY_OTHER,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,WETLAND_MANAGED_PERENNIAL,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,WETLAND_MANAGED_SEASONAL,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,WETLAND_MANAGED_PERENNIAL,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,WETLAND_MANAGED_SEASONAL,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,WETLAND_MANAGED_PERENNIAL,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,WETLAND_MANAGED_SEASONAL,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,WETLAND_MANAGED_PERENNIAL,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,WETLAND_MANAGED_SEASONAL,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,WETLAND_MANAGED_PERENNIAL,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,WETLAND_MANAGED_SEASONAL,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,WETLAND_MANAGED_PERENNIAL,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,WETLAND_MANAGED_SEASONAL,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,WETLAND_MANAGED_PERENNIAL,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,WETLAND_MANAGED_SEASONAL,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,WETLAND_MANAGED_PERENNIAL,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,WETLAND_MANAGED_SEASONAL,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,WETLAND_MANAGED_PERENNIAL,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,WETLAND_MANAGED_SEASONAL,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,WETLAND_OTHER,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,WETLAND_OTHER,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,WETLAND_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,WETLAND_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,WETLAND_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,WETLAND_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,WETLAND_OTHER,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,WETLAND_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,WETLAND_OTHER,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,BARREN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,IDLE,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,URBAN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,BARREN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,IDLE,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,URBAN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,BARREN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,IDLE,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,URBAN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,BARREN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,IDLE,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,URBAN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,BARREN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,IDLE,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,URBAN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,BARREN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,IDLE,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,URBAN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,BARREN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,IDLE,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,URBAN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,BARREN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,IDLE,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,URBAN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,BARREN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,IDLE,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,URBAN,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,WOODLAND,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,WOODLAND,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,WOODLAND,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,WOODLAND,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,WOODLAND,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,WOODLAND,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,WOODLAND,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,WOODLAND,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,WOODLAND,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,SCRUB,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,SCRUB,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,SCRUB,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,SCRUB,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,SCRUB,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,SCRUB,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,SCRUB,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,SCRUB,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,SCRUB,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,RIPARIAN_FOREST_POFR,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,RIPARIAN_FOREST_QULO,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,RIPARIAN_FOREST_SALIX,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,RIPARIAN_FOREST_MIXED,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,RIPARIAN_SCRUB_INTRO,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,RIPARIAN_SCRUB_SALIX,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Grassland,RIPARIAN_SCRUB_MIXED,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,RIPARIAN_FOREST_POFR,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,RIPARIAN_FOREST_QULO,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,RIPARIAN_FOREST_SALIX,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,RIPARIAN_FOREST_MIXED,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,RIPARIAN_SCRUB_INTRO,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,RIPARIAN_SCRUB_SALIX,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Oak Savannah,RIPARIAN_SCRUB_MIXED,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,RIPARIAN_FOREST_POFR,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,RIPARIAN_FOREST_QULO,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,RIPARIAN_FOREST_SALIX,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,RIPARIAN_FOREST_MIXED,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,RIPARIAN_SCRUB_INTRO,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,RIPARIAN_SCRUB_SALIX,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Landbirds_Riparian,RIPARIAN_SCRUB_MIXED,10,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,RIPARIAN_FOREST_POFR,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,RIPARIAN_FOREST_QULO,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,RIPARIAN_FOREST_SALIX,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,RIPARIAN_FOREST_MIXED,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,RIPARIAN_SCRUB_INTRO,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,RIPARIAN_SCRUB_SALIX,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Waterfowl,RIPARIAN_SCRUB_MIXED,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,RIPARIAN_FOREST_POFR,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,RIPARIAN_FOREST_QULO,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,RIPARIAN_FOREST_SALIX,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,RIPARIAN_FOREST_MIXED,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,RIPARIAN_SCRUB_INTRO,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,RIPARIAN_SCRUB_SALIX,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Shorebirds,RIPARIAN_SCRUB_MIXED,0,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,RIPARIAN_FOREST_POFR,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,RIPARIAN_FOREST_QULO,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,RIPARIAN_FOREST_SALIX,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,RIPARIAN_FOREST_MIXED,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,RIPARIAN_SCRUB_INTRO,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,RIPARIAN_SCRUB_SALIX,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Wintering Waterbirds_Other Waterbirds,RIPARIAN_SCRUB_MIXED,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,RIPARIAN_FOREST_POFR,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,RIPARIAN_FOREST_QULO,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,RIPARIAN_FOREST_SALIX,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,RIPARIAN_FOREST_MIXED,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,RIPARIAN_SCRUB_INTRO,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,RIPARIAN_SCRUB_SALIX,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Waterfowl,RIPARIAN_SCRUB_MIXED,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,RIPARIAN_FOREST_POFR,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,RIPARIAN_FOREST_QULO,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,RIPARIAN_FOREST_SALIX,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,RIPARIAN_FOREST_MIXED,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,RIPARIAN_SCRUB_INTRO,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,RIPARIAN_SCRUB_SALIX,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Shorebirds,RIPARIAN_SCRUB_MIXED,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,RIPARIAN_FOREST_POFR,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,RIPARIAN_FOREST_QULO,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,RIPARIAN_FOREST_SALIX,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,RIPARIAN_FOREST_MIXED,5,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,RIPARIAN_SCRUB_INTRO,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,RIPARIAN_SCRUB_SALIX,1,NA,NA,NA,ranking
+biodiversity,avian conservation contribution,Breeding Waterbirds_Other Waterbirds,RIPARIAN_SCRUB_MIXED,1,NA,NA,NA,ranking

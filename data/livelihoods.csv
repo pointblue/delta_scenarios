@@ -1,39 +1,63 @@
-METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,CODE_NAME,SCORE,SCORE_MIN,SCORE_MAX,UNIT
-economy,livelihoods,JOBS,FIELD,2.4113932555658,1.6387825675035528,3.3440135327635327,number of employees per 1000ha
-economy,livelihoods,JOBS,FIELD_CORN,1.7421492014729136,1.4914041818301331,1.9618852520410457,number of employees per 1000ha
-economy,livelihoods,JOBS,GRAIN&HAY,0.3677852584596855,0.3636776859504132,0.3718928309689578,number of employees per 1000ha
-economy,livelihoods,JOBS,GRAIN&HAY_WHEAT,0.42174566336480473,0.3420784042285427,0.6449582390812598,number of employees per 1000ha
-economy,livelihoods,JOBS,ORCHARD_DECIDUOUS,179.96808771116426,16.297043421890283,645.2252206708393,number of employees per 1000ha
-economy,livelihoods,JOBS,PASTURE,10.66382890417866,9.591994356061072,11.657562544674766,number of employees per 1000ha
-economy,livelihoods,JOBS,RICE,9.6941908021292,7.178523103918892,12.18678561067595,number of employees per 1000ha
-economy,livelihoods,JOBS,ROW,28.270317741359076,25.281770782095425,30.870159067344414,number of employees per 1000ha
-economy,livelihoods,JOBS,VINEYARD,31.11983980026302,25.206851122489166,37.79233710392273,number of employees per 1000ha
-economy,livelihoods,WAGES,FIELD,37.965044956140346,32.95126315789474,40.3135,annual dollars per employee (thousands)
-economy,livelihoods,WAGES,FIELD_CORN,36.91593307494225,30.30508910891089,42.71748192771084,annual dollars per employee (thousands)
-economy,livelihoods,WAGES,GRAIN&HAY,37.42158277591973,34.131730769230764,40.7114347826087,annual dollars per employee (thousands)
-economy,livelihoods,WAGES,GRAIN&HAY_WHEAT,43.501587812187815,35.943333333333335,58.5993076923077,annual dollars per employee (thousands)
-economy,livelihoods,WAGES,ORCHARD_DECIDUOUS,36.70705688362239,26.397141025641027,46.53442073832791,annual dollars per employee (thousands)
-economy,livelihoods,WAGES,PASTURE,43.866040612202326,39.09537110481587,50.222442953020135,annual dollars per employee (thousands)
-economy,livelihoods,WAGES,RICE,43.75590267768207,41.846174496644295,46.43636612021857,annual dollars per employee (thousands)
-economy,livelihoods,WAGES,ROW,42.91451830232017,35.77473145604395,51.417130372492835,annual dollars per employee (thousands)
-economy,livelihoods,WAGES,VINEYARD,33.200688096577096,28.783562716262974,38.01996074646075,annual dollars per employee (thousands)
-economy,livelihoods,JOBS,ORCHARD_CITRUS&SUBTROPICAL,179.96808771116426,16.297043421890283,645.2252206708393,number of employees per 1000ha
-economy,livelihoods,WAGES,ORCHARD_CITRUS&SUBTROPICAL,36.70705688362239,26.397141025641027,46.53442073832791,annual dollars per employee (thousands)
-economy,livelihoods,JOBS,PASTURE_ALFALFA,0.3677852584596855,0.3636776859504132,0.3718928309689578,number of employees per 1000ha
-economy,livelihoods,WAGES,PASTURE_ALFALFA,37.42158277591973,34.131730769230764,40.7114347826087,annual dollars per employee (thousands)
-economy,livelihoods,JOBS,IDLE,0,NA,NA,number of employees per 1000ha
-economy,livelihoods,WAGES,IDLE,0,NA,NA,annual dollars per employee (thousands)
-economy,livelihoods,JOBS,GRASSLAND,0,NA,NA,number of employees per 1000ha
-economy,livelihoods,WAGES,GRASSLAND,0,NA,NA,annual dollars per employee (thousands)
-economy,livelihoods,JOBS,URBAN,0,NA,NA,number of employees per 1000ha
-economy,livelihoods,WAGES,URBAN,0,NA,NA,annual dollars per employee (thousands)
-economy,livelihoods,JOBS,RIPARIAN,0,NA,NA,number of employees per 1000ha
-economy,livelihoods,WAGES,RIPARIAN,0,NA,NA,annual dollars per employee (thousands)
-economy,livelihoods,JOBS,WETLAND_MANAGED,0,NA,NA,number of employees per 1000ha
-economy,livelihoods,WAGES,WETLAND_MANAGED,0,NA,NA,annual dollars per employee (thousands)
-economy,livelihoods,JOBS,WETLAND_OTHER,0,NA,NA,number of employees per 1000ha
-economy,livelihoods,WAGES,WETLAND_OTHER,0,NA,NA,annual dollars per employee (thousands)
-economy,livelihoods,JOBS,WOODLAND&SCRUB,0,NA,NA,number of employees per 1000ha
-economy,livelihoods,WAGES,WOODLAND&SCRUB,0,NA,NA,annual dollars per employee (thousands)
-economy,livelihoods,JOBS,BARREN,0,NA,NA,number of employees per 1000ha
-economy,livelihoods,WAGES,BARREN,0,NA,NA,annual dollars per employee (thousands)
+METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,CODE_NAME,SCORE_MEAN,SCORE_SE,SCORE_MIN,SCORE_MAX,UNIT
+economy,livelihoods,Agricultural Jobs,FIELD_CORN,0.0024409219407038134,2.2833241654319982e-4,8.920758122743682e-4,0.003927496688741722,number of employees per ha
+economy,livelihoods,Agricultural Jobs,FIELD_OTHER,5.747606936795885e-4,7.40336150950513e-5,4.560334827313472e-4,7.886329787234041e-4,number of employees per ha
+economy,livelihoods,Agricultural Jobs,GRAIN&HAY_OTHER,0.0039506997467660485,5.513717044380068e-4,0.003399328042328042,0.004502071451204056,number of employees per ha
+economy,livelihoods,Agricultural Jobs,GRAIN&HAY_WHEAT,0.001967880365152875,3.57258631427393e-4,0.0013131183574879228,0.0036698762376237625,number of employees per ha
+economy,livelihoods,Agricultural Jobs,ORCHARD_DECIDUOUS,0.05098351830054537,0.007932300491896178,0.011353817759421786,0.15402208672086723,number of employees per ha
+economy,livelihoods,Agricultural Jobs,RICE,0.014404298868204869,0.0018066363707172242,0.003365788876276958,0.026173115264797507,number of employees per ha
+economy,livelihoods,Agricultural Jobs,ROW,0.049696455553818734,0.0033294730163744304,0.026177066061323858,0.07060975814063238,number of employees per ha
+economy,livelihoods,Agricultural Jobs,VINEYARD,0.02269056648746179,0.002259764552414,0.0049421000000000005,0.044478899999999995,number of employees per ha
+economy,livelihoods,Annual Wages,FIELD_CORN,37394.93255977689,1490.3331045427178,26408.93442622951,46930.6,annual dollars per employee
+economy,livelihoods,Annual Wages,FIELD_OTHER,37965.04495614035,1692.413670145488,32951.26315789474,40313.5,annual dollars per employee
+economy,livelihoods,Annual Wages,GRAIN&HAY_OTHER,37421.58277591973,3289.852006688965,34131.730769230766,40711.434782608696,annual dollars per employee
+economy,livelihoods,Annual Wages,GRAIN&HAY_WHEAT,40985.301165501165,1474.8488412900667,35943.333333333336,46645.8,annual dollars per employee
+economy,livelihoods,Annual Wages,ORCHARD_DECIDUOUS,36508.89484346645,961.8956600014571,20975.964285714286,46150.803636363635,annual dollars per employee
+economy,livelihoods,Annual Wages,RICE,39062.4739007644,2013.83613106825,29101.2,49331.22556390977,annual dollars per employee
+economy,livelihoods,Annual Wages,ROW,37081.76093191373,2051.770126373111,27333.246913580246,53562.51386321626,annual dollars per employee
+economy,livelihoods,Annual Wages,VINEYARD,36390.96978233102,1255.9914721629225,22391.833333333332,58651.25,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,ORCHARD_CITRUS&SUBTROPICAL,0.05098351830054537,0.007932300491896178,0.011353817759421786,0.15402208672086723,number of employees per ha
+economy,livelihoods,Annual Wages,ORCHARD_CITRUS&SUBTROPICAL,36508.89484346645,961.8956600014571,20975.964285714286,46150.803636363635,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,PASTURE_ALFALFA,0.006340739337371615,0.00062298051766420965,0.0028930593026215323,0.011929206896551725,number of employees per ha
+economy,livelihoods,Annual Wages,PASTURE_ALFALFA,41925.075148210955,1968.9476498135668,26015.71186440678,55362.27350427351,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,PASTURE_OTHER,0.006340739337371615,0.00062298051766420965,0.0028930593026215323,0.011929206896551725,number of employees per ha
+economy,livelihoods,Annual Wages,PASTURE_OTHER,41925.075148210955,1968.9476498135668,26015.71186440678,55362.27350427351,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,IDLE,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,IDLE,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,GRASSLAND,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,GRASSLAND,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,URBAN,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,URBAN,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,RIPARIAN,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,RIPARIAN,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,RIPARIAN_FOREST_POFR,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,RIPARIAN_FOREST_POFR,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,RIPARIAN_FOREST_QULO,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,RIPARIAN_FOREST_QULO,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,RIPARIAN_FOREST_SALIX,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,RIPARIAN_FOREST_SALIX,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,RIPARIAN_FOREST_MIXED,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,RIPARIAN_FOREST_MIXED,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,RIPARIAN_SCRUB_INTRO,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,RIPARIAN_SCRUB_INTRO,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,RIPARIAN_SCRUB_SALIX,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,RIPARIAN_SCRUB_SALIX,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,RIPARIAN_SCRUB_MIXED,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,RIPARIAN_SCRUB_MIXED,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,WETLAND_MANAGED,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,WETLAND_MANAGED,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,WETLAND_MANAGED_PERENNIAL,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,WETLAND_MANAGED_PERENNIAL,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,WETLAND_MANAGED_SEASONAL,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,WETLAND_MANAGED_SEASONAL,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,WETLAND_TIDAL,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,WETLAND_TIDAL,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,WETLAND_OTHER,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,WETLAND_OTHER,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,WATER,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,WATER,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,WOODLAND,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,WOODLAND,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,SCRUB,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,SCRUB,0,NA,NA,NA,annual dollars per employee
+economy,livelihoods,Agricultural Jobs,BARREN,0,NA,NA,NA,number of employees per ha
+economy,livelihoods,Annual Wages,BARREN,0,NA,NA,NA,annual dollars per employee

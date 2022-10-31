@@ -4,7 +4,10 @@
 
 # PACKAGES & FUNCTIONS
 source('R/0_packages.R')
+source('R/0_functions.R')
 
+# key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
+key = readxl::read_excel('GIS/VEG_key.xlsx')
 
 # CROP PRODUCTION VALUE------------
 #
@@ -46,64 +49,7 @@ cropdat_raw = purrr::map_dfr(
 ## classify landcovers----------
 # match to land cover classes & subclasses as in baseline
 
-cropdat_classify = cropdat_raw %>%
-  # assign to landcover classes, matching major classes as in baseline
-  mutate(
-    crop = as.character(crop),
-    CODE_NAME = case_when(
-      grepl('almond|apple|apricot|cherr|fruits & nuts|nectarines|orchard',
-            crop, ignore.case = TRUE) ~ 'ORCHARD_DECIDUOUS',
-      grepl('orchard|peaches|pears|plums|walnuts|pistachios',
-            crop, ignore.case = TRUE) ~ 'ORCHARD_DECIDUOUS',
-      grepl('olive|carob', crop, ignore.case = TRUE) ~ 'ORCHARD_CITRUS&SUBTROPICAL',
-      grepl('grape', crop, ignore.case = TRUE) ~ 'VINEYARD',
-      grepl('corn|sorghum|sudan', crop, ignore.case = TRUE) ~ 'FIELD_CORN',
-      grepl('alfalfa', crop, ignore.case = TRUE) ~ 'PASTURE_ALFALFA',
-      grepl('rice', crop, ignore.case = TRUE) ~ 'RICE',
-      grepl('wheat', crop, ignore.case = TRUE) ~ 'GRAIN&HAY_WHEAT',
-      grepl('hay other|oat|grain|triticale|silage',
-            crop, ignore.case = TRUE) ~ 'GRAIN&HAY',
-      grepl('pasture irrigated|ryegrass|seed grass', crop, ignore.case = TRUE) ~ 'PASTURE',
-      grepl('pasture range|hay wild', crop, ignore.case = TRUE) ~ 'GRASSLAND',
-      grepl('safflower|sunflower|beans dry|field crops',
-            crop, ignore.case = TRUE) ~ 'FIELD',
-      grepl('asparagus|beans|berries|carrot|cucumber|garlic|melon|onion|pepper',
-            crop, ignore.case = TRUE) ~ 'ROW',
-      grepl('potato|pumpkin|squash|tomato|vegetable|seed',
-            crop, ignore.case = TRUE) ~ 'ROW',
-      TRUE ~ 'UNKNOWN'),
-    SUBCLASS = case_when(
-      grepl('ALMOND', crop) ~ 'ALMONDS',
-      crop == 'APPLES ALL' ~ 'APPLES',
-      grepl('PEAR', crop) ~ 'PEARS',
-      grepl('APRICOTS|NECTARINES|PEACHES|PLUMS|CHERRIES', crop) ~ 'STONE FRUIT',
-      crop == 'WALNUTS ENGLISH' ~ 'WALNUTS',
-      CODE_NAME == 'ORCHARD_DECIDUOUS' ~ 'MISCELLANEOUS DECIDUOUS',
-      crop == 'OLIVES' ~ 'OLIVES',
-      crop == 'CAROBS' ~ 'CAROBS',
-      CODE_NAME == 'PASTURE_ALFALFA' ~ 'ALFALFA & ALFALFA MIXTURES',
-      CODE_NAME == 'FIELD_CORN' ~ 'CORN, SORGHUM, OR SUDAN',
-      CODE_NAME == 'GRAIN&HAY_WHEAT' ~ 'WHEAT',
-      CODE_NAME == 'GRAIN&HAY' ~ 'MISCELLANEOUS GRAIN AND HAY',
-      grepl('SUNFLOWER', crop) ~ 'SUNFLOWERS',
-      grepl('BEANS DRY', crop) ~ 'BEANS (DRY)',
-      crop == 'SAFFLOWER' ~ 'SAFFLOWER',
-      CODE_NAME == 'FIELD' ~ 'MISCELLANEOUS FIELD',
-      CODE_NAME == 'RICE' ~ 'RICE (ALL TYPES)',
-      CODE_NAME %in% c('VINEYARD', 'GRASSLAND') ~ CODE_NAME,
-      crop == 'PASTURE IRRIGATED' ~ 'MIXED PASTURE',
-      crop %in% c('RYEGRASS PERENNIAL ALL', 'SEED GRASS UNSPECIFIED') ~ 'MISCELLANEOUS GRASSES',
-      grepl('BLUEBERRIES', crop) ~ 'BUSH BERRIES',
-      grepl('CARROTS', crop) ~ 'CARROTS',
-      grepl('CUCUMBER|MELON|PUMPKIN|SQUASH', crop) ~
-        'MELONS, SQUASH, AND CUCUMBERS (ALL TYPES)',
-      grepl('GARLIC|ONION', crop) ~ 'ONIONS & GARLIC',
-      grepl('PEPPERS', crop) ~ 'PEPPERS (CHILI, BELL, ETC)',
-      grepl('POTATO', crop) ~ 'POTATO OR SWEET POTATO',
-      grepl('STRAWBERRIES', crop) ~ 'STRAWBERRIES',
-      crop == 'TOMATOES PROCESSING' ~ 'TOMATOES (PROCESSING)',
-      grepl('ASPARAGUS|BEANS|TOMATO|VEGETABLE|SEED', crop) ~ 'MISCELLANEOUS TRUCK'
-      ))
+cropdat_classify = codify_agstats(cropdat_raw)
 
 
 ## estimate avg annual value per ha----------
@@ -113,6 +59,12 @@ cropdat_classify = cropdat_raw %>%
 # the State of Delta Agriculture report, to apply the average yield per acre to
 # Delta acres
 
+cropdat_county = cropdat_classify %>%
+  # sum over all crops within SUBCLASS
+  group_by(county, CODE_NAME, SUBCLASS, year) %>%
+  summarize(across(c(harvest_ac, production, value), sum, na.rm = TRUE),
+            .groups = 'drop')
+
 cropdat_sum = cropdat_classify %>%
   # sum over all Delta counties in each year
   group_by(CODE_NAME, SUBCLASS, year) %>%
@@ -121,7 +73,7 @@ cropdat_sum = cropdat_classify %>%
 write_csv(cropdat_sum, 'data_orig/cropdat_summary.csv')
 
 ## calculate average production value------
-# $ per ha of each land cover class and subclass, averaged over all 5 years
+# $1000 per ha of each land cover class and subclass, averaged over all 5 years
 
 ## by subclass:
 cropdat_subclass = cropdat_sum %>%
@@ -129,17 +81,18 @@ cropdat_subclass = cropdat_sum %>%
   mutate(harvest_ha = harvest_ac / 2.47105,
          value_ha = value / harvest_ha) %>%
   group_by(CODE_NAME, SUBCLASS) %>%
-  #average over all years
-  summarize(SCORE = mean(value_ha, na.rm = TRUE),
-            SCORE_MIN = min(value_ha, na.rm = TRUE),
-            SCORE_MAX = max(value_ha, na.rm = TRUE),
+  #average over all years (and convert from thousands to millions)
+  summarize(SCORE_MEAN = mean(value_ha, na.rm = TRUE) / 1000,
+            SCORE_SE = sd(value_ha, na.rm = TRUE)/sqrt(length(!is.na(value_ha))) / 1000,
+            SCORE_MIN = min(value_ha, na.rm = TRUE) / 1000,
+            SCORE_MAX = max(value_ha, na.rm = TRUE) / 1000,
             .groups = 'drop') %>%
   mutate(METRIC_CATEGORY = 'economy',
          METRIC_SUBTYPE = 'production value',
-         METRIC = 'gross production value',
-         UNIT = 'USD per ha per year (thousands)') %>%
+         METRIC = 'Gross Production Value',
+         UNIT = 'USD per ha per year (millions)') %>%
   select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, SUBCLASS,
-         SCORE, SCORE_MIN, SCORE_MAX, UNIT)
+         SCORE_MEAN, SCORE_SE, SCORE_MIN, SCORE_MAX, UNIT)
 write_csv(cropdat_subclass, 'data/crop_production_value_subclass.csv')
 
 ## by class:
@@ -149,22 +102,23 @@ cropdat_class = cropdat_sum %>%
   # calculate (weighted) average production value per acre per class
   mutate(harvest_ha = harvest_ac / 2.47105,
          value_ha = value / harvest_ha) %>%
-  #average over all years
+  #average over all years (and convert to millions)
   group_by(CODE_NAME) %>%
-  summarize(SCORE = mean(value_ha),
-            SCORE_MIN = min(value_ha),
-            SCORE_MAX = max(value_ha),
+  summarize(SCORE_MEAN = mean(value_ha) / 1000,
+            SCORE_SE = sd(value_ha, na.rm = TRUE)/sqrt(length(!is.na(value_ha))) / 1000,
+            SCORE_MIN = min(value_ha) / 1000,
+            SCORE_MAX = max(value_ha) / 1000,
             .groups = 'drop') %>%
   mutate(METRIC_CATEGORY = 'economy',
          METRIC_SUBTYPE = 'production value',
-         METRIC = 'gross production value',
-         UNIT = 'USD per ha per year (thousands)') %>%
-  select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, SCORE,
-         SCORE_MIN, SCORE_MAX, UNIT)
+         METRIC = 'Gross Production Value',
+         UNIT = 'USD per ha per year (millions)') %>%
+  select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, SCORE_MEAN,
+         SCORE_SE, SCORE_MIN, SCORE_MAX, UNIT)
 
 # check for missing:
-cropdat_class %>% select(METRIC, CODE_NAME, SCORE) %>%
-  pivot_wider(names_from = 'METRIC', values_from = 'SCORE') %>%
+cropdat_class %>% select(METRIC, CODE_NAME, SCORE_MEAN) %>%
+  pivot_wider(names_from = 'METRIC', values_from = 'SCORE_MEAN') %>%
   mutate(CODE_NAME = factor(CODE_NAME, levels = key %>% pull(CODE_NAME))) %>%
   complete(CODE_NAME) %>% print(n = 40)
 # IDLE, URBAN, RIPARIAN, WETLAND_MANAGED, WETLAND_OTHER, WATER, WOODLAND&SCRUB,
@@ -173,32 +127,47 @@ cropdat_class %>% select(METRIC, CODE_NAME, SCORE) %>%
 cropdat_class_fill = cropdat_class %>%
   bind_rows(
     expand_grid(
-      tibble(CODE_NAME = c('IDLE', 'URBAN', 'RIPARIAN', 'WETLAND_MANAGED',
-                           'WETLAND_OTHER', 'WOODLAND&SCRUB', 'BARREN')),
+      tibble(CODE_NAME = c('IDLE', 'URBAN', 'RIPARIAN', 'RIPARIAN_FOREST_POFR',
+                           'RIPARIAN_FOREST_QULO', 'RIPARIAN_FOREST_SALIX',
+                           'RIPARIAN_FOREST_MIXED', 'RIPARIAN_SCRUB_INTRO',
+                           'RIPARIAN_SCRUB_SALIX', 'RIPARIAN_SCRUB_MIXED',
+                           'WETLAND_MANAGED', 'WETLAND_MANAGED_PERENNIAL',
+                           'WETLAND_MANAGED_SEASONAL', 'WETLAND_TIDAL',
+                           'WETLAND_OTHER', 'WATER',
+                           'WOODLAND', 'SCRUB', 'BARREN')),
       cropdat_class %>% filter(CODE_NAME == 'GRASSLAND') %>%
-        mutate(SCORE = 0, SCORE_MIN = NA, SCORE_MAX = NA) %>% select(-CODE_NAME)
+        mutate(SCORE_MEAN = 0, SCORE_SE = NA, SCORE_MIN = NA, SCORE_MAX = NA) %>%
+        select(-CODE_NAME)
     )
   )
+# check for missing:
+cropdat_class_fill %>% select(METRIC, CODE_NAME, SCORE_MEAN) %>%
+  pivot_wider(names_from = 'METRIC', values_from = 'SCORE_MEAN') %>%
+  mutate(CODE_NAME = factor(CODE_NAME, levels = key %>% pull(CODE_NAME))) %>%
+  complete(CODE_NAME) %>% print(n = 40)
+
 write_csv(cropdat_class_fill, 'data/crop_production_value.csv')
 
 # summary plots
 cropdat_class_fill %>%
   mutate(CODE_NAME = factor(
     CODE_NAME,
-    levels = cropdat_class_fill %>% arrange(SCORE) %>% pull(CODE_NAME))) %>%
-  ggplot(aes(SCORE, CODE_NAME, xmin = SCORE_MIN, xmax = SCORE_MAX)) +
-  geom_col() + geom_errorbar(width = 0)
+    levels = cropdat_class_fill %>% arrange(SCORE_MEAN) %>% pull(CODE_NAME))) %>%
+  ggplot(aes(SCORE_MEAN, CODE_NAME, xmin = SCORE_MEAN-SCORE_SE, xmax = SCORE_MEAN+SCORE_SE)) +
+  geom_col() + geom_errorbar(width = 0) +
+  labs(x = 'value ($/ha, millions)', y = NULL)
 # highest gross production value in ORCHARD_DECIDUOUS, ROW, VINEYARD
 # ORCHARD_CITRUS&SUBTROPICAL
 
 cropdat_subclass %>%
   mutate(SUBCLASS = factor(SUBCLASS,
-                           levels = cropdat_subclass %>% arrange(SCORE) %>%
+                           levels = cropdat_subclass %>% arrange(SCORE_MEAN) %>%
                              pull(SUBCLASS))) %>%
   # filter(CODE_NAME %in% c('ORCHARD_DECIDUOUS', 'VINEYARD', 'ROW')) %>%
-  ggplot(aes(SCORE/1000, SUBCLASS, xmin = SCORE_MIN/1000, xmax = SCORE_MAX/1000)) +
+  ggplot(aes(SCORE_MEAN/1000, SUBCLASS, xmin = (SCORE_MEAN-SCORE_SE)/1000,
+             xmax = (SCORE_MEAN+SCORE_SE)/1000)) +
   geom_col() + geom_errorbar(width = 0) +
-  labs(x = 'value ($/ha, thousands)', y = NULL)
+  labs(x = 'value ($/ha, millions)', y = NULL)
 # within these classes, highest rates for BUSH BERRIES and STRAWBERRIES
 
 
@@ -338,33 +307,7 @@ edat_subset = edat_raw %>%
            ))
 
 ## classify landcovers---------
-edat_classify = edat_subset %>%
-  mutate(
-    CODE_NAME = case_when(
-      NAICS_code == 111140 ~ 'GRAIN&HAY_WHEAT', #wheat
-      NAICS_code == 111150 ~ 'FIELD_CORN', #corn
-      NAICS_code == 111160 ~ 'RICE', #rice
-      NAICS_code == 111120 ~ 'FIELD', #oilseed (SUNFLOWER, SAFFLOWER OIL SEEDS)
-      NAICS_code == 111940 ~ 'PASTURE', #hay farming (probably includes alfalfa?)
-      NAICS_code %in% c(111191, 111199) ~ 'GRAIN&HAY', #oilseed and grain combo; all other grain farming
-      NAICS_code %in% c(111331, 111335, 111336, 111339) ~ 'ORCHARD_DECIDUOUS', #apple, grape, tree nut, fruit/treenut combo
-      NAICS_code == 111332 ~ 'VINEYARD',
-      NAICS_code == 111219 ~ 'ROW', #other vegetable and melon
-      NAICS_code == 111998 ~ 'OTHER' # all other misc
-    ),
-    SUBCLASS = case_when(
-      NAICS_code == 111331 ~ 'APPLES',
-      NAICS_code == 111335 ~ 'TREE NUTS',
-      NAICS_code %in% c(111336, 111339) ~ 'MISCELLANEOUS DECIDUOUS',
-      NAICS_code == 111120 ~ 'OILSEEDS',
-      NAICS_code == 111150 ~ 'CORN, SORGHUM, OR SUDAN',
-      NAICS_code == 111160 ~ 'RICE (ALL TYPES)',
-      NAICS_code == 111140 ~ 'WHEAT',
-      NAICS_code %in% c(111191, 111199) ~ 'MISCELLANEOUS GRAIN AND HAY',
-      NAICS_code == 111940 ~ 'PASTURE (ALL TYPES)',
-      NAICS_code == 111219 ~ 'ROW (ALL TYPES)',
-      TRUE ~ CODE_NAME
-    )) %>%
+edat_classify = edat_subset %>% codify_edd() %>%
   select(CODE_NAME, SUBCLASS, industry, county, year, est:wages_total)
 
 ## estimate avg annual wages and jobs per ha----------
@@ -373,83 +316,149 @@ edat_classify = edat_subset %>%
 # for entire counties, only a portion of which are actually in the Delta proper;
 # instead, use harvested acres from crop production value data above
 
-edat_sum = edat_classify %>%
-  # sum over all Delta counties in each year
-  group_by(CODE_NAME, SUBCLASS, year) %>%
-  summarize(across(c(n_employees_monthly, wages_total), sum),
+# need to align acreage info to subclasses from edat -- note county-specific and
+# year-specific variation in reporting?
+cropdat_county %>% filter(county == 'Sacramento') %>%
+  select(county:harvest_ac) %>%
+  pivot_wider(names_from = year, values_from = harvest_ac) %>% print(n = Inf)
+edat_classify %>% filter(county == 'Sacramento') %>%
+  select(county, CODE_NAME:SUBCLASS, year, n = n_employees_monthly) %>%
+  group_by(county, CODE_NAME, SUBCLASS, year) %>% summarize(n = sum(n)) %>%
+  arrange(county, year, CODE_NAME, SUBCLASS) %>%
+  pivot_wider(names_from = year, values_from = n)
+# Sacramento:
+#   OTHER: in edat every year; assume it includes all FIELD_OTHER, WHEAT, plus
+#      years missing from CORN, GRAIN&HAY_OTHER, RICE below?
+#   CORN: no edat for 2018-19, but there is harvest dat
+#   GRAIN&HAY_OTHER: no edat for 2014 or 2017-2020, but there is harvest dat
+#   RICE: no edat for 2014-2017 or 2020, but there is harvest dat
+#   ORCHARD_DECIDUOUS: MISC or TREE NUTS in every year (combine)
+#   GRASSLAND in harvest dat - include in PASTURE (ALL TYPES)? (combine)
+#   ROW & VINEYARD are ok
+# Yolo:
+#   OTHER: in edat every year; assume it includes all GRAIN&HAY,
+#     ORCHARD_CITRUS&SUBTROPICAL, plus missing years for CORN, OILSEEDS
+#   every year: PASTURE (include GRASSLAND?), RICE, ROW, VINEYARD, TREE NUTS
+#   ORCHARD_DECIDUOUS (2014-2017) seems to switch to MISC_DECIDUOUS (2018-2020)
+#     (except both reported in 2014)
+#   FIELD_CORN: edat only 2018 but harvest dat every year
+#   OILSEEDS: only 2014-2017, but harvest dat every year
+# San Joaquin:
+#   OTHER: in edat every year but 2015; assume it includes FIELD_OTHER, GRAIN&HAY,
+#    GRASSLAND, ORCHARD_CITRUS&SUBTROPICAL; PASTURE; ROW
+#   every year: CORN, ORCHARD_DECIDUOUS (including mixed tree/nut); RICE, VINEYARD
+# Solano:
+#   OTHER: in edat every year; assume it includes all CORN, FIELD_OTHER, GRAIN&HAY_OTHER,
+#     ORCHARD_CITRUS&SUBTROPICAL, and missing years for ROW?
+#   every year: WHEAT, ORCHARD_DECIDUOUS, PASTURE (including GRASSLAND?), VINEYARD
+#   ROW: edat only 2014
+# Contra Costa:
+#   OTHER: only in 2014
+#   VINEYARD: missing 2015-2017
+#   ORCHARD_DECIDUOUS: missing 2014
+#   ROW: missing 2014
+#   --> MISSING DATA FOR CORN, FIELD_OTHER, GRAIN&HAY, GRASSLAND, PASTURE,
+#       ORCHARD_CITRUS&SUBTROPICAL, and missing years for ROW
+# Alameda: no edat or cropdat
+
+##--> match county-year-CODE_NAME specific data to estimate average numbers of
+## jobs per ha of each land cover class (assuming it wasn't always reported every
+## year)
+edat_align = full_join(
+  cropdat_county %>%
+    mutate(
+      CODE_NAME = case_when(
+        CODE_NAME %in% c('PASTURE_ALFALFA', 'PASTURE_OTHER') ~ 'PASTURE',
+        TRUE ~ CODE_NAME
+      )) %>%
+    group_by(county, year, CODE_NAME) %>%
+    summarize(harvest_ac = sum(harvest_ac),
+              .groups = 'drop'),
+  edat_classify %>% group_by(county, year, CODE_NAME) %>%
+    summarize(n_employees_monthly = sum(n_employees_monthly),
+              wages_total = sum(wages_total),
+            .groups = 'drop'),
+  by = c('county', 'year', 'CODE_NAME'))
+write_csv(edat_align, 'data_orig/employment_summary.csv')
+
+edat_sum = edat_align %>% drop_na() %>%
+  mutate(harvest_ha = harvest_ac / 2.47105,
+         jobs_ha = n_employees_monthly / harvest_ha,
+         wages_yr = wages_total / n_employees_monthly)
+
+# annual variation?
+edat_sum %>%
+  select(county, CODE_NAME:year, jobs_ha, wages_yr) %>%
+  mutate(jobs_ha = jobs_ha * 100,
+         wages_yr = wages_yr / 1000) %>%
+  pivot_longer(jobs_ha:wages_yr) %>%
+  # filter(county != 'Contra Costa' & county != 'Solano') %>%
+  # summarize overall counties in each year
+  group_by(CODE_NAME, year, name) %>%
+  summarize(SCORE_MEAN = mean(value),
+            SCORE_SE = sd(value, na.rm = TRUE)/sqrt(length(!is.na(value))),
             .groups = 'drop') %>%
-  # add acreage info from cropdat above
-  left_join(cropdat_sum %>% select(CODE_NAME, SUBCLASS, year, harvest_ac) %>%
-              mutate(
-                SUBCLASS = case_when(
-                  SUBCLASS %in% c('SAFFLOWER', 'SUNFLOWER') ~ 'OILSEEDS',
-                  SUBCLASS %in% c('ALMONDS', 'WALNUTS') ~ 'TREE NUTS',
-                  CODE_NAME == 'PASTURE' ~ 'PASTURE (ALL TYPES)',
-                  CODE_NAME == 'ROW' ~ 'ROW (ALL TYPES)',
-                  TRUE ~ SUBCLASS
-                )) %>%
-              group_by(CODE_NAME, SUBCLASS, year) %>%
-              summarize(harvest_ac = sum(harvest_ac), .groups = 'drop'),
-            by = c('CODE_NAME', 'SUBCLASS', 'year')) %>%
-  mutate(harvest_ha = harvest_ac / 2.47105)
-write_csv(edat_sum, 'data_orig/employment_summary.csv')
+  ggplot(aes(year, SCORE_MEAN, color = CODE_NAME)) +
+  facet_wrap(~name, scales = 'free_y') +
+  geom_line() + geom_point() +
+  # geom_errorbar(aes(ymin = SCORE_MEAN - SCORE_SE, ymax = SCORE_MEAN + SCORE_SE),
+  #               width = 0.25) +
+  scale_color_viridis_d()
+# --> suspicious bump in ORCHARD_DECIDUOUS in 2016 (due to one record in Contra
+# Costa); rising numbers in ROW overall (due to jump in #jobs in 2017 in Contra
+# Costa); wages overall climbing between 2014 and 2020, except for a
+# suspiciously high peak in WHEAT in 2014 (one record from Solano county)
 
 ## calculate averages------
-# employees per ha and wages per employee for each land cover class and
-# subclass, averaged over all 5 years
+# employees per ha and wages per employee for each land cover class, averaged
+# over all counties and years
 
-## by subclass:
-edat_subclass = edat_sum %>%
-  # annual values
-  mutate(JOBS = n_employees_monthly / harvest_ha * 1000, #employees per 1000 ha
-         WAGES = wages_total/n_employees_monthly / 1000) %>%  # per person wages
-  pivot_longer(JOBS:WAGES, names_to = 'METRIC') %>%
-  filter(CODE_NAME != 'OTHER') %>%
-  group_by(CODE_NAME, SUBCLASS, METRIC) %>%
-  #average over all years
-  summarize(SCORE = mean(value),
-            SCORE_MIN = min(value),
-            SCORE_MAX = max(value),
-            .groups = 'drop') %>%
-  mutate(METRIC_CATEGORY = 'economy',
-         METRIC_SUBTYPE = 'livelihoods',
-         UNIT = case_when(METRIC == 'JOBS' ~ 'number of employees per 1000ha',
-                          METRIC == 'WAGES' ~ 'annual dollars per employee (thousands)')) %>%
-  select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, SUBCLASS, SCORE,
-         SCORE_MIN, SCORE_MAX, UNIT) %>%
-  arrange(METRIC)
-write_csv(edat_subclass, 'data/livelihoods_subclass.csv')
-
-## by class:
 edat_class = edat_sum %>%
-  group_by(CODE_NAME, harvest_ha, year) %>%
-  summarize(across(c(n_employees_monthly, wages_total), sum), .groups = 'drop') %>%
-  # annual values
-  mutate(JOBS = n_employees_monthly / harvest_ha * 1000, #employees per 1000 ha
-         WAGES = wages_total/n_employees_monthly / 1000) %>% #dollars per employee (thousands)
-  pivot_longer(JOBS:WAGES, names_to = 'METRIC') %>%
-  filter(CODE_NAME != 'OTHER') %>%
-  group_by(CODE_NAME, METRIC) %>%
-  #average over all years
-  summarize(SCORE = mean(value),
+  # drop outliers and suspicious values
+  filter(!(CODE_NAME == 'GRAIN&HAY_WHEAT' & county == 'Solano' & year == 2014)) %>%
+  filter(!(CODE_NAME == 'ORCHARD_DECIDUOUS' & county == 'Contra Costa' & year == 2016)) %>%
+  filter(!(CODE_NAME == 'ROW' & county == 'Contra Costa')) %>%
+  select(county, year, CODE_NAME, jobs_ha, wages_yr) %>%
+  pivot_longer(jobs_ha:wages_yr, names_to = 'METRIC') %>%
+  group_by(METRIC, CODE_NAME) %>%
+  summarize(SCORE_MEAN = mean(value),
+            SCORE_SE = sd(value, na.rm = TRUE)/sqrt(length(!is.na(value))),
             SCORE_MIN = min(value),
             SCORE_MAX = max(value),
             .groups = 'drop') %>%
   mutate(METRIC_CATEGORY = 'economy',
          METRIC_SUBTYPE = 'livelihoods',
-         UNIT = case_when(METRIC == 'JOBS' ~ 'number of employees per 1000ha',
-                          METRIC == 'WAGES' ~ 'annual dollars per employee (thousands)')) %>%
-  select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, SCORE,
-         SCORE_MIN, SCORE_MAX, UNIT) %>%
+         UNIT = case_when(METRIC == 'jobs_ha' ~ 'number of employees per ha',
+                          METRIC == 'wages_yr' ~ 'annual dollars per employee'),
+         METRIC = recode(METRIC,
+                         jobs_ha = 'Agricultural Jobs',
+                         wages_yr = 'Annual Wages')) %>%
+  select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME,
+         SCORE_MEAN, SCORE_SE, SCORE_MIN, SCORE_MAX, UNIT) %>%
   arrange(METRIC)
+
+ggplot(edat_class, aes(SCORE_MEAN, CODE_NAME)) + facet_wrap(~METRIC, scales = 'free_x') +
+  geom_col() +
+  geom_errorbar(aes(xmin = SCORE_MEAN - SCORE_SE, xmax = SCORE_MEAN + SCORE_SE),
+                width = 0.25)
+
+edat_align %>% filter(CODE_NAME == 'ORCHARD_DECIDUOUS') %>%
+  filter(!(CODE_NAME == 'ORCHARD_DECIDUOUS' & county == 'Contra Costa' &
+             year == 2016)) %>%
+  mutate(jobs_ha = n_employees_monthly / harvest_ac) %>%
+  select(county, year, CODE_NAME, jobs_ha) %>%
+  pivot_wider(names_from = county, values_from = jobs_ha)
+# --> Sacramento county employs a lot more workers per ha in orchards than other
+# counties (?)
 
 # check for missing:
-edat_class %>% select(METRIC, CODE_NAME, SCORE) %>%
-  pivot_wider(names_from = 'METRIC', values_from = 'SCORE') %>%
+edat_class %>% select(METRIC, CODE_NAME, SCORE_MEAN) %>%
+  pivot_wider(names_from = 'METRIC', values_from = 'SCORE_MEAN') %>%
   mutate(CODE_NAME = factor(CODE_NAME, levels = key %>% pull(CODE_NAME))) %>%
   complete(CODE_NAME) %>% print(n = 40)
-# ORCHARD_CITRUS&SUBTROPICAL, PASTURE_ALFALFA -- assume same as other orchard
-# and general grain & hay?
+# ORCHARD_CITRUS&SUBTROPICAL -- assume same as other orchard
+# PASTURE -- assume overall value applies to both PASTURE_ALFALFA and
+# PASTURE_OTHER (assume equivalent)
 
 # IDLE, GRASSLAND, URBAN, RIPARIAN, WETLAND_MANAGED, WETLAND_OTHER, WATER,
 # WOODLAND&SCRUB, BARREN -- assume these provide zero ag jobs -- BUT note that
@@ -459,18 +468,27 @@ edat_class_fill = edat_class %>%
   bind_rows(
     edat_class %>% filter(CODE_NAME == 'ORCHARD_DECIDUOUS') %>%
       mutate(CODE_NAME = 'ORCHARD_CITRUS&SUBTROPICAL'),
-    edat_class %>% filter(CODE_NAME == 'GRAIN&HAY') %>%
+    edat_class %>% filter(CODE_NAME == 'PASTURE') %>%
       mutate(CODE_NAME = 'PASTURE_ALFALFA'),
+    edat_class %>% filter(CODE_NAME == 'PASTURE') %>%
+      mutate(CODE_NAME = 'PASTURE_OTHER'),
     expand_grid(
-      tibble(CODE_NAME = c('IDLE', 'GRASSLAND', 'URBAN', 'RIPARIAN',
-                           'WETLAND_MANAGED', 'WETLAND_OTHER', 'WOODLAND&SCRUB',
-                           'BARREN')),
+      tibble(CODE_NAME = c('IDLE', 'GRASSLAND', 'URBAN', 'RIPARIAN', 'RIPARIAN_FOREST_POFR',
+                           'RIPARIAN_FOREST_QULO', 'RIPARIAN_FOREST_SALIX',
+                           'RIPARIAN_FOREST_MIXED', 'RIPARIAN_SCRUB_INTRO',
+                           'RIPARIAN_SCRUB_SALIX', 'RIPARIAN_SCRUB_MIXED',
+                           'WETLAND_MANAGED', 'WETLAND_MANAGED_PERENNIAL',
+                           'WETLAND_MANAGED_SEASONAL', 'WETLAND_TIDAL',
+                           'WETLAND_OTHER', 'WATER', 'WOODLAND', 'SCRUB', 'BARREN')),
       edat_class %>% filter(CODE_NAME == 'VINEYARD') %>%
-        mutate(SCORE = 0, SCORE_MIN = NA, SCORE_MAX = NA) %>% select(-CODE_NAME)
+        mutate(SCORE_MEAN = 0, SCORE_SE = NA, SCORE_MIN = NA, SCORE_MAX = NA) %>%
+        select(-CODE_NAME)
     )
-  )
-edat_class_fill %>% select(METRIC, CODE_NAME, SCORE) %>%
-  pivot_wider(names_from = 'METRIC', values_from = 'SCORE') %>%
+  ) %>%
+  filter(CODE_NAME != 'PASTURE') #drop general pasture entry
+
+edat_class_fill %>% select(METRIC, CODE_NAME, SCORE_MEAN) %>%
+  pivot_wider(names_from = 'METRIC', values_from = 'SCORE_MEAN') %>%
   mutate(CODE_NAME = factor(CODE_NAME, levels = key %>% pull(CODE_NAME))) %>%
   complete(CODE_NAME) %>% print(n = 40)
 
@@ -482,20 +500,11 @@ write_csv(edat_class_fill, 'data/livelihoods.csv')
 edat_class_fill %>%
   mutate(CODE_NAME = factor(
     CODE_NAME,
-    levels = edat_class_fill %>% filter(METRIC == 'WAGES') %>%
-      arrange(SCORE) %>% pull(CODE_NAME))) %>%
-  ggplot(aes(SCORE, CODE_NAME, xmin = SCORE_MIN, xmax = SCORE_MAX)) +
-  geom_col() + geom_errorbar(width = 0) + facet_wrap(~METRIC, scales = 'free')
+    levels = edat_class_fill %>% filter(METRIC == 'Agricultural Jobs') %>%
+      arrange(SCORE_MEAN) %>% pull(CODE_NAME))) %>%
+  ggplot(aes(SCORE_MEAN, CODE_NAME, xmin = SCORE_MEAN-SCORE_SE, xmax = SCORE_MEAN+SCORE_SE)) +
+  geom_col() + geom_errorbar(width = 0) + facet_wrap(~METRIC, scales = 'free_x')
 # highest wages in RICE & lowest in VINEYARD
 # highest number of jobs in ORCHARD_DECIDUOUS, lowest in WHEAT/GRAINS
 
-edat_subclass %>%
-  mutate(SUBCLASS = factor(
-    SUBCLASS,
-    levels = edat_subclass %>% filter(METRIC == 'WAGES') %>%
-      arrange(SCORE) %>% pull(SUBCLASS))) %>%
-  # filter(CODE_NAME %in% c('ORCHARD_DECIDUOUS', 'VINEYARD', 'ROW')) %>%
-  ggplot(aes(SCORE/1000, SUBCLASS, xmin = SCORE_MIN/1000, xmax = SCORE_MAX/1000)) +
-  geom_col() + geom_errorbar(width = 0) +
-  labs(x = 'value ($/ha, thousands)', y = NULL) + facet_wrap(~METRIC, scales = 'free')
-# not much subclass data available....
+
