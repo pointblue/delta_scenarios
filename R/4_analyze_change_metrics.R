@@ -337,3 +337,78 @@ change_scores_county = left_join(
          change_pct_se = change_prop_se * 100,
          change_pct = if_else(METRIC_CATEGORY == 'Water Quality', -1 * change_pct, change_pct))
 write_csv(change_scores_county, 'output/scenario_change_county.csv')
+
+## CHANGE MAPS--------
+# for species distribution models only
+
+# CHANGE MAPS--------
+
+## RIPARIAN-----
+change1_rip = purrr::map(
+  names(preds$riparian$baseline),
+  ~diff(c(preds$riparian$baseline[[.x]],
+          preds$riparian$scenario1_restoration[[.x]]))) %>%
+  setNames(names(preds$riparian$baseline)) %>%
+  rast()
+writeRaster(change1_rip,
+            file.path('GIS/change_rasters/riparian/scenario1_restoration',
+                      paste0(names(change1), '.tif')),
+            overwrite = TRUE)
+
+change2_rip = purrr::map(
+  names(preds$riparian$baseline),
+  ~diff(c(preds$riparian$baseline[[.x]],
+          preds$riparian$scenario2_perennialexpand[[.x]]))) %>%
+  setNames(names(preds$riparian$baseline)) %>%
+  rast()
+writeRaster(change2_rip,
+            file.path('GIS/change_rasters/riparian/scenario2_perennialexpand',
+                      paste0(names(change2), '.tif')),
+            overwrite = TRUE)
+
+## WATERBIRDS FALL---------
+change1_fall = purrr::map(
+  names(preds$waterbird_fall$baseline),
+  ~diff(c(preds$waterbird_fall$baseline[[.x]],
+          preds$waterbird_fall$scenario1_restoration[[.x]]))) %>%
+  setNames(names(preds$waterbird_fall$baseline)) %>%
+  rast()
+writeRaster(change1_fall,
+            file.path('GIS/change_rasters/waterbird_fall/scenario1_restoration',
+                      paste0(names(change1_fall), '.tif')),
+            overwrite = TRUE)
+
+change2_fall = purrr::map(
+  names(preds$waterbird_fall$baseline),
+  ~diff(c(preds$waterbird_fall$baseline[[.x]],
+          preds$waterbird_fall$scenario2_perennialexpand[[.x]]))) %>%
+  setNames(names(preds$waterbird_fall$baseline)) %>%
+  rast()
+writeRaster(change2_fall,
+            file.path('GIS/change_rasters/waterbird_fall/scenario2_perennialexpand',
+                      paste0(names(change1_fall), '.tif')),
+            overwrite = TRUE)
+
+
+## WATERBIRDS WINTER-------
+change1_win = purrr::map(
+  names(preds$waterbird_win$baseline),
+  ~diff(c(preds$waterbird_win$baseline[[.x]],
+          preds$waterbird_win$scenario1_restoration[[.x]]))) %>%
+  setNames(names(preds$waterbird_win$baseline)) %>%
+  rast()
+writeRaster(change1_win,
+            file.path('GIS/change_rasters/waterbird_win/scenario1_restoration',
+                      paste0(names(change1_win), '.tif')),
+            overwrite = TRUE)
+
+change2_win = purrr::map(
+  names(preds$waterbird_win$baseline),
+  ~diff(c(preds$waterbird_win$baseline[[.x]],
+          preds$waterbird_win$scenario2_perennialexpand[[.x]]))) %>%
+  setNames(names(preds$waterbird_win$baseline)) %>%
+  rast()
+writeRaster(change2_win,
+            file.path('GIS/change_rasters/waterbird_win/scenario2_perennialexpand',
+                      paste0(names(change2_win), '.tif')),
+            overwrite = TRUE)
