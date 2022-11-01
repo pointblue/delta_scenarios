@@ -1,0 +1,61 @@
+scenario,METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,UNIT,SCORE_TOTAL
+baseline,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,8321171.617073545
+baseline,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,8500081.034859188
+baseline,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,7684861.429093509
+baseline,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,3497526.95029796
+baseline,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,3721512.780561402
+baseline,Biodiversity Support,species distribution: riparian,Song Sparrow,ha,24808444.475219153
+baseline,Biodiversity Support,species distribution: riparian,Spotted Towhee,ha,17327798.0473321
+baseline,Biodiversity Support,species distribution: riparian,Yellow-breasted Chat,ha,1246455.7113711827
+baseline,Biodiversity Support,species distribution: riparian,Yellow Warbler,ha,2343767.7604282484
+scenario1_restoration,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,8891634.21664621
+scenario1_restoration,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,9151057.863522984
+scenario1_restoration,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,8013409.83240176
+scenario1_restoration,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,3598999.645493552
+scenario1_restoration,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,4181081.572167586
+scenario1_restoration,Biodiversity Support,species distribution: riparian,Song Sparrow,ha,24988330.59181182
+scenario1_restoration,Biodiversity Support,species distribution: riparian,Spotted Towhee,ha,18221545.57397207
+scenario1_restoration,Biodiversity Support,species distribution: riparian,Yellow-breasted Chat,ha,1221065.2179232282
+scenario1_restoration,Biodiversity Support,species distribution: riparian,Yellow Warbler,ha,2371074.949992924
+scenario2_perennialexpand,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,8116014.799203879
+scenario2_perennialexpand,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,8401764.48674947
+scenario2_perennialexpand,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,7401884.991234769
+scenario2_perennialexpand,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,3466270.196140847
+scenario2_perennialexpand,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,3454433.730428542
+scenario2_perennialexpand,Biodiversity Support,species distribution: riparian,Song Sparrow,ha,24716616.958917223
+scenario2_perennialexpand,Biodiversity Support,species distribution: riparian,Spotted Towhee,ha,19104837.376142398
+scenario2_perennialexpand,Biodiversity Support,species distribution: riparian,Yellow-breasted Chat,ha,1134713.5737917903
+scenario2_perennialexpand,Biodiversity Support,species distribution: riparian,Yellow Warbler,ha,2350637.659908748
+baseline,Biodiversity Support,species distribution: waterbird_fall,Herons/Egrets,ha,4494040.929309527
+baseline,Biodiversity Support,species distribution: waterbird_fall,Cranes,ha,1030219.2613740552
+baseline,Biodiversity Support,species distribution: waterbird_fall,Dabbling Ducks,ha,1334311.198999474
+baseline,Biodiversity Support,species distribution: waterbird_fall,Geese,ha,940626.8215512806
+baseline,Biodiversity Support,species distribution: waterbird_fall,Shorebirds,ha,2006790.830626525
+scenario1_restoration,Biodiversity Support,species distribution: waterbird_fall,Herons/Egrets,ha,4699311.455441846
+scenario1_restoration,Biodiversity Support,species distribution: waterbird_fall,Cranes,ha,1058593.7959290983
+scenario1_restoration,Biodiversity Support,species distribution: waterbird_fall,Dabbling Ducks,ha,1812367.1872377708
+scenario1_restoration,Biodiversity Support,species distribution: waterbird_fall,Geese,ha,999417.7702972227
+scenario1_restoration,Biodiversity Support,species distribution: waterbird_fall,Shorebirds,ha,2413223.7030304763
+scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_fall,Herons/Egrets,ha,4227485.373562574
+scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_fall,Cranes,ha,1055447.2313756822
+scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_fall,Dabbling Ducks,ha,1234145.5817872658
+scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_fall,Geese,ha,1436536.8692130498
+scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_fall,Shorebirds,ha,1939951.0910770649
+baseline,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,5232194.561819236
+baseline,Biodiversity Support,species distribution: waterbird_win,Cranes,ha,2968117.571044962
+baseline,Biodiversity Support,species distribution: waterbird_win,Dabbling Ducks,ha,3996614.9640703266
+baseline,Biodiversity Support,species distribution: waterbird_win,Diving Ducks,ha,1356283.114867662
+baseline,Biodiversity Support,species distribution: waterbird_win,Geese,ha,4921122.132914599
+baseline,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,3489006.9881600924
+scenario1_restoration,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,5479231.735299859
+scenario1_restoration,Biodiversity Support,species distribution: waterbird_win,Cranes,ha,2908578.762802854
+scenario1_restoration,Biodiversity Support,species distribution: waterbird_win,Dabbling Ducks,ha,4405692.556074365
+scenario1_restoration,Biodiversity Support,species distribution: waterbird_win,Diving Ducks,ha,1645640.9791599992
+scenario1_restoration,Biodiversity Support,species distribution: waterbird_win,Geese,ha,5048267.225079451
+scenario1_restoration,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,3771500.5301451106
+scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,5026980.99934583
+scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_win,Cranes,ha,2708288.148566377
+scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_win,Dabbling Ducks,ha,3857785.3619578294
+scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_win,Diving Ducks,ha,1344537.3058491594
+scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_win,Geese,ha,5007174.37425025
+scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,3339498.7676230157
