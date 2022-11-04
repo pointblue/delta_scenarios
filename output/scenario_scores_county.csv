@@ -1,6 +1,6 @@
 scenario,county,METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,UNIT,SCORE_TOTAL,SCORE_TOTAL_SE
-baseline,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,219.17998995034463,11.851312634392766
-baseline,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,39045.6848299329,739.1573434656615
+baseline,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,21917.99899503447,1185.1312634392782
+baseline,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),39.0456848299329,0.7391573434656614
 baseline,Contra Costa & Alameda,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),67682.30581998055,1701.5234992888152
 baseline,Contra Costa & Alameda,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,106666.02423852682,NA
 baseline,Contra Costa & Alameda,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,56805.7522572577,NA
@@ -12,7 +12,7 @@ baseline,Contra Costa & Alameda,Biodiversity Support,avian conservation contribu
 baseline,Contra Costa & Alameda,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ranking,63646.382529079914,NA
 baseline,Contra Costa & Alameda,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ranking,65588.2226062417,NA
 baseline,Contra Costa & Alameda,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,984410.651423389,NA
-baseline,Contra Costa & Alameda,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,1261288.7831169697,NA
+baseline,Contra Costa & Alameda,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,1261288.7831169695,NA
 baseline,Contra Costa & Alameda,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,1393937.4833600388,NA
 baseline,Contra Costa & Alameda,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,613498.3471613792,NA
 baseline,Contra Costa & Alameda,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,454255.27083506394,NA
@@ -31,16 +31,15 @@ baseline,Contra Costa & Alameda,Biodiversity Support,species distribution: water
 baseline,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_win,Geese,ha,442457.7363690775,NA
 baseline,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,518035.3580860628,NA
 baseline,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,284782.15018758137,NA
-baseline,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Drought,ranking,223526.1826321321,8809.611312250903
-baseline,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Flood,ranking,183328.39819390667,8889.120730391087
-baseline,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Heat,ranking,258577.91420353416,9727.369480870873
-baseline,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Overall,ranking,234263.27645570147,5283.595533449481
-baseline,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Salinity,ranking,271620.6107932329,0
+baseline,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Drought,ranking,211165.05714094514,8694.928092326509
+baseline,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Flood,ranking,182429.46179454977,8793.396324461928
+baseline,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Heat,ranking,254351.73903560106,9781.093550636171
+baseline,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Salinity,ranking,244729.26972466707,0
 baseline,Contra Costa & Alameda,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,10575.280870547276,739.9950702892028
 baseline,Contra Costa & Alameda,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,1314.2470657426973,222.82503226341612
 baseline,Contra Costa & Alameda,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,30809.15767396046,1322.6813429513713
-baseline,Sacramento,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,363.484755677433,24.886000985117693
-baseline,Sacramento,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,38500.266218712044,627.5812070487708
+baseline,Sacramento,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,36348.475567743306,2488.600098511772
+baseline,Sacramento,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.50026621871204,0.6275812070487707
 baseline,Sacramento,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),134565.04276763787,3626.749952743213
 baseline,Sacramento,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,83464.02331656218,NA
 baseline,Sacramento,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,50906.70202285051,NA
@@ -51,9 +50,9 @@ baseline,Sacramento,Biodiversity Support,avian conservation contribution,Breedin
 baseline,Sacramento,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,ranking,87577.38348001242,NA
 baseline,Sacramento,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ranking,97067.70385712385,NA
 baseline,Sacramento,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ranking,97673.22388118505,NA
-baseline,Sacramento,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,1297404.5394466983,NA
+baseline,Sacramento,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,1297404.5394466985,NA
 baseline,Sacramento,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,1585590.540953229,NA
-baseline,Sacramento,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,1410450.6593885315,NA
+baseline,Sacramento,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,1410450.6593885317,NA
 baseline,Sacramento,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,471538.0152515653,NA
 baseline,Sacramento,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,599837.1050848109,NA
 baseline,Sacramento,Biodiversity Support,species distribution: riparian,Song Sparrow,ha,4285164.790940533,NA
@@ -71,16 +70,15 @@ baseline,Sacramento,Biodiversity Support,species distribution: waterbird_win,Div
 baseline,Sacramento,Biodiversity Support,species distribution: waterbird_win,Geese,ha,989731.597538427,NA
 baseline,Sacramento,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,803334.0353114738,NA
 baseline,Sacramento,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,599796.9054992001,NA
-baseline,Sacramento,Climate Change Resilience,climate change resilience,Drought,ranking,211669.21216097847,12998.331583695413
-baseline,Sacramento,Climate Change Resilience,climate change resilience,Flood,ranking,216782.07418232717,14114.247625809383
-baseline,Sacramento,Climate Change Resilience,climate change resilience,Heat,ranking,252512.34628393874,15431.898070454141
-baseline,Sacramento,Climate Change Resilience,climate change resilience,Overall,ranking,222325.5039764669,8207.801763222637
-baseline,Sacramento,Climate Change Resilience,climate change resilience,Salinity,ranking,208338.38327862322,0
+baseline,Sacramento,Climate Change Resilience,climate change resilience,Drought,ranking,203367.91183111444,12963.442924930736
+baseline,Sacramento,Climate Change Resilience,climate change resilience,Flood,ranking,216676.21781448444,14087.164703174116
+baseline,Sacramento,Climate Change Resilience,climate change resilience,Heat,ranking,249858.78617849573,15447.163760423753
+baseline,Sacramento,Climate Change Resilience,climate change resilience,Salinity,ranking,179340.75712636113,0
 baseline,Sacramento,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,17121.5638034733,1270.2344587126292
 baseline,Sacramento,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,2994.1522359578125,296.31821501173386
 baseline,Sacramento,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,54764.95186061751,2237.2525239895945
-baseline,San Joaquin,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,1481.99026033429,93.43293798167889
-baseline,San Joaquin,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,38380.170228517185,646.6502063082322
+baseline,San Joaquin,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,148199.02603342905,9343.293798167897
+baseline,San Joaquin,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.38017022851718,0.6466502063082321
 baseline,San Joaquin,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),457744.73382659274,13288.166284959236
 baseline,San Joaquin,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,144229.68573117256,NA
 baseline,San Joaquin,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,92447.46367353201,NA
@@ -92,35 +90,34 @@ baseline,San Joaquin,Biodiversity Support,avian conservation contribution,Winter
 baseline,San Joaquin,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ranking,313064.2024400532,NA
 baseline,San Joaquin,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ranking,303047.922042042,NA
 baseline,San Joaquin,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,3922613.52221585,NA
-baseline,San Joaquin,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,3689816.0756910844,NA
+baseline,San Joaquin,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,3689816.075691085,NA
 baseline,San Joaquin,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,2446191.5130781634,NA
 baseline,San Joaquin,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,1553516.2864489688,NA
 baseline,San Joaquin,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,1803504.4401706404,NA
-baseline,San Joaquin,Biodiversity Support,species distribution: riparian,Song Sparrow,ha,12092639.707067113,NA
+baseline,San Joaquin,Biodiversity Support,species distribution: riparian,Song Sparrow,ha,12092639.707067112,NA
 baseline,San Joaquin,Biodiversity Support,species distribution: riparian,Spotted Towhee,ha,7372971.998110968,NA
 baseline,San Joaquin,Biodiversity Support,species distribution: riparian,Yellow-breasted Chat,ha,646641.5184171146,NA
 baseline,San Joaquin,Biodiversity Support,species distribution: riparian,Yellow Warbler,ha,904678.7623225402,NA
 baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Cranes,ha,538220.7565498202,NA
 baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Dabbling Ducks,ha,181116.33923940567,NA
 baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Geese,ha,416640.6822699666,NA
-baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Herons/Egrets,ha,1308541.2824749947,NA
+baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Herons/Egrets,ha,1308541.282474995,NA
 baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Shorebirds,ha,411014.9118530875,NA
-baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Cranes,ha,1719494.5896931821,NA
-baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Dabbling Ducks,ha,2095342.6014524677,NA
+baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Cranes,ha,1719494.589693182,NA
+baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Dabbling Ducks,ha,2095342.6014524675,NA
 baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Diving Ducks,ha,562388.0882831698,NA
 baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Geese,ha,2564959.753034088,NA
-baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,2372467.3236156506,NA
+baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,2372467.32361565,NA
 baseline,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,1800730.2895569296,NA
-baseline,San Joaquin,Climate Change Resilience,climate change resilience,Drought,ranking,642793.2917923095,36508.34714929587
-baseline,San Joaquin,Climate Change Resilience,climate change resilience,Flood,ranking,614103.3625840924,38875.31633313578
-baseline,San Joaquin,Climate Change Resilience,climate change resilience,Heat,ranking,767027.6404789388,41356.62139951558
-baseline,San Joaquin,Climate Change Resilience,climate change resilience,Overall,ranking,688451.8153395707,22495.727409536987
-baseline,San Joaquin,Climate Change Resilience,climate change resilience,Salinity,ranking,729882.9665029421,0
+baseline,San Joaquin,Climate Change Resilience,climate change resilience,Drought,ranking,625759.1411154332,36456.17342190646
+baseline,San Joaquin,Climate Change Resilience,climate change resilience,Flood,ranking,613961.0889420754,38834.020532181006
+baseline,San Joaquin,Climate Change Resilience,climate change resilience,Heat,ranking,761610.3602636755,41380.886228941745
+baseline,San Joaquin,Climate Change Resilience,climate change resilience,Salinity,ranking,620952.0546744168,0
 baseline,San Joaquin,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,75525.94524569312,5846.074233648729
 baseline,San Joaquin,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,8278.012493475673,1225.4337725315404
 baseline,San Joaquin,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,236526.69498481267,10413.82648342474
-baseline,Solano,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,187.3596991297111,10.412069309048722
-baseline,Solano,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,40019.5395970042,891.9181015486683
+baseline,Solano,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,18735.969912971115,1041.2069309048773
+baseline,Solano,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),40.019539597004204,0.8919181015486684
 baseline,Solano,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),58696.698302170415,1517.9707058485553
 baseline,Solano,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,153669.06610625982,NA
 baseline,Solano,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,79211.97314760089,NA
@@ -151,16 +148,15 @@ baseline,Solano,Biodiversity Support,species distribution: waterbird_win,Diving 
 baseline,Solano,Biodiversity Support,species distribution: waterbird_win,Geese,ha,284586.2914566287,NA
 baseline,Solano,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,790276.886475583,NA
 baseline,Solano,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,341040.0437463023,NA
-baseline,Solano,Climate Change Resilience,climate change resilience,Drought,ranking,186508.408661178,11181.502498364109
-baseline,Solano,Climate Change Resilience,climate change resilience,Flood,ranking,202664.28703042763,11050.240850327773
-baseline,Solano,Climate Change Resilience,climate change resilience,Heat,ranking,237304.7306796424,11822.489164978202
-baseline,Solano,Climate Change Resilience,climate change resilience,Overall,ranking,202050.68339809068,6556.634223163272
-baseline,Solano,Climate Change Resilience,climate change resilience,Salinity,ranking,181725.30722111464,0
+baseline,Solano,Climate Change Resilience,climate change resilience,Drought,ranking,176625.80826847875,11124.58899875258
+baseline,Solano,Climate Change Resilience,climate change resilience,Flood,ranking,203584.02161242915,11001.785803984876
+baseline,Solano,Climate Change Resilience,climate change resilience,Heat,ranking,234533.45056952164,11852.642987796533
+baseline,Solano,Climate Change Resilience,climate change resilience,Salinity,ranking,141848.91563656926,0
 baseline,Solano,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,12336.140229225362,1594.8851111500442
 baseline,Solano,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,1575.0855804027103,335.215357005367
 baseline,Solano,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,31977.323931996696,2205.1193427223043
-baseline,Yolo,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,261.7157257517947,12.812676707254234
-baseline,Yolo,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,38784.436575401545,693.6273109558573
+baseline,Yolo,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,26171.572575179478,1281.267670725424
+baseline,Yolo,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.78443657540154,0.6936273109558573
 baseline,Yolo,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),95862.78674700446,1804.226285310261
 baseline,Yolo,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,101935.71405056119,NA
 baseline,Yolo,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,55542.87220707536,NA
@@ -172,8 +168,8 @@ baseline,Yolo,Biodiversity Support,avian conservation contribution,Wintering Wat
 baseline,Yolo,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ranking,36861.03146472573,NA
 baseline,Yolo,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ranking,46900.35186365247,NA
 baseline,Yolo,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,1248950.7372896292,NA
-baseline,Yolo,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,925247.3839274711,NA
-baseline,Yolo,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,1038398.4779321485,NA
+baseline,Yolo,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,925247.3839274712,NA
+baseline,Yolo,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,1038398.4779321484,NA
 baseline,Yolo,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,415915.57262055576,NA
 baseline,Yolo,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,520893.248432378,NA
 baseline,Yolo,Biodiversity Support,species distribution: riparian,Song Sparrow,ha,1738127.401525817,NA
@@ -183,24 +179,23 @@ baseline,Yolo,Biodiversity Support,species distribution: riparian,Yellow Warbler
 baseline,Yolo,Biodiversity Support,species distribution: waterbird_fall,Cranes,ha,74185.69325537473,NA
 baseline,Yolo,Biodiversity Support,species distribution: waterbird_fall,Dabbling Ducks,ha,568574.3937780667,NA
 baseline,Yolo,Biodiversity Support,species distribution: waterbird_fall,Geese,ha,294361.6916096588,NA
-baseline,Yolo,Biodiversity Support,species distribution: waterbird_fall,Herons/Egrets,ha,928576.2230965827,NA
+baseline,Yolo,Biodiversity Support,species distribution: waterbird_fall,Herons/Egrets,ha,928576.2230965828,NA
 baseline,Yolo,Biodiversity Support,species distribution: waterbird_fall,Shorebirds,ha,679777.8887270846,NA
 baseline,Yolo,Biodiversity Support,species distribution: waterbird_win,Cranes,ha,125182.95876309276,NA
 baseline,Yolo,Biodiversity Support,species distribution: waterbird_win,Dabbling Ducks,ha,650091.182446842,NA
-baseline,Yolo,Biodiversity Support,species distribution: waterbird_win,Diving Ducks,ha,377948.42737965845,NA
+baseline,Yolo,Biodiversity Support,species distribution: waterbird_win,Diving Ducks,ha,377948.4273796585,NA
 baseline,Yolo,Biodiversity Support,species distribution: waterbird_win,Geese,ha,639386.7545163777,NA
 baseline,Yolo,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,748080.9583304657,NA
-baseline,Yolo,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,462657.59917007916,NA
-baseline,Yolo,Climate Change Resilience,climate change resilience,Drought,ranking,185161.69110766426,10476.566829163883
-baseline,Yolo,Climate Change Resilience,climate change resilience,Flood,ranking,187326.1257391257,9675.171493111226
-baseline,Yolo,Climate Change Resilience,climate change resilience,Heat,ranking,211251.55696581092,11465.552764249822
-baseline,Yolo,Climate Change Resilience,climate change resilience,Overall,ranking,193183.6265806481,6099.419791503358
-baseline,Yolo,Climate Change Resilience,climate change resilience,Salinity,ranking,188995.13250999153,0
+baseline,Yolo,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,462657.5991700792,NA
+baseline,Yolo,Climate Change Resilience,climate change resilience,Drought,ranking,171501.71556486562,10360.204892569964
+baseline,Yolo,Climate Change Resilience,climate change resilience,Flood,ranking,188981.6348958188,9569.133347416353
+baseline,Yolo,Climate Change Resilience,climate change resilience,Heat,ranking,207563.49181926038,11524.999738804283
+baseline,Yolo,Climate Change Resilience,climate change resilience,Salinity,ranking,170307.1867673993,0
 baseline,Yolo,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,9871.352057217238,700.7965051603134
 baseline,Yolo,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,2077.8073912484356,180.79339375987612
 baseline,Yolo,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,38783.28184364502,1741.2233449244954
-scenario1_restoration,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,219.03789397614773,11.848374901876241
-scenario1_restoration,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,39041.55951022513,738.2937765189754
+scenario1_restoration,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,21903.789397614783,1184.837490187626
+scenario1_restoration,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),39.041559510225134,0.7382937765189753
 scenario1_restoration,Contra Costa & Alameda,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),67667.11292549084,1701.4303294049446
 scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,106348.23422589898,NA
 scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,56646.002250909805,NA
@@ -223,7 +218,7 @@ scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,species distri
 scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_fall,Cranes,ha,40031.19593645291,NA
 scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_fall,Dabbling Ducks,ha,82653.34395063628,NA
 scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_fall,Geese,ha,9147.879237226314,NA
-scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_fall,Herons/Egrets,ha,444893.60607398883,NA
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_fall,Herons/Egrets,ha,444893.6060739888,NA
 scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_fall,Shorebirds,ha,173971.8451977604,NA
 scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_win,Cranes,ha,257925.68749578463,NA
 scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_win,Dabbling Ducks,ha,372340.4844603191,NA
@@ -231,16 +226,15 @@ scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,species distri
 scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_win,Geese,ha,440763.19067556824,NA
 scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,548332.3980692361,NA
 scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,287156.58411673893,NA
-scenario1_restoration,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Drought,ranking,223306.80762341493,8796.1427813981
-scenario1_restoration,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Flood,ranking,183071.9390928068,8875.79230793985
-scenario1_restoration,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Heat,ranking,258284.4691918737,9714.437296533011
-scenario1_restoration,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Overall,ranking,234025.27229851676,5275.963407680974
-scenario1_restoration,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Salinity,ranking,271437.8732859716,0
+scenario1_restoration,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Drought,ranking,210989.78213398033,8682.096327539708
+scenario1_restoration,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Flood,ranking,182166.8581477512,8780.600594475634
+scenario1_restoration,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Heat,ranking,254069.90402440194,9767.825177492565
+scenario1_restoration,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Salinity,ranking,244565.10971814394,0
 scenario1_restoration,Contra Costa & Alameda,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,10575.186534606042,739.9905760257193
 scenario1_restoration,Contra Costa & Alameda,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,1314.2119461667587,222.81353551991924
 scenario1_restoration,Contra Costa & Alameda,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,30808.043926737526,1322.66971656748
-scenario1_restoration,Sacramento,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,351.51420438440243,24.393280627506574
-scenario1_restoration,Sacramento,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,38414.81628566983,622.9876225510653
+scenario1_restoration,Sacramento,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,35151.420438440255,2439.32806275066
+scenario1_restoration,Sacramento,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.41481628566983,0.6229876225510653
 scenario1_restoration,Sacramento,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),131326.12303943117,3555.376333791946
 scenario1_restoration,Sacramento,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,73074.42290371656,NA
 scenario1_restoration,Sacramento,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,45489.06180757284,NA
@@ -271,16 +265,15 @@ scenario1_restoration,Sacramento,Biodiversity Support,species distribution: wate
 scenario1_restoration,Sacramento,Biodiversity Support,species distribution: waterbird_win,Geese,ha,979981.9522095534,NA
 scenario1_restoration,Sacramento,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,878958.481756515,NA
 scenario1_restoration,Sacramento,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,675574.377473837,NA
-scenario1_restoration,Sacramento,Climate Change Resilience,climate change resilience,Drought,ranking,198910.11665397757,12512.06035966577
-scenario1_restoration,Sacramento,Climate Change Resilience,climate change resilience,Flood,ranking,201652.78380841593,13573.697575590068
-scenario1_restoration,Sacramento,Climate Change Resilience,climate change resilience,Heat,ranking,235860.3672293914,14899.036733879653
-scenario1_restoration,Sacramento,Climate Change Resilience,climate change resilience,Overall,ranking,207930.28448805618,7907.649010890899
-scenario1_restoration,Sacramento,Climate Change Resilience,climate change resilience,Salinity,ranking,195297.8702604398,0
+scenario1_restoration,Sacramento,Climate Change Resilience,climate change resilience,Drought,ranking,191849.39137340957,12485.825783269313
+scenario1_restoration,Sacramento,Climate Change Resilience,climate change resilience,Flood,ranking,201527.62653071535,13553.309272521188
+scenario1_restoration,Sacramento,Climate Change Resilience,climate change resilience,Heat,ranking,233590.34213918872,14910.419349749563
+scenario1_restoration,Sacramento,Climate Change Resilience,climate change resilience,Salinity,ranking,168434.28669297695,0
 scenario1_restoration,Sacramento,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,16467.592331500295,1227.7590713081086
 scenario1_restoration,Sacramento,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,2951.854905314159,289.48774964787066
 scenario1_restoration,Sacramento,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,52457.22850780328,2164.1605443861395
-scenario1_restoration,San Joaquin,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,1462.5491200551814,92.19406496700255
-scenario1_restoration,San Joaquin,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,38374.917506793616,647.4447104210458
+scenario1_restoration,San Joaquin,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,146254.91200551818,9219.406496700263
+scenario1_restoration,San Joaquin,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.374917506793615,0.6474447104210457
 scenario1_restoration,San Joaquin,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),451591.16417203593,13112.272145523424
 scenario1_restoration,San Joaquin,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,137651.0454697609,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,88795.53352841735,NA
@@ -295,14 +288,14 @@ scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: rip
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,4066619.170144118,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,2551271.4710779074,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,1600341.7430282468,NA
-scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,2068294.3670519318,NA
+scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,2068294.367051932,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: riparian,Song Sparrow,ha,12129799.595932828,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: riparian,Spotted Towhee,ha,7732492.27382237,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: riparian,Yellow-breasted Chat,ha,636372.8645989568,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: riparian,Yellow Warbler,ha,905103.058507604,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Cranes,ha,529381.4037323231,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Dabbling Ducks,ha,184372.63714289293,NA
-scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Geese,ha,397402.79701909365,NA
+scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Geese,ha,397402.7970190937,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Herons/Egrets,ha,1297887.3875690831,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Shorebirds,ha,414738.5906075645,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Cranes,ha,1710002.9361235185,NA
@@ -311,16 +304,15 @@ scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: wat
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Geese,ha,2573172.9042311823,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,2365004.554635783,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,1816616.0907921228,NA
-scenario1_restoration,San Joaquin,Climate Change Resilience,climate change resilience,Drought,ranking,629786.1012754502,35978.36472296302
-scenario1_restoration,San Joaquin,Climate Change Resilience,climate change resilience,Flood,ranking,600060.3797533471,38373.4899728698
-scenario1_restoration,San Joaquin,Climate Change Resilience,climate change resilience,Heat,ranking,751655.6655823971,40789.5814674072
-scenario1_restoration,San Joaquin,Climate Change Resilience,climate change resilience,Overall,ranking,674756.7187807661,22187.97826933099
-scenario1_restoration,San Joaquin,Climate Change Resilience,climate change resilience,Salinity,ranking,717524.7285118699,0
+scenario1_restoration,San Joaquin,Climate Change Resilience,climate change resilience,Drought,ranking,612927.8256055625,35926.55071511139
+scenario1_restoration,San Joaquin,Climate Change Resilience,climate change resilience,Flood,ranking,600019.5852062716,38332.55116897621
+scenario1_restoration,San Joaquin,Climate Change Resilience,climate change resilience,Heat,ranking,746331.4003708299,40813.794579900336
+scenario1_restoration,San Joaquin,Climate Change Resilience,climate change resilience,Salinity,ranking,611167.3442856073,0
 scenario1_restoration,San Joaquin,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,74496.35783093548,5759.991110231574
 scenario1_restoration,San Joaquin,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,8174.868105912828,1207.9513789769144
 scenario1_restoration,San Joaquin,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,233375.4684370656,10267.720428529161
-scenario1_restoration,Solano,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,186.22563289340786,10.384122538148313
-scenario1_restoration,Solano,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,40014.67371407659,891.1284494247006
+scenario1_restoration,Solano,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,18622.563289340793,1038.4122538148363
+scenario1_restoration,Solano,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),40.014673714076594,0.8911284494247006
 scenario1_restoration,Solano,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),58367.43108090163,1512.6335409472217
 scenario1_restoration,Solano,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,151806.96603226662,NA
 scenario1_restoration,Solano,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,78239.1631089449,NA
@@ -351,16 +343,15 @@ scenario1_restoration,Solano,Biodiversity Support,species distribution: waterbir
 scenario1_restoration,Solano,Biodiversity Support,species distribution: waterbird_win,Geese,ha,284685.6101440214,NA
 scenario1_restoration,Solano,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,803923.5994332366,NA
 scenario1_restoration,Solano,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,366300.7272285642,NA
-scenario1_restoration,Solano,Climate Change Resilience,climate change resilience,Drought,ranking,184676.75858839476,11075.538478153287
-scenario1_restoration,Solano,Climate Change Resilience,climate change resilience,Flood,ranking,200493.05330778693,10960.744501816811
-scenario1_restoration,Solano,Climate Change Resilience,climate change resilience,Heat,ranking,234934.57094260358,11710.818835658929
-scenario1_restoration,Solano,Climate Change Resilience,climate change resilience,Overall,ranking,200065.163124388,6497.424707073355
-scenario1_restoration,Solano,Climate Change Resilience,climate change resilience,Salinity,ranking,180156.2696587667,0
+scenario1_restoration,Solano,Climate Change Resilience,climate change resilience,Drought,ranking,174930.65820111954,11019.660789774092
+scenario1_restoration,Solano,Climate Change Resilience,climate change resilience,Flood,ranking,201415.54516262526,10913.23793653466
+scenario1_restoration,Solano,Climate Change Resilience,climate change resilience,Heat,ranking,232207.3008342316,11740.433892566265
+scenario1_restoration,Solano,Climate Change Resilience,climate change resilience,Salinity,ranking,140662.7155894339,0
 scenario1_restoration,Solano,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,12226.106907320267,1576.9766515852891
 scenario1_restoration,Solano,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,1561.4936686902947,331.36276848330783
 scenario1_restoration,Solano,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,31719.503126809024,2180.9801610030036
-scenario1_restoration,Yolo,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,238.9486819478266,12.165319893113473
-scenario1_restoration,Yolo,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,38647.8127963758,691.288491751596
+scenario1_restoration,Yolo,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,23894.868194782666,1216.5319893113478
+scenario1_restoration,Yolo,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.6478127963758,0.6912884917515959
 scenario1_restoration,Yolo,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),88730.57456626404,1721.1120304518793
 scenario1_restoration,Yolo,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,86660.73344358802,NA
 scenario1_restoration,Yolo,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,47818.89190015197,NA
@@ -376,7 +367,7 @@ scenario1_restoration,Yolo,Biodiversity Support,species distribution: riparian,B
 scenario1_restoration,Yolo,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,1116553.9473236022,NA
 scenario1_restoration,Yolo,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,433499.0854796022,NA
 scenario1_restoration,Yolo,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,618114.0468603828,NA
-scenario1_restoration,Yolo,Biodiversity Support,species distribution: riparian,Song Sparrow,ha,1802735.2578773682,NA
+scenario1_restoration,Yolo,Biodiversity Support,species distribution: riparian,Song Sparrow,ha,1802735.257877368,NA
 scenario1_restoration,Yolo,Biodiversity Support,species distribution: riparian,Spotted Towhee,ha,2936913.1469460414,NA
 scenario1_restoration,Yolo,Biodiversity Support,species distribution: riparian,Yellow-breasted Chat,ha,95639.20498023638,NA
 scenario1_restoration,Yolo,Biodiversity Support,species distribution: riparian,Yellow Warbler,ha,322677.18294589885,NA
@@ -391,16 +382,15 @@ scenario1_restoration,Yolo,Biodiversity Support,species distribution: waterbird_
 scenario1_restoration,Yolo,Biodiversity Support,species distribution: waterbird_win,Geese,ha,769663.5678191256,NA
 scenario1_restoration,Yolo,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,883012.7014050882,NA
 scenario1_restoration,Yolo,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,625852.7505338477,NA
-scenario1_restoration,Yolo,Climate Change Resilience,climate change resilience,Drought,ranking,164666.68529326594,9583.420108746845
-scenario1_restoration,Yolo,Climate Change Resilience,climate change resilience,Flood,ranking,163530.24956628986,8873.726972253753
-scenario1_restoration,Yolo,Climate Change Resilience,climate change resilience,Heat,ranking,185600.05487508327,10584.697124667606
-scenario1_restoration,Yolo,Climate Change Resilience,climate change resilience,Overall,ranking,170031.4428359877,5603.776351510984
-scenario1_restoration,Yolo,Climate Change Resilience,climate change resilience,Salinity,ranking,166328.7816093117,0
+scenario1_restoration,Yolo,Climate Change Resilience,climate change resilience,Drought,ranking,152652.05981584764,9485.0473375387
+scenario1_restoration,Yolo,Climate Change Resilience,climate change resilience,Flood,ranking,164961.3805322488,8784.319090313636
+scenario1_restoration,Yolo,Climate Change Resilience,climate change resilience,Heat,ranking,182346.9597458169,10634.505968740008
+scenario1_restoration,Yolo,Climate Change Resilience,climate change resilience,Salinity,ranking,151376.31601515412,0
 scenario1_restoration,Yolo,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,8588.531303367005,579.3398793446023
 scenario1_restoration,Yolo,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,1978.66122376975,169.61651544503349
 scenario1_restoration,Yolo,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,34076.317093620586,1470.0623725167138
-scenario2_perennialexpand,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,220.49564701733726,11.883527415128942
-scenario2_perennialexpand,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,39033.81763719351,736.3997186969304
+scenario2_perennialexpand,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,22049.564701733732,1188.3527415128958
+scenario2_perennialexpand,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),39.033817637193515,0.7363997186969303
 scenario2_perennialexpand,Contra Costa & Alameda,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),68304.00926950737,1705.7939071357955
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,106416.36422860622,NA
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,56738.882254600525,NA
@@ -413,7 +403,7 @@ scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,avian cons
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ranking,65486.43260219693,NA
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,983224.8344696852,NA
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,1257277.8374692632,NA
-scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,1384077.2353069237,NA
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,1384077.2353069235,NA
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,613542.9417445015,NA
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,453891.61218190566,NA
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,species distribution: riparian,Song Sparrow,ha,4349318.866637764,NA
@@ -429,18 +419,17 @@ scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,species di
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_win,Dabbling Ducks,ha,358532.2647826746,NA
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_win,Diving Ducks,ha,136799.14064067547,NA
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_win,Geese,ha,519410.1176242655,NA
-scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,522112.13715341355,NA
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,522112.1371534135,NA
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,304970.47449498595,NA
-scenario2_perennialexpand,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Drought,ranking,223530.94763232148,8808.192665034307
-scenario2_perennialexpand,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Flood,ranking,183370.8352410475,8885.211840491264
-scenario2_perennialexpand,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Heat,ranking,258458.40866307117,9726.770338602924
-scenario2_perennialexpand,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Overall,ranking,234192.43808032168,5282.4795177043725
-scenario2_perennialexpand,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Salinity,ranking,271409.56078484654,0
+scenario2_perennialexpand,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Drought,ranking,211239.12214388823,8694.76674436509
+scenario2_perennialexpand,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Flood,ranking,182461.09884126147,8790.50699447112
+scenario2_perennialexpand,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Heat,ranking,254250.05349584616,9779.855999678448
+scenario2_perennialexpand,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Salinity,ranking,244578.42971867323,0
 scenario2_perennialexpand,Contra Costa & Alameda,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,10587.138631076716,738.3289158021843
 scenario2_perennialexpand,Contra Costa & Alameda,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,1331.1173493850092,222.75186505545645
 scenario2_perennialexpand,Contra Costa & Alameda,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,30941.01008922758,1322.6212192590676
-scenario2_perennialexpand,Sacramento,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,430.73795703469347,30.611408519455384
-scenario2_perennialexpand,Sacramento,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,38273.69195736337,608.7845320429062
+scenario2_perennialexpand,Sacramento,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,43073.79570346935,3061.1408519455417
+scenario2_perennialexpand,Sacramento,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.273691957363376,0.6087845320429061
 scenario2_perennialexpand,Sacramento,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),158203.46745901147,4395.981750654668
 scenario2_perennialexpand,Sacramento,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,79504.65315923095,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,51447.15204432607,NA
@@ -452,7 +441,7 @@ scenario2_perennialexpand,Sacramento,Biodiversity Support,avian conservation con
 scenario2_perennialexpand,Sacramento,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ranking,89814.33356890082,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ranking,90085.413579672575,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,1236348.2920276518,NA
-scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,1544257.9991718961,NA
+scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,1544257.999171896,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,1355606.743046207,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,464616.16960581805,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,556326.0859228671,NA
@@ -461,7 +450,7 @@ scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: 
 scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: riparian,Yellow-breasted Chat,ha,180095.4355587769,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: riparian,Yellow Warbler,ha,368140.34222629335,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: waterbird_fall,Cranes,ha,337965.01570050087,NA
-scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: waterbird_fall,Dabbling Ducks,ha,238636.42296130874,NA
+scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: waterbird_fall,Dabbling Ducks,ha,238636.4229613087,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: waterbird_fall,Geese,ha,176416.70482046902,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: waterbird_fall,Herons/Egrets,ha,748950.6281574568,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: waterbird_fall,Shorebirds,ha,329485.307020425,NA
@@ -471,16 +460,15 @@ scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: 
 scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: waterbird_win,Geese,ha,961257.4913386256,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,766802.4284732839,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,573876.2543617851,NA
-scenario2_perennialexpand,Sacramento,Climate Change Resilience,climate change resilience,Drought,ranking,204444.0293738755,14388.525505275968
-scenario2_perennialexpand,Sacramento,Climate Change Resilience,climate change resilience,Flood,ranking,214900.3121757345,15037.527577176665
-scenario2_perennialexpand,Sacramento,Climate Change Resilience,climate change resilience,Heat,ranking,241879.53532571453,17020.35589120307
-scenario2_perennialexpand,Sacramento,Climate Change Resilience,climate change resilience,Overall,ranking,213526.52738494388,8961.953014540826
-scenario2_perennialexpand,Sacramento,Climate Change Resilience,climate change resilience,Salinity,ranking,192882.232664451,0
+scenario2_perennialexpand,Sacramento,Climate Change Resilience,climate change resilience,Drought,ranking,196304.42905043685,14358.217877472256
+scenario2_perennialexpand,Sacramento,Climate Change Resilience,climate change resilience,Flood,ranking,214769.2558068904,15013.07811618019
+scenario2_perennialexpand,Sacramento,Climate Change Resilience,climate change resilience,Heat,ranking,239267.55522192377,17033.624777390207
+scenario2_perennialexpand,Sacramento,Climate Change Resilience,climate change resilience,Salinity,ranking,168998.85671541095,0
 scenario2_perennialexpand,Sacramento,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,17763.644592102533,1164.5581689698254
 scenario2_perennialexpand,Sacramento,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,3607.1812272041975,308.1220048347929
 scenario2_perennialexpand,Sacramento,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,61210.533521136014,2421.084339988121
-scenario2_perennialexpand,San Joaquin,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,1806.2984687780977,149.50003391196785
-scenario2_perennialexpand,San Joaquin,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,38089.93752372798,584.2454587886517
+scenario2_perennialexpand,San Joaquin,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,180629.84687780982,14950.0033911968
+scenario2_perennialexpand,San Joaquin,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.08993752372798,0.5842454587886518
 scenario2_perennialexpand,San Joaquin,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),547946.6182665797,21071.049664588187
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,128675.34511309862,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,95654.34380096197,NA
@@ -494,14 +482,14 @@ scenario2_perennialexpand,San Joaquin,Biodiversity Support,avian conservation co
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,3843775.312436041,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,3658045.5867036353,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,2272831.1623896784,NA
-scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,1537195.6318704619,NA
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,1537195.631870462,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,1622903.8844215064,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: riparian,Song Sparrow,ha,12092690.457067888,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: riparian,Spotted Towhee,ha,8721145.893259853,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: riparian,Yellow-breasted Chat,ha,555223.8207581349,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: riparian,Yellow Warbler,ha,909258.1447862296,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Cranes,ha,556679.258121933,NA
-scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Dabbling Ducks,ha,156236.70315551053,NA
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Dabbling Ducks,ha,156236.7031555105,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Geese,ha,722988.4072522142,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Herons/Egrets,ha,1154905.2500903606,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: waterbird_fall,Shorebirds,ha,370562.9942660427,NA
@@ -510,17 +498,16 @@ scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution:
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Diving Ducks,ha,541851.6080258492,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Geese,ha,2558890.97228163,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,2235685.1965637673,NA
-scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,1662919.7246297575,NA
-scenario2_perennialexpand,San Joaquin,Climate Change Resilience,climate change resilience,Drought,ranking,596211.1299413008,37139.52832141319
-scenario2_perennialexpand,San Joaquin,Climate Change Resilience,climate change resilience,Flood,ranking,607164.7833311054,38448.03004778607
-scenario2_perennialexpand,San Joaquin,Climate Change Resilience,climate change resilience,Heat,ranking,719386.1016215485,44251.41052420365
-scenario2_perennialexpand,San Joaquin,Climate Change Resilience,climate change resilience,Overall,ranking,645114.2196320998,23131.947393339695
-scenario2_perennialexpand,San Joaquin,Climate Change Resilience,climate change resilience,Salinity,ranking,657694.8636344448,0
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,1662919.7246297577,NA
+scenario2_perennialexpand,San Joaquin,Climate Change Resilience,climate change resilience,Drought,ranking,580851.7293309731,37097.739724950436
+scenario2_perennialexpand,San Joaquin,Climate Change Resilience,climate change resilience,Flood,ranking,606761.509678717,38413.9931986861
+scenario2_perennialexpand,San Joaquin,Climate Change Resilience,climate change resilience,Heat,ranking,714399.4714233977,44269.58736384581
+scenario2_perennialexpand,San Joaquin,Climate Change Resilience,climate change resilience,Salinity,ranking,574473.8028275371,0
 scenario2_perennialexpand,San Joaquin,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,77571.15508275128,5261.369266540104
 scenario2_perennialexpand,San Joaquin,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,9618.474978636474,1160.1907727022426
 scenario2_perennialexpand,San Joaquin,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,270186.79592411907,11305.183083722159
-scenario2_perennialexpand,Solano,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,213.97975199877612,13.244729988513866
-scenario2_perennialexpand,Solano,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,39895.08139816783,869.4279309061004
+scenario2_perennialexpand,Solano,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,21397.97519987762,1324.4729988513911
+scenario2_perennialexpand,Solano,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),39.89508139816783,0.8694279309061004
 scenario2_perennialexpand,Solano,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),67013.5392608565,1891.5486600885977
 scenario2_perennialexpand,Solano,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,151623.90602499247,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,79052.49314126372,NA
@@ -533,34 +520,33 @@ scenario2_perennialexpand,Solano,Biodiversity Support,avian conservation contrib
 scenario2_perennialexpand,Solano,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ranking,56867.5822597146,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,853316.4975556235,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,1028092.2616717716,NA
-scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,1378882.7433684221,NA
+scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,1378882.743368422,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,439938.59866253205,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,331709.3305009107,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: riparian,Song Sparrow,ha,2339010.1608157987,NA
-scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: riparian,Spotted Towhee,ha,1592533.9556663195,NA
+scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: riparian,Spotted Towhee,ha,1592533.9556663197,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: riparian,Yellow-breasted Chat,ha,134958.5440796593,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: riparian,Yellow Warbler,ha,370387.71845253394,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: waterbird_fall,Cranes,ha,41184.61564747203,NA
-scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: waterbird_fall,Dabbling Ducks,ha,252989.40018485818,NA
+scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: waterbird_fall,Dabbling Ducks,ha,252989.40018485815,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: waterbird_fall,Geese,ha,110245.99926424627,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: waterbird_fall,Herons/Egrets,ha,1028205.1781806682,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: waterbird_fall,Shorebirds,ha,419285.87259478454,NA
-scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: waterbird_win,Cranes,ha,127575.31279068855,NA
+scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: waterbird_win,Cranes,ha,127575.31279068856,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: waterbird_win,Dabbling Ducks,ha,299450.99598110345,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: waterbird_win,Diving Ducks,ha,113513.50238225682,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: waterbird_win,Geese,ha,305987.52620838996,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,776496.3259857562,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,338254.151760911,NA
-scenario2_perennialexpand,Solano,Climate Change Resilience,climate change resilience,Drought,ranking,183632.97354691848,11137.422693709663
-scenario2_perennialexpand,Solano,Climate Change Resilience,climate change resilience,Flood,ranking,202100.44450802254,10991.678857620222
-scenario2_perennialexpand,Solano,Climate Change Resilience,climate change resilience,Heat,ranking,233543.49392304145,11813.48817273711
-scenario2_perennialexpand,Solano,Climate Change Resilience,climate change resilience,Overall,ranking,198786.81724161058,6535.52421747495
-scenario2_perennialexpand,Solano,Climate Change Resilience,climate change resilience,Salinity,ranking,175870.35698845983,0
+scenario2_perennialexpand,Solano,Climate Change Resilience,climate change resilience,Drought,ranking,174123.64816905186,11084.524044800812
+scenario2_perennialexpand,Solano,Climate Change Resilience,climate change resilience,Flood,ranking,202962.00636043976,10946.578658530834
+scenario2_perennialexpand,Solano,Climate Change Resilience,climate change resilience,Heat,ranking,230868.19881673477,11841.419575968646
+scenario2_perennialexpand,Solano,Climate Change Resilience,climate change resilience,Salinity,ranking,137894.67547944188,0
 scenario2_perennialexpand,Solano,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,12437.169080891965,1527.459908006988
 scenario2_perennialexpand,Solano,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,1709.8203111446805,322.74530564792934
 scenario2_perennialexpand,Solano,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,34438.89674489078,2164.3157638604775
-scenario2_perennialexpand,Yolo,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,317.9001656827403,17.578244134355174
-scenario2_perennialexpand,Yolo,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee,38477.328983456195,656.4343978916188
+scenario2_perennialexpand,Yolo,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,31790.016568274033,1757.8244134355189
+scenario2_perennialexpand,Yolo,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.4773289834562,0.6564343978916188
 scenario2_perennialexpand,Yolo,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),114997.13756984595,2485.230938097761
 scenario2_perennialexpand,Yolo,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,95902.56381082533,NA
 scenario2_perennialexpand,Yolo,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,54612.362170100205,NA
@@ -572,7 +558,7 @@ scenario2_perennialexpand,Yolo,Biodiversity Support,avian conservation contribut
 scenario2_perennialexpand,Yolo,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ranking,34423.29136785865,NA
 scenario2_perennialexpand,Yolo,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ranking,43397.37172445655,NA
 scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,1199310.052760049,NA
-scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,914049.8976732295,NA
+scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,914049.8976732296,NA
 scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,1010471.775535101,NA
 scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: riparian,Lazuli Bunting,ha,410956.82335678075,NA
 scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: riparian,Nuttall's Woodpecker,ha,489590.363560141,NA
@@ -585,21 +571,20 @@ scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: waterb
 scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: waterbird_fall,Geese,ha,418749.12585930695,NA
 scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: waterbird_fall,Herons/Egrets,ha,869770.5523603492,NA
 scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: waterbird_fall,Shorebirds,ha,658631.9324384547,NA
-scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: waterbird_win,Cranes,ha,120856.55060153869,NA
+scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: waterbird_win,Cranes,ha,120856.55060153868,NA
 scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: waterbird_win,Dabbling Ducks,ha,639787.2389335703,NA
 scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: waterbird_win,Diving Ducks,ha,385823.7382002356,NA
 scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: waterbird_win,Geese,ha,661628.266797339,NA
 scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,725884.9111696085,NA
-scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,459478.16237557627,NA
-scenario2_perennialexpand,Yolo,Climate Change Resilience,climate change resilience,Drought,ranking,178034.4608244536,11420.928529599745
-scenario2_perennialexpand,Yolo,Climate Change Resilience,climate change resilience,Flood,ranking,185992.3209133978,10567.338129744472
-scenario2_perennialexpand,Yolo,Climate Change Resilience,climate change resilience,Heat,ranking,202658.71662436213,12762.172886068043
-scenario2_perennialexpand,Yolo,Climate Change Resilience,climate change resilience,Overall,ranking,185482.9450814687,6708.032501747167
-scenario2_perennialexpand,Yolo,Climate Change Resilience,climate change resilience,Salinity,ranking,175246.2819636613,0
+scenario2_perennialexpand,Yolo,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,459478.1623755762,NA
+scenario2_perennialexpand,Yolo,Climate Change Resilience,climate change resilience,Drought,ranking,164438.0102841792,11315.276749630611
+scenario2_perennialexpand,Yolo,Climate Change Resilience,climate change resilience,Flood,ranking,187637.9300696975,10471.242929847389
+scenario2_perennialexpand,Yolo,Climate Change Resilience,climate change resilience,Heat,ranking,198986.9864784607,12815.110401381506
+scenario2_perennialexpand,Yolo,Climate Change Resilience,climate change resilience,Salinity,ranking,161222.22640639544,0
 scenario2_perennialexpand,Yolo,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,10639.227074795843,668.8587883380286
 scenario2_perennialexpand,Yolo,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,2468.9496117892622,202.39124824781868
 scenario2_perennialexpand,Yolo,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,45209.66542549114,1877.4210881557867
-NA,NA,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per ha,NA,0
+NA,NA,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,NA,0
 NA,NA,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),NA,0
 NA,NA,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,NA,NA
 NA,NA,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,NA,NA
@@ -613,7 +598,6 @@ NA,NA,Biodiversity Support,avian conservation contribution,Wintering Waterbirds:
 NA,NA,Climate Change Resilience,climate change resilience,Drought,ranking,NA,0
 NA,NA,Climate Change Resilience,climate change resilience,Flood,ranking,NA,0
 NA,NA,Climate Change Resilience,climate change resilience,Heat,ranking,NA,0
-NA,NA,Climate Change Resilience,climate change resilience,Overall,ranking,NA,0
 NA,NA,Climate Change Resilience,climate change resilience,Salinity,ranking,NA,0
 NA,NA,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,NA,0
 NA,NA,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,NA,0
