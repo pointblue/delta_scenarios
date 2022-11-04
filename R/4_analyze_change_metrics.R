@@ -25,7 +25,7 @@ waterquality = read_csv('data/pesticide_exposure.csv', col_types = cols()) %>%
 economy = bind_rows(
   read_csv('data/crop_production_value.csv', col_types = cols()),
   read_csv('data/livelihoods.csv', col_types = cols()))
-ccs = read_csv('data/climate_change_resilience2.csv', col_types = cols())
+ccs = read_csv('data/climate_change_resilience.csv', col_types = cols())
 acs = read_csv('data/avian_conservation_score.csv', col_types = cols())
 
 metrics = bind_rows(economy, waterquality, ccs, acs) %>%
