@@ -405,7 +405,6 @@ edat_sum %>%
   #               width = 0.25) +
   scale_color_viridis_d()
 # --> suspicious bump in ORCHARD_DECIDUOUS in 2016 (due to one record in Contra
-# Costa); rising numbers in ROW overall (due to jump in #jobs in 2017 in Contra
 # Costa); wages overall climbing between 2014 and 2020, except for a
 # suspiciously high peak in WHEAT in 2014 (one record from Solano county)
 
@@ -492,19 +491,22 @@ edat_class_fill %>% select(METRIC, CODE_NAME, SCORE_MEAN) %>%
   mutate(CODE_NAME = factor(CODE_NAME, levels = key %>% pull(CODE_NAME))) %>%
   complete(CODE_NAME) %>% print(n = 40)
 
+# FINALIZE UNITS
+edat_class_final = edat_class_fill %>%
+  mutate(across(c(SCORE_MEAN, SCORE_SE, SCORE_MIN, SCORE_MAX),
+                ~if_else(METRIC == 'Agricultural Jobs', .x * 100, .x / 1000)),
+         UNIT = if_else(METRIC == 'Agricultural Jobs',
+                        'number of employees per 100ha',
+                        'annual dollars per employee (thousands)'))
 
-write_csv(edat_class_fill, 'data/livelihoods.csv')
+write_csv(edat_class_final, 'data/livelihoods.csv')
 
 
 # summary plots:
-edat_class_fill %>%
+edat_class_final %>%
   mutate(CODE_NAME = factor(
     CODE_NAME,
     levels = edat_class_fill %>% filter(METRIC == 'Agricultural Jobs') %>%
       arrange(SCORE_MEAN) %>% pull(CODE_NAME))) %>%
   ggplot(aes(SCORE_MEAN, CODE_NAME, xmin = SCORE_MEAN-SCORE_SE, xmax = SCORE_MEAN+SCORE_SE)) +
   geom_col() + geom_errorbar(width = 0) + facet_wrap(~METRIC, scales = 'free_x')
-# highest wages in RICE & lowest in VINEYARD
-# highest number of jobs in ORCHARD_DECIDUOUS, lowest in WHEAT/GRAINS
-
-
