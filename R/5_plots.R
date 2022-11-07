@@ -270,6 +270,7 @@ metriclist = unique(net_change$METRIC)
 
 net_change_format = net_change %>%
   mutate(
+    net_change = if_else(METRIC_CATEGORY == 'Water Quality', -1 * net_change, net_change),
     METRIC = case_when(
       METRIC_SUBTYPE == 'species distribution: waterbird_fall' ~ paste0(METRIC, ' (fall)'),
       METRIC_SUBTYPE == 'species distribution: waterbird_win' ~ paste0(METRIC, ' (winter)'),
@@ -278,7 +279,7 @@ net_change_format = net_change %>%
       METRIC_SUBTYPE == 'species distribution: riparian' ~ 'Riparian landbird distributions',
       METRIC_SUBTYPE == 'species distribution: waterbird_fall' ~ 'Waterbird distributions',
       METRIC_SUBTYPE == 'species distribution: waterbird_win' ~ 'Waterbird distributions',
-      METRIC_SUBTYPE == 'avian conservation contribution' ~ 'Avian Conservation Score',
+      # METRIC_SUBTYPE == 'avian conservation contribution' ~ 'Avian Conservation Score',
       TRUE ~ METRIC_CATEGORY),
     METRIC_CATEGORY = factor(
       METRIC_CATEGORY,
@@ -286,21 +287,22 @@ net_change_format = net_change %>%
                  'Water Quality',
                  'Climate Change Resilience',
                  'Riparian landbird distributions',
-                 'Waterbird distributions',
-                 'Avian Conservation Score')),
-    METRIC = recode(METRIC,
-                    'Breeding Landbirds: Grassland' = 'Grassland landbirds (breeding)',
-                    'Breeding Landbirds: Oak Savannah' = 'Oak Savannah landbirds (breeding)',
-                    'Breeding Landbirds: Riparian' = 'Riparian landbirds (breeding)',
-                    'Breeding Waterbirds: Waterfowl' = 'Waterfowl (breeding)',
-                    'Breeding Waterbirds: Shorebirds' = 'Shorebirds (breeding)',
-                    'Breeding Waterbirds: Other Waterbirds' = 'Other waterbirds (breeding)',
-                    'Wintering Waterbirds: Waterfowl' = 'Waterfowl (wintering)',
-                    'Wintering Waterbirds: Shorebirds' = 'Shorebirds (wintering)',
-                    'Wintering Waterbirds: Other Waterbirds' = 'Other waterbirds (wintering)'),
+                 'Waterbird distributions'
+                 # 'Avian Conservation Score'
+                 )),
+    # METRIC = recode(METRIC,
+    #                 'Breeding Landbirds: Grassland' = 'Grassland landbirds (breeding)',
+    #                 'Breeding Landbirds: Oak Savannah' = 'Oak Savannah landbirds (breeding)',
+    #                 'Breeding Landbirds: Riparian' = 'Riparian landbirds (breeding)',
+    #                 'Breeding Waterbirds: Waterfowl' = 'Waterfowl (breeding)',
+    #                 'Breeding Waterbirds: Shorebirds' = 'Shorebirds (breeding)',
+    #                 'Breeding Waterbirds: Other Waterbirds' = 'Other waterbirds (breeding)',
+    #                 'Wintering Waterbirds: Waterfowl' = 'Waterfowl (wintering)',
+    #                 'Wintering Waterbirds: Shorebirds' = 'Shorebirds (wintering)',
+    #                 'Wintering Waterbirds: Other Waterbirds' = 'Other waterbirds (wintering)'),
     METRIC = factor(
       METRIC,
-      levels = c(metriclist[c(1:3,28:35)],
+      levels = c(metriclist[c(1:3, 19:25)], #28:35)],
                  "Nuttall's Woodpecker",
                  'Ash-throated Flycatcher',
                  'Black-headed Grosbeak',
@@ -315,24 +317,26 @@ net_change_format = net_change %>%
                  'Diving Ducks (winter)',
                  'Cranes (fall)', 'Cranes (winter)',
                  'Shorebirds (fall)', 'Shorebirds (winter)',
-                 'Herons/Egrets (fall)', 'Herons/Egrets (winter)',
-                 'Grassland landbirds (breeding)',
-                 'Oak Savannah landbirds (breeding)',
-                 'Riparian landbirds (breeding)',
-                 'Waterfowl (breeding)',
-                 'Waterfowl (wintering)',
-                 'Shorebirds (breeding)',
-                 'Shorebirds (wintering)',
-                 'Other waterbirds (breeding)',
-                 'Other waterbirds (wintering)') %>% rev()),
+                 'Herons/Egrets (fall)', 'Herons/Egrets (winter)'
+                 # 'Grassland landbirds (breeding)',
+                 # 'Oak Savannah landbirds (breeding)',
+                 # 'Riparian landbirds (breeding)',
+                 # 'Waterfowl (breeding)',
+                 # 'Waterfowl (wintering)',
+                 # 'Shorebirds (breeding)',
+                 # 'Shorebirds (wintering)',
+                 # 'Other waterbirds (breeding)',
+                 # 'Other waterbirds (wintering)'
+                 ) %>% rev()),
     bin = if_else(change_pct > 0, 'benefit', 'trade-off'),
     change_pct_se = if_else(METRIC == 'Salinity', NA_real_, change_pct_se))
 
 ## horizontal bar--------
-# b&w bar chart with error bars for reporting and manuscript
+# bar chart with error bars for reporting and manuscript
 
-h1a = net_change_format %>%
-  filter(!grepl('bird|Avian', METRIC_CATEGORY) &
+### percent change----------
+h1 = net_change_format %>%
+  filter(!grepl('Avian', METRIC_CATEGORY) &
            scenario == 'scenario1_restoration') %>%
   mutate() %>%
   ggplot(aes(change_pct, METRIC)) +
@@ -340,60 +344,6 @@ h1a = net_change_format %>%
   geom_col(aes(fill = bin)) +
   geom_errorbar(aes(xmin = change_pct - change_pct_se,
                     xmax = change_pct + change_pct_se), width = 0.5) +
-  scale_fill_manual(values = pointblue.palette[c(1,3)]) +
-  geom_vline(xintercept = 0, color = 'gray30') +
-  labs(x = '% change', y = NULL, title = 'A') +
-  xlim(-35, 35) +
-  theme_minimal() +
-  theme(axis.line.x = element_line(color = 'gray30'),
-        axis.text = element_text(family = 'sourcesans', size = 9),
-        axis.title = element_text(family = 'sourcesans', size = 10),
-        panel.grid.major.y = element_blank(),
-        plot.title = element_text(family = 'sourcesans', size = 10),
-        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
-        strip.background = element_blank(),
-        legend.position = 'none')
-
-h2a = net_change_format %>%
-  filter(!grepl('bird|Avian', METRIC_CATEGORY) &
-           scenario == 'scenario2_perennialexpand') %>%
-  mutate(bin = if_else(change_pct > 0, 'benefit', 'trade-off')) %>%
-  ggplot(aes(change_pct, METRIC)) +
-  ggforce::facet_col(~METRIC_CATEGORY, scales = 'free_y', space = 'free') +
-  geom_col(aes(fill = bin)) +
-  geom_errorbar(aes(xmin = change_pct - change_pct_se,
-                    xmax = change_pct + change_pct_se), width = 0.5) +
-  scale_fill_manual(values = pointblue.palette[c(1,3)]) +
-  geom_vline(xintercept = 0, color = 'gray30') +
-  labs(x = '% change', y = NULL, title = 'B') +
-  xlim(-35, 35) +
-  theme_minimal() +
-  theme(axis.line.x = element_line(color = 'gray30'),
-        axis.text.x = element_text(family = 'sourcesans', size = 9),
-        axis.text.y = element_blank(),
-        axis.title = element_text(family = 'sourcesans', size = 10),
-        panel.grid.major.y = element_blank(),
-        plot.title = element_text(family = 'sourcesans', size = 10),
-        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0, color = 'white'),
-        strip.background = element_blank(),
-        legend.position = 'none')
-
-showtext_auto()
-showtext_opts(dpi = 300) #default for ggsave
-h1a + h2a + plot_layout(widths = c(1, 1))
-ggsave('fig/netchange_barchartA.png', height = 4, width = 6.5, units = 'in')
-showtext_auto(FALSE)
-
-h1b = net_change_format %>%
-  filter(grepl('bird|Avian', METRIC_CATEGORY) &
-           grepl('distribution', METRIC_SUBTYPE) &
-           scenario == 'scenario1_restoration') %>%
-  ggplot(aes(change_pct, METRIC)) +
-  ggforce::facet_col(~METRIC_CATEGORY, scales = 'free_y', space = 'free') +
-  geom_col(aes(fill = bin)) +
-  geom_errorbar(aes(xmin = change_pct - change_pct_se,
-                    xmax = change_pct + change_pct_se),
-                width = 0.5) +
   scale_fill_manual(values = pointblue.palette[c(1,3)]) +
   geom_vline(xintercept = 0, color = 'gray30') +
   labs(x = '% change', y = NULL, title = 'A') +
@@ -408,20 +358,19 @@ h1b = net_change_format %>%
         strip.background = element_blank(),
         legend.position = 'none')
 
-h2b = net_change_format %>%
-  filter(grepl('bird|Avian', METRIC_CATEGORY) &
-           grepl('distribution', METRIC_SUBTYPE) &
+h2 = net_change_format %>%
+  filter(!grepl('Avian', METRIC_CATEGORY) &
            scenario == 'scenario2_perennialexpand') %>%
+  mutate(bin = if_else(change_pct > 0, 'benefit', 'trade-off')) %>%
   ggplot(aes(change_pct, METRIC)) +
   ggforce::facet_col(~METRIC_CATEGORY, scales = 'free_y', space = 'free') +
   geom_col(aes(fill = bin)) +
   geom_errorbar(aes(xmin = change_pct - change_pct_se,
-                    xmax = change_pct + change_pct_se),
-                width = 0.5) +
+                    xmax = change_pct + change_pct_se), width = 0.5) +
   scale_fill_manual(values = pointblue.palette[c(1,3)]) +
   geom_vline(xintercept = 0, color = 'gray30') +
-  labs(x = '% change', y = NULL,
-       title = 'B') + xlim(-35, 55) +
+  labs(x = '% change', y = NULL, title = 'B') +
+  xlim(-35, 55) +
   theme_minimal() +
   theme(axis.line.x = element_line(color = 'gray30'),
         axis.text.x = element_text(family = 'sourcesans', size = 9),
@@ -433,15 +382,198 @@ h2b = net_change_format %>%
         strip.background = element_blank(),
         legend.position = 'none')
 
+
 showtext_auto()
 showtext_opts(dpi = 300) #default for ggsave
+h1 + h2 + plot_layout(widths = c(1, 1))
+ggsave('fig/netchange_barchart_all.png', height = 7.5, width = 6.5, units = 'in')
+showtext_auto(FALSE)
+
+### raw change--------
+# maybe preferable?
+h1_raw = net_change_format %>%
+  filter(scenario == 'scenario1_restoration') %>%
+  mutate(across(c(net_change, net_change_se),
+                ~.x/1000)) %>%
+  mutate(across(c(net_change, net_change_se),
+                ~if_else(grepl('distributions', METRIC_CATEGORY),
+                         .x/10, .x))) %>%
+  ggplot(aes(net_change, METRIC)) +
+  ggforce::facet_col(~METRIC_CATEGORY, scales = 'free_y', space = 'free') +
+  geom_col(aes(fill = bin)) +
+  geom_errorbar(aes(xmin = net_change - net_change_se,
+                    xmax = net_change + net_change_se), width = 0.5) +
+  scale_fill_manual(values = pointblue.palette[c(1,3)]) +
+  geom_vline(xintercept = 0, color = 'gray30') +
+  labs(x = 'net change', y = NULL, title = 'A') +
+  xlim(-100, 200) +
+  theme_minimal() +
+  theme(axis.line.x = element_line(color = 'gray30'),
+        axis.text = element_text(family = 'sourcesans', size = 9),
+        axis.title = element_text(family = 'sourcesans', size = 10),
+        panel.grid.major.y = element_blank(),
+        plot.title = element_text(family = 'sourcesans', size = 10),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+        strip.background = element_blank(),
+        legend.position = 'none')
+
+h2_raw = net_change_format %>%
+  filter(scenario != 'scenario1_restoration') %>%
+  mutate(across(c(net_change, net_change_se),
+                ~.x/1000)) %>%
+  mutate(across(c(net_change, net_change_se),
+                ~if_else(grepl('distributions', METRIC_CATEGORY),
+                         .x/10, .x))) %>%
+  ggplot(aes(net_change, METRIC)) +
+  ggforce::facet_col(~METRIC_CATEGORY, scales = 'free_y', space = 'free') +
+  geom_col(aes(fill = bin)) +
+  geom_errorbar(aes(xmin = net_change - net_change_se,
+                    xmax = net_change + net_change_se), width = 0.5) +
+  scale_fill_manual(values = pointblue.palette[c(1,3)]) +
+  geom_vline(xintercept = 0, color = 'gray30') +
+  labs(x = 'net change', y = NULL, title = 'B') +
+  xlim(-100, 200) +
+  theme_minimal() +
+  theme(axis.line.x = element_line(color = 'gray30'),
+        axis.text.x = element_text(family = 'sourcesans', size = 9),
+        axis.text.y = element_blank(),
+        axis.title = element_text(family = 'sourcesans', size = 10),
+        panel.grid.major.y = element_blank(),
+        plot.title = element_text(family = 'sourcesans', size = 10),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0, color = 'white'),
+        strip.background = element_blank(),
+        legend.position = 'none')
+
+h1_raw + h2_raw + plot_layout(widths = c(1, 1))
+ggsave('fig/netchange_barchart_all_raw.png', height = 7.5, width = 6.5, units = 'in')
+
+### raw without biodiversity------
+h1a = net_change_format %>%
+  filter(!grepl('bird', METRIC_CATEGORY) &
+           scenario == 'scenario1_restoration') %>%
+  mutate(across(c(net_change, net_change_se),
+                ~.x/1000)) %>%
+  ggplot(aes(net_change, METRIC)) +
+  ggforce::facet_col(~METRIC_CATEGORY, scales = 'free_y', space = 'free') +
+  geom_col(aes(fill = bin)) +
+  geom_errorbar(aes(xmin = net_change - net_change_se,
+                    xmax = net_change + net_change_se), width = 0.5) +
+  scale_fill_manual(values = pointblue.palette[c(1,3)]) +
+  geom_vline(xintercept = 0, color = 'gray30') +
+  labs(x = 'net change', y = NULL, title = 'A') +
+  xlim(-100, 200) +
+  theme_minimal() +
+  theme(axis.line.x = element_line(color = 'gray30'),
+        axis.text = element_text(family = 'sourcesans', size = 9),
+        axis.title = element_text(family = 'sourcesans', size = 10),
+        panel.grid.major.y = element_blank(),
+        plot.title = element_text(family = 'sourcesans', size = 10),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+        strip.background = element_blank(),
+        legend.position = 'none')
+
+h2a = net_change_format %>%
+  filter(!grepl('bird', METRIC_CATEGORY) &
+           scenario == 'scenario2_perennialexpand') %>%
+  mutate(across(c(net_change, net_change_se), ~.x/1000)) %>%
+  mutate(bin = if_else(change_pct > 0, 'benefit', 'trade-off')) %>%
+  ggplot(aes(net_change, METRIC)) +
+  ggforce::facet_col(~METRIC_CATEGORY, scales = 'free_y', space = 'free') +
+  geom_col(aes(fill = bin)) +
+  geom_errorbar(aes(xmin = net_change - net_change_se,
+                    xmax = net_change + net_change_se), width = 0.5) +
+  scale_fill_manual(values = pointblue.palette[c(1,3)]) +
+  geom_vline(xintercept = 0, color = 'gray30') +
+  labs(x = 'net change', y = NULL, title = 'B') +
+  xlim(-100, 200) +
+  theme_minimal() +
+  theme(axis.line.x = element_line(color = 'gray30'),
+        axis.text.x = element_text(family = 'sourcesans', size = 9),
+        axis.text.y = element_blank(),
+        axis.title = element_text(family = 'sourcesans', size = 10),
+        panel.grid.major.y = element_blank(),
+        plot.title = element_text(family = 'sourcesans', size = 10),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0, color = 'white'),
+        strip.background = element_blank(),
+        legend.position = 'none')
+h1a + h2a + plot_layout(widths = c(1, 1))
+ggsave('fig/netchange_barchart_rawA.png', height = 4, width = 8, units = 'in')
+
+### raw biodiversity-----
+h1b = net_change_format %>%
+  filter(grepl('bird', METRIC_CATEGORY) &
+           scenario == 'scenario1_restoration') %>%
+  mutate(across(c(net_change, net_change_se), ~.x/1000)) %>%
+  ggplot(aes(net_change, METRIC)) +
+  ggforce::facet_col(~METRIC_CATEGORY, scales = 'free_y', space = 'free') +
+  geom_col(aes(fill = bin)) +
+  geom_errorbar(aes(xmin = net_change - net_change_se,
+                    xmax = net_change + net_change_se),
+                width = 0.5) +
+  scale_fill_manual(values = pointblue.palette[c(1,3)]) +
+  geom_vline(xintercept = 0, color = 'gray30') +
+  labs(x = 'net change', y = NULL, title = 'A') +
+  xlim(-500, 2000) +
+  theme_minimal() +
+  theme(axis.line.x = element_line(color = 'gray30'),
+        axis.text = element_text(family = 'sourcesans', size = 9),
+        axis.title = element_text(family = 'sourcesans', size = 10),
+        panel.grid.major.y = element_blank(),
+        plot.title = element_text(family = 'sourcesans', size = 10),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+        strip.background = element_blank(),
+        legend.position = 'none')
+
+h2b = net_change_format %>%
+  filter(grepl('bird|Avian', METRIC_CATEGORY) &
+           grepl('distribution', METRIC_SUBTYPE) &
+           scenario == 'scenario2_perennialexpand') %>%
+  mutate(across(c(net_change, net_change_se), ~.x/1000)) %>%
+  ggplot(aes(net_change, METRIC)) +
+  ggforce::facet_col(~METRIC_CATEGORY, scales = 'free_y', space = 'free') +
+  geom_col(aes(fill = bin)) +
+  geom_errorbar(aes(xmin = net_change - net_change_se,
+                    xmax = net_change + net_change_se),
+                width = 0.5) +
+  scale_fill_manual(values = pointblue.palette[c(1,3)]) +
+  geom_vline(xintercept = 0, color = 'gray30') +
+  labs(x = 'net change', y = NULL,
+       title = 'B') +
+  xlim(-500, 2000) +
+  theme_minimal() +
+  theme(axis.line.x = element_line(color = 'gray30'),
+        axis.text.x = element_text(family = 'sourcesans', size = 9),
+        axis.text.y = element_blank(),
+        axis.title = element_text(family = 'sourcesans', size = 10),
+        panel.grid.major.y = element_blank(),
+        plot.title = element_text(family = 'sourcesans', size = 10),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0, color = 'white'),
+        strip.background = element_blank(),
+        legend.position = 'none')
+
 h1b + h2b + plot_layout(widths = c(1, 1))
-ggsave('fig/netchange_barchartB.png', height = 4, width = 6.5, units = 'in')
+ggsave('fig/netchange_barchart_rawB.png', height = 4, width = 8, units = 'in')
 showtext_auto(F)
 
 
+### raw by scenario----------
 
+h1a + labs(title = NULL) +
+  theme(axis.text.x = element_text(hjust = 1)) +
+  h1b + labs(title = NULL) +
+  plot_layout(widths = c(1, 1))
+ggsave('fig/netchange_barchart_scenario1.png', height = 4, width = 8, units = 'in')
 
+h2a + labs(title = NULL) +
+  theme(axis.text.y = element_text(family = 'sourcesans', size = 9, hjust = 1),
+        axis.text = element_text(family = 'sourcesans', size = 9),
+        strip.text = element_text(color = 'black')) +
+  h2b + labs(title = NULL) +
+  theme(axis.text.y = element_text(family = 'sourcesans', size = 9, hjust = 1),
+        axis.text = element_text(family = 'sourcesans', size = 9),
+        strip.text = element_text(color = 'black')) +
+  plot_layout(widths = c(1, 1))
+ggsave('fig/netchange_barchart_scenario2.png', height = 4, width = 8, units = 'in')
 
 
 ## lollipop chart---------

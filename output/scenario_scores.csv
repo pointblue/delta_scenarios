@@ -2,15 +2,6 @@ scenario,METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,UNIT,SCORE_TOTAL,SCORE_TOTAL_SE
 baseline,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,251375.7862059932,14421.872889551187
 baseline,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.72684112935419,0.6138994828298515
 baseline,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),814558.3476816936,20702.285798169465
-baseline,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,595973.6100008204,NA
-baseline,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,418458.69000043476,NA
-baseline,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,ranking,208087.3800001224,NA
-baseline,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,ranking,202861.80000013768,NA
-baseline,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,ranking,169444.44000014526,NA
-baseline,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,ranking,859796.4600010676,NA
-baseline,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,ranking,562853.5199998701,NA
-baseline,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ranking,631185.6599999794,NA
-baseline,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ranking,674310.9599999557,NA
 baseline,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,8321171.617073545,NA
 baseline,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,8500081.034859188,NA
 baseline,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,7684861.429093509,NA
@@ -31,9 +22,9 @@ baseline,Biodiversity Support,species distribution: waterbird_win,Diving Ducks,h
 baseline,Biodiversity Support,species distribution: waterbird_win,Geese,ha,4921122.132914599,NA
 baseline,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,5232194.561819236,NA
 baseline,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,3489006.9881600924,NA
-baseline,Climate Change Resilience,climate change resilience,Drought,ranking,1440207.018750656,70517.78343406871
-baseline,Climate Change Resilience,climate change resilience,Flood,ranking,1541674.8146605021,73482.53785085841
-baseline,Climate Change Resilience,climate change resilience,Heat,ranking,1819822.2300009627,80784.50643077603
+baseline,Climate Change Resilience,climate change resilience,Drought,ranking,1507272.8602507228,14103.556686813741
+baseline,Climate Change Resilience,climate change resilience,Flood,ranking,1581784.7709105243,14696.507570171683
+baseline,Climate Change Resilience,climate change resilience,Heat,ranking,1860438.61864386,16156.901286155207
 baseline,Climate Change Resilience,climate change resilience,Salinity,ranking,1444678.1100000096,0
 baseline,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,125430.863485304,9894.388055583227
 baseline,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,16239.360345045463,2134.8198858076667
@@ -41,15 +32,6 @@ baseline,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg p
 scenario1_restoration,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,245830.29666768678,14209.09177256706
 scenario1_restoration,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.69750096778964,0.6133768124229415
 scenario1_restoration,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),797689.1866727817,20401.462508506775
-scenario1_restoration,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,565294.5000007681,NA
-scenario1_restoration,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,440423.28000045376,NA
-scenario1_restoration,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,ranking,262271.88000017975,NA
-scenario1_restoration,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,ranking,251809.20000018133,NA
-scenario1_restoration,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,ranking,202435.56000016996,NA
-scenario1_restoration,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,ranking,856559.3400010337,NA
-scenario1_restoration,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,ranking,589041.8100001006,NA
-scenario1_restoration,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ranking,651717.7200002025,NA
-scenario1_restoration,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ranking,713966.4900002012,NA
 scenario1_restoration,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,8891634.21664621,NA
 scenario1_restoration,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,9151057.863522984,NA
 scenario1_restoration,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,8013409.83240176,NA
@@ -70,9 +52,9 @@ scenario1_restoration,Biodiversity Support,species distribution: waterbird_win,D
 scenario1_restoration,Biodiversity Support,species distribution: waterbird_win,Geese,ha,5048267.225079451,NA
 scenario1_restoration,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,5479231.735299859,NA
 scenario1_restoration,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,3771500.5301451106,NA
-scenario1_restoration,Climate Change Resilience,climate change resilience,Drought,ranking,1421322.4537507328,68987.6928323876
-scenario1_restoration,Climate Change Resilience,climate change resilience,Flood,ranking,1559837.6601151298,71860.42999010984
-scenario1_restoration,Climate Change Resilience,climate change resilience,Heat,ranking,1820442.871608229,79839.15302088036
+scenario1_restoration,Climate Change Resilience,climate change resilience,Drought,ranking,1489227.1447508035,13797.538566477522
+scenario1_restoration,Climate Change Resilience,climate change resilience,Flood,ranking,1598919.4013651584,14372.085998021968
+scenario1_restoration,Climate Change Resilience,climate change resilience,Heat,ranking,1860839.2189296999,15967.830604176073
 scenario1_restoration,Climate Change Resilience,climate change resilience,Salinity,ranking,1453357.9800000594,0
 scenario1_restoration,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,122354.35630913381,9666.007524457018
 scenario1_restoration,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,15981.145438332755,2092.4123698496933
@@ -80,15 +62,6 @@ scenario1_restoration,Water Quality,pesticide application rate,Risk to Aquatic O
 scenario2_perennialexpand,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,298943.9402827083,21491.11903669941
 scenario2_perennialexpand,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.48727663199474,0.5733275564218536
 scenario2_perennialexpand,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),956471.5464054388,30431.946104233648
-scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ranking,568127.4300007754,NA
-scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ranking,414021.0600004427,NA
-scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,ranking,214893.90000014857,NA
-scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,ranking,195334.47000013324,NA
-scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,ranking,164728.35000013924,NA
-scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,ranking,813402.3600009942,NA
-scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,ranking,528018.9300006689,NA
-scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ranking,590911.9200007679,NA
-scenario2_perennialexpand,Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ranking,628751.9700007433,NA
 scenario2_perennialexpand,Biodiversity Support,species distribution: riparian,Ash-throated Flycatcher,ha,8116014.799203879,NA
 scenario2_perennialexpand,Biodiversity Support,species distribution: riparian,Black-headed Grosbeak,ha,8401764.48674947,NA
 scenario2_perennialexpand,Biodiversity Support,species distribution: riparian,Common Yellowthroat,ha,7401884.991234769,NA
@@ -109,9 +82,9 @@ scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_w
 scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_win,Geese,ha,5007174.37425025,NA
 scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_win,Herons/Egrets,ha,5026980.99934583,NA
 scenario2_perennialexpand,Biodiversity Support,species distribution: waterbird_win,Shorebirds,ha,3339498.7676230157,NA
-scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Drought,ranking,1375222.7762510276,72964.5507728984
-scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Flood,ranking,1524200.0089790425,74357.72322215018
-scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Heat,ranking,1744020.4403586048,85493.85488660136
+scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Drought,ranking,1450625.498751125,14592.910154579678
+scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Flood,ranking,1563677.0877290955,14871.544644430036
+scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Heat,ranking,1792666.339715813,17098.770977320273
 scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Salinity,ranking,1371816.1800001524,0
 scenario2_perennialexpand,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,128998.91559903901,9100.625756624524
 scenario2_perennialexpand,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,18735.59895719281,2066.7115256664374

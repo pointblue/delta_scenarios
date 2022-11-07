@@ -26,9 +26,9 @@ economy = bind_rows(
   read_csv('data/crop_production_value.csv', col_types = cols()),
   read_csv('data/livelihoods.csv', col_types = cols()))
 ccs = read_csv('data/climate_change_resilience.csv', col_types = cols())
-acs = read_csv('data/avian_conservation_score.csv', col_types = cols())
+# acs = read_csv('data/avian_conservation_score.csv', col_types = cols())
 
-metrics = bind_rows(economy, waterquality, ccs, acs) %>%
+metrics = bind_rows(economy, waterquality, ccs) %>%
   left_join(key %>% select(LABEL, CODE_NAME), by = 'CODE_NAME') %>%
   mutate(CODE_NAME = factor(CODE_NAME,
                             levels = key$CODE_NAME %>% na.omit()),
@@ -338,10 +338,8 @@ change_scores_county = left_join(
          change_pct = if_else(METRIC_CATEGORY == 'Water Quality', -1 * change_pct, change_pct))
 write_csv(change_scores_county, 'output/scenario_change_county.csv')
 
-## CHANGE MAPS--------
+# CALCULATE CHANGE MAPS--------
 # for species distribution models only
-
-# CHANGE MAPS--------
 
 ## RIPARIAN-----
 change1_rip = purrr::map(

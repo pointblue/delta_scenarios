@@ -185,21 +185,21 @@ Water Quality,pesticide application rate,Risk to Aquatic Organisms,WATER,0,NA,NA
 Water Quality,pesticide application rate,Risk to Aquatic Organisms,WOODLAND,0,NA,NA,NA,kg per ha,Woodland
 Water Quality,pesticide application rate,Risk to Aquatic Organisms,SCRUB,0,NA,NA,NA,kg per ha,Scrub
 Water Quality,pesticide application rate,Risk to Aquatic Organisms,BARREN,0,NA,NA,NA,kg per ha,Barren
-Climate Change Resilience,climate change resilience,Drought,ORCHARD_DECIDUOUS,1,1,0,10,ranking,Orchard - Deciduous Fruits & Nuts
-Climate Change Resilience,climate change resilience,Drought,ORCHARD_CITRUS&SUBTROPICAL,1.875,1.315260702022878,0,10,ranking,Orchard - Citrus & Subtropical
-Climate Change Resilience,climate change resilience,Drought,VINEYARD,4.444444444444445,1.5466012118972283,0,10,ranking,Vineyard
-Climate Change Resilience,climate change resilience,Drought,GRAIN&HAY_WHEAT,8,1.1055415967851332,0,10,ranking,Wheat
-Climate Change Resilience,climate change resilience,Drought,GRAIN&HAY_OTHER,8,1.1055415967851332,0,10,ranking,Other Grains
-Climate Change Resilience,climate change resilience,Drought,FIELD_CORN,5.5,1.1666666666666663,0,10,ranking,Corn
-Climate Change Resilience,climate change resilience,Drought,FIELD_OTHER,4.444444444444445,1.5466012118972283,0,10,ranking,Other Field Crops
-Climate Change Resilience,climate change resilience,Drought,ROW,4.444444444444445,1.5466012118972283,0,10,ranking,Row Crops
-Climate Change Resilience,climate change resilience,Drought,RICE,1.5,0.7637626158259733,0,5,ranking,Rice
+Climate Change Resilience,climate change resilience,Drought,ORCHARD_DECIDUOUS,1.9,0.2,1,10,ranking,Orchard - Deciduous Fruits & Nuts
+Climate Change Resilience,climate change resilience,Drought,ORCHARD_CITRUS&SUBTROPICAL,2.625,0.2630521404045756,1,10,ranking,Orchard - Citrus & Subtropical
+Climate Change Resilience,climate change resilience,Drought,VINEYARD,4.888888888888889,0.30932024237944566,1,10,ranking,Vineyard
+Climate Change Resilience,climate change resilience,Drought,GRAIN&HAY_WHEAT,8.1,0.22110831935702663,1,10,ranking,Wheat
+Climate Change Resilience,climate change resilience,Drought,GRAIN&HAY_OTHER,8.1,0.22110831935702663,1,10,ranking,Other Grains
+Climate Change Resilience,climate change resilience,Drought,FIELD_CORN,5.7,0.2333333333333333,1,10,ranking,Corn
+Climate Change Resilience,climate change resilience,Drought,FIELD_OTHER,4.888888888888889,0.30932024237944566,1,10,ranking,Other Field Crops
+Climate Change Resilience,climate change resilience,Drought,ROW,4.888888888888889,0.30932024237944566,1,10,ranking,Row Crops
+Climate Change Resilience,climate change resilience,Drought,RICE,2.2,0.15275252316519466,1,5,ranking,Rice
 Climate Change Resilience,climate change resilience,Drought,IDLE,10,NA,10,10,ranking,Idle
-Climate Change Resilience,climate change resilience,Drought,PASTURE_ALFALFA,3.5,0.7637626158259733,0,5,ranking,Alfalfa
-Climate Change Resilience,climate change resilience,Drought,PASTURE_OTHER,5.833333333333333,1.035969267513435,0,10,ranking,Other Pasture
-Climate Change Resilience,climate change resilience,Drought,GRASSLAND,7.5,0.9731236802019038,0,10,ranking,Grassland
+Climate Change Resilience,climate change resilience,Drought,PASTURE_ALFALFA,3.8,0.15275252316519466,1,5,ranking,Alfalfa
+Climate Change Resilience,climate change resilience,Drought,PASTURE_OTHER,6,0.20719385350268704,1,10,ranking,Other Pasture
+Climate Change Resilience,climate change resilience,Drought,GRASSLAND,7.583333333333333,0.19462473604038075,1,10,ranking,Grassland
 Climate Change Resilience,climate change resilience,Drought,URBAN,5,NA,5,5,ranking,Urban
-Climate Change Resilience,climate change resilience,Drought,RIPARIAN,5,0.6154574548966637,0,10,ranking,Riparian
+Climate Change Resilience,climate change resilience,Drought,RIPARIAN,5.083333333333333,0.12309149097933274,1,10,ranking,Riparian
 Climate Change Resilience,climate change resilience,Drought,RIPARIAN_FOREST_POFR,6,NA,6,6,ranking,Riparian - Cottonwood
 Climate Change Resilience,climate change resilience,Drought,RIPARIAN_FOREST_QULO,6,NA,6,6,ranking,Riparian - Valley Oak
 Climate Change Resilience,climate change resilience,Drought,RIPARIAN_FOREST_SALIX,4,2,2,6,ranking,Riparian - Willow
@@ -207,29 +207,29 @@ Climate Change Resilience,climate change resilience,Drought,RIPARIAN_FOREST_MIXE
 Climate Change Resilience,climate change resilience,Drought,RIPARIAN_SCRUB_INTRO,8,1.7320508075688772,4,10,ranking,Riparian - Introduced Scrub
 Climate Change Resilience,climate change resilience,Drought,RIPARIAN_SCRUB_SALIX,4,1.1547005383792517,2,6,ranking,Riparian - Willow Shrub
 Climate Change Resilience,climate change resilience,Drought,RIPARIAN_SCRUB_MIXED,6,0,6,6,ranking,Riparian - Mixed Shrub
-Climate Change Resilience,climate change resilience,Drought,WETLAND_MANAGED,1.6666666666666667,0.7106690545187015,0,5,ranking,Managed Wetland
-Climate Change Resilience,climate change resilience,Drought,WETLAND_MANAGED_PERENNIAL,1.6666666666666667,0.7106690545187015,0,5,ranking,Managed Wetland - Perennial
-Climate Change Resilience,climate change resilience,Drought,WETLAND_MANAGED_SEASONAL,1.6666666666666667,0.7106690545187015,0,5,ranking,Managed Wetland - Seasonal
+Climate Change Resilience,climate change resilience,Drought,WETLAND_MANAGED,2.3333333333333335,0.1421338109037403,1,5,ranking,Managed Wetland
+Climate Change Resilience,climate change resilience,Drought,WETLAND_MANAGED_PERENNIAL,2.3333333333333335,0.1421338109037403,1,5,ranking,Managed Wetland - Perennial
+Climate Change Resilience,climate change resilience,Drought,WETLAND_MANAGED_SEASONAL,2.3333333333333335,0.1421338109037403,1,5,ranking,Managed Wetland - Seasonal
 Climate Change Resilience,climate change resilience,Drought,WETLAND_TIDAL,5,NA,5,5,ranking,Tidal Wetland
-Climate Change Resilience,climate change resilience,Drought,WETLAND_OTHER,1.6666666666666667,0.7106690545187015,0,5,ranking,Other Wetland
+Climate Change Resilience,climate change resilience,Drought,WETLAND_OTHER,2.3333333333333335,0.1421338109037403,1,5,ranking,Other Wetland
 Climate Change Resilience,climate change resilience,Drought,WOODLAND,5,NA,NA,NA,ranking,Woodland
 Climate Change Resilience,climate change resilience,Drought,SCRUB,5,NA,NA,NA,ranking,Scrub
 Climate Change Resilience,climate change resilience,Drought,BARREN,10,NA,10,10,ranking,Barren
-Climate Change Resilience,climate change resilience,Flood,ORCHARD_DECIDUOUS,5,0.8333333333333334,0,10,ranking,Orchard - Deciduous Fruits & Nuts
-Climate Change Resilience,climate change resilience,Flood,ORCHARD_CITRUS&SUBTROPICAL,2.5,0.944911182523068,0,5,ranking,Orchard - Citrus & Subtropical
-Climate Change Resilience,climate change resilience,Flood,VINEYARD,5.625,1.4752421108802056,0,10,ranking,Vineyard
-Climate Change Resilience,climate change resilience,Flood,GRAIN&HAY_WHEAT,3.75,1.25,0,10,ranking,Wheat
-Climate Change Resilience,climate change resilience,Flood,GRAIN&HAY_OTHER,3.75,1.25,0,10,ranking,Other Grains
-Climate Change Resilience,climate change resilience,Flood,FIELD_CORN,4.375,1.4752421108802056,0,10,ranking,Corn
-Climate Change Resilience,climate change resilience,Flood,FIELD_OTHER,3.3333333333333335,1.1785113019775793,0,10,ranking,Other Field Crops
-Climate Change Resilience,climate change resilience,Flood,ROW,3.3333333333333335,1.1785113019775793,0,10,ranking,Row Crops
+Climate Change Resilience,climate change resilience,Flood,ORCHARD_DECIDUOUS,5.111111111111111,0.16666666666666666,1,10,ranking,Orchard - Deciduous Fruits & Nuts
+Climate Change Resilience,climate change resilience,Flood,ORCHARD_CITRUS&SUBTROPICAL,3,0.1889822365046136,1,5,ranking,Orchard - Citrus & Subtropical
+Climate Change Resilience,climate change resilience,Flood,VINEYARD,5.875,0.29504842217604116,1,10,ranking,Vineyard
+Climate Change Resilience,climate change resilience,Flood,GRAIN&HAY_WHEAT,4.125,0.25,1,10,ranking,Wheat
+Climate Change Resilience,climate change resilience,Flood,GRAIN&HAY_OTHER,4.125,0.25,1,10,ranking,Other Grains
+Climate Change Resilience,climate change resilience,Flood,FIELD_CORN,4.75,0.29504842217604116,1,10,ranking,Corn
+Climate Change Resilience,climate change resilience,Flood,FIELD_OTHER,3.7777777777777777,0.23570226039551587,1,10,ranking,Other Field Crops
+Climate Change Resilience,climate change resilience,Flood,ROW,3.7777777777777777,0.23570226039551587,1,10,ranking,Row Crops
 Climate Change Resilience,climate change resilience,Flood,RICE,10,0,10,10,ranking,Rice
 Climate Change Resilience,climate change resilience,Flood,IDLE,10,NA,10,10,ranking,Idle
-Climate Change Resilience,climate change resilience,Flood,PASTURE_ALFALFA,6.875,0.91490631838925,5,10,ranking,Alfalfa
-Climate Change Resilience,climate change resilience,Flood,PASTURE_OTHER,7,1.1055415967851332,0,10,ranking,Other Pasture
-Climate Change Resilience,climate change resilience,Flood,GRASSLAND,9.090909090909092,0.6098367211363063,5,10,ranking,Grassland
+Climate Change Resilience,climate change resilience,Flood,PASTURE_ALFALFA,6.875,0.18298126367784995,5,10,ranking,Alfalfa
+Climate Change Resilience,climate change resilience,Flood,PASTURE_OTHER,7.1,0.22110831935702663,1,10,ranking,Other Pasture
+Climate Change Resilience,climate change resilience,Flood,GRASSLAND,9.090909090909092,0.12196734422726126,5,10,ranking,Grassland
 Climate Change Resilience,climate change resilience,Flood,URBAN,1,NA,1,1,ranking,Urban
-Climate Change Resilience,climate change resilience,Flood,RIPARIAN,9.090909090909092,0.6098367211363063,5,10,ranking,Riparian
+Climate Change Resilience,climate change resilience,Flood,RIPARIAN,9.090909090909092,0.12196734422726126,5,10,ranking,Riparian
 Climate Change Resilience,climate change resilience,Flood,RIPARIAN_FOREST_POFR,6,NA,6,6,ranking,Riparian - Cottonwood
 Climate Change Resilience,climate change resilience,Flood,RIPARIAN_FOREST_QULO,2,NA,2,2,ranking,Riparian - Valley Oak
 Climate Change Resilience,climate change resilience,Flood,RIPARIAN_FOREST_SALIX,10,0,10,10,ranking,Riparian - Willow
@@ -245,33 +245,33 @@ Climate Change Resilience,climate change resilience,Flood,WETLAND_OTHER,10,0,10,
 Climate Change Resilience,climate change resilience,Flood,WOODLAND,1,NA,NA,NA,ranking,Woodland
 Climate Change Resilience,climate change resilience,Flood,SCRUB,1,NA,NA,NA,ranking,Scrub
 Climate Change Resilience,climate change resilience,Flood,BARREN,10,NA,10,10,ranking,Barren
-Climate Change Resilience,climate change resilience,Heat,ORCHARD_DECIDUOUS,2.5,1.336306209562122,0,10,ranking,Orchard - Deciduous Fruits & Nuts
-Climate Change Resilience,climate change resilience,Heat,ORCHARD_CITRUS&SUBTROPICAL,1.4285714285714286,0.9221388919541468,0,5,ranking,Orchard - Citrus & Subtropical
-Climate Change Resilience,climate change resilience,Heat,VINEYARD,3.5714285714285716,1.7975796274454166,0,10,ranking,Vineyard
-Climate Change Resilience,climate change resilience,Heat,GRAIN&HAY_WHEAT,8.125,1.315260702022878,0,10,ranking,Wheat
-Climate Change Resilience,climate change resilience,Heat,GRAIN&HAY_OTHER,8.125,1.315260702022878,0,10,ranking,Other Grains
-Climate Change Resilience,climate change resilience,Heat,FIELD_CORN,7.142857142857143,1.486904285332952,0,10,ranking,Corn
-Climate Change Resilience,climate change resilience,Heat,FIELD_OTHER,4.375,1.132908708968707,0,10,ranking,Other Field Crops
-Climate Change Resilience,climate change resilience,Heat,ROW,4.375,1.132908708968707,0,10,ranking,Row Crops
-Climate Change Resilience,climate change resilience,Heat,RICE,6.25,1.25,0,10,ranking,Rice
+Climate Change Resilience,climate change resilience,Heat,ORCHARD_DECIDUOUS,3.125,0.26726124191242434,1,10,ranking,Orchard - Deciduous Fruits & Nuts
+Climate Change Resilience,climate change resilience,Heat,ORCHARD_CITRUS&SUBTROPICAL,2.142857142857143,0.18442777839082936,1,5,ranking,Orchard - Citrus & Subtropical
+Climate Change Resilience,climate change resilience,Heat,VINEYARD,4.142857142857143,0.3595159254890833,1,10,ranking,Vineyard
+Climate Change Resilience,climate change resilience,Heat,GRAIN&HAY_WHEAT,8.25,0.2630521404045756,1,10,ranking,Wheat
+Climate Change Resilience,climate change resilience,Heat,GRAIN&HAY_OTHER,8.25,0.2630521404045756,1,10,ranking,Other Grains
+Climate Change Resilience,climate change resilience,Heat,FIELD_CORN,7.285714285714286,0.2973808570665904,1,10,ranking,Corn
+Climate Change Resilience,climate change resilience,Heat,FIELD_OTHER,4.625,0.2265817417937414,1,10,ranking,Other Field Crops
+Climate Change Resilience,climate change resilience,Heat,ROW,4.625,0.2265817417937414,1,10,ranking,Row Crops
+Climate Change Resilience,climate change resilience,Heat,RICE,6.375,0.25,1,10,ranking,Rice
 Climate Change Resilience,climate change resilience,Heat,IDLE,10,NA,10,10,ranking,Idle
-Climate Change Resilience,climate change resilience,Heat,PASTURE_ALFALFA,7.857142857142857,1.0101525445522106,5,10,ranking,Alfalfa
-Climate Change Resilience,climate change resilience,Heat,PASTURE_OTHER,8.5,1.0671873729054746,0,10,ranking,Other Pasture
-Climate Change Resilience,climate change resilience,Heat,GRASSLAND,9,1,0,10,ranking,Grassland
+Climate Change Resilience,climate change resilience,Heat,PASTURE_ALFALFA,7.857142857142857,0.20203050891044216,5,10,ranking,Alfalfa
+Climate Change Resilience,climate change resilience,Heat,PASTURE_OTHER,8.6,0.21343747458109497,1,10,ranking,Other Pasture
+Climate Change Resilience,climate change resilience,Heat,GRASSLAND,9.1,0.2,1,10,ranking,Grassland
 Climate Change Resilience,climate change resilience,Heat,URBAN,5,NA,5,5,ranking,Urban
-Climate Change Resilience,climate change resilience,Heat,RIPARIAN,8,1.1055415967851332,0,10,ranking,Riparian
-Climate Change Resilience,climate change resilience,Heat,RIPARIAN_FOREST_POFR,8,1.1055415967851332,0,10,ranking,Riparian - Cottonwood
-Climate Change Resilience,climate change resilience,Heat,RIPARIAN_FOREST_QULO,8,1.1055415967851332,0,10,ranking,Riparian - Valley Oak
-Climate Change Resilience,climate change resilience,Heat,RIPARIAN_FOREST_SALIX,8,1.1055415967851332,0,10,ranking,Riparian - Willow
-Climate Change Resilience,climate change resilience,Heat,RIPARIAN_FOREST_MIXED,8,1.1055415967851332,0,10,ranking,Riparian - Mixed Forest
-Climate Change Resilience,climate change resilience,Heat,RIPARIAN_SCRUB_INTRO,8,1.1055415967851332,0,10,ranking,Riparian - Introduced Scrub
-Climate Change Resilience,climate change resilience,Heat,RIPARIAN_SCRUB_SALIX,8,1.1055415967851332,0,10,ranking,Riparian - Willow Shrub
-Climate Change Resilience,climate change resilience,Heat,RIPARIAN_SCRUB_MIXED,8,1.1055415967851332,0,10,ranking,Riparian - Mixed Shrub
-Climate Change Resilience,climate change resilience,Heat,WETLAND_MANAGED,7.5,1.118033988749895,0,10,ranking,Managed Wetland
-Climate Change Resilience,climate change resilience,Heat,WETLAND_MANAGED_PERENNIAL,7.5,1.118033988749895,0,10,ranking,Managed Wetland - Perennial
-Climate Change Resilience,climate change resilience,Heat,WETLAND_MANAGED_SEASONAL,7.5,1.118033988749895,0,10,ranking,Managed Wetland - Seasonal
+Climate Change Resilience,climate change resilience,Heat,RIPARIAN,8.1,0.22110831935702663,1,10,ranking,Riparian
+Climate Change Resilience,climate change resilience,Heat,RIPARIAN_FOREST_POFR,8.1,0.22110831935702663,1,10,ranking,Riparian - Cottonwood
+Climate Change Resilience,climate change resilience,Heat,RIPARIAN_FOREST_QULO,8.1,0.22110831935702663,1,10,ranking,Riparian - Valley Oak
+Climate Change Resilience,climate change resilience,Heat,RIPARIAN_FOREST_SALIX,8.1,0.22110831935702663,1,10,ranking,Riparian - Willow
+Climate Change Resilience,climate change resilience,Heat,RIPARIAN_FOREST_MIXED,8.1,0.22110831935702663,1,10,ranking,Riparian - Mixed Forest
+Climate Change Resilience,climate change resilience,Heat,RIPARIAN_SCRUB_INTRO,8.1,0.22110831935702663,1,10,ranking,Riparian - Introduced Scrub
+Climate Change Resilience,climate change resilience,Heat,RIPARIAN_SCRUB_SALIX,8.1,0.22110831935702663,1,10,ranking,Riparian - Willow Shrub
+Climate Change Resilience,climate change resilience,Heat,RIPARIAN_SCRUB_MIXED,8.1,0.22110831935702663,1,10,ranking,Riparian - Mixed Shrub
+Climate Change Resilience,climate change resilience,Heat,WETLAND_MANAGED,7.6,0.22360679774997896,1,10,ranking,Managed Wetland
+Climate Change Resilience,climate change resilience,Heat,WETLAND_MANAGED_PERENNIAL,7.6,0.22360679774997896,1,10,ranking,Managed Wetland - Perennial
+Climate Change Resilience,climate change resilience,Heat,WETLAND_MANAGED_SEASONAL,7.6,0.22360679774997896,1,10,ranking,Managed Wetland - Seasonal
 Climate Change Resilience,climate change resilience,Heat,WETLAND_TIDAL,5,NA,5,5,ranking,Tidal Wetland
-Climate Change Resilience,climate change resilience,Heat,WETLAND_OTHER,7.5,1.118033988749895,0,10,ranking,Other Wetland
+Climate Change Resilience,climate change resilience,Heat,WETLAND_OTHER,7.6,0.22360679774997896,1,10,ranking,Other Wetland
 Climate Change Resilience,climate change resilience,Heat,WOODLAND,5,NA,NA,NA,ranking,Woodland
 Climate Change Resilience,climate change resilience,Heat,SCRUB,5,NA,NA,NA,ranking,Scrub
 Climate Change Resilience,climate change resilience,Heat,BARREN,10,NA,10,10,ranking,Barren
@@ -305,264 +305,3 @@ Climate Change Resilience,climate change resilience,Salinity,WETLAND_OTHER,9,NA,
 Climate Change Resilience,climate change resilience,Salinity,WOODLAND,1,NA,NA,NA,ranking,Woodland
 Climate Change Resilience,climate change resilience,Salinity,SCRUB,1,NA,NA,NA,ranking,Scrub
 Climate Change Resilience,climate change resilience,Salinity,BARREN,10,NA,10,10,ranking,Barren
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ORCHARD_DECIDUOUS,0,NA,NA,NA,ranking,Orchard - Deciduous Fruits & Nuts
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ORCHARD_CITRUS&SUBTROPICAL,0,NA,NA,NA,ranking,Orchard - Citrus & Subtropical
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,VINEYARD,0,NA,NA,NA,ranking,Vineyard
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,GRAIN&HAY_WHEAT,1,NA,NA,NA,ranking,Wheat
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,GRAIN&HAY_OTHER,1,NA,NA,NA,ranking,Other Grains
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,FIELD_CORN,0,NA,NA,NA,ranking,Corn
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,FIELD_OTHER,0,NA,NA,NA,ranking,Other Field Crops
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,ROW,0,NA,NA,NA,ranking,Row Crops
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,RICE,0,NA,NA,NA,ranking,Rice
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,IDLE,0,NA,NA,NA,ranking,Idle
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,PASTURE_ALFALFA,1,NA,NA,NA,ranking,Alfalfa
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,PASTURE_OTHER,10,NA,NA,NA,ranking,Other Pasture
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,GRASSLAND,10,NA,NA,NA,ranking,Grassland
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,URBAN,0,NA,NA,NA,ranking,Urban
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,RIPARIAN,0,NA,NA,NA,ranking,Riparian
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,RIPARIAN_FOREST_POFR,0,NA,NA,NA,ranking,Riparian - Cottonwood
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,RIPARIAN_FOREST_QULO,0,NA,NA,NA,ranking,Riparian - Valley Oak
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,RIPARIAN_FOREST_SALIX,0,NA,NA,NA,ranking,Riparian - Willow
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,RIPARIAN_FOREST_MIXED,0,NA,NA,NA,ranking,Riparian - Mixed Forest
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,RIPARIAN_SCRUB_INTRO,0,NA,NA,NA,ranking,Riparian - Introduced Scrub
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,RIPARIAN_SCRUB_SALIX,0,NA,NA,NA,ranking,Riparian - Willow Shrub
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,RIPARIAN_SCRUB_MIXED,0,NA,NA,NA,ranking,Riparian - Mixed Shrub
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,WETLAND_MANAGED,1,NA,NA,NA,ranking,Managed Wetland
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,WETLAND_MANAGED_PERENNIAL,1,NA,NA,NA,ranking,Managed Wetland - Perennial
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,WETLAND_MANAGED_SEASONAL,1,NA,NA,NA,ranking,Managed Wetland - Seasonal
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,WETLAND_OTHER,10,NA,NA,NA,ranking,Other Wetland
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,WOODLAND,1,NA,NA,NA,ranking,Woodland
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,SCRUB,1,NA,NA,NA,ranking,Scrub
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Grassland,BARREN,0,NA,NA,NA,ranking,Barren
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ORCHARD_DECIDUOUS,1,NA,NA,NA,ranking,Orchard - Deciduous Fruits & Nuts
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ORCHARD_CITRUS&SUBTROPICAL,1,NA,NA,NA,ranking,Orchard - Citrus & Subtropical
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,VINEYARD,1,NA,NA,NA,ranking,Vineyard
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,GRAIN&HAY_WHEAT,0,NA,NA,NA,ranking,Wheat
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,GRAIN&HAY_OTHER,0,NA,NA,NA,ranking,Other Grains
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,FIELD_CORN,0,NA,NA,NA,ranking,Corn
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,FIELD_OTHER,0,NA,NA,NA,ranking,Other Field Crops
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,ROW,0,NA,NA,NA,ranking,Row Crops
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,RICE,0,NA,NA,NA,ranking,Rice
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,IDLE,0,NA,NA,NA,ranking,Idle
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,PASTURE_ALFALFA,1,NA,NA,NA,ranking,Alfalfa
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,PASTURE_OTHER,5,NA,NA,NA,ranking,Other Pasture
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,GRASSLAND,5,NA,NA,NA,ranking,Grassland
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,URBAN,0,NA,NA,NA,ranking,Urban
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,RIPARIAN,10,NA,NA,NA,ranking,Riparian
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,RIPARIAN_FOREST_POFR,10,NA,NA,NA,ranking,Riparian - Cottonwood
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,RIPARIAN_FOREST_QULO,10,NA,NA,NA,ranking,Riparian - Valley Oak
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,RIPARIAN_FOREST_SALIX,10,NA,NA,NA,ranking,Riparian - Willow
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,RIPARIAN_FOREST_MIXED,10,NA,NA,NA,ranking,Riparian - Mixed Forest
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,RIPARIAN_SCRUB_INTRO,1,NA,NA,NA,ranking,Riparian - Introduced Scrub
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,RIPARIAN_SCRUB_SALIX,1,NA,NA,NA,ranking,Riparian - Willow Shrub
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,RIPARIAN_SCRUB_MIXED,1,NA,NA,NA,ranking,Riparian - Mixed Shrub
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,WETLAND_MANAGED,0,NA,NA,NA,ranking,Managed Wetland
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,WETLAND_MANAGED_PERENNIAL,0,NA,NA,NA,ranking,Managed Wetland - Perennial
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,WETLAND_MANAGED_SEASONAL,0,NA,NA,NA,ranking,Managed Wetland - Seasonal
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,WETLAND_OTHER,5,NA,NA,NA,ranking,Other Wetland
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,WOODLAND,10,NA,NA,NA,ranking,Woodland
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,SCRUB,1,NA,NA,NA,ranking,Scrub
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Oak Savannah,BARREN,0,NA,NA,NA,ranking,Barren
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,ORCHARD_DECIDUOUS,1,NA,NA,NA,ranking,Orchard - Deciduous Fruits & Nuts
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,ORCHARD_CITRUS&SUBTROPICAL,1,NA,NA,NA,ranking,Orchard - Citrus & Subtropical
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,VINEYARD,1,NA,NA,NA,ranking,Vineyard
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,GRAIN&HAY_WHEAT,0,NA,NA,NA,ranking,Wheat
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,GRAIN&HAY_OTHER,0,NA,NA,NA,ranking,Other Grains
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,FIELD_CORN,0,NA,NA,NA,ranking,Corn
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,FIELD_OTHER,0,NA,NA,NA,ranking,Other Field Crops
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,ROW,0,NA,NA,NA,ranking,Row Crops
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,RICE,1,NA,NA,NA,ranking,Rice
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,IDLE,0,NA,NA,NA,ranking,Idle
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,PASTURE_ALFALFA,0,NA,NA,NA,ranking,Alfalfa
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,PASTURE_OTHER,1,NA,NA,NA,ranking,Other Pasture
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,GRASSLAND,1,NA,NA,NA,ranking,Grassland
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,URBAN,0,NA,NA,NA,ranking,Urban
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,RIPARIAN,10,NA,NA,NA,ranking,Riparian
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,RIPARIAN_FOREST_POFR,10,NA,NA,NA,ranking,Riparian - Cottonwood
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,RIPARIAN_FOREST_QULO,10,NA,NA,NA,ranking,Riparian - Valley Oak
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,RIPARIAN_FOREST_SALIX,10,NA,NA,NA,ranking,Riparian - Willow
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,RIPARIAN_FOREST_MIXED,10,NA,NA,NA,ranking,Riparian - Mixed Forest
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,RIPARIAN_SCRUB_INTRO,1,NA,NA,NA,ranking,Riparian - Introduced Scrub
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,RIPARIAN_SCRUB_SALIX,10,NA,NA,NA,ranking,Riparian - Willow Shrub
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,RIPARIAN_SCRUB_MIXED,10,NA,NA,NA,ranking,Riparian - Mixed Shrub
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,WETLAND_MANAGED,5,NA,NA,NA,ranking,Managed Wetland
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,WETLAND_MANAGED_PERENNIAL,5,NA,NA,NA,ranking,Managed Wetland - Perennial
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,WETLAND_MANAGED_SEASONAL,5,NA,NA,NA,ranking,Managed Wetland - Seasonal
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,WETLAND_OTHER,1,NA,NA,NA,ranking,Other Wetland
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,WOODLAND,5,NA,NA,NA,ranking,Woodland
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,SCRUB,1,NA,NA,NA,ranking,Scrub
-Biodiversity Support,avian conservation contribution,Breeding Landbirds: Riparian,BARREN,0,NA,NA,NA,ranking,Barren
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,ORCHARD_DECIDUOUS,0,NA,NA,NA,ranking,Orchard - Deciduous Fruits & Nuts
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,ORCHARD_CITRUS&SUBTROPICAL,0,NA,NA,NA,ranking,Orchard - Citrus & Subtropical
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,VINEYARD,0,NA,NA,NA,ranking,Vineyard
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,GRAIN&HAY_WHEAT,0,NA,NA,NA,ranking,Wheat
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,GRAIN&HAY_OTHER,0,NA,NA,NA,ranking,Other Grains
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,FIELD_CORN,0,NA,NA,NA,ranking,Corn
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,FIELD_OTHER,0,NA,NA,NA,ranking,Other Field Crops
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,ROW,0,NA,NA,NA,ranking,Row Crops
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,RICE,10,NA,NA,NA,ranking,Rice
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,IDLE,0,NA,NA,NA,ranking,Idle
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,PASTURE_ALFALFA,1,NA,NA,NA,ranking,Alfalfa
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,PASTURE_OTHER,1,NA,NA,NA,ranking,Other Pasture
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,GRASSLAND,1,NA,NA,NA,ranking,Grassland
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,URBAN,0,NA,NA,NA,ranking,Urban
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,RIPARIAN,5,NA,NA,NA,ranking,Riparian
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,RIPARIAN_FOREST_POFR,5,NA,NA,NA,ranking,Riparian - Cottonwood
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,RIPARIAN_FOREST_QULO,5,NA,NA,NA,ranking,Riparian - Valley Oak
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,RIPARIAN_FOREST_SALIX,5,NA,NA,NA,ranking,Riparian - Willow
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,RIPARIAN_FOREST_MIXED,5,NA,NA,NA,ranking,Riparian - Mixed Forest
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,RIPARIAN_SCRUB_INTRO,1,NA,NA,NA,ranking,Riparian - Introduced Scrub
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,RIPARIAN_SCRUB_SALIX,1,NA,NA,NA,ranking,Riparian - Willow Shrub
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,RIPARIAN_SCRUB_MIXED,1,NA,NA,NA,ranking,Riparian - Mixed Shrub
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,WETLAND_MANAGED,10,NA,NA,NA,ranking,Managed Wetland
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,WETLAND_MANAGED_PERENNIAL,10,NA,NA,NA,ranking,Managed Wetland - Perennial
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,WETLAND_MANAGED_SEASONAL,10,NA,NA,NA,ranking,Managed Wetland - Seasonal
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,WETLAND_OTHER,1,NA,NA,NA,ranking,Other Wetland
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,WOODLAND,0,NA,NA,NA,ranking,Woodland
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,SCRUB,0,NA,NA,NA,ranking,Scrub
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Other Waterbirds,BARREN,0,NA,NA,NA,ranking,Barren
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,ORCHARD_DECIDUOUS,0,NA,NA,NA,ranking,Orchard - Deciduous Fruits & Nuts
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,ORCHARD_CITRUS&SUBTROPICAL,0,NA,NA,NA,ranking,Orchard - Citrus & Subtropical
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,VINEYARD,0,NA,NA,NA,ranking,Vineyard
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,GRAIN&HAY_WHEAT,0,NA,NA,NA,ranking,Wheat
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,GRAIN&HAY_OTHER,0,NA,NA,NA,ranking,Other Grains
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,FIELD_CORN,0,NA,NA,NA,ranking,Corn
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,FIELD_OTHER,0,NA,NA,NA,ranking,Other Field Crops
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,ROW,0,NA,NA,NA,ranking,Row Crops
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,RICE,10,NA,NA,NA,ranking,Rice
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,IDLE,0,NA,NA,NA,ranking,Idle
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,PASTURE_ALFALFA,1,NA,NA,NA,ranking,Alfalfa
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,PASTURE_OTHER,1,NA,NA,NA,ranking,Other Pasture
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,GRASSLAND,1,NA,NA,NA,ranking,Grassland
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,URBAN,0,NA,NA,NA,ranking,Urban
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,RIPARIAN,1,NA,NA,NA,ranking,Riparian
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,RIPARIAN_FOREST_POFR,1,NA,NA,NA,ranking,Riparian - Cottonwood
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,RIPARIAN_FOREST_QULO,1,NA,NA,NA,ranking,Riparian - Valley Oak
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,RIPARIAN_FOREST_SALIX,1,NA,NA,NA,ranking,Riparian - Willow
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,RIPARIAN_FOREST_MIXED,1,NA,NA,NA,ranking,Riparian - Mixed Forest
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,RIPARIAN_SCRUB_INTRO,1,NA,NA,NA,ranking,Riparian - Introduced Scrub
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,RIPARIAN_SCRUB_SALIX,1,NA,NA,NA,ranking,Riparian - Willow Shrub
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,RIPARIAN_SCRUB_MIXED,1,NA,NA,NA,ranking,Riparian - Mixed Shrub
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,WETLAND_MANAGED,10,NA,NA,NA,ranking,Managed Wetland
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,WETLAND_MANAGED_PERENNIAL,10,NA,NA,NA,ranking,Managed Wetland - Perennial
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,WETLAND_MANAGED_SEASONAL,10,NA,NA,NA,ranking,Managed Wetland - Seasonal
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,WETLAND_OTHER,1,NA,NA,NA,ranking,Other Wetland
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,WOODLAND,0,NA,NA,NA,ranking,Woodland
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,SCRUB,0,NA,NA,NA,ranking,Scrub
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Shorebirds,BARREN,0,NA,NA,NA,ranking,Barren
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,ORCHARD_DECIDUOUS,0,NA,NA,NA,ranking,Orchard - Deciduous Fruits & Nuts
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,ORCHARD_CITRUS&SUBTROPICAL,0,NA,NA,NA,ranking,Orchard - Citrus & Subtropical
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,VINEYARD,0,NA,NA,NA,ranking,Vineyard
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,GRAIN&HAY_WHEAT,10,NA,NA,NA,ranking,Wheat
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,GRAIN&HAY_OTHER,10,NA,NA,NA,ranking,Other Grains
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,FIELD_CORN,0,NA,NA,NA,ranking,Corn
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,FIELD_OTHER,0,NA,NA,NA,ranking,Other Field Crops
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,ROW,0,NA,NA,NA,ranking,Row Crops
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,RICE,10,NA,NA,NA,ranking,Rice
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,IDLE,0,NA,NA,NA,ranking,Idle
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,PASTURE_ALFALFA,1,NA,NA,NA,ranking,Alfalfa
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,PASTURE_OTHER,10,NA,NA,NA,ranking,Other Pasture
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,GRASSLAND,10,NA,NA,NA,ranking,Grassland
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,URBAN,0,NA,NA,NA,ranking,Urban
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,RIPARIAN,1,NA,NA,NA,ranking,Riparian
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,RIPARIAN_FOREST_POFR,1,NA,NA,NA,ranking,Riparian - Cottonwood
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,RIPARIAN_FOREST_QULO,1,NA,NA,NA,ranking,Riparian - Valley Oak
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,RIPARIAN_FOREST_SALIX,1,NA,NA,NA,ranking,Riparian - Willow
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,RIPARIAN_FOREST_MIXED,1,NA,NA,NA,ranking,Riparian - Mixed Forest
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,RIPARIAN_SCRUB_INTRO,1,NA,NA,NA,ranking,Riparian - Introduced Scrub
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,RIPARIAN_SCRUB_SALIX,1,NA,NA,NA,ranking,Riparian - Willow Shrub
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,RIPARIAN_SCRUB_MIXED,1,NA,NA,NA,ranking,Riparian - Mixed Shrub
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,WETLAND_MANAGED,10,NA,NA,NA,ranking,Managed Wetland
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,WETLAND_MANAGED_PERENNIAL,10,NA,NA,NA,ranking,Managed Wetland - Perennial
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,WETLAND_MANAGED_SEASONAL,10,NA,NA,NA,ranking,Managed Wetland - Seasonal
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,WETLAND_OTHER,10,NA,NA,NA,ranking,Other Wetland
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,WOODLAND,0,NA,NA,NA,ranking,Woodland
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,SCRUB,0,NA,NA,NA,ranking,Scrub
-Biodiversity Support,avian conservation contribution,Breeding Waterbirds: Waterfowl,BARREN,0,NA,NA,NA,ranking,Barren
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,ORCHARD_DECIDUOUS,0,NA,NA,NA,ranking,Orchard - Deciduous Fruits & Nuts
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,ORCHARD_CITRUS&SUBTROPICAL,0,NA,NA,NA,ranking,Orchard - Citrus & Subtropical
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,VINEYARD,0,NA,NA,NA,ranking,Vineyard
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,GRAIN&HAY_WHEAT,1,NA,NA,NA,ranking,Wheat
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,GRAIN&HAY_OTHER,1,NA,NA,NA,ranking,Other Grains
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,FIELD_CORN,10,NA,NA,NA,ranking,Corn
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,FIELD_OTHER,1,NA,NA,NA,ranking,Other Field Crops
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,ROW,1,NA,NA,NA,ranking,Row Crops
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,RICE,10,NA,NA,NA,ranking,Rice
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,IDLE,0,NA,NA,NA,ranking,Idle
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,PASTURE_ALFALFA,1,NA,NA,NA,ranking,Alfalfa
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,PASTURE_OTHER,1,NA,NA,NA,ranking,Other Pasture
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,GRASSLAND,1,NA,NA,NA,ranking,Grassland
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,URBAN,0,NA,NA,NA,ranking,Urban
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,RIPARIAN,1,NA,NA,NA,ranking,Riparian
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,RIPARIAN_FOREST_POFR,1,NA,NA,NA,ranking,Riparian - Cottonwood
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,RIPARIAN_FOREST_QULO,1,NA,NA,NA,ranking,Riparian - Valley Oak
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,RIPARIAN_FOREST_SALIX,1,NA,NA,NA,ranking,Riparian - Willow
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,RIPARIAN_FOREST_MIXED,1,NA,NA,NA,ranking,Riparian - Mixed Forest
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,RIPARIAN_SCRUB_INTRO,1,NA,NA,NA,ranking,Riparian - Introduced Scrub
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,RIPARIAN_SCRUB_SALIX,1,NA,NA,NA,ranking,Riparian - Willow Shrub
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,RIPARIAN_SCRUB_MIXED,1,NA,NA,NA,ranking,Riparian - Mixed Shrub
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,WETLAND_MANAGED,10,NA,NA,NA,ranking,Managed Wetland
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,WETLAND_MANAGED_PERENNIAL,10,NA,NA,NA,ranking,Managed Wetland - Perennial
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,WETLAND_MANAGED_SEASONAL,10,NA,NA,NA,ranking,Managed Wetland - Seasonal
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,WETLAND_OTHER,1,NA,NA,NA,ranking,Other Wetland
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,WOODLAND,0,NA,NA,NA,ranking,Woodland
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,SCRUB,0,NA,NA,NA,ranking,Scrub
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Other Waterbirds,BARREN,0,NA,NA,NA,ranking,Barren
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ORCHARD_DECIDUOUS,0,NA,NA,NA,ranking,Orchard - Deciduous Fruits & Nuts
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ORCHARD_CITRUS&SUBTROPICAL,0,NA,NA,NA,ranking,Orchard - Citrus & Subtropical
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,VINEYARD,0,NA,NA,NA,ranking,Vineyard
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,GRAIN&HAY_WHEAT,1,NA,NA,NA,ranking,Wheat
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,GRAIN&HAY_OTHER,1,NA,NA,NA,ranking,Other Grains
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,FIELD_CORN,10,NA,NA,NA,ranking,Corn
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,FIELD_OTHER,1,NA,NA,NA,ranking,Other Field Crops
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,ROW,1,NA,NA,NA,ranking,Row Crops
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,RICE,10,NA,NA,NA,ranking,Rice
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,IDLE,0,NA,NA,NA,ranking,Idle
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,PASTURE_ALFALFA,5,NA,NA,NA,ranking,Alfalfa
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,PASTURE_OTHER,1,NA,NA,NA,ranking,Other Pasture
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,GRASSLAND,1,NA,NA,NA,ranking,Grassland
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,URBAN,0,NA,NA,NA,ranking,Urban
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,RIPARIAN,0,NA,NA,NA,ranking,Riparian
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,RIPARIAN_FOREST_POFR,0,NA,NA,NA,ranking,Riparian - Cottonwood
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,RIPARIAN_FOREST_QULO,0,NA,NA,NA,ranking,Riparian - Valley Oak
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,RIPARIAN_FOREST_SALIX,0,NA,NA,NA,ranking,Riparian - Willow
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,RIPARIAN_FOREST_MIXED,0,NA,NA,NA,ranking,Riparian - Mixed Forest
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,RIPARIAN_SCRUB_INTRO,0,NA,NA,NA,ranking,Riparian - Introduced Scrub
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,RIPARIAN_SCRUB_SALIX,0,NA,NA,NA,ranking,Riparian - Willow Shrub
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,RIPARIAN_SCRUB_MIXED,0,NA,NA,NA,ranking,Riparian - Mixed Shrub
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,WETLAND_MANAGED,10,NA,NA,NA,ranking,Managed Wetland
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,WETLAND_MANAGED_PERENNIAL,10,NA,NA,NA,ranking,Managed Wetland - Perennial
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,WETLAND_MANAGED_SEASONAL,10,NA,NA,NA,ranking,Managed Wetland - Seasonal
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,WETLAND_OTHER,1,NA,NA,NA,ranking,Other Wetland
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,WOODLAND,0,NA,NA,NA,ranking,Woodland
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,SCRUB,0,NA,NA,NA,ranking,Scrub
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Shorebirds,BARREN,0,NA,NA,NA,ranking,Barren
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ORCHARD_DECIDUOUS,0,NA,NA,NA,ranking,Orchard - Deciduous Fruits & Nuts
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ORCHARD_CITRUS&SUBTROPICAL,0,NA,NA,NA,ranking,Orchard - Citrus & Subtropical
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,VINEYARD,0,NA,NA,NA,ranking,Vineyard
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,GRAIN&HAY_WHEAT,5,NA,NA,NA,ranking,Wheat
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,GRAIN&HAY_OTHER,5,NA,NA,NA,ranking,Other Grains
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,FIELD_CORN,10,NA,NA,NA,ranking,Corn
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,FIELD_OTHER,1,NA,NA,NA,ranking,Other Field Crops
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,ROW,1,NA,NA,NA,ranking,Row Crops
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,RICE,10,NA,NA,NA,ranking,Rice
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,IDLE,0,NA,NA,NA,ranking,Idle
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,PASTURE_ALFALFA,1,NA,NA,NA,ranking,Alfalfa
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,PASTURE_OTHER,1,NA,NA,NA,ranking,Other Pasture
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,GRASSLAND,1,NA,NA,NA,ranking,Grassland
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,URBAN,0,NA,NA,NA,ranking,Urban
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,RIPARIAN,5,NA,NA,NA,ranking,Riparian
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,RIPARIAN_FOREST_POFR,5,NA,NA,NA,ranking,Riparian - Cottonwood
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,RIPARIAN_FOREST_QULO,5,NA,NA,NA,ranking,Riparian - Valley Oak
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,RIPARIAN_FOREST_SALIX,5,NA,NA,NA,ranking,Riparian - Willow
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,RIPARIAN_FOREST_MIXED,5,NA,NA,NA,ranking,Riparian - Mixed Forest
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,RIPARIAN_SCRUB_INTRO,1,NA,NA,NA,ranking,Riparian - Introduced Scrub
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,RIPARIAN_SCRUB_SALIX,1,NA,NA,NA,ranking,Riparian - Willow Shrub
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,RIPARIAN_SCRUB_MIXED,1,NA,NA,NA,ranking,Riparian - Mixed Shrub
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,WETLAND_MANAGED,10,NA,NA,NA,ranking,Managed Wetland
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,WETLAND_MANAGED_PERENNIAL,10,NA,NA,NA,ranking,Managed Wetland - Perennial
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,WETLAND_MANAGED_SEASONAL,10,NA,NA,NA,ranking,Managed Wetland - Seasonal
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,WETLAND_OTHER,1,NA,NA,NA,ranking,Other Wetland
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,WOODLAND,0,NA,NA,NA,ranking,Woodland
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,SCRUB,0,NA,NA,NA,ranking,Scrub
-Biodiversity Support,avian conservation contribution,Wintering Waterbirds: Waterfowl,BARREN,0,NA,NA,NA,ranking,Barren
