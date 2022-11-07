@@ -44,38 +44,28 @@ ccv_invert = ccv_raw %>%
   mutate(value = case_when(value == 1 ~ 3,
                            value == 3 ~ 1,
                            TRUE ~ 2),
+         # rescale 1-3 to 1-10
+         value_rescale = case_when(value == 3 ~ 10,
+                                   value == 2 ~ 5,
+                                   value == 1 ~ 1),
          FACTOR_TYPE = 'RESILIENCE',
          FACTOR = gsub(' sensitivity| intolerance', '', FACTOR))
-
-# rescale
-ccv_invert2 = ccv_invert %>%
-  mutate(value = case_when(value == 3 ~ 10,
-                           value == 2 ~ 5,
-                           value == 1 ~ 0))
 
 ## estimate average------
 # across scorers, average score for each factor and landcover
 
 ccv_avg = ccv_invert %>%
   group_by(LANDCOVER, FACTOR_TYPE, FACTOR) %>%
-  summarize(SCORE_MEAN = mean(value, na.rm = TRUE),
+  summarize(SCORE_MEAN = mean(value_rescale, na.rm = TRUE),
+            # calculate SE on original scale
             SCORE_SE = sd(value, na.rm = TRUE)/sqrt(length(!is.na(value))),
-            SCORE_MIN = min(value, na.rm = TRUE),
-            SCORE_MAX = max(value, na.rm = TRUE),
+            SCORE_MIN = min(value_rescale, na.rm = TRUE),
+            SCORE_MAX = max(value_rescale, na.rm = TRUE),
             .groups = 'drop') %>%
   arrange(LANDCOVER, FACTOR_TYPE, FACTOR)
 
 ccv_avg %>% select(LANDCOVER:SCORE_MEAN) %>%
   pivot_wider(names_from = 'FACTOR', values_from = SCORE_MEAN)
-
-ccv_avg2 = ccv_invert2 %>%
-  group_by(LANDCOVER, FACTOR_TYPE, FACTOR) %>%
-  summarize(SCORE_MEAN = mean(value, na.rm = TRUE),
-            SCORE_SE = sd(value, na.rm = TRUE)/sqrt(length(!is.na(value))),
-            SCORE_MIN = min(value, na.rm = TRUE),
-            SCORE_MAX = max(value, na.rm = TRUE),
-            .groups = 'drop') %>%
-  arrange(LANDCOVER, FACTOR_TYPE, FACTOR)
 
 ## classify--------
 ccv_classify = codify_ccv(ccv_avg) %>%
@@ -84,11 +74,7 @@ ccv_classify = codify_ccv(ccv_avg) %>%
 ccv_classify %>% select(CODE_NAME, FACTOR, SCORE_MEAN) %>%
   pivot_wider(names_from = 'FACTOR', values_from = SCORE_MEAN)
 
-
-ccv_classify2 = codify_ccv(ccv_avg2) %>%
-  filter(LANDCOVER != 'cotton')
-
-write_csv(ccv_classify2, 'data_orig/cc_resilience_Peterson.csv')
+write_csv(ccv_classify, 'data_orig/cc_resilience_Peterson.csv')
 
 # SUPPLEMENTAL DATA--------
 ## Delta Adapts-----
@@ -220,7 +206,7 @@ ripdat_avg = ripdat_classify %>%
 write_csv(ripdat_avg, 'data_orig/cc_resilience_riparian.csv')
 
 # COMPILED-------
-ccv_compiled = bind_rows(ccv_classify2 %>% mutate(scorer = 'Peterson'),
+ccv_compiled = bind_rows(ccv_classify %>% mutate(scorer = 'Peterson'),
                          da_classify, ripdat_avg) %>%
   select(-LANDCOVER)
 write_csv(ccv_compiled, 'data_orig/cc_resilience_all.csv')
@@ -338,7 +324,7 @@ ccv_fill %>%
   facet_wrap(~FACTOR)
 
 # FINALIZE--------
-# add overall score and metadata
+# add metadata
 
 ccv_final = ccv_fill %>%
   # bind_rows(ccv_fill %>%
