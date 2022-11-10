@@ -135,34 +135,28 @@ write_csv(scores_county, 'output/scenario_scores_county.csv')
 # NET CHANGE------
 # compare each scenario to baseline
 
-# LANDCOVER
+## landcover----
 # for landcover, have to align field names to match fields expected in sum_change()
-totals_change = totals %>%
-  filter(!grepl('win', scenario)) %>%
+landcover_change = landcover %>% filter(!grepl('win', scenario)) %>%
   rename(SCORE_TOTAL = area) %>%
   mutate(SCORE_TOTAL_SE = 0) %>%
-  sum_change() %>%
-  select(-ends_with('SE', ignore.case = TRUE)) %>%
-  left_join(key %>% select(CODE_NAME, LABEL), by = 'CODE_NAME') %>%
-  select(scenario, CODE_NAME, LABEL, SCENARIO, BASELINE, net_change:change_pct)
-write_csv(totals_change, 'output/land_cover_change.csv')
+  DeltaMultipleBenefits::sum_change(scoredat = .) %>%
+  select(-ends_with('SE', ignore.case = TRUE))
+write_csv(landcover_change, 'output/netchange_landcover.csv')
 
-totals_change_county = totals_county %>%
-  filter(!grepl('win', scenario)) %>%
+landcover_change_county = landcover_county %>% filter(!grepl('win', scenario)) %>%
   rename(SCORE_TOTAL = area) %>%
   mutate(SCORE_TOTAL_SE = 0) %>%
-  sum_change() %>%
-  select(-ends_with('SE', ignore.case = TRUE)) %>%
-  left_join(key %>% select(CODE_NAME, LABEL), by = 'CODE_NAME') %>%
-  select(scenario, ZONE, CODE_NAME, LABEL, SCENARIO, BASELINE, net_change:change_pct)
-write_csv(totals_change_county, 'output/land_cover_change_county.csv')
+  DeltaMultipleBenefits::sum_change(scoredat = .) %>%
+  select(-ends_with('SE', ignore.case = TRUE))
+write_csv(landcover_change_county, 'output/netchange_landcover_county.csv')
 
-# METRICS & HABITAT
-net_change = sum_change(scores)
-write_csv(net_change, 'output/scenario_change.csv')
+## metrics-----
+scores_change = DeltaMultipleBenefits::sum_change(scores)
+write_csv(scores_change, 'output/netchange_scores.csv')
 
-net_change_county = sum_change(scores_county)
-write_csv(net_change_county, 'output/scenario_change_county.csv')
+scores_change_county = DeltaMultipleBenefits::sum_change(scores_county)
+write_csv(scores_change_county, 'output/netchange_scores_county.csv')
 
 
 # CALCULATE CHANGE MAPS--------
