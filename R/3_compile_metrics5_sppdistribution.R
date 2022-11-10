@@ -391,3 +391,28 @@ c(pred[[spp]], pred_orig[[spp]]) %>% diff() %>% plot(colNA = 'gray50')
 # --> [[slight variation for crane]]
 # scenario1 is fairly different from original for all (including divduck)
 # scenario2 is fairly different from original for all (except divduck) due to fixing pwater
+
+## thresholds---------
+# create versions of prediction maps that use model-specific thresholds to
+# convert probabilities into binary presence/absence
+purrr::map(names(scenarios)[1:3],
+           ~transform_SDM(
+             modlist = BRT_riparian,
+             pathin = 'GIS/prediction_rasters/riparian',
+             landscape_name = .x,
+             stat = 'equal_sens_spec',
+             pathout = 'GIS/prediction_rasters_threshold/riparian'))
+purrr::map(names(scenarios)[1:3],
+           ~transform_SDM(
+             modlist = waterbird_mods_fall,
+             pathin = 'GIS/prediction_rasters/waterbird_fall',
+             landscape_name = .x,
+             stat = 'equal_sens_spec',
+             pathout = 'GIS/prediction_rasters_threshold/waterbird_fall'))
+purrr::map(names(scenarios)[4:6],
+           ~transform_SDM(
+             modlist = waterbird_mods_win,
+             pathin = 'GIS/prediction_rasters/waterbird_win',
+             landscape_name = .x,
+             stat = 'equal_sens_spec',
+             pathout = 'GIS/prediction_rasters_threshold/waterbird_win'))
