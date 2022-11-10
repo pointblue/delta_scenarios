@@ -1,0 +1,931 @@
+scenario,ZONE,CODE_NAME,LABEL,area
+baseline,Contra Costa & Alameda,BARREN,Barren,17.009999999999998
+baseline,Contra Costa & Alameda,FIELD_CORN,Corn,4278.87
+baseline,Contra Costa & Alameda,FIELD_OTHER,Other Field Crops,522.36
+baseline,Contra Costa & Alameda,GRAIN&HAY_OTHER,Other Grains,665.4599999999999
+baseline,Contra Costa & Alameda,GRAIN&HAY_WHEAT,Wheat,1102.23
+baseline,Contra Costa & Alameda,GRASSLAND,Grassland,4193.91
+baseline,Contra Costa & Alameda,IDLE,Idle,2932.02
+baseline,Contra Costa & Alameda,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,5.85
+baseline,Contra Costa & Alameda,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1211.22
+baseline,Contra Costa & Alameda,PASTURE_ALFALFA,Alfalfa,1282.23
+baseline,Contra Costa & Alameda,PASTURE_OTHER,Other Pasture,4013.73
+baseline,Contra Costa & Alameda,RICE,Rice,0
+baseline,Contra Costa & Alameda,RIPARIAN,Riparian,1157.1299999999999
+baseline,Contra Costa & Alameda,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,71.55
+baseline,Contra Costa & Alameda,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,178.2
+baseline,Contra Costa & Alameda,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,25.38
+baseline,Contra Costa & Alameda,RIPARIAN_FOREST_SALIX,Riparian - Willow,123.3
+baseline,Contra Costa & Alameda,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,343.97999999999996
+baseline,Contra Costa & Alameda,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,24.84
+baseline,Contra Costa & Alameda,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,389.88
+baseline,Contra Costa & Alameda,ROW,Row Crops,1829.79
+baseline,Contra Costa & Alameda,SCRUB,Scrub,174.6
+baseline,Contra Costa & Alameda,URBAN,Urban,12869.189999999999
+baseline,Contra Costa & Alameda,VINEYARD,Vineyard,752.4
+baseline,Contra Costa & Alameda,WATER,Water,7042.23
+baseline,Contra Costa & Alameda,WETLAND_MANAGED,Managed Wetland,0
+baseline,Contra Costa & Alameda,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0
+baseline,Contra Costa & Alameda,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0
+baseline,Contra Costa & Alameda,WETLAND_OTHER,Other Wetland,2119.0499999999997
+baseline,Contra Costa & Alameda,WETLAND_TIDAL,Tidal Wetland,763.74
+baseline,Contra Costa & Alameda,WOODLAND,Woodland,174.6
+baseline,Sacramento,BARREN,Barren,3.96
+baseline,Sacramento,FIELD_CORN,Corn,6886.8
+baseline,Sacramento,FIELD_OTHER,Other Field Crops,1415.1599999999999
+baseline,Sacramento,GRAIN&HAY_OTHER,Other Grains,1197.54
+baseline,Sacramento,GRAIN&HAY_WHEAT,Wheat,1326.4199999999998
+baseline,Sacramento,GRASSLAND,Grassland,2056.95
+baseline,Sacramento,IDLE,Idle,4144.05
+baseline,Sacramento,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,8.01
+baseline,Sacramento,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,2755.62
+baseline,Sacramento,PASTURE_ALFALFA,Alfalfa,2372.58
+baseline,Sacramento,PASTURE_OTHER,Other Pasture,4359.42
+baseline,Sacramento,RICE,Rice,377.82
+baseline,Sacramento,RIPARIAN,Riparian,2404.62
+baseline,Sacramento,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,188.45999999999998
+baseline,Sacramento,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,432.71999999999997
+baseline,Sacramento,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,853.29
+baseline,Sacramento,RIPARIAN_FOREST_SALIX,Riparian - Willow,227.88
+baseline,Sacramento,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,219.23999999999998
+baseline,Sacramento,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,31.32
+baseline,Sacramento,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,451.71
+baseline,Sacramento,ROW,Row Crops,780.03
+baseline,Sacramento,SCRUB,Scrub,4.05
+baseline,Sacramento,URBAN,Urban,3327.75
+baseline,Sacramento,VINEYARD,Vineyard,4879.889999999999
+baseline,Sacramento,WATER,Water,5684.8499999999995
+baseline,Sacramento,WETLAND_MANAGED,Managed Wetland,1516.1399999999999
+baseline,Sacramento,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,798.66
+baseline,Sacramento,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,717.48
+baseline,Sacramento,WETLAND_OTHER,Other Wetland,1423.08
+baseline,Sacramento,WETLAND_TIDAL,Tidal Wetland,1042.2
+baseline,Sacramento,WOODLAND,Woodland,168.93
+baseline,San Joaquin,BARREN,Barren,161.73
+baseline,San Joaquin,FIELD_CORN,Corn,20821.77
+baseline,San Joaquin,FIELD_OTHER,Other Field Crops,2676.6
+baseline,San Joaquin,GRAIN&HAY_OTHER,Other Grains,2597.4
+baseline,San Joaquin,GRAIN&HAY_WHEAT,Wheat,6184.71
+baseline,San Joaquin,GRASSLAND,Grassland,5516.55
+baseline,San Joaquin,IDLE,Idle,14213.97
+baseline,San Joaquin,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,577.7099999999999
+baseline,San Joaquin,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,10368.539999999999
+baseline,San Joaquin,PASTURE_ALFALFA,Alfalfa,11286.18
+baseline,San Joaquin,PASTURE_OTHER,Other Pasture,3944.8799999999997
+baseline,San Joaquin,RICE,Rice,1211.3999999999999
+baseline,San Joaquin,RIPARIAN,Riparian,2964.24
+baseline,San Joaquin,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,125.46
+baseline,San Joaquin,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,686.3399999999999
+baseline,San Joaquin,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,652.23
+baseline,San Joaquin,RIPARIAN_FOREST_SALIX,Riparian - Willow,391.14
+baseline,San Joaquin,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,192.6
+baseline,San Joaquin,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,51.93
+baseline,San Joaquin,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,864.54
+baseline,San Joaquin,ROW,Row Crops,12461.31
+baseline,San Joaquin,SCRUB,Scrub,28.169999999999998
+baseline,San Joaquin,URBAN,Urban,16702.11
+baseline,San Joaquin,VINEYARD,Vineyard,5103.8099999999995
+baseline,San Joaquin,WATER,Water,7714.98
+baseline,San Joaquin,WETLAND_MANAGED,Managed Wetland,339.75
+baseline,San Joaquin,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,2.9699999999999998
+baseline,San Joaquin,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,336.78
+baseline,San Joaquin,WETLAND_OTHER,Other Wetland,2920.14
+baseline,San Joaquin,WETLAND_TIDAL,Tidal Wetland,449.28
+baseline,San Joaquin,WOODLAND,Woodland,317.52
+baseline,Solano,BARREN,Barren,7.83
+baseline,Solano,FIELD_CORN,Corn,2421.36
+baseline,Solano,FIELD_OTHER,Other Field Crops,1804.77
+baseline,Solano,GRAIN&HAY_OTHER,Other Grains,1633.95
+baseline,Solano,GRAIN&HAY_WHEAT,Wheat,1296.99
+baseline,Solano,GRASSLAND,Grassland,5168.429999999999
+baseline,Solano,IDLE,Idle,2252.97
+baseline,Solano,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,18.99
+baseline,Solano,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1073.43
+baseline,Solano,PASTURE_ALFALFA,Alfalfa,3235.14
+baseline,Solano,PASTURE_OTHER,Other Pasture,7880.04
+baseline,Solano,RICE,Rice,0
+baseline,Solano,RIPARIAN,Riparian,693.18
+baseline,Solano,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,103.86
+baseline,Solano,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,99.81
+baseline,Solano,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,53.73
+baseline,Solano,RIPARIAN_FOREST_SALIX,Riparian - Willow,84.24
+baseline,Solano,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,135.72
+baseline,Solano,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,1.53
+baseline,Solano,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,214.29
+baseline,Solano,ROW,Row Crops,587.52
+baseline,Solano,SCRUB,Scrub,33.57
+baseline,Solano,URBAN,Urban,622.17
+baseline,Solano,VINEYARD,Vineyard,706.5899999999999
+baseline,Solano,WATER,Water,4576.95
+baseline,Solano,WETLAND_MANAGED,Managed Wetland,824.22
+baseline,Solano,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,33.48
+baseline,Solano,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,790.74
+baseline,Solano,WETLAND_OTHER,Other Wetland,1694.1599999999999
+baseline,Solano,WETLAND_TIDAL,Tidal Wetland,687.51
+baseline,Solano,WOODLAND,Woodland,43.11
+baseline,Yolo,BARREN,Barren,0
+baseline,Yolo,FIELD_CORN,Corn,470.60999999999996
+baseline,Yolo,FIELD_OTHER,Other Field Crops,1586.79
+baseline,Yolo,GRAIN&HAY_OTHER,Other Grains,1746.09
+baseline,Yolo,GRAIN&HAY_WHEAT,Wheat,1759.23
+baseline,Yolo,GRASSLAND,Grassland,3555.9
+baseline,Yolo,IDLE,Idle,3066.2999999999997
+baseline,Yolo,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,33.21
+baseline,Yolo,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,378.71999999999997
+baseline,Yolo,PASTURE_ALFALFA,Alfalfa,995.49
+baseline,Yolo,PASTURE_OTHER,Other Pasture,3840.0299999999997
+baseline,Yolo,RICE,Rice,1090.71
+baseline,Yolo,RIPARIAN,Riparian,1135.17
+baseline,Yolo,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,105.66
+baseline,Yolo,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,317.07
+baseline,Yolo,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,394.74
+baseline,Yolo,RIPARIAN_FOREST_SALIX,Riparian - Willow,145.44
+baseline,Yolo,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,25.2
+baseline,Yolo,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,5.13
+baseline,Yolo,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,141.93
+baseline,Yolo,ROW,Row Crops,1440.6299999999999
+baseline,Yolo,SCRUB,Scrub,0
+baseline,Yolo,URBAN,Urban,3263.31
+baseline,Yolo,VINEYARD,Vineyard,4862.25
+baseline,Yolo,WATER,Water,1752.12
+baseline,Yolo,WETLAND_MANAGED,Managed Wetland,3329.0099999999998
+baseline,Yolo,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,104.49
+baseline,Yolo,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,3224.52
+baseline,Yolo,WETLAND_OTHER,Other Wetland,2341.71
+baseline,Yolo,WETLAND_TIDAL,Tidal Wetland,616.14
+baseline,Yolo,WOODLAND,Woodland,58.5
+baseline_win,Contra Costa & Alameda,BARREN,Barren,17.009999999999998
+baseline_win,Contra Costa & Alameda,FIELD_CORN,Corn,3801.87
+baseline_win,Contra Costa & Alameda,FIELD_OTHER,Other Field Crops,490.68
+baseline_win,Contra Costa & Alameda,GRAIN&HAY_OTHER,Other Grains,1217.61
+baseline_win,Contra Costa & Alameda,GRAIN&HAY_WHEAT,Wheat,1137.96
+baseline_win,Contra Costa & Alameda,GRASSLAND,Grassland,4193.91
+baseline_win,Contra Costa & Alameda,IDLE,Idle,2932.02
+baseline_win,Contra Costa & Alameda,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,5.85
+baseline_win,Contra Costa & Alameda,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1211.22
+baseline_win,Contra Costa & Alameda,PASTURE_ALFALFA,Alfalfa,1270.8899999999999
+baseline_win,Contra Costa & Alameda,PASTURE_OTHER,Other Pasture,3995.8199999999997
+baseline_win,Contra Costa & Alameda,RICE,Rice,0
+baseline_win,Contra Costa & Alameda,RIPARIAN,Riparian,1157.1299999999999
+baseline_win,Contra Costa & Alameda,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,71.55
+baseline_win,Contra Costa & Alameda,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,178.2
+baseline_win,Contra Costa & Alameda,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,25.38
+baseline_win,Contra Costa & Alameda,RIPARIAN_FOREST_SALIX,Riparian - Willow,123.3
+baseline_win,Contra Costa & Alameda,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,343.97999999999996
+baseline_win,Contra Costa & Alameda,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,24.84
+baseline_win,Contra Costa & Alameda,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,389.88
+baseline_win,Contra Costa & Alameda,ROW,Row Crops,1779.84
+baseline_win,Contra Costa & Alameda,SCRUB,Scrub,174.6
+baseline_win,Contra Costa & Alameda,URBAN,Urban,12869.189999999999
+baseline_win,Contra Costa & Alameda,VINEYARD,Vineyard,752.4
+baseline_win,Contra Costa & Alameda,WATER,Water,7042.23
+baseline_win,Contra Costa & Alameda,WETLAND_MANAGED,Managed Wetland,0
+baseline_win,Contra Costa & Alameda,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0
+baseline_win,Contra Costa & Alameda,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0
+baseline_win,Contra Costa & Alameda,WETLAND_OTHER,Other Wetland,2119.0499999999997
+baseline_win,Contra Costa & Alameda,WETLAND_TIDAL,Tidal Wetland,763.74
+baseline_win,Contra Costa & Alameda,WOODLAND,Woodland,174.6
+baseline_win,Sacramento,BARREN,Barren,3.96
+baseline_win,Sacramento,FIELD_CORN,Corn,5009.67
+baseline_win,Sacramento,FIELD_OTHER,Other Field Crops,920.52
+baseline_win,Sacramento,GRAIN&HAY_OTHER,Other Grains,3592.5299999999997
+baseline_win,Sacramento,GRAIN&HAY_WHEAT,Wheat,1381.86
+baseline_win,Sacramento,GRASSLAND,Grassland,2056.95
+baseline_win,Sacramento,IDLE,Idle,4144.05
+baseline_win,Sacramento,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,8.01
+baseline_win,Sacramento,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,2755.62
+baseline_win,Sacramento,PASTURE_ALFALFA,Alfalfa,2349.36
+baseline_win,Sacramento,PASTURE_OTHER,Other Pasture,4318.11
+baseline_win,Sacramento,RICE,Rice,377.82
+baseline_win,Sacramento,RIPARIAN,Riparian,2404.62
+baseline_win,Sacramento,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,188.45999999999998
+baseline_win,Sacramento,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,432.71999999999997
+baseline_win,Sacramento,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,853.29
+baseline_win,Sacramento,RIPARIAN_FOREST_SALIX,Riparian - Willow,227.88
+baseline_win,Sacramento,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,219.23999999999998
+baseline_win,Sacramento,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,31.32
+baseline_win,Sacramento,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,451.71
+baseline_win,Sacramento,ROW,Row Crops,765.9
+baseline_win,Sacramento,SCRUB,Scrub,4.05
+baseline_win,Sacramento,URBAN,Urban,3327.75
+baseline_win,Sacramento,VINEYARD,Vineyard,4879.889999999999
+baseline_win,Sacramento,WATER,Water,5684.8499999999995
+baseline_win,Sacramento,WETLAND_MANAGED,Managed Wetland,1516.1399999999999
+baseline_win,Sacramento,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,798.66
+baseline_win,Sacramento,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,717.48
+baseline_win,Sacramento,WETLAND_OTHER,Other Wetland,1423.08
+baseline_win,Sacramento,WETLAND_TIDAL,Tidal Wetland,1042.2
+baseline_win,Sacramento,WOODLAND,Woodland,168.93
+baseline_win,San Joaquin,BARREN,Barren,161.73
+baseline_win,San Joaquin,FIELD_CORN,Corn,13318.74
+baseline_win,San Joaquin,FIELD_OTHER,Other Field Crops,1532.52
+baseline_win,San Joaquin,GRAIN&HAY_OTHER,Other Grains,9377.55
+baseline_win,San Joaquin,GRAIN&HAY_WHEAT,Wheat,9094.59
+baseline_win,San Joaquin,GRASSLAND,Grassland,5516.55
+baseline_win,San Joaquin,IDLE,Idle,14213.97
+baseline_win,San Joaquin,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,577.7099999999999
+baseline_win,San Joaquin,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,10368.539999999999
+baseline_win,San Joaquin,PASTURE_ALFALFA,Alfalfa,11541.42
+baseline_win,San Joaquin,PASTURE_OTHER,Other Pasture,3779.64
+baseline_win,San Joaquin,RICE,Rice,1211.3999999999999
+baseline_win,San Joaquin,RIPARIAN,Riparian,2964.24
+baseline_win,San Joaquin,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,125.46
+baseline_win,San Joaquin,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,686.3399999999999
+baseline_win,San Joaquin,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,652.23
+baseline_win,San Joaquin,RIPARIAN_FOREST_SALIX,Riparian - Willow,391.14
+baseline_win,San Joaquin,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,192.6
+baseline_win,San Joaquin,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,51.93
+baseline_win,San Joaquin,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,864.54
+baseline_win,San Joaquin,ROW,Row Crops,11328.39
+baseline_win,San Joaquin,SCRUB,Scrub,28.169999999999998
+baseline_win,San Joaquin,URBAN,Urban,16702.11
+baseline_win,San Joaquin,VINEYARD,Vineyard,5103.8099999999995
+baseline_win,San Joaquin,WATER,Water,7714.98
+baseline_win,San Joaquin,WETLAND_MANAGED,Managed Wetland,339.75
+baseline_win,San Joaquin,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,2.9699999999999998
+baseline_win,San Joaquin,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,336.78
+baseline_win,San Joaquin,WETLAND_OTHER,Other Wetland,2920.14
+baseline_win,San Joaquin,WETLAND_TIDAL,Tidal Wetland,449.28
+baseline_win,San Joaquin,WOODLAND,Woodland,317.52
+baseline_win,Solano,BARREN,Barren,7.83
+baseline_win,Solano,FIELD_CORN,Corn,887.85
+baseline_win,Solano,FIELD_OTHER,Other Field Crops,1722.24
+baseline_win,Solano,GRAIN&HAY_OTHER,Other Grains,2639.0699999999997
+baseline_win,Solano,GRAIN&HAY_WHEAT,Wheat,1976.22
+baseline_win,Solano,GRASSLAND,Grassland,5168.429999999999
+baseline_win,Solano,IDLE,Idle,2252.97
+baseline_win,Solano,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,18.99
+baseline_win,Solano,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1073.43
+baseline_win,Solano,PASTURE_ALFALFA,Alfalfa,3207.96
+baseline_win,Solano,PASTURE_OTHER,Other Pasture,7873.83
+baseline_win,Solano,RICE,Rice,0
+baseline_win,Solano,RIPARIAN,Riparian,693.18
+baseline_win,Solano,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,103.86
+baseline_win,Solano,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,99.81
+baseline_win,Solano,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,53.73
+baseline_win,Solano,RIPARIAN_FOREST_SALIX,Riparian - Willow,84.24
+baseline_win,Solano,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,135.72
+baseline_win,Solano,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,1.53
+baseline_win,Solano,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,214.29
+baseline_win,Solano,ROW,Row Crops,552.6
+baseline_win,Solano,SCRUB,Scrub,33.57
+baseline_win,Solano,URBAN,Urban,622.17
+baseline_win,Solano,VINEYARD,Vineyard,706.5899999999999
+baseline_win,Solano,WATER,Water,4576.95
+baseline_win,Solano,WETLAND_MANAGED,Managed Wetland,824.22
+baseline_win,Solano,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,33.48
+baseline_win,Solano,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,790.74
+baseline_win,Solano,WETLAND_OTHER,Other Wetland,1694.1599999999999
+baseline_win,Solano,WETLAND_TIDAL,Tidal Wetland,687.51
+baseline_win,Solano,WOODLAND,Woodland,43.11
+baseline_win,Yolo,BARREN,Barren,0
+baseline_win,Yolo,FIELD_CORN,Corn,352.8
+baseline_win,Yolo,FIELD_OTHER,Other Field Crops,1432.71
+baseline_win,Yolo,GRAIN&HAY_OTHER,Other Grains,2103.75
+baseline_win,Yolo,GRAIN&HAY_WHEAT,Wheat,1769.1299999999999
+baseline_win,Yolo,GRASSLAND,Grassland,3555.9
+baseline_win,Yolo,IDLE,Idle,3066.2999999999997
+baseline_win,Yolo,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,33.21
+baseline_win,Yolo,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,378.71999999999997
+baseline_win,Yolo,PASTURE_ALFALFA,Alfalfa,995.49
+baseline_win,Yolo,PASTURE_OTHER,Other Pasture,3840.0299999999997
+baseline_win,Yolo,RICE,Rice,1090.71
+baseline_win,Yolo,RIPARIAN,Riparian,1135.17
+baseline_win,Yolo,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,105.66
+baseline_win,Yolo,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,317.07
+baseline_win,Yolo,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,394.74
+baseline_win,Yolo,RIPARIAN_FOREST_SALIX,Riparian - Willow,145.44
+baseline_win,Yolo,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,25.2
+baseline_win,Yolo,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,5.13
+baseline_win,Yolo,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,141.93
+baseline_win,Yolo,ROW,Row Crops,1344.96
+baseline_win,Yolo,SCRUB,Scrub,0
+baseline_win,Yolo,URBAN,Urban,3263.31
+baseline_win,Yolo,VINEYARD,Vineyard,4862.25
+baseline_win,Yolo,WATER,Water,1752.12
+baseline_win,Yolo,WETLAND_MANAGED,Managed Wetland,3329.0099999999998
+baseline_win,Yolo,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,104.49
+baseline_win,Yolo,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,3224.52
+baseline_win,Yolo,WETLAND_OTHER,Other Wetland,2341.71
+baseline_win,Yolo,WETLAND_TIDAL,Tidal Wetland,616.14
+baseline_win,Yolo,WOODLAND,Woodland,58.5
+scenario1_restoration,Contra Costa & Alameda,BARREN,Barren,17.009999999999998
+scenario1_restoration,Contra Costa & Alameda,FIELD_CORN,Corn,4278.87
+scenario1_restoration,Contra Costa & Alameda,FIELD_OTHER,Other Field Crops,522.36
+scenario1_restoration,Contra Costa & Alameda,GRAIN&HAY_OTHER,Other Grains,665.4599999999999
+scenario1_restoration,Contra Costa & Alameda,GRAIN&HAY_WHEAT,Wheat,1102.23
+scenario1_restoration,Contra Costa & Alameda,GRASSLAND,Grassland,4192.11
+scenario1_restoration,Contra Costa & Alameda,IDLE,Idle,2930.7599999999998
+scenario1_restoration,Contra Costa & Alameda,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,5.85
+scenario1_restoration,Contra Costa & Alameda,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1211.22
+scenario1_restoration,Contra Costa & Alameda,PASTURE_ALFALFA,Alfalfa,1282.23
+scenario1_restoration,Contra Costa & Alameda,PASTURE_OTHER,Other Pasture,3991.3199999999997
+scenario1_restoration,Contra Costa & Alameda,RICE,Rice,0
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN,Riparian,1158.75
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,71.55
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,179.01
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,25.65
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_FOREST_SALIX,Riparian - Willow,123.3
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,343.97999999999996
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,24.84
+scenario1_restoration,Contra Costa & Alameda,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,390.41999999999996
+scenario1_restoration,Contra Costa & Alameda,ROW,Row Crops,1829.79
+scenario1_restoration,Contra Costa & Alameda,SCRUB,Scrub,174.6
+scenario1_restoration,Contra Costa & Alameda,URBAN,Urban,12868.109999999999
+scenario1_restoration,Contra Costa & Alameda,VINEYARD,Vineyard,752.4
+scenario1_restoration,Contra Costa & Alameda,WATER,Water,7042.23
+scenario1_restoration,Contra Costa & Alameda,WETLAND_MANAGED,Managed Wetland,32.58
+scenario1_restoration,Contra Costa & Alameda,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0
+scenario1_restoration,Contra Costa & Alameda,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,32.58
+scenario1_restoration,Contra Costa & Alameda,WETLAND_OTHER,Other Wetland,2111.49
+scenario1_restoration,Contra Costa & Alameda,WETLAND_TIDAL,Tidal Wetland,763.74
+scenario1_restoration,Contra Costa & Alameda,WOODLAND,Woodland,174.51
+scenario1_restoration,Sacramento,BARREN,Barren,3.33
+scenario1_restoration,Sacramento,FIELD_CORN,Corn,6646.5
+scenario1_restoration,Sacramento,FIELD_OTHER,Other Field Crops,1384.02
+scenario1_restoration,Sacramento,GRAIN&HAY_OTHER,Other Grains,1135.08
+scenario1_restoration,Sacramento,GRAIN&HAY_WHEAT,Wheat,1241.55
+scenario1_restoration,Sacramento,GRASSLAND,Grassland,1866.78
+scenario1_restoration,Sacramento,IDLE,Idle,3870.45
+scenario1_restoration,Sacramento,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,8.01
+scenario1_restoration,Sacramento,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,2694.06
+scenario1_restoration,Sacramento,PASTURE_ALFALFA,Alfalfa,2300.22
+scenario1_restoration,Sacramento,PASTURE_OTHER,Other Pasture,3747.42
+scenario1_restoration,Sacramento,RICE,Rice,213.92999999999998
+scenario1_restoration,Sacramento,RIPARIAN,Riparian,3170.3399999999997
+scenario1_restoration,Sacramento,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,281.07
+scenario1_restoration,Sacramento,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,535.3199999999999
+scenario1_restoration,Sacramento,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,1245.87
+scenario1_restoration,Sacramento,RIPARIAN_FOREST_SALIX,Riparian - Willow,261.81
+scenario1_restoration,Sacramento,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,219.23999999999998
+scenario1_restoration,Sacramento,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,32.4
+scenario1_restoration,Sacramento,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,594.63
+scenario1_restoration,Sacramento,ROW,Row Crops,759.51
+scenario1_restoration,Sacramento,SCRUB,Scrub,2.9699999999999998
+scenario1_restoration,Sacramento,URBAN,Urban,3325.95
+scenario1_restoration,Sacramento,VINEYARD,Vineyard,4875.75
+scenario1_restoration,Sacramento,WATER,Water,5684.8499999999995
+scenario1_restoration,Sacramento,WETLAND_MANAGED,Managed Wetland,2804.04
+scenario1_restoration,Sacramento,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,1970.28
+scenario1_restoration,Sacramento,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,833.76
+scenario1_restoration,Sacramento,WETLAND_OTHER,Other Wetland,1210.4099999999999
+scenario1_restoration,Sacramento,WETLAND_TIDAL,Tidal Wetland,1042.2
+scenario1_restoration,Sacramento,WOODLAND,Woodland,148.5
+scenario1_restoration,San Joaquin,BARREN,Barren,149.04
+scenario1_restoration,San Joaquin,FIELD_CORN,Corn,20597.67
+scenario1_restoration,San Joaquin,FIELD_OTHER,Other Field Crops,2565.63
+scenario1_restoration,San Joaquin,GRAIN&HAY_OTHER,Other Grains,2574.9
+scenario1_restoration,San Joaquin,GRAIN&HAY_WHEAT,Wheat,6064.29
+scenario1_restoration,San Joaquin,GRASSLAND,Grassland,5026.41
+scenario1_restoration,San Joaquin,IDLE,Idle,13847.31
+scenario1_restoration,San Joaquin,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,577.7099999999999
+scenario1_restoration,San Joaquin,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,10231.199999999999
+scenario1_restoration,San Joaquin,PASTURE_ALFALFA,Alfalfa,11116.89
+scenario1_restoration,San Joaquin,PASTURE_OTHER,Other Pasture,3840.12
+scenario1_restoration,San Joaquin,RICE,Rice,1211.3999999999999
+scenario1_restoration,San Joaquin,RIPARIAN,Riparian,4969.17
+scenario1_restoration,San Joaquin,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,161.1
+scenario1_restoration,San Joaquin,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,1172.7
+scenario1_restoration,San Joaquin,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,1461.69
+scenario1_restoration,San Joaquin,RIPARIAN_FOREST_SALIX,Riparian - Willow,542.0699999999999
+scenario1_restoration,San Joaquin,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,192.6
+scenario1_restoration,San Joaquin,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,51.93
+scenario1_restoration,San Joaquin,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,1387.08
+scenario1_restoration,San Joaquin,ROW,Row Crops,12292.56
+scenario1_restoration,San Joaquin,SCRUB,Scrub,28.169999999999998
+scenario1_restoration,San Joaquin,URBAN,Urban,16701.75
+scenario1_restoration,San Joaquin,VINEYARD,Vineyard,5043.0599999999995
+scenario1_restoration,San Joaquin,WATER,Water,7714.98
+scenario1_restoration,San Joaquin,WETLAND_MANAGED,Managed Wetland,369.63
+scenario1_restoration,San Joaquin,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,2.9699999999999998
+scenario1_restoration,San Joaquin,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,366.65999999999997
+scenario1_restoration,San Joaquin,WETLAND_OTHER,Other Wetland,2889.99
+scenario1_restoration,San Joaquin,WETLAND_TIDAL,Tidal Wetland,449.28
+scenario1_restoration,San Joaquin,WOODLAND,Woodland,301.59
+scenario1_restoration,Solano,BARREN,Barren,7.83
+scenario1_restoration,Solano,FIELD_CORN,Corn,2405.97
+scenario1_restoration,Solano,FIELD_OTHER,Other Field Crops,1800.54
+scenario1_restoration,Solano,GRAIN&HAY_OTHER,Other Grains,1629.8999999999999
+scenario1_restoration,Solano,GRAIN&HAY_WHEAT,Wheat,1293.84
+scenario1_restoration,Solano,GRASSLAND,Grassland,5069.25
+scenario1_restoration,Solano,IDLE,Idle,2230.92
+scenario1_restoration,Solano,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,18.99
+scenario1_restoration,Solano,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1073.43
+scenario1_restoration,Solano,PASTURE_ALFALFA,Alfalfa,3197.6099999999997
+scenario1_restoration,Solano,PASTURE_OTHER,Other Pasture,7821.179999999999
+scenario1_restoration,Solano,RICE,Rice,0
+scenario1_restoration,Solano,RIPARIAN,Riparian,825.3
+scenario1_restoration,Solano,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,159.29999999999998
+scenario1_restoration,Solano,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,107.00999999999999
+scenario1_restoration,Solano,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,74.07
+scenario1_restoration,Solano,RIPARIAN_FOREST_SALIX,Riparian - Willow,91.61999999999999
+scenario1_restoration,Solano,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,135.72
+scenario1_restoration,Solano,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,1.53
+scenario1_restoration,Solano,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,256.05
+scenario1_restoration,Solano,ROW,Row Crops,578.25
+scenario1_restoration,Solano,SCRUB,Scrub,33.39
+scenario1_restoration,Solano,URBAN,Urban,622.17
+scenario1_restoration,Solano,VINEYARD,Vineyard,706.5899999999999
+scenario1_restoration,Solano,WATER,Water,4576.95
+scenario1_restoration,Solano,WETLAND_MANAGED,Managed Wetland,972.18
+scenario1_restoration,Solano,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,33.48
+scenario1_restoration,Solano,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,938.6999999999999
+scenario1_restoration,Solano,WETLAND_OTHER,Other Wetland,1670.76
+scenario1_restoration,Solano,WETLAND_TIDAL,Tidal Wetland,687.51
+scenario1_restoration,Solano,WOODLAND,Woodland,40.32
+scenario1_restoration,Yolo,BARREN,Barren,0
+scenario1_restoration,Yolo,FIELD_CORN,Corn,414
+scenario1_restoration,Yolo,FIELD_OTHER,Other Field Crops,1278.8999999999999
+scenario1_restoration,Yolo,GRAIN&HAY_OTHER,Other Grains,1601.28
+scenario1_restoration,Yolo,GRAIN&HAY_WHEAT,Wheat,1579.23
+scenario1_restoration,Yolo,GRASSLAND,Grassland,3127.77
+scenario1_restoration,Yolo,IDLE,Idle,2658.7799999999997
+scenario1_restoration,Yolo,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,33.21
+scenario1_restoration,Yolo,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,378.63
+scenario1_restoration,Yolo,PASTURE_ALFALFA,Alfalfa,857.88
+scenario1_restoration,Yolo,PASTURE_OTHER,Other Pasture,3069.3599999999997
+scenario1_restoration,Yolo,RICE,Rice,785.88
+scenario1_restoration,Yolo,RIPARIAN,Riparian,2219.85
+scenario1_restoration,Yolo,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,131.76
+scenario1_restoration,Yolo,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,326.34
+scenario1_restoration,Yolo,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,1437.03
+scenario1_restoration,Yolo,RIPARIAN_FOREST_SALIX,Riparian - Willow,146.88
+scenario1_restoration,Yolo,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,25.2
+scenario1_restoration,Yolo,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,5.13
+scenario1_restoration,Yolo,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,147.51
+scenario1_restoration,Yolo,ROW,Row Crops,1276.83
+scenario1_restoration,Yolo,SCRUB,Scrub,0
+scenario1_restoration,Yolo,URBAN,Urban,3263.31
+scenario1_restoration,Yolo,VINEYARD,Vineyard,4719.87
+scenario1_restoration,Yolo,WATER,Water,1752.12
+scenario1_restoration,Yolo,WETLAND_MANAGED,Managed Wetland,5574.69
+scenario1_restoration,Yolo,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,104.49
+scenario1_restoration,Yolo,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,5470.2
+scenario1_restoration,Yolo,WETLAND_OTHER,Other Wetland,2059.65
+scenario1_restoration,Yolo,WETLAND_TIDAL,Tidal Wetland,616.14
+scenario1_restoration,Yolo,WOODLAND,Woodland,54.54
+scenario1_restoration_win,Contra Costa & Alameda,BARREN,Barren,17.009999999999998
+scenario1_restoration_win,Contra Costa & Alameda,FIELD_CORN,Corn,3801.87
+scenario1_restoration_win,Contra Costa & Alameda,FIELD_OTHER,Other Field Crops,490.68
+scenario1_restoration_win,Contra Costa & Alameda,GRAIN&HAY_OTHER,Other Grains,1217.61
+scenario1_restoration_win,Contra Costa & Alameda,GRAIN&HAY_WHEAT,Wheat,1137.96
+scenario1_restoration_win,Contra Costa & Alameda,GRASSLAND,Grassland,4192.11
+scenario1_restoration_win,Contra Costa & Alameda,IDLE,Idle,2930.7599999999998
+scenario1_restoration_win,Contra Costa & Alameda,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,5.85
+scenario1_restoration_win,Contra Costa & Alameda,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1211.22
+scenario1_restoration_win,Contra Costa & Alameda,PASTURE_ALFALFA,Alfalfa,1270.8899999999999
+scenario1_restoration_win,Contra Costa & Alameda,PASTURE_OTHER,Other Pasture,3973.41
+scenario1_restoration_win,Contra Costa & Alameda,RICE,Rice,0
+scenario1_restoration_win,Contra Costa & Alameda,RIPARIAN,Riparian,1158.75
+scenario1_restoration_win,Contra Costa & Alameda,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,71.55
+scenario1_restoration_win,Contra Costa & Alameda,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,179.01
+scenario1_restoration_win,Contra Costa & Alameda,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,25.65
+scenario1_restoration_win,Contra Costa & Alameda,RIPARIAN_FOREST_SALIX,Riparian - Willow,123.3
+scenario1_restoration_win,Contra Costa & Alameda,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,343.97999999999996
+scenario1_restoration_win,Contra Costa & Alameda,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,24.84
+scenario1_restoration_win,Contra Costa & Alameda,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,390.41999999999996
+scenario1_restoration_win,Contra Costa & Alameda,ROW,Row Crops,1779.84
+scenario1_restoration_win,Contra Costa & Alameda,SCRUB,Scrub,174.6
+scenario1_restoration_win,Contra Costa & Alameda,URBAN,Urban,12868.109999999999
+scenario1_restoration_win,Contra Costa & Alameda,VINEYARD,Vineyard,752.4
+scenario1_restoration_win,Contra Costa & Alameda,WATER,Water,7042.23
+scenario1_restoration_win,Contra Costa & Alameda,WETLAND_MANAGED,Managed Wetland,32.58
+scenario1_restoration_win,Contra Costa & Alameda,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0
+scenario1_restoration_win,Contra Costa & Alameda,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,32.58
+scenario1_restoration_win,Contra Costa & Alameda,WETLAND_OTHER,Other Wetland,2111.49
+scenario1_restoration_win,Contra Costa & Alameda,WETLAND_TIDAL,Tidal Wetland,763.74
+scenario1_restoration_win,Contra Costa & Alameda,WOODLAND,Woodland,174.51
+scenario1_restoration_win,Sacramento,BARREN,Barren,3.33
+scenario1_restoration_win,Sacramento,FIELD_CORN,Corn,4874.22
+scenario1_restoration_win,Sacramento,FIELD_OTHER,Other Field Crops,889.38
+scenario1_restoration_win,Sacramento,GRAIN&HAY_OTHER,Other Grains,3425.22
+scenario1_restoration_win,Sacramento,GRAIN&HAY_WHEAT,Wheat,1296.99
+scenario1_restoration_win,Sacramento,GRASSLAND,Grassland,1866.78
+scenario1_restoration_win,Sacramento,IDLE,Idle,3870.45
+scenario1_restoration_win,Sacramento,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,8.01
+scenario1_restoration_win,Sacramento,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,2694.06
+scenario1_restoration_win,Sacramento,PASTURE_ALFALFA,Alfalfa,2277
+scenario1_restoration_win,Sacramento,PASTURE_OTHER,Other Pasture,3706.1099999999997
+scenario1_restoration_win,Sacramento,RICE,Rice,213.92999999999998
+scenario1_restoration_win,Sacramento,RIPARIAN,Riparian,3170.3399999999997
+scenario1_restoration_win,Sacramento,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,281.07
+scenario1_restoration_win,Sacramento,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,535.3199999999999
+scenario1_restoration_win,Sacramento,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,1245.87
+scenario1_restoration_win,Sacramento,RIPARIAN_FOREST_SALIX,Riparian - Willow,261.81
+scenario1_restoration_win,Sacramento,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,219.23999999999998
+scenario1_restoration_win,Sacramento,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,32.4
+scenario1_restoration_win,Sacramento,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,594.63
+scenario1_restoration_win,Sacramento,ROW,Row Crops,745.38
+scenario1_restoration_win,Sacramento,SCRUB,Scrub,2.9699999999999998
+scenario1_restoration_win,Sacramento,URBAN,Urban,3325.95
+scenario1_restoration_win,Sacramento,VINEYARD,Vineyard,4875.75
+scenario1_restoration_win,Sacramento,WATER,Water,5684.8499999999995
+scenario1_restoration_win,Sacramento,WETLAND_MANAGED,Managed Wetland,2804.04
+scenario1_restoration_win,Sacramento,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,1970.28
+scenario1_restoration_win,Sacramento,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,833.76
+scenario1_restoration_win,Sacramento,WETLAND_OTHER,Other Wetland,1210.4099999999999
+scenario1_restoration_win,Sacramento,WETLAND_TIDAL,Tidal Wetland,1042.2
+scenario1_restoration_win,Sacramento,WOODLAND,Woodland,148.5
+scenario1_restoration_win,San Joaquin,BARREN,Barren,149.04
+scenario1_restoration_win,San Joaquin,FIELD_CORN,Corn,13268.789999999999
+scenario1_restoration_win,San Joaquin,FIELD_OTHER,Other Field Crops,1488.87
+scenario1_restoration_win,San Joaquin,GRAIN&HAY_OTHER,Other Grains,9166.14
+scenario1_restoration_win,San Joaquin,GRAIN&HAY_WHEAT,Wheat,8924.85
+scenario1_restoration_win,San Joaquin,GRASSLAND,Grassland,5026.41
+scenario1_restoration_win,San Joaquin,IDLE,Idle,13847.31
+scenario1_restoration_win,San Joaquin,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,577.7099999999999
+scenario1_restoration_win,San Joaquin,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,10231.199999999999
+scenario1_restoration_win,San Joaquin,PASTURE_ALFALFA,Alfalfa,11372.13
+scenario1_restoration_win,San Joaquin,PASTURE_OTHER,Other Pasture,3674.8799999999997
+scenario1_restoration_win,San Joaquin,RICE,Rice,1211.3999999999999
+scenario1_restoration_win,San Joaquin,RIPARIAN,Riparian,4969.17
+scenario1_restoration_win,San Joaquin,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,161.1
+scenario1_restoration_win,San Joaquin,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,1172.7
+scenario1_restoration_win,San Joaquin,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,1461.69
+scenario1_restoration_win,San Joaquin,RIPARIAN_FOREST_SALIX,Riparian - Willow,542.0699999999999
+scenario1_restoration_win,San Joaquin,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,192.6
+scenario1_restoration_win,San Joaquin,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,51.93
+scenario1_restoration_win,San Joaquin,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,1387.08
+scenario1_restoration_win,San Joaquin,ROW,Row Crops,11156.4
+scenario1_restoration_win,San Joaquin,SCRUB,Scrub,28.169999999999998
+scenario1_restoration_win,San Joaquin,URBAN,Urban,16701.75
+scenario1_restoration_win,San Joaquin,VINEYARD,Vineyard,5043.0599999999995
+scenario1_restoration_win,San Joaquin,WATER,Water,7714.98
+scenario1_restoration_win,San Joaquin,WETLAND_MANAGED,Managed Wetland,369.63
+scenario1_restoration_win,San Joaquin,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,2.9699999999999998
+scenario1_restoration_win,San Joaquin,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,366.65999999999997
+scenario1_restoration_win,San Joaquin,WETLAND_OTHER,Other Wetland,2889.99
+scenario1_restoration_win,San Joaquin,WETLAND_TIDAL,Tidal Wetland,449.28
+scenario1_restoration_win,San Joaquin,WOODLAND,Woodland,301.59
+scenario1_restoration_win,Solano,BARREN,Barren,7.83
+scenario1_restoration_win,Solano,FIELD_CORN,Corn,884.61
+scenario1_restoration_win,Solano,FIELD_OTHER,Other Field Crops,1718.01
+scenario1_restoration_win,Solano,GRAIN&HAY_OTHER,Other Grains,2622.87
+scenario1_restoration_win,Solano,GRAIN&HAY_WHEAT,Wheat,1973.07
+scenario1_restoration_win,Solano,GRASSLAND,Grassland,5069.25
+scenario1_restoration_win,Solano,IDLE,Idle,2230.92
+scenario1_restoration_win,Solano,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,18.99
+scenario1_restoration_win,Solano,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1073.43
+scenario1_restoration_win,Solano,PASTURE_ALFALFA,Alfalfa,3170.43
+scenario1_restoration_win,Solano,PASTURE_OTHER,Other Pasture,7814.969999999999
+scenario1_restoration_win,Solano,RICE,Rice,0
+scenario1_restoration_win,Solano,RIPARIAN,Riparian,825.3
+scenario1_restoration_win,Solano,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,159.29999999999998
+scenario1_restoration_win,Solano,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,107.00999999999999
+scenario1_restoration_win,Solano,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,74.07
+scenario1_restoration_win,Solano,RIPARIAN_FOREST_SALIX,Riparian - Willow,91.61999999999999
+scenario1_restoration_win,Solano,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,135.72
+scenario1_restoration_win,Solano,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,1.53
+scenario1_restoration_win,Solano,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,256.05
+scenario1_restoration_win,Solano,ROW,Row Crops,543.3299999999999
+scenario1_restoration_win,Solano,SCRUB,Scrub,33.39
+scenario1_restoration_win,Solano,URBAN,Urban,622.17
+scenario1_restoration_win,Solano,VINEYARD,Vineyard,706.5899999999999
+scenario1_restoration_win,Solano,WATER,Water,4576.95
+scenario1_restoration_win,Solano,WETLAND_MANAGED,Managed Wetland,972.18
+scenario1_restoration_win,Solano,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,33.48
+scenario1_restoration_win,Solano,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,938.6999999999999
+scenario1_restoration_win,Solano,WETLAND_OTHER,Other Wetland,1670.76
+scenario1_restoration_win,Solano,WETLAND_TIDAL,Tidal Wetland,687.51
+scenario1_restoration_win,Solano,WOODLAND,Woodland,40.32
+scenario1_restoration_win,Yolo,BARREN,Barren,0
+scenario1_restoration_win,Yolo,FIELD_CORN,Corn,325.89
+scenario1_restoration_win,Yolo,FIELD_OTHER,Other Field Crops,1191.1499999999999
+scenario1_restoration_win,Yolo,GRAIN&HAY_OTHER,Other Grains,1845.09
+scenario1_restoration_win,Yolo,GRAIN&HAY_WHEAT,Wheat,1589.1299999999999
+scenario1_restoration_win,Yolo,GRASSLAND,Grassland,3127.77
+scenario1_restoration_win,Yolo,IDLE,Idle,2658.7799999999997
+scenario1_restoration_win,Yolo,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,33.21
+scenario1_restoration_win,Yolo,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,378.63
+scenario1_restoration_win,Yolo,PASTURE_ALFALFA,Alfalfa,857.88
+scenario1_restoration_win,Yolo,PASTURE_OTHER,Other Pasture,3069.3599999999997
+scenario1_restoration_win,Yolo,RICE,Rice,785.88
+scenario1_restoration_win,Yolo,RIPARIAN,Riparian,2219.85
+scenario1_restoration_win,Yolo,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,131.76
+scenario1_restoration_win,Yolo,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,326.34
+scenario1_restoration_win,Yolo,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,1437.03
+scenario1_restoration_win,Yolo,RIPARIAN_FOREST_SALIX,Riparian - Willow,146.88
+scenario1_restoration_win,Yolo,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,25.2
+scenario1_restoration_win,Yolo,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,5.13
+scenario1_restoration_win,Yolo,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,147.51
+scenario1_restoration_win,Yolo,ROW,Row Crops,1198.98
+scenario1_restoration_win,Yolo,SCRUB,Scrub,0
+scenario1_restoration_win,Yolo,URBAN,Urban,3263.31
+scenario1_restoration_win,Yolo,VINEYARD,Vineyard,4719.87
+scenario1_restoration_win,Yolo,WATER,Water,1752.12
+scenario1_restoration_win,Yolo,WETLAND_MANAGED,Managed Wetland,5574.69
+scenario1_restoration_win,Yolo,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,104.49
+scenario1_restoration_win,Yolo,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,5470.2
+scenario1_restoration_win,Yolo,WETLAND_OTHER,Other Wetland,2059.65
+scenario1_restoration_win,Yolo,WETLAND_TIDAL,Tidal Wetland,616.14
+scenario1_restoration_win,Yolo,WOODLAND,Woodland,54.54
+scenario2_perennialexpand,Contra Costa & Alameda,BARREN,Barren,17.009999999999998
+scenario2_perennialexpand,Contra Costa & Alameda,FIELD_CORN,Corn,4271.58
+scenario2_perennialexpand,Contra Costa & Alameda,FIELD_OTHER,Other Field Crops,522.36
+scenario2_perennialexpand,Contra Costa & Alameda,GRAIN&HAY_OTHER,Other Grains,665.37
+scenario2_perennialexpand,Contra Costa & Alameda,GRAIN&HAY_WHEAT,Wheat,1102.23
+scenario2_perennialexpand,Contra Costa & Alameda,GRASSLAND,Grassland,4191.21
+scenario2_perennialexpand,Contra Costa & Alameda,IDLE,Idle,2928.87
+scenario2_perennialexpand,Contra Costa & Alameda,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,5.85
+scenario2_perennialexpand,Contra Costa & Alameda,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1213.47
+scenario2_perennialexpand,Contra Costa & Alameda,PASTURE_ALFALFA,Alfalfa,1278.36
+scenario2_perennialexpand,Contra Costa & Alameda,PASTURE_OTHER,Other Pasture,4003.74
+scenario2_perennialexpand,Contra Costa & Alameda,RICE,Rice,0
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN,Riparian,1136.25
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,71.55
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,169.2
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,25.38
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_FOREST_SALIX,Riparian - Willow,119.33999999999999
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,343.8
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,24.84
+scenario2_perennialexpand,Contra Costa & Alameda,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,382.14
+scenario2_perennialexpand,Contra Costa & Alameda,ROW,Row Crops,1829.79
+scenario2_perennialexpand,Contra Costa & Alameda,SCRUB,Scrub,174.6
+scenario2_perennialexpand,Contra Costa & Alameda,URBAN,Urban,12869.189999999999
+scenario2_perennialexpand,Contra Costa & Alameda,VINEYARD,Vineyard,810
+scenario2_perennialexpand,Contra Costa & Alameda,WATER,Water,7042.23
+scenario2_perennialexpand,Contra Costa & Alameda,WETLAND_MANAGED,Managed Wetland,0
+scenario2_perennialexpand,Contra Costa & Alameda,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0
+scenario2_perennialexpand,Contra Costa & Alameda,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0
+scenario2_perennialexpand,Contra Costa & Alameda,WETLAND_OTHER,Other Wetland,2107.17
+scenario2_perennialexpand,Contra Costa & Alameda,WETLAND_TIDAL,Tidal Wetland,763.74
+scenario2_perennialexpand,Contra Costa & Alameda,WOODLAND,Woodland,174.6
+scenario2_perennialexpand,Sacramento,BARREN,Barren,3.96
+scenario2_perennialexpand,Sacramento,FIELD_CORN,Corn,6362.46
+scenario2_perennialexpand,Sacramento,FIELD_OTHER,Other Field Crops,1292.31
+scenario2_perennialexpand,Sacramento,GRAIN&HAY_OTHER,Other Grains,1073.52
+scenario2_perennialexpand,Sacramento,GRAIN&HAY_WHEAT,Wheat,1136.25
+scenario2_perennialexpand,Sacramento,GRASSLAND,Grassland,1943.01
+scenario2_perennialexpand,Sacramento,IDLE,Idle,3482.37
+scenario2_perennialexpand,Sacramento,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,148.59
+scenario2_perennialexpand,Sacramento,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,3317.22
+scenario2_perennialexpand,Sacramento,PASTURE_ALFALFA,Alfalfa,2142
+scenario2_perennialexpand,Sacramento,PASTURE_OTHER,Other Pasture,4159.62
+scenario2_perennialexpand,Sacramento,RICE,Rice,377.82
+scenario2_perennialexpand,Sacramento,RIPARIAN,Riparian,2207.25
+scenario2_perennialexpand,Sacramento,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,167.13
+scenario2_perennialexpand,Sacramento,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,407.7
+scenario2_perennialexpand,Sacramento,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,761.9399999999999
+scenario2_perennialexpand,Sacramento,RIPARIAN_FOREST_SALIX,Riparian - Willow,222.39
+scenario2_perennialexpand,Sacramento,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,194.57999999999998
+scenario2_perennialexpand,Sacramento,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,29.61
+scenario2_perennialexpand,Sacramento,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,423.9
+scenario2_perennialexpand,Sacramento,ROW,Row Crops,701.4599999999999
+scenario2_perennialexpand,Sacramento,SCRUB,Scrub,4.05
+scenario2_perennialexpand,Sacramento,URBAN,Urban,3327.75
+scenario2_perennialexpand,Sacramento,VINEYARD,Vineyard,6656.04
+scenario2_perennialexpand,Sacramento,WATER,Water,5684.8499999999995
+scenario2_perennialexpand,Sacramento,WETLAND_MANAGED,Managed Wetland,1514.1599999999999
+scenario2_perennialexpand,Sacramento,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,796.68
+scenario2_perennialexpand,Sacramento,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,717.48
+scenario2_perennialexpand,Sacramento,WETLAND_OTHER,Other Wetland,1395.36
+scenario2_perennialexpand,Sacramento,WETLAND_TIDAL,Tidal Wetland,1036.8899999999999
+scenario2_perennialexpand,Sacramento,WOODLAND,Woodland,168.93
+scenario2_perennialexpand,San Joaquin,BARREN,Barren,157.76999999999998
+scenario2_perennialexpand,San Joaquin,FIELD_CORN,Corn,19102.59
+scenario2_perennialexpand,San Joaquin,FIELD_OTHER,Other Field Crops,2276.37
+scenario2_perennialexpand,San Joaquin,GRAIN&HAY_OTHER,Other Grains,2329.29
+scenario2_perennialexpand,San Joaquin,GRAIN&HAY_WHEAT,Wheat,5284.71
+scenario2_perennialexpand,San Joaquin,GRASSLAND,Grassland,5003.37
+scenario2_perennialexpand,San Joaquin,IDLE,Idle,11898.449999999999
+scenario2_perennialexpand,San Joaquin,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,608.31
+scenario2_perennialexpand,San Joaquin,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,18195.03
+scenario2_perennialexpand,San Joaquin,PASTURE_ALFALFA,Alfalfa,10203.75
+scenario2_perennialexpand,San Joaquin,PASTURE_OTHER,Other Pasture,3414.7799999999997
+scenario2_perennialexpand,San Joaquin,RICE,Rice,1211.3999999999999
+scenario2_perennialexpand,San Joaquin,RIPARIAN,Riparian,2641.41
+scenario2_perennialexpand,San Joaquin,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,111.24
+scenario2_perennialexpand,San Joaquin,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,612.36
+scenario2_perennialexpand,San Joaquin,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,521.55
+scenario2_perennialexpand,San Joaquin,RIPARIAN_FOREST_SALIX,Riparian - Willow,354.59999999999997
+scenario2_perennialexpand,San Joaquin,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,174.15
+scenario2_perennialexpand,San Joaquin,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,51.48
+scenario2_perennialexpand,San Joaquin,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,816.03
+scenario2_perennialexpand,San Joaquin,ROW,Row Crops,9870.119999999999
+scenario2_perennialexpand,San Joaquin,SCRUB,Scrub,28.169999999999998
+scenario2_perennialexpand,San Joaquin,URBAN,Urban,16702.11
+scenario2_perennialexpand,San Joaquin,VINEYARD,Vineyard,8187.929999999999
+scenario2_perennialexpand,San Joaquin,WATER,Water,7714.98
+scenario2_perennialexpand,San Joaquin,WETLAND_MANAGED,Managed Wetland,337.23
+scenario2_perennialexpand,San Joaquin,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0.72
+scenario2_perennialexpand,San Joaquin,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,336.51
+scenario2_perennialexpand,San Joaquin,WETLAND_OTHER,Other Wetland,2633.04
+scenario2_perennialexpand,San Joaquin,WETLAND_TIDAL,Tidal Wetland,444.41999999999996
+scenario2_perennialexpand,San Joaquin,WOODLAND,Woodland,317.52
+scenario2_perennialexpand,Solano,BARREN,Barren,7.83
+scenario2_perennialexpand,Solano,FIELD_CORN,Corn,2302.74
+scenario2_perennialexpand,Solano,FIELD_OTHER,Other Field Crops,1717.3799999999999
+scenario2_perennialexpand,Solano,GRAIN&HAY_OTHER,Other Grains,1561.05
+scenario2_perennialexpand,Solano,GRAIN&HAY_WHEAT,Wheat,1222.47
+scenario2_perennialexpand,Solano,GRASSLAND,Grassland,5073.03
+scenario2_perennialexpand,Solano,IDLE,Idle,2141.64
+scenario2_perennialexpand,Solano,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,18.99
+scenario2_perennialexpand,Solano,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1471.6799999999998
+scenario2_perennialexpand,Solano,PASTURE_ALFALFA,Alfalfa,3098.7
+scenario2_perennialexpand,Solano,PASTURE_OTHER,Other Pasture,7863.299999999999
+scenario2_perennialexpand,Solano,RICE,Rice,0
+scenario2_perennialexpand,Solano,RIPARIAN,Riparian,660.42
+scenario2_perennialexpand,Solano,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,95.03999999999999
+scenario2_perennialexpand,Solano,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,99.63
+scenario2_perennialexpand,Solano,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,47.699999999999996
+scenario2_perennialexpand,Solano,RIPARIAN_FOREST_SALIX,Riparian - Willow,78.39
+scenario2_perennialexpand,Solano,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,132.12
+scenario2_perennialexpand,Solano,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,1.53
+scenario2_perennialexpand,Solano,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,206.01
+scenario2_perennialexpand,Solano,ROW,Row Crops,540
+scenario2_perennialexpand,Solano,SCRUB,Scrub,33.57
+scenario2_perennialexpand,Solano,URBAN,Urban,622.17
+scenario2_perennialexpand,Solano,VINEYARD,Vineyard,1165.95
+scenario2_perennialexpand,Solano,WATER,Water,4576.95
+scenario2_perennialexpand,Solano,WETLAND_MANAGED,Managed Wetland,824.22
+scenario2_perennialexpand,Solano,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,33.48
+scenario2_perennialexpand,Solano,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,790.74
+scenario2_perennialexpand,Solano,WETLAND_OTHER,Other Wetland,1630.1699999999998
+scenario2_perennialexpand,Solano,WETLAND_TIDAL,Tidal Wetland,687.51
+scenario2_perennialexpand,Solano,WOODLAND,Woodland,43.11
+scenario2_perennialexpand,Yolo,BARREN,Barren,0
+scenario2_perennialexpand,Yolo,FIELD_CORN,Corn,390.51
+scenario2_perennialexpand,Yolo,FIELD_OTHER,Other Field Crops,1445.22
+scenario2_perennialexpand,Yolo,GRAIN&HAY_OTHER,Other Grains,1539.54
+scenario2_perennialexpand,Yolo,GRAIN&HAY_WHEAT,Wheat,1617.3
+scenario2_perennialexpand,Yolo,GRASSLAND,Grassland,3472.1099999999997
+scenario2_perennialexpand,Yolo,IDLE,Idle,2630.52
+scenario2_perennialexpand,Yolo,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,33.21
+scenario2_perennialexpand,Yolo,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1278
+scenario2_perennialexpand,Yolo,PASTURE_ALFALFA,Alfalfa,913.3199999999999
+scenario2_perennialexpand,Yolo,PASTURE_OTHER,Other Pasture,3374.46
+scenario2_perennialexpand,Yolo,RICE,Rice,1090.71
+scenario2_perennialexpand,Yolo,RIPARIAN,Riparian,1006.1999999999999
+scenario2_perennialexpand,Yolo,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,92.25
+scenario2_perennialexpand,Yolo,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,302.21999999999997
+scenario2_perennialexpand,Yolo,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,300.96
+scenario2_perennialexpand,Yolo,RIPARIAN_FOREST_SALIX,Riparian - Willow,145.17
+scenario2_perennialexpand,Yolo,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,23.58
+scenario2_perennialexpand,Yolo,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,5.13
+scenario2_perennialexpand,Yolo,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,136.89
+scenario2_perennialexpand,Yolo,ROW,Row Crops,1265.04
+scenario2_perennialexpand,Yolo,SCRUB,Scrub,0
+scenario2_perennialexpand,Yolo,URBAN,Urban,3263.31
+scenario2_perennialexpand,Yolo,VINEYARD,Vineyard,5915.88
+scenario2_perennialexpand,Yolo,WATER,Water,1752.12
+scenario2_perennialexpand,Yolo,WETLAND_MANAGED,Managed Wetland,3329.0099999999998
+scenario2_perennialexpand,Yolo,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,104.49
+scenario2_perennialexpand,Yolo,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,3224.52
+scenario2_perennialexpand,Yolo,WETLAND_OTHER,Other Wetland,2330.8199999999997
+scenario2_perennialexpand,Yolo,WETLAND_TIDAL,Tidal Wetland,616.14
+scenario2_perennialexpand,Yolo,WOODLAND,Woodland,58.5
+scenario2_perennialexpand_win,Contra Costa & Alameda,BARREN,Barren,17.009999999999998
+scenario2_perennialexpand_win,Contra Costa & Alameda,FIELD_CORN,Corn,3794.58
+scenario2_perennialexpand_win,Contra Costa & Alameda,FIELD_OTHER,Other Field Crops,490.68
+scenario2_perennialexpand_win,Contra Costa & Alameda,GRAIN&HAY_OTHER,Other Grains,1217.52
+scenario2_perennialexpand_win,Contra Costa & Alameda,GRAIN&HAY_WHEAT,Wheat,1137.96
+scenario2_perennialexpand_win,Contra Costa & Alameda,GRASSLAND,Grassland,4191.21
+scenario2_perennialexpand_win,Contra Costa & Alameda,IDLE,Idle,2928.87
+scenario2_perennialexpand_win,Contra Costa & Alameda,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,5.85
+scenario2_perennialexpand_win,Contra Costa & Alameda,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1213.47
+scenario2_perennialexpand_win,Contra Costa & Alameda,PASTURE_ALFALFA,Alfalfa,1267.02
+scenario2_perennialexpand_win,Contra Costa & Alameda,PASTURE_OTHER,Other Pasture,3985.83
+scenario2_perennialexpand_win,Contra Costa & Alameda,RICE,Rice,0
+scenario2_perennialexpand_win,Contra Costa & Alameda,RIPARIAN,Riparian,1136.25
+scenario2_perennialexpand_win,Contra Costa & Alameda,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,71.55
+scenario2_perennialexpand_win,Contra Costa & Alameda,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,169.2
+scenario2_perennialexpand_win,Contra Costa & Alameda,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,25.38
+scenario2_perennialexpand_win,Contra Costa & Alameda,RIPARIAN_FOREST_SALIX,Riparian - Willow,119.33999999999999
+scenario2_perennialexpand_win,Contra Costa & Alameda,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,343.8
+scenario2_perennialexpand_win,Contra Costa & Alameda,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,24.84
+scenario2_perennialexpand_win,Contra Costa & Alameda,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,382.14
+scenario2_perennialexpand_win,Contra Costa & Alameda,ROW,Row Crops,1779.84
+scenario2_perennialexpand_win,Contra Costa & Alameda,SCRUB,Scrub,174.6
+scenario2_perennialexpand_win,Contra Costa & Alameda,URBAN,Urban,12869.189999999999
+scenario2_perennialexpand_win,Contra Costa & Alameda,VINEYARD,Vineyard,810
+scenario2_perennialexpand_win,Contra Costa & Alameda,WATER,Water,7042.23
+scenario2_perennialexpand_win,Contra Costa & Alameda,WETLAND_MANAGED,Managed Wetland,0
+scenario2_perennialexpand_win,Contra Costa & Alameda,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0
+scenario2_perennialexpand_win,Contra Costa & Alameda,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0
+scenario2_perennialexpand_win,Contra Costa & Alameda,WETLAND_OTHER,Other Wetland,2107.17
+scenario2_perennialexpand_win,Contra Costa & Alameda,WETLAND_TIDAL,Tidal Wetland,763.74
+scenario2_perennialexpand_win,Contra Costa & Alameda,WOODLAND,Woodland,174.6
+scenario2_perennialexpand_win,Sacramento,BARREN,Barren,3.96
+scenario2_perennialexpand_win,Sacramento,FIELD_CORN,Corn,4627.98
+scenario2_perennialexpand_win,Sacramento,FIELD_OTHER,Other Field Crops,824.4
+scenario2_perennialexpand_win,Sacramento,GRAIN&HAY_OTHER,Other Grains,3315.6
+scenario2_perennialexpand_win,Sacramento,GRAIN&HAY_WHEAT,Wheat,1155.1499999999999
+scenario2_perennialexpand_win,Sacramento,GRASSLAND,Grassland,1943.01
+scenario2_perennialexpand_win,Sacramento,IDLE,Idle,3482.37
+scenario2_perennialexpand_win,Sacramento,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,148.59
+scenario2_perennialexpand_win,Sacramento,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,3317.22
+scenario2_perennialexpand_win,Sacramento,PASTURE_ALFALFA,Alfalfa,2121.75
+scenario2_perennialexpand_win,Sacramento,PASTURE_OTHER,Other Pasture,4118.3099999999995
+scenario2_perennialexpand_win,Sacramento,RICE,Rice,377.82
+scenario2_perennialexpand_win,Sacramento,RIPARIAN,Riparian,2207.25
+scenario2_perennialexpand_win,Sacramento,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,167.13
+scenario2_perennialexpand_win,Sacramento,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,407.7
+scenario2_perennialexpand_win,Sacramento,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,761.9399999999999
+scenario2_perennialexpand_win,Sacramento,RIPARIAN_FOREST_SALIX,Riparian - Willow,222.39
+scenario2_perennialexpand_win,Sacramento,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,194.57999999999998
+scenario2_perennialexpand_win,Sacramento,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,29.61
+scenario2_perennialexpand_win,Sacramento,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,423.9
+scenario2_perennialexpand_win,Sacramento,ROW,Row Crops,704.43
+scenario2_perennialexpand_win,Sacramento,SCRUB,Scrub,4.05
+scenario2_perennialexpand_win,Sacramento,URBAN,Urban,3327.75
+scenario2_perennialexpand_win,Sacramento,VINEYARD,Vineyard,6656.04
+scenario2_perennialexpand_win,Sacramento,WATER,Water,5684.8499999999995
+scenario2_perennialexpand_win,Sacramento,WETLAND_MANAGED,Managed Wetland,1514.1599999999999
+scenario2_perennialexpand_win,Sacramento,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,796.68
+scenario2_perennialexpand_win,Sacramento,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,717.48
+scenario2_perennialexpand_win,Sacramento,WETLAND_OTHER,Other Wetland,1395.36
+scenario2_perennialexpand_win,Sacramento,WETLAND_TIDAL,Tidal Wetland,1036.8899999999999
+scenario2_perennialexpand_win,Sacramento,WOODLAND,Woodland,168.93
+scenario2_perennialexpand_win,San Joaquin,BARREN,Barren,157.76999999999998
+scenario2_perennialexpand_win,San Joaquin,FIELD_CORN,Corn,12195.99
+scenario2_perennialexpand_win,San Joaquin,FIELD_OTHER,Other Field Crops,1262.34
+scenario2_perennialexpand_win,San Joaquin,GRAIN&HAY_OTHER,Other Grains,8486.46
+scenario2_perennialexpand_win,San Joaquin,GRAIN&HAY_WHEAT,Wheat,7817.3099999999995
+scenario2_perennialexpand_win,San Joaquin,GRASSLAND,Grassland,5003.37
+scenario2_perennialexpand_win,San Joaquin,IDLE,Idle,11898.449999999999
+scenario2_perennialexpand_win,San Joaquin,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,608.31
+scenario2_perennialexpand_win,San Joaquin,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,18195.03
+scenario2_perennialexpand_win,San Joaquin,PASTURE_ALFALFA,Alfalfa,10455.48
+scenario2_perennialexpand_win,San Joaquin,PASTURE_OTHER,Other Pasture,3264.8399999999997
+scenario2_perennialexpand_win,San Joaquin,RICE,Rice,1211.3999999999999
+scenario2_perennialexpand_win,San Joaquin,RIPARIAN,Riparian,2641.41
+scenario2_perennialexpand_win,San Joaquin,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,111.24
+scenario2_perennialexpand_win,San Joaquin,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,612.36
+scenario2_perennialexpand_win,San Joaquin,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,521.55
+scenario2_perennialexpand_win,San Joaquin,RIPARIAN_FOREST_SALIX,Riparian - Willow,354.59999999999997
+scenario2_perennialexpand_win,San Joaquin,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,174.15
+scenario2_perennialexpand_win,San Joaquin,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,51.48
+scenario2_perennialexpand_win,San Joaquin,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,816.03
+scenario2_perennialexpand_win,San Joaquin,ROW,Row Crops,8999.19
+scenario2_perennialexpand_win,San Joaquin,SCRUB,Scrub,28.169999999999998
+scenario2_perennialexpand_win,San Joaquin,URBAN,Urban,16702.11
+scenario2_perennialexpand_win,San Joaquin,VINEYARD,Vineyard,8187.929999999999
+scenario2_perennialexpand_win,San Joaquin,WATER,Water,7714.98
+scenario2_perennialexpand_win,San Joaquin,WETLAND_MANAGED,Managed Wetland,337.23
+scenario2_perennialexpand_win,San Joaquin,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0.72
+scenario2_perennialexpand_win,San Joaquin,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,336.51
+scenario2_perennialexpand_win,San Joaquin,WETLAND_OTHER,Other Wetland,2633.04
+scenario2_perennialexpand_win,San Joaquin,WETLAND_TIDAL,Tidal Wetland,444.41999999999996
+scenario2_perennialexpand_win,San Joaquin,WOODLAND,Woodland,317.52
+scenario2_perennialexpand_win,Solano,BARREN,Barren,7.83
+scenario2_perennialexpand_win,Solano,FIELD_CORN,Corn,837.0899999999999
+scenario2_perennialexpand_win,Solano,FIELD_OTHER,Other Field Crops,1641.06
+scenario2_perennialexpand_win,Solano,GRAIN&HAY_OTHER,Other Grains,2547.36
+scenario2_perennialexpand_win,Solano,GRAIN&HAY_WHEAT,Wheat,1846.4399999999998
+scenario2_perennialexpand_win,Solano,GRASSLAND,Grassland,5073.03
+scenario2_perennialexpand_win,Solano,IDLE,Idle,2141.64
+scenario2_perennialexpand_win,Solano,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,18.99
+scenario2_perennialexpand_win,Solano,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1471.6799999999998
+scenario2_perennialexpand_win,Solano,PASTURE_ALFALFA,Alfalfa,3071.52
+scenario2_perennialexpand_win,Solano,PASTURE_OTHER,Other Pasture,7857.09
+scenario2_perennialexpand_win,Solano,RICE,Rice,0
+scenario2_perennialexpand_win,Solano,RIPARIAN,Riparian,660.42
+scenario2_perennialexpand_win,Solano,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,95.03999999999999
+scenario2_perennialexpand_win,Solano,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,99.63
+scenario2_perennialexpand_win,Solano,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,47.699999999999996
+scenario2_perennialexpand_win,Solano,RIPARIAN_FOREST_SALIX,Riparian - Willow,78.39
+scenario2_perennialexpand_win,Solano,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,132.12
+scenario2_perennialexpand_win,Solano,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,1.53
+scenario2_perennialexpand_win,Solano,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,206.01
+scenario2_perennialexpand_win,Solano,ROW,Row Crops,505.08
+scenario2_perennialexpand_win,Solano,SCRUB,Scrub,33.57
+scenario2_perennialexpand_win,Solano,URBAN,Urban,622.17
+scenario2_perennialexpand_win,Solano,VINEYARD,Vineyard,1165.95
+scenario2_perennialexpand_win,Solano,WATER,Water,4576.95
+scenario2_perennialexpand_win,Solano,WETLAND_MANAGED,Managed Wetland,824.22
+scenario2_perennialexpand_win,Solano,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,33.48
+scenario2_perennialexpand_win,Solano,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,790.74
+scenario2_perennialexpand_win,Solano,WETLAND_OTHER,Other Wetland,1630.1699999999998
+scenario2_perennialexpand_win,Solano,WETLAND_TIDAL,Tidal Wetland,687.51
+scenario2_perennialexpand_win,Solano,WOODLAND,Woodland,43.11
+scenario2_perennialexpand_win,Yolo,BARREN,Barren,0
+scenario2_perennialexpand_win,Yolo,FIELD_CORN,Corn,274.23
+scenario2_perennialexpand_win,Yolo,FIELD_OTHER,Other Field Crops,1309.77
+scenario2_perennialexpand_win,Yolo,GRAIN&HAY_OTHER,Other Grains,1876.77
+scenario2_perennialexpand_win,Yolo,GRAIN&HAY_WHEAT,Wheat,1625.6699999999998
+scenario2_perennialexpand_win,Yolo,GRASSLAND,Grassland,3472.1099999999997
+scenario2_perennialexpand_win,Yolo,IDLE,Idle,2630.52
+scenario2_perennialexpand_win,Yolo,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,33.21
+scenario2_perennialexpand_win,Yolo,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1278
+scenario2_perennialexpand_win,Yolo,PASTURE_ALFALFA,Alfalfa,913.3199999999999
+scenario2_perennialexpand_win,Yolo,PASTURE_OTHER,Other Pasture,3374.46
+scenario2_perennialexpand_win,Yolo,RICE,Rice,1090.71
+scenario2_perennialexpand_win,Yolo,RIPARIAN,Riparian,1006.1999999999999
+scenario2_perennialexpand_win,Yolo,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,92.25
+scenario2_perennialexpand_win,Yolo,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,302.21999999999997
+scenario2_perennialexpand_win,Yolo,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,300.96
+scenario2_perennialexpand_win,Yolo,RIPARIAN_FOREST_SALIX,Riparian - Willow,145.17
+scenario2_perennialexpand_win,Yolo,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,23.58
+scenario2_perennialexpand_win,Yolo,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,5.13
+scenario2_perennialexpand_win,Yolo,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,136.89
+scenario2_perennialexpand_win,Yolo,ROW,Row Crops,1171.1699999999998
+scenario2_perennialexpand_win,Yolo,SCRUB,Scrub,0
+scenario2_perennialexpand_win,Yolo,URBAN,Urban,3263.31
+scenario2_perennialexpand_win,Yolo,VINEYARD,Vineyard,5915.88
+scenario2_perennialexpand_win,Yolo,WATER,Water,1752.12
+scenario2_perennialexpand_win,Yolo,WETLAND_MANAGED,Managed Wetland,3329.0099999999998
+scenario2_perennialexpand_win,Yolo,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,104.49
+scenario2_perennialexpand_win,Yolo,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,3224.52
+scenario2_perennialexpand_win,Yolo,WETLAND_OTHER,Other Wetland,2330.8199999999997
+scenario2_perennialexpand_win,Yolo,WETLAND_TIDAL,Tidal Wetland,616.14
+scenario2_perennialexpand_win,Yolo,WOODLAND,Woodland,58.5

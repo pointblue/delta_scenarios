@@ -46,6 +46,30 @@ write_csv(habitat_binary_county, 'output/scenario_habitat_binary_county.csv')
 
 # OTHER METRICS----------
 
+## land cover totals------------
+landcover = DeltaMultipleBenefits::sum_landcover(
+  pathin = 'GIS/scenario_rasters',
+  maskpath = 'GIS/boundaries/delta.tif',
+  pixel_area = 0.09,
+  rollup = TRUE) %>%
+  # add LABEL fields
+  left_join(key %>% select(CODE_NAME, LABEL), by = 'CODE_NAME') %>%
+  select(scenario, CODE_NAME, LABEL, area) %>%
+  arrange(scenario, CODE_NAME)
+write_csv(landcover, 'output/landcover_totals.csv')
+
+landcover_county = DeltaMultipleBenefits::sum_landcover(
+  pathin = 'GIS/scenario_rasters',
+  zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
+  maskpath = 'GIS/boundaries/delta.tif',
+  pixel_area = 0.09,
+  rollup = TRUE) %>%
+  # add LABEL fields
+  left_join(key %>% select(CODE_NAME, LABEL), by = 'CODE_NAME') %>%
+  select(scenario, ZONE, CODE_NAME, LABEL, area) %>%
+  arrange(scenario, ZONE, CODE_NAME)
+write_csv(landcover_county, 'output/landcover_totals_county.csv')
+
 ## compile landcover scores----------
 waterquality = read_csv('data/pesticide_exposure.csv', col_types = cols()) %>%
   filter(METRIC %in%
@@ -73,20 +97,6 @@ metrics = bind_rows(economy, waterquality, ccs) %>%
   mutate_at(vars(METRIC_SUBTYPE:METRIC), factor) %>%
   arrange(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME)
 write_csv(metrics, 'output/metrics_final.csv')
-
-## land cover totals------------
-totals = sum_landcover(pathin = 'GIS/scenario_rasters',
-                       maskpath = 'GIS/boundaries/delta.tif',
-                       pixel_area = 0.09, rollup = TRUE) %>%
-  arrange(scenario, CODE_NAME)
-write_csv(totals, 'output/land_cover_totals.csv')
-
-totals_county = sum_landcover(pathin = 'GIS/scenario_rasters',
-                              zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
-                              maskpath = 'GIS/boundaries/delta.tif',
-                              pixel_area = 0.09, rollup = TRUE) %>%
-  arrange(scenario, ZONE, CODE_NAME)
-write_csv(totals_county, 'output/land_cover_totals_county.csv')
 
 ## sum total-----------
 # combine the landscape-specific estimates of the total area of each land cover
