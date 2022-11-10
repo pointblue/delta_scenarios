@@ -110,10 +110,10 @@ write_csv(metrics, 'output/metrics_final.csv')
 # (and they shouldn't change)
 # --> exclude winter scenarios/landscapes
 # --> combine with habitat estimates from above
-scores = sum_metrics(
+scores = DeltaMultipleBenefits::sum_metrics(
   metricdat = metrics %>%
     filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))),
-  areadat = totals %>%
+  areadat = landcover %>%
     filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))) %>%
     filter(!grepl('win', scenario))) %>%
   bind_rows(habitat, habitat_binary) %>%
@@ -121,9 +121,10 @@ scores = sum_metrics(
   arrange(scenario, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC)
 write_csv(scores, 'output/scenario_scores.csv')
 
-scores_county = sum_metrics(
-  metricdat = metrics %>% filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))),
-  areadat = totals_county %>%
+scores_county = DeltaMultipleBenefits::sum_metrics(
+  metricdat = metrics %>%
+    filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))),
+  areadat = landcover_county %>%
     filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))) %>%
     filter(!grepl('win', scenario))) %>%
   bind_rows(habitat_county, habitat_binary_county) %>%
