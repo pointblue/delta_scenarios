@@ -1,23 +1,54 @@
-# ANALYZE NON-SPATIAL METRICS---------
-# Calculate the net change in multiple metrics based solely on the net
-# change in land cover classes/sub-classes, and not dependent on spatial
-# location (i.e. no spatial distribution model involved)
+# ANALYZE NET CHANGE IN MULTIPLE METRICS---------
+# Calculate the total "landscape score" for each metric and landscape, and then
+# the net change between each scenario and the baseline
 
 # PACKAGES & FUNCTIONS
 source('R/0_packages.R')
 source('R/0_functions.R')
 key = readxl::read_excel('GIS/VEG_key.xlsx')
+spp_key = read_csv('output/TABLE_species_key.csv')
 
 # REFERENCE DATA
-totals = read_csv('output/land_cover_totals.csv')
-totals_county = read_csv('output/land_cover_totals_county.csv')
-
 delta = rast('GIS/boundaries/delta.tif')
 county_raster = rast('GIS/landscape_rasters/boundaries/counties.tif')
 
-# SOURCE DATA----------
+# SPATIAL DATA-----------
+# total suitable habitat for each landscape, predicted from SDMs
 
-## nonspatial metrics----------
+## probability of presence:
+habitat = sum_habitat(
+  pathin = 'GIS/prediction_rasters',
+  subtype = 'distributions',
+  keypath = 'output/TABLE_species_key.csv'
+)
+write_csv(habitat, 'output/scenario_habitat.csv')
+
+habitat_county = sum_habitat(
+  pathin = 'GIS/prediction_rasters',
+  zones = county_raster,
+  subtype = 'distributions',
+  keypath = 'output/TABLE_species_key.csv')
+write_csv(habitat_county, 'output/scenario_habitat_county.csv')
+
+## alt: binary presence/absence predictions (using thresholds):
+habitat_binary = sum_habitat(
+  'GIS/prediction_rasters_threshold',
+  subtype = 'habitat',
+  keypath = 'output/TABLE_species_key.csv'
+)
+write_csv(habitat_binary, 'output/scenario_habitat_binary.csv')
+
+habitat_binary_county = sum_habitat(
+  pathin = 'GIS/prediction_rasters_threshold',
+  zones = county_raster,
+  subtype = 'habitat',
+  keypath = 'output/TABLE_species_key.csv')
+write_csv(habitat_binary_county, 'output/scenario_habitat_binary_county.csv')
+
+
+# OTHER METRICS----------
+
+## compile landcover scores----------
 waterquality = read_csv('data/pesticide_exposure.csv', col_types = cols()) %>%
   filter(METRIC %in%
            c('Risk to Aquatic Organisms', 'Critical Pesticides',
@@ -45,298 +76,85 @@ metrics = bind_rows(economy, waterquality, ccs) %>%
   arrange(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME)
 write_csv(metrics, 'output/metrics_final.csv')
 
-## SDM predictions---------
-preds = list(
-  ## RIPARIAN
-  riparian = list(
-    'baseline' = list.files(
-      'GIS/prediction_rasters/riparian/baseline', '.tif$',
-      full.names = TRUE) %>% rast(),
-    'scenario1_restoration' = list.files(
-      'GIS/prediction_rasters/riparian/scenario1_restoration/', '.tif$',
-      full.names = TRUE) %>% rast(),
-    'scenario2_perennialexpand' = list.files(
-      'GIS/prediction_rasters/riparian/scenario2_perennialexpand/', '.tif$',
-      full.names = TRUE) %>% rast()
-  ),
-  # WATERBIRDS FALL
-  waterbird_fall = list(
-    'baseline' = list.files(
-      'GIS/prediction_rasters/waterbird_fall/baseline', '.tif$',
-      full.names = TRUE) %>% rast(),
-    'scenario1_restoration' = list.files(
-      'GIS/prediction_rasters/waterbird_fall/scenario1_restoration', '.tif$',
-      full.names = TRUE) %>% rast(),
-    'scenario2_perennialexpand' = list.files(
-      'GIS/prediction_rasters/waterbird_fall/scenario2_perennialexpand',
-      '.tif$', full.names = TRUE) %>% rast()
-  ),
-  # WATERBIRDS WINTER
-  waterbird_win = list(
-    'baseline' = list.files(
-      'GIS/prediction_rasters/waterbird_win/baseline_win', '.tif$',
-      full.names = TRUE) %>% rast(),
-    'scenario1_restoration' = list.files(
-      'GIS/prediction_rasters/waterbird_win/scenario1_restoration_win', '.tif$',
-      full.names = TRUE) %>% rast(),
-    'scenario2_perennialexpand' = list.files(
-      'GIS/prediction_rasters/waterbird_win/scenario2_perennialexpand_win',
-      '.tif$', full.names = TRUE) %>% rast()
-  )
-)
+## land cover totals------------
+totals = sum_landcover(pathin = 'GIS/scenario_rasters',
+                       maskpath = 'GIS/boundaries/delta.tif',
+                       pixel_area = 0.09, rollup = TRUE) %>%
+  arrange(scenario, CODE_NAME)
+write_csv(totals, 'output/land_cover_totals.csv')
 
-spp_key = tibble(
-  spp = c(names(preds$riparian$baseline),
-          names(preds$waterbird_win$baseline))
-) %>%
-  mutate(spp = factor(spp,
-                      levels = c('NUWO', 'ATFL', 'BHGR', 'LAZB', 'COYE',
-                                 'YEWA', 'SPTO', 'SOSP', 'YBCH',
-                                 'geese', 'dblr', 'divduck', 'crane', 'shore',
-                                 'cicon')),
-         label = recode(spp,
-                        NUWO = "Nuttall's Woodpecker",
-                        ATFL = 'Ash-throated Flycatcher',
-                        BHGR = 'Black-headed Grosbeak',
-                        LAZB = 'Lazuli Bunting',
-                        COYE = 'Common Yellowthroat',
-                        YEWA = 'Yellow Warbler',
-                        SPTO = 'Spotted Towhee',
-                        SOSP = 'Song Sparrow',
-                        YBCH = 'Yellow-breasted Chat',
-                        dblr = 'Dabbling Ducks',
-                        shore = 'Shorebirds',
-                        cicon = 'Herons/Egrets',
-                        crane = 'Cranes',
-                        geese = 'Geese',
-                        divduck = 'Diving Ducks')) %>%
-  arrange(spp)
+totals_county = sum_landcover(pathin = 'GIS/scenario_rasters',
+                              zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
+                              maskpath = 'GIS/boundaries/delta.tif',
+                              pixel_area = 0.09, rollup = TRUE) %>%
+  arrange(scenario, ZONE, CODE_NAME)
+write_csv(totals_county, 'output/land_cover_totals_county.csv')
 
-
-# SCENARIO SCORES--------
-# represent each metric in each scenario by a total landscape score
-
-## ENTIRE DELTA--------
-
-# SDM habitat: calculate the total suitable habitat for each species/group and
-# scenario
-habitat = purrr::map_dfr(
-  preds,
-  function(SDM) {
-    purrr::map_dfr(SDM,
-                   function(scenario) {
-                     purrr::map(as.list(scenario) %>% setNames(names(scenario)),
-                                function(spp) {
-                                  values(spp) %>% sum(na.rm = TRUE)
-                                })
-                   }, .id = 'scenario') %>%
-      pivot_longer(-scenario)
-  }, .id = 'SDM') %>%
-  mutate(METRIC_CATEGORY = 'Biodiversity Support',
-         METRIC_SUBTYPE = 'species distribution',
-         SCORE_TOTAL = value / .09, # convert to ha
-         UNIT = 'ha') %>%
-  unite('METRIC_SUBTYPE', c('METRIC_SUBTYPE', 'SDM'), sep = ': ') %>%
-  left_join(spp_key %>% select(name = spp, METRIC = label), by = 'name') %>%
-  select(scenario, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, UNIT, SCORE_TOTAL)
-write_csv(habitat, 'output/scenario_habitat.csv')
-
-# combine with all other metrics:
-# join with the areas of each land cover class in each scenario to
-# generate total scores, being aware of different units involved
-metrics %>% select(METRIC, UNIT) %>% distinct()
-
-# for most, including ranking scores, multiply by number of hectares; for annual
-# wages, average wages per employee doesn't change just from changing the total
-# area of each land cover
-scores = full_join(totals, metrics, by = 'CODE_NAME') %>%
-  mutate(
-    # keep mean for Annual Wages for now, otherwise multiply by area for total score
-    SCORE_TOTAL = if_else(METRIC == 'Annual Wages', SCORE_MEAN, area * SCORE_MEAN),
-    # multiplication by a constant, so no other propagation of error needed
-    SCORE_TOTAL_SE = if_else(METRIC == 'Annual Wages', SCORE_SE, area * SCORE_SE)) %>%
-  # # for ACS: keep distinct data for riparian subclasses (introscrub gets its own ACS score)
-  # filter(!(CODE_NAME == 'RIPARIAN' &
-  #            METRIC_CATEGORY %in% c('Biodiversity Support'))) %>%
-  # # for water quality & economy: drop riparian subclasses (all zero anyway)
-  # filter(!(grepl('RIPARIAN_', CODE_NAME) &
-  #            METRIC_CATEGORY %in% c('Climate Change Resilience',
-  #                                   'Agricultural Livelihoods',
-  #                                   'Water Quality',
-  #                                   'Biodiversity Support'))) %>%
-  #only keep general riparian and managed wetland scores (no distinction for
-  #subclasses)
-  filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_', CODE_NAME))) %>%
-  #not addressing these in these scenarios (and they shouldn't change)
-  filter(!CODE_NAME %in% c('WETLAND_TIDAL', 'WATER'))
-
-# # check representation across land covers & missing values for a subset of metrics:
-# scores %>% filter(scenario == 'baseline') %>%
-#   filter(METRIC %in%
-#            c('Breeding Landbirds: Riparian', 'Drought', 'Agricultural Jobs',
-#              'Groundwater Contaminant')) %>%
-#   select(CODE_NAME, METRIC, SCORE_TOTAL) %>%
-#   pivot_wider(names_from = METRIC, values_from = SCORE_TOTAL) %>% print(n = Inf)
-
-# summarize each metric for the entire Delta, for baseline and each scenario:
+## sum total-----------
+# combine the landscape-specific estimates of the total area of each land cover
+# class with the per-unit-area metrics for each land cover class
 # - for most metrics, this is the sum over all hectares
 # - for Annual Wages, calculate the new weighted average wage across all
 #    agricultural ha (i.e., those with a wage value)
-scores_sum = bind_rows(
-  # for all but annual wages:
-  scores %>% filter(METRIC != 'Annual Wages') %>%
-    mutate(
-      SCORE_TOTAL_SE = case_when(
-        METRIC_CATEGORY == 'Biodiversity Support' ~ SCORE_TOTAL_SE,
-        is.na(SCORE_TOTAL_SE) ~ 0,
-        TRUE ~ SCORE_TOTAL_SE)) %>%
-    # only SE with NA is for biodiversity (assume all others = 0: assumed values
-    # for economic, water quality metrics where no data reported, and resilience
-    # to salinity)
-    group_by(scenario, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, UNIT) %>%
-    summarize(SCORE_TOTAL = sum(SCORE_TOTAL),
-              SCORE_TOTAL_SE = sqrt(sum(SCORE_TOTAL_SE^2)),
-              .groups = 'drop'),
-  # for annual wages: multiply the average wage per-land cover by the proportion
-  # of the total ag landscape made up by that land cover
-  scores %>% filter(METRIC == 'Annual Wages' & SCORE_TOTAL > 0) %>%
-    group_by(scenario, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, UNIT) %>%
-    mutate(area_ag_total = sum(area),
-           area_prop = area / area_ag_total) %>%
-    summarize(SCORE_TOTAL = sum(SCORE_TOTAL * area_prop),
-              SCORE_TOTAL_SE = sqrt(sum((SCORE_TOTAL_SE * area_prop)^2)),
-              .groups = 'drop'),
-  # add habitat
-  habitat
-) %>% arrange(scenario, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC)
-write_csv(scores_sum, 'output/scenario_scores.csv')
 
-## BY COUNTY---------
-# repeat above, but summarize by county
+# exclude riparian and managed wetland subclasses (to not double-count), and
+# exclude tidal wetlands and water since not addressing them in these scenarios
+# (and they shouldn't change)
+# --> exclude winter scenarios/landscapes
+# --> combine with habitat estimates from above
+scores = sum_metrics(
+  metricdat = metrics %>%
+    filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))),
+  areadat = totals %>%
+    filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))) %>%
+    filter(!grepl('win', scenario))) %>%
+  bind_rows(habitat, habitat_binary) %>%
+  filter(!grepl('win', scenario)) %>% #remove from habitat metrics
+  arrange(scenario, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC)
+write_csv(scores, 'output/scenario_scores.csv')
 
-# SDM habitat:
-habitat_county = purrr::map_dfr(
-  preds,
-  function(SDM) {
-    purrr::map_dfr(SDM,
-                   function(scenario) {
-                     purrr::map_dfr(
-                       as.list(scenario) %>% setNames(names(scenario)),
-                       function(spp) {
-                         zonal(spp, county_raster, 'sum', na.rm = TRUE) %>%
-                           setNames(c('COUNTY_NAME', 'value'))
-                       }, .id = 'name')
-                   }, .id = 'scenario')
-  }, .id = 'SDM') %>%
-  mutate(METRIC_CATEGORY = 'Biodiversity Support',
-         METRIC_SUBTYPE = 'species distribution',
-         SCORE_TOTAL = value / .09, # convert to ha
-         UNIT = 'ha') %>%
-  unite('METRIC_SUBTYPE', c('METRIC_SUBTYPE', 'SDM'), sep = ': ') %>%
-  left_join(spp_key %>% select(name = spp, METRIC = label), by = 'name') %>%
-  select(scenario, county = COUNTY_NAME, METRIC_CATEGORY, METRIC_SUBTYPE,
-         METRIC, UNIT, SCORE_TOTAL)
-write_csv(habitat_county, 'output/scenario_habitat_county.csv')
-
-# all other scores:
-scores_county = full_join(totals_county, metrics, by = 'CODE_NAME') %>%
-  mutate(
-    SCORE_TOTAL = if_else(METRIC == 'Annual Wages', SCORE_MEAN, area * SCORE_MEAN),
-    # multiplication by a constant, so no other propagation of error needed
-    SCORE_TOTAL_SE = if_else(METRIC == 'Annual Wages', SCORE_SE, area * SCORE_SE)) %>%
-  # # for ACS: keep distinct data for riparian subclasses (introscrub gets its own ACS score)
-  # filter(!(CODE_NAME == 'RIPARIAN' &
-  #            METRIC_CATEGORY %in% c('Biodiversity Support'))) %>%
-  # for water quality & economy: assume no data/pesticides either way
-  # filter(!(grepl('RIPARIAN_', CODE_NAME) &
-  #            METRIC_CATEGORY %in% c('Climate Change Resilience',
-  #                                   'Agricultural Livelihoods',
-  #                                   'Water Quality',
-  #                                   'Biodiversity Support'))) %>%
-  #only keep general riparian and managed wetland category (no distinction for
-  #subclasses with any metric)
-  filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_', CODE_NAME))) %>%
-  #not addressing these in these scenarios (and they shouldn't change)
-  filter(!CODE_NAME %in% c('WETLAND_TIDAL', 'WATER'))
-
-# # check representation across land covers & missing values for a subset of metrics:
-# scores_county %>% filter(scenario == 'baseline' & county == 'Yolo') %>%
-#   filter(METRIC %in%
-#            c('Breeding Landbirds: Riparian', 'Drought', 'Agricultural Jobs',
-#              'Groundwater Contaminant')) %>%
-#   select(CODE_NAME, METRIC, SCORE_TOTAL) %>%
-#   pivot_wider(names_from = METRIC, values_from = SCORE_TOTAL) %>% print(n = Inf)
-
-# summarize each metric for the entire Delta, for baseline and each scenario:
-# - for most metrics, this is the sum over all hectares
-# - for Annual Wages, calculate the new weighted average wage across all
-#    agricultural ha (i.e., those with a wage value)
-scores_county_sum = bind_rows(
-  # for all but annual wages:
-  scores_county %>% filter(METRIC != 'Annual Wages') %>%
-    mutate(
-      SCORE_TOTAL_SE = case_when(
-        METRIC_CATEGORY == 'Biodiversity Support' ~ SCORE_TOTAL_SE,
-        is.na(SCORE_TOTAL_SE) ~ 0,
-        TRUE ~ SCORE_TOTAL_SE)) %>%
-    # only SE with NA is for biodiversity (assume all others = 0: assumed values
-    # for economic, water quality metrics where no data reported, and resilience
-    # to salinity)
-    group_by(scenario, county, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, UNIT) %>%
-    summarize(SCORE_TOTAL = sum(SCORE_TOTAL),
-              SCORE_TOTAL_SE = sqrt(sum(SCORE_TOTAL_SE^2)),
-              .groups = 'drop'),
-  # for annual wages: multiply the average wage per-land cover by the proportion
-  # of the total ag landscape made up by that land cover
-  scores_county %>% filter(METRIC == 'Annual Wages' & SCORE_TOTAL > 0) %>%
-    group_by(scenario, county, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, UNIT) %>%
-    mutate(area_ag_total = sum(area),
-           area_prop = area / area_ag_total) %>%
-    summarize(SCORE_TOTAL = sum(SCORE_TOTAL * area_prop),
-              SCORE_TOTAL_SE = sqrt(sum((SCORE_TOTAL_SE * area_prop)^2)),
-              .groups = 'drop'),
-  # add habitat
-  habitat_county
-) %>% arrange(scenario, county, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC)
-write_csv(scores_county_sum, 'output/scenario_scores_county.csv')
-
+scores_county = sum_metrics(
+  metricdat = metrics %>% filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))),
+  areadat = totals_county %>%
+    filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))) %>%
+    filter(!grepl('win', scenario))) %>%
+  bind_rows(habitat_county, habitat_binary_county) %>%
+  filter(!grepl('win', scenario)) %>% #remove from habitat metrics
+  arrange(scenario, ZONE, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC)
+write_csv(scores_county, 'output/scenario_scores_county.csv')
 
 # NET CHANGE------
-# compare each scenario to baseline scores for each metric
+# compare each scenario to baseline
 
-## ENTIRE DELTA--------
-change_scores = left_join(
-  scores_sum %>% filter(scenario != 'baseline') %>%
-    rename(SCENARIO = SCORE_TOTAL, SCENARIO_SE = SCORE_TOTAL_SE),
-  scores_sum %>% filter(scenario == 'baseline') %>%
-    rename(BASELINE = SCORE_TOTAL, BASELINE_SE = SCORE_TOTAL_SE) %>%
-    select(-scenario),
-  by = c('METRIC_CATEGORY', 'METRIC_SUBTYPE', 'METRIC', 'UNIT')) %>%
-  mutate(net_change = SCENARIO - BASELINE,
-         net_change_se = sqrt(SCENARIO_SE^2 + BASELINE_SE^2),
-         change_prop = net_change/BASELINE,
-         change_prop_se = abs(change_prop) * sqrt((net_change_se/net_change)^2 + (BASELINE_SE/BASELINE)^2),
-         change_pct = change_prop * 100,
-         change_pct_se = change_prop_se * 100,
-         change_pct = if_else(METRIC_CATEGORY == 'Water Quality', -1 * change_pct, change_pct))
-write_csv(change_scores, 'output/scenario_change.csv')
+# LANDCOVER
+# for landcover, have to align field names to match fields expected in sum_change()
+totals_change = totals %>%
+  filter(!grepl('win', scenario)) %>%
+  rename(SCORE_TOTAL = area) %>%
+  mutate(SCORE_TOTAL_SE = 0) %>%
+  sum_change() %>%
+  select(-ends_with('SE', ignore.case = TRUE)) %>%
+  left_join(key %>% select(CODE_NAME, LABEL), by = 'CODE_NAME') %>%
+  select(scenario, CODE_NAME, LABEL, SCENARIO, BASELINE, net_change:change_pct)
+write_csv(totals_change, 'output/land_cover_change.csv')
 
-## BY COUNTY---------
-change_scores_county = left_join(
-  scores_county_sum %>% filter(scenario != 'baseline') %>%
-    rename(SCENARIO = SCORE_TOTAL, SCENARIO_SE = SCORE_TOTAL_SE),
-  scores_county_sum %>% filter(scenario == 'baseline') %>%
-    rename(BASELINE = SCORE_TOTAL, BASELINE_SE = SCORE_TOTAL_SE) %>%
-    select(-scenario),
-  by = c('county', 'METRIC_CATEGORY', 'METRIC_SUBTYPE', 'METRIC', 'UNIT')) %>%
-  mutate(net_change = SCENARIO - BASELINE,
-         net_change_se = sqrt(SCENARIO_SE^2 + BASELINE_SE^2),
-         change_prop = net_change/BASELINE,
-         change_prop_se = abs(change_prop) * sqrt((net_change_se/net_change)^2 + (BASELINE_SE/BASELINE)^2),
-         change_pct = change_prop * 100,
-         change_pct_se = change_prop_se * 100,
-         change_pct = if_else(METRIC_CATEGORY == 'Water Quality', -1 * change_pct, change_pct))
-write_csv(change_scores_county, 'output/scenario_change_county.csv')
+totals_change_county = totals_county %>%
+  filter(!grepl('win', scenario)) %>%
+  rename(SCORE_TOTAL = area) %>%
+  mutate(SCORE_TOTAL_SE = 0) %>%
+  sum_change() %>%
+  select(-ends_with('SE', ignore.case = TRUE)) %>%
+  left_join(key %>% select(CODE_NAME, LABEL), by = 'CODE_NAME') %>%
+  select(scenario, ZONE, CODE_NAME, LABEL, SCENARIO, BASELINE, net_change:change_pct)
+write_csv(totals_change_county, 'output/land_cover_change_county.csv')
+
+# METRICS & HABITAT
+net_change = sum_change(scores)
+write_csv(net_change, 'output/scenario_change.csv')
+
+net_change_county = sum_change(scores_county)
+write_csv(net_change_county, 'output/scenario_change_county.csv')
+
 
 # CALCULATE CHANGE MAPS--------
 # for species distribution models only
