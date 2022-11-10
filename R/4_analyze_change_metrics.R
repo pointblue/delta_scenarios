@@ -6,41 +6,39 @@
 source('R/0_packages.R')
 source('R/0_functions.R')
 key = readxl::read_excel('GIS/VEG_key.xlsx')
-spp_key = read_csv('output/TABLE_species_key.csv')
+# spp_key = read_csv('output/TABLE_species_key.csv')
 
 # REFERENCE DATA
-delta = rast('GIS/boundaries/delta.tif')
-county_raster = rast('GIS/landscape_rasters/boundaries/counties.tif')
+# delta = rast('GIS/boundaries/delta.tif')
+# county_raster = rast('GIS/landscape_rasters/boundaries/counties.tif')
 
 # SPATIAL DATA-----------
 # total suitable habitat for each landscape, predicted from SDMs
 
 ## probability of presence:
-habitat = sum_habitat(
+habitat = DeltaMultipleBenefits::sum_habitat(
   pathin = 'GIS/prediction_rasters',
   subtype = 'distributions',
-  keypath = 'output/TABLE_species_key.csv'
-)
+  keypath = 'output/TABLE_species_key.csv')
 write_csv(habitat, 'output/scenario_habitat.csv')
 
-habitat_county = sum_habitat(
+habitat_county = DeltaMultipleBenefits::sum_habitat(
   pathin = 'GIS/prediction_rasters',
-  zones = county_raster,
+  zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
   subtype = 'distributions',
   keypath = 'output/TABLE_species_key.csv')
 write_csv(habitat_county, 'output/scenario_habitat_county.csv')
 
-## alt: binary presence/absence predictions (using thresholds):
-habitat_binary = sum_habitat(
-  'GIS/prediction_rasters_threshold',
+## binary presence/absence (using thresholds):
+habitat_binary = DeltaMultipleBenefits::sum_habitat(
+  pathin = 'GIS/prediction_rasters_threshold',
   subtype = 'habitat',
-  keypath = 'output/TABLE_species_key.csv'
-)
+  keypath = 'output/TABLE_species_key.csv')
 write_csv(habitat_binary, 'output/scenario_habitat_binary.csv')
 
-habitat_binary_county = sum_habitat(
+habitat_binary_county = DeltaMultipleBenefits::sum_habitat(
   pathin = 'GIS/prediction_rasters_threshold',
-  zones = county_raster,
+  zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
   subtype = 'habitat',
   keypath = 'output/TABLE_species_key.csv')
 write_csv(habitat_binary_county, 'output/scenario_habitat_binary_county.csv')

@@ -1,0 +1,301 @@
+scenario,ZONE,METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,UNIT,SCORE_TOTAL
+baseline,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,7855.555555555556
+baseline,Sacramento,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,191088.8888888889
+baseline,San Joaquin,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,325022.22222222225
+baseline,Solano,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,12644.444444444445
+baseline,Yolo,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,91155.55555555556
+baseline,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,28366.666666666668
+baseline,Sacramento,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,262111.11111111112
+baseline,San Joaquin,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,153766.6666666667
+baseline,Solano,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,25244.444444444445
+baseline,Yolo,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,28355.55555555556
+baseline,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1434311.1111111112
+baseline,Sacramento,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1538066.6666666667
+baseline,San Joaquin,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1440900
+baseline,Solano,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1685622.2222222222
+baseline,Yolo,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1116522.2222222222
+baseline,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,1198200
+baseline,Sacramento,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,250800
+baseline,San Joaquin,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,2299033.3333333335
+baseline,Solano,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,633544.4444444445
+baseline,Yolo,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,528488.8888888889
+baseline,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,1011.1111111111112
+baseline,Sacramento,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,47088.88888888889
+baseline,San Joaquin,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,151944.44444444444
+baseline,Solano,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,11.11111111111111
+baseline,Yolo,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,25188.88888888889
+baseline,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,4111677.777777778
+baseline,Sacramento,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,3905933.3333333335
+baseline,San Joaquin,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,11612466.666666668
+baseline,Solano,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,2013555.5555555557
+baseline,Yolo,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,619733.3333333334
+baseline,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,96200
+baseline,Sacramento,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,805544.4444444445
+baseline,San Joaquin,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,547711.1111111111
+baseline,Solano,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,46866.66666666667
+baseline,Yolo,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,457611.1111111111
+baseline,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,22777.777777777777
+baseline,Sacramento,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,10466.666666666668
+baseline,San Joaquin,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,54944.444444444445
+baseline,Solano,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,14522.222222222223
+baseline,Yolo,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,655.5555555555555
+baseline,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,156844.44444444444
+baseline,Sacramento,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,193700
+baseline,San Joaquin,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,270144.44444444444
+baseline,Solano,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,147088.8888888889
+baseline,Yolo,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,241888.8888888889
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,7711.111111111111
+scenario1_restoration,Sacramento,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,240555.55555555556
+scenario1_restoration,San Joaquin,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,642177.7777777778
+scenario1_restoration,Solano,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,16066.666666666668
+scenario1_restoration,Yolo,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,212366.6666666667
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,14000
+scenario1_restoration,Sacramento,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,368588.8888888889
+scenario1_restoration,San Joaquin,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,447455.55555555556
+scenario1_restoration,Solano,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,33133.333333333336
+scenario1_restoration,Yolo,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,60822.222222222226
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1436355.5555555555
+scenario1_restoration,Sacramento,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1698644.4444444445
+scenario1_restoration,San Joaquin,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1541477.7777777778
+scenario1_restoration,Solano,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1846800
+scenario1_restoration,Yolo,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1287488.888888889
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,1198200
+scenario1_restoration,Sacramento,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,250244.44444444447
+scenario1_restoration,San Joaquin,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,2307444.4444444445
+scenario1_restoration,Solano,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,633544.4444444445
+scenario1_restoration,Yolo,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,528488.8888888889
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,1011.1111111111112
+scenario1_restoration,Sacramento,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,90533.33333333334
+scenario1_restoration,San Joaquin,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,424966.6666666667
+scenario1_restoration,Solano,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,844.4444444444445
+scenario1_restoration,Yolo,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,143388.8888888889
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,4114766.666666667
+scenario1_restoration,Sacramento,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,3924644.4444444445
+scenario1_restoration,San Joaquin,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,11673211.111111112
+scenario1_restoration,Solano,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,2034044.4444444445
+scenario1_restoration,Yolo,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,605244.4444444445
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,97077.77777777778
+scenario1_restoration,Sacramento,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,937144.4444444445
+scenario1_restoration,San Joaquin,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,974855.5555555556
+scenario1_restoration,Solano,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,56722.222222222226
+scenario1_restoration,Yolo,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,675544.4444444445
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,22777.777777777777
+scenario1_restoration,Sacramento,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,13133.333333333334
+scenario1_restoration,San Joaquin,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,54777.77777777778
+scenario1_restoration,Solano,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,13700
+scenario1_restoration,Yolo,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,722.2222222222223
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,163900
+scenario1_restoration,Sacramento,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,235900
+scenario1_restoration,San Joaquin,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,339600
+scenario1_restoration,Solano,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,150244.44444444444
+scenario1_restoration,Yolo,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,238666.6666666667
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,7911.111111111111
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,171911.11111111112
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,281211.1111111111
+scenario2_perennialexpand,Solano,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,11588.888888888889
+scenario2_perennialexpand,Yolo,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,ha,67988.88888888889
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,23422.222222222223
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,242177.77777777778
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,125177.77777777778
+scenario2_perennialexpand,Solano,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,24144.444444444445
+scenario2_perennialexpand,Yolo,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,ha,27688.88888888889
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1420977.7777777778
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1470133.3333333335
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1242722.2222222222
+scenario2_perennialexpand,Solano,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1664355.5555555555
+scenario2_perennialexpand,Yolo,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,ha,1081800
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,1198200
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,229888.8888888889
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,2298822.2222222225
+scenario2_perennialexpand,Solano,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,633544.4444444445
+scenario2_perennialexpand,Yolo,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,ha,528488.8888888889
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,1011.1111111111112
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,38366.66666666667
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,109833.33333333334
+scenario2_perennialexpand,Solano,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,44.44444444444444
+scenario2_perennialexpand,Yolo,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,ha,15888.888888888889
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,4113455.5555555555
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,3570911.1111111115
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,11354055.555555556
+scenario2_perennialexpand,Solano,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,1976377.7777777778
+scenario2_perennialexpand,Yolo,Biodiversity Support,Riparian landbird habitat,Song Sparrow,ha,524644.4444444445
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,99255.55555555556
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,804411.1111111111
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,698866.6666666667
+scenario2_perennialexpand,Solano,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,53866.66666666667
+scenario2_perennialexpand,Yolo,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,ha,455388.88888888893
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,22644.444444444445
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,10300
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,52566.66666666667
+scenario2_perennialexpand,Solano,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,11400
+scenario2_perennialexpand,Yolo,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,ha,1677.7777777777778
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,155955.55555555556
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,192688.8888888889
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,312722.22222222225
+scenario2_perennialexpand,Solano,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,145811.11111111112
+scenario2_perennialexpand,Yolo,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,ha,236688.8888888889
+baseline,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,6977.777777777778
+baseline,Sacramento,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,498866.6666666667
+baseline,San Joaquin,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,345611.1111111111
+baseline,Solano,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,387055.55555555556
+baseline,Yolo,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,1090700
+baseline,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,1722.2222222222224
+baseline,Sacramento,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,209255.55555555556
+baseline,San Joaquin,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,396611.1111111111
+baseline,Solano,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,0
+baseline,Yolo,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,0
+baseline,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,7222.222222222223
+baseline,Sacramento,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,224188.8888888889
+baseline,San Joaquin,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,109455.55555555556
+baseline,Solano,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,169144.44444444444
+baseline,Yolo,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,552077.7777777778
+baseline,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Geese (fall),ha,0
+baseline,Sacramento,Biodiversity Support,Waterbird habitat,Geese (fall),ha,51122.222222222226
+baseline,San Joaquin,Biodiversity Support,Waterbird habitat,Geese (fall),ha,191677.77777777778
+baseline,Solano,Biodiversity Support,Waterbird habitat,Geese (fall),ha,8966.666666666668
+baseline,Yolo,Biodiversity Support,Waterbird habitat,Geese (fall),ha,158255.55555555556
+baseline,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,155744.44444444444
+baseline,Sacramento,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,313488.8888888889
+baseline,San Joaquin,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,399055.55555555556
+baseline,Solano,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,376566.6666666667
+baseline,Yolo,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,714577.7777777778
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,75200
+scenario1_restoration,Sacramento,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,625711.1111111111
+scenario1_restoration,San Joaquin,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,345933.3333333334
+scenario1_restoration,Solano,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,560966.6666666667
+scenario1_restoration,Yolo,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,1215000
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,1711.111111111111
+scenario1_restoration,Sacramento,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,232966.6666666667
+scenario1_restoration,San Joaquin,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,390522.22222222225
+scenario1_restoration,Solano,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,0
+scenario1_restoration,Yolo,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,0
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,27400
+scenario1_restoration,Sacramento,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,393777.7777777778
+scenario1_restoration,San Joaquin,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,113300
+scenario1_restoration,Solano,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,197044.44444444444
+scenario1_restoration,Yolo,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,799088.8888888889
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Geese (fall),ha,0
+scenario1_restoration,Sacramento,Biodiversity Support,Waterbird habitat,Geese (fall),ha,63233.333333333336
+scenario1_restoration,San Joaquin,Biodiversity Support,Waterbird habitat,Geese (fall),ha,192444.44444444444
+scenario1_restoration,Solano,Biodiversity Support,Waterbird habitat,Geese (fall),ha,9033.333333333334
+scenario1_restoration,Yolo,Biodiversity Support,Waterbird habitat,Geese (fall),ha,217733.33333333334
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,166200
+scenario1_restoration,Sacramento,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,457444.44444444444
+scenario1_restoration,San Joaquin,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,401211.1111111111
+scenario1_restoration,Solano,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,419666.6666666667
+scenario1_restoration,Yolo,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,925366.6666666667
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,6700
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,509311.1111111111
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,322500
+scenario2_perennialexpand,Solano,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,370766.6666666667
+scenario2_perennialexpand,Yolo,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),ha,1024266.6666666667
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,1511.111111111111
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,214422.22222222222
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,448111.1111111111
+scenario2_perennialexpand,Solano,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,0
+scenario2_perennialexpand,Yolo,Biodiversity Support,Waterbird habitat,Cranes (fall),ha,266.6666666666667
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,6888.88888888889
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,210244.44444444444
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,97311.11111111111
+scenario2_perennialexpand,Solano,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,162266.6666666667
+scenario2_perennialexpand,Yolo,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),ha,535722.2222222222
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Geese (fall),ha,0
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Waterbird habitat,Geese (fall),ha,72544.44444444445
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Waterbird habitat,Geese (fall),ha,269711.1111111111
+scenario2_perennialexpand,Solano,Biodiversity Support,Waterbird habitat,Geese (fall),ha,13533.333333333334
+scenario2_perennialexpand,Yolo,Biodiversity Support,Waterbird habitat,Geese (fall),ha,247166.6666666667
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,158366.6666666667
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,309877.7777777778
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,355788.8888888889
+scenario2_perennialexpand,Solano,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,373155.55555555556
+scenario2_perennialexpand,Yolo,Biodiversity Support,Waterbird habitat,Shorebirds (fall),ha,690755.5555555556
+baseline_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,309711.1111111111
+baseline_win,Sacramento,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,531800
+baseline_win,San Joaquin,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,2517600
+baseline_win,Solano,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,601811.1111111111
+baseline_win,Yolo,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,741566.6666666667
+baseline_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,106511.11111111111
+baseline_win,Sacramento,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,333922.22222222225
+baseline_win,San Joaquin,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,1422966.6666666667
+baseline_win,Solano,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,0
+baseline_win,Yolo,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,0
+baseline_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,290933.3333333334
+baseline_win,Sacramento,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,443822.22222222225
+baseline_win,San Joaquin,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,1704711.1111111112
+baseline_win,Solano,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,203922.22222222222
+baseline_win,Yolo,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,586311.1111111111
+baseline_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,113266.66666666667
+baseline_win,Sacramento,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,117633.33333333334
+baseline_win,San Joaquin,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,435044.44444444444
+baseline_win,Solano,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,93911.11111111111
+baseline_win,Yolo,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,377411.1111111111
+baseline_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Geese (winter),ha,60788.88888888889
+baseline_win,Sacramento,Biodiversity Support,Waterbird habitat,Geese (winter),ha,669511.1111111111
+baseline_win,San Joaquin,Biodiversity Support,Waterbird habitat,Geese (winter),ha,1406277.7777777778
+baseline_win,Solano,Biodiversity Support,Waterbird habitat,Geese (winter),ha,8300
+baseline_win,Yolo,Biodiversity Support,Waterbird habitat,Geese (winter),ha,126777.77777777778
+baseline_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,216844.44444444444
+baseline_win,Sacramento,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,501033.3333333334
+baseline_win,San Joaquin,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,1528500
+baseline_win,Solano,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,197644.44444444444
+baseline_win,Yolo,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,390488.8888888889
+scenario1_restoration_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,405900
+scenario1_restoration_win,Sacramento,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,727388.8888888889
+scenario1_restoration_win,San Joaquin,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,2570455.5555555555
+scenario1_restoration_win,Solano,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,631133.3333333334
+scenario1_restoration_win,Yolo,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,977633.3333333334
+scenario1_restoration_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,50088.88888888889
+scenario1_restoration_win,Sacramento,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,290855.55555555556
+scenario1_restoration_win,San Joaquin,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,1424711.1111111112
+scenario1_restoration_win,Solano,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,0
+scenario1_restoration_win,Yolo,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,0
+scenario1_restoration_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,304844.44444444444
+scenario1_restoration_win,Sacramento,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,588266.6666666667
+scenario1_restoration_win,San Joaquin,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,1712211.1111111112
+scenario1_restoration_win,Solano,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,225444.44444444447
+scenario1_restoration_win,Yolo,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,824611.1111111111
+scenario1_restoration_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,114766.66666666667
+scenario1_restoration_win,Sacramento,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,140544.44444444444
+scenario1_restoration_win,San Joaquin,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,431600
+scenario1_restoration_win,Solano,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,112122.22222222223
+scenario1_restoration_win,Yolo,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,654077.7777777778
+scenario1_restoration_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Geese (winter),ha,61133.333333333336
+scenario1_restoration_win,Sacramento,Biodiversity Support,Waterbird habitat,Geese (winter),ha,624744.4444444445
+scenario1_restoration_win,San Joaquin,Biodiversity Support,Waterbird habitat,Geese (winter),ha,1404244.4444444445
+scenario1_restoration_win,Solano,Biodiversity Support,Waterbird habitat,Geese (winter),ha,8522.222222222223
+scenario1_restoration_win,Yolo,Biodiversity Support,Waterbird habitat,Geese (winter),ha,219277.77777777778
+scenario1_restoration_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,211311.11111111112
+scenario1_restoration_win,Sacramento,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,629288.8888888889
+scenario1_restoration_win,San Joaquin,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,1534144.4444444445
+scenario1_restoration_win,Solano,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,217088.8888888889
+scenario1_restoration_win,Yolo,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,590755.5555555556
+scenario2_perennialexpand_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,321511.1111111111
+scenario2_perennialexpand_win,Sacramento,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,560966.6666666667
+scenario2_perennialexpand_win,San Joaquin,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,2751166.666666667
+scenario2_perennialexpand_win,Solano,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,590600
+scenario2_perennialexpand_win,Yolo,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),ha,760144.4444444445
+scenario2_perennialexpand_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,123488.88888888889
+scenario2_perennialexpand_win,Sacramento,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,338355.55555555556
+scenario2_perennialexpand_win,San Joaquin,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,1238600
+scenario2_perennialexpand_win,Solano,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,0
+scenario2_perennialexpand_win,Yolo,Biodiversity Support,Waterbird habitat,Cranes (winter),ha,0
+scenario2_perennialexpand_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,295844.44444444444
+scenario2_perennialexpand_win,Sacramento,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,440044.44444444444
+scenario2_perennialexpand_win,San Joaquin,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,1623200
+scenario2_perennialexpand_win,Solano,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,201066.6666666667
+scenario2_perennialexpand_win,Yolo,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),ha,581477.7777777778
+scenario2_perennialexpand_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,115155.55555555556
+scenario2_perennialexpand_win,Sacramento,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,120600
+scenario2_perennialexpand_win,San Joaquin,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,421577.7777777778
+scenario2_perennialexpand_win,Solano,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,93855.55555555556
+scenario2_perennialexpand_win,Yolo,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,382444.44444444444
+scenario2_perennialexpand_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Geese (winter),ha,110422.22222222223
+scenario2_perennialexpand_win,Sacramento,Biodiversity Support,Waterbird habitat,Geese (winter),ha,660822.2222222222
+scenario2_perennialexpand_win,San Joaquin,Biodiversity Support,Waterbird habitat,Geese (winter),ha,1610366.6666666667
+scenario2_perennialexpand_win,Solano,Biodiversity Support,Waterbird habitat,Geese (winter),ha,9355.555555555557
+scenario2_perennialexpand_win,Yolo,Biodiversity Support,Waterbird habitat,Geese (winter),ha,234011.11111111112
+scenario2_perennialexpand_win,Contra Costa & Alameda,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,274877.7777777778
+scenario2_perennialexpand_win,Sacramento,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,491688.88888888893
+scenario2_perennialexpand_win,San Joaquin,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,1426855.5555555555
+scenario2_perennialexpand_win,Solano,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,203011.11111111112
+scenario2_perennialexpand_win,Yolo,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,412388.8888888889
