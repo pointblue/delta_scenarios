@@ -1,7 +1,7 @@
 scenario,METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,UNIT,SCORE_TOTAL,SCORE_TOTAL_SE
-baseline,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,251375.78620567874,14421.872889531716
+baseline,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,2513.7578620567874,144.21872889531716
 baseline,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.726841129353446,0.6138994828299215
-baseline,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),814558.3476808218,20702.285798143694
+baseline,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),814558.3476808218,20702.285798143694
 baseline,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,8321171.617073545,NA
 baseline,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,8500081.034859188,NA
 baseline,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,7684861.429093509,NA
@@ -46,12 +46,12 @@ baseline,Climate Change Resilience,climate change resilience,Drought,ranking,150
 baseline,Climate Change Resilience,climate change resilience,Flood,ranking,1581784.770909091,14696.507570168387
 baseline,Climate Change Resilience,climate change resilience,Heat,ranking,1860438.618642857,16156.901286149025
 baseline,Climate Change Resilience,climate change resilience,Salinity,ranking,1444678.1099999999,0
-baseline,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,125430.86348519039,9894.388055570847
-baseline,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,16239.360345030305,2134.819885805276
-baseline,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,392864.74040842074,16782.85648396496
-scenario1_restoration,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,245830.29666737595,14209.091772547903
+baseline,Water Quality,pesticide application rate,Critical Pesticides,kg,125430.86348519039,9894.388055570847
+baseline,Water Quality,pesticide application rate,Groundwater Contaminant,kg,16239.360345030305,2134.819885805276
+baseline,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,392864.74040842074,16782.85648396496
+scenario1_restoration,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,2458.30296667376,142.09091772547904
 scenario1_restoration,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.69750096778908,0.6133768124229931
-scenario1_restoration,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),797689.1866718797,20401.462508480847
+scenario1_restoration,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),797689.1866718797,20401.462508480847
 scenario1_restoration,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,8891634.21664621,NA
 scenario1_restoration,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,9151057.863522984,NA
 scenario1_restoration,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,8013409.83240176,NA
@@ -96,12 +96,12 @@ scenario1_restoration,Climate Change Resilience,climate change resilience,Drough
 scenario1_restoration,Climate Change Resilience,climate change resilience,Flood,ranking,1598919.4013636364,14372.085998014885
 scenario1_restoration,Climate Change Resilience,climate change resilience,Heat,ranking,1860839.2189285716,15967.83060416636
 scenario1_restoration,Climate Change Resilience,climate change resilience,Salinity,ranking,1453357.98,0
-scenario1_restoration,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,122354.35630901263,9666.007524444682
-scenario1_restoration,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,15981.145438317306,2092.412369847355
-scenario1_restoration,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,382439.8916196707,16383.405798689806
-scenario2_perennialexpand,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,298943.94028229726,21491.119036668355
+scenario1_restoration,Water Quality,pesticide application rate,Critical Pesticides,kg,122354.35630901263,9666.007524444682
+scenario1_restoration,Water Quality,pesticide application rate,Groundwater Contaminant,kg,15981.145438317306,2092.412369847355
+scenario1_restoration,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,382439.8916196707,16383.405798689806
+scenario2_perennialexpand,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,2989.4394028229726,214.91119036668354
 scenario2_perennialexpand,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.48727663199477,0.5733275564218338
-scenario2_perennialexpand,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),956471.5464041128,30431.946104189617
+scenario2_perennialexpand,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),956471.5464041128,30431.946104189617
 scenario2_perennialexpand,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,8116014.799203879,NA
 scenario2_perennialexpand,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,8401764.48674947,NA
 scenario2_perennialexpand,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,7401884.991234769,NA
@@ -146,6 +146,6 @@ scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Dr
 scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Flood,ranking,1563677.0877272727,14871.544644408816
 scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Heat,ranking,1792666.3397142857,17098.770977296204
 scenario2_perennialexpand,Climate Change Resilience,climate change resilience,Salinity,ranking,1371816.18,0
-scenario2_perennialexpand,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,128998.91559887078,9100.625756612193
-scenario2_perennialexpand,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,18735.598957170987,2066.7115256640723
-scenario2_perennialexpand,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,441990.22986618144,17850.19338859975
+scenario2_perennialexpand,Water Quality,pesticide application rate,Critical Pesticides,kg,128998.91559887078,9100.625756612193
+scenario2_perennialexpand,Water Quality,pesticide application rate,Groundwater Contaminant,kg,18735.598957170987,2066.7115256640723
+scenario2_perennialexpand,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,441990.22986618144,17850.19338859975

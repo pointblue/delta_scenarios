@@ -1,35 +1,35 @@
 METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,CODE_NAME,SCORE_MEAN,SCORE_SE,SCORE_MIN,SCORE_MAX,UNIT,LABEL
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,ORCHARD_DECIDUOUS,5.098351830054537,0.7932300491896178,1.1353817759421787,15.402208672086722,number of employees per 100ha,Orchard - Deciduous Fruits & Nuts
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,ORCHARD_CITRUS&SUBTROPICAL,5.098351830054537,0.7932300491896178,1.1353817759421787,15.402208672086722,number of employees per 100ha,Orchard - Citrus & Subtropical
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,VINEYARD,2.269056648746179,0.2259764552414,0.49421,4.447889999999999,number of employees per 100ha,Vineyard
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,GRAIN&HAY_WHEAT,0.19678803651528748,0.0357258631427393,0.1313118357487923,0.36698762376237626,number of employees per 100ha,Wheat
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,GRAIN&HAY_OTHER,0.3950699746766049,0.05513717044380067,0.3399328042328042,0.4502071451204055,number of employees per 100ha,Other Grains
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,FIELD_CORN,0.24409219407038135,0.02283324165431998,0.08920758122743681,0.3927496688741722,number of employees per 100ha,Corn
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,FIELD_OTHER,0.05747606936795885,0.00740336150950513,0.04560334827313472,0.07886329787234041,number of employees per 100ha,Other Field Crops
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,ROW,4.969645555381874,0.332947301637443,2.6177066061323857,7.060975814063237,number of employees per 100ha,Row Crops
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,RICE,1.4404298868204868,0.1806636370717224,0.3365788876276958,2.617311526479751,number of employees per 100ha,Rice
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,IDLE,0,NA,NA,NA,number of employees per 100ha,Idle
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,PASTURE_ALFALFA,0.6340739337371615,0.06229805176642096,0.28930593026215323,1.1929206896551725,number of employees per 100ha,Alfalfa
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,PASTURE_OTHER,0.6340739337371615,0.06229805176642096,0.28930593026215323,1.1929206896551725,number of employees per 100ha,Other Pasture
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,GRASSLAND,0,NA,NA,NA,number of employees per 100ha,Grassland
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,URBAN,0,NA,NA,NA,number of employees per 100ha,Urban
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN,0,NA,NA,NA,number of employees per 100ha,Riparian
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN_FOREST_POFR,0,NA,NA,NA,number of employees per 100ha,Riparian - Cottonwood
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN_FOREST_QULO,0,NA,NA,NA,number of employees per 100ha,Riparian - Valley Oak
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN_FOREST_SALIX,0,NA,NA,NA,number of employees per 100ha,Riparian - Willow
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN_FOREST_MIXED,0,NA,NA,NA,number of employees per 100ha,Riparian - Mixed Forest
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN_SCRUB_INTRO,0,NA,NA,NA,number of employees per 100ha,Riparian - Introduced Scrub
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN_SCRUB_SALIX,0,NA,NA,NA,number of employees per 100ha,Riparian - Willow Shrub
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN_SCRUB_MIXED,0,NA,NA,NA,number of employees per 100ha,Riparian - Mixed Shrub
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,WETLAND_MANAGED,0,NA,NA,NA,number of employees per 100ha,Managed Wetland
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,WETLAND_MANAGED_PERENNIAL,0,NA,NA,NA,number of employees per 100ha,Managed Wetland - Perennial
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,WETLAND_MANAGED_SEASONAL,0,NA,NA,NA,number of employees per 100ha,Managed Wetland - Seasonal
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,WETLAND_TIDAL,0,NA,NA,NA,number of employees per 100ha,Tidal Wetland
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,WETLAND_OTHER,0,NA,NA,NA,number of employees per 100ha,Other Wetland
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,WATER,0,NA,NA,NA,number of employees per 100ha,Water
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,WOODLAND,0,NA,NA,NA,number of employees per 100ha,Woodland
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,SCRUB,0,NA,NA,NA,number of employees per 100ha,Scrub
-Agricultural Livelihoods,livelihoods,Agricultural Jobs,BARREN,0,NA,NA,NA,number of employees per 100ha,Barren
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,ORCHARD_DECIDUOUS,0.05098351830054537,0.007932300491896178,0.011353817759421786,0.15402208672086723,employees per ha,Orchard - Deciduous Fruits & Nuts
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,ORCHARD_CITRUS&SUBTROPICAL,0.05098351830054537,0.007932300491896178,0.011353817759421786,0.15402208672086723,employees per ha,Orchard - Citrus & Subtropical
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,VINEYARD,0.02269056648746179,0.002259764552414,0.0049421,0.044478899999999995,employees per ha,Vineyard
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,GRAIN&HAY_WHEAT,0.001967880365152875,3.57258631427393e-4,0.001313118357487923,0.0036698762376237625,employees per ha,Wheat
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,GRAIN&HAY_OTHER,0.0039506997467660485,5.513717044380067e-4,0.003399328042328042,0.004502071451204055,employees per ha,Other Grains
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,FIELD_CORN,0.0024409219407038134,2.2833241654319982e-4,8.920758122743681e-4,0.003927496688741722,employees per ha,Corn
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,FIELD_OTHER,5.747606936795885e-4,7.40336150950513e-5,4.560334827313472e-4,7.88632978723404e-4,employees per ha,Other Field Crops
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,ROW,0.049696455553818734,0.0033294730163744304,0.026177066061323858,0.07060975814063238,employees per ha,Row Crops
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,RICE,0.014404298868204869,0.001806636370717224,0.003365788876276958,0.026173115264797507,employees per ha,Rice
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,IDLE,0,NA,NA,NA,employees per ha,Idle
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,PASTURE_ALFALFA,0.006340739337371615,0.00062298051766420965,0.0028930593026215323,0.011929206896551725,employees per ha,Alfalfa
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,PASTURE_OTHER,0.006340739337371615,0.00062298051766420965,0.0028930593026215323,0.011929206896551725,employees per ha,Other Pasture
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,GRASSLAND,0,NA,NA,NA,employees per ha,Grassland
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,URBAN,0,NA,NA,NA,employees per ha,Urban
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN,0,NA,NA,NA,employees per ha,Riparian
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN_FOREST_POFR,0,NA,NA,NA,employees per ha,Riparian - Cottonwood
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN_FOREST_QULO,0,NA,NA,NA,employees per ha,Riparian - Valley Oak
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN_FOREST_SALIX,0,NA,NA,NA,employees per ha,Riparian - Willow
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN_FOREST_MIXED,0,NA,NA,NA,employees per ha,Riparian - Mixed Forest
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN_SCRUB_INTRO,0,NA,NA,NA,employees per ha,Riparian - Introduced Scrub
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN_SCRUB_SALIX,0,NA,NA,NA,employees per ha,Riparian - Willow Shrub
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,RIPARIAN_SCRUB_MIXED,0,NA,NA,NA,employees per ha,Riparian - Mixed Shrub
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,WETLAND_MANAGED,0,NA,NA,NA,employees per ha,Managed Wetland
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,WETLAND_MANAGED_PERENNIAL,0,NA,NA,NA,employees per ha,Managed Wetland - Perennial
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,WETLAND_MANAGED_SEASONAL,0,NA,NA,NA,employees per ha,Managed Wetland - Seasonal
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,WETLAND_TIDAL,0,NA,NA,NA,employees per ha,Tidal Wetland
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,WETLAND_OTHER,0,NA,NA,NA,employees per ha,Other Wetland
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,WATER,0,NA,NA,NA,employees per ha,Water
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,WOODLAND,0,NA,NA,NA,employees per ha,Woodland
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,SCRUB,0,NA,NA,NA,employees per ha,Scrub
+Agricultural Livelihoods,livelihoods,Agricultural Jobs,BARREN,0,NA,NA,NA,employees per ha,Barren
 Agricultural Livelihoods,livelihoods,Annual Wages,ORCHARD_DECIDUOUS,36.50889484346645,0.9618956600014572,20.975964285714287,46.150803636363634,annual dollars per employee (thousands),Orchard - Deciduous Fruits & Nuts
 Agricultural Livelihoods,livelihoods,Annual Wages,ORCHARD_CITRUS&SUBTROPICAL,36.50889484346645,0.9618956600014572,20.975964285714287,46.150803636363634,annual dollars per employee (thousands),Orchard - Citrus & Subtropical
 Agricultural Livelihoods,livelihoods,Annual Wages,VINEYARD,36.39096978233102,1.2559914721629224,22.39183333333333,58.65125,annual dollars per employee (thousands),Vineyard

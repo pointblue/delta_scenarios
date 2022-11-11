@@ -1,7 +1,7 @@
 scenario,ZONE,METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,UNIT,SCORE_TOTAL,SCORE_TOTAL_SE
-baseline,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,21917.998124091475,1185.131216346395
+baseline,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,219.17998124091474,11.85131216346395
 baseline,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),39.0456848299329,0.7391573434656614
-baseline,Contra Costa & Alameda,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),67682.30313052746,1701.5234316763488
+baseline,Contra Costa & Alameda,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),67682.30313052746,1701.5234316763488
 baseline,Contra Costa & Alameda,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,984410.651423389,NA
 baseline,Contra Costa & Alameda,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,1261288.7831169695,NA
 baseline,Contra Costa & Alameda,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,1393937.4833600388,NA
@@ -46,12 +46,12 @@ baseline,Contra Costa & Alameda,Climate Change Resilience,climate change resilie
 baseline,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Flood,ranking,196988.65618181817,1764.3329541198184
 baseline,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Heat,ranking,267368.55075,1972.878888206218
 baseline,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Salinity,ranking,249357.78,0
-baseline,Contra Costa & Alameda,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,10575.280450323387,739.9950408844418
-baseline,Contra Costa & Alameda,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,1314.247013519213,222.8250234091452
-baseline,Contra Costa & Alameda,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,30809.156449714574,1322.681290392739
-baseline,Sacramento,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,36348.47412338471,2488.599999623693
+baseline,Contra Costa & Alameda,Water Quality,pesticide application rate,Critical Pesticides,kg,10575.280450323387,739.9950408844418
+baseline,Contra Costa & Alameda,Water Quality,pesticide application rate,Groundwater Contaminant,kg,1314.247013519213,222.8250234091452
+baseline,Contra Costa & Alameda,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,30809.156449714574,1322.681290392739
+baseline,Sacramento,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,363.4847412338471,24.885999996236926
 baseline,Sacramento,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.50026621871204,0.6275812070487706
-baseline,Sacramento,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),134565.0374205037,3626.7498086291234
+baseline,Sacramento,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),134565.0374205037,3626.7498086291234
 baseline,Sacramento,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,1297404.5394466985,NA
 baseline,Sacramento,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,1585590.540953229,NA
 baseline,Sacramento,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,1410450.6593885317,NA
@@ -96,12 +96,12 @@ baseline,Sacramento,Climate Change Resilience,climate change resilience,Drought,
 baseline,Sacramento,Climate Change Resilience,climate change resilience,Flood,ranking,260168.56552272727,2832.6566863929474
 baseline,Sacramento,Climate Change Resilience,climate change resilience,Heat,ranking,288054.64832142857,3153.127526695006
 baseline,Sacramento,Climate Change Resilience,climate change resilience,Salinity,ranking,202604.49,0
-baseline,Sacramento,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,17121.563123123506,1270.2344082380487
-baseline,Sacramento,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,2994.152116980897,296.31820323710633
-baseline,Sacramento,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,54764.949684453924,2237.25243508917
-baseline,San Joaquin,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,148199.0201445291,9343.293426898776
+baseline,Sacramento,Water Quality,pesticide application rate,Critical Pesticides,kg,17121.563123123506,1270.2344082380487
+baseline,Sacramento,Water Quality,pesticide application rate,Groundwater Contaminant,kg,2994.152116980897,296.31820323710633
+baseline,Sacramento,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,54764.949684453924,2237.25243508917
+baseline,San Joaquin,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,1481.9902014452907,93.43293426898775
 baseline,San Joaquin,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.38017022851719,0.6466502063082321
-baseline,San Joaquin,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),457744.71563745197,13288.16575693497
+baseline,San Joaquin,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),457744.71563745197,13288.16575693497
 baseline,San Joaquin,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,3922613.52221585,NA
 baseline,San Joaquin,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,3689816.075691085,NA
 baseline,San Joaquin,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,2446191.5130781634,NA
@@ -146,12 +146,12 @@ baseline,San Joaquin,Climate Change Resilience,climate change resilience,Drought
 baseline,San Joaquin,Climate Change Resilience,climate change resilience,Flood,ranking,665246.9714090909,7775.214000443929
 baseline,San Joaquin,Climate Change Resilience,climate change resilience,Heat,ranking,807258.5861785715,8302.436316006519
 baseline,San Joaquin,Climate Change Resilience,climate change resilience,Salinity,ranking,635866.74,0
-baseline,San Joaquin,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,75525.94224456181,5846.07400134662
-baseline,San Joaquin,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,8278.012164537022,1225.4337238371793
-baseline,San Joaquin,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,236526.68558608662,10413.826069616473
-baseline,Solano,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,18735.96916847059,1041.2068895310326
+baseline,San Joaquin,Water Quality,pesticide application rate,Critical Pesticides,kg,75525.94224456181,5846.07400134662
+baseline,San Joaquin,Water Quality,pesticide application rate,Groundwater Contaminant,kg,8278.012164537022,1225.4337238371793
+baseline,San Joaquin,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,236526.68558608662,10413.826069616473
+baseline,Solano,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,187.35969168470592,10.412068895310327
 baseline,Solano,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),40.019539597004204,0.8919181015486685
-baseline,Solano,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),58696.695969773275,1517.9706455298215
+baseline,Solano,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),58696.695969773275,1517.9706455298215
 baseline,Solano,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,867752.7180410094,NA
 baseline,Solano,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,1038096.1780505877,NA
 baseline,Solano,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,1395865.4883645475,NA
@@ -196,12 +196,12 @@ baseline,Solano,Climate Change Resilience,climate change resilience,Drought,rank
 baseline,Solano,Climate Change Resilience,climate change resilience,Flood,ranking,222291.61888636363,2201.9807360764344
 baseline,Solano,Climate Change Resilience,climate change resilience,Heat,ranking,250285.10657142857,2382.616912988798
 baseline,Solano,Climate Change Resilience,climate change resilience,Salinity,ranking,152039.61,0
-baseline,Solano,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,12336.13973903121,1594.8850477750063
-baseline,Solano,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,1575.0855178144354,335.215343685106
-baseline,Solano,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,31977.322661332055,2205.1192550987375
-baseline,Yolo,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,26171.57153521466,1281.2676198124234
+baseline,Solano,Water Quality,pesticide application rate,Critical Pesticides,kg,12336.13973903121,1594.8850477750063
+baseline,Solano,Water Quality,pesticide application rate,Groundwater Contaminant,kg,1575.0855178144354,335.215343685106
+baseline,Solano,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,31977.322661332055,2205.1192550987375
+baseline,Yolo,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,261.7157153521466,12.812676198124233
 baseline,Yolo,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.78443657540154,0.6936273109558573
-baseline,Yolo,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),95862.78293775971,1804.2262136167524
+baseline,Yolo,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),95862.78293775971,1804.2262136167524
 baseline,Yolo,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,1248950.7372896292,NA
 baseline,Yolo,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,925247.3839274712,NA
 baseline,Yolo,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,1038398.4779321484,NA
@@ -246,12 +246,12 @@ baseline,Yolo,Climate Change Resilience,climate change resilience,Drought,rankin
 baseline,Yolo,Climate Change Resilience,climate change resilience,Flood,ranking,237086.19890909092,1918.8281967165908
 baseline,Yolo,Climate Change Resilience,climate change resilience,Heat,ranking,247470.03932142857,2435.1875641242314
 baseline,Yolo,Climate Change Resilience,climate change resilience,Salinity,ranking,204808.95,0
-baseline,Yolo,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,9871.351664964966,700.7964773131633
-baseline,Yolo,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,2077.8073086837917,180.79338657579243
-baseline,Yolo,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,38783.28030253592,1741.223275734499
-scenario1_restoration,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,21903.788527236426,1184.837443106416
+baseline,Yolo,Water Quality,pesticide application rate,Critical Pesticides,kg,9871.351664964966,700.7964773131633
+baseline,Yolo,Water Quality,pesticide application rate,Groundwater Contaminant,kg,2077.8073086837917,180.79338657579243
+baseline,Yolo,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,38783.28030253592,1741.223275734499
+scenario1_restoration,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,219.03788527236424,11.84837443106416
 scenario1_restoration,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),39.041559510225134,0.7382937765189753
-scenario1_restoration,Contra Costa & Alameda,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),67667.11023664146,1701.43026179618
+scenario1_restoration,Contra Costa & Alameda,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),67667.11023664146,1701.43026179618
 scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,983100.403066621,NA
 scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,1251992.3859472077,NA
 scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,1398769.3988018152,NA
@@ -296,12 +296,12 @@ scenario1_restoration,Contra Costa & Alameda,Climate Change Resilience,climate c
 scenario1_restoration,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Flood,ranking,197064.33881818183,1761.797860064507
 scenario1_restoration,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Heat,ranking,267344.26875,1970.307667584127
 scenario1_restoration,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Salinity,ranking,249493.32,0
-scenario1_restoration,Contra Costa & Alameda,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,10575.186114385902,739.9905466211369
-scenario1_restoration,Contra Costa & Alameda,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,1314.21189394467,222.81352666610516
-scenario1_restoration,Contra Costa & Alameda,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,30808.042702535895,1322.6696640093096
-scenario1_restoration,Sacramento,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,35151.419041648354,2439.3279658204756
+scenario1_restoration,Contra Costa & Alameda,Water Quality,pesticide application rate,Critical Pesticides,kg,10575.186114385902,739.9905466211369
+scenario1_restoration,Contra Costa & Alameda,Water Quality,pesticide application rate,Groundwater Contaminant,kg,1314.21189394467,222.81352666610516
+scenario1_restoration,Contra Costa & Alameda,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,30808.042702535895,1322.6696640093096
+scenario1_restoration,Sacramento,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,351.51419041648353,24.393279658204758
 scenario1_restoration,Sacramento,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.414816285669836,0.6229876225510654
-scenario1_restoration,Sacramento,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),131326.1178210001,3555.3761925139893
+scenario1_restoration,Sacramento,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),131326.1178210001,3555.3761925139893
 scenario1_restoration,Sacramento,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,1403156.0849894874,NA
 scenario1_restoration,Sacramento,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,1738461.218537142,NA
 scenario1_restoration,Sacramento,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,1502389.4765970402,NA
@@ -346,12 +346,12 @@ scenario1_restoration,Sacramento,Climate Change Resilience,climate change resili
 scenario1_restoration,Sacramento,Climate Change Resilience,climate change resilience,Flood,ranking,264622.6695,2738.10279986238
 scenario1_restoration,Sacramento,Climate Change Resilience,climate change resilience,Heat,ranking,287548.1061428571,3126.873912209016
 scenario1_restoration,Sacramento,Climate Change Resilience,climate change resilience,Salinity,ranking,206352,0
-scenario1_restoration,Sacramento,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,16467.591677136996,1227.7590225213485
-scenario1_restoration,Sacramento,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,2951.854788017988,289.4877381446614
-scenario1_restoration,Sacramento,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,52457.226423340384,2164.1604583901294
-scenario1_restoration,San Joaquin,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,146254.90619387035,9219.406130353982
+scenario1_restoration,Sacramento,Water Quality,pesticide application rate,Critical Pesticides,kg,16467.591677136996,1227.7590225213485
+scenario1_restoration,Sacramento,Water Quality,pesticide application rate,Groundwater Contaminant,kg,2951.854788017988,289.4877381446614
+scenario1_restoration,Sacramento,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,52457.226423340384,2164.1604583901294
+scenario1_restoration,San Joaquin,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,1462.5490619387035,92.19406130353981
 scenario1_restoration,San Joaquin,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.37491750679362,0.6474447104210457
-scenario1_restoration,San Joaquin,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),451591.14622741606,13112.271624488565
+scenario1_restoration,San Joaquin,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),451591.14622741606,13112.271624488565
 scenario1_restoration,San Joaquin,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,4281938.816044397,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,4066619.170144118,NA
 scenario1_restoration,San Joaquin,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,2551271.4710779074,NA
@@ -396,12 +396,12 @@ scenario1_restoration,San Joaquin,Climate Change Resilience,climate change resil
 scenario1_restoration,San Joaquin,Climate Change Resilience,climate change resilience,Flood,ranking,669528.0285909091,7690.429323438247
 scenario1_restoration,San Joaquin,Climate Change Resilience,climate change resilience,Heat,ranking,808143.7818214286,8236.786714978993
 scenario1_restoration,San Joaquin,Climate Change Resilience,climate change resilience,Salinity,ranking,634370.67,0
-scenario1_restoration,San Joaquin,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,74496.3548707163,5759.9908813501
-scenario1_restoration,San Joaquin,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,8174.867781072768,1207.9513309772408
-scenario1_restoration,San Joaquin,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,233375.45916355803,10267.720020526624
-scenario1_restoration,Solano,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,18622.562549346643,1038.412212552042
+scenario1_restoration,San Joaquin,Water Quality,pesticide application rate,Critical Pesticides,kg,74496.3548707163,5759.9908813501
+scenario1_restoration,San Joaquin,Water Quality,pesticide application rate,Groundwater Contaminant,kg,8174.867781072768,1207.9513309772408
+scenario1_restoration,San Joaquin,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,233375.45916355803,10267.720020526624
+scenario1_restoration,Solano,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,186.22562549346642,10.384122125520422
 scenario1_restoration,Solano,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),40.014673714076594,0.8911284494247006
-scenario1_restoration,Solano,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),58367.42876158839,1512.6334808405675
+scenario1_restoration,Solano,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),58367.42876158839,1512.6334808405675
 scenario1_restoration,Solano,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,881708.180909666,NA
 scenario1_restoration,Solano,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,1078560.271513048,NA
 scenario1_restoration,Solano,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,1444406.5374264286,NA
@@ -446,12 +446,12 @@ scenario1_restoration,Solano,Climate Change Resilience,climate change resilience
 scenario1_restoration,Solano,Climate Change Resilience,climate change resilience,Flood,ranking,222783.47618181817,2184.9673857399407
 scenario1_restoration,Solano,Climate Change Resilience,climate change resilience,Heat,ranking,250129.00735714284,2365.1780024501845
 scenario1_restoration,Solano,Climate Change Resilience,climate change resilience,Salinity,ranking,152713.53,0
-scenario1_restoration,Solano,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,12226.106421498447,1576.9765889218693
-scenario1_restoration,Solano,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,1561.4936066421135,331.36275531613484
-scenario1_restoration,Solano,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,31719.501866389262,2180.9800743386418
-scenario1_restoration,Yolo,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,23894.867245285954,1216.5319409707117
+scenario1_restoration,Solano,Water Quality,pesticide application rate,Critical Pesticides,kg,12226.106421498447,1576.9765889218693
+scenario1_restoration,Solano,Water Quality,pesticide application rate,Groundwater Contaminant,kg,1561.4936066421135,331.36275531613484
+scenario1_restoration,Solano,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,31719.501866389262,2180.9800743386418
+scenario1_restoration,Yolo,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,238.9486724528595,12.165319409707116
 scenario1_restoration,Yolo,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.6478127963758,0.6912884917515959
-scenario1_restoration,Yolo,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),88730.57104042792,1721.1119620610345
+scenario1_restoration,Yolo,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),88730.57104042792,1721.1119620610345
 scenario1_restoration,Yolo,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,1341690.850515581,NA
 scenario1_restoration,Yolo,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,1015382.9604218404,NA
 scenario1_restoration,Yolo,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,1116553.9473236022,NA
@@ -496,12 +496,12 @@ scenario1_restoration,Yolo,Climate Change Resilience,climate change resilience,D
 scenario1_restoration,Yolo,Climate Change Resilience,climate change resilience,Flood,ranking,244918.12827272725,1777.6038265424565
 scenario1_restoration,Yolo,Climate Change Resilience,climate change resilience,Heat,ranking,247672.36735714285,2513.6583298769206
 scenario1_restoration,Yolo,Climate Change Resilience,climate change resilience,Salinity,ranking,210427.91999999998,0
-scenario1_restoration,Yolo,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,8588.530962089448,579.3398563237048
-scenario1_restoration,Yolo,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,1978.6611451448202,169.61650870507896
-scenario1_restoration,Yolo,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,34076.315739549456,1470.0623141016858
-scenario2_perennialexpand,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,22049.563825562785,1188.3526942920025
+scenario1_restoration,Yolo,Water Quality,pesticide application rate,Critical Pesticides,kg,8588.530962089448,579.3398563237048
+scenario1_restoration,Yolo,Water Quality,pesticide application rate,Groundwater Contaminant,kg,1978.6611451448202,169.61650870507896
+scenario1_restoration,Yolo,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,34076.315739549456,1470.0623141016858
+scenario2_perennialexpand,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,220.49563825562785,11.883526942920025
 scenario2_perennialexpand,Contra Costa & Alameda,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),39.033817637193515,0.7363997186969303
-scenario2_perennialexpand,Contra Costa & Alameda,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),68304.00655535,1705.7938393536383
+scenario2_perennialexpand,Contra Costa & Alameda,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),68304.00655535,1705.7938393536383
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,983224.8344696852,NA
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,1257277.8374692632,NA
 scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,1384077.2353069235,NA
@@ -546,12 +546,12 @@ scenario2_perennialexpand,Contra Costa & Alameda,Climate Change Resilience,clima
 scenario2_perennialexpand,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Flood,ranking,196841.35854545454,1763.554987751474
 scenario2_perennialexpand,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Heat,ranking,267128.54807142855,1972.039989054167
 scenario2_perennialexpand,Contra Costa & Alameda,Climate Change Resilience,climate change resilience,Salinity,ranking,249123.42,0
-scenario2_perennialexpand,Contra Costa & Alameda,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,10587.13821038164,738.3288864636303
-scenario2_perennialexpand,Contra Costa & Alameda,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,1331.1172964911602,222.75185620409292
-scenario2_perennialexpand,Contra Costa & Alameda,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,30941.00885974235,1322.6211667028244
-scenario2_perennialexpand,Sacramento,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,43073.79399187056,3061.1407303067376
+scenario2_perennialexpand,Contra Costa & Alameda,Water Quality,pesticide application rate,Critical Pesticides,kg,10587.13821038164,738.3288864636303
+scenario2_perennialexpand,Contra Costa & Alameda,Water Quality,pesticide application rate,Groundwater Contaminant,kg,1331.1172964911602,222.75185620409292
+scenario2_perennialexpand,Contra Costa & Alameda,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,30941.00885974235,1322.6211667028244
+scenario2_perennialexpand,Sacramento,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,430.7379399187056,30.611407303067374
 scenario2_perennialexpand,Sacramento,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.273691957363376,0.6087845320429061
-scenario2_perennialexpand,Sacramento,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),158203.46117257074,4395.981575974054
+scenario2_perennialexpand,Sacramento,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),158203.46117257074,4395.981575974054
 scenario2_perennialexpand,Sacramento,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,1236348.2920276518,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,1544257.999171896,NA
 scenario2_perennialexpand,Sacramento,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,1355606.743046207,NA
@@ -596,12 +596,12 @@ scenario2_perennialexpand,Sacramento,Climate Change Resilience,climate change re
 scenario2_perennialexpand,Sacramento,Climate Change Resilience,climate change resilience,Flood,ranking,256600.30961363635,3014.6600458051175
 scenario2_perennialexpand,Sacramento,Climate Change Resilience,climate change resilience,Heat,ranking,277117.3494642857,3458.1197741999617
 scenario2_perennialexpand,Sacramento,Climate Change Resilience,climate change resilience,Salinity,ranking,191455.29,0
-scenario2_perennialexpand,Sacramento,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,17763.643886238744,1164.5581226944432
-scenario2_perennialexpand,Sacramento,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,3607.181083867699,308.1219925911249
-scenario2_perennialexpand,Sacramento,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,61210.53108884804,2421.0842437828765
-scenario2_perennialexpand,San Joaquin,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,180629.83970022484,14950.00279713706
+scenario2_perennialexpand,Sacramento,Water Quality,pesticide application rate,Critical Pesticides,kg,17763.643886238744,1164.5581226944432
+scenario2_perennialexpand,Sacramento,Water Quality,pesticide application rate,Groundwater Contaminant,kg,3607.181083867699,308.1219925911249
+scenario2_perennialexpand,Sacramento,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,61210.53108884804,2421.0842437828765
+scenario2_perennialexpand,San Joaquin,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,1806.2983970022483,149.5000279713706
 scenario2_perennialexpand,San Joaquin,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.08993752372798,0.5842454587886516
-scenario2_perennialexpand,San Joaquin,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),547946.5964931381,21071.048827299932
+scenario2_perennialexpand,San Joaquin,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),547946.5964931381,21071.048827299932
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,3843775.312436041,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,3658045.5867036353,NA
 scenario2_perennialexpand,San Joaquin,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,2272831.1623896784,NA
@@ -646,12 +646,12 @@ scenario2_perennialexpand,San Joaquin,Climate Change Resilience,climate change r
 scenario2_perennialexpand,San Joaquin,Climate Change Resilience,climate change resilience,Flood,ranking,654278.0505,7689.550118602347
 scenario2_perennialexpand,San Joaquin,Climate Change Resilience,climate change resilience,Heat,ranking,762816.888,8873.47928680873
 scenario2_perennialexpand,San Joaquin,Climate Change Resilience,climate change resilience,Salinity,ranking,588074.49,0
-scenario2_perennialexpand,San Joaquin,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,77571.15200035063,5261.369057472082
-scenario2_perennialexpand,San Joaquin,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,9618.474596432632,1160.190726600405
-scenario2_perennialexpand,San Joaquin,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,270186.78518786083,11305.18263449456
-scenario2_perennialexpand,Solano,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,21397.974349598513,1324.4729462215646
+scenario2_perennialexpand,San Joaquin,Water Quality,pesticide application rate,Critical Pesticides,kg,77571.15200035063,5261.369057472082
+scenario2_perennialexpand,San Joaquin,Water Quality,pesticide application rate,Groundwater Contaminant,kg,9618.474596432632,1160.190726600405
+scenario2_perennialexpand,San Joaquin,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,270186.78518786083,11305.18263449456
+scenario2_perennialexpand,Solano,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,213.97974349598513,13.244729462215647
 scenario2_perennialexpand,Solano,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),39.89508139816783,0.8694279309061004
-scenario2_perennialexpand,Solano,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),67013.5365979778,1891.54858492521
+scenario2_perennialexpand,Solano,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),67013.5365979778,1891.54858492521
 scenario2_perennialexpand,Solano,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,853316.4975556235,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,1028092.2616717716,NA
 scenario2_perennialexpand,Solano,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,1378882.743368422,NA
@@ -696,12 +696,12 @@ scenario2_perennialexpand,Solano,Climate Change Resilience,climate change resili
 scenario2_perennialexpand,Solano,Climate Change Resilience,climate change resilience,Flood,ranking,221369.47647727272,2190.796942227042
 scenario2_perennialexpand,Solano,Climate Change Resilience,climate change resilience,Heat,ranking,246779.18292857142,2379.928213258643
 scenario2_perennialexpand,Solano,Climate Change Resilience,climate change resilience,Salinity,ranking,147954.33,0
-scenario2_perennialexpand,Solano,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,12437.168586683287,1527.4598473111869
-scenario2_perennialexpand,Solano,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,1709.8202432025282,322.74529282318355
-scenario2_perennialexpand,Solano,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,34438.89537641202,2164.315677858299
-scenario2_perennialexpand,Yolo,Agricultural Livelihoods,livelihoods,Agricultural Jobs,number of employees per 100ha,31790.01530505232,1757.824343585855
+scenario2_perennialexpand,Solano,Water Quality,pesticide application rate,Critical Pesticides,kg,12437.168586683287,1527.4598473111869
+scenario2_perennialexpand,Solano,Water Quality,pesticide application rate,Groundwater Contaminant,kg,1709.8202432025282,322.74529282318355
+scenario2_perennialexpand,Solano,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,34438.89537641202,2164.315677858299
+scenario2_perennialexpand,Yolo,Agricultural Livelihoods,livelihoods,Agricultural Jobs,employees,317.9001530505232,17.578243435858553
 scenario2_perennialexpand,Yolo,Agricultural Livelihoods,livelihoods,Annual Wages,annual dollars per employee (thousands),38.4773289834562,0.6564343978916188
-scenario2_perennialexpand,Yolo,Agricultural Livelihoods,production value,Gross Production Value,USD per ha per year (millions),114997.13300027045,2485.23083934356
+scenario2_perennialexpand,Yolo,Agricultural Livelihoods,production value,Gross Production Value,USD per year (millions),114997.13300027045,2485.23083934356
 scenario2_perennialexpand,Yolo,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,ha,1199310.052760049,NA
 scenario2_perennialexpand,Yolo,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,ha,914049.8976732296,NA
 scenario2_perennialexpand,Yolo,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,ha,1010471.775535101,NA
@@ -746,6 +746,6 @@ scenario2_perennialexpand,Yolo,Climate Change Resilience,climate change resilien
 scenario2_perennialexpand,Yolo,Climate Change Resilience,climate change resilience,Flood,ranking,234585.13259090908,2097.8412377917116
 scenario2_perennialexpand,Yolo,Climate Change Resilience,climate change resilience,Heat,ranking,238822.68375,2678.188572771742
 scenario2_perennialexpand,Yolo,Climate Change Resilience,climate change resilience,Salinity,ranking,195208.11,0
-scenario2_perennialexpand,Yolo,Water Quality,pesticide application rate,Critical Pesticides,kg per ha,10639.22665203096,668.8587617599694
-scenario2_perennialexpand,Yolo,Water Quality,pesticide application rate,Groundwater Contaminant,kg per ha,2468.9495136820233,202.39124020551336
-scenario2_perennialexpand,Yolo,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg per ha,45209.66362902052,1877.4210135537787
+scenario2_perennialexpand,Yolo,Water Quality,pesticide application rate,Critical Pesticides,kg,10639.22665203096,668.8587617599694
+scenario2_perennialexpand,Yolo,Water Quality,pesticide application rate,Groundwater Contaminant,kg,2468.9495136820233,202.39124020551336
+scenario2_perennialexpand,Yolo,Water Quality,pesticide application rate,Risk to Aquatic Organisms,kg,45209.66362902052,1877.4210135537787

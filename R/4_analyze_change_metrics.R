@@ -75,10 +75,17 @@ waterquality = read_csv('data/pesticide_exposure.csv', col_types = cols()) %>%
   filter(METRIC %in%
            c('Risk to Aquatic Organisms', 'Critical Pesticides',
              'Groundwater Contaminant'))
+
 economy = bind_rows(
   read_csv('data/crop_production_value.csv', col_types = cols()),
-  read_csv('data/livelihoods.csv', col_types = cols()))
+  read_csv('data/livelihoods.csv', col_types = cols())) %>%
+  #change jobs metrics back to jobs/ha for easier landscape calculations
+  mutate(across(c(SCORE_MEAN, SCORE_SE, SCORE_MIN, SCORE_MAX),
+                ~if_else(METRIC == 'Agricultural Jobs', .x/100, .x)),
+         UNIT = recode(UNIT, 'number of employees per 100ha' = 'employees per ha'))
+
 ccs = read_csv('data/climate_change_resilience.csv', col_types = cols())
+
 # acs = read_csv('data/avian_conservation_score.csv', col_types = cols())
 
 metrics = bind_rows(economy, waterquality, ccs) %>%
@@ -110,6 +117,11 @@ write_csv(metrics, 'output/metrics_final.csv')
 # (and they shouldn't change)
 # --> exclude winter scenarios/landscapes
 # --> combine with habitat estimates from above
+
+# check units:
+metrics %>% select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, UNIT) %>%
+  distinct() %>% print(width = Inf)
+
 scores = DeltaMultipleBenefits::sum_metrics(
   metricdat = metrics %>%
     filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))),
@@ -119,7 +131,12 @@ scores = DeltaMultipleBenefits::sum_metrics(
   bind_rows(habitat, habitat_binary) %>%
   mutate(scenario = gsub('_win', '', scenario)) %>% #rename in habitat metrics
   arrange(scenario, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC)
+
+# check updated units:
+scores %>% select(METRIC_CATEGORY, METRIC_SUBTYPE, UNIT) %>% distinct()
+
 write_csv(scores, 'output/scenario_scores.csv')
+
 
 scores_county = DeltaMultipleBenefits::sum_metrics(
   metricdat = metrics %>%
@@ -130,6 +147,9 @@ scores_county = DeltaMultipleBenefits::sum_metrics(
   bind_rows(habitat_county, habitat_binary_county) %>%
   mutate(scenario = gsub('_win', '', scenario)) %>% #rename in habitat metrics
   arrange(scenario, ZONE, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC)
+# check updated units:
+scores_county %>% select(METRIC_CATEGORY, METRIC_SUBTYPE, UNIT) %>% distinct()
+
 write_csv(scores_county, 'output/scenario_scores_county.csv')
 
 # NET CHANGE------
