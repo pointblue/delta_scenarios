@@ -19,6 +19,7 @@ key = readxl::read_excel('GIS/VEG_key.xlsx')
 habitat = DeltaMultipleBenefits::sum_habitat(
   pathin = 'GIS/prediction_rasters',
   subtype = 'distributions',
+  rollup = TRUE,
   keypath = 'output/TABLE_species_key.csv')
 write_csv(habitat, 'output/scenario_habitat.csv')
 
@@ -26,6 +27,7 @@ habitat_county = DeltaMultipleBenefits::sum_habitat(
   pathin = 'GIS/prediction_rasters',
   zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
   subtype = 'distributions',
+  rollup = TRUE,
   keypath = 'output/TABLE_species_key.csv')
 write_csv(habitat_county, 'output/scenario_habitat_county.csv')
 
@@ -33,6 +35,7 @@ write_csv(habitat_county, 'output/scenario_habitat_county.csv')
 habitat_binary = DeltaMultipleBenefits::sum_habitat(
   pathin = 'GIS/prediction_rasters_threshold',
   subtype = 'habitat',
+  rollup = TRUE,
   keypath = 'output/TABLE_species_key.csv')
 write_csv(habitat_binary, 'output/scenario_habitat_binary.csv')
 
@@ -40,6 +43,7 @@ habitat_binary_county = DeltaMultipleBenefits::sum_habitat(
   pathin = 'GIS/prediction_rasters_threshold',
   zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
   subtype = 'habitat',
+  rollup = TRUE,
   keypath = 'output/TABLE_species_key.csv')
 write_csv(habitat_binary_county, 'output/scenario_habitat_binary_county.csv')
 

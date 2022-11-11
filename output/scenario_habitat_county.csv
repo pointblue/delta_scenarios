@@ -299,3 +299,48 @@ scenario2_perennialexpand_win,Sacramento,Biodiversity Support,Waterbird distribu
 scenario2_perennialexpand_win,San Joaquin,Biodiversity Support,Waterbird distributions,Shorebirds (winter),ha,1662919.7246297575
 scenario2_perennialexpand_win,Solano,Biodiversity Support,Waterbird distributions,Shorebirds (winter),ha,338254.151760911
 scenario2_perennialexpand_win,Yolo,Biodiversity Support,Waterbird distributions,Shorebirds (winter),ha,459478.16237557627
+baseline,Contra Costa & Alameda,Biodiversity Support,Riparian landbird distributions,Total,ha,4456936.320899593
+baseline,Sacramento,Biodiversity Support,Riparian landbird distributions,Total,ha,4812025.549032788
+baseline,San Joaquin,Biodiversity Support,Riparian landbird distributions,Total,ha,12550513.831844099
+baseline,Solano,Biodiversity Support,Riparian landbird distributions,Total,ha,2817189.7957742214
+baseline,Yolo,Biodiversity Support,Riparian landbird distributions,Total,ha,2965096.082821654
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Riparian landbird distributions,Total,ha,4458325.370885598
+scenario1_restoration,Sacramento,Biodiversity Support,Riparian landbird distributions,Total,ha,4907976.016255883
+scenario1_restoration,San Joaquin,Biodiversity Support,Riparian landbird distributions,Total,ha,12700389.368316365
+scenario1_restoration,Solano,Biodiversity Support,Riparian landbird distributions,Total,ha,2866235.693372952
+scenario1_restoration,Yolo,Biodiversity Support,Riparian landbird distributions,Total,ha,3192633.4287967947
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Riparian landbird distributions,Total,ha,4458726.873553959
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Riparian landbird distributions,Total,ha,4819125.319988033
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Riparian landbird distributions,Total,ha,12701133.582166832
+scenario2_perennialexpand,Solano,Biodiversity Support,Riparian landbird distributions,Total,ha,2850369.832731618
+scenario2_perennialexpand,Yolo,Biodiversity Support,Riparian landbird distributions,Total,ha,3067803.277006249
+baseline,Contra Costa & Alameda,Biodiversity Support,Waterbird distributions,Total (fall),ha,434689.0687233872
+baseline,Sacramento,Biodiversity Support,Waterbird distributions,Total (fall),ha,824924.7240881126
+baseline,San Joaquin,Biodiversity Support,Waterbird distributions,Total (fall),ha,1389933.6701075237
+baseline,Solano,Biodiversity Support,Waterbird distributions,Total (fall),ha,1070735.713791185
+baseline,Yolo,Biodiversity Support,Waterbird distributions,Total (fall),ha,997218.4610903263
+scenario1_restoration,Contra Costa & Alameda,Biodiversity Support,Waterbird distributions,Total (fall),ha,453069.86587444943
+scenario1_restoration,Sacramento,Biodiversity Support,Waterbird distributions,Total (fall),ha,910705.7521396213
+scenario1_restoration,San Joaquin,Biodiversity Support,Waterbird distributions,Total (fall),ha,1375870.736312204
+scenario1_restoration,Solano,Biodiversity Support,Waterbird distributions,Total (fall),ha,1109837.095354663
+scenario1_restoration,Yolo,Biodiversity Support,Waterbird distributions,Total (fall),ha,1139268.649680747
+scenario2_perennialexpand,Contra Costa & Alameda,Biodiversity Support,Waterbird distributions,Total (fall),ha,433841.9376499123
+scenario2_perennialexpand,Sacramento,Biodiversity Support,Waterbird distributions,Total (fall),ha,789176.4486995009
+scenario2_perennialexpand,San Joaquin,Biodiversity Support,Waterbird distributions,Total (fall),ha,1267559.8060551616
+scenario2_perennialexpand,Solano,Biodiversity Support,Waterbird distributions,Total (fall),ha,1054960.455520948
+scenario2_perennialexpand,Yolo,Biodiversity Support,Waterbird distributions,Total (fall),ha,939121.9132668442
+baseline_win,Contra Costa & Alameda,Biodiversity Support,Waterbird distributions,Total (winter),ha,699710.6925967667
+baseline_win,Sacramento,Biodiversity Support,Waterbird distributions,Total (winter),ha,1215534.9234107467
+baseline_win,San Joaquin,Biodiversity Support,Waterbird distributions,Total (winter),ha,3401024.454880092
+baseline_win,Solano,Biodiversity Support,Waterbird distributions,Total (winter),ha,874814.1691245966
+baseline_win,Yolo,Biodiversity Support,Waterbird distributions,Total (winter),ha,940209.0835549765
+scenario1_restoration_win,Contra Costa & Alameda,Biodiversity Support,Waterbird distributions,Total (winter),ha,712688.2749855518
+scenario1_restoration_win,Sacramento,Biodiversity Support,Waterbird distributions,Total (winter),ha,1270047.3509323266
+scenario1_restoration_win,San Joaquin,Biodiversity Support,Waterbird distributions,Total (winter),ha,3391395.2848770553
+scenario1_restoration_win,Solano,Biodiversity Support,Waterbird distributions,Total (winter),ha,895676.1997636822
+scenario1_restoration_win,Yolo,Biodiversity Support,Waterbird distributions,Total (winter),ha,1125828.791863223
+scenario2_perennialexpand_win,Contra Costa & Alameda,Biodiversity Support,Waterbird distributions,Total (winter),ha,712504.6852780713
+scenario2_perennialexpand_win,Sacramento,Biodiversity Support,Waterbird distributions,Total (winter),ha,1158133.4830961295
+scenario2_perennialexpand_win,San Joaquin,Biodiversity Support,Waterbird distributions,Total (winter),ha,3166095.084001455
+scenario2_perennialexpand_win,Solano,Biodiversity Support,Waterbird distributions,Total (winter),ha,860748.9890863498
+scenario2_perennialexpand_win,Yolo,Biodiversity Support,Waterbird distributions,Total (winter),ha,911700.6247979072

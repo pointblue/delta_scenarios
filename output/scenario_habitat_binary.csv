@@ -59,3 +59,12 @@ scenario2_perennialexpand_win,Biodiversity Support,Waterbird habitat,Dabbling Du
 scenario2_perennialexpand_win,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),ha,1133633.3333333335
 scenario2_perennialexpand_win,Biodiversity Support,Waterbird habitat,Geese (winter),ha,2624977.777777778
 scenario2_perennialexpand_win,Biodiversity Support,Waterbird habitat,Shorebirds (winter),ha,2808822.2222222225
+baseline,Biodiversity Support,Riparian landbird habitat,Total,ha,28102577.77777778
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Total,ha,28855322.222222224
+scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Total,ha,27540744.444444444
+baseline,Biodiversity Support,Waterbird habitat,Total (fall),ha,3094800
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Total (fall),ha,3574722.2222222225
+scenario2_perennialexpand,Biodiversity Support,Waterbird habitat,Total (fall),ha,2989588.888888889
+baseline_win,Biodiversity Support,Waterbird habitat,Total (winter),ha,6864566.666666667
+scenario1_restoration_win,Biodiversity Support,Waterbird habitat,Total (winter),ha,7339188.888888889
+scenario2_perennialexpand_win,Biodiversity Support,Waterbird habitat,Total (winter),ha,6711844.444444445
