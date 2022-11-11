@@ -117,7 +117,7 @@ scores = DeltaMultipleBenefits::sum_metrics(
     filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))) %>%
     filter(!grepl('win', scenario))) %>%
   bind_rows(habitat, habitat_binary) %>%
-  filter(!grepl('win', scenario)) %>% #remove from habitat metrics
+  mutate(scenario = gsub('_win', '', scenario)) %>% #rename in habitat metrics
   arrange(scenario, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC)
 write_csv(scores, 'output/scenario_scores.csv')
 
@@ -128,7 +128,7 @@ scores_county = DeltaMultipleBenefits::sum_metrics(
     filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))) %>%
     filter(!grepl('win', scenario))) %>%
   bind_rows(habitat_county, habitat_binary_county) %>%
-  filter(!grepl('win', scenario)) %>% #remove from habitat metrics
+  mutate(scenario = gsub('_win', '', scenario)) %>% #rename in habitat metrics
   arrange(scenario, ZONE, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC)
 write_csv(scores_county, 'output/scenario_scores_county.csv')
 
