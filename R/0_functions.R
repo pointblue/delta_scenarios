@@ -688,435 +688,436 @@ summarize_fragdat <- function(r, target = 70, buffer = 2000,
   stack(sdat)
 }
 
-## MOVE TO R PACKAGE:---------
+## DONE - MOVED TO R PACKAGE:---------
 
-create_directory = function(path) {
-  if (!dir.exists(path)) {
-    cat('Creating directory:', path, '\n')
-    dir.create(path, recursive = TRUE)
-  } else {
-    cat('Writing to directory:', path, '\n')
-  }
-}
+# create_directory = function(path) {
+#   if (!dir.exists(path)) {
+#     cat('Creating directory:', path, '\n')
+#     dir.create(path, recursive = TRUE)
+#   } else {
+#     cat('Writing to directory:', path, '\n')
+#   }
+# }
+#
+# python_prep = function(landscape, SDM, pathout, scenario_name,
+#                        suffix = NULL, mask = NULL, pixel_value = NULL,
+#                        overwrite = FALSE) {
+#
+#   if (!is.null(mask) & is.null(suffix)) {
+#     stop('Provide two suffix values to distinguish unmasked and masked results (e.g., _area and _pfld)')
+#   }
+#
+#   # split layer by land cover classes to represent presence/absence
+#   layernames = freq(landscape) %>% pull(label)
+#   presence = segregate(landscape, other = 0) %>% setNames(layernames)
+#
+#   # reclassify according to riparian and waterbird model inputs
+#   presence_reclass = reclassify_landcover(presence, type = SDM)
+#
+#   create_directory(file.path(pathout, scenario_name, SDM))
+#
+#   # optional: if mask is provided (e.g. pfld data), generate layers
+#   # reflecting the value of the mask layer wherever each land cover is present
+#   # --> expect two values provided for "suffix" to distinguish them (e.g., _area
+#   # and _pfld)
+#   if (!is.null(mask)) {
+#     # where presence_reclass is 0 (land cover not present), change maskpath to
+#     # NA (allowing values in mask path to be summarized only for that specific
+#     # land cover)
+#     newstack_mask = mask(mask, presence_reclass,
+#                          maskvalue = 0, updatevalue = NA)
+#     names(newstack_mask) = paste0(names(presence_reclass), suffix[2])
+#     writeRaster(newstack_mask,
+#                 filename = file.path(pathout, scenario_name, SDM,
+#                                      paste0(names(newstack_mask), '.tif')),
+#                 overwrite = overwrite)
+#   }
+#
+#   # finalize original unmasked values:
+#   # optional: replace presence (1) with another value (e.g., pixel area)
+#   if (!is.null(pixel_value)) {
+#     presence_reclass = subst(presence_reclass, from = 1, to = pixel_value)
+#   }
+#
+#   # optional: add suffix
+#   if (!is.null(suffix)) {
+#     names(presence_reclass) = paste0(names(presence_reclass), suffix[1])
+#   }
+#
+#   writeRaster(presence_reclass,
+#               filename = file.path(pathout, scenario_name, SDM,
+#                                    paste0(names(presence_reclass), '.tif')),
+#               overwrite = overwrite)
+# }
 
-reclassify_landcover = function(stack, type) {
-  if (type == 'riparian') {
-    c(# sum of all riparian subclasses
-      subset(stack, names(stack)[grepl('RIPARIAN', names(stack))]) %>%
-        sum(na.rm = TRUE) %>% setNames('RIPARIAN'),
-      # sum of all wetland subclasses
-      subset(stack, names(stack)[grepl('WETLAND', names(stack))]) %>%
-        sum(na.rm = TRUE) %>% setNames('WETLAND'),
-      # rename riparian and wetland subclasses
-      subset(stack, c('WETLAND_MANAGED_PERENNIAL',
-                    'RIPARIAN_FOREST_POFR',
-                    'RIPARIAN_FOREST_QULO',
-                    'RIPARIAN_FOREST_SALIX',
-                    'RIPARIAN_FOREST_MIXED',
-                    'RIPARIAN_SCRUB_MIXED',
-                    'RIPARIAN_SCRUB_SALIX',
-                    'RIPARIAN_SCRUB_INTRO')) %>%
-        setNames(c('PERM', 'POFR', 'QULO','SALIX', 'MIXEDFOREST',
-                   'MIXEDSHRUB', 'SALIXSHRUB', 'INTROSCRUB')),
-      # sum of perennial crops, grassland/pasture, and other ag
-      subset(stack, names(stack)[grepl('ORCH|VINE', names(stack))]) %>%
-        sum(na.rm = TRUE) %>% setNames('ORCHVIN'),
-      subset(stack, names(stack)[grepl('PASTURE|GRASS', names(stack))]) %>%
-        sum(na.rm = TRUE) %>% setNames('GRASSPAS'),
-      subset(stack, names(stack)[grepl('FIELD|GRAIN|ROW', names(stack))]) %>%
-        sum(na.rm = TRUE) %>% setNames('AG'),
-      # keep rice, idle, urban, and water as-is
-      subset(stack, c('RICE', 'IDLE', 'URBAN', 'WATER'))
-    )
+# reclassify_landcover = function(stack, type) {
+#   if (type == 'riparian') {
+#     c(# sum of all riparian subclasses
+#       subset(stack, names(stack)[grepl('RIPARIAN', names(stack))]) %>%
+#         sum(na.rm = TRUE) %>% setNames('RIPARIAN'),
+#       # sum of all wetland subclasses
+#       subset(stack, names(stack)[grepl('WETLAND', names(stack))]) %>%
+#         sum(na.rm = TRUE) %>% setNames('WETLAND'),
+#       # rename riparian and wetland subclasses
+#       subset(stack, c('WETLAND_MANAGED_PERENNIAL',
+#                     'RIPARIAN_FOREST_POFR',
+#                     'RIPARIAN_FOREST_QULO',
+#                     'RIPARIAN_FOREST_SALIX',
+#                     'RIPARIAN_FOREST_MIXED',
+#                     'RIPARIAN_SCRUB_MIXED',
+#                     'RIPARIAN_SCRUB_SALIX',
+#                     'RIPARIAN_SCRUB_INTRO')) %>%
+#         setNames(c('PERM', 'POFR', 'QULO','SALIX', 'MIXEDFOREST',
+#                    'MIXEDSHRUB', 'SALIXSHRUB', 'INTROSCRUB')),
+#       # sum of perennial crops, grassland/pasture, and other ag
+#       subset(stack, names(stack)[grepl('ORCH|VINE', names(stack))]) %>%
+#         sum(na.rm = TRUE) %>% setNames('ORCHVIN'),
+#       subset(stack, names(stack)[grepl('PASTURE|GRASS', names(stack))]) %>%
+#         sum(na.rm = TRUE) %>% setNames('GRASSPAS'),
+#       subset(stack, names(stack)[grepl('FIELD|GRAIN|ROW', names(stack))]) %>%
+#         sum(na.rm = TRUE) %>% setNames('AG'),
+#       # keep rice, idle, urban, and water as-is
+#       subset(stack, c('RICE', 'IDLE', 'URBAN', 'WATER'))
+#     )
+#
+#   } else if (type == 'waterbird_fall') {
+#     c(
+#       # combine all riparian, perennial crops, managed wetlands,
+#       # other wetlands, and woodland/scrub
+#       subset(stack, names(stack)[grepl('RIPARIAN', names(stack))]) %>%
+#         sum(na.rm = TRUE) %>% setNames('woodw'),
+#       subset(stack, names(stack)[grepl('ORCHARD|VINEYARD', names(stack))]) %>%
+#         sum(na.rm = TRUE) %>% setNames('orch'),
+#       subset(stack, c('WETLAND_TIDAL', 'WETLAND_OTHER')) %>%
+#         sum(na.rm = TRUE) %>% setNames('wet'),
+#       subset(stack, names(stack)[grepl('WETLAND_MANAGED', names(stack))]) %>%
+#         sum(na.rm = TRUE) %>% setNames('duwet'),
+#       subset(stack, c('WOODLAND', 'SCRUB')) %>% sum(na.rm = TRUE) %>%
+#         setNames('for'),
+#       # for fall, combine all grains
+#       subset(stack, names(stack)[grepl('GRAIN', names(stack))]) %>%
+#         sum(na.rm = TRUE) %>% setNames('grain'),
+#       # keep others as-is and rename to match model inputs
+#       subset(stack,
+#              c('PASTURE_ALFALFA', 'PASTURE_OTHER', 'GRASSLAND',
+#                'IDLE', 'RICE', 'FIELD_CORN', 'ROW', 'FIELD_OTHER',
+#                'WATER', 'URBAN', 'BARREN')) %>%
+#         setNames(c('alf', 'ip', 'dryp', 'fal', 'rice', 'corn',
+#                    'row', 'field', 'water', 'dev', 'barren'))
+#     )
+#   } else if (type == 'waterbird_win') {
+#     c(
+#       # combine all riparian, perennial crops, managed wetlands,
+#       # other wetlands, and woodland/scrub
+#       subset(stack, names(stack)[grepl('RIPARIAN', names(stack))]) %>%
+#         sum(na.rm = TRUE) %>% setNames('woodw'),
+#       subset(stack, names(stack)[grepl('ORCHARD|VINEYARD', names(stack))]) %>%
+#         sum(na.rm = TRUE) %>% setNames('orch'),
+#       subset(stack, c('WETLAND_TIDAL', 'WETLAND_OTHER')) %>%
+#         sum(na.rm = TRUE) %>% setNames('wet'),
+#       subset(stack, names(stack)[grepl('WETLAND_MANAGED', names(stack))]) %>%
+#         sum(na.rm = TRUE) %>% setNames('duwet'),
+#       subset(stack, c('WOODLAND', 'SCRUB')) %>% sum(na.rm = TRUE) %>%
+#         setNames('for'),
+#       # for winter, keep wheat separate from other grains
+#       subset(stack, c('GRAIN&HAY_OTHER', 'GRAIN&HAY_WHEAT')) %>%
+#         setNames(c('grain', 'ww')),
+#       # keep others as-is and rename to match model inputs
+#       subset(stack,
+#              c('PASTURE_ALFALFA', 'PASTURE_OTHER', 'GRASSLAND',
+#                'IDLE', 'RICE', 'FIELD_CORN', 'ROW', 'FIELD_OTHER',
+#                'WATER', 'URBAN', 'BARREN')) %>%
+#         setNames(c('alf', 'ip', 'dryp', 'fal', 'rice', 'corn',
+#                    'row', 'field', 'water', 'dev', 'barren'))
+#     )
+#   }
+# }
+#
+# python_run = function(scenario, type = 'waterbird', scale,
+#                       pathin = 'GIS/landscape_rasters/cover', regex = NULL,
+#                       pathout = 'GIS/landscape_rasters/focal_stats',
+#                       fun = 'SUM' # or "MEAN"
+#                       ) {
+#
+#   # create necessary directories
+#   create_directory(file.path(pathout, scenario, type, scale))
+#
+#   # run focal stats
+#   focal_stats(
+#     pathin = file.path(pathin, scenario, type),
+#     pathout = file.path(pathout, scenario, type, scale),
+#     buffer = scale, fun = fun, regex = regex)
+#
+# }
+#
+# python_dist = function(pathin, scenario_name, copyto = NULL, pathout,
+#                        maskpath = NULL, overwrite = FALSE) {
+#
+#   # calculate distance to roosts and put in same pathin directory
+#   dist_stats(filename = 'roosts.tif',
+#              fullpathin = file.path(pathin, scenario_name) %>% normalizePath(),
+#              fullpathout =  file.path(pathin, scenario_name) %>%
+#                normalizePath() %>% paste0('\\droost_km.tif'))
+#
+#   r = file.path(pathin, scenario_name, 'droost_km.tif') %>% rast()
+#
+#   if (!is.null(maskpath)) {
+#     r = mask(r, rast(maskpath))
+#   }
+#   create_directory(file.path(pathout[1], scenario_name))
+#   writeRaster(r, file.path(pathout[1], scenario_name, 'droost_km.tif'),
+#               wopt = list(names = 'droost_km'), overwrite = overwrite)
+#
+#   if (!is.null(copyto)) {
+#     # copy from scenario_name/pathout[1] to copyto/pathout[2]
+#     create_directory(file.path(pathout[2], copyto))
+#     writeRaster(r, file.path(pathout[2], copyto, 'droost_km.tif'),
+#                 wopt = list(names = 'droost_km'), overwrite = overwrite)
+#   }
+# }
+#
+# generate_covertype = function(landscape, pathout, type, maskpath=NULL) {
+#   create_directory(pathout)
+#
+#   if (type == 'waterbird_fall') {
+#     key = freq(landscape) %>%
+#       mutate(
+#         covertype = case_when(
+#           label == 'RICE' ~ 'Rice',
+#           label == 'PASTURE_OTHER' ~ 'Irrigated pasture',
+#           label == 'PASTURE_ALFALFA' ~ 'Alfalfa',
+#           label %in%
+#             c('WETLAND_MANAGED_PERENNIAL', 'WETLAND_MANAGED_SEASONAL') ~ 'Wetland',
+#           TRUE ~ NA_character_),
+#         covertype_code = case_when(
+#           covertype == 'Alfalfa' ~ 1,
+#           covertype == 'Irrigated pasture' ~ 2,
+#           covertype == 'Rice' ~ 3,
+#           covertype == 'Wetland' ~ 4)
+#         )
+#
+#   } else if (type == 'waterbird_win') {
+#     key = freq(landscape) %>%
+#       mutate(
+#         covertype = case_when(
+#           label == 'PASTURE_ALFALFA' ~ 'Alfalfa',
+#           label == 'FIELD_CORN' ~ 'Corn',
+#           label == 'PASTURE_OTHER' ~ 'Irrigated pasture',
+#           label == 'RICE' ~ 'Rice',
+#           label %in%
+#             c('WETLAND_MANAGED_PERENNIAL', 'WETLAND_MANAGED_SEASONAL') ~ 'Wetland',
+#           label == 'GRAIN&HAY_WHEAT' ~ 'Winter wheat',
+#           TRUE ~ NA_character_),
+#         covertype_code = case_when(
+#           covertype == 'Alfalfa' ~ 1,
+#           covertype == 'Corn' ~ 2,
+#           covertype == 'Irrigated pasture' ~ 3,
+#           covertype == 'Rice' ~ 4,
+#           covertype == 'Wetland' ~ 5,
+#           covertype == 'Winter wheat' ~ 6)
+#       )
+#   }
+#
+#   if (!is.null(maskpath)) {
+#     landscape = mask(landscape, rast(maskpath))
+#   }
+#
+#   covertype = classify(landscape,
+#                        rcl = key %>%
+#                          select(from = value, to = covertype_code),
+#                        othersNA = TRUE)
+#   levels(covertype) = key %>% select(covertype_code, covertype) %>%
+#     distinct() %>% drop_na() %>% arrange(covertype_code) %>% as.data.frame()
+#   writeRaster(covertype, paste0(pathout, '/covertype.tif'))
+# }
 
-  } else if (type == 'waterbird_fall') {
-    c(
-      # combine all riparian, perennial crops, managed wetlands,
-      # other wetlands, and woodland/scrub
-      subset(stack, names(stack)[grepl('RIPARIAN', names(stack))]) %>%
-        sum(na.rm = TRUE) %>% setNames('woodw'),
-      subset(stack, names(stack)[grepl('ORCHARD|VINEYARD', names(stack))]) %>%
-        sum(na.rm = TRUE) %>% setNames('orch'),
-      subset(stack, c('WETLAND_TIDAL', 'WETLAND_OTHER')) %>%
-        sum(na.rm = TRUE) %>% setNames('wet'),
-      subset(stack, names(stack)[grepl('WETLAND_MANAGED', names(stack))]) %>%
-        sum(na.rm = TRUE) %>% setNames('duwet'),
-      subset(stack, c('WOODLAND', 'SCRUB')) %>% sum(na.rm = TRUE) %>%
-        setNames('for'),
-      # for fall, combine all grains
-      subset(stack, names(stack)[grepl('GRAIN', names(stack))]) %>%
-        sum(na.rm = TRUE) %>% setNames('grain'),
-      # keep others as-is and rename to match model inputs
-      subset(stack,
-             c('PASTURE_ALFALFA', 'PASTURE_OTHER', 'GRASSLAND',
-               'IDLE', 'RICE', 'FIELD_CORN', 'ROW', 'FIELD_OTHER',
-               'WATER', 'URBAN', 'BARREN')) %>%
-        setNames(c('alf', 'ip', 'dryp', 'fal', 'rice', 'corn',
-                   'row', 'field', 'water', 'dev', 'barren'))
-    )
-  } else if (type == 'waterbird_win') {
-    c(
-      # combine all riparian, perennial crops, managed wetlands,
-      # other wetlands, and woodland/scrub
-      subset(stack, names(stack)[grepl('RIPARIAN', names(stack))]) %>%
-        sum(na.rm = TRUE) %>% setNames('woodw'),
-      subset(stack, names(stack)[grepl('ORCHARD|VINEYARD', names(stack))]) %>%
-        sum(na.rm = TRUE) %>% setNames('orch'),
-      subset(stack, c('WETLAND_TIDAL', 'WETLAND_OTHER')) %>%
-        sum(na.rm = TRUE) %>% setNames('wet'),
-      subset(stack, names(stack)[grepl('WETLAND_MANAGED', names(stack))]) %>%
-        sum(na.rm = TRUE) %>% setNames('duwet'),
-      subset(stack, c('WOODLAND', 'SCRUB')) %>% sum(na.rm = TRUE) %>%
-        setNames('for'),
-      # for winter, keep wheat separate from other grains
-      subset(stack, c('GRAIN&HAY_OTHER', 'GRAIN&HAY_WHEAT')) %>%
-        setNames(c('grain', 'ww')),
-      # keep others as-is and rename to match model inputs
-      subset(stack,
-             c('PASTURE_ALFALFA', 'PASTURE_OTHER', 'GRASSLAND',
-               'IDLE', 'RICE', 'FIELD_CORN', 'ROW', 'FIELD_OTHER',
-               'WATER', 'URBAN', 'BARREN')) %>%
-        setNames(c('alf', 'ip', 'dryp', 'fal', 'rice', 'corn',
-                   'row', 'field', 'water', 'dev', 'barren'))
-    )
-  }
-}
-
-python_prep = function(landscape, SDM, pathout, scenario_name,
-                       suffix = NULL, mask = NULL, pixel_value = NULL,
-                       overwrite = FALSE) {
-
-  if (!is.null(mask) & is.null(suffix)) {
-    stop('Provide two suffix values to distinguish unmasked and masked results (e.g., _area and _pfld)')
-  }
-
-  # split layer by land cover classes to represent presence/absence
-  layernames = freq(landscape) %>% pull(label)
-  presence = segregate(landscape, other = 0) %>% setNames(layernames)
-
-  # reclassify according to riparian and waterbird model inputs
-  presence_reclass = reclassify_landcover(presence, type = SDM)
-
-  create_directory(file.path(pathout, scenario_name, SDM))
-
-  # optional: if mask is provided (e.g. pfld data), generate layers
-  # reflecting the value of the mask layer wherever each land cover is present
-  # --> expect two values provided for "suffix" to distinguish them (e.g., _area
-  # and _pfld)
-  if (!is.null(mask)) {
-    # where presence_reclass is 0 (land cover not present), change maskpath to
-    # NA (allowing values in mask path to be summarized only for that specific
-    # land cover)
-    newstack_mask = mask(mask, presence_reclass,
-                         maskvalue = 0, updatevalue = NA)
-    names(newstack_mask) = paste0(names(presence_reclass), suffix[2])
-    writeRaster(newstack_mask,
-                filename = file.path(pathout, scenario_name, SDM,
-                                     paste0(names(newstack_mask), '.tif')),
-                overwrite = overwrite)
-  }
-
-  # finalize original unmasked values:
-  # optional: replace presence (1) with another value (e.g., pixel area)
-  if (!is.null(pixel_value)) {
-    presence_reclass = subst(presence_reclass, from = 1, to = pixel_value)
-  }
-
-  # optional: add suffix
-  if (!is.null(suffix)) {
-    names(presence_reclass) = paste0(names(presence_reclass), suffix[1])
-  }
-
-  writeRaster(presence_reclass,
-              filename = file.path(pathout, scenario_name, SDM,
-                                   paste0(names(presence_reclass), '.tif')),
-              overwrite = overwrite)
-}
-
-python_run = function(scenario, type = 'waterbird', scale,
-                      pathin = 'GIS/landscape_rasters/cover', regex = NULL,
-                      pathout = 'GIS/landscape_rasters/focal_stats',
-                      fun = 'SUM' # or "MEAN"
-                      ) {
-
-  # create necessary directories
-  create_directory(file.path(pathout, scenario, type, scale))
-
-  # run focal stats
-  focal_stats(
-    pathin = file.path(pathin, scenario, type),
-    pathout = file.path(pathout, scenario, type, scale),
-    buffer = scale, fun = fun, regex = regex)
-
-}
-
-generate_covertype = function(landscape, pathout, type, maskpath=NULL) {
-  create_directory(pathout)
-
-  if (type == 'waterbird_fall') {
-    key = freq(landscape) %>%
-      mutate(
-        covertype = case_when(
-          label == 'RICE' ~ 'Rice',
-          label == 'PASTURE_OTHER' ~ 'Irrigated pasture',
-          label == 'PASTURE_ALFALFA' ~ 'Alfalfa',
-          label %in%
-            c('WETLAND_MANAGED_PERENNIAL', 'WETLAND_MANAGED_SEASONAL') ~ 'Wetland',
-          TRUE ~ NA_character_),
-        covertype_code = case_when(
-          covertype == 'Alfalfa' ~ 1,
-          covertype == 'Irrigated pasture' ~ 2,
-          covertype == 'Rice' ~ 3,
-          covertype == 'Wetland' ~ 4)
-        )
-
-  } else if (type == 'waterbird_win') {
-    key = freq(landscape) %>%
-      mutate(
-        covertype = case_when(
-          label == 'PASTURE_ALFALFA' ~ 'Alfalfa',
-          label == 'FIELD_CORN' ~ 'Corn',
-          label == 'PASTURE_OTHER' ~ 'Irrigated pasture',
-          label == 'RICE' ~ 'Rice',
-          label %in%
-            c('WETLAND_MANAGED_PERENNIAL', 'WETLAND_MANAGED_SEASONAL') ~ 'Wetland',
-          label == 'GRAIN&HAY_WHEAT' ~ 'Winter wheat',
-          TRUE ~ NA_character_),
-        covertype_code = case_when(
-          covertype == 'Alfalfa' ~ 1,
-          covertype == 'Corn' ~ 2,
-          covertype == 'Irrigated pasture' ~ 3,
-          covertype == 'Rice' ~ 4,
-          covertype == 'Wetland' ~ 5,
-          covertype == 'Winter wheat' ~ 6)
-      )
-  }
-
-  if (!is.null(maskpath)) {
-    landscape = mask(landscape, rast(maskpath))
-  }
-
-  covertype = classify(landscape,
-                       rcl = key %>%
-                         select(from = value, to = covertype_code),
-                       othersNA = TRUE)
-  levels(covertype) = key %>% select(covertype_code, covertype) %>%
-    distinct() %>% drop_na() %>% arrange(covertype_code) %>% as.data.frame()
-  writeRaster(covertype, paste0(pathout, '/covertype.tif'))
-}
-
-generate_pwater = function(waterdatpath,
-                           baseline_landscape,
-                           scenario_landscape = NULL,
-                           landscape_name,
-                           floor = TRUE,
-                           maskpath, pathout,
-                           overwrite = FALSE) {
-
-  pwater = rast(waterdatpath)
-
-  if (!is.null(scenario_landscape)) {#generate new pwater values for scenario
-    # calculate mean baseline pwater by land cover class (detailed) - including
-    # within the 10km buffer
-    mwater = zonal(pwater, baseline_landscape, fun = mean, na.rm = TRUE) %>%
-      setNames(c('label', 'pwater')) %>% drop_na() %>%
-      left_join(freq(baseline_landscape), by = 'label')
-
-    # assign mean baseline pwater values to changed pixels in each scenario
-    changes = c(scenario_landscape, baseline_landscape) %>% diff() %>%
-      subst(from = 0, to = NA) %>% #no change = NA
-      classify(rcl = matrix(c(-Inf, Inf, 1), nrow = 1)) # all others = 1
-
-    pwater_new = scenario_landscape %>% mask(changes) %>%
-      classify(rcl = mwater %>% select(value, pwater) %>% as.matrix(),
-               othersNA = TRUE)
-
-    if (floor) {
-      # current mean pwater is the "floor"; only allow pwater to increase for
-      # changed pixels (e.g. restoration scenario)
-      pwater_scenario = lapp(c(pwater_new, pwater),
-                             function(x, y) {
-                               ifelse(!is.na(x) & x > y, x, y)
-                             })
-    } else {
-      pwater_scenario = cover(pwater_new, pwater)
-    }
-  } else {
-    # just write final baseline pwater to appropriate directory
-    pwater_scenario = pwater
-  }
-
-  # write unmasked version for focal stats
-  create_directory(file.path(pathout[1], landscape_name))
-  writeRaster(pwater_scenario,
-              file.path(pathout[1], landscape_name, 'pwater.tif'),
-              wopt = list(names = 'pwater'), overwrite = overwrite)
-
-  # write masked version as a predictor
-  pwater_scenario_mask = mask(pwater_scenario, rast(maskpath))
-  create_directory(file.path(pathout[2], landscape_name))
-  writeRaster(pwater_scenario_mask,
-              file.path(pathout[2], landscape_name, 'pwater.tif'),
-              wopt = list(names = 'pwater'), overwrite = overwrite)
-
-}
-
-update_roosts = function(roostpath = 'GIS/original_source_data/Ivey/Select_recent_roosts_Ivey_utm.shp',
-                         landscape, pathout, scenario_name,
-                         overwrite = FALSE) {
-  create_directory(file.path(pathout, scenario_name))
-  # check how much traditional roosts overlap with incompatible land covers:
-  # orchard, vineyard, riparian, woodland, scrub, urban
-  roost_overlay = landscape %>%
-    subst(from = c(11:19, 60, 70:79, 100:120), to = 1) %>%
-    subst(from = c(2:130), to = 0) %>% #everything else
-    terra::extract(vect(roostpath))
-
-  # identify polygons to exclude with >20% incompatible landcover
-  incompatible = roost_overlay %>% setNames(c('ID', 'landscape')) %>%
-    group_by(ID, landscape) %>% count() %>% ungroup() %>%
-    group_by(ID) %>% mutate(ncell = sum(n), prop = n/ncell) %>% ungroup() %>%
-    filter(landscape == 1 & prop > 0.2) %>% arrange(desc(prop))
-
-  read_sf(roostpath) %>%
-    filter(!Roost_ID %in% incompatible$ID) %>%
-    vect() %>% rasterize(., landscape) %>%
-    writeRaster(file.path(pathout, scenario_name, 'roosts.tif'),
-                wopt = list(names = scenario_name), overwrite = overwrite)
-}
-
-python_dist = function(pathin, scenario_name, copyto = NULL, pathout,
-                       maskpath = NULL, overwrite = FALSE) {
-
-  # calculate distance to roosts and put in same pathin directory
-  dist_stats(filename = 'roosts.tif',
-             fullpathin = file.path(pathin, scenario_name) %>% normalizePath(),
-             fullpathout =  file.path(pathin, scenario_name) %>%
-               normalizePath() %>% paste0('\\droost_km.tif'))
-
-  r = file.path(pathin, scenario_name, 'droost_km.tif') %>% rast()
-
-  if (!is.null(maskpath)) {
-    r = mask(r, rast(maskpath))
-  }
-  create_directory(file.path(pathout[1], scenario_name))
-  writeRaster(r, file.path(pathout[1], scenario_name, 'droost_km.tif'),
-              wopt = list(names = 'droost_km'), overwrite = overwrite)
-
-  if (!is.null(copyto)) {
-    # copy from scenario_name/pathout[1] to copyto/pathout[2]
-    create_directory(file.path(pathout[2], copyto))
-    writeRaster(r, file.path(pathout[2], copyto, 'droost_km.tif'),
-                wopt = list(names = 'droost_km'), overwrite = overwrite)
-  }
-}
-
-finalize_SDM_predictors = function(pathin, pathout, SDM, scenario_name, scale,
-                                   maskpath = NULL, cover = FALSE,
-                                   overwrite = FALSE) {
-
-  # troubleshooting
-  if (cover & is.null(maskpath)) {
-    stop('cover=TRUE but maskpath not provided')
-  }
-
-  create_directory(file.path(pathout, scenario_name))
-  dat = list.files(file.path(pathin, scenario_name, SDM, scale),
-                   pattern = '.tif$', full.names = TRUE) %>% rast()
-
-  if (!is.null(mask)) {
-    mask = rast(maskpath)
-    dat = mask(dat, mask)
-
-    if (cover) { # fill NAs within mask boundary with zero (e.g. pfld)
-      dat = cover(dat, mask %>% subst(from = 1, to = 0))
-    }
-  }
-
-  if (SDM == 'riparian') {
-
-    names(dat) = paste0(names(dat), '_', scale)
-    # convert to proportion
-    if (scale == '50') {dat = dat/13} else if (scale == '2000') {dat = dat/14073}
-    writeRaster(dat,
-                paste0(file.path(pathout, scenario_name), '/', names(dat), '.tif'),
-                overwrite = overwrite)
-
-  } else if (SDM %in% c('waterbird_fall', 'waterbird_win')) { # scale-specific focal stats:
-
-    names(dat) = paste0(names(dat), '_', as.numeric(scale)/1000, 'k')
-    writeRaster(dat,
-                paste0(file.path(pathout, scenario_name), '/', names(dat), '.tif'),
-                overwrite = overwrite)
-  }
-}
-
-fit_SDMs = function(modlist, scenario_name, pathin, pathout,
-                    constants = NULL, factors = NULL, overwrite = FALSE,
-                    landscape = NULL, unsuitable = NULL) {
-
-  if (is.null(landscape) & !is.null(unsuitable)) {
-    stop('Landscape provided but unsuitable cover types not specified')
-  }
-  if (!is.null(landscape) & is.null(unsuitable)) {
-    stop('Unsuitable cover types specified but landscape not provided')
-  }
-
-  create_directory(file.path(pathout, scenario_name))
-
-  # scenario-independent predictors (in pathin) and scenario-specific predictors
-  predictors = c(list.files(pathin, pattern = '.tif$', full.names = TRUE),
-                 list.files(file.path(pathin, scenario_name), pattern = '.tif$',
-                            full.names = TRUE)) %>%
-    rast()
-
-  # NOTE: This step is slow:
-  if (is.null(unsuitable)) {
-    #predict and write results raster directly
-    purrr::map(names(modlist),
-               ~terra::predict(
-                 model = modlist[[.x]],
-                 object = subset(predictors,
-                                 modlist[[.x]]$contributions %>%
-                                   filter(!var %in% names(constants)) %>%
-                                   pull(var)),
-                 n.trees = modlist[[.x]]$n.trees,
-                 na.rm = TRUE,
-                 type = 'response',
-                 const = constants,
-                 factors = factors,
-                 filename = paste0(file.path(pathout, scenario_name), '/',
-                                   .x, '.tif'),
-                 overwrite = overwrite,
-                 wopt = list(names = .x)
-               ))
-  } else {
-    # predict results, but fill in unsuitable land covers with zero before
-    # writing raster
-    mask = landscape %>% subst(from = unsuitable, to = 0) %>%
-      subst(c(1:999), NA)
-
-    purrr::map(names(modlist),
-               ~terra::predict(
-                 model = modlist[[.x]],
-                 object = subset(predictors,
-                                 modlist[[.x]]$contributions %>%
-                                   filter(!var %in% names(constants)) %>%
-                                   pull(var)),
-                 n.trees = modlist[[.x]]$n.trees,
-                 na.rm = TRUE,
-                 type = 'response',
-                 const = constants,
-                 factors = factors) %>%
-                 cover(mask,
-                       filename = paste0(file.path(pathout, scenario_name), '/',
-                                         .x, '.tif'),
-                       overwrite = overwrite,
-                       wopt = list(names = .x))
-              )
-  }
-
-}
+# generate_pwater = function(waterdatpath,
+#                            baseline_landscape,
+#                            scenario_landscape = NULL,
+#                            landscape_name,
+#                            floor = TRUE,
+#                            maskpath, pathout,
+#                            overwrite = FALSE) {
+#
+#   pwater = rast(waterdatpath)
+#
+#   if (!is.null(scenario_landscape)) {
+#     #generate new pwater values for scenario
+#     # calculate mean baseline pwater by land cover class (detailed) - including
+#     # within the 10km buffer
+#     mwater = zonal(pwater, baseline_landscape, fun = mean, na.rm = TRUE) %>%
+#       setNames(c('label', 'pwater')) %>% drop_na() %>%
+#       left_join(freq(baseline_landscape), by = 'label')
+#
+#     # assign mean baseline pwater values to changed pixels in each scenario
+#     changes = c(scenario_landscape, baseline_landscape) %>% diff() %>%
+#       subst(from = 0, to = NA) %>% #no change = NA
+#       classify(rcl = matrix(c(-Inf, Inf, 1), nrow = 1)) # all others = 1
+#
+#     pwater_new = scenario_landscape %>% mask(changes) %>%
+#       classify(rcl = mwater %>% select(value, pwater) %>% as.matrix(),
+#                othersNA = TRUE)
+#
+#     if (floor) {
+#       # current mean pwater is the "floor"; only allow pwater to increase for
+#       # changed pixels (e.g. restoration scenario)
+#       pwater_scenario = lapp(c(pwater_new, pwater),
+#                              function(x, y) {
+#                                ifelse(!is.na(x) & x > y, x, y)
+#                              })
+#     } else {
+#       pwater_scenario = cover(pwater_new, pwater)
+#     }
+#   } else {
+#     # just write final baseline pwater to appropriate directory
+#     pwater_scenario = pwater
+#   }
+#
+#   # write unmasked version for focal stats
+#   create_directory(file.path(pathout[1], landscape_name))
+#   writeRaster(pwater_scenario,
+#               file.path(pathout[1], landscape_name, 'pwater.tif'),
+#               wopt = list(names = 'pwater'), overwrite = overwrite)
+#
+#   # write masked version as a predictor
+#   pwater_scenario_mask = mask(pwater_scenario, rast(maskpath))
+#   create_directory(file.path(pathout[2], landscape_name))
+#   writeRaster(pwater_scenario_mask,
+#               file.path(pathout[2], landscape_name, 'pwater.tif'),
+#               wopt = list(names = 'pwater'), overwrite = overwrite)
+#
+# }
+#
+# update_roosts = function(roostpath = 'GIS/original_source_data/Ivey/Select_recent_roosts_Ivey_utm.shp',
+#                          landscape, pathout, scenario_name,
+#                          overwrite = FALSE) {
+#   create_directory(file.path(pathout, scenario_name))
+#   # check how much traditional roosts overlap with incompatible land covers:
+#   # orchard, vineyard, riparian, woodland, scrub, urban
+#   roost_overlay = landscape %>%
+#     subst(from = c(11:19, 60, 70:79, 100:120), to = 1) %>%
+#     subst(from = c(2:130), to = 0) %>% #everything else
+#     terra::extract(vect(roostpath))
+#
+#   # identify polygons to exclude with >20% incompatible landcover
+#   incompatible = roost_overlay %>% setNames(c('ID', 'landscape')) %>%
+#     group_by(ID, landscape) %>% count() %>% ungroup() %>%
+#     group_by(ID) %>% mutate(ncell = sum(n), prop = n/ncell) %>% ungroup() %>%
+#     filter(landscape == 1 & prop > 0.2) %>% arrange(desc(prop))
+#
+#   read_sf(roostpath) %>%
+#     filter(!Roost_ID %in% incompatible$ID) %>%
+#     vect() %>% rasterize(., landscape) %>%
+#     writeRaster(file.path(pathout, scenario_name, 'roosts.tif'),
+#                 wopt = list(names = scenario_name), overwrite = overwrite)
+# }
+#
+# finalize_SDM_predictors = function(pathin, pathout, SDM, scenario_name, scale,
+#                                    maskpath = NULL, cover = FALSE,
+#                                    overwrite = FALSE) {
+#
+#   # troubleshooting
+#   if (cover & is.null(maskpath)) {
+#     stop('cover=TRUE but maskpath not provided')
+#   }
+#
+#   create_directory(file.path(pathout, scenario_name))
+#   dat = list.files(file.path(pathin, scenario_name, SDM, scale),
+#                    pattern = '.tif$', full.names = TRUE) %>% rast()
+#
+#   if (!is.null(mask)) {
+#     mask = rast(maskpath)
+#     dat = mask(dat, mask)
+#
+#     if (cover) { # fill NAs within mask boundary with zero (e.g. pfld)
+#       dat = cover(dat, mask %>% subst(from = 1, to = 0))
+#     }
+#   }
+#
+#   if (SDM == 'riparian') {
+#
+#     names(dat) = paste0(names(dat), '_', scale)
+#     # convert to proportion
+#     if (scale == '50') {dat = dat/13} else if (scale == '2000') {dat = dat/14073}
+#     writeRaster(dat,
+#                 paste0(file.path(pathout, scenario_name), '/', names(dat), '.tif'),
+#                 overwrite = overwrite)
+#
+#   } else if (SDM %in% c('waterbird_fall', 'waterbird_win')) { # scale-specific focal stats:
+#
+#     names(dat) = paste0(names(dat), '_', as.numeric(scale)/1000, 'k')
+#     writeRaster(dat,
+#                 paste0(file.path(pathout, scenario_name), '/', names(dat), '.tif'),
+#                 overwrite = overwrite)
+#   }
+# }
+#
+# fit_SDMs = function(modlist, scenario_name, pathin, pathout,
+#                     constants = NULL, factors = NULL, overwrite = FALSE,
+#                     landscape = NULL, unsuitable = NULL) {
+#
+#   if (is.null(landscape) & !is.null(unsuitable)) {
+#     stop('Landscape provided but unsuitable cover types not specified')
+#   }
+#   if (!is.null(landscape) & is.null(unsuitable)) {
+#     stop('Unsuitable cover types specified but landscape not provided')
+#   }
+#
+#   create_directory(file.path(pathout, scenario_name))
+#
+#   # scenario-independent predictors (in pathin) and scenario-specific predictors
+#   predictors = c(list.files(pathin, pattern = '.tif$', full.names = TRUE),
+#                  list.files(file.path(pathin, scenario_name), pattern = '.tif$',
+#                             full.names = TRUE)) %>%
+#     rast()
+#
+#   # NOTE: This step is slow:
+#   if (is.null(unsuitable)) {
+#     #predict and write results raster directly
+#     purrr::map(names(modlist),
+#                ~terra::predict(
+#                  model = modlist[[.x]],
+#                  object = subset(predictors,
+#                                  modlist[[.x]]$contributions %>%
+#                                    filter(!var %in% names(constants)) %>%
+#                                    pull(var)),
+#                  n.trees = modlist[[.x]]$n.trees,
+#                  na.rm = TRUE,
+#                  type = 'response',
+#                  const = constants,
+#                  factors = factors,
+#                  filename = paste0(file.path(pathout, scenario_name), '/',
+#                                    .x, '.tif'),
+#                  overwrite = overwrite,
+#                  wopt = list(names = .x)
+#                ))
+#   } else {
+#     # predict results, but fill in unsuitable land covers with zero before
+#     # writing raster
+#     mask = landscape %>% subst(from = unsuitable, to = 0) %>%
+#       subst(c(1:999), NA)
+#
+#     purrr::map(names(modlist),
+#                ~terra::predict(
+#                  model = modlist[[.x]],
+#                  object = subset(predictors,
+#                                  modlist[[.x]]$contributions %>%
+#                                    filter(!var %in% names(constants)) %>%
+#                                    pull(var)),
+#                  n.trees = modlist[[.x]]$n.trees,
+#                  na.rm = TRUE,
+#                  type = 'response',
+#                  const = constants,
+#                  factors = factors) %>%
+#                  cover(mask,
+#                        filename = paste0(file.path(pathout, scenario_name), '/',
+#                                          .x, '.tif'),
+#                        overwrite = overwrite,
+#                        wopt = list(names = .x))
+#               )
+#   }
+#
+# }
 
 # # clean up results
 # process_focal_stats(
@@ -1144,6 +1145,251 @@ fit_SDMs = function(modlist, scenario_name, pathin, pathout,
 #               filename = paste0(pathout, names(ras), '.tif'),
 #               overwrite = overwrite)
 # }
+#
+# transform_SDM = function(pathin, landscape_name, modist, stat, pathout,
+#                          overwrite = FALSE) {
+#
+#   predictions = list.files(file.path(pathin, landscape_name),
+#                            pattern = '.tif$', full.names = TRUE) %>%
+#     terra::rast()
+#
+#   threshold_list = purrr::map(names(modlist) %>% setNames(names(modlist)),
+#                               function(x) {
+#                                 obs = modlist[[x]]$gbm.call$dataframe[modlist[[x]]$gbm.call$gbm.y]
+#                                 presence = modlist[[x]]$fitted[obs == 1]
+#                                 absence = modlist[[x]]$fitted[obs == 0]
+#                                 e = dismo::evaluate(presence, absence)
+#                                 dismo::threshold(e, stat)
+#                               })
+#
+#   create_directory(file.path(pathout, landscape_name))
+#
+#   # reclassify using model-specific thresholds and write to file
+#   purrr::map(names(modlist),
+#              ~terra::classify(
+#                predictions[[.x]],
+#                rcl = matrix(c(-Inf, threshold_list[[.x]], 0,
+#                               threshold_list[[.x]], Inf, 1),
+#                             nrow = 2, byrow = TRUE),
+#                filename = paste0(file.path(pathout, landscape_name, .x), '.tif'),
+#                overwrite = overwrite,
+#                wopt = list(names = .x))
+#   )
+# }
+
+# transform_SDM = function(modlist, pathin, landscape_name, stat, pathout,
+#                          overwrite = FALSE) {
+#
+#   predictions = list.files(file.path(pathin, landscape_name),
+#                            pattern = '.tif$', full.names = TRUE) %>%
+#     terra::rast()
+#
+#   create_directory(file.path(pathout, landscape_name))
+#
+#   purrr::map(names(modlist),
+#              ~find_threshold(mod = modlist[[.x]],
+#                              name = .x,
+#                              pred = predictions[[.x]],
+#                              stat = stat,
+#                              pathout = pathout,
+#                              landscape_name = landscape_name,
+#                              overwrite = overwrite))
+# }
+#
+# find_threshold = function(mod, name, pred, stat, pathout, landscape_name, overwrite) {
+#   obs = mod$gbm.call$dataframe[mod$gbm.call$gbm.y]
+#   presence = mod$fitted[obs == 1]
+#   absence = mod$fitted[obs == 0]
+#   e = dismo::evaluate(presence, absence)
+#   t = dismo::threshold(e, stat)
+#
+#   terra::classify(
+#     pred,
+#     rcl = matrix(c(-Inf, t, 0,
+#                    t, Inf, 1), nrow = 2, byrow = TRUE),
+#     filename = paste0(file.path(pathout, landscape_name), '/', name, '.tif'),
+#     overwrite = overwrite,
+#     wopt = list(names = name))
+#
+# }
+#
+# sum_habitat = function(pathin, zones = NULL, subtype = 'distributions',
+#                        keypath = NULL) {
+#   fl = list.files(pathin, '.tif$', recursive = TRUE, full.names = TRUE) %>%
+#     set_names()
+#
+#   if (is.null(zones)) {
+#     # sum total
+#     res = purrr::map_df(fl,
+#                         ~terra::rast(.x) %>% terra::values() %>% sum(na.rm = TRUE) %>%
+#                           dplyr::as_tibble(),
+#                         .id = 'pathin')
+#   } else {
+#     # zonal total
+#     res = purrr::map_df(fl,
+#                         ~terra::rast(.x) %>%
+#                           terra::zonal(zones, 'sum', na.rm = TRUE) %>%
+#                           setNames(c('ZONE', 'value')),
+#                         .id = 'pathin')
+#   }
+#   res = res %>%
+#     mutate(pathin = gsub(!!pathin, '', pathin),
+#            pathin = gsub('^\\/|.tif$', '', pathin)) %>%
+#     separate(pathin, sep = '/', into = c('SDM', 'scenario', 'spp')) %>%
+#     mutate(METRIC_CATEGORY = 'Biodiversity Support',
+#            METRIC_SUBTYPE = case_when(
+#              SDM == 'riparian' ~ paste('Riparian landbird', subtype),
+#              SDM %in% c('waterbird_fall', 'waterbird_win') ~
+#                paste('Waterbird', subtype)),
+#            SCORE_TOTAL = value / .09, # convert to ha
+#            UNIT = 'ha')
+#
+#   if (!is.null(keypath)) {
+#     res = left_join(res, read_csv(keypath, col_types = cols()) %>%
+#                       select(spp, METRIC = label), by = 'spp')
+#   } else {
+#     res = rename(res, METRIC = spp)
+#   }
+#
+#   res %>%
+#     mutate(METRIC = case_when(
+#       SDM == 'waterbird_fall' ~ paste0(METRIC, ' (fall)'),
+#       SDM == 'waterbird_win' ~ paste0(METRIC, ' (winter)'),
+#       TRUE ~ METRIC
+#     )) %>%
+#     select(scenario, any_of('ZONE'), METRIC_CATEGORY, METRIC_SUBTYPE, METRIC,
+#            UNIT, SCORE_TOTAL)
+# }
+#
+# sum_landcover = function(pathin, maskpath, pixel_area, zones = NULL) {
+#   fl = list.files(pathin, '.tif$', full.names = TRUE) %>% set_names()
+#
+#   if (is.null(zones)) {
+#     if (is.null(maskpath)) {
+#       res = purrr::map_df(fl,
+#                           ~rast(.x) %>% freq() %>%
+#                             mutate(area = count * pixel_area),
+#                           .id = 'scenario')
+#     } else {
+#       res = purrr::map_df(fl,
+#                           ~rast(.x) %>% mask(rast(maskpath)) %>% freq() %>%
+#                             mutate(area = count * pixel_area),
+#                           .id = 'scenario')
+#     }
+#     res = res %>%
+#       mutate(scenario = gsub(!!pathin, '', scenario),
+#              scenario = gsub('^\\/|.tif$', '', scenario)) %>%
+#       select(scenario, CODE_NAME = label, area)
+#
+#     # add roll-up of riparian & managed wetland subtypes
+#     res = bind_rows(
+#       res,
+#       res %>% dplyr::filter(grepl('RIPARIAN_|WETLAND_MANAGED', CODE_NAME)) %>%
+#         dplyr::mutate(CODE_NAME = dplyr::case_when(
+#           grepl('RIPARIAN_', CODE_NAME) ~ 'RIPARIAN',
+#           grepl('WETLAND_MANAGED', CODE_NAME) ~ 'WETLAND_MANAGED',
+#           TRUE ~ CODE_NAME)) %>%
+#         dplyr::group_by(scenario, CODE_NAME) %>%
+#         dplyr::summarize(area = sum(area), .groups = 'drop'))
+#
+#   } else {
+#     znames = levels(zones)[[1]]
+#     zseg = segregate(zones, other = NA)
+#
+#     if (is.null(maskpath)) {
+#
+#       res = purrr::map_df(fl,
+#                           ~zonal(zseg, rast(.x), 'sum', na.rm = TRUE) %>%
+#                             set_names(c('CODE_NAME', znames)),
+#                           .id = 'scenario')
+#     } else {
+#       res = purrr::map_df(fl,
+#                           ~zonal(zseg, mask(rast(.x), rast(maskpath)), 'sum',
+#                                  na.rm = TRUE) %>%
+#                             set_names(c('CODE_NAME', znames)),
+#                           .id = 'scenario')
+#     }
+#
+#     res = res %>%
+#       pivot_longer(znames, names_to = 'ZONE', values_to = 'count') %>%
+#       mutate(area = count * pixel_area) %>%
+#       mutate(scenario = gsub(!!pathin, '', scenario),
+#              scenario = gsub('^\\/|.tif$', '', scenario)) %>%
+#       select(scenario, ZONE, CODE_NAME, area)
+#
+#     # add roll-up of riparian & managed wetland subtypes
+#     res = bind_rows(
+#       res,
+#       res %>% dplyr::filter(grepl('RIPARIAN_|WETLAND_MANAGED', CODE_NAME)) %>%
+#         dplyr::mutate(CODE_NAME = dplyr::case_when(
+#           grepl('RIPARIAN_', CODE_NAME) ~ 'RIPARIAN',
+#           grepl('WETLAND_MANAGED', CODE_NAME) ~ 'WETLAND_MANAGED',
+#           TRUE ~ CODE_NAME)) %>%
+#         dplyr::group_by(scenario, ZONE, CODE_NAME) %>%
+#         dplyr::summarize(area = sum(area), .groups = 'drop'))
+#   }
+#   return(res)
+# }
+#
+# sum_metrics = function(metricdat, areadat) {
+#   dat_join = full_join(areadat, metricdat) %>%
+#     mutate(
+#       # retain mean value for Annual Wages for now, otherwise multiply by area
+#       # for total score
+#       SCORE_TOTAL = if_else(METRIC == 'Annual Wages',
+#                             SCORE_MEAN, area * SCORE_MEAN),
+#       # propagate error: multiplication by a constant
+#       SCORE_TOTAL_SE = if_else(METRIC == 'Annual Wages',
+#                                SCORE_SE, area * SCORE_SE)) %>%
+#     replace_na(list(SCORE_TOTAL_SE = 0))
+#   # -->the only NA values are for land covers and metrics where value is
+#   # presumed zero and scores for climate change resilience to salinity
+#
+#   bind_rows(
+#     # for all but annual wages, sum over all land cover classes:
+#     dat_join %>% filter(METRIC != 'Annual Wages') %>%
+#       group_by(
+#         across(
+#           any_of(
+#             c('scenario', 'ZONE', 'METRIC_CATEGORY', 'METRIC_SUBTYPE',
+#               'METRIC', 'UNIT')))) %>%
+#       summarize(SCORE_TOTAL = sum(SCORE_TOTAL),
+#                 SCORE_TOTAL_SE = sqrt(sum(SCORE_TOTAL_SE^2)),
+#                 .groups = 'drop'),
+#     # for annual wages: multiply the average wage per-landcover by the
+#     # proportion of the total ag landscape made up by that land cover
+#     dat_join %>% filter(METRIC == 'Annual Wages' & SCORE_TOTAL > 0) %>%
+#       group_by(
+#         across(
+#           any_of(
+#             c('scenario', 'ZONE', 'METRIC_CATEGORY', 'METRIC_SUBTYPE',
+#               'METRIC', 'UNIT')))) %>%
+#       mutate(area_ag_total = sum(area),
+#              area_prop = area / area_ag_total) %>%
+#       summarize(SCORE_TOTAL = sum(SCORE_TOTAL * area_prop),
+#                 SCORE_TOTAL_SE = sqrt(sum((SCORE_TOTAL_SE * area_prop)^2)),
+#                 .groups = 'drop')
+#   )
+# }
+#
+# sum_change = function(scoredat) {
+#   left_join(
+#     scoredat %>% filter(scenario != 'baseline') %>%
+#       rename(SCENARIO = SCORE_TOTAL, SCENARIO_SE = SCORE_TOTAL_SE),
+#     scoredat %>% filter(scenario == 'baseline') %>%
+#       rename(BASELINE = SCORE_TOTAL, BASELINE_SE = SCORE_TOTAL_SE) %>%
+#       select(-scenario)
+#     # by = any_of(c('METRIC_CATEGORY', 'ZONE', 'METRIC_SUBTYPE', 'METRIC', 'UNIT'))
+#   ) %>%
+#     mutate(net_change = SCENARIO - BASELINE,
+#            net_change_se = sqrt(SCENARIO_SE^2 + BASELINE_SE^2),
+#            change_prop = net_change/BASELINE,
+#            change_prop_se = abs(change_prop) * sqrt((net_change_se/net_change)^2 + (BASELINE_SE/BASELINE)^2),
+#            change_pct = change_prop * 100,
+#            change_pct_se = change_prop_se * 100)
+# }
+
+## MOVE TO R PACKAGE:---------
 
 map_predictions <- function(df,
                             palette = c("#2b83ba", "#80bfab", "#c7e8ad",
@@ -1182,3 +1428,81 @@ map_predictions <- function(df,
 }
 
 
+# analyze_metrics = function(metrics_df, baseline, scenario = NULL) {
+#   if (!'METRIC' %in% names(metrics_df) | !"SCORE" %in% names(metrics_df)) {
+#     stop('metrics_df must contain at least the fields "METRIC" and "SCORE"')
+#   }
+#   if (class(baseline) == 'SpatRaster') {
+#     # calculate the area of each land cover classification
+#
+#     if (length(levels(baseline)[[1]]) == 1) {
+#       # no levels/labels defined
+#       warning('No levels defined for baseline raster; using numeric values only.')
+#     }
+#     area_baseline = calculate_area(baseline, unit = 'ha')
+#
+#   } else if ('data.frame' %in% class(baseline)) {
+#     # assume area already calculated
+#     if (!'area' %in% names(baseline) |
+#         (!'label' %in% names(baseline) & !'value' %in% names(baseline))) {
+#       # check that landcover1 contains the necessary fields
+#       stop('baseline must contain fields "area" and either "label" or "value", or provide a SpatRaster')
+#     } else {
+#       # proceed below
+#       area_baseline = baseline
+#     }
+#   } else {
+#     # not a spatraster or a tibble/dataframe
+#     stop('baseline must be a SpatRaster (from package terra), or a tibble or data.frame.')
+#   }
+#
+#   metrics_base = full_join(area1, df) %>%  #join by value and/or label fields
+#     # calculate total score
+#     mutate(SCORE_BASELINE = SCORE * area) %>%
+#     select(-area, -SCORE) %>%
+#     group_by(across(c(-label, -value, -SCORE_BASELINE))) %>%
+#     summarize(SCORE_BASELINE = sum(SCORE_BASELINE, na.rm = TRUE),
+#               .groups = 'drop') %>%
+#     drop_na()
+#
+#   if (!is.null(scenario)) {
+#     # calculate change as well as total metrics
+#     if (class(scenario) == 'SpatRaster') {
+#       if (length(levels(scenario)[[1]]) == 1) {
+#         # no levels/labels defined
+#         warning('No levels defined for scenario raster; using numeric values only.')
+#       }
+#       area_scenario = calculate_area(scenario)
+#     } else if ('data.frame' %in% class(scenario)) {
+#       # assume area already calculated
+#       if (!'area' %in% names(scenario) |
+#           (!'label' %in% names(scenario) & !'value' %in% names(scenario))) {
+#         # check that landcover2 contains the necessary fields
+#         stop('scenario must contain fields "area" and either "label" or "value", or provide a SpatRaster')
+#       } else {
+#         # proceed below
+#         area_scenario = scenario
+#       }
+#     } else {
+#       # not a spatraster or a tibble/dataframe
+#       stop('scenario must be a SpatRaster (from package terra), or a tibble or data.frame.')
+#     }
+#
+#     metrics_scenario = full_join(area_scenario, df) %>%  #join by value and/or label fields
+#       # calculate total score
+#       mutate(SCORE_SCENARIO = SCORE * area) %>%
+#       select(-area, -SCORE) %>%
+#       group_by(across(c(-label, -value, -SCORE_SCENARIO))) %>%
+#       summarize(SCORE_SCENARIO = sum(SCORE_SCENARIO, na.rm = TRUE),
+#                 .groups = 'drop') %>%
+#       drop_na()
+#
+#     metrics_change = full_join(metrics_base, metrics_scenario) %>%
+#       mutate(SCORE_CHANGE = SCORE_SCENARIO - SCORE_BASELINE)
+#
+#     return(metrics_change)
+#   } else {
+#     return(metrics_base)
+#   }
+#
+# }
