@@ -26,8 +26,6 @@ key = readxl::read_excel('GIS/VEG_key.xlsx')
 scenarios = list.files('GIS/scenario_rasters', '.tif$', full.names = TRUE) %>%
   terra::rast()
 
-# delta = rast('GIS/boundaries/delta.tif')
-
 # BASIC PREDICTORS-----------
 # predictors not requiring focal stats with a moving window
 #
@@ -250,117 +248,101 @@ combos_finalize %>% filter(SDM == 'riparian') %>% #filter/subset as needed
 load('data/riparian_landbirds/BRT_models_riparian_final.RData')
 load('data/waterbirds/BRT_models_final.RData')
 
-
 # riparian
-purrr::pmap(list(scenario_name = names(scenarios)[1:3],
-                 landscape = scenarios[[1:3]] %>% mask(delta) %>% as.list()),
-            fit_SDMs,
-            modlist = BRT_riparian,
-            constants = data.frame(region = 1,
-                                   area.ha = 3.141593),
-            unsuitable = 90, #open water
-            pathin = 'GIS/landscape_rasters/predictors_riparian',
-            pathout = 'GIS/prediction_rasters/riparian',
-            overwrite = TRUE)
+purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
+           ~DeltaMultipleBenefits::fit_SDM(
+             pathin = 'GIS/landscape_rasters/predictors_riparian',
+             landscape_name = .x,
+             modlist = BRT_riparian,
+             constants = data.frame(region = 1,
+                                    area.ha = 3.141593),
+             unsuitable = 90, #open water
+             landscape = scenarios[[.x]] %>%
+               mask(rast('GIS/boundaries/delta.tif')),
+             pathout = 'GIS/prediction_rasters/riparian',
+             overwrite = TRUE
+           ))
 
 # waterbird_fall -- note different offset values for cranes & geese vs. dblr,
 # shore, cicon
 
 # crane, geese:
-purrr::pmap(list(scenario_name = names(scenarios)[1:3],
-                 landscape = scenarios[[1:3]] %>% mask(delta) %>% as.list()),
-            fit_SDMs,
-            modlist = waterbird_mods_fall[c('crane', 'geese')],
-            constants = data.frame(offset = 3.709),
-            factors = list(list('covertype' = c('Alfalfa',
-                                                'Irrigated pasture',
-                                                'Rice',
-                                                'Wetland'))),
-            unsuitable = c(10:19, 60, 130), #perennial crops, urban, barren
-            pathin = 'GIS/landscape_rasters/predictors_waterbird_fall',
-            pathout = 'GIS/prediction_rasters/waterbird_fall',
-            overwrite = TRUE)
+purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
+           ~DeltaMultipleBenefits::fit_SDM(
+             pathin = 'GIS/landscape_rasters/predictors_waterbird_fall',
+             landscape_name = .x,
+             modlist = waterbird_mods_fall[c('crane', 'geese')],
+             constants = data.frame(offset = 3.709),
+             factors = list(list('covertype' = c('Alfalfa',
+                                                 'Irrigated pasture',
+                                                 'Rice',
+                                                 'Wetland'))),
+             unsuitable = c(10:19, 60, 130), #perennial crops, urban, barren
+             landscape = scenarios[[.x]] %>%
+               mask(rast('GIS/boundaries/delta.tif')),
+             pathout = 'GIS/prediction_rasters/waterbird_fall',
+             overwrite = TRUE
+           ))
 
 # dblr, shore, cicon:
-purrr::pmap(list(scenario_name = names(scenarios)[1:3],
-                 landscape = scenarios[[1:3]] %>% mask(delta) %>% as.list()),
-            fit_SDMs,
-            modlist = waterbird_mods_fall[c('dblr', 'cicon', 'shore')],
-            constants = data.frame(offset = 4.435),
-            factors = list(list('covertype' = c('Alfalfa',
-                                                'Irrigated pasture',
-                                                'Rice',
-                                                'Wetland'))),
-            unsuitable = c(10:19, 60), #perennial crops and urban
-            pathin = 'GIS/landscape_rasters/predictors_waterbird_fall',
-            pathout = 'GIS/prediction_rasters/waterbird_fall',
-            overwrite = TRUE)
+purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
+           ~DeltaMultipleBenefits::fit_SDM(
+             pathin = 'GIS/landscape_rasters/predictors_waterbird_fall',
+             landscape_name = .x,
+             modlist = waterbird_mods_fall[c('dblr', 'cicon', 'shore')],
+             constants = data.frame(offset = 4.435),
+             factors = list(list('covertype' = c('Alfalfa',
+                                                 'Irrigated pasture',
+                                                 'Rice',
+                                                 'Wetland'))),
+             unsuitable = c(10:19, 60, 130), #perennial crops, urban, barren
+             landscape = scenarios[[.x]] %>%
+               mask(rast('GIS/boundaries/delta.tif')),
+             pathout = 'GIS/prediction_rasters/waterbird_fall',
+             overwrite = TRUE
+           ))
 # beepr::beep(1)
 
-# # compare predictions to original report results:
-# pred = list.files('GIS/prediction_rasters/waterbird_fall/scenario2_perennialexpand/', '.tif',
-#                   full.names = TRUE) %>% rast()
-# pred_orig = list.files('GIS/prediction_rasters/waterbirds_fall_orig/scenario2', '.tif',
-#                        full.names = TRUE) %>% rast()
-# spp = 'cicon'
-# c(pred[[spp]], pred_orig[[spp]]) %>% diff() %>% plot(colNA = 'gray50')
-#
-# # baseline identical to original for geese, dblr, shore, cicon
-# # --> [[slight variation for crane]]
-# # scenario1 is fairly different from original for all
-# # scenario2 is slightly different from original for all
-
 # waterbird_win: one offset for all, so can do together
-purrr::pmap(list(scenario_name = names(scenarios)[4:6],
-                 landscape = scenarios[[4:6]] %>% mask(delta) %>% as.list()),
-            fit_SDMs,
-            modlist = waterbird_mods_win,
-            const = data.frame(offset = 3.617),
-            factors = list(list('covertype' = c('Alfalfa',
-                                                'Corn',
-                                                'Irrigated pasture',
-                                                'Rice',
-                                                'Wetland',
-                                                'Winter wheat'))),
-            unsuitable = c(10:19, 60, 130), #perennial crops, urban, barren
-            pathin = 'GIS/landscape_rasters/predictors_waterbird_win',
-            pathout = 'GIS/prediction_rasters/waterbird_win',
-            overwrite = TRUE)
-beepr::beep(1)
-
-# compare predictions to original report results:
-pred = list.files('GIS/prediction_rasters/waterbird_fall/scenario1_restoration/', '.tif',
-                  full.names = TRUE) %>% rast()
-pred_orig = list.files('GIS/prediction_rasters/waterbirds_fall_orig/scenario1/', '.tif',
-                       full.names = TRUE) %>% rast()
-spp = 'geese'
-c(pred[[spp]], pred_orig[[spp]]) %>% diff() %>% plot(colNA = 'gray50')
-#--> winter predictions have changed due to fixing pwater
-
-# baseline identical to original for geese, dblr, shore, cicon
-# --> [[slight variation for crane]]
-# scenario1 is fairly different from original for all (including divduck)
-# scenario2 is fairly different from original for all (except divduck) due to fixing pwater
+purrr::map(names(scenarios)[which(grepl('win', names(scenarios)))],
+           ~DeltaMultipleBenefits::fit_SDM(
+             pathin = 'GIS/landscape_rasters/predictors_waterbird_win',
+             landscape_name = .x,
+             modlist = waterbird_mods_win,
+             constants = data.frame(offset = 3.617),
+             factors = list(list('covertype' = c('Alfalfa',
+                                                 'Corn',
+                                                 'Irrigated pasture',
+                                                 'Rice',
+                                                 'Wetland',
+                                                 'Winter wheat'))),
+             unsuitable = c(10:19, 60, 130), #perennial crops, urban, barren
+             landscape = scenarios[[.x]] %>%
+               mask(rast('GIS/boundaries/delta.tif')),
+             pathout = 'GIS/prediction_rasters/waterbird_win',
+             overwrite = TRUE))
 
 ## thresholds---------
 # create versions of prediction maps that use model-specific thresholds to
 # convert probabilities into binary presence/absence
-purrr::map(names(scenarios)[1:3],
-           ~transform_SDM(
+purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
+           ~DeltaMultipleBenefits::transform_SDM(
              modlist = BRT_riparian,
              pathin = 'GIS/prediction_rasters/riparian',
              landscape_name = .x,
              stat = 'equal_sens_spec',
              pathout = 'GIS/prediction_rasters_threshold/riparian'))
-purrr::map(names(scenarios)[1:3],
-           ~transform_SDM(
+
+purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
+           ~DeltaMultipleBenefits::transform_SDM(
              modlist = waterbird_mods_fall,
              pathin = 'GIS/prediction_rasters/waterbird_fall',
              landscape_name = .x,
              stat = 'equal_sens_spec',
              pathout = 'GIS/prediction_rasters_threshold/waterbird_fall'))
-purrr::map(names(scenarios)[4:6],
-           ~transform_SDM(
+
+purrr::map(names(scenarios)[which(grepl('win', names(scenarios)))],
+           ~DeltaMultipleBenefits::transform_SDM(
              modlist = waterbird_mods_win,
              pathin = 'GIS/prediction_rasters/waterbird_win',
              landscape_name = .x,
