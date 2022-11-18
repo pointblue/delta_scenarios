@@ -5,14 +5,16 @@
 # PACKAGES & FUNCTIONS
 source('R/0_packages.R')
 source('R/0_functions.R')
-key = readxl::read_excel('GIS/VEG_key.xlsx')
-# spp_key = read_csv('output/TABLE_species_key.csv')
 
 # REFERENCE DATA
-# delta = rast('GIS/boundaries/delta.tif')
-# county_raster = rast('GIS/landscape_rasters/boundaries/counties.tif')
+key = readxl::read_excel('GIS/VEG_key.xlsx')
+metrics = read_csv('output/metrics_final.csv')
 
-# SPATIAL DATA-----------
+# COMPILE RESULTS--------
+# stats by scenario
+
+
+## habitat-----------
 # total suitable habitat for each landscape, predicted from SDMs
 
 ## probability of presence:
@@ -47,9 +49,6 @@ habitat_binary_county = DeltaMultipleBenefits::sum_habitat(
   keypath = 'output/TABLE_species_key.csv')
 write_csv(habitat_binary_county, 'output/scenario_habitat_binary_county.csv')
 
-
-# OTHER METRICS----------
-
 ## land cover totals------------
 landcover = DeltaMultipleBenefits::sum_landcover(
   pathin = 'GIS/scenario_rasters',
@@ -74,42 +73,7 @@ landcover_county = DeltaMultipleBenefits::sum_landcover(
   arrange(scenario, ZONE, CODE_NAME)
 write_csv(landcover_county, 'output/landcover_totals_county.csv')
 
-## compile landcover scores----------
-waterquality = read_csv('data/pesticide_exposure.csv', col_types = cols()) %>%
-  filter(METRIC %in%
-           c('Risk to Aquatic Organisms', 'Critical Pesticides',
-             'Groundwater Contaminant'))
-
-economy = bind_rows(
-  read_csv('data/crop_production_value.csv', col_types = cols()),
-  read_csv('data/livelihoods.csv', col_types = cols())) %>%
-  #change jobs metrics back to jobs/ha for easier landscape calculations
-  mutate(across(c(SCORE_MEAN, SCORE_SE, SCORE_MIN, SCORE_MAX),
-                ~if_else(METRIC == 'Agricultural Jobs', .x/100, .x)),
-         UNIT = recode(UNIT, 'number of employees per 100ha' = 'employees per ha'))
-
-ccs = read_csv('data/climate_change_resilience.csv', col_types = cols())
-
-# acs = read_csv('data/avian_conservation_score.csv', col_types = cols())
-
-metrics = bind_rows(economy, waterquality, ccs) %>%
-  left_join(key %>% select(LABEL, CODE_NAME), by = 'CODE_NAME') %>%
-  mutate(CODE_NAME = factor(CODE_NAME,
-                            levels = key$CODE_NAME %>% na.omit()),
-         METRIC_CATEGORY = factor(METRIC_CATEGORY,
-                                  levels = c('economy', 'water quality',
-                                             'climate', 'biodiversity')),
-         METRIC_CATEGORY = recode(METRIC_CATEGORY,
-                                  economy = 'Agricultural Livelihoods',
-                                  `water quality` = 'Water Quality',
-                                  climate = 'Climate Change Resilience',
-                                  biodiversity = 'Biodiversity Support'),
-         METRIC = gsub('_', ': ', METRIC)) %>%
-  mutate_at(vars(METRIC_SUBTYPE:METRIC), factor) %>%
-  arrange(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME)
-write_csv(metrics, 'output/metrics_final.csv')
-
-## sum total-----------
+## land cover scores-----------
 # combine the landscape-specific estimates of the total area of each land cover
 # class with the per-unit-area metrics for each land cover class
 # - for most metrics, this is the sum over all hectares
