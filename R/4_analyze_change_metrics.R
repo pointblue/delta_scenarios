@@ -22,32 +22,22 @@ habitat = DeltaMultipleBenefits::sum_habitat(
   pathin = 'GIS/prediction_rasters',
   subtype = 'distributions',
   rollup = TRUE,
-  keypath = 'output/TABLE_species_key.csv')
+  keypath = 'output/TABLE_species_key.csv',
+  scale = 0.09) %>%
+  mutate(UNIT = 'ha')
 write_csv(habitat, 'output/scenario_habitat.csv')
 
-habitat_county = DeltaMultipleBenefits::sum_habitat(
-  pathin = 'GIS/prediction_rasters',
-  zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
-  subtype = 'distributions',
-  rollup = TRUE,
-  keypath = 'output/TABLE_species_key.csv')
-write_csv(habitat_county, 'output/scenario_habitat_county.csv')
 
 ## binary presence/absence (using thresholds):
 habitat_binary = DeltaMultipleBenefits::sum_habitat(
   pathin = 'GIS/prediction_rasters_threshold',
   subtype = 'habitat',
   rollup = TRUE,
-  keypath = 'output/TABLE_species_key.csv')
+  keypath = 'output/TABLE_species_key.csv',
+  scale = 0.09) %>%
+  mutate(UNIT = 'ha')
 write_csv(habitat_binary, 'output/scenario_habitat_binary.csv')
 
-habitat_binary_county = DeltaMultipleBenefits::sum_habitat(
-  pathin = 'GIS/prediction_rasters_threshold',
-  zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
-  subtype = 'habitat',
-  rollup = TRUE,
-  keypath = 'output/TABLE_species_key.csv')
-write_csv(habitat_binary_county, 'output/scenario_habitat_binary_county.csv')
 
 ## land cover totals------------
 landcover = DeltaMultipleBenefits::sum_landcover(
@@ -61,24 +51,13 @@ landcover = DeltaMultipleBenefits::sum_landcover(
   arrange(scenario, CODE_NAME)
 write_csv(landcover, 'output/landcover_totals.csv')
 
-landcover_county = DeltaMultipleBenefits::sum_landcover(
-  pathin = 'GIS/scenario_rasters',
-  zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
-  maskpath = 'GIS/boundaries/delta.tif',
-  pixel_area = 0.09,
-  rollup = TRUE) %>%
-  # add LABEL fields
-  left_join(key %>% select(CODE_NAME, LABEL), by = 'CODE_NAME') %>%
-  select(scenario, ZONE, CODE_NAME, LABEL, area) %>%
-  arrange(scenario, ZONE, CODE_NAME)
-write_csv(landcover_county, 'output/landcover_totals_county.csv')
-
-## land cover scores-----------
+## scores-----------
 # combine the landscape-specific estimates of the total area of each land cover
 # class with the per-unit-area metrics for each land cover class
 # - for most metrics, this is the sum over all hectares
 # - for Annual Wages, calculate the new weighted average wage across all
 #    agricultural ha (i.e., those with a wage value)
+# - for climate change resilience, calculate the new overall average
 
 # exclude riparian and managed wetland subclasses (to not double-count), and
 # exclude tidal wetlands and water since not addressing them in these scenarios
@@ -106,6 +85,59 @@ scores %>% select(METRIC_CATEGORY, METRIC_SUBTYPE, UNIT) %>% distinct()
 write_csv(scores, 'output/scenario_scores.csv')
 
 
+
+# NET CHANGE------
+# compare each scenario to baseline
+
+## landcover----
+# for landcover, have to align field names to match fields expected in sum_change()
+landcover_change = landcover %>% filter(!grepl('win', scenario)) %>%
+  rename(SCORE_TOTAL = area) %>%
+  mutate(SCORE_TOTAL_SE = 0) %>%
+  DeltaMultipleBenefits::sum_change(scoredat = .) %>%
+  select(-ends_with('SE', ignore.case = TRUE))
+write_csv(landcover_change, 'output/netchange_landcover.csv')
+
+
+## metrics-----
+scores_change = DeltaMultipleBenefits::sum_change(scores)
+write_csv(scores_change, 'output/netchange_scores.csv')
+
+
+
+# COUNTY-SPECIFIC ESTIMATES---------
+
+## habitat-------
+habitat_county = DeltaMultipleBenefits::sum_habitat(
+  pathin = 'GIS/prediction_rasters',
+  zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
+  subtype = 'distributions',
+  rollup = TRUE,
+  keypath = 'output/TABLE_species_key.csv')
+write_csv(habitat_county, 'output/scenario_habitat_county.csv')
+
+habitat_binary_county = DeltaMultipleBenefits::sum_habitat(
+  pathin = 'GIS/prediction_rasters_threshold',
+  zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
+  subtype = 'habitat',
+  rollup = TRUE,
+  keypath = 'output/TABLE_species_key.csv')
+write_csv(habitat_binary_county, 'output/scenario_habitat_binary_county.csv')
+
+## land cover totals-------
+landcover_county = DeltaMultipleBenefits::sum_landcover(
+  pathin = 'GIS/scenario_rasters',
+  zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
+  maskpath = 'GIS/boundaries/delta.tif',
+  pixel_area = 0.09,
+  rollup = TRUE) %>%
+  # add LABEL fields
+  left_join(key %>% select(CODE_NAME, LABEL), by = 'CODE_NAME') %>%
+  select(scenario, ZONE, CODE_NAME, LABEL, area) %>%
+  arrange(scenario, ZONE, CODE_NAME)
+write_csv(landcover_county, 'output/landcover_totals_county.csv')
+
+## scores------
 scores_county = DeltaMultipleBenefits::sum_metrics(
   metricdat = metrics %>%
     filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))),
@@ -120,28 +152,13 @@ scores_county %>% select(METRIC_CATEGORY, METRIC_SUBTYPE, UNIT) %>% distinct()
 
 write_csv(scores_county, 'output/scenario_scores_county.csv')
 
-# NET CHANGE------
-# compare each scenario to baseline
-
-## landcover----
-# for landcover, have to align field names to match fields expected in sum_change()
-landcover_change = landcover %>% filter(!grepl('win', scenario)) %>%
-  rename(SCORE_TOTAL = area) %>%
-  mutate(SCORE_TOTAL_SE = 0) %>%
-  DeltaMultipleBenefits::sum_change(scoredat = .) %>%
-  select(-ends_with('SE', ignore.case = TRUE))
-write_csv(landcover_change, 'output/netchange_landcover.csv')
-
+## net change--------
 landcover_change_county = landcover_county %>% filter(!grepl('win', scenario)) %>%
   rename(SCORE_TOTAL = area) %>%
   mutate(SCORE_TOTAL_SE = 0) %>%
   DeltaMultipleBenefits::sum_change(scoredat = .) %>%
   select(-ends_with('SE', ignore.case = TRUE))
 write_csv(landcover_change_county, 'output/netchange_landcover_county.csv')
-
-## metrics-----
-scores_change = DeltaMultipleBenefits::sum_change(scores)
-write_csv(scores_change, 'output/netchange_scores.csv')
 
 scores_change_county = DeltaMultipleBenefits::sum_change(scores_county)
 write_csv(scores_change_county, 'output/netchange_scores_county.csv')
@@ -151,34 +168,51 @@ write_csv(scores_change_county, 'output/netchange_scores_county.csv')
 # for species distribution models only
 
 ## RIPARIAN-----
+pred_rip_binary = list(
+  'baseline' = list.files('GIS/prediction_rasters_threshold/riparian/baseline', '.tif',
+                          full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario1' = list.files('GIS/prediction_rasters_threshold/riparian/scenario1_restoration/', '.tif',
+                          full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario2' = list.files('GIS/prediction_rasters_threshold/riparian/scenario2_perennialexpand/', '.tif',
+                          full.names = TRUE, recursive = TRUE) %>% rast()
+  )
 change1_rip = purrr::map(
-  names(preds$riparian$baseline),
-  ~diff(c(preds$riparian$baseline[[.x]],
-          preds$riparian$scenario1_restoration[[.x]]))) %>%
-  setNames(names(preds$riparian$baseline)) %>%
+  names(pred_rip_binary$baseline),
+  ~diff(c(pred_rip_binary$baseline[[.x]],
+          pred_rip_binary$scenario1[[.x]]))) %>%
+  setNames(names(pred_rip_binary$baseline)) %>%
   rast()
 writeRaster(change1_rip,
             file.path('GIS/change_rasters/riparian/scenario1_restoration',
-                      paste0(names(change1), '.tif')),
+                      paste0(names(change1_rip), '.tif')),
             overwrite = TRUE)
 
 change2_rip = purrr::map(
-  names(preds$riparian$baseline),
-  ~diff(c(preds$riparian$baseline[[.x]],
-          preds$riparian$scenario2_perennialexpand[[.x]]))) %>%
-  setNames(names(preds$riparian$baseline)) %>%
+  names(pred_rip_binary$baseline),
+  ~diff(c(pred_rip_binary$baseline[[.x]],
+          pred_rip_binary$scenario2[[.x]]))) %>%
+  setNames(names(pred_rip_binary$baseline)) %>%
   rast()
 writeRaster(change2_rip,
             file.path('GIS/change_rasters/riparian/scenario2_perennialexpand',
-                      paste0(names(change2), '.tif')),
+                      paste0(names(change2_rip), '.tif')),
             overwrite = TRUE)
 
 ## WATERBIRDS FALL---------
+pred_fall_binary = list(
+  'baseline' = list.files('GIS/prediction_rasters_threshold/waterbird_fall/baseline', '.tif',
+                          full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario1' = list.files('GIS/prediction_rasters_threshold/waterbird_fall/scenario1_restoration/', '.tif',
+                           full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario2' = list.files('GIS/prediction_rasters_threshold/waterbird_fall/scenario2_perennialexpand/', '.tif',
+                           full.names = TRUE, recursive = TRUE) %>% rast()
+)
+
 change1_fall = purrr::map(
-  names(preds$waterbird_fall$baseline),
-  ~diff(c(preds$waterbird_fall$baseline[[.x]],
-          preds$waterbird_fall$scenario1_restoration[[.x]]))) %>%
-  setNames(names(preds$waterbird_fall$baseline)) %>%
+  names(pred_fall_binary$baseline),
+  ~diff(c(pred_fall_binary$baseline[[.x]],
+          pred_fall_binary$scenario1[[.x]]))) %>%
+  setNames(names(pred_fall_binary$baseline)) %>%
   rast()
 writeRaster(change1_fall,
             file.path('GIS/change_rasters/waterbird_fall/scenario1_restoration',
@@ -186,23 +220,32 @@ writeRaster(change1_fall,
             overwrite = TRUE)
 
 change2_fall = purrr::map(
-  names(preds$waterbird_fall$baseline),
-  ~diff(c(preds$waterbird_fall$baseline[[.x]],
-          preds$waterbird_fall$scenario2_perennialexpand[[.x]]))) %>%
-  setNames(names(preds$waterbird_fall$baseline)) %>%
+  names(pred_fall_binary$baseline),
+  ~diff(c(pred_fall_binary$baseline[[.x]],
+          pred_fall_binary$scenario2[[.x]]))) %>%
+  setNames(names(pred_fall_binary$baseline)) %>%
   rast()
 writeRaster(change2_fall,
             file.path('GIS/change_rasters/waterbird_fall/scenario2_perennialexpand',
-                      paste0(names(change1_fall), '.tif')),
+                      paste0(names(change2_fall), '.tif')),
             overwrite = TRUE)
 
 
 ## WATERBIRDS WINTER-------
+pred_win_binary = list(
+  'baseline' = list.files('GIS/prediction_rasters_threshold/waterbird_win/baseline_win', '.tif',
+                          full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario1' = list.files('GIS/prediction_rasters_threshold/waterbird_win/scenario1_restoration_win', '.tif',
+                           full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario2' = list.files('GIS/prediction_rasters_threshold/waterbird_win/scenario2_perennialexpand_win', '.tif',
+                           full.names = TRUE, recursive = TRUE) %>% rast()
+)
+
 change1_win = purrr::map(
-  names(preds$waterbird_win$baseline),
-  ~diff(c(preds$waterbird_win$baseline[[.x]],
-          preds$waterbird_win$scenario1_restoration[[.x]]))) %>%
-  setNames(names(preds$waterbird_win$baseline)) %>%
+  names(pred_win_binary$baseline),
+  ~diff(c(pred_win_binary$baseline[[.x]],
+          pred_win_binary$scenario1[[.x]]))) %>%
+  setNames(names(pred_win_binary$baseline)) %>%
   rast()
 writeRaster(change1_win,
             file.path('GIS/change_rasters/waterbird_win/scenario1_restoration',
@@ -210,10 +253,10 @@ writeRaster(change1_win,
             overwrite = TRUE)
 
 change2_win = purrr::map(
-  names(preds$waterbird_win$baseline),
-  ~diff(c(preds$waterbird_win$baseline[[.x]],
-          preds$waterbird_win$scenario2_perennialexpand[[.x]]))) %>%
-  setNames(names(preds$waterbird_win$baseline)) %>%
+  names(pred_win_binary$baseline),
+  ~diff(c(pred_win_binary$baseline[[.x]],
+          pred_win_binary$scenario2[[.x]]))) %>%
+  setNames(names(pred_win_binary$baseline)) %>%
   rast()
 writeRaster(change2_win,
             file.path('GIS/change_rasters/waterbird_win/scenario2_perennialexpand',
