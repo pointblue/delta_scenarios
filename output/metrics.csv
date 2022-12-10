@@ -1,0 +1,277 @@
+METRIC_CATEGORY,METRIC,UNIT,CODE_NAME,LABEL,SCORE_MEAN,SCORE_SE
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,0.05098351830054537,0.007932300491896178
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,0.05098351830054537,0.007932300491896178
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,VINEYARD,Vineyard,0.02269056648746179,0.002259764552414
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,GRAIN&HAY_WHEAT,Wheat,0.001967880365152875,3.57258631427393e-4
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,GRAIN&HAY_OTHER,Other Grains,0.0039506997467660485,5.513717044380067e-4
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,FIELD_CORN,Corn,0.0024409219407038134,2.2833241654319982e-4
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,FIELD_OTHER,Other Field Crops,5.747606936795885e-4,7.40336150950513e-5
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,ROW,Row Crops,0.049696455553818734,0.0033294730163744304
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,RICE,Rice,0.014404298868204869,0.001806636370717224
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,IDLE,Idle,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,PASTURE_ALFALFA,Alfalfa,0.006340739337371615,0.00062298051766420965
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,PASTURE_OTHER,Other Pasture,0.006340739337371615,0.00062298051766420965
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,GRASSLAND,Grassland,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,URBAN,Urban,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,RIPARIAN,Riparian,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,RIPARIAN_FOREST_SALIX,Riparian - Willow,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,WETLAND_MANAGED,Managed Wetland,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,WETLAND_TIDAL,Tidal Wetland,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,WETLAND_OTHER,Other Wetland,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,WATER,Water,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,WOODLAND,Woodland,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,SCRUB,Scrub,0,NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,BARREN,Barren,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,36.50889484346645,0.9618956600014572
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,36.50889484346645,0.9618956600014572
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",VINEYARD,Vineyard,36.39096978233102,1.2559914721629224
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",GRAIN&HAY_WHEAT,Wheat,40.98530116550116,1.4748488412900669
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",GRAIN&HAY_OTHER,Other Grains,37.42158277591973,3.289852006688965
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",FIELD_CORN,Corn,37.39493255977689,1.4903331045427175
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",FIELD_OTHER,Other Field Crops,37.96504495614035,1.692413670145488
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",ROW,Row Crops,37.08176093191373,2.051770126373111
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RICE,Rice,39.0624739007644,2.01383613106825
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",IDLE,Idle,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",PASTURE_ALFALFA,Alfalfa,41.92507514821096,1.9689476498135667
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",PASTURE_OTHER,Other Pasture,41.92507514821096,1.9689476498135667
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",GRASSLAND,Grassland,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",URBAN,Urban,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN,Riparian,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN_FOREST_POFR,Riparian - Cottonwood,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN_FOREST_QULO,Riparian - Valley Oak,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN_FOREST_SALIX,Riparian - Willow,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",WETLAND_MANAGED,Managed Wetland,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",WETLAND_TIDAL,Tidal Wetland,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",WETLAND_OTHER,Other Wetland,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",WATER,Water,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",WOODLAND,Woodland,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",SCRUB,Scrub,0,NA
+Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",BARREN,Barren,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,12.615897788431353,1.1104016915400174
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,7.066044346012426,0.5373536645776471
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",VINEYARD,Vineyard,10.950634344163827,0.3248047923189947
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",GRAIN&HAY_WHEAT,Wheat,1.1839350142764065,0.08603222577132909
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",GRAIN&HAY_OTHER,Other Grains,1.123179045711329,0.09524208243448472
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",FIELD_CORN,Corn,2.651030563544446,0.13152112949435424
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",FIELD_OTHER,Other Field Crops,2.9589192005010987,0.1207121793843009
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",ROW,Row Crops,12.317814252114289,0.4197179810584379
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RICE,Rice,3.8620398618464353,0.2173547939487749
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",IDLE,Idle,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",PASTURE_ALFALFA,Alfalfa,2.874550635573503,0.21293849227502393
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",PASTURE_OTHER,Other Pasture,0.6731033771752637,0.04203638167261972
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",GRASSLAND,Grassland,0.06035955750151726,0.00190468193323193
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",URBAN,Urban,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN,Riparian,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN_FOREST_POFR,Riparian - Cottonwood,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN_FOREST_QULO,Riparian - Valley Oak,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN_FOREST_SALIX,Riparian - Willow,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",WETLAND_MANAGED,Managed Wetland,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",WETLAND_TIDAL,Tidal Wetland,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",WETLAND_OTHER,Other Wetland,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",WATER,Water,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",WOODLAND,Woodland,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",SCRUB,Scrub,0,NA
+Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",BARREN,Barren,0,NA
+Climate Change Resilience,Drought,"qualitative score, 1-10",ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1.9,0.2
+Climate Change Resilience,Drought,"qualitative score, 1-10",ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,2.625,0.2630521404045756
+Climate Change Resilience,Drought,"qualitative score, 1-10",VINEYARD,Vineyard,4.888888888888889,0.30932024237944566
+Climate Change Resilience,Drought,"qualitative score, 1-10",GRAIN&HAY_WHEAT,Wheat,8.1,0.22110831935702663
+Climate Change Resilience,Drought,"qualitative score, 1-10",GRAIN&HAY_OTHER,Other Grains,8.1,0.22110831935702663
+Climate Change Resilience,Drought,"qualitative score, 1-10",FIELD_CORN,Corn,5.7,0.2333333333333333
+Climate Change Resilience,Drought,"qualitative score, 1-10",FIELD_OTHER,Other Field Crops,4.888888888888889,0.30932024237944566
+Climate Change Resilience,Drought,"qualitative score, 1-10",ROW,Row Crops,4.888888888888889,0.30932024237944566
+Climate Change Resilience,Drought,"qualitative score, 1-10",RICE,Rice,2.2,0.15275252316519466
+Climate Change Resilience,Drought,"qualitative score, 1-10",IDLE,Idle,10,NA
+Climate Change Resilience,Drought,"qualitative score, 1-10",PASTURE_ALFALFA,Alfalfa,3.8,0.15275252316519466
+Climate Change Resilience,Drought,"qualitative score, 1-10",PASTURE_OTHER,Other Pasture,6,0.20719385350268704
+Climate Change Resilience,Drought,"qualitative score, 1-10",GRASSLAND,Grassland,7.583333333333333,0.19462473604038075
+Climate Change Resilience,Drought,"qualitative score, 1-10",URBAN,Urban,5,NA
+Climate Change Resilience,Drought,"qualitative score, 1-10",RIPARIAN,Riparian,5.083333333333333,0.12309149097933274
+Climate Change Resilience,Drought,"qualitative score, 1-10",RIPARIAN_FOREST_POFR,Riparian - Cottonwood,6,NA
+Climate Change Resilience,Drought,"qualitative score, 1-10",RIPARIAN_FOREST_QULO,Riparian - Valley Oak,6,NA
+Climate Change Resilience,Drought,"qualitative score, 1-10",RIPARIAN_FOREST_SALIX,Riparian - Willow,4,2
+Climate Change Resilience,Drought,"qualitative score, 1-10",RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,5.6,1.32664991614216
+Climate Change Resilience,Drought,"qualitative score, 1-10",RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,8,1.7320508075688772
+Climate Change Resilience,Drought,"qualitative score, 1-10",RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,4,1.1547005383792517
+Climate Change Resilience,Drought,"qualitative score, 1-10",RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,6,0
+Climate Change Resilience,Drought,"qualitative score, 1-10",WETLAND_MANAGED,Managed Wetland,2.3333333333333335,0.1421338109037403
+Climate Change Resilience,Drought,"qualitative score, 1-10",WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,2.3333333333333335,0.1421338109037403
+Climate Change Resilience,Drought,"qualitative score, 1-10",WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,2.3333333333333335,0.1421338109037403
+Climate Change Resilience,Drought,"qualitative score, 1-10",WETLAND_TIDAL,Tidal Wetland,5,NA
+Climate Change Resilience,Drought,"qualitative score, 1-10",WETLAND_OTHER,Other Wetland,2.3333333333333335,0.1421338109037403
+Climate Change Resilience,Drought,"qualitative score, 1-10",WOODLAND,Woodland,5,NA
+Climate Change Resilience,Drought,"qualitative score, 1-10",SCRUB,Scrub,5,NA
+Climate Change Resilience,Drought,"qualitative score, 1-10",BARREN,Barren,10,NA
+Climate Change Resilience,Flood,"qualitative score, 1-10",ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,5.111111111111111,0.16666666666666666
+Climate Change Resilience,Flood,"qualitative score, 1-10",ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,3,0.1889822365046136
+Climate Change Resilience,Flood,"qualitative score, 1-10",VINEYARD,Vineyard,5.875,0.29504842217604116
+Climate Change Resilience,Flood,"qualitative score, 1-10",GRAIN&HAY_WHEAT,Wheat,4.125,0.25
+Climate Change Resilience,Flood,"qualitative score, 1-10",GRAIN&HAY_OTHER,Other Grains,4.125,0.25
+Climate Change Resilience,Flood,"qualitative score, 1-10",FIELD_CORN,Corn,4.75,0.29504842217604116
+Climate Change Resilience,Flood,"qualitative score, 1-10",FIELD_OTHER,Other Field Crops,3.7777777777777777,0.23570226039551587
+Climate Change Resilience,Flood,"qualitative score, 1-10",ROW,Row Crops,3.7777777777777777,0.23570226039551587
+Climate Change Resilience,Flood,"qualitative score, 1-10",RICE,Rice,10,0
+Climate Change Resilience,Flood,"qualitative score, 1-10",IDLE,Idle,10,NA
+Climate Change Resilience,Flood,"qualitative score, 1-10",PASTURE_ALFALFA,Alfalfa,6.875,0.18298126367784995
+Climate Change Resilience,Flood,"qualitative score, 1-10",PASTURE_OTHER,Other Pasture,7.1,0.22110831935702663
+Climate Change Resilience,Flood,"qualitative score, 1-10",GRASSLAND,Grassland,9.090909090909092,0.12196734422726126
+Climate Change Resilience,Flood,"qualitative score, 1-10",URBAN,Urban,1,NA
+Climate Change Resilience,Flood,"qualitative score, 1-10",RIPARIAN,Riparian,9.090909090909092,0.12196734422726126
+Climate Change Resilience,Flood,"qualitative score, 1-10",RIPARIAN_FOREST_POFR,Riparian - Cottonwood,6,NA
+Climate Change Resilience,Flood,"qualitative score, 1-10",RIPARIAN_FOREST_QULO,Riparian - Valley Oak,2,NA
+Climate Change Resilience,Flood,"qualitative score, 1-10",RIPARIAN_FOREST_SALIX,Riparian - Willow,10,0
+Climate Change Resilience,Flood,"qualitative score, 1-10",RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,4.4,0.7483314773547882
+Climate Change Resilience,Flood,"qualitative score, 1-10",RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,8.666666666666666,1.1547005383792517
+Climate Change Resilience,Flood,"qualitative score, 1-10",RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,8.666666666666666,1.3333333333333333
+Climate Change Resilience,Flood,"qualitative score, 1-10",RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,7,2.449489742783178
+Climate Change Resilience,Flood,"qualitative score, 1-10",WETLAND_MANAGED,Managed Wetland,10,0
+Climate Change Resilience,Flood,"qualitative score, 1-10",WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,10,0
+Climate Change Resilience,Flood,"qualitative score, 1-10",WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,10,0
+Climate Change Resilience,Flood,"qualitative score, 1-10",WETLAND_TIDAL,Tidal Wetland,10,NA
+Climate Change Resilience,Flood,"qualitative score, 1-10",WETLAND_OTHER,Other Wetland,10,0
+Climate Change Resilience,Flood,"qualitative score, 1-10",WOODLAND,Woodland,1,NA
+Climate Change Resilience,Flood,"qualitative score, 1-10",SCRUB,Scrub,1,NA
+Climate Change Resilience,Flood,"qualitative score, 1-10",BARREN,Barren,10,NA
+Climate Change Resilience,Heat,"qualitative score, 1-10",ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,3.125,0.26726124191242434
+Climate Change Resilience,Heat,"qualitative score, 1-10",ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,2.142857142857143,0.18442777839082936
+Climate Change Resilience,Heat,"qualitative score, 1-10",VINEYARD,Vineyard,4.142857142857143,0.3595159254890833
+Climate Change Resilience,Heat,"qualitative score, 1-10",GRAIN&HAY_WHEAT,Wheat,8.25,0.2630521404045756
+Climate Change Resilience,Heat,"qualitative score, 1-10",GRAIN&HAY_OTHER,Other Grains,8.25,0.2630521404045756
+Climate Change Resilience,Heat,"qualitative score, 1-10",FIELD_CORN,Corn,7.285714285714286,0.2973808570665904
+Climate Change Resilience,Heat,"qualitative score, 1-10",FIELD_OTHER,Other Field Crops,4.625,0.2265817417937414
+Climate Change Resilience,Heat,"qualitative score, 1-10",ROW,Row Crops,4.625,0.2265817417937414
+Climate Change Resilience,Heat,"qualitative score, 1-10",RICE,Rice,6.375,0.25
+Climate Change Resilience,Heat,"qualitative score, 1-10",IDLE,Idle,10,NA
+Climate Change Resilience,Heat,"qualitative score, 1-10",PASTURE_ALFALFA,Alfalfa,7.857142857142857,0.20203050891044216
+Climate Change Resilience,Heat,"qualitative score, 1-10",PASTURE_OTHER,Other Pasture,8.6,0.21343747458109497
+Climate Change Resilience,Heat,"qualitative score, 1-10",GRASSLAND,Grassland,9.1,0.2
+Climate Change Resilience,Heat,"qualitative score, 1-10",URBAN,Urban,5,NA
+Climate Change Resilience,Heat,"qualitative score, 1-10",RIPARIAN,Riparian,8.1,0.22110831935702663
+Climate Change Resilience,Heat,"qualitative score, 1-10",RIPARIAN_FOREST_POFR,Riparian - Cottonwood,8.1,0.22110831935702663
+Climate Change Resilience,Heat,"qualitative score, 1-10",RIPARIAN_FOREST_QULO,Riparian - Valley Oak,8.1,0.22110831935702663
+Climate Change Resilience,Heat,"qualitative score, 1-10",RIPARIAN_FOREST_SALIX,Riparian - Willow,8.1,0.22110831935702663
+Climate Change Resilience,Heat,"qualitative score, 1-10",RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,8.1,0.22110831935702663
+Climate Change Resilience,Heat,"qualitative score, 1-10",RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,8.1,0.22110831935702663
+Climate Change Resilience,Heat,"qualitative score, 1-10",RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,8.1,0.22110831935702663
+Climate Change Resilience,Heat,"qualitative score, 1-10",RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,8.1,0.22110831935702663
+Climate Change Resilience,Heat,"qualitative score, 1-10",WETLAND_MANAGED,Managed Wetland,7.6,0.22360679774997896
+Climate Change Resilience,Heat,"qualitative score, 1-10",WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,7.6,0.22360679774997896
+Climate Change Resilience,Heat,"qualitative score, 1-10",WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,7.6,0.22360679774997896
+Climate Change Resilience,Heat,"qualitative score, 1-10",WETLAND_TIDAL,Tidal Wetland,5,NA
+Climate Change Resilience,Heat,"qualitative score, 1-10",WETLAND_OTHER,Other Wetland,7.6,0.22360679774997896
+Climate Change Resilience,Heat,"qualitative score, 1-10",WOODLAND,Woodland,5,NA
+Climate Change Resilience,Heat,"qualitative score, 1-10",SCRUB,Scrub,5,NA
+Climate Change Resilience,Heat,"qualitative score, 1-10",BARREN,Barren,10,NA
+Water Quality,Critical Pesticides,kg/ha/yr,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1.0856725657725022,0.017241285635755
+Water Quality,Critical Pesticides,kg/ha/yr,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,2.8220488450093644,0.3235840361499295
+Water Quality,Critical Pesticides,kg/ha/yr,VINEYARD,Vineyard,0.388026774905255,0.03224041603197426
+Water Quality,Critical Pesticides,kg/ha/yr,GRAIN&HAY_WHEAT,Wheat,0.01501791344065551,0.00552504079690417
+Water Quality,Critical Pesticides,kg/ha/yr,GRAIN&HAY_OTHER,Other Grains,0.00639798410235488,0.00284548771407537
+Water Quality,Critical Pesticides,kg/ha/yr,FIELD_CORN,Corn,0.579622664836537,0.06458417031529763
+Water Quality,Critical Pesticides,kg/ha/yr,FIELD_OTHER,Other Field Crops,0.6859325375013596,0.165080401984823
+Water Quality,Critical Pesticides,kg/ha/yr,ROW,Row Crops,1.5214991765883048,0.12248271819121012
+Water Quality,Critical Pesticides,kg/ha/yr,RICE,Rice,1.332864607084957,0.3333075750452675
+Water Quality,Critical Pesticides,kg/ha/yr,IDLE,Idle,0.04923761631271479,0.01481685444041195
+Water Quality,Critical Pesticides,kg/ha/yr,PASTURE_ALFALFA,Alfalfa,2.2098613610297337,0.481163820209236
+Water Quality,Critical Pesticides,kg/ha/yr,PASTURE_OTHER,Other Pasture,2.0605059855408989e-4,7.986730233063945e-5
+Water Quality,Critical Pesticides,kg/ha/yr,GRASSLAND,Grassland,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,URBAN,Urban,0.02562865464592703,0.01345016701674956
+Water Quality,Critical Pesticides,kg/ha/yr,RIPARIAN,Riparian,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,RIPARIAN_FOREST_SALIX,Riparian - Willow,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,WETLAND_MANAGED,Managed Wetland,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,WETLAND_TIDAL,Tidal Wetland,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,WETLAND_OTHER,Other Wetland,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,WATER,Water,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,WOODLAND,Woodland,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,SCRUB,Scrub,0,NA
+Water Quality,Critical Pesticides,kg/ha/yr,BARREN,Barren,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,0.10411758323200766,0.01683532250100008
+Water Quality,Groundwater Contaminant,kg/ha/yr,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,0.6686037968455397,0.15587681541362863
+Water Quality,Groundwater Contaminant,kg/ha/yr,VINEYARD,Vineyard,0.3162555352208334,0.02904750357575161
+Water Quality,Groundwater Contaminant,kg/ha/yr,GRAIN&HAY_WHEAT,Wheat,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,GRAIN&HAY_OTHER,Other Grains,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,FIELD_CORN,Corn,0.03251912657849203,0.00863117814084167
+Water Quality,Groundwater Contaminant,kg/ha/yr,FIELD_OTHER,Other Field Crops,0.00297055653952512,0.0013047753549391499
+Water Quality,Groundwater Contaminant,kg/ha/yr,ROW,Row Crops,0.01114718843480912,0.00515679219638774
+Water Quality,Groundwater Contaminant,kg/ha/yr,RICE,Rice,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,IDLE,Idle,0.00596908478084429,0.00431498487596625
+Water Quality,Groundwater Contaminant,kg/ha/yr,PASTURE_ALFALFA,Alfalfa,0.34223084476174587,0.10298241857787184
+Water Quality,Groundwater Contaminant,kg/ha/yr,PASTURE_OTHER,Other Pasture,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,GRASSLAND,Grassland,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,URBAN,Urban,0.02555419233255759,0.01339295057390388
+Water Quality,Groundwater Contaminant,kg/ha/yr,RIPARIAN,Riparian,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,RIPARIAN_FOREST_SALIX,Riparian - Willow,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,WETLAND_MANAGED,Managed Wetland,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,WETLAND_TIDAL,Tidal Wetland,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,WETLAND_OTHER,Other Wetland,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,WATER,Water,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,WOODLAND,Woodland,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,SCRUB,Scrub,0,NA
+Water Quality,Groundwater Contaminant,kg/ha/yr,BARREN,Barren,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,6.195785736420012,0.42134886428464746
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,5.2502304853961395,0.6824221266491314
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,VINEYARD,Vineyard,2.4645189647690797,0.18876230100449953
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,GRAIN&HAY_WHEAT,Wheat,0.01814428789442623,0.00473346097255171
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,GRAIN&HAY_OTHER,Other Grains,0.01032660699718943,0.00607442752329436
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,FIELD_CORN,Corn,0.5966863072502369,0.03704411700209074
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,FIELD_OTHER,Other Field Crops,1.1491388636867332,0.1623867193371374
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,ROW,Row Crops,5.973093522907556,0.4495419411672446
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,RICE,Rice,7.308868823226923,1.0224380070564352
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,IDLE,Idle,0.1347430245660169,0.02503562670827413
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,PASTURE_ALFALFA,Alfalfa,4.875236635103077,0.6532909739830662
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,PASTURE_OTHER,Other Pasture,0.04024237939450009,0.00988536794319783
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,GRASSLAND,Grassland,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,URBAN,Urban,0.03901781990119692,0.01758485680496637
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,RIPARIAN,Riparian,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,RIPARIAN_FOREST_SALIX,Riparian - Willow,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,WETLAND_MANAGED,Managed Wetland,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,WETLAND_TIDAL,Tidal Wetland,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,WETLAND_OTHER,Other Wetland,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,WATER,Water,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,WOODLAND,Woodland,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,SCRUB,Scrub,0,NA
+Water Quality,Risk to Aquatic Organisms,kg/ha/yr,BARREN,Barren,0,NA
