@@ -16,6 +16,8 @@ palette = c("#2b83ba", "#80bfab", "#c7e8ad", "#ffffbf", "#fdc980", "#f07c4a",
             "#d7191c")
 palette2 = c("darkblue", "white", "darkred")
 
+spp_key = read_csv('output/TABLE_species_key.csv')
+
 library(showtext)
 font_add_google('Source Sans Pro', 'sourcesans')
 
@@ -26,16 +28,21 @@ change1_rip = list.files('GIS/change_rasters/riparian/scenario1_restoration/',
                          '.tif$', full.names = TRUE) %>% rast() %>%
   as.data.frame(xy = TRUE) %>%
   pivot_longer(!x:y, names_to = 'spp') %>%
-  left_join(spp_key, by = 'spp')
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
 
 showtext_auto()
 showtext_opts(dpi = 300)
 ggplot(change1_rip) + facet_wrap(~label, ncol = 5) +
-  geom_raster(aes(x, y, fill = value)) +
-  scale_fill_gradientn(colors = rev(c(palette[1], 'white', palette[7])),
-                       na.value = 'transparent',
-                       limits = c(-1, 1)) +
-  labs(x = NULL, y = NULL, fill = 'Probability\nof presence') +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  # scale_fill_gradientn(colors = rev(c(palette[1], 'white', palette[7])),
+  #                      na.value = 'transparent',
+  #                      limits = c(-1, 1)) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
   geom_sf(data = delta_shp, fill = NA) +
   theme_minimal() +
   theme(axis.text = element_blank(),
@@ -55,16 +62,21 @@ change2_rip = list.files('GIS/change_rasters/riparian/scenario2_perennialexpand/
                          '.tif$', full.names = TRUE) %>% rast() %>%
   as.data.frame(xy = TRUE) %>%
   pivot_longer(!x:y, names_to = 'spp') %>%
-  left_join(spp_key, by = 'spp')
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
 
 showtext_auto()
 showtext_opts(dpi = 300)
 ggplot(change2_rip) + facet_wrap(~label, ncol = 5) +
-  geom_raster(aes(x, y, fill = value)) +
-  scale_fill_gradientn(colors = rev(c(palette[1], 'white', palette[7])),
-                       na.value = 'transparent',
-                       limits = c(-1, 1)) +
-  labs(x = NULL, y = NULL, fill = 'Probability\nof presence') +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  # scale_fill_gradientn(colors = rev(c(palette[1], 'white', palette[7])),
+  #                      na.value = 'transparent',
+  #                      limits = c(-1, 1)) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
   geom_sf(data = delta_shp, fill = NA) +
   theme_minimal() +
   theme(axis.text = element_blank(),
@@ -86,16 +98,21 @@ change1_fall = list.files('GIS/change_rasters/waterbird_fall/scenario1_restorati
                           '.tif$', full.names = TRUE) %>% rast() %>%
   as.data.frame(xy = TRUE) %>%
   pivot_longer(!x:y, names_to = 'spp') %>%
-  left_join(spp_key, by = 'spp')
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
 
 showtext_auto()
 showtext_opts(dpi = 300)
 ggplot(change1_fall) + facet_wrap(~label, ncol = 3) +
-  geom_raster(aes(x, y, fill = value)) +
-  scale_fill_gradientn(colors = rev(c(palette[1], 'white', palette[7])),
-                       na.value = 'transparent',
-                       limits = c(-1, 1)) +
-  labs(x = NULL, y = NULL, fill = 'Probability\nof presence') +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  # scale_fill_gradientn(colors = rev(c(palette[1], 'white', palette[7])),
+  #                      na.value = 'transparent',
+  #                      limits = c(-1, 1)) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
   geom_sf(data = delta_shp, fill = NA) +
   theme_minimal() +
   theme(axis.text = element_blank(),
@@ -115,16 +132,21 @@ change2_fall = list.files('GIS/change_rasters/waterbird_fall/scenario2_perennial
                           '.tif$', full.names = TRUE) %>% rast() %>%
   as.data.frame(xy = TRUE) %>%
   pivot_longer(!x:y, names_to = 'spp') %>%
-  left_join(spp_key, by = 'spp')
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
 
 showtext_auto()
 showtext_opts(dpi = 300)
 ggplot(change2_fall) + facet_wrap(~label, ncol = 3) +
-  geom_raster(aes(x, y, fill = value)) +
-  scale_fill_gradientn(colors = rev(c(palette[1], 'white', palette[7])),
-                       na.value = 'transparent',
-                       limits = c(-1, 1)) +
-  labs(x = NULL, y = NULL, fill = 'Probability\nof presence') +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  # scale_fill_gradientn(colors = rev(c(palette[1], 'white', palette[7])),
+  #                      na.value = 'transparent',
+  #                      limits = c(-1, 1)) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
   geom_sf(data = delta_shp, fill = NA) +
   theme_minimal() +
   theme(axis.text = element_blank(),
@@ -146,16 +168,21 @@ change1_win = list.files('GIS/change_rasters/waterbird_win/scenario1_restoration
                          '.tif$', full.names = TRUE) %>% rast() %>%
   as.data.frame(xy = TRUE) %>%
   pivot_longer(!x:y, names_to = 'spp') %>%
-  left_join(spp_key, by = 'spp')
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
 
 showtext_auto()
 showtext_opts(dpi = 300)
 ggplot(change1_win) + facet_wrap(~label, ncol = 3) +
-  geom_raster(aes(x, y, fill = value)) +
-  scale_fill_gradientn(colors = rev(c(palette[1], 'white', palette[7])),
-                       na.value = 'transparent',
-                       limits = c(-1, 1)) +
-  labs(x = NULL, y = NULL, fill = 'Probability\nof presence') +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  # scale_fill_gradientn(colors = rev(c(palette[1], 'white', palette[7])),
+  #                      na.value = 'transparent',
+  #                      limits = c(-1, 1)) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
   geom_sf(data = delta_shp, fill = NA) +
   theme_minimal() +
   theme(axis.text = element_blank(),
@@ -175,16 +202,21 @@ change2_win = list.files('GIS/change_rasters/waterbird_win/scenario2_perennialex
                           '.tif$', full.names = TRUE) %>% rast() %>%
   as.data.frame(xy = TRUE) %>%
   pivot_longer(!x:y, names_to = 'spp') %>%
-  left_join(spp_key, by = 'spp')
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
 
 showtext_auto()
 showtext_opts(dpi = 300)
 ggplot(change2_win) + facet_wrap(~label, ncol = 3) +
-  geom_raster(aes(x, y, fill = value)) +
-  scale_fill_gradientn(colors = rev(c(palette[1], 'white', palette[7])),
-                       na.value = 'transparent',
-                       limits = c(-1, 1)) +
-  labs(x = NULL, y = NULL, fill = 'Probability\nof presence') +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  # scale_fill_gradientn(colors = rev(c(palette[1], 'white', palette[7])),
+  #                      na.value = 'transparent',
+  #                      limits = c(-1, 1)) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
   geom_sf(data = delta_shp, fill = NA) +
   theme_minimal() +
   theme(axis.text = element_blank(),
