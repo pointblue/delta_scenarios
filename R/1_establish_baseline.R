@@ -86,7 +86,7 @@ writeRaster(veg_raster, 'GIS/landscape_rasters/veg_baseline_core.tif',
             overwrite = TRUE)
 
 ## NASS------
-# fill in rest of 10k buffer with NASS raster from 2014
+# fill in rest of 10k buffer with NASS raster from 2018
 # (same as used in waterbird study)
 NASS18 = rast('GIS/original_source_data/CDL/CDL_2018_clip_20211108202757_1802460488.tif') %>%
   crop(template) %>% mask(template) %>%
