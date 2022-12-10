@@ -545,3 +545,294 @@ purrr::map(names(scenarios)[which(grepl('win', names(scenarios)))],
              landscape_name = .x,
              stat = 'equal_sens_spec',
              pathout = 'GIS/prediction_rasters_threshold/waterbird_win'))
+
+# CALCULATE CHANGE MAPS--------
+
+## RIPARIAN-----
+pred_rip_binary = list(
+  'baseline' = list.files('GIS/prediction_rasters_threshold/riparian/baseline', '.tif',
+                          full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario1' = list.files('GIS/prediction_rasters_threshold/riparian/scenario1_restoration/', '.tif',
+                           full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario2' = list.files('GIS/prediction_rasters_threshold/riparian/scenario2_perennialexpand/', '.tif',
+                           full.names = TRUE, recursive = TRUE) %>% rast()
+)
+change1_rip = purrr::map(
+  names(pred_rip_binary$baseline),
+  ~diff(c(pred_rip_binary$baseline[[.x]],
+          pred_rip_binary$scenario1[[.x]]))) %>%
+  setNames(names(pred_rip_binary$baseline)) %>%
+  rast()
+writeRaster(change1_rip,
+            file.path('GIS/change_rasters/riparian/scenario1_restoration',
+                      paste0(names(change1_rip), '.tif')),
+            overwrite = TRUE)
+
+change2_rip = purrr::map(
+  names(pred_rip_binary$baseline),
+  ~diff(c(pred_rip_binary$baseline[[.x]],
+          pred_rip_binary$scenario2[[.x]]))) %>%
+  setNames(names(pred_rip_binary$baseline)) %>%
+  rast()
+writeRaster(change2_rip,
+            file.path('GIS/change_rasters/riparian/scenario2_perennialexpand',
+                      paste0(names(change2_rip), '.tif')),
+            overwrite = TRUE)
+
+## WATERBIRDS FALL---------
+pred_fall_binary = list(
+  'baseline' = list.files('GIS/prediction_rasters_threshold/waterbird_fall/baseline', '.tif',
+                          full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario1' = list.files('GIS/prediction_rasters_threshold/waterbird_fall/scenario1_restoration/', '.tif',
+                           full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario2' = list.files('GIS/prediction_rasters_threshold/waterbird_fall/scenario2_perennialexpand/', '.tif',
+                           full.names = TRUE, recursive = TRUE) %>% rast()
+)
+
+change1_fall = purrr::map(
+  names(pred_fall_binary$baseline),
+  ~diff(c(pred_fall_binary$baseline[[.x]],
+          pred_fall_binary$scenario1[[.x]]))) %>%
+  setNames(names(pred_fall_binary$baseline)) %>%
+  rast()
+writeRaster(change1_fall,
+            file.path('GIS/change_rasters/waterbird_fall/scenario1_restoration',
+                      paste0(names(change1_fall), '.tif')),
+            overwrite = TRUE)
+
+change2_fall = purrr::map(
+  names(pred_fall_binary$baseline),
+  ~diff(c(pred_fall_binary$baseline[[.x]],
+          pred_fall_binary$scenario2[[.x]]))) %>%
+  setNames(names(pred_fall_binary$baseline)) %>%
+  rast()
+writeRaster(change2_fall,
+            file.path('GIS/change_rasters/waterbird_fall/scenario2_perennialexpand',
+                      paste0(names(change2_fall), '.tif')),
+            overwrite = TRUE)
+
+
+## WATERBIRDS WINTER-------
+pred_win_binary = list(
+  'baseline' = list.files('GIS/prediction_rasters_threshold/waterbird_win/baseline_win', '.tif',
+                          full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario1' = list.files('GIS/prediction_rasters_threshold/waterbird_win/scenario1_restoration_win', '.tif',
+                           full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario2' = list.files('GIS/prediction_rasters_threshold/waterbird_win/scenario2_perennialexpand_win', '.tif',
+                           full.names = TRUE, recursive = TRUE) %>% rast()
+)
+
+change1_win = purrr::map(
+  names(pred_win_binary$baseline),
+  ~diff(c(pred_win_binary$baseline[[.x]],
+          pred_win_binary$scenario1[[.x]]))) %>%
+  setNames(names(pred_win_binary$baseline)) %>%
+  rast()
+writeRaster(change1_win,
+            file.path('GIS/change_rasters/waterbird_win/scenario1_restoration',
+                      paste0(names(change1_win), '.tif')),
+            overwrite = TRUE)
+
+change2_win = purrr::map(
+  names(pred_win_binary$baseline),
+  ~diff(c(pred_win_binary$baseline[[.x]],
+          pred_win_binary$scenario2[[.x]]))) %>%
+  setNames(names(pred_win_binary$baseline)) %>%
+  rast()
+writeRaster(change2_win,
+            file.path('GIS/change_rasters/waterbird_win/scenario2_perennialexpand',
+                      paste0(names(change2_win), '.tif')),
+            overwrite = TRUE)
+
+
+# PLOT CHANGE MAPS---------
+spp_key = read_csv('output/TABLE_species_key.csv')
+
+delta_shp = read_sf('GIS/boundaries/Legal_Delta_Boundary.shp') %>%
+  st_transform(crs = st_crs(32610))
+palette = c("#2b83ba", "#80bfab", "#c7e8ad", "#ffffbf", "#fdc980", "#f07c4a",
+            "#d7191c")
+
+library(showtext)
+font_add_google('Source Sans Pro', 'sourcesans')
+
+## riparian-------
+change1_rip = list.files('GIS/change_rasters/riparian/scenario1_restoration/',
+                         '.tif$', full.names = TRUE) %>% rast() %>%
+  as.data.frame(xy = TRUE) %>%
+  pivot_longer(!x:y, names_to = 'spp') %>%
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
+
+showtext_auto()
+showtext_opts(dpi = 300)
+ggplot(change1_rip) + facet_wrap(~label, ncol = 5) +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
+  geom_sf(data = delta_shp, fill = NA) +
+  theme_minimal() +
+  theme(axis.text = element_blank(),
+        panel.grid = element_blank(),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+        legend.title = element_text(family = 'sourcesans', size = 10),
+        legend.text = element_text(family = 'sourcesans', size = 9),
+        legend.position = c(1, 0),
+        legend.justification = c(1, 0),
+        plot.margin = margin(2, 2, 2, 2, unit = 'pt'),
+        panel.spacing = unit(3, 'pt'))
+ggsave('fig/changemap_scenario1_riparian.png', height = 7, width = 10)
+showtext_auto(F)
+
+change2_rip = list.files('GIS/change_rasters/riparian/scenario2_perennialexpand/',
+                         '.tif$', full.names = TRUE) %>% rast() %>%
+  as.data.frame(xy = TRUE) %>%
+  pivot_longer(!x:y, names_to = 'spp') %>%
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
+
+showtext_auto()
+showtext_opts(dpi = 300)
+ggplot(change2_rip) + facet_wrap(~label, ncol = 5) +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
+  geom_sf(data = delta_shp, fill = NA) +
+  theme_minimal() +
+  theme(axis.text = element_blank(),
+        panel.grid = element_blank(),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+        legend.title = element_text(family = 'sourcesans', size = 10),
+        legend.text = element_text(family = 'sourcesans', size = 9),
+        legend.position = c(1, 0),
+        legend.justification = c(1, 0),
+        plot.margin = margin(2, 2, 2, 2, unit = 'pt'),
+        panel.spacing = unit(3, 'pt'))
+ggsave('fig/changemap_scenario2_riparian.png', height = 7, width = 10)
+showtext_auto(F)
+
+## waterbird_fall-----------
+
+change1_fall = list.files('GIS/change_rasters/waterbird_fall/scenario1_restoration/',
+                          '.tif$', full.names = TRUE) %>% rast() %>%
+  as.data.frame(xy = TRUE) %>%
+  pivot_longer(!x:y, names_to = 'spp') %>%
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
+
+showtext_auto()
+showtext_opts(dpi = 300)
+ggplot(change1_fall) + facet_wrap(~label, ncol = 3) +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
+  geom_sf(data = delta_shp, fill = NA) +
+  theme_minimal() +
+  theme(axis.text = element_blank(),
+        panel.grid = element_blank(),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+        legend.title = element_text(family = 'sourcesans', size = 10),
+        legend.text = element_text(family = 'sourcesans', size = 9),
+        legend.position = 'right',
+        plot.margin = margin(2, 2, 2, 2, unit = 'pt'),
+        panel.spacing = unit(3, 'pt'))
+ggsave('fig/changemap_scenario1_waterbirds_fall.png', height = 7, width = 7)
+showtext_auto(F)
+
+change2_fall = list.files('GIS/change_rasters/waterbird_fall/scenario2_perennialexpand/',
+                          '.tif$', full.names = TRUE) %>% rast() %>%
+  as.data.frame(xy = TRUE) %>%
+  pivot_longer(!x:y, names_to = 'spp') %>%
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
+
+showtext_auto()
+showtext_opts(dpi = 300)
+ggplot(change2_fall) + facet_wrap(~label, ncol = 3) +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
+  geom_sf(data = delta_shp, fill = NA) +
+  theme_minimal() +
+  theme(axis.text = element_blank(),
+        panel.grid = element_blank(),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+        legend.title = element_text(family = 'sourcesans', size = 10),
+        legend.text = element_text(family = 'sourcesans', size = 9),
+        legend.position = 'right',
+        plot.margin = margin(2, 2, 2, 2, unit = 'pt'),
+        panel.spacing = unit(3, 'pt'))
+ggsave('fig/changemap_scenario2_waterbirds_fall.png', height = 7, width = 7)
+showtext_auto(F)
+
+## waterbird_winter-----------
+
+change1_win = list.files('GIS/change_rasters/waterbird_win/scenario1_restoration/',
+                         '.tif$', full.names = TRUE) %>% rast() %>%
+  as.data.frame(xy = TRUE) %>%
+  pivot_longer(!x:y, names_to = 'spp') %>%
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
+
+showtext_auto()
+showtext_opts(dpi = 300)
+ggplot(change1_win) + facet_wrap(~label, ncol = 3) +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
+  geom_sf(data = delta_shp, fill = NA) +
+  theme_minimal() +
+  theme(axis.text = element_blank(),
+        panel.grid = element_blank(),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+        legend.title = element_text(family = 'sourcesans', size = 10),
+        legend.text = element_text(family = 'sourcesans', size = 9),
+        legend.position = 'right',
+        plot.margin = margin(2, 2, 2, 2, unit = 'pt'),
+        panel.spacing = unit(3, 'pt'))
+ggsave('fig/changemap_scenario1_waterbirds_winter.png', height = 7, width = 7)
+showtext_auto(F)
+
+change2_win = list.files('GIS/change_rasters/waterbird_win/scenario2_perennialexpand/',
+                         '.tif$', full.names = TRUE) %>% rast() %>%
+  as.data.frame(xy = TRUE) %>%
+  pivot_longer(!x:y, names_to = 'spp') %>%
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
+
+showtext_auto()
+showtext_opts(dpi = 300)
+ggplot(change2_win) + facet_wrap(~label, ncol = 3) +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
+  geom_sf(data = delta_shp, fill = NA) +
+  theme_minimal() +
+  theme(axis.text = element_blank(),
+        panel.grid = element_blank(),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+        legend.title = element_text(family = 'sourcesans', size = 10),
+        legend.text = element_text(family = 'sourcesans', size = 9),
+        legend.position = 'right',
+        plot.margin = margin(2, 2, 2, 2, unit = 'pt'),
+        panel.spacing = unit(3, 'pt'))
+ggsave('fig/changemap_scenario2_waterbirds_winter.png', height = 7, width = 7)
+showtext_auto(F)
