@@ -1,6 +1,5 @@
-# ECONOMIC METRICS
-# includes both benefits to landowners (crop production values) and to workers
-# (ag jobs and wages)
+# AGRICULTURAL LIVELIHOODS
+# includes both gross crop production value and ag jobs and wages
 
 # PACKAGES & FUNCTIONS
 source('R/0_packages.R')

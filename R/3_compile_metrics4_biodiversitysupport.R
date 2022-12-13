@@ -1,3 +1,7 @@
+# BIODIVERSITY SUPPORT
+# species distribution models developed in prior analysis for riparian landbirds
+# and waterbird groups
+
 # All distribution models related the probability of species presence to the
 # extent and configuration of land covers in the surrounding landscape, as well
 # as additional taxon- or guild-specific predictors. To apply these models to

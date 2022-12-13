@@ -1,11 +1,6 @@
-# CLIMATE CHANGE SENSITIVITY INDICES
-# including expert opinion rankings for climate change sensitivity from MBCP
-# multiple benefits synthesis report (including management rigidity, drought,
-# flood intolerance, temperature) and salt tolerance (from Delta Adapts)
-
-# [also have rankings for climate change exposure (including pest & disease
-# impacts, market volatility/pollution, land use/land cover change, and capacity
-# gap) - but these are more generic/less specific to the Delta]
+# CLIMATE CHANGE RESILIENCE
+# qualitative indices for sensitivity/resilience to flood, drought, heat
+# also considering salinity
 
 # PACKAGES & FUNCTIONS
 source('R/0_packages.R')

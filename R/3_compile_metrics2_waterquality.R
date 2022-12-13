@@ -1,5 +1,5 @@
-# PESTICIDE METRICS
-# part of HEALTHY ENVIRONMENT metrics
+# WATER QUALITY
+# pesticide application rates as indicator of risk to water quality
 #
 # concerns for both human exposure and aquatic environment/biodiversity,
 # although note that many pesticides enter the Delta from farther upstream
