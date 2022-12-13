@@ -73,7 +73,8 @@ cropdat_sum = cropdat_classify %>%
 write_csv(cropdat_sum, 'data_orig/cropdat_summary.csv')
 
 ## calculate average production value------
-# $1000 per ha of each land cover class and subclass, averaged over all 5 years
+# USD per ha of each land cover class and subclass per year, averaged over all 5
+# years
 
 ## by subclass:
 cropdat_subclass = cropdat_sum %>%
@@ -81,16 +82,16 @@ cropdat_subclass = cropdat_sum %>%
   mutate(harvest_ha = harvest_ac / 2.47105,
          value_ha = value / harvest_ha) %>%
   group_by(CODE_NAME, SUBCLASS) %>%
-  #average over all years (and convert from thousands to millions)
-  summarize(SCORE_MEAN = mean(value_ha, na.rm = TRUE) / 1000,
-            SCORE_SE = sd(value_ha, na.rm = TRUE)/sqrt(length(!is.na(value_ha))) / 1000,
-            SCORE_MIN = min(value_ha, na.rm = TRUE) / 1000,
-            SCORE_MAX = max(value_ha, na.rm = TRUE) / 1000,
+  # average over all years
+  summarize(SCORE_MEAN = mean(value_ha, na.rm = TRUE),
+            SCORE_SE = sd(value_ha, na.rm = TRUE)/sqrt(length(!is.na(value_ha))),
+            SCORE_MIN = min(value_ha, na.rm = TRUE),
+            SCORE_MAX = max(value_ha, na.rm = TRUE),
             .groups = 'drop') %>%
   mutate(METRIC_CATEGORY = 'economy',
          METRIC_SUBTYPE = 'production value',
          METRIC = 'Gross Production Value',
-         UNIT = 'USD per ha per year (millions)') %>%
+         UNIT = 'USD per ha per year') %>%
   select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, SUBCLASS,
          SCORE_MEAN, SCORE_SE, SCORE_MIN, SCORE_MAX, UNIT)
 write_csv(cropdat_subclass, 'data/crop_production_value_subclass.csv')
@@ -102,17 +103,17 @@ cropdat_class = cropdat_sum %>%
   # calculate (weighted) average production value per acre per class
   mutate(harvest_ha = harvest_ac / 2.47105,
          value_ha = value / harvest_ha) %>%
-  #average over all years (and convert to millions)
+  # average over all years
   group_by(CODE_NAME) %>%
-  summarize(SCORE_MEAN = mean(value_ha) / 1000,
-            SCORE_SE = sd(value_ha, na.rm = TRUE)/sqrt(length(!is.na(value_ha))) / 1000,
-            SCORE_MIN = min(value_ha) / 1000,
-            SCORE_MAX = max(value_ha) / 1000,
+  summarize(SCORE_MEAN = mean(value_ha),
+            SCORE_SE = sd(value_ha, na.rm = TRUE)/sqrt(length(!is.na(value_ha))),
+            SCORE_MIN = min(value_ha),
+            SCORE_MAX = max(value_ha),
             .groups = 'drop') %>%
   mutate(METRIC_CATEGORY = 'economy',
          METRIC_SUBTYPE = 'production value',
          METRIC = 'Gross Production Value',
-         UNIT = 'USD per ha per year (millions)') %>%
+         UNIT = 'USD per ha per year') %>%
   select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, SCORE_MEAN,
          SCORE_SE, SCORE_MIN, SCORE_MAX, UNIT)
 
@@ -155,7 +156,7 @@ cropdat_class_fill %>%
     levels = cropdat_class_fill %>% arrange(SCORE_MEAN) %>% pull(CODE_NAME))) %>%
   ggplot(aes(SCORE_MEAN, CODE_NAME, xmin = SCORE_MEAN-SCORE_SE, xmax = SCORE_MEAN+SCORE_SE)) +
   geom_col() + geom_errorbar(width = 0) +
-  labs(x = 'value ($/ha, millions)', y = NULL)
+  labs(x = 'value ($/ha)', y = NULL)
 # highest gross production value in ORCHARD_DECIDUOUS, ROW, VINEYARD
 # ORCHARD_CITRUS&SUBTROPICAL
 
@@ -167,7 +168,7 @@ cropdat_subclass %>%
   ggplot(aes(SCORE_MEAN/1000, SUBCLASS, xmin = (SCORE_MEAN-SCORE_SE)/1000,
              xmax = (SCORE_MEAN+SCORE_SE)/1000)) +
   geom_col() + geom_errorbar(width = 0) +
-  labs(x = 'value ($/ha, millions)', y = NULL)
+  labs(x = 'value ($/ha, thousands)', y = NULL)
 # within these classes, highest rates for BUSH BERRIES and STRAWBERRIES
 
 
