@@ -492,15 +492,15 @@ edat_class_fill %>% select(METRIC, CODE_NAME, SCORE_MEAN) %>%
   mutate(CODE_NAME = factor(CODE_NAME, levels = key %>% pull(CODE_NAME))) %>%
   complete(CODE_NAME) %>% print(n = 40)
 
-# FINALIZE UNITS
-edat_class_final = edat_class_fill %>%
-  mutate(across(c(SCORE_MEAN, SCORE_SE, SCORE_MIN, SCORE_MAX),
-                ~if_else(METRIC == 'Agricultural Jobs', .x * 100, .x / 1000)),
-         UNIT = if_else(METRIC == 'Agricultural Jobs',
-                        'number of employees per 100ha',
-                        'annual dollars per employee (thousands)'))
+# # FINALIZE UNITS
+# edat_class_final = edat_class_fill %>%
+#   mutate(across(c(SCORE_MEAN, SCORE_SE, SCORE_MIN, SCORE_MAX),
+#                 ~if_else(METRIC == 'Agricultural Jobs', .x * 100, .x / 1000)),
+#          UNIT = if_else(METRIC == 'Agricultural Jobs',
+#                         'number of employees per 100ha',
+#                         'annual dollars per employee (thousands)'))
 
-write_csv(edat_class_final, 'data/livelihoods.csv')
+write_csv(edat_class_fill, 'data/livelihoods.csv')
 
 
 # summary plots:
