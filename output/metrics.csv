@@ -1,16 +1,16 @@
 METRIC_CATEGORY,METRIC,UNIT,CODE_NAME,LABEL,SCORE_MEAN,SCORE_SE
-Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,0.05098351830054537,0.007932300491896178
-Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,0.05098351830054537,0.007932300491896178
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,0.05098351830054537,0.00793230049189617
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,0.05098351830054537,0.00793230049189617
 Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,VINEYARD,Vineyard,0.02269056648746179,0.002259764552414
-Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,GRAIN&HAY_WHEAT,Wheat,0.001967880365152875,3.57258631427393e-4
-Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,GRAIN&HAY_OTHER,Other Grains,0.0039506997467660485,5.513717044380067e-4
-Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,FIELD_CORN,Corn,0.0024409219407038134,2.2833241654319982e-4
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,GRAIN&HAY_WHEAT,Wheat,0.00196788036515287,3.57258631427393e-4
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,GRAIN&HAY_OTHER,Other Grains,0.00395069974676604,5.513717044380068e-4
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,FIELD_CORN,Corn,0.00244092194070381,2.2833241654319984e-4
 Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,FIELD_OTHER,Other Field Crops,5.747606936795885e-4,7.40336150950513e-5
-Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,ROW,Row Crops,0.049696455553818734,0.0033294730163744304
-Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,RICE,Rice,0.014404298868204869,0.001806636370717224
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,ROW,Row Crops,0.04969645555381873,0.00332947301637443
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,RICE,Rice,0.01440429886820486,0.00180663637071722
 Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,IDLE,Idle,0,NA
-Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,PASTURE_ALFALFA,Alfalfa,0.006340739337371615,0.00062298051766420965
-Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,PASTURE_OTHER,Other Pasture,0.006340739337371615,0.00062298051766420965
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,PASTURE_ALFALFA,Alfalfa,0.0063407393373716104,6.229805176642e-4
+Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,PASTURE_OTHER,Other Pasture,0.0063407393373716104,6.229805176642e-4
 Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,GRASSLAND,Grassland,0,NA
 Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,URBAN,Urban,0,NA
 Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,RIPARIAN,Riparian,0,NA
@@ -30,68 +30,68 @@ Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,WATER,Water,0,NA
 Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,WOODLAND,Woodland,0,NA
 Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,SCRUB,Scrub,0,NA
 Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr,BARREN,Barren,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,36.50889484346645,0.9618956600014572
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,36.50889484346645,0.9618956600014572
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",VINEYARD,Vineyard,36.39096978233102,1.2559914721629224
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",GRAIN&HAY_WHEAT,Wheat,40.98530116550116,1.4748488412900669
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",GRAIN&HAY_OTHER,Other Grains,37.42158277591973,3.289852006688965
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",FIELD_CORN,Corn,37.39493255977689,1.4903331045427175
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",FIELD_OTHER,Other Field Crops,37.96504495614035,1.692413670145488
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",ROW,Row Crops,37.08176093191373,2.051770126373111
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RICE,Rice,39.0624739007644,2.01383613106825
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",IDLE,Idle,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",PASTURE_ALFALFA,Alfalfa,41.92507514821096,1.9689476498135667
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",PASTURE_OTHER,Other Pasture,41.92507514821096,1.9689476498135667
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",GRASSLAND,Grassland,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",URBAN,Urban,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN,Riparian,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN_FOREST_POFR,Riparian - Cottonwood,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN_FOREST_QULO,Riparian - Valley Oak,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN_FOREST_SALIX,Riparian - Willow,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",WETLAND_MANAGED,Managed Wetland,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",WETLAND_TIDAL,Tidal Wetland,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",WETLAND_OTHER,Other Wetland,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",WATER,Water,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",WOODLAND,Woodland,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",SCRUB,Scrub,0,NA
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands",BARREN,Barren,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,12.615897788431353,1.1104016915400174
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,7.066044346012426,0.5373536645776471
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",VINEYARD,Vineyard,10.950634344163827,0.3248047923189947
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",GRAIN&HAY_WHEAT,Wheat,1.1839350142764065,0.08603222577132909
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",GRAIN&HAY_OTHER,Other Grains,1.123179045711329,0.09524208243448472
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",FIELD_CORN,Corn,2.651030563544446,0.13152112949435424
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",FIELD_OTHER,Other Field Crops,2.9589192005010987,0.1207121793843009
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",ROW,Row Crops,12.317814252114289,0.4197179810584379
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RICE,Rice,3.8620398618464353,0.2173547939487749
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",IDLE,Idle,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",PASTURE_ALFALFA,Alfalfa,2.874550635573503,0.21293849227502393
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",PASTURE_OTHER,Other Pasture,0.6731033771752637,0.04203638167261972
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",GRASSLAND,Grassland,0.06035955750151726,0.00190468193323193
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",URBAN,Urban,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN,Riparian,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN_FOREST_POFR,Riparian - Cottonwood,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN_FOREST_QULO,Riparian - Valley Oak,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN_FOREST_SALIX,Riparian - Willow,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",WETLAND_MANAGED,Managed Wetland,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",WETLAND_TIDAL,Tidal Wetland,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",WETLAND_OTHER,Other Wetland,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",WATER,Water,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",WOODLAND,Woodland,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",SCRUB,Scrub,0,NA
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions",BARREN,Barren,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,36508.89484346645,961.8956600014571
+Agricultural Livelihoods,Annual Wages,USD/FTE,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,36508.89484346645,961.8956600014571
+Agricultural Livelihoods,Annual Wages,USD/FTE,VINEYARD,Vineyard,36390.96978233102,1255.9914721629225
+Agricultural Livelihoods,Annual Wages,USD/FTE,GRAIN&HAY_WHEAT,Wheat,40985.301165501165,1474.8488412900667
+Agricultural Livelihoods,Annual Wages,USD/FTE,GRAIN&HAY_OTHER,Other Grains,37421.58277591973,3289.852006688965
+Agricultural Livelihoods,Annual Wages,USD/FTE,FIELD_CORN,Corn,37394.93255977689,1490.3331045427178
+Agricultural Livelihoods,Annual Wages,USD/FTE,FIELD_OTHER,Other Field Crops,37965.04495614035,1692.413670145488
+Agricultural Livelihoods,Annual Wages,USD/FTE,ROW,Row Crops,37081.76093191373,2051.770126373111
+Agricultural Livelihoods,Annual Wages,USD/FTE,RICE,Rice,39062.4739007644,2013.83613106825
+Agricultural Livelihoods,Annual Wages,USD/FTE,IDLE,Idle,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,PASTURE_ALFALFA,Alfalfa,41925.075148210955,1968.9476498135668
+Agricultural Livelihoods,Annual Wages,USD/FTE,PASTURE_OTHER,Other Pasture,41925.075148210955,1968.9476498135668
+Agricultural Livelihoods,Annual Wages,USD/FTE,GRASSLAND,Grassland,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,URBAN,Urban,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,RIPARIAN,Riparian,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,RIPARIAN_FOREST_SALIX,Riparian - Willow,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,WETLAND_MANAGED,Managed Wetland,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,WETLAND_TIDAL,Tidal Wetland,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,WETLAND_OTHER,Other Wetland,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,WATER,Water,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,WOODLAND,Woodland,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,SCRUB,Scrub,0,NA
+Agricultural Livelihoods,Annual Wages,USD/FTE,BARREN,Barren,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,12615.897788431352,1110.4016915400175
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,7066.044346012425,537.3536645776471
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,VINEYARD,Vineyard,10950.634344163827,324.80479231899466
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,GRAIN&HAY_WHEAT,Wheat,1183.9350142764065,86.03222577132908
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,GRAIN&HAY_OTHER,Other Grains,1123.179045711329,95.24208243448471
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,FIELD_CORN,Corn,2651.030563544446,131.52112949435423
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,FIELD_OTHER,Other Field Crops,2958.9192005010987,120.7121793843009
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,ROW,Row Crops,12317.814252114287,419.7179810584379
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,RICE,Rice,3862.039861846435,217.3547939487749
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,IDLE,Idle,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,PASTURE_ALFALFA,Alfalfa,2874.550635573503,212.93849227502392
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,PASTURE_OTHER,Other Pasture,673.1033771752637,42.03638167261972
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,GRASSLAND,Grassland,60.359557501517266,1.904681933231936
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,URBAN,Urban,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,RIPARIAN,Riparian,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,RIPARIAN_FOREST_SALIX,Riparian - Willow,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,WETLAND_MANAGED,Managed Wetland,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,WETLAND_TIDAL,Tidal Wetland,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,WETLAND_OTHER,Other Wetland,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,WATER,Water,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,WOODLAND,Woodland,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,SCRUB,Scrub,0,NA
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr,BARREN,Barren,0,NA
 Climate Change Resilience,Drought,"qualitative score, 1-10",ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,1.9,0.2
 Climate Change Resilience,Drought,"qualitative score, 1-10",ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,2.625,0.2630521404045756
 Climate Change Resilience,Drought,"qualitative score, 1-10",VINEYARD,Vineyard,4.888888888888889,0.30932024237944566

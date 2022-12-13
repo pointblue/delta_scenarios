@@ -1,7 +1,7 @@
 METRIC_CATEGORY,METRIC,UNIT
 Agricultural Livelihoods,Agricultural Jobs,FTE/ha/yr
-Agricultural Livelihoods,Annual Wages,"USD/FTE, thousands"
-Agricultural Livelihoods,Gross Production Value,"USD/ha/yr, millions"
+Agricultural Livelihoods,Annual Wages,USD/FTE
+Agricultural Livelihoods,Gross Production Value,USD/ha/yr
 Climate Change Resilience,Drought,"qualitative score, 1-10"
 Climate Change Resilience,Flood,"qualitative score, 1-10"
 Climate Change Resilience,Heat,"qualitative score, 1-10"

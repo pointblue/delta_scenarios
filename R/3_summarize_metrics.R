@@ -27,12 +27,7 @@ waterquality = read_csv('data/pesticide_exposure.csv', col_types = cols()) %>%
 
 economy = bind_rows(
   read_csv('data/crop_production_value.csv', col_types = cols()),
-  read_csv('data/livelihoods.csv', col_types = cols())) %>%
-  #change jobs metrics back to jobs/ha for easier landscape calculations
-  mutate(across(c(SCORE_MEAN, SCORE_SE, SCORE_MIN, SCORE_MAX),
-                ~if_else(METRIC == 'Agricultural Jobs', .x/100, .x)),
-         UNIT = recode(UNIT,
-                       'number of employees per 100ha' = 'employees per ha'))
+  read_csv('data/livelihoods.csv', col_types = cols()))
 
 ccs = read_csv('data/climate_change_resilience.csv', col_types = cols()) %>%
   filter(METRIC %in% c('Heat', 'Drought', 'Flood'))
@@ -52,9 +47,9 @@ metrics = bind_rows(economy, waterquality, ccs) %>%
       biodiversity = 'Biodiversity Support'),
     UNIT = recode(
       UNIT,
-      'employees per ha' = 'FTE/ha/yr',
-      'annual dollars per employee (thousands)' = 'USD/FTE, thousands',
-      'USD per ha per year (millions)' = 'USD/ha/yr, millions',
+      'number of employees per ha' = 'FTE/ha/yr',
+      'annual dollars per employee' = 'USD/FTE',
+      'USD per ha per year' = 'USD/ha/yr',
       'kg per ha' = 'kg/ha/yr',
       'ranking' = 'qualitative score, 1-10')) %>%
   arrange(METRIC_CATEGORY, METRIC, CODE_NAME) %>%
@@ -73,10 +68,13 @@ metrics_format = metrics %>%
   filter(LABEL %in% label.order) %>%
   mutate(LABEL = factor(LABEL, levels = label.order)) %>%
   arrange(LABEL) %>%
-  # for the readability of this table, convert Ag Jobs units
+  # for the readability of this table, convert Ag Jobs units to FTE/100ha,
+  # Annual wages to USD thousands
   mutate(across(c(SCORE_MEAN, SCORE_SE),
-                ~if_else(METRIC == 'Agricultural Jobs',
-                         .x*100, .x)))
+                ~case_when(METRIC == 'Agricultural Jobs' ~ .x*100,
+                           METRIC == 'Annual Wages' ~ .x/1000,
+                           METRIC == 'Gross Production Value' ~ .x/1000,
+                           TRUE ~ .x)))
 
 metrics_table = metrics_format %>%
   mutate(SCORE_MEAN = paste0("'", round(SCORE_MEAN, digits = 2) %>%
@@ -89,8 +87,7 @@ metrics_table = metrics_format %>%
   select(LABEL,
          contains('Jobs'), contains('Wages'), contains('Gross'),
          contains('Critical'), contains('Groundwater'), contains('Aquatic'),
-         contains('Drought'), contains('Flood'), contains('Heat'),
-         contains('Salinity'))
+         contains('Drought'), contains('Flood'), contains('Heat'))
 write_csv(metrics_table, 'output/TABLE_metrics_summary.csv')
 
 
@@ -107,9 +104,11 @@ metrics %>%
            LABEL %in% label.order) %>%
   mutate(LABEL = factor(LABEL, levels = rev(label.order))) %>%
   select(LABEL, CODE_NAME, METRIC, SCORE_MEAN, SCORE_SE) %>%
-  # for plotting purposes, convert to ag jobs/100 ha
+  # for plotting purposes, convert to ag jobs/100 ha, wages and production value
+  # in thousands
   mutate(across(c(SCORE_MEAN, SCORE_SE),
-                ~if_else(METRIC == 'Agricultural Jobs', .x*100, .x))) %>%
+                ~case_when(METRIC == 'Agricultural Jobs' ~ .x*100,
+                           TRUE ~ .x/1000))) %>%
   ggplot(aes(SCORE_MEAN, LABEL)) +
   geom_col(fill = pointblue.palette[4]) +
   geom_errorbar(aes(xmin = SCORE_MEAN - SCORE_SE,
@@ -121,7 +120,7 @@ metrics %>%
       METRIC = c(
         `Agricultural Jobs` = 'Agricultural Jobs\n(FTE / 100 ha)',
         `Annual Wages` = 'Annual Wages\n(USD, thousands)',
-        `Gross Production Value` = 'Gross Crop Production Value\n(USD / ha, millions)'))) +
+        `Gross Production Value` = 'Gross Crop Production Value\n(USD / ha, thousands)'))) +
   labs(x = NULL, y = NULL) +
   theme_bw() +
   theme(axis.text = element_text(family = 'sourcesans', size = 10),
@@ -143,7 +142,7 @@ metrics %>%
                 width = 0.5) +
   facet_wrap(~METRIC, scale = 'free_x') +
   # scale_fill_gradient(low = palette[5], high = palette[7]) +
-  labs(x = 'Pesticide application rate (lbs/ha/yr)', y = NULL) +
+  labs(x = 'Pesticide application rate (kg/ha/yr)', y = NULL) +
   theme_bw() +
   theme(axis.text = element_text(family = 'sourcesans', size = 10),
         axis.title = element_text(family = 'sourcesans', size = 11),
@@ -181,10 +180,12 @@ ggsave('fig/metrics_climate.png', height = 4, width = 8)
 metrics_example = read_csv('output/metrics.csv') %>%
   filter(LABEL == 'Vineyard') %>%
   mutate(
-    # rescale to match units from netchange
+    #rescale to match units from netchange
     across(c(SCORE_MEAN, SCORE_SE),
            ~case_when(
              METRIC == 'Agricultural Jobs' ~ .*1000, #per ha to per 1000 ha
+             METRIC == 'Annual Wages' ~ ./1000,
+             METRIC == 'Gross Production Value' ~ ./1000,
              TRUE ~ .)),
     METRIC = factor(
       METRIC,
@@ -196,8 +197,8 @@ metrics_example = read_csv('output/metrics.csv') %>%
     METRIC = recode(
       METRIC,
       'Agricultural Jobs' = 'Agricultural Jobs\n(FTE per 1000 ha)',
-      'Annual Wages' = 'Annual Wages\n(USD, thousands)',
-      'Gross Production Value' = 'Gross Production Value\n(USD, billions)',
+      'Annual Wages' = 'Annual Wages\n(USD per FTE, thousands)',
+      'Gross Production Value' = 'Gross Production Value\n(USD per ha, thousands)',
       'Critical Pesticides' = 'Critical\nPesticides',
       'Groundwater Contaminant' = 'Groundwater\nContaminants',
       'Risk to Aquatic Organisms' = 'Risk to Aquatic\nOrganisms'))
@@ -256,6 +257,7 @@ c = metrics_example %>%
         panel.grid = element_blank(),
         legend.position = 'none')
 
+library(patchwork)
 showtext_auto()
 showtext_opts(dpi = 300) #default for ggsave
 a + b + c + plot_layout(nrow = 2, byrow = FALSE)
