@@ -840,3 +840,27 @@ ggplot(change2_win) + facet_wrap(~label, ncol = 3) +
         panel.spacing = unit(3, 'pt'))
 ggsave('fig/changemap_scenario2_waterbirds_winter.png', height = 7, width = 7)
 showtext_auto(F)
+
+# SUMMARIZE TOTAL HABITAT---------
+# total suitable habitat for each landscape, predicted from SDMs
+
+## probability of presence:
+habitat = DeltaMultipleBenefits::sum_habitat(
+  pathin = 'GIS/prediction_rasters',
+  subtype = 'distributions',
+  rollup = TRUE,
+  keypath = 'output/TABLE_species_key.csv',
+  scale = 0.09) %>%
+  mutate(UNIT = 'ha')
+write_csv(habitat, 'output/scenario_habitat.csv')
+
+
+## binary presence/absence (using thresholds):
+habitat_binary = DeltaMultipleBenefits::sum_habitat(
+  pathin = 'GIS/prediction_rasters_threshold',
+  subtype = 'habitat',
+  rollup = TRUE,
+  keypath = 'output/TABLE_species_key.csv',
+  scale = 0.09) %>%
+  mutate(UNIT = 'ha')
+write_csv(habitat_binary, 'output/scenario_habitat_binary.csv')
