@@ -346,21 +346,26 @@ netchange = read_csv('output/netchange_scores.csv', col_types = cols()) %>%
     across(c(BASELINE, BASELINE_SE, SCENARIO, SCENARIO_SE, net_change, net_change_se),
            ~case_when(
              METRIC_CATEGORY == 'Water Quality' ~ ./1000, #kg to MT
-             METRIC == 'Annual Wages' ~ .*1000, #thousands to dollars
-             METRIC == 'Gross Production Value' ~ ./1000, #millions to billions
+             # METRIC == 'Annual Wages' ~ .*1000, #thousands to dollars
+             METRIC == 'Gross Production Value' ~ ./1000/1000, #USD to thousands to millions
              TRUE ~ .)),
-    net_change_se = if_else(METRIC == 'Salinity', NA_real_, net_change_se),
     METRIC_CATEGORY = factor(METRIC_CATEGORY, levels = categorylist),
     METRIC = factor(METRIC, levels = rev(metriclist)),
     # clarify metric labels
     METRIC = recode(
       METRIC,
-      'Agricultural Jobs' = 'Agricultural Jobs (FTE)',
-      'Annual Wages' = 'Annual Wages (USD)',
-      'Gross Production Value' = 'Gross Production Value (USD, billions)',
-      Total = 'Riparian landbird habitat',
-      `Total (fall)` = 'Waterbird habitat (fall)',
-      `Total (winter)` = 'Waterbird habitat (winter)'),
+      'Agricultural Jobs' = 'Agricultural Jobs (FTE/yr)',
+      'Annual Wages' = 'Annual Wages (USD/FTE)',
+      'Gross Production Value' = 'Gross Production Value (USD/yr, millions)',
+      'Critical Pesticides' = 'Critical Pesticides (MT/yr)',
+      'Groundwater Contaminant' = 'Groundwater Contaminants (MT/yr)',
+      'Risk to Aquatic Organisms' = 'Risk to Aquatic Organisms (MT/yr)',
+      Drought = 'Drought (mean score)',
+      Flood = 'Flood (mean score)',
+      Heat = 'Heat (mean score)',
+      Total = 'Riparian landbird habitat (ha)',
+      `Total (fall)` = 'Waterbird habitat, fall (ha)',
+      `Total (winter)` = 'Waterbird habitat, winter (ha)'),
     # invert water quality scores
     net_change = if_else(METRIC_CATEGORY == 'Water Quality',
                          -1 * net_change, net_change),
