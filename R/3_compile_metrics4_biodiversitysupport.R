@@ -117,6 +117,8 @@ purrr::pmap(
   pathout = c('GIS/landscape_rasters/predictors_waterbird_fall',
               'GIS/landscape_rasters/predictors_waterbird_win'),
   maskpath = 'GIS/boundaries/delta.tif',
+  filename = 'droost_km.tif',
+  scale = 'km',
   overwrite = TRUE)
 
 
@@ -253,35 +255,18 @@ riparian = list(
   scenario1 = list.files('GIS/landscape_rasters/predictors_riparian/scenario1_restoration/',
                          '.tif$', full.names = TRUE) %>% rast(),
   scenario2 = list.files('GIS/landscape_rasters/predictors_riparian/scenario2_perennialexpand/',
+                         '.tif$', full.names = TRUE) %>% rast(),
+  scenario3 = list.files('GIS/landscape_rasters/predictors_riparian/scenario3_combo/',
                          '.tif$', full.names = TRUE) %>% rast())
 
-rip_stats =
-  bind_rows(
-    # baseline stats
-    global(riparian$baseline, 'mean', na.rm = TRUE) %>%
-      as_tibble(rownames = 'predictor') %>%
-      left_join(
-        global(riparian$baseline, 'range', na.rm = TRUE) %>%
-          as_tibble(rownames = 'predictor'),
-        by = 'predictor') %>%
-      mutate(landscape = 'baseline'),
-    # scenario 1
-    global(riparian$scenario1, 'mean', na.rm = TRUE) %>%
-      as_tibble(rownames = 'predictor') %>%
-      left_join(
-        global(riparian$scenario1, 'range', na.rm = TRUE) %>%
-          as_tibble(rownames = 'predictor'),
-        by = 'predictor') %>%
-      mutate(landscape = 'scenario1'),
-    #scenario 2
-    global(riparian$scenario2, 'mean', na.rm = TRUE) %>%
-      as_tibble(rownames = 'predictor') %>%
-      left_join(
-        global(riparian$scenario2, 'range', na.rm = TRUE) %>%
-          as_tibble(rownames = 'predictor'),
-        by = 'predictor') %>%
-      mutate(landscape = 'scenario2')) %>%
-  select(landscape, predictor, mean, min = range, max)
+rip_stats = purrr::map_df(
+  riparian,
+  ~full_join(
+    global(., 'mean', na.rm = TRUE) %>% as_tibble(rownames = 'predictor'),
+    global(., 'range', na.rm = TRUE) %>% as_tibble(rownames = 'predictor') %>%
+      purrr::set_names(c('predictor', 'min', 'max')),
+    by = 'predictor'),
+  .id = 'landscape')
 write_csv(rip_stats, 'output/predictor_summary_riparian.csv')
 
 rip_stats %>%
@@ -305,91 +290,66 @@ waterbird_fall = list(
   scenario1 = list.files('GIS/landscape_rasters/predictors_waterbird_fall/scenario1_restoration/',
                          '.tif$', full.names = TRUE) %>% rast(),
   scenario2 = list.files('GIS/landscape_rasters/predictors_waterbird_fall/scenario2_perennialexpand/',
+                         '.tif$', full.names = TRUE) %>% rast(),
+  scenario3 = list.files('GIS/landscape_rasters/predictors_waterbird_fall/scenario3_combo/',
                          '.tif$', full.names = TRUE) %>% rast())
 
-fall_stats =
-  bind_rows(
-    # baseline stats
-    global(waterbird_fall$baseline, 'mean', na.rm = TRUE) %>%
-      as_tibble(rownames = 'predictor') %>%
-      left_join(
-        global(waterbird_fall$baseline, 'range', na.rm = TRUE) %>%
-          as_tibble(rownames = 'predictor'),
-        by = 'predictor') %>%
-      mutate(landscape = 'baseline'),
-    # scenario 1
-    global(waterbird_fall$scenario1, 'mean', na.rm = TRUE) %>%
-      as_tibble(rownames = 'predictor') %>%
-      left_join(
-        global(waterbird_fall$scenario1, 'range', na.rm = TRUE) %>%
-          as_tibble(rownames = 'predictor'),
-        by = 'predictor') %>%
-      mutate(landscape = 'scenario1'),
-    #scenario 2
-    global(waterbird_fall$scenario2, 'mean', na.rm = TRUE) %>%
-      as_tibble(rownames = 'predictor') %>%
-      left_join(
-        global(waterbird_fall$scenario2, 'range', na.rm = TRUE) %>%
-          as_tibble(rownames = 'predictor'),
-        by = 'predictor') %>%
-      mutate(landscape = 'scenario2')) %>%
-  select(landscape, predictor, mean, min = range, max)
+fall_stats = purrr::map_df(
+  waterbird_fall,
+  ~full_join(
+    global(., 'mean', na.rm = TRUE) %>% as_tibble(rownames = 'predictor'),
+    global(., 'range', na.rm = TRUE) %>% as_tibble(rownames = 'predictor') %>%
+      purrr::set_names(c('predictor', 'min', 'max')),
+    by = 'predictor'),
+  .id = 'landscape')
 write_csv(fall_stats, 'output/predictor_summary_waterbird_fall.csv')
 
-fall_stats_plotformat = fall_stats %>%
-  filter(grepl('woodw|duwet|orch|droost', predictor)) %>%
-  filter(!grepl('pfld', predictor)) %>%
-  separate(predictor, into = c('predictor', 'unit', 'scale')) %>%
-  replace_na(replace = list(scale = ' ')) %>%
-  mutate(landscape = factor(landscape,
-                            levels = c('scenario2', 'scenario1', 'baseline'),
-                            labels = c('Scenario 2', 'Scenario 1', 'Baseline')),
-         predictor = factor(predictor,
-                            levels = c('duwet', 'woodw', 'orch', 'droost'),
-                            labels = c("Managed Wetlands (sq km)",
-                                       "Riparian (sq km)",
-                                       "Perennial Crops (sq km)",
-                                       "Distance to crane roost (km)")),
-         scale = factor(scale, levels = rev(c('2k', '5k', '10k', ' ')),
-                        labels = rev(c('2 km', '5 km', '10 km', ' '))),
-         across(c(mean, min, max),
-                ~if_else(scale == ' ', ., ./100)))
-
-# lbl = setNames(
-#   c('Distance to crane roost (km)',
-#     "'Managed Wetlands ('*km^2*')'",
-#     "'Perennial Crops ('*km^2*')'",
-#     "'Riparian ('*km^2*')'"),
-#   c('droost', 'duwet', 'orch', 'woodw')
-#   )[levels(fall_stats_plotformat$predictor)]
-
-library(showtext)
-font_add_google('Source Sans Pro', 'sourcesans')
-showtext_auto()
-showtext_opts(dpi = 300) #default for ggsave
-
-fall_stats_plotformat %>%
-  ggplot(aes(mean, scale, xmin = min, xmax = max)) +
-  ggforce::facet_col(~predictor, scales = 'free_y', space = 'free') +
-  # facet_wrap(~predictor, ncol = 1, scales = 'free', labeller = label_parsed) +
-  geom_pointrange(aes(color = landscape), fatten = 2,
-                  position = position_dodge(width = 0.5)) +
-  labs(x = NULL, y = NULL) +
-  xlim(0, NA) +
-  scale_color_manual(values = pointblue.palette[c(3:1)]) +
-  theme_minimal() +
-  theme(
-    # axis.line.x = element_line(color = 'gray30'),
-        axis.text = element_text(family = 'sourcesans', size = 9),
-        panel.grid.major.y = element_blank(),
-        plot.title = element_text(family = 'sourcesans', size = 10),
-        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
-        strip.background = element_blank(),
-        # legend.position = 'none'
-        )
-ggsave('fig/predictor_stats.jpg',
-       height = 6, width = 6.5, units = 'in', dpi = 300)
-showtext_auto(FALSE)
+# fall_stats_plotformat = fall_stats %>%
+#   filter(grepl('woodw|duwet|orch|droost', predictor)) %>%
+#   filter(!grepl('pfld', predictor)) %>%
+#   separate(predictor, into = c('predictor', 'unit', 'scale')) %>%
+#   replace_na(replace = list(scale = ' ')) %>%
+#   mutate(landscape = factor(landscape,
+#                             levels = c('scenario3', 'scenario2', 'scenario1', 'baseline'),
+#                             labels = c('Scenario 3', 'Scenario 2', 'Scenario 1', 'Baseline')),
+#          predictor = factor(predictor,
+#                             levels = c('duwet', 'woodw', 'orch', 'droost'),
+#                             labels = c("Managed Wetlands (sq km)",
+#                                        "Riparian (sq km)",
+#                                        "Perennial Crops (sq km)",
+#                                        "Distance to crane roost (km)")),
+#          scale = factor(scale, levels = rev(c('2k', '5k', '10k', ' ')),
+#                         labels = rev(c('2 km', '5 km', '10 km', ' '))),
+#          across(c(mean, min, max),
+#                 ~if_else(scale == ' ', ., ./100)))
+#
+# library(showtext)
+# font_add_google('Source Sans Pro', 'sourcesans')
+# showtext_auto()
+# showtext_opts(dpi = 300) #default for ggsave
+#
+# fall_stats_plotformat %>%
+#   ggplot(aes(mean, scale, xmin = min, xmax = max)) +
+#   ggforce::facet_col(~predictor, scales = 'free_y', space = 'free') +
+#   # facet_wrap(~predictor, ncol = 1, scales = 'free', labeller = label_parsed) +
+#   geom_pointrange(aes(color = landscape), fatten = 2,
+#                   position = position_dodge(width = 0.5)) +
+#   labs(x = NULL, y = NULL) +
+#   xlim(0, NA) +
+#   scale_color_manual(values = pointblue.palette[c(4:1)]) +
+#   theme_minimal() +
+#   theme(
+#     # axis.line.x = element_line(color = 'gray30'),
+#         axis.text = element_text(family = 'sourcesans', size = 9),
+#         panel.grid.major.y = element_blank(),
+#         plot.title = element_text(family = 'sourcesans', size = 10),
+#         strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+#         strip.background = element_blank(),
+#         # legend.position = 'none'
+#         )
+# ggsave('fig/predictor_stats.jpg',
+#        height = 6, width = 6.5, units = 'in', dpi = 300)
+# showtext_auto(FALSE)
 
 fall_stats %>%
   filter(grepl('woodw|duwet|orch|droost', predictor) & !(grepl('pfld', predictor))) %>%
@@ -404,41 +364,28 @@ fall_stats %>%
 
 ### waterbird_win-----
 waterbird_win = list(
-  baseline = list.files('GIS/landscape_rasters/predictors_waterbird_win/baseline/',
+  baseline = list.files('GIS/landscape_rasters/predictors_waterbird_win/baseline_win/',
                         '.tif$', full.names = TRUE) %>% rast(),
-  scenario1 = list.files('GIS/landscape_rasters/predictors_waterbird_win/scenario1_restoration/',
+  scenario1 = list.files('GIS/landscape_rasters/predictors_waterbird_win/scenario1_restoration_win/',
                          '.tif$', full.names = TRUE) %>% rast(),
-  scenario2 = list.files('GIS/landscape_rasters/predictors_waterbird_win/scenario2_perennialexpand/',
+  scenario2 = list.files('GIS/landscape_rasters/predictors_waterbird_win/scenario2_perennialexpand_win/',
+                         '.tif$', full.names = TRUE) %>% rast(),
+  scenario3 = list.files('GIS/landscape_rasters/predictors_waterbird_win/scenario3_combo_win/',
                          '.tif$', full.names = TRUE) %>% rast())
 
-win_stats =
-  bind_rows(
-    # baseline stats
-    global(waterbird_win$baseline, 'mean', na.rm = TRUE) %>%
-      as_tibble(rownames = 'predictor') %>%
-      left_join(
-        global(waterbird_win$baseline, 'range', na.rm = TRUE) %>%
-          as_tibble(rownames = 'predictor'),
-        by = 'predictor') %>%
-      mutate(landscape = 'baseline'),
-    # scenario 1
-    global(waterbird_win$scenario1, 'mean', na.rm = TRUE) %>%
-      as_tibble(rownames = 'predictor') %>%
-      left_join(
-        global(waterbird_win$scenario1, 'range', na.rm = TRUE) %>%
-          as_tibble(rownames = 'predictor'),
-        by = 'predictor') %>%
-      mutate(landscape = 'scenario1'),
-    #scenario 2
-    global(waterbird_win$scenario2, 'mean', na.rm = TRUE) %>%
-      as_tibble(rownames = 'predictor') %>%
-      left_join(
-        global(waterbird_win$scenario2, 'range', na.rm = TRUE) %>%
-          as_tibble(rownames = 'predictor'),
-        by = 'predictor') %>%
-      mutate(landscape = 'scenario2')) %>%
-  select(landscape, predictor, mean, min = range, max)
+win_stats = purrr::map_df(
+  waterbird_win,
+  ~full_join(
+    global(., 'mean', na.rm = TRUE) %>% as_tibble(rownames = 'predictor'),
+    global(., 'range', na.rm = TRUE) %>% as_tibble(rownames = 'predictor') %>%
+      purrr::set_names(c('predictor', 'min', 'max')),
+    by = 'predictor'),
+  .id = 'landscape')
 write_csv(win_stats, 'output/predictor_summary_waterbird_win.csv')
+
+rm(riparian, waterbird_fall, waterbird_win)
+rm(rip_stats, fall_stats, win_stats)
+
 
 # FIT MODELS--------
 # --> fit_SDMs function is designed to read in all predictors from the directory
@@ -559,6 +506,8 @@ pred_rip_binary = list(
   'scenario1' = list.files('GIS/prediction_rasters_threshold/riparian/scenario1_restoration/', '.tif',
                            full.names = TRUE, recursive = TRUE) %>% rast(),
   'scenario2' = list.files('GIS/prediction_rasters_threshold/riparian/scenario2_perennialexpand/', '.tif',
+                           full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario3' = list.files('GIS/prediction_rasters_threshold/riparian/scenario3_combo/', '.tif',
                            full.names = TRUE, recursive = TRUE) %>% rast()
 )
 change1_rip = purrr::map(
@@ -583,6 +532,17 @@ writeRaster(change2_rip,
                       paste0(names(change2_rip), '.tif')),
             overwrite = TRUE)
 
+change3_rip = purrr::map(
+  names(pred_rip_binary$baseline),
+  ~diff(c(pred_rip_binary$baseline[[.x]],
+          pred_rip_binary$scenario3[[.x]]))) %>%
+  setNames(names(pred_rip_binary$baseline)) %>%
+  rast()
+writeRaster(change3_rip,
+            file.path('GIS/change_rasters/riparian/scenario3_combo',
+                      paste0(names(change3_rip), '.tif')),
+            overwrite = TRUE)
+
 ## WATERBIRDS FALL---------
 pred_fall_binary = list(
   'baseline' = list.files('GIS/prediction_rasters_threshold/waterbird_fall/baseline', '.tif',
@@ -590,6 +550,8 @@ pred_fall_binary = list(
   'scenario1' = list.files('GIS/prediction_rasters_threshold/waterbird_fall/scenario1_restoration/', '.tif',
                            full.names = TRUE, recursive = TRUE) %>% rast(),
   'scenario2' = list.files('GIS/prediction_rasters_threshold/waterbird_fall/scenario2_perennialexpand/', '.tif',
+                           full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario3' = list.files('GIS/prediction_rasters_threshold/waterbird_fall/scenario3_combo/', '.tif',
                            full.names = TRUE, recursive = TRUE) %>% rast()
 )
 
@@ -615,6 +577,17 @@ writeRaster(change2_fall,
                       paste0(names(change2_fall), '.tif')),
             overwrite = TRUE)
 
+change3_fall = purrr::map(
+  names(pred_fall_binary$baseline),
+  ~diff(c(pred_fall_binary$baseline[[.x]],
+          pred_fall_binary$scenario3[[.x]]))) %>%
+  setNames(names(pred_fall_binary$baseline)) %>%
+  rast()
+writeRaster(change3_fall,
+            file.path('GIS/change_rasters/waterbird_fall/scenario3_combo',
+                      paste0(names(change3_fall), '.tif')),
+            overwrite = TRUE)
+
 
 ## WATERBIRDS WINTER-------
 pred_win_binary = list(
@@ -623,6 +596,8 @@ pred_win_binary = list(
   'scenario1' = list.files('GIS/prediction_rasters_threshold/waterbird_win/scenario1_restoration_win', '.tif',
                            full.names = TRUE, recursive = TRUE) %>% rast(),
   'scenario2' = list.files('GIS/prediction_rasters_threshold/waterbird_win/scenario2_perennialexpand_win', '.tif',
+                           full.names = TRUE, recursive = TRUE) %>% rast(),
+  'scenario3' = list.files('GIS/prediction_rasters_threshold/waterbird_win/scenario3_combo_win', '.tif',
                            full.names = TRUE, recursive = TRUE) %>% rast()
 )
 
@@ -648,6 +623,19 @@ writeRaster(change2_win,
                       paste0(names(change2_win), '.tif')),
             overwrite = TRUE)
 
+change3_win = purrr::map(
+  names(pred_win_binary$baseline),
+  ~diff(c(pred_win_binary$baseline[[.x]],
+          pred_win_binary$scenario3[[.x]]))) %>%
+  setNames(names(pred_win_binary$baseline)) %>%
+  rast()
+writeRaster(change3_win,
+            file.path('GIS/change_rasters/waterbird_win/scenario3_combo',
+                      paste0(names(change3_win), '.tif')),
+            overwrite = TRUE)
+
+rm(pred_rip_binary, pred_fall_binary, pred_win_binary)
+rm(change3_rip, change3_fall, change3_win)
 
 # PLOT CHANGE MAPS---------
 spp_key = read_csv('output/TABLE_species_key.csv')
@@ -721,6 +709,36 @@ ggplot(change2_rip) + facet_wrap(~label, ncol = 5) +
 ggsave('fig/changemap_scenario2_riparian.png', height = 7, width = 10)
 showtext_auto(F)
 
+change3_rip = list.files('GIS/change_rasters/riparian/scenario3_combo/',
+                         '.tif$', full.names = TRUE) %>% rast() %>%
+  as.data.frame(xy = TRUE) %>%
+  pivot_longer(!x:y, names_to = 'spp') %>%
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
+
+showtext_auto()
+showtext_opts(dpi = 300)
+ggplot(change3_rip) + facet_wrap(~label, ncol = 5) +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
+  geom_sf(data = delta_shp, fill = NA) +
+  theme_minimal() +
+  theme(axis.text = element_blank(),
+        panel.grid = element_blank(),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+        legend.title = element_text(family = 'sourcesans', size = 10),
+        legend.text = element_text(family = 'sourcesans', size = 9),
+        legend.position = c(1, 0),
+        legend.justification = c(1, 0),
+        plot.margin = margin(2, 2, 2, 2, unit = 'pt'),
+        panel.spacing = unit(3, 'pt'))
+ggsave('fig/changemap_scenario3_riparian.png', height = 7, width = 10)
+showtext_auto(F)
+
 ## waterbird_fall-----------
 
 change1_fall = list.files('GIS/change_rasters/waterbird_fall/scenario1_restoration/',
@@ -781,6 +799,35 @@ ggplot(change2_fall) + facet_wrap(~label, ncol = 3) +
 ggsave('fig/changemap_scenario2_waterbirds_fall.png', height = 7, width = 7)
 showtext_auto(F)
 
+change3_fall = list.files('GIS/change_rasters/waterbird_fall/scenario3_combo/',
+                          '.tif$', full.names = TRUE) %>% rast() %>%
+  as.data.frame(xy = TRUE) %>%
+  pivot_longer(!x:y, names_to = 'spp') %>%
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
+
+showtext_auto()
+showtext_opts(dpi = 300)
+ggplot(change3_fall) + facet_wrap(~label, ncol = 3) +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
+  geom_sf(data = delta_shp, fill = NA) +
+  theme_minimal() +
+  theme(axis.text = element_blank(),
+        panel.grid = element_blank(),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+        legend.title = element_text(family = 'sourcesans', size = 10),
+        legend.text = element_text(family = 'sourcesans', size = 9),
+        legend.position = 'right',
+        plot.margin = margin(2, 2, 2, 2, unit = 'pt'),
+        panel.spacing = unit(3, 'pt'))
+ggsave('fig/changemap_scenario3_waterbirds_fall.png', height = 7, width = 7)
+showtext_auto(F)
+
 ## waterbird_winter-----------
 
 change1_win = list.files('GIS/change_rasters/waterbird_win/scenario1_restoration/',
@@ -839,6 +886,35 @@ ggplot(change2_win) + facet_wrap(~label, ncol = 3) +
         plot.margin = margin(2, 2, 2, 2, unit = 'pt'),
         panel.spacing = unit(3, 'pt'))
 ggsave('fig/changemap_scenario2_waterbirds_winter.png', height = 7, width = 7)
+showtext_auto(F)
+
+change3_win = list.files('GIS/change_rasters/waterbird_win/scenario3_combo/',
+                         '.tif$', full.names = TRUE) %>% rast() %>%
+  as.data.frame(xy = TRUE) %>%
+  pivot_longer(!x:y, names_to = 'spp') %>%
+  filter(value != 0) %>%
+  left_join(spp_key, by = 'spp') %>%
+  mutate(value = factor(value, levels = c(-1, 1),
+                        labels = c('loss', 'gain')),
+         label = factor(label, levels = spp_key$label))
+
+showtext_auto()
+showtext_opts(dpi = 300)
+ggplot(change3_win) + facet_wrap(~label, ncol = 3) +
+  geom_tile(aes(x, y, fill = value)) +
+  scale_fill_manual(values = c('gain' = palette[1], 'loss' = palette[7])) +
+  labs(x = NULL, y = NULL, fill = 'Change in\npredicted\npresence') +
+  geom_sf(data = delta_shp, fill = NA) +
+  theme_minimal() +
+  theme(axis.text = element_blank(),
+        panel.grid = element_blank(),
+        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+        legend.title = element_text(family = 'sourcesans', size = 10),
+        legend.text = element_text(family = 'sourcesans', size = 9),
+        legend.position = 'right',
+        plot.margin = margin(2, 2, 2, 2, unit = 'pt'),
+        panel.spacing = unit(3, 'pt'))
+ggsave('fig/changemap_scenario3_waterbirds_winter.png', height = 7, width = 7)
 showtext_auto(F)
 
 # SUMMARIZE TOTAL HABITAT---------

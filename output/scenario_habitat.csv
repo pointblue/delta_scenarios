@@ -26,6 +26,15 @@ scenario2_perennialexpand,Biodiversity Support,Riparian landbird distributions,S
 scenario2_perennialexpand,Biodiversity Support,Riparian landbird distributions,Spotted Towhee,154749.18274675342,ha
 scenario2_perennialexpand,Biodiversity Support,Riparian landbird distributions,Yellow-breasted Chat,9191.179947713501,ha
 scenario2_perennialexpand,Biodiversity Support,Riparian landbird distributions,Yellow Warbler,19040.16504526086,ha
+scenario3_combo,Biodiversity Support,Riparian landbird distributions,Ash-throated Flycatcher,70793.75068315031,ha
+scenario3_combo,Biodiversity Support,Riparian landbird distributions,Black-headed Grosbeak,73106.53712890104,ha
+scenario3_combo,Biodiversity Support,Riparian landbird distributions,Common Yellowthroat,62584.73598501959,ha
+scenario3_combo,Biodiversity Support,Riparian landbird distributions,Lazuli Bunting,28839.127752693257,ha
+scenario3_combo,Biodiversity Support,Riparian landbird distributions,Nuttall's Woodpecker,31738.700444202626,ha
+scenario3_combo,Biodiversity Support,Riparian landbird distributions,Song Sparrow,201816.49058920954,ha
+scenario3_combo,Biodiversity Support,Riparian landbird distributions,Spotted Towhee,161211.07001581378,ha
+scenario3_combo,Biodiversity Support,Riparian landbird distributions,Yellow-breasted Chat,9003.587416581111,ha
+scenario3_combo,Biodiversity Support,Riparian landbird distributions,Yellow Warbler,19335.239934672954,ha
 baseline,Biodiversity Support,Waterbird distributions,Herons/Egrets (fall),36401.731527407166,ha
 baseline,Biodiversity Support,Waterbird distributions,Cranes (fall),8344.776017129847,ha
 baseline,Biodiversity Support,Waterbird distributions,Dabbling Ducks (fall),10807.92071189574,ha
@@ -41,6 +50,11 @@ scenario2_perennialexpand,Biodiversity Support,Waterbird distributions,Cranes (f
 scenario2_perennialexpand,Biodiversity Support,Waterbird distributions,Dabbling Ducks (fall),9996.579212476852,ha
 scenario2_perennialexpand,Biodiversity Support,Waterbird distributions,Geese (fall),11635.948640625702,ha
 scenario2_perennialexpand,Biodiversity Support,Waterbird distributions,Shorebirds (fall),15713.603837724226,ha
+scenario3_combo,Biodiversity Support,Waterbird distributions,Herons/Egrets (fall),36014.88983370334,ha
+scenario3_combo,Biodiversity Support,Waterbird distributions,Cranes (fall),8759.683367503372,ha
+scenario3_combo,Biodiversity Support,Waterbird distributions,Dabbling Ducks (fall),13887.123830440705,ha
+scenario3_combo,Biodiversity Support,Waterbird distributions,Geese (fall),13114.04245621182,ha
+scenario3_combo,Biodiversity Support,Waterbird distributions,Shorebirds (fall),19055.621061737256,ha
 baseline_win,Biodiversity Support,Waterbird distributions,Herons/Egrets (winter),42380.775950735806,ha
 baseline_win,Biodiversity Support,Waterbird distributions,Cranes (winter),24041.75232546419,ha
 baseline_win,Biodiversity Support,Waterbird distributions,Dabbling Ducks (winter),32372.58120896964,ha
@@ -59,12 +73,21 @@ scenario2_perennialexpand_win,Biodiversity Support,Waterbird distributions,Dabbl
 scenario2_perennialexpand_win,Biodiversity Support,Waterbird distributions,Diving Ducks (winter),10890.75217737819,ha
 scenario2_perennialexpand_win,Biodiversity Support,Waterbird distributions,Geese (winter),40558.11243142703,ha
 scenario2_perennialexpand_win,Biodiversity Support,Waterbird distributions,Shorebirds (winter),27049.940017746427,ha
+scenario3_combo_win,Biodiversity Support,Waterbird distributions,Herons/Egrets (winter),42733.47757675588,ha
+scenario3_combo_win,Biodiversity Support,Waterbird distributions,Cranes (winter),21509.81316705275,ha
+scenario3_combo_win,Biodiversity Support,Waterbird distributions,Dabbling Ducks (winter),34499.05708400035,ha
+scenario3_combo_win,Biodiversity Support,Waterbird distributions,Diving Ducks (winter),13207.03083081252,ha
+scenario3_combo_win,Biodiversity Support,Waterbird distributions,Geese (winter),41410.79702353798,ha
+scenario3_combo_win,Biodiversity Support,Waterbird distributions,Shorebirds (winter),29272.409799212764,ha
 baseline,Biodiversity Support,Riparian landbird distributions,Total,223574.8489432834,ha
 scenario1_restoration,Biodiversity Support,Riparian landbird distributions,Total,227817.6152472885,ha
 scenario2_perennialexpand,Biodiversity Support,Riparian landbird distributions,Total,225967.5649224682,ha
+scenario3_combo,Biodiversity Support,Riparian landbird distributions,Total,230129.417423119,ha
 baseline,Biodiversity Support,Waterbird distributions,Total (fall),38211.76326618433,ha
 scenario1_restoration,Biodiversity Support,Waterbird distributions,Total (fall),40408.89200482964,ha
 scenario2_perennialexpand,Biodiversity Support,Waterbird distributions,Total (fall),36325.75054565817,ha
+scenario3_combo,Biodiversity Support,Waterbird distributions,Total (fall),38606.31882282883,ha
 baseline_win,Biodiversity Support,Waterbird distributions,Total (winter),57763.47592089415,ha
 scenario1_restoration_win,Biodiversity Support,Waterbird distributions,Total (winter),59904.65080961689,ha
 scenario2_perennialexpand_win,Biodiversity Support,Waterbird distributions,Total (winter),55154.38121670529,ha
+scenario3_combo_win,Biodiversity Support,Waterbird distributions,Total (winter),57194.82617730707,ha
