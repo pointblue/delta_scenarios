@@ -17,7 +17,24 @@ key = readxl::read_excel('GIS/VEG_key.xlsx')
 restore = rast('GIS/scenario_inputs/restoration_added_ripdetail.tif')
 perex = rast('GIS/scenario_inputs/perex_added_detail.tif')
 
-scenario_combo = cover(restore, perex) %>% cover(baseline)
+# exclude where perex overlaps riparian and wetland?
+levels(perex) <- NULL
+levels(baseline$baseline) <- NULL
+perex_limited = lapp(c(perex, baseline$baseline),
+                     function(x, y) {
+                       ifelse(y %in% c(70:82), NA, x)
+                     })
+
+baseline = c(rast('GIS/landscape_rasters/veg_baseline.tif'),
+             rast('GIS/landscape_rasters/veg_baseline_winter.tif'))
+
+scenario_combo = cover(restore, perex_limited) %>% cover(baseline)
+
+# check that restored totals haven't changed
+scenario1 = rast('GIS/scenario_rasters/scenario1_restoration.tif')
+freq(scenario1) %>% as_tibble() %>% filter(value %in% c(70:82))
+freq(scenario_combo$lyr1) %>% as_tibble() %>% filter(value %in% c(70:82))
+
 levels(scenario_combo[[1]]) <- key %>%
   select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
   as.data.frame()
