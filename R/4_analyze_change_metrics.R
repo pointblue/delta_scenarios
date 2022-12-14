@@ -12,20 +12,31 @@ metrics = read_csv('output/metrics.csv')
 habitat = read_csv('output/scenario_habitat.csv')
 habitat_binary = read_csv('output/scenario_habitat_binary.csv')
 
-# # calculate land cover totals------------
-# # total area of each land cover class/subclass in each landscape:
-# landcover = DeltaMultipleBenefits::sum_landcover(
-#   pathin = 'GIS/scenario_rasters',
-#   maskpath = 'GIS/boundaries/delta.tif',
-#   pixel_area = 0.09,
-#   rollup = TRUE) %>%
-#   # add LABEL fields
-#   left_join(key %>% select(CODE_NAME, LABEL), by = 'CODE_NAME') %>%
-#   select(scenario, CODE_NAME, LABEL, area) %>%
-#   arrange(scenario, CODE_NAME)
-# write_csv(landcover, 'output/landcover_totals.csv')
+# LAND COVER CHANGE----------
+# total area of each land cover class/subclass in each landscape:
+landcover = DeltaMultipleBenefits::sum_landcover(
+  pathin = 'GIS/scenario_rasters',
+  maskpath = 'GIS/boundaries/delta.tif',
+  pixel_area = 0.09,
+  rollup = TRUE) %>%
+  # add LABEL fields
+  left_join(key %>% select(CODE_NAME, LABEL), by = 'CODE_NAME') %>%
+  select(scenario, CODE_NAME, LABEL, area) %>%
+  arrange(scenario, CODE_NAME)
+write_csv(landcover, 'output/landcover_totals.csv')
 
-# LANDSCAPE SCORES-----------
+# net change
+# have to align field names to match fields expected in sum_change()
+landcover_change = landcover %>% filter(!grepl('win', scenario)) %>%
+  rename(SCORE_TOTAL = area) %>%
+  mutate(SCORE_TOTAL_SE = 0) %>%
+  DeltaMultipleBenefits::sum_change(scoredat = .) %>%
+  select(-ends_with('SE', ignore.case = TRUE))
+write_csv(landcover_change, 'output/netchange_landcover.csv')
+
+# METRICS CHANGE--------
+
+## total landscape scores-----------
 # combine the landscape-specific estimates of the total area of each land cover
 # class with the per-unit-area metrics for each land cover class
 # - for most metrics, this is the sum over all hectares
@@ -56,11 +67,10 @@ scores = DeltaMultipleBenefits::sum_metrics(
   mutate(scenario = gsub('_win', '', scenario)) %>% #rename in habitat metrics
   arrange(scenario, METRIC_CATEGORY, METRIC) %>%
   mutate(UNIT = gsub('/ha', '', UNIT)) # now scores are not per ha
+write_csv(scores, 'output/scenario_scores.csv')
 
 # check updated units:
 scores %>% select(METRIC_CATEGORY, METRIC_SUBTYPE, UNIT) %>% distinct()
-
-write_csv(scores, 'output/scenario_scores.csv')
 
 ## table--------
 scores_table = scores %>% filter(is.na(METRIC_SUBTYPE) | grepl('habitat', METRIC_SUBTYPE)) %>%
@@ -81,31 +91,19 @@ scores_table = scores %>% filter(is.na(METRIC_SUBTYPE) | grepl('habitat', METRIC
   pivot_wider(names_from = scenario,
               values_from = c(SCORE_TOTAL, SCORE_TOTAL_SE)) %>%
   select(METRIC_CATEGORY, METRIC, UNIT, ends_with('baseline'),
-         ends_with('restoration'), ends_with('expand'))
+         ends_with('restoration'), ends_with('expand'), ends_with('combo'))
 write_csv(scores_table, 'output/TABLE_scores_summary.csv')
 
-# NET CHANGE------
+## net change-------
 # compare each scenario to baseline
-
-## landcover----
-# for landcover, have to align field names to match fields expected in sum_change()
-landcover_change = landcover %>% filter(!grepl('win', scenario)) %>%
-  rename(SCORE_TOTAL = area) %>%
-  mutate(SCORE_TOTAL_SE = 0) %>%
-  DeltaMultipleBenefits::sum_change(scoredat = .) %>%
-  select(-ends_with('SE', ignore.case = TRUE))
-write_csv(landcover_change, 'output/netchange_landcover.csv')
-
-
-## metrics-----
 scores_change = DeltaMultipleBenefits::sum_change(scores)
 write_csv(scores_change, 'output/netchange_scores.csv')
 
 
 
-# # COUNTY-SPECIFIC ESTIMATES---------
+# COUNTY-SPECIFIC ESTIMATES---------
 #
-# ## habitat-------
+## habitat-------
 # habitat_county = DeltaMultipleBenefits::sum_habitat(
 #   pathin = 'GIS/prediction_rasters',
 #   zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
@@ -122,7 +120,7 @@ write_csv(scores_change, 'output/netchange_scores.csv')
 #   keypath = 'output/TABLE_species_key.csv')
 # write_csv(habitat_binary_county, 'output/scenario_habitat_binary_county.csv')
 #
-# ## land cover totals-------
+## land cover totals-------
 # landcover_county = DeltaMultipleBenefits::sum_landcover(
 #   pathin = 'GIS/scenario_rasters',
 #   zonepath = 'GIS/landscape_rasters/boundaries/counties.tif',
@@ -135,7 +133,7 @@ write_csv(scores_change, 'output/netchange_scores.csv')
 #   arrange(scenario, ZONE, CODE_NAME)
 # write_csv(landcover_county, 'output/landcover_totals_county.csv')
 #
-# ## scores------
+## scores------
 # scores_county = DeltaMultipleBenefits::sum_metrics(
 #   metricdat = metrics %>%
 #     filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))),
@@ -150,7 +148,7 @@ write_csv(scores_change, 'output/netchange_scores.csv')
 #
 # write_csv(scores_county, 'output/scenario_scores_county.csv')
 #
-# ## net change--------
+## net change--------
 # landcover_change_county = landcover_county %>% filter(!grepl('win', scenario)) %>%
 #   rename(SCORE_TOTAL = area) %>%
 #   mutate(SCORE_TOTAL_SE = 0) %>%
