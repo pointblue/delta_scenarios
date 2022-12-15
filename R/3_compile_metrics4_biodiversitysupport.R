@@ -67,8 +67,10 @@ purrr::map(names(scenarios)[which(grepl('win', names(scenarios)))],
 # waterbird_fall:
 purrr::pmap(
   list(
-    scenario_landscape = list(NULL, scenarios$scenario1_restoration,
-                              scenarios$scenario2_perennialexpand),
+    scenario_landscape = list(NULL,
+                              scenarios$scenario1_restoration,
+                              scenarios$scenario2_perennialexpand,
+                              scenarios$scenario3_combo),
     scenario_name = names(scenarios)[-which(grepl('win', names(scenarios)))],
     floor = c(FALSE, TRUE, FALSE)),
   DeltaMultipleBenefits::update_pwater,
@@ -81,8 +83,10 @@ purrr::pmap(
 
 # waterbird_win:
 purrr::pmap(
-  list(scenario_landscape = list(NULL, scenarios$scenario1_restoration_win,
-                                 scenarios$scenario2_perennialexpand_win),
+  list(scenario_landscape = list(NULL,
+                                 scenarios$scenario1_restoration_win,
+                                 scenarios$scenario2_perennialexpand_win,
+                                 scenarios$scenario3_combo_win),
        scenario_name = names(scenarios)[which(grepl('win', names(scenarios)))],
        floor = c(FALSE, TRUE, FALSE)),
   DeltaMultipleBenefits::update_pwater,

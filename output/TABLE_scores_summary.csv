@@ -1,13 +1,13 @@
 METRIC_CATEGORY,METRIC,UNIT,SCORE_TOTAL_baseline,SCORE_TOTAL_SE_baseline,SCORE_TOTAL_scenario1_restoration,SCORE_TOTAL_SE_scenario1_restoration,SCORE_TOTAL_scenario2_perennialexpand,SCORE_TOTAL_SE_scenario2_perennialexpand,SCORE_TOTAL_scenario3_combo,SCORE_TOTAL_SE_scenario3_combo
-Agricultural Livelihoods,Agricultural Jobs,FTE/yr,  2514,  144,  2458,  142,  2989,  215,  2906,  209
-Agricultural Livelihoods,Annual Wages,USD/FTE, 38727,  614, 38698,  613, 38487,  573, 38465,  574
-Agricultural Livelihoods,Gross Production Value,USD/yr (thousands),814558,20702,797689,20401,956472,30432,931186,29629
-Biodiversity Support,Total,ha,227631,   NA,233728,   NA,223080,   NA,231081,   NA
-Biodiversity Support,Total (fall),ha, 25068,   NA, 28955,   NA, 24216,   NA, 27964,   NA
-Biodiversity Support,Total (winter),ha, 55603,   NA, 59447,   NA, 54366,   NA, 57706,   NA
+Agricultural Livelihoods,Agricultural Jobs,FTE/yr,  2514,  144,  2458,  142,  2989,  215,  2881,  207
+Agricultural Livelihoods,Annual Wages,USD/FTE, 38727,  614, 38698,  613, 38487,  573, 38474,  575
+Agricultural Livelihoods,Gross Production Value,USD/yr (thousands),814558,20702,797689,20401,956472,30432,923077,29303
+Biodiversity Support,Total,ha,227631,   NA,233728,   NA,223080,   NA,231880,   NA
+Biodiversity Support,Total (fall),ha, 25068,   NA, 28955,   NA, 24216,   NA, 27983,   NA
+Biodiversity Support,Total (winter),ha, 55603,   NA, 59447,   NA, 54366,   NA, 57692,   NA
 Climate Change Resilience,Drought,"qualitative score, 1-10",     5.62,    0.05,     5.56,    0.05,     5.41,    0.05,     5.36,    0.05
-Climate Change Resilience,Flood,"qualitative score, 1-10",     5.90,    0.05,     5.96,    0.05,     5.83,    0.06,     5.90,    0.05
-Climate Change Resilience,Heat,"qualitative score, 1-10",     6.94,    0.06,     6.94,    0.06,     6.69,    0.06,     6.70,    0.06
-Water Quality,Critical Pesticides,MT/yr,   125.43,    9.89,   122.35,    9.67,   129.00,    9.10,   125.58,    8.90
-Water Quality,Groundwater Contaminant,MT/yr,    16.24,    2.13,    15.98,    2.09,    18.74,    2.07,    18.34,    2.03
-Water Quality,Risk to Aquatic Organisms,MT/yr,   392.86,   16.78,   382.44,   16.38,   441.99,   17.85,   428.53,   17.38
+Climate Change Resilience,Flood,"qualitative score, 1-10",     5.90,    0.05,     5.96,    0.05,     5.83,    0.06,     5.91,    0.05
+Climate Change Resilience,Heat,"qualitative score, 1-10",     6.94,    0.06,     6.94,    0.06,     6.69,    0.06,     6.72,    0.06
+Water Quality,Critical Pesticides,MT/yr,   125.43,    9.89,   122.35,    9.67,   129.00,    9.10,   125.03,    8.90
+Water Quality,Groundwater Contaminant,MT/yr,    16.24,    2.13,    15.98,    2.09,    18.74,    2.07,    18.17,    2.02
+Water Quality,Risk to Aquatic Organisms,MT/yr,   392.86,   16.78,   382.44,   16.38,   441.99,   17.85,   425.64,   17.29
