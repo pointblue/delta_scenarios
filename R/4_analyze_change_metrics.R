@@ -12,27 +12,6 @@ metrics = read_csv('output/metrics.csv')
 habitat = read_csv('output/scenario_habitat.csv')
 habitat_binary = read_csv('output/scenario_habitat_binary.csv')
 
-# LAND COVER CHANGE----------
-# total area of each land cover class/subclass in each landscape:
-landcover = DeltaMultipleBenefits::sum_landcover(
-  pathin = 'GIS/scenario_rasters',
-  maskpath = 'GIS/boundaries/delta.tif',
-  pixel_area = 0.09,
-  rollup = TRUE) %>%
-  # add LABEL fields
-  left_join(key %>% select(CODE_NAME, LABEL), by = 'CODE_NAME') %>%
-  select(scenario, CODE_NAME, LABEL, area) %>%
-  arrange(scenario, CODE_NAME)
-write_csv(landcover, 'output/landcover_totals.csv')
-
-# net change
-# have to align field names to match fields expected in sum_change()
-landcover_change = landcover %>% filter(!grepl('win', scenario)) %>%
-  rename(SCORE_TOTAL = area) %>%
-  mutate(SCORE_TOTAL_SE = 0) %>%
-  DeltaMultipleBenefits::sum_change(scoredat = .) %>%
-  select(-ends_with('SE', ignore.case = TRUE))
-write_csv(landcover_change, 'output/netchange_landcover.csv')
 
 # METRICS CHANGE--------
 
