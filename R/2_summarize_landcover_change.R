@@ -340,3 +340,18 @@ ggsave(filename = 'fig/map_baseline&change.jpg',
        height = 4, width = 9, units = 'in', dpi = 300)
 showtext_auto(FALSE)
 
+# WRITE METADATA--------
+# original landscape maps:
+scenarios = terra::rast(list.files('GIS/scenario_rasters', '.tif$', full.names = TRUE))
+
+freq = freq(scenarios)
+rat = freq %>% select(layer, CODE = value, count, CODE_NAME = label) %>%
+  left_join(key %>% select(CODE_NAME, LABEL), by = 'CODE_NAME') %>%
+  select(layer, CODE, CODE_NAME, LABEL, count) %>%
+  split(.$layer)
+names(rat) = names(scenarios)
+
+purrr::map(names(rat),
+           ~rat[[.x]] %>% select(-layer) %>%
+             foreign::write.dbf(file = paste0('GIS/scenario_rasters/', .x, '.tif.vat.dbf')))
+
