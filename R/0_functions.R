@@ -1427,7 +1427,7 @@ map_predictions <- function(df,
   return(p)
 }
 
-plot_changemap = function(pathin, SDM, landscape_name, key,
+plot_change_map = function(pathin, SDM, landscape_name, key,
                        studyarea, watermask,
                        palette = c('loss' = 'red',
                                    'maintain' = '#74b743',
@@ -1477,6 +1477,52 @@ plot_changemap = function(pathin, SDM, landscape_name, key,
   ggsave(filename = pathout, plot = p, ...)
 }
 
+plot_change_bar = function(dat) {
+  ggplot(dat, aes(net_change, METRIC)) +
+    facet_wrap(~scenario, ncol = 3) +
+    # ggforce::facet_col(~METRIC_CATEGORY, scales = 'free', space = 'free') +
+    geom_col(aes(fill = bin)) +
+    geom_errorbar(aes(xmin = net_change - net_change_se,
+                      xmax = net_change + net_change_se), width = 0.25) +
+    scale_fill_manual(values = pointblue.palette[c(1,3)]) +
+    geom_vline(xintercept = 0, color = 'gray30') +
+    theme_minimal() +
+    theme(axis.line.x = element_line(color = 'gray30'),
+          axis.text = element_text(family = 'sourcesans', size = 8.5),
+          axis.title = element_text(family = 'sourcesans', size = 10),
+          panel.grid.major.y = element_blank(),
+          plot.title = element_text(family = 'sourcesans', size = 10),
+          strip.placement = 'outside',
+          # strip.text = element_text(family = 'sourcesans', size = 10, vjust = 1),
+          strip.text = element_blank(),
+          strip.background = element_blank(),
+          legend.position = 'none',
+          panel.spacing = unit(1, 'lines'))
+}
+
+plot_change_lollipop = function(dat) {
+  dat %>% mutate(METRIC = gsub('\n', ' ', METRIC)) %>%
+    ggplot(aes(net_change, METRIC, fill = bin, color = bin)) +
+    facet_wrap(~scenario, ncol = 3) +
+    geom_vline(xintercept = 0, color = 'gray30') +
+    geom_col(width = 0.25) +
+    geom_point(size = 10) +
+    geom_text(aes(label = round(net_change, digits = 0)),
+              color = 'black', size = 4) +
+    scale_fill_manual(values = pointblue.palette[c(1,3)]) +
+    scale_color_manual(values = pointblue.palette[c(1,3)]) +
+    theme_minimal() +
+    theme(axis.line.x = element_line(color = 'gray30'),
+          axis.text = element_text(family = 'sourcesans', size = 14, lineheight = 0.8),
+          axis.title = element_text(family = 'sourcesans', size = 16),
+          panel.grid.major.y = element_blank(),
+          plot.title = element_text(family = 'sourcesans', size = 16),
+          strip.placement = 'outside',
+          strip.text = element_blank(),
+          strip.background = element_blank(),
+          legend.position = 'none',
+          panel.spacing = unit(1, 'lines'))
+}
 # analyze_metrics = function(metrics_df, baseline, scenario = NULL) {
 #   if (!'METRIC' %in% names(metrics_df) | !"SCORE" %in% names(metrics_df)) {
 #     stop('metrics_df must contain at least the fields "METRIC" and "SCORE"')

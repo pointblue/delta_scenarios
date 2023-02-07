@@ -152,51 +152,30 @@ netchange = read_csv('output/netchange_scores.csv', col_types = cols()) %>%
 ## for manuscript-----
 # barchart with error bars
 
-plot_change = function(dat) {
-  ggplot(dat, aes(net_change, METRIC)) +
-    facet_wrap(~scenario, ncol = 3) +
-    # ggforce::facet_col(~METRIC_CATEGORY, scales = 'free', space = 'free') +
-    geom_col(aes(fill = bin)) +
-    geom_errorbar(aes(xmin = net_change - net_change_se,
-                      xmax = net_change + net_change_se), width = 0.25) +
-    scale_fill_manual(values = pointblue.palette[c(1,3)]) +
-    geom_vline(xintercept = 0, color = 'gray30') +
-    theme_minimal() +
-    theme(axis.line.x = element_line(color = 'gray30'),
-          axis.text = element_text(family = 'sourcesans', size = 8.5),
-          axis.title = element_text(family = 'sourcesans', size = 10),
-          panel.grid.major.y = element_blank(),
-          plot.title = element_text(family = 'sourcesans', size = 10),
-          strip.placement = 'outside',
-          # strip.text = element_text(family = 'sourcesans', size = 10, vjust = 1),
-          strip.text = element_blank(),
-          strip.background = element_blank(),
-          legend.position = 'none',
-          panel.spacing = unit(1, 'lines'))
-}
+
 
 
 part1 = netchange %>%
   filter(METRIC_CATEGORY == 'Agricultural Livelihoods') %>%
-  plot_change() +
+  plot_change_bar() +
   labs(x = NULL, y = NULL, title = 'A') +
   xlim(-1100, 1100)
 
 part2 = netchange %>%
   filter(METRIC_CATEGORY == 'Water Quality') %>%
-  plot_change() +
+  plot_change_bar() +
   labs(x = NULL, y = NULL, title = 'B') +
   xlim(-75, 75)
 
 part3 = netchange %>%
   filter(METRIC_CATEGORY == 'Climate Change Resilience') %>%
-  plot_change() +
+  plot_change_bar() +
   labs(x = NULL, y = NULL, title = 'C') +
   xlim(-0.4, 0.4)
 
 part4 = netchange %>%
   filter(METRIC_CATEGORY == 'Biodiversity Support') %>%
-  plot_change() +
+  plot_change_bar() +
   labs(x = NULL, y = NULL, title = 'D') +
   xlim(-7000, 7000) +
   facet_wrap(~scenario, ncol = 3, strip.position = 'bottom') +
@@ -211,51 +190,27 @@ showtext_auto(FALSE)
 ## lollipop chart overview---------
 # simple version for presentations with larger fonts and without error bars
 
-plot_lollipop = function(dat) {
-  dat %>% mutate(METRIC = gsub('\n', ' ', METRIC)) %>%
-  ggplot(aes(net_change, METRIC, fill = bin, color = bin)) +
-    facet_wrap(~scenario, ncol = 3) +
-    geom_vline(xintercept = 0, color = 'gray30') +
-    geom_col(width = 0.25) +
-    geom_point(size = 10) +
-    geom_text(aes(label = round(net_change, digits = 0)),
-              color = 'black', size = 4) +
-    scale_fill_manual(values = pointblue.palette[c(1,3)]) +
-    scale_color_manual(values = pointblue.palette[c(1,3)]) +
-    theme_minimal() +
-    theme(axis.line.x = element_line(color = 'gray30'),
-          axis.text = element_text(family = 'sourcesans', size = 14, lineheight = 0.8),
-          axis.title = element_text(family = 'sourcesans', size = 16),
-          panel.grid.major.y = element_blank(),
-          plot.title = element_text(family = 'sourcesans', size = 16),
-          strip.placement = 'outside',
-          strip.text = element_blank(),
-          strip.background = element_blank(),
-          legend.position = 'none',
-          panel.spacing = unit(1, 'lines'))
-}
-
 part1 = netchange %>%
   filter(METRIC_CATEGORY == 'Agricultural Livelihoods') %>%
-  plot_lollipop() +
+  plot_change_lollipop() +
   labs(x = NULL, y = NULL, title = 'Agricultural Livelihoods') +
   xlim(-600, 600)
 
 part2 = netchange %>%
   filter(METRIC_CATEGORY == 'Water Quality') %>%
-  plot_lollipop() +
+  plot_change_lollipop() +
   labs(x = NULL, y = NULL, title = 'Water Quality') +
   xlim(-75, 75)
 
 part3 = netchange %>%
   filter(METRIC_CATEGORY == 'Climate Change Resilience') %>%
-  plot_lollipop() +
+  plot_change_lollipop() +
   labs(x = NULL, y = NULL, title = 'Climate Change Resilience') +
   xlim(-0.3, 0.3)
 
 part4 = netchange %>%
   filter(METRIC_CATEGORY == 'Biodiversity Support') %>%
-  plot_lollipop() +
+  plot_change_lollipop() +
   facet_wrap(~scenario, ncol = 3, strip.position = 'bottom') +
   labs(x = NULL, y = NULL, title = 'Biodiversity Support') +
   xlim(-7000, 7000) +
