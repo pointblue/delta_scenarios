@@ -1427,6 +1427,55 @@ map_predictions <- function(df,
   return(p)
 }
 
+plot_changemap = function(pathin, SDM, landscape_name, key,
+                       studyarea, watermask,
+                       palette = c('loss' = 'red',
+                                   'maintain' = '#74b743',
+                                   'gain' = '#005baa',
+                                   'open water' = 'white'),
+                       ncol,
+                       legend.title = 'Change in\npredicted\npresence',
+                       legend.position = 'right',
+                       legend.justification = c(1, 0.5),
+                       pathout = NULL,
+                       ...) {
+
+  df = list.files(file.path(pathin, SDM, landscape_name),
+                  '.tif$', full.names = TRUE) %>%
+    rast() %>%
+    cover(y = watermask) %>%
+    crop(vect(studyarea))
+
+  layernames = names(df)
+
+  for (i in c(1:nlyr(df))) { # doesn't work with purrr for some reason
+    levels(df)[[i]] = data.frame(ID = c(-1, 0, 1, 90),
+                                 label = names(palette))
+  }
+  names(df) = key$label[match(layernames, key$spp)] #reassign with labels from key
+  df = subset(df, subset = key$label[key$label %in% names(df)]) #reorder
+
+  p = ggplot() +
+    geom_sf(data = studyarea, fill = 'gray80', color = 'black', size = 0.2) +
+    geom_spatraster(data = df) +
+    geom_sf(data = studyarea, fill = NA, color = 'black', size = 0.2) +
+    facet_wrap(~lyr, ncol = ncol) +
+    scale_fill_manual(values = palette, na.value = 'transparent',
+                      breaks = names(palette)[1:3]) +
+    labs(x = NULL, y = NULL, fill = legend.title) +
+    theme_minimal() +
+    theme(axis.text = element_blank(),
+          panel.grid = element_blank(),
+          strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+          legend.title = element_text(family = 'sourcesans', size = 10),
+          legend.text = element_text(family = 'sourcesans', size = 9),
+          legend.position = legend.position,
+          legend.justification = legend.justification,
+          plot.margin = margin(2, 2, 2, 2, unit = 'pt'),
+          panel.spacing = unit(0, 'pt'))
+
+  ggsave(filename = pathout, plot = p, ...)
+}
 
 # analyze_metrics = function(metrics_df, baseline, scenario = NULL) {
 #   if (!'METRIC' %in% names(metrics_df) | !"SCORE" %in% names(metrics_df)) {
