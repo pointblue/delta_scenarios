@@ -2,7 +2,7 @@ METRIC_CATEGORY,METRIC,UNIT,SCORE_TOTAL_baseline,SCORE_TOTAL_SE_baseline,SCORE_T
 Agricultural Livelihoods,Agricultural Jobs,FTE/yr,  2514,  144,  2458,  142,  2989,  215,  2881,  207
 Agricultural Livelihoods,Annual Wages,USD/FTE, 38727,  614, 38698,  613, 38487,  573, 38474,  575
 Agricultural Livelihoods,Gross Production Value,USD/yr (thousands),814558,20702,797689,20401,956472,30432,923077,29303
-Biodiversity Support,Total,ha,227631,   NA,233728,   NA,223080,   NA,231880,   NA
+Biodiversity Support,Total,ha,201883,   NA,207878,   NA,197463,   NA,206024,   NA
 Biodiversity Support,Total (fall),ha, 25068,   NA, 28955,   NA, 24216,   NA, 27983,   NA
 Biodiversity Support,Total (winter),ha, 55603,   NA, 59447,   NA, 54366,   NA, 57692,   NA
 Climate Change Resilience,Drought,"qualitative score, 1-10",     5.62,    0.05,     5.56,    0.05,     5.41,    0.05,     5.36,    0.05

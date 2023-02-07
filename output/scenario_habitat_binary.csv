@@ -1,40 +1,40 @@
 scenario,METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,SCORE_TOTAL,UNIT
-baseline,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,5085.179999999999,ha
-baseline,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,4032.81,ha
-baseline,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,58445.189999999995,ha
-baseline,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,39772.08,ha
-baseline,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,1824.48,ha
-baseline,Biodiversity Support,Riparian landbird habitat,Song Sparrow,180333.53999999998,ha
-baseline,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,15827.13,ha
-baseline,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,837.27,ha
-baseline,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,8178.57,ha
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,9063.18,ha
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,7484.67,ha
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,63267.479999999996,ha
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,39835.71,ha
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,5352.03,ha
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Song Sparrow,181050.75,ha
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,22205.16,ha
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,851.4,ha
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,9139.59,ha
-scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,4379.22,ha
-scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,3585.42,ha
-scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,55728.09,ha
-scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,39600.99,ha
-scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,1337.6699999999998,ha
-scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Song Sparrow,174469.77,ha
-scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,17105.76,ha
-scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,798.5699999999999,ha
-scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,8456.13,ha
-scenario3_combo,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,8961.84,ha
-scenario3_combo,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,7417.53,ha
-scenario3_combo,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,60569.729999999996,ha
-scenario3_combo,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,39759.479999999996,ha
-scenario3_combo,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,4807.62,ha
-scenario3_combo,Biodiversity Support,Riparian landbird habitat,Song Sparrow,176999.49,ha
-scenario3_combo,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,25613.64,ha
-scenario3_combo,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,822.78,ha
-scenario3_combo,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,10030.41,ha
+baseline,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,4375.26,ha
+baseline,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,3246.75,ha
+baseline,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,41817.33,ha
+baseline,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,39753.18,ha
+baseline,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,1755.45,ha
+baseline,Biodiversity Support,Riparian landbird habitat,Song Sparrow,155695.86,ha
+baseline,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,14180.4,ha
+baseline,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,309.87,ha
+baseline,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,7303.32,ha
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,8072.0999999999995,ha
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,6190.83,ha
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,46343.25,ha
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,39816.81,ha
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,5181.75,ha
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Song Sparrow,156442.68,ha
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,20113.829999999998,ha
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,325.8,ha
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,8118.2699999999995,ha
+scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,3761.1,ha
+scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,2852.0099999999998,ha
+scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,39677.31,ha
+scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,39582.36,ha
+scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,1282.05,ha
+scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Song Sparrow,150021.99,ha
+scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,15305.13,ha
+scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,294.03,ha
+scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,7591.32,ha
+scenario3_combo,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,7956.09,ha
+scenario3_combo,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,6130.889999999999,ha
+scenario3_combo,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,44254.17,ha
+scenario3_combo,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,39740.31,ha
+scenario3_combo,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,4648.59,ha
+scenario3_combo,Biodiversity Support,Riparian landbird habitat,Song Sparrow,152476.83,ha
+scenario3_combo,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,23205.149999999998,ha
+scenario3_combo,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,316.26,ha
+scenario3_combo,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,8978.76,ha
 baseline,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),18866.61,ha
 baseline,Biodiversity Support,Waterbird habitat,Cranes (fall),4921.47,ha
 baseline,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),8602.92,ha
@@ -79,10 +79,10 @@ scenario3_combo_win,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winte
 scenario3_combo_win,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),11682.81,ha
 scenario3_combo_win,Biodiversity Support,Waterbird habitat,Geese (winter),21112.559999999998,ha
 scenario3_combo_win,Biodiversity Support,Waterbird habitat,Shorebirds (winter),25513.739999999998,ha
-baseline,Biodiversity Support,Riparian landbird habitat,Total,227630.88,ha
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Total,233728.11,ha
-scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Total,223080.03,ha
-scenario3_combo,Biodiversity Support,Riparian landbird habitat,Total,231880.13999999998,ha
+baseline,Biodiversity Support,Riparian landbird habitat,Total,201883.05,ha
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Total,207878.03999999998,ha
+scenario2_perennialexpand,Biodiversity Support,Riparian landbird habitat,Total,197462.52,ha
+scenario3_combo,Biodiversity Support,Riparian landbird habitat,Total,206024.4,ha
 baseline,Biodiversity Support,Waterbird habitat,Total (fall),25067.879999999997,ha
 scenario1_restoration,Biodiversity Support,Waterbird habitat,Total (fall),28955.25,ha
 scenario2_perennialexpand,Biodiversity Support,Waterbird habitat,Total (fall),24215.67,ha
