@@ -1,8 +1,11 @@
-.Rproj.user
+.Rproj.user*
 .Rhistory
 .Rdata
+.RDataTmp
 .httr-oauth
 .DS_Store
 GIS/
 fig/
 R/devel/
+data_orig/
+.Rproj.user
