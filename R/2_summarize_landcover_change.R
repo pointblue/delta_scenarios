@@ -237,107 +237,173 @@ levels(baseline_simple) <- key %>% select(CODE_BASELINE, LABEL) %>%
                               110, 120, 130)) %>%
   mutate(LABEL = if_else(LABEL == 'Field Crops', 'Field & Row Crops', LABEL)) %>%
   as.data.frame()
-coltab(baseline_simple) <- key %>% select(CODE_BASELINE, COLOR) %>% drop_na() %>%
-  filter(CODE_BASELINE %in% c(10, 21, 25, 26, 30, 40, 50, 52, 60, 70, 80, 90:130)) %>%
-  mutate(COLOR = case_when(CODE_BASELINE == 10 ~ '#aa66cd',
-                           CODE_BASELINE == 21 ~ '#ffebaf',
-                           CODE_BASELINE == 25 ~ '#ffa77f',
-                           CODE_BASELINE == 26 ~ '#ffff00',
-                           CODE_BASELINE == 30 ~ '#e600a9',
-                           CODE_BASELINE == 40 ~ '#e1e1e1',
-                           CODE_BASELINE == 50 ~ '#e9ffbe',
-                           CODE_BASELINE == 52 ~ '#00a884',
-                           CODE_BASELINE == 60 ~ '#686868',
-                           CODE_BASELINE == 70 ~ '#ff0000',
-                           CODE_BASELINE == 80 ~ '#004da8',
-                           CODE_BASELINE == 90 ~ '#bee8ff',
-                           CODE_BASELINE == 110 ~ '#737300',
-                           CODE_BASELINE == 120 ~ '#734c00',
-                           TRUE ~ COLOR)) %>%
-  complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
-plot(baseline_simple) # preview basic plot
+# coltab(baseline_simple) <- key %>% select(CODE_BASELINE, COLOR) %>% drop_na() %>%
+#   filter(CODE_BASELINE %in% c(10, 21, 25, 26, 30, 40, 50, 52, 60, 70, 80, 90:130)) %>%
+#   mutate(COLOR = case_when(CODE_BASELINE == 10 ~ '#aa66cd',
+#                            CODE_BASELINE == 21 ~ '#ffebaf',
+#                            CODE_BASELINE == 25 ~ '#ffa77f',
+#                            CODE_BASELINE == 26 ~ '#ffff00',
+#                            CODE_BASELINE == 30 ~ '#e600a9',
+#                            CODE_BASELINE == 40 ~ '#e1e1e1',
+#                            CODE_BASELINE == 50 ~ '#e9ffbe',
+#                            CODE_BASELINE == 52 ~ '#00a884',
+#                            CODE_BASELINE == 60 ~ '#686868',
+#                            CODE_BASELINE == 70 ~ '#ff0000',
+#                            CODE_BASELINE == 80 ~ '#004da8',
+#                            CODE_BASELINE == 90 ~ '#bee8ff',
+#                            CODE_BASELINE == 110 ~ '#737300',
+#                            CODE_BASELINE == 120 ~ '#734c00',
+#                            TRUE ~ COLOR)) %>%
+#   complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+# plot(baseline_simple) # preview basic plot
+
+# water
+water = baseline_simple %>% mask(delta)
+levels(water) <- NULL
+water = subst(water, c(0:89, 91:150), NA)
+levels(water) <- data.frame(CODE_BASELINE = 90,
+                            LABEL = 'Water')
 
 ## scenario 1
 scenario1_added = rast('GIS/scenario_inputs/restoration_added_ripdetail.tif') %>%
-  subst(c(70:79), 70) %>% subst(c(81:82), 80)
-levels(scenario1_added) <- data.frame(CODE_BASELINE = c(70, 80),
-                                      LABEL = c('Riparian', 'Wetland'))
-coltab(scenario1_added) <- data.frame(CODE_BASELINE = c(70, 80),
-                                      COLOR = c('#ff0000', '#004da8')) %>%
+  subst(c(70:79), 70) %>% subst(c(81:82), 80) %>%
+  cover(water)
+levels(scenario1_added) <- data.frame(CODE_BASELINE = c(70, 80, 90),
+                                      LABEL = c('Riparian', 'Wetland', 'Water'))
+coltab(scenario1_added) <- data.frame(CODE_BASELINE = c(70, 80, 90),
+                                      COLOR = c('#ff0000', '#004da8', '#bee8ff')) %>%
   complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
 plot(scenario1_added)
 
 ## scenario 2
 scenario2_added = rast('GIS/scenario_rasters/scenario2_perennialexpand.tif') %>%
   mask(rast('GIS/scenario_inputs/perex_added.tif')) %>%
-  subst(c(10:19), 10)
-levels(scenario2_added) <- data.frame(CODE_BASELINE = 10,
-                                      LABEL = 'Perennial Crops')
-coltab(scenario2_added) <- data.frame(CODE_BASELINE = 10,
-                                      COLOR = '#aa66cd') %>%
+  cover(water)
+levels(scenario2_added) <- NULL
+scenario2_added = subst(scenario2_added, c(10:19), 10)
+levels(scenario2_added) <- data.frame(CODE_BASELINE = c(10, 90),
+                                      LABEL = c('Perennial Crops', 'Water'))
+coltab(scenario2_added) <- data.frame(CODE_BASELINE = c(10, 90),
+                                      COLOR = c('#aa66cd', '#bee8ff')) %>%
   drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
 plot(scenario2_added)
 
 ## scenario 3
-scenario3_added = cover(scenario1_added, scenario2_added)
-levels(scenario3_added) <- data.frame(CODE_BASELINE = c(10, 70, 80),
-                                      LABEL = c('Perennial Crops', 'Riparian', 'Wetland'))
-coltab(scenario3_added) <- data.frame(CODE_BASELINE = c(10, 70, 80),
-                                      COLOR = c('#aa66cd', '#ff0000', '#004da8')) %>%
+scenario3_added = cover(scenario1_added, scenario2_added) %>% cover(water)
+levels(scenario3_added) <- data.frame(CODE_BASELINE = c(10, 70, 80, 90),
+                                      LABEL = c('Perennial Crops', 'Riparian', 'Wetland', 'Water'))
+coltab(scenario3_added) <- data.frame(CODE_BASELINE = c(10, 70, 80, 90),
+                                      COLOR = c('#aa66cd', '#ff0000', '#004da8', '#bee8ff')) %>%
   complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
 plot(scenario3_added)
+
 
 ## combine all:
 mapset = c(baseline_simple, scenario1_added, scenario2_added, scenario3_added)
 names(mapset) = c('A', 'B', 'C', 'D')
 
-mapset_df = as.data.frame(mapset, xy = TRUE, na.rm = FALSE) %>%
-  pivot_longer(A:D, names_to = 'scenario') %>% drop_na() %>%
+pal = freq(mapset$A) %>%
   mutate(COLOR = case_when(value == 'Perennial Crops' ~ '#aa66cd',
                            value == 'Riparian' ~ '#ff0000',
                            value == 'Wetland' ~ '#004da8',
                            value == 'Grain & Hay' ~ '#ffebaf',
-                           value == 'Field & Row Crops' ~ '#ffa77f',
+                           value == 'Field & Row Crops' ~ '#ff844c',
                            value == 'Corn' ~ '#ffff00',
                            value == 'Rice' ~ '#e600a9',
-                           value == 'Idle' ~ '#e1e1e1',
-                           value == 'Grassland & Pasture' ~ '#e9ffbe',
+                           value == 'Idle' ~ '#ffa77f',
+                           value == 'Grassland & Pasture' ~ '#D2D59A',
                            value == 'Alfalfa' ~ '#00a884',
-                           value == 'Urban' ~ '#686868',
+                           value == 'Urban' ~ '#474747',
                            value == 'Riparian' ~ '#004da8',
                            value == 'Wetland' ~ '#004da8',
-                           value == 'Water' ~ '#bee8ff',
+                           value == 'Water' ~ 'white',
                            value == 'Woodland' ~ '#737300',
                            value == 'Scrub' ~ '#734c00',
-                           value == 'Barren' ~ '#ffffff'))
+                           value == 'Barren' ~ '#e9ffbe'))
+pal2 = pal %>%
+  mutate(COLOR = if_else(value == 'Water', '#bee8ff', COLOR))
 
-pal = mapset_df %>% select(value, COLOR) %>% distinct() %>%
-  mutate(value = factor(value,
-                        levels = levels(baseline_simple)[[1]] %>%
-                          as_tibble('value') %>% drop_na() %>% pull(value))) %>%
-  arrange(value)
-pal2 = structure(pal$COLOR, names = as.character(pal$value))
+pal = structure(pal$COLOR, names = as.character(pal$value))
+pal2 = structure(pal2$COLOR, names = as.character(pal2$value))
 
+
+library(maps)
+citydat = us.cities
+citydat = citydat %>% filter(country.etc == 'CA') %>%
+  filter(grepl('Sacramento|Stockton|Antioch|Tracy', name)) %>%
+  filter(!grepl('Parkway|West', name)) %>%
+  mutate(name = gsub(' CA', '', name)) %>%
+  st_as_sf(coords = c('long', 'lat'))
+st_crs(citydat) <- 4326
+citydat = citydat %>% st_transform(crs = st_crs(delta_shp))
+citydat = bind_cols(citydat, st_coordinates(citydat) %>% as_tibble())
+
+library(tidyterra)
+library(showtext)
+font_add_google('Source Sans Pro', 'sourcesans')
 showtext_auto()
 showtext_opts(dpi = 300) #default for ggsave
-ggplot(mapset_df) + facet_wrap(~scenario, ncol = 4) +
-  geom_raster(aes(x, y, fill = as.factor(value))) +
-  geom_sf(data = delta_shp, fill = NA, color = 'black') +
-  scale_fill_manual(values = pal2) +
-  guides(fill = guide_legend(ncol = 5)) +
+
+p1 = ggplot() +
+  geom_sf(data = delta_shp, fill = 'gray80', color = 'black', size = 0.4) +
+  geom_spatraster(data = mapset$A) +
+  scale_fill_manual(values = pal, na.value = 'transparent') +
+  geom_sf(data = delta_shp, fill = NA, color = 'black', size = 0.4) +
+  # geom_text(data = citydat, aes(X, Y, label = name), size = 2, color = 'white', fontface = 'bold') +
+  geom_label(
+    data = citydat,
+    aes(X, Y, label = name),
+    color = "black", size = 2,
+    hjust = c(1, 0, 0, 1),
+    nudge_x = c(0, 100, 250, -200),
+    nudge_y = c(-3000, 0, 0, -3000),
+    fill = 'white',
+    label.padding = unit(0.15, 'lines'),
+    label.size = 0.15
+  ) +
+  labs(x = NULL, y = NULL, fill = 'Land cover')
+
+# scenarios
+p2 = ggplot() +
+  geom_sf(data = delta_shp, fill = 'gray80', color = 'black', size = 0.4) +
+  geom_spatraster(data = mapset$B) +
+  scale_fill_manual(values = pal, na.value = 'transparent') +
+  geom_sf(data = delta_shp, fill = NA, color = 'black', size = 0.4) +
+  labs(x = NULL, y = NULL, fill = 'Land cover')
+
+p3 = ggplot() +
+  geom_sf(data = delta_shp, fill = 'gray80', color = 'black', size = 0.4) +
+  geom_spatraster(data = mapset$C) +
+  scale_fill_manual(values = pal, na.value = 'transparent') +
+  geom_sf(data = delta_shp, fill = NA, color = 'black', size = 0.4) +
+  labs(x = NULL, y = NULL, fill = 'Land cover')
+
+p4 = ggplot() +
+  geom_sf(data = delta_shp, fill = 'gray80', color = 'black', size = 0.4) +
+  geom_spatraster(data = mapset$D) +
+  scale_fill_manual(values = pal, na.value = 'transparent') +
+  geom_sf(data = delta_shp, fill = NA, color = 'black', size = 0.4) +
   labs(x = NULL, y = NULL, fill = 'Land cover') +
+  theme_void()
+
+library(patchwork)
+patchwork = (p1 + p2)/(p3 + p4)
+patchwork +
+  plot_annotation(tag_levels = 'A') +
+  plot_layout(guides = 'collect') &
   theme_void() +
   theme(aspect.ratio = 1.4,
-        strip.text = element_text(family = 'sourcesans', face = 'bold',
-                                  hjust = 0),
+        legend.position = 'bottom',
         legend.title = element_text(family = 'sourcesans', face = 'bold',
                                     size = 9.5),
+
         legend.text = element_text(family = 'sourcesans', size = 8),
         legend.key.size = unit(9, 'pt'),
-        legend.position = 'bottom',
-        panel.spacing = unit(-.5, "lines"))
-ggsave(filename = 'fig/map_baseline&change.jpg',
-       height = 4, width = 9, units = 'in', dpi = 300)
+        panel.spacing = unit(-1, "lines"),
+        plot.tag = element_text(size = 9, family = 'sourcesans', face = 'bold'))
+
+ggsave(filename = 'fig/map_scenarios.jpg',
+       height = 8, width = 6, units = 'in', dpi = 300)
 showtext_auto(FALSE)
 
 # WRITE METADATA--------
