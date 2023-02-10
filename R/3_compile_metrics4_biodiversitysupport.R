@@ -24,6 +24,7 @@
 # PACKAGES & FUNCTIONS
 source('R/0_packages.R')
 source('R/0_functions.R')
+reticulate::use_python('C:/Python27/ArcGISx6410.8/python.exe', required = TRUE)
 
 # reference data:
 key = readxl::read_excel('GIS/VEG_key.xlsx')
@@ -47,9 +48,10 @@ purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
            ~DeltaMultipleBenefits::update_covertype(
              landscape = scenarios[[.x]],
              landscape_name = .x,
+             key = readxl::read_excel('GIS/VEG_key.xlsx'),
              SDM = 'waterbird_fall',
              maskpath = 'GIS/boundaries/delta.tif',
-             pathout = 'GIS/landscape_rasters/predictors_waterbird_fall',
+             pathout = 'GIS/landscape_rasters',
              overwrite = TRUE))
 
 # waterbird_win:
@@ -57,9 +59,32 @@ purrr::map(names(scenarios)[which(grepl('win', names(scenarios)))],
            ~DeltaMultipleBenefits::update_covertype(
              landscape = scenarios[[.x]],
              landscape_name = .x,
+             key = readxl::read_excel('GIS/VEG_key.xlsx'),
              SDM = 'waterbird_win',
              maskpath = 'GIS/boundaries/delta.tif',
-             pathout = 'GIS/landscape_rasters/predictors_waterbird_win',
+             pathout = 'GIS/landscape_rasters',
+             overwrite = TRUE))
+
+# alt fall:
+purrr::map(names(scenarios)[which(!grepl('win', names(scenarios)) & grepl('_alt', names(scenarios)))],
+           ~DeltaMultipleBenefits::update_covertype(
+             landscape = scenarios[[.x]],
+             landscape_name = .x,
+             key = readxl::read_excel('GIS/VEG_key.xlsx'),
+             SDM = 'waterbird_fall',
+             mask = 'GIS/boundaries/delta.tif',
+             pathout = 'GIS/landscape_rasters',
+             overwrite = TRUE))
+
+# alt win:
+purrr::map(names(scenarios)[which(grepl('win', names(scenarios)) & grepl('_alt', names(scenarios)))],
+           ~DeltaMultipleBenefits::update_covertype(
+             landscape = scenarios[[.x]],
+             landscape_name = .x,
+             key = readxl::read_excel('GIS/VEG_key.xlsx'),
+             SDM = 'waterbird_win',
+             mask = 'GIS/boundaries/delta.tif',
+             pathout = 'GIS/landscape_rasters',
              overwrite = TRUE))
 
 ## pwater----------
@@ -71,15 +96,15 @@ purrr::pmap(
                               scenarios$scenario1_restoration,
                               scenarios$scenario2_perennialexpand,
                               scenarios$scenario3_combo),
-    scenario_name = names(scenarios)[-which(grepl('win', names(scenarios)))],
-    floor = c(FALSE, TRUE, FALSE)),
+    landscape_name = names(scenarios)[-which(grepl('win', names(scenarios)))],
+    floor = c(FALSE, TRUE, FALSE, FALSE)),
   DeltaMultipleBenefits::update_pwater,
-  landscape = scenarios$baseline,
-  waterdatpath = 'GIS/landscape_rasters/pwater/water_fall_mean.tif',
-  maskpath = 'GIS/boundaries/delta.tif',
-  pathout = c('GIS/landscape_rasters/pwater',
-              'GIS/landscape_rasters/predictors_waterbird_fall'),
-  overwrite = TRUE)
+  waterdat = 'GIS/landscape_rasters/pwater/water_fall_mean.tif',
+  mask = 'GIS/boundaries/delta.tif',
+  pathout = 'GIS/landscape_rasters',
+  SDM = 'waterbird_fall',
+  overwrite = TRUE,
+  baseline_landscape = scenarios$baseline)
 
 # waterbird_win:
 purrr::pmap(
@@ -87,44 +112,119 @@ purrr::pmap(
                                  scenarios$scenario1_restoration_win,
                                  scenarios$scenario2_perennialexpand_win,
                                  scenarios$scenario3_combo_win),
-       scenario_name = names(scenarios)[which(grepl('win', names(scenarios)))],
-       floor = c(FALSE, TRUE, FALSE)),
+       landscape_name = names(scenarios)[which(grepl('win', names(scenarios)))],
+       floor = c(FALSE, TRUE, FALSE, FALSE)),
   DeltaMultipleBenefits::update_pwater,
-  landscape = scenarios$baseline_win,
-  waterdatpath = 'GIS/landscape_rasters/pwater/water_win_mean.tif',
-  maskpath = 'GIS/boundaries/delta.tif',
-  pathout = c('GIS/landscape_rasters/pwater',
-              'GIS/landscape_rasters/predictors_waterbird_WIN'),
-  overwrite = TRUE)
+  waterdat = 'GIS/landscape_rasters/pwater/water_win_mean.tif',
+  mask = 'GIS/boundaries/delta.tif',
+  pathout = 'GIS/landscape_rasters',
+  SDM = 'waterbird_win',
+  overwrite = TRUE,
+  baseline_landscape = scenarios$baseline_win)
 
+# alt fall:
+purrr::pmap(
+  list(
+    scenario_landscape = list(scenarios$scenario2_perennialexpand_alt,
+                              scenarios$scenario3_combo_alt),
+    landscape_name = c(names(scenarios)[which(!grepl('win', names(scenarios)) &
+                                                grepl('_alt', names(scenarios)))])),
+  DeltaMultipleBenefits::update_pwater,
+  waterdat = 'GIS/landscape_rasters/pwater/water_fall_mean.tif',
+  mask = 'GIS/boundaries/delta.tif',
+  pathout = 'GIS/landscape_rasters',
+  SDM = 'waterbird_fall',
+  overwrite = TRUE,
+  baseline_landscape = scenarios$baseline,
+  floor = FALSE)
+
+# alt win:
+purrr::pmap(
+  list(
+    scenario_landscape = list(scenarios$scenario2_perennialexpand_alt_win,
+                              scenarios$scenario3_combo_alt_win),
+    landscape_name = c(names(scenarios)[which(grepl('win', names(scenarios)) &
+                                                grepl('_alt', names(scenarios)))])),
+  DeltaMultipleBenefits::update_pwater,
+  waterdat = 'GIS/landscape_rasters/pwater/water_win_mean.tif',
+  mask = 'GIS/boundaries/delta.tif',
+  pathout = 'GIS/landscape_rasters',
+  SDM = 'waterbird_win',
+  overwrite = TRUE,
+  baseline_landscape = scenarios$baseline_win,
+  floor = FALSE)
 
 ## droost----------
-# unnecessary to repeat for each season since "unsuitable" land cover classes
-# aren't dynamic and changing seasonally
+# not specific to a seasonal SDM and unnecessary to repeat for each season since
+# "unsuitable" land cover classes aren't dynamic and changing seasonally; output
+# to a general crane_roosts folder
 purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
            ~DeltaMultipleBenefits::update_roosts(
              landscape = scenarios[[.x]],
              landscape_name = .x,
              unsuitable = c(11:19, 60, 70:79, 100:120),
              proportion = 0.2,
-             roostpath = 'GIS/original_source_data/Ivey/Select_recent_roosts_Ivey_utm.shp',
+             roosts = 'GIS/original_source_data/Ivey/Select_recent_roosts_Ivey_utm.shp',
              pathout = 'GIS/landscape_rasters/crane_roosts',
              overwrite = TRUE
            ))
+# then use python to calculate distance to roost from every pixel in each landscape
+purrr::map(
+  names(scenarios)[-which(grepl('win', names(scenarios)))],
+  ~DeltaMultipleBenefits::python_dist(
+    pathin = 'GIS/landscape_rasters/crane_roosts',
+    landscape_name = .x,
+    pathout = 'GIS/landscape_rasters',
+    SDM = 'waterbird_fall',
+    filename = 'droost_km.tif',
+    scale = 'km',
+    mask = 'GIS/boundaries/delta.tif',
+    overwrite = TRUE))
+# copy to winter directories as well:
+writeRaster(
+  rast('GIS/landscape_rasters/waterbird_fall/baseline/droost_km.tif'),
+  filename = 'GIS/landscape_rasters/waterbird_win/baseline_win/droost_km.tif')
+writeRaster(
+  rast('GIS/landscape_rasters/waterbird_fall/scenario1_restoration/droost_km.tif'),
+  filename = 'GIS/landscape_rasters/waterbird_win/scenario1_restoration_win/droost_km.tif')
+writeRaster(
+  rast('GIS/landscape_rasters/waterbird_fall/scenario2_perennialexpand/droost_km.tif'),
+  filename = 'GIS/landscape_rasters/waterbird_win/scenario2_perennialexpand_win/droost_km.tif')
+writeRaster(
+  rast('GIS/landscape_rasters/waterbird_fall/scenario3_combo/droost_km.tif'),
+  filename = 'GIS/landscape_rasters/waterbird_win/scenario3_combo_win/droost_km.tif')
 
-# use python to calculate distance to roost from every pixel in each landscape
-purrr::pmap(
-  list(landscape_name = names(scenarios)[-which(grepl('win', names(scenarios)))],
-       copyto = names(scenarios)[which(grepl('win', names(scenarios)))]),
-  DeltaMultipleBenefits::python_dist,
-  pathin = 'GIS/landscape_rasters/crane_roosts',
-  pathout = c('GIS/landscape_rasters/predictors_waterbird_fall',
-              'GIS/landscape_rasters/predictors_waterbird_win'),
-  maskpath = 'GIS/boundaries/delta.tif',
-  filename = 'droost_km.tif',
-  scale = 'km',
-  overwrite = TRUE)
 
+# alt:
+purrr::map(names(scenarios)[which(!grepl('win', names(scenarios)) & grepl('_alt', names(scenarios)))],
+           ~DeltaMultipleBenefits::update_roosts(
+             landscape = scenarios[[.x]],
+             landscape_name = .x,
+             unsuitable = c(11:19, 60, 70:79, 100:120),
+             proportion = 0.2,
+             roosts = 'GIS/original_source_data/Ivey/Select_recent_roosts_Ivey_utm.shp',
+             pathout = 'GIS/landscape_rasters/crane_roosts',
+             overwrite = TRUE
+           ))
+purrr::map(names(scenarios)[which(!grepl('win', names(scenarios)) &
+                                    grepl('_alt', names(scenarios)))],
+  ~DeltaMultipleBenefits::python_dist(
+    pathin = 'GIS/landscape_rasters/crane_roosts',
+    landscape_name = .x,
+    pathout = 'GIS/landscape_rasters',
+    SDM = 'waterbird_fall',
+    filename = 'droost_km.tif',
+    scale = 'km',
+    mask = 'GIS/boundaries/delta.tif',
+    overwrite = TRUE
+  ))
+# copy to winter directories as well:
+writeRaster(
+  rast('GIS/landscape_rasters/waterbird_fall/scenario2_perennialexpand_alt/droost_km.tif'),
+  filename = 'GIS/landscape_rasters/waterbird_win/scenario2_perennialexpand_alt_win/droost_km.tif')
+writeRaster(
+  rast('GIS/landscape_rasters/waterbird_fall/scenario3_combo_alt/droost_km.tif'),
+  filename = 'GIS/landscape_rasters/waterbird_win/scenario3_combo_alt_win/droost_km.tif')
 
 # FOCAL STATS---------
 # summarizing landcover stats within a moving window surrounding each focal
