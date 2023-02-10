@@ -28,6 +28,7 @@ template = rasterize(vect(delta_buff10k), extend(delta, delta_buff10k))
 
 baseline = c(rast('GIS/landscape_rasters/veg_baseline.tif'),
              rast('GIS/landscape_rasters/veg_baseline_winter.tif'))
+levels(baseline) <- NULL
 # key = readxl::read_excel('GIS/VEG_Delta10k_baseline_metadata.xlsx')
 key = readxl::read_excel('GIS/VEG_key.xlsx')
 
@@ -39,7 +40,7 @@ bbau = rast('GIS/original_source_data/State Class Rasters/scn421.sc.it1.ts2050.t
   mask(template) %>%
   # keep only the footprint of expanded perennial crops (code=20) - reclassify
   # to baseline code for general perennial crops (10); all others convert to NA
-  classify(rcl = matrix(c(20, 10), byrow = TRUE, ncol = 2), othersNA = TRUE)
+  subst(from = 20, to = 10, others = NA)
 # note: missing southwest corner of Delta
 
 # # compare to baseline
@@ -60,12 +61,17 @@ bbau = rast('GIS/original_source_data/State Class Rasters/scn421.sc.it1.ts2050.t
 
 # first eliminate urban, water, forest/shrub, rice, & existing perennial as
 # candidates for conversion to perennial crops:
-bbau_limited1 = lapp(c(bbau, baseline),
+bbau_limited1 = c(lapp(c(bbau, baseline$baseline),
                     function(x, y) {
                       ifelse(y %in% c(11:19, 30, 60, 90, 100), NA, x)
-                    })
+                    }),
+                  lapp(c(bbau, baseline$baseline_win),
+                       function(x, y) {
+                         ifelse(y %in% c(11:19, 30, 60, 90, 100), NA, x)
+                       }))
 # freq(bbau); freq(bbau_limited1)
 # dropped a lot (but a lot of existing perennial crops)
+
 
 # now eliminate riparian/wetland that is in a protected area/easement as
 # candidates for conversion:
@@ -82,6 +88,8 @@ bbau_limited2 = lapp(c(bbau_limited1, protected_ripwet),
                      })
 # freq(bbau); freq(bbau_limited1); freq(bbau_limited2)
 # small further decrease
+
+
 
 # of the remaining projected perennial crops, examine range of patch sizes;
 # reasonable to assume perennial expansion on small patches of ~ 1 pixel?
@@ -106,12 +114,13 @@ writeRaster(bbau_clean,
             'GIS/scenario_inputs/perex_added.tif',
             overwrite = TRUE)
 
-# ASSIGN SUBCLASSES-------
+# ORIGINAL VERSION-------
+## ASSIGN SUBCLASSES-------
 # similar process as for assigning subclasses/details to riparian restoration
 # pixels, but use larger buffer size to ensure all have some perennial crops
 # within the buffer
 
-## find proportions---------
+### find proportions---------
 # from patchlist above, convert to polygons, find centroids, and buffer by 10km
 bbau_patches1_buff = as.polygons(bbau_patches) %>% centroids() %>%
   buffer(width = 10000) #8052 polygons
@@ -238,7 +247,7 @@ buff_values_prop %>% select(patch_name, n_subclasses) %>% distinct() %>%
   pull(n_subclasses) %>% as.factor() %>% summary()
 # most have 2 possible subclass assignments, ranging 1-3
 
-## ROUND 1-------
+### ROUND 1-------
 # SINGLES: for patches with only a single option for a subclass (1664), make the
 # assignments straight-forward (can't fold into sampling procedure below because
 # sample function doesn't work as expected with only one option)
@@ -277,7 +286,7 @@ cover(bbau_singles, bbau_doubles) %>% cover(bbau_patches) %>%
 bbau_round1 = cover(bbau_singles, bbau_doubles) %>% cover(baseline)
 plot(bbau_round1)
 
-## ROUND 2-------
+### ROUND 2-------
 # use the newly added perennial crop subclasses to inform the remaining
 # undefined pixels
 
@@ -338,7 +347,7 @@ writeRaster(bbau_round2,
             'GIS/scenario_inputs/perex_added_detail.tif',
             overwrite = TRUE)
 
-# CROSSTAB-------
+## CROSSTAB-------
 crosstab(c(bbau_clean, bbau_round2), useNA = TRUE, long = TRUE)
 #should align perfectly
 
@@ -346,7 +355,7 @@ crosstab(c(baseline, bbau_round2), useNA = TRUE, long = TRUE)
 #should not have conversions from unsuitable types
 
 
-# FINALIZE-----------
+## FINALIZE-----------
 # overlay perennial crop footprint details on baseline
 levels(baseline$baseline) <- NULL
 levels(baseline$baseline_win) <- NULL
@@ -374,32 +383,178 @@ baseline = c(rast('GIS/landscape_rasters/veg_baseline.tif'),
              rast('GIS/landscape_rasters/veg_baseline_winter.tif'))
 plot(c(baseline[[1]], scenario_perex[[1]]))
 
-# # calculate change-------
-# levels(baseline) <- NULL
-# levels(scenario_perex) <- NULL
-# delta_perex = DeltaMultipleBenefits::calculate_change(
-#   baseline = baseline %>% mask(delta),
-#   scenario = scenario_perex %>% mask(delta))
-# delta_perex %>%
-#   mutate(class = case_when(class == 'FIELD_CORN' ~ 'CORN',
-#                            class == 'PASTURE_ALFALFA' ~ 'ALFALFA',
-#                            class == 'GRAIN&HAY_OTHER' ~ 'GRAIN',
-#                            class == 'GRAIN&HAY_WHEAT' ~ 'GRAIN',
-#                            class == 'PASTURE_OTHER' ~ 'PASTURE',
-#                            class %in% c('ROW', 'FIELD_OTHER') ~ 'ROW & FIELD CROPS',
-#                            class %in% c('WOODLAND', 'SCRUB') ~ 'WOODLAND & SCRUB',
-#                            grepl('RIPARIAN', class) ~ 'RIPARIAN',
-#                            grepl('WETLAND', class) ~ 'WETLANDS',
-#                            grepl('ORCHARD', class) ~ 'ORCHARD',
-#                            TRUE ~ class)) %>%
-#   group_by(class) %>%
-#   summarize(net_change = sum(net_change), .groups = 'drop') %>%
-#   arrange(net_change) %>%
-#   DeltaMultipleBenefits::plot_change() +
-#   labs(x = bquote(' ' *Delta~ 'total area (ha)'), y = NULL) +
-#   theme_bw() + xlim(-5000, 10000) +
-#   theme(axis.text = element_text(size = 18),
-#         axis.title = element_text(size = 18))
-# # ggsave('fig/change_scenario2_perennialexpand.png', height = 7.5, width = 6.5)
-# # large increase in orchard & vineyard cover, at the expense of: row/field,
-# # idle, corn, grain, alfalfa, pasture, grassland, riparian, wetlands
+
+# ALTERNATIVE VERSION---------
+# keep it simple -- just don't let bbau replace water, urban, existing perennial
+bbau_limited1_alt = lapp(c(bbau, baseline$baseline),
+                         function(x, y) {
+                           ifelse(y %in% c(11:19, 60, 90), NA, x)
+                         })
+# freq(bbau); freq(bbau_limited1); freq(bbau_limited1_alt)
+
+# and mask out any protected areas (not limited to riparian/wetland)
+bbau_limited2_alt = c(lapp(c(bbau_limited1_alt, protected),
+                           function(x, y) {
+                             ifelse(y %in% c(1:2), NA, x)
+                           }))
+
+# keep all patches, no matter the size
+writeRaster(bbau_limited2_alt,
+            'GIS/scenario_inputs/perex_added_alt.tif',
+            overwrite = TRUE)
+
+# tmp = cover(bbau_limited2_alt, baseline$baseline)
+# levels(tmp) <- key %>%
+#   select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
+#   as.data.frame()
+# levels(baseline$baseline) <- key %>%
+#   select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
+#   as.data.frame()
+# sum_landcover(landscapes = c(baseline$baseline, tmp), mask = delta)
+
+## assign subclasses----------
+
+## find unique patches:
+# of the remaining projected perennial crops, examine range of patch sizes;
+# reasonable to assume perennial expansion on small patches of ~ 1 pixel?
+bbau_patches_alt = bbau_limited2_alt %>% patches(directions = 8) #values 1-7831
+patchlist = freq(bbau_patches_alt) %>% as_tibble() %>%
+  mutate(ID = c(1:nrow(freq(bbau_patches_alt))),
+         area.ha = count * 0.09)
+# 6817 patches, ranging from 0.09 ha (1 pixel) to 570 ha
+# value = unique value assigned in bbau_patches_alt (not sequential?)
+# ID = sequential value 1-6817
+
+## find 10km buffers around each patch:
+# convert raster patches to polygons, find centroids, and buffer by 10km
+bbau_patches_alt_buff = as.polygons(bbau_patches_alt) %>% centroids() %>%
+  buffer(width = 10000) #6817 polygons corresponding to # of patches
+names(bbau_patches_alt_buff) = 'buffers'
+# values in polygons correspond to values in bbau_patches_alt (not sequential),
+# but their indexing/order should match ID in patchlist
+
+## reference data:
+# from baseline, extract just the perennial land cover classes
+baseline_perennials = subst(baseline$baseline, from = c(20:150), NA)
+names(baseline_perennials) = 'baseline'
+plot(c(baseline_perennials, cover(baseline_perennials, bbau_limited2_alt)))
+
+### find proportions:
+# rasterize each buffer polygon use as a mask on baseline_perennials,
+# to find frequency of perennial crop types in each buffer
+patch_freq = purrr::map_df(
+  c(1:length(bbau_patches_alt_buff)),
+  function(polynum) {
+    mask(baseline_perennials,
+         rasterize(bbau_patches_alt_buff[polynum], baseline$baseline)) %>%
+      freq() %>% as_tibble() %>% mutate(ID = polynum)})
+
+patch_prop = patch_freq %>%
+  group_by(ID) %>%
+  mutate(total = sum(count)) %>%
+  # how many subclasses per patch?
+  add_count(name = 'n_subclasses') %>%
+  ungroup() %>%
+  mutate(prop = count/total) %>%
+  select(ID, n_subclasses, CODE_BASELINE = value, count, prop) %>%
+  left_join(patchlist %>%
+              select(ID, patch_name = value, ncells = count),
+            by = 'ID')
+write_csv(patch_prop, 'GIS/scenario_inputs/perennial_props_alt.csv')
+
+patch_prop %>% select(patch_name, n_subclasses) %>% distinct() %>%
+  pull(n_subclasses) %>% as.factor() %>% summary()
+# most have 3 possible subclass assignments, ranging 2-3
+
+### ROUND 1-------
+# SINGLES: none?
+
+# DOUBLES & TRIPLES: for patches with more than one possible subclass, randomly
+# assign entire patch to one of the subclasses, weighted by proportion
+buff_prop = patch_prop %>%
+  select(patch_name, CODE_BASELINE, prop) %>%
+  split(.$patch_name) %>%
+  purrr::map_dfr(function(x) {
+    tibble(patch_name = x$patch_name[1],
+           CODE_BASELINE = sample(x$CODE_BASELINE, size = 1, prob = x$prop))
+  })
+
+# assign new class values to patches
+bbau_assignments = classify(
+  bbau_patches_alt,
+  rcl = buff_prop %>% select(from = patch_name, to = CODE_BASELINE) %>% as.matrix(),
+  others = NA)
+plot(c(bbau_patches_alt, bbau_assignments))
+freq(c(bbau_patches_alt, bbau_assignments)) %>% as_tibble() %>%
+  group_by(layer) %>% summarize(count = sum(count)) # a few pixels not yet assigned
+
+# remaining 3 patches?
+patchlist %>% filter(!value %in% buff_prop$patch_name) #127, 133, 136
+patchlist[patchlist$value %in% c(127, 133, 136),] #ID 109, 114, 116
+plot(delta, col = 'blue')
+plot(cover(bbau_assignments, baseline_perennials), add = TRUE,
+     col = c('purple', 'orange', 'red'))
+bbau_patches_alt_buff[c(109, 114, 116)] %>% plot(add = TRUE)
+# --> nearly identical patches outside the core delta, largest is ~17 acres
+
+
+### ROUND 2-------
+# use the newly added perennial crop subclasses to inform the remaining
+# undefined pixels
+
+# extract only the perennial crop subclasses in the updated round 1 raster
+updated_perennials = cover(bbau_assignments, baseline_perennials)
+plot(c(baseline_perennials, updated_perennials))
+
+# for each remaining buffer, find frequency of perennial crop types in surrounding 10km
+# from baseline
+patch_freq2 = purrr::map_df(
+  c(109, 114, 116),
+  function(polynum) {
+    mask(updated_perennials,
+         rasterize(bbau_patches_alt_buff[polynum], baseline$baseline)) %>%
+      freq() %>% as_tibble() %>% mutate(ID = polynum)})
+# they each only have one possible value (19)
+
+bbau_assignments2 = subst(bbau_patches_alt,
+                          from = c(127, 133, 136), to = 19, others = NA)
+bbau_assignments_all = cover(bbau_assignments, bbau_assignments2)
+freq(c(bbau_patches_alt, bbau_assignments_all)) %>% as_tibble() %>%
+  group_by(layer) %>% summarize(count = sum(count)) # identical
+
+c(bbau_assignments_all, cover(bbau_assignments_all, baseline_perennials)) %>%
+  plot(colNA = 'black')
+
+writeRaster(bbau_assignments_all,
+            'GIS/scenario_inputs/perex_added_detail_alt.tif',
+            overwrite = TRUE)
+
+## CROSSTAB-------
+crosstab(c(bbau_limited2_alt, bbau_assignments_all), useNA = TRUE, long = TRUE)
+#should align perfectly-yes
+
+crosstab(c(baseline$baseline, bbau_assignments_all), useNA = TRUE, long = TRUE)
+#should not have conversions from unsuitable types: urban (60), water (90)
+
+## FINALIZE-----------
+# overlay perennial crop footprint details on baseline
+levels(baseline$baseline) <- NULL
+levels(baseline$baseline_win) <- NULL
+scenario_perex_alt = cover(bbau_assignments_all, baseline)
+
+levels(scenario_perex_alt[[1]]) <- key %>%
+  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
+  as.data.frame()
+levels(scenario_perex_alt[[2]]) <- key %>%
+  select(id = CODE_BASELINE, label = CODE_NAME) %>% drop_na() %>%
+  as.data.frame()
+coltab(scenario_perex_alt[[1]]) <- key %>% select(CODE_BASELINE, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+coltab(scenario_perex_alt[[2]]) <- key %>% select(CODE_BASELINE, COLOR) %>%
+  drop_na() %>% complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
+names(scenario_perex_alt) = c('scenario2_perennialexpand_alt',
+                          'scenario2_perennialexpand_alt_win')
+plot(scenario_perex_alt)
+writeRaster(scenario_perex_alt,
+            paste0('GIS/scenario_rasters/', names(scenario_perex_alt), '.tif'),
+            overwrite = TRUE)

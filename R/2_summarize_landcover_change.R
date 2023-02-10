@@ -18,8 +18,8 @@ key = readxl::read_excel('GIS/VEG_key.xlsx')
 # LAND COVER CHANGE----------
 # total area of each land cover class/subclass in each landscape:
 landcover = DeltaMultipleBenefits::sum_landcover(
-  pathin = 'GIS/scenario_rasters',
-  maskpath = 'GIS/boundaries/delta.tif',
+  landscapes = 'GIS/scenario_rasters',
+  mask = 'GIS/boundaries/delta.tif',
   pixel_area = 0.09,
   rollup = TRUE) %>%
   # add LABEL fields
@@ -33,7 +33,7 @@ write_csv(landcover, 'output/landcover_totals.csv')
 landcover_change = landcover %>% filter(!grepl('win', scenario)) %>%
   rename(SCORE_TOTAL = area) %>%
   mutate(SCORE_TOTAL_SE = 0) %>%
-  DeltaMultipleBenefits::sum_change(scoredat = .) %>%
+  DeltaMultipleBenefits::sum_change() %>%
   select(-ends_with('SE', ignore.case = TRUE))
 write_csv(landcover_change, 'output/netchange_landcover.csv')
 
@@ -86,15 +86,22 @@ change_summary = bind_rows(
                                      'Managed Wetland - Perennial',
                                      'Managed Wetland - Seasonal',
                                      'Tidal Wetland',
-                                     'Other Wetland') %>% rev()),
-           bin = if_else(net_change > 0, 'increase', 'decrease'),
+                                     'Other Wetland') %>% rev())) %>%
+    group_by(scenario, LABEL) %>%
+    summarize(net_change = sum(net_change),
+              change_pct = net_change/sum(BASELINE) * 100,
+              .groups = 'drop') %>%
+    # filter(!LABEL %in% c('Urban', 'Barren', 'Water', 'Woodland', 'Scrub')) %>%
+    mutate(bin = if_else(net_change > 0, 'increase', 'decrease'),
            group = 'Subclasses') %>%
     arrange(scenario, LABEL)
 ) %>%
   mutate(scenario = recode(scenario,
                            'scenario1_restoration' = 'Scenario 1:\nHabitat restoration',
                            'scenario2_perennialexpand' = 'Scenario 2:\nPerennial crop\nexpansion',
-                           'scenario3_combo' = 'Scenario 3:\nCombination'))
+                           'scenario3_combo' = 'Scenario 3:\nCombination',
+                           'scenario2_perennialexpand_alt' = 'Scenario 2:\nPerennial crop\nexpansion_alt',
+                           'scenario3_combo_alt' = 'Scenario 3\nCombination_alt'))
 
 ## for manuscript---------
 part1 = change_summary %>% filter(group == 'Major classes') %>%
@@ -161,6 +168,78 @@ part1/part2 + plot_layout(heights = c(0.55, 0.45))
   # plot_annotation(tag_levels = 'A') &
   # theme(plot.tag = element_text(family = 'sourcesans', size = 10))
 ggsave('fig/netchange_land_cover.jpg',
+       height = 6, width = 6.5, units = 'in', dpi = 300)
+showtext_auto(FALSE)
+
+### alt---------
+change_summary_alt = change_summary %>%
+  filter(grepl('Scenario 1|_alt', scenario)) %>%
+  mutate(scenario = gsub('_alt', '', scenario))
+
+part1_alt = change_summary_alt %>% filter(group == 'Major classes') %>%
+  ggplot(aes(net_change/1000, LABEL)) +
+  facet_wrap(~scenario, ncol = 3) +
+  geom_col(fill = 'gray60') +
+  geom_text(data = change_summary_alt %>% filter(group == 'Major classes' & bin == 'increase'),
+            aes(x = net_change/1000 + 2,
+                label = paste0(round(change_pct, digits = 0), '%')), size = 2) +
+  geom_text(data = change_summary_alt %>% filter(group == 'Major classes' & bin == 'decrease'),
+            aes(x = net_change/1000 - 2,
+                label = paste0(round(change_pct, digits = 0), '%')), size = 2) +
+  labs(y = NULL,
+       x = NULL,
+       title = 'A'
+  ) +
+  xlim(-7, 20) +
+  geom_vline(xintercept = 0, size = 0.2) +
+  theme_bw() +
+  theme(
+    strip.placement = 'outside',
+    # strip.text = element_blank(),
+    strip.text = element_text(family = 'sourcesans', size = 9, vjust = 0),
+    strip.background = element_blank(),
+    plot.title = element_text(family = 'sourcesans', size = 10),
+    panel.grid = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_text(family = 'sourcesans', size = 8, hjust = 1),
+    axis.title = element_text(family = 'sourcesans', size = 8),
+    legend.position = 'none')
+
+part2_alt = change_summary_alt %>% filter(group != 'Major classes') %>%
+  ggplot(aes(net_change/1000, LABEL)) +
+  facet_wrap(~scenario, ncol = 3) +
+  geom_col(fill = 'gray60') +
+  geom_text(data = change_summary_alt %>% filter(group != 'Major classes' & bin == 'increase'),
+            aes(x = net_change/1000 + 2,
+                label = paste0(round(change_pct, digits = 0), '%')), size = 2) +
+  geom_text(data = change_summary_alt %>% filter(group != 'Major classes' & bin == 'decrease'),
+            aes(x = net_change/1000 - 2,
+                label = paste0(round(change_pct, digits = 0), '%')), size = 2) +
+  labs(x = expression(paste(Delta, ' total area (ha, thousands)')),
+       y = NULL,
+       title = 'B'
+  ) +
+  xlim(-7, 20) +
+  geom_vline(xintercept = 0, size = 0.2) +
+  theme_bw() +
+  theme(
+    strip.placement = 'outside',
+    strip.text = element_blank(),
+    # strip.text = element_text(family = 'sourcesans', size = 10, vjust = 1),
+    strip.background = element_blank(),
+    panel.grid = element_blank(),
+    axis.text = element_text(family = 'sourcesans', size = 8),
+    axis.text.y = element_text(hjust = 1),
+    axis.title = element_text(family = 'sourcesans', size = 8),
+    plot.title = element_text(family = 'sourcesans', size = 10),
+    legend.position = 'none')
+
+showtext_auto()
+showtext_opts(dpi = 300) #default for ggsave
+part1_alt/part2_alt + plot_layout(heights = c(0.55, 0.45))
+# plot_annotation(tag_levels = 'A') &
+# theme(plot.tag = element_text(family = 'sourcesans', size = 10))
+ggsave('fig/netchange_land_cover_alt.jpg',
        height = 6, width = 6.5, units = 'in', dpi = 300)
 showtext_auto(FALSE)
 
