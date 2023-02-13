@@ -264,3 +264,193 @@ a + b + c + plot_layout(nrow = 2, byrow = FALSE)
 ggsave('fig/presentation_metrics_overview.png',
        height = 7.5, width = 10, units = 'in')
 showtext_auto(FALSE)
+
+
+# PLOT CHANGE MAPS---------
+# Note: these plots are slow to produce!
+
+spp_key = read_csv('output/TABLE_species_key.csv')
+
+delta_shp = read_sf('GIS/boundaries/Legal_Delta_Boundary.shp') %>%
+  st_transform(crs = st_crs(32610))
+
+water = terra::rast('GIS/scenario_rasters/baseline.tif') %>%
+  mask(rast('GIS/boundaries/delta.tif')) %>%
+  classify(rcl = data.frame(from = 90, to = 0) %>% as.matrix(),
+           others = NA)
+plot(water, col = 'blue')
+
+library(showtext)
+font_add_google('Source Sans Pro', 'sourcesans')
+
+library(tidyterra)
+
+## riparian
+# --> should be able to use purrr for multiple scenarios, but was getting errors
+# with new device issues with ggsave
+
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'riparian',
+                landscape_name = 'scenario1_restoration',
+                key = spp_key,
+                ncol = 5,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_riparian_scenario1.png',
+                height = 7, width = 10,
+                legend.position = c(1, 0),
+                legend.justification = c(1, 0))
+
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'riparian',
+                landscape_name = 'scenario2_perennialexpand',
+                key = spp_key,
+                ncol = 5,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_riparian_scenario2.png',
+                height = 7, width = 10,
+                legend.position = c(1, 0),
+                legend.justification = c(1, 0))
+
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'riparian',
+                landscape_name = 'scenario3_combo',
+                key = spp_key,
+                ncol = 5,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_riparian_scenario3.png',
+                height = 7, width = 10,
+                legend.position = c(1, 0),
+                legend.justification = c(1, 0))
+
+## waterbird_fall
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'waterbird_fall',
+                landscape_name = 'scenario1_restoration',
+                key = spp_key,
+                ncol = 3,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_waterbird_fall_scenario1.png',
+                height = 7, width = 7.5)
+
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'waterbird_fall',
+                landscape_name = 'scenario2_perennialexpand',
+                key = spp_key,
+                ncol = 3,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_waterbird_fall_scenario2.png',
+                height = 7, width = 7.5)
+
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'waterbird_fall',
+                landscape_name = 'scenario3_combo',
+                key = spp_key,
+                ncol = 3,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_waterbird_fall_scenario3.png',
+                height = 7, width = 7.5)
+
+## waterbird_winter
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'waterbird_win',
+                landscape_name = 'scenario1_restoration_win',
+                key = spp_key,
+                ncol = 3,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_waterbird_win_scenario1.png',
+                height = 7, width = 7.5)
+
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'waterbird_win',
+                landscape_name = 'scenario2_perennialexpand_win',
+                key = spp_key,
+                ncol = 3,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_waterbird_win_scenario2.png',
+                height = 7, width = 7.5)
+
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'waterbird_win',
+                landscape_name = 'scenario3_combo_win',
+                key = spp_key,
+                ncol = 3,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_waterbird_win_scenario3.png',
+                height = 7, width = 7.5)
+
+## alt-------
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'riparian',
+                landscape_name = 'scenario2_perennialexpand_alt',
+                key = spp_key,
+                ncol = 5,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_riparian_scenario2_alt.png',
+                height = 7, width = 10,
+                legend.position = c(1, 0),
+                legend.justification = c(1, 0))
+
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'riparian',
+                landscape_name = 'scenario3_combo_alt',
+                key = spp_key,
+                ncol = 5,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_riparian_scenario3_alt.png',
+                height = 7, width = 10,
+                legend.position = c(1, 0),
+                legend.justification = c(1, 0))
+
+## waterbird_fall
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'waterbird_fall',
+                landscape_name = 'scenario2_perennialexpand_alt',
+                key = spp_key,
+                ncol = 3,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_waterbird_fall_scenario2_alt.png',
+                height = 7, width = 7.5)
+
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'waterbird_fall',
+                landscape_name = 'scenario3_combo_alt',
+                key = spp_key,
+                ncol = 3,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_waterbird_fall_scenario3_alt.png',
+                height = 7, width = 7.5)
+
+## waterbird_win
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'waterbird_win',
+                landscape_name = 'scenario2_perennialexpand_alt_win',
+                key = spp_key,
+                ncol = 3,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_waterbird_win_scenario2_alt.png',
+                height = 7, width = 7.5)
+
+plot_change_map(pathin = 'GIS/SDM_results_diff',
+                SDM = 'waterbird_win',
+                landscape_name = 'scenario3_combo_alt_win',
+                key = spp_key,
+                ncol = 3,
+                studyarea = delta_shp,
+                watermask = water,
+                pathout = 'fig/changemap_waterbird_win_scenario3_alt.png',
+                height = 7, width = 7.5)
+showtext_auto(F)
