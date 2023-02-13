@@ -154,6 +154,68 @@ scenario2_perennialexpand,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,50
 scenario2_perennialexpand,WETLAND_OTHER,Other Wetland,10096.56
 scenario2_perennialexpand,WETLAND_TIDAL,Tidal Wetland,3548.7
 scenario2_perennialexpand,WOODLAND,Woodland,762.66
+scenario2_perennialexpand_alt,BARREN,Barren,187.2
+scenario2_perennialexpand_alt,FIELD_CORN,Corn,32474.789999999997
+scenario2_perennialexpand_alt,FIELD_OTHER,Other Field Crops,7265.25
+scenario2_perennialexpand_alt,GRAIN&HAY_OTHER,Other Grains,7188.389999999999
+scenario2_perennialexpand_alt,GRAIN&HAY_WHEAT,Wheat,10371.69
+scenario2_perennialexpand_alt,GRASSLAND,Grassland,19715.04
+scenario2_perennialexpand_alt,IDLE,Idle,23136.57
+scenario2_perennialexpand_alt,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,1231.83
+scenario2_perennialexpand_alt,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,24010.92
+scenario2_perennialexpand_alt,PASTURE_ALFALFA,Alfalfa,17662.14
+scenario2_perennialexpand_alt,PASTURE_OTHER,Other Pasture,22830.03
+scenario2_perennialexpand_alt,RICE,Rice,2591.19
+scenario2_perennialexpand_alt,RIPARIAN,Riparian,7651.53
+scenario2_perennialexpand_alt,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,537.21
+scenario2_perennialexpand_alt,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,1591.11
+scenario2_perennialexpand_alt,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,1657.53
+scenario2_perennialexpand_alt,RIPARIAN_FOREST_SALIX,Riparian - Willow,919.89
+scenario2_perennialexpand_alt,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,868.23
+scenario2_perennialexpand_alt,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,112.58999999999999
+scenario2_perennialexpand_alt,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,1964.97
+scenario2_perennialexpand_alt,ROW,Row Crops,14219.73
+scenario2_perennialexpand_alt,SCRUB,Scrub,236.16
+scenario2_perennialexpand_alt,URBAN,Urban,36784.53
+scenario2_perennialexpand_alt,VINEYARD,Vineyard,23707.62
+scenario2_perennialexpand_alt,WATER,Water,26771.399999999998
+scenario2_perennialexpand_alt,WETLAND_MANAGED,Managed Wetland,6004.62
+scenario2_perennialexpand_alt,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,935.37
+scenario2_perennialexpand_alt,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,5069.25
+scenario2_perennialexpand_alt,WETLAND_OTHER,Other Wetland,10096.56
+scenario2_perennialexpand_alt,WETLAND_TIDAL,Tidal Wetland,3548.7
+scenario2_perennialexpand_alt,WOODLAND,Woodland,705.9599999999999
+scenario2_perennialexpand_alt_win,BARREN,Barren,187.2
+scenario2_perennialexpand_alt_win,FIELD_CORN,Corn,21742.739999999998
+scenario2_perennialexpand_alt_win,FIELD_OTHER,Other Field Crops,5539.86
+scenario2_perennialexpand_alt_win,GRAIN&HAY_OTHER,Other Grains,17481.87
+scenario2_perennialexpand_alt_win,GRAIN&HAY_WHEAT,Wheat,13604.76
+scenario2_perennialexpand_alt_win,GRASSLAND,Grassland,19715.04
+scenario2_perennialexpand_alt_win,IDLE,Idle,23136.57
+scenario2_perennialexpand_alt_win,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,1231.83
+scenario2_perennialexpand_alt_win,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,24010.92
+scenario2_perennialexpand_alt_win,PASTURE_ALFALFA,Alfalfa,17855.1
+scenario2_perennialexpand_alt_win,PASTURE_OTHER,Other Pasture,22614.66
+scenario2_perennialexpand_alt_win,RICE,Rice,2591.19
+scenario2_perennialexpand_alt_win,RIPARIAN,Riparian,7651.53
+scenario2_perennialexpand_alt_win,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,537.21
+scenario2_perennialexpand_alt_win,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,1591.11
+scenario2_perennialexpand_alt_win,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,1657.53
+scenario2_perennialexpand_alt_win,RIPARIAN_FOREST_SALIX,Riparian - Willow,919.89
+scenario2_perennialexpand_alt_win,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,868.23
+scenario2_perennialexpand_alt_win,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,112.58999999999999
+scenario2_perennialexpand_alt_win,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,1964.97
+scenario2_perennialexpand_alt_win,ROW,Row Crops,13173.029999999999
+scenario2_perennialexpand_alt_win,SCRUB,Scrub,236.16
+scenario2_perennialexpand_alt_win,URBAN,Urban,36784.53
+scenario2_perennialexpand_alt_win,VINEYARD,Vineyard,23707.62
+scenario2_perennialexpand_alt_win,WATER,Water,26771.399999999998
+scenario2_perennialexpand_alt_win,WETLAND_MANAGED,Managed Wetland,6004.62
+scenario2_perennialexpand_alt_win,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,935.37
+scenario2_perennialexpand_alt_win,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,5069.25
+scenario2_perennialexpand_alt_win,WETLAND_OTHER,Other Wetland,10096.56
+scenario2_perennialexpand_alt_win,WETLAND_TIDAL,Tidal Wetland,3548.7
+scenario2_perennialexpand_alt_win,WOODLAND,Woodland,705.9599999999999
 scenario2_perennialexpand_win,BARREN,Barren,186.57
 scenario2_perennialexpand_win,FIELD_CORN,Corn,21729.87
 scenario2_perennialexpand_win,FIELD_OTHER,Other Field Crops,5528.25
@@ -216,6 +278,68 @@ scenario3_combo,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,7641.9
 scenario3_combo,WETLAND_OTHER,Other Wetland,9550.8
 scenario3_combo,WETLAND_TIDAL,Tidal Wetland,3548.7
 scenario3_combo,WOODLAND,Woodland,719.4599999999999
+scenario3_combo_alt,BARREN,Barren,174.15
+scenario3_combo_alt,FIELD_CORN,Corn,31982.129999999997
+scenario3_combo_alt,FIELD_OTHER,Other Field Crops,6874.92
+scenario3_combo_alt,GRAIN&HAY_OTHER,Other Grains,6989.3099999999995
+scenario3_combo_alt,GRAIN&HAY_WHEAT,Wheat,10014.75
+scenario3_combo_alt,GRASSLAND,Grassland,18636.75
+scenario3_combo_alt,IDLE,Idle,22307.85
+scenario3_combo_alt,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,1201.4099999999999
+scenario3_combo_alt,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,23234.94
+scenario3_combo_alt,PASTURE_ALFALFA,Alfalfa,17304.21
+scenario3_combo_alt,PASTURE_OTHER,Other Pasture,21381.66
+scenario3_combo_alt,RICE,Rice,2122.47
+scenario3_combo_alt,RIPARIAN,Riparian,12343.41
+scenario3_combo_alt,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,804.78
+scenario3_combo_alt,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,2320.38
+scenario3_combo_alt,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,4244.3099999999995
+scenario3_combo_alt,RIPARIAN_FOREST_SALIX,Riparian - Willow,1165.68
+scenario3_combo_alt,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,916.74
+scenario3_combo_alt,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,115.83
+scenario3_combo_alt,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,2775.69
+scenario3_combo_alt,ROW,Row Crops,13928.4
+scenario3_combo_alt,SCRUB,Scrub,234.89999999999998
+scenario3_combo_alt,URBAN,Urban,36781.29
+scenario3_combo_alt,VINEYARD,Vineyard,22588.92
+scenario3_combo_alt,WATER,Water,26771.399999999998
+scenario3_combo_alt,WETLAND_MANAGED,Managed Wetland,9753.119999999999
+scenario3_combo_alt,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,2111.22
+scenario3_combo_alt,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,7641.9
+scenario3_combo_alt,WETLAND_OTHER,Other Wetland,9550.8
+scenario3_combo_alt,WETLAND_TIDAL,Tidal Wetland,3548.7
+scenario3_combo_alt,WOODLAND,Woodland,666.36
+scenario3_combo_alt_win,BARREN,Barren,174.15
+scenario3_combo_alt_win,FIELD_CORN,Corn,21540.149999999998
+scenario3_combo_alt_win,FIELD_OTHER,Other Field Crops,5269.23
+scenario3_combo_alt_win,GRAIN&HAY_OTHER,Other Grains,16908.21
+scenario3_combo_alt_win,GRAIN&HAY_WHEAT,Wheat,13207.32
+scenario3_combo_alt_win,GRASSLAND,Grassland,18636.75
+scenario3_combo_alt_win,IDLE,Idle,22307.85
+scenario3_combo_alt_win,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,1201.4099999999999
+scenario3_combo_alt_win,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,23234.94
+scenario3_combo_alt_win,PASTURE_ALFALFA,Alfalfa,17497.17
+scenario3_combo_alt_win,PASTURE_OTHER,Other Pasture,21166.29
+scenario3_combo_alt_win,RICE,Rice,2122.47
+scenario3_combo_alt_win,RIPARIAN,Riparian,12343.41
+scenario3_combo_alt_win,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,804.78
+scenario3_combo_alt_win,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,2320.38
+scenario3_combo_alt_win,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,4244.3099999999995
+scenario3_combo_alt_win,RIPARIAN_FOREST_SALIX,Riparian - Willow,1165.68
+scenario3_combo_alt_win,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,916.74
+scenario3_combo_alt_win,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,115.83
+scenario3_combo_alt_win,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,2775.69
+scenario3_combo_alt_win,ROW,Row Crops,12887.01
+scenario3_combo_alt_win,SCRUB,Scrub,234.89999999999998
+scenario3_combo_alt_win,URBAN,Urban,36781.29
+scenario3_combo_alt_win,VINEYARD,Vineyard,22588.92
+scenario3_combo_alt_win,WATER,Water,26771.399999999998
+scenario3_combo_alt_win,WETLAND_MANAGED,Managed Wetland,9753.119999999999
+scenario3_combo_alt_win,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,2111.22
+scenario3_combo_alt_win,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,7641.9
+scenario3_combo_alt_win,WETLAND_OTHER,Other Wetland,9550.8
+scenario3_combo_alt_win,WETLAND_TIDAL,Tidal Wetland,3548.7
+scenario3_combo_alt_win,WOODLAND,Woodland,666.36
 scenario3_combo_win,BARREN,Barren,173.51999999999998
 scenario3_combo_win,FIELD_CORN,Corn,21527.64
 scenario3_combo_win,FIELD_OTHER,Other Field Crops,5264.639999999999
