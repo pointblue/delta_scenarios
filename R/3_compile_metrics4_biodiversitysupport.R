@@ -51,7 +51,7 @@ purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
              key = readxl::read_excel('GIS/VEG_key.xlsx'),
              SDM = 'waterbird_fall',
              maskpath = 'GIS/boundaries/delta.tif',
-             pathout = 'GIS/landscape_rasters',
+             pathout = 'GIS/SDM_predictors',
              overwrite = TRUE))
 
 # waterbird_win:
@@ -62,7 +62,7 @@ purrr::map(names(scenarios)[which(grepl('win', names(scenarios)))],
              key = readxl::read_excel('GIS/VEG_key.xlsx'),
              SDM = 'waterbird_win',
              maskpath = 'GIS/boundaries/delta.tif',
-             pathout = 'GIS/landscape_rasters',
+             pathout = 'GIS/SDM_predictors',
              overwrite = TRUE))
 
 # alt fall:
@@ -73,7 +73,7 @@ purrr::map(names(scenarios)[which(!grepl('win', names(scenarios)) & grepl('_alt'
              key = readxl::read_excel('GIS/VEG_key.xlsx'),
              SDM = 'waterbird_fall',
              mask = 'GIS/boundaries/delta.tif',
-             pathout = 'GIS/landscape_rasters',
+             pathout = 'GIS/SDM_predictors',
              overwrite = TRUE))
 
 # alt win:
@@ -84,7 +84,7 @@ purrr::map(names(scenarios)[which(grepl('win', names(scenarios)) & grepl('_alt',
              key = readxl::read_excel('GIS/VEG_key.xlsx'),
              SDM = 'waterbird_win',
              mask = 'GIS/boundaries/delta.tif',
-             pathout = 'GIS/landscape_rasters',
+             pathout = 'GIS/SDM_predictors',
              overwrite = TRUE))
 
 ## pwater----------
@@ -99,9 +99,9 @@ purrr::pmap(
     landscape_name = names(scenarios)[-which(grepl('win', names(scenarios)))],
     floor = c(FALSE, TRUE, FALSE, FALSE)),
   DeltaMultipleBenefits::update_pwater,
-  waterdat = 'GIS/landscape_rasters/pwater/water_fall_mean.tif',
+  waterdat = 'GIS/landscape_rasters/water_fall_mean.tif',
   mask = 'GIS/boundaries/delta.tif',
-  pathout = 'GIS/landscape_rasters',
+  pathout = 'GIS/SDM_predictors',
   SDM = 'waterbird_fall',
   overwrite = TRUE,
   baseline_landscape = scenarios$baseline)
@@ -115,9 +115,9 @@ purrr::pmap(
        landscape_name = names(scenarios)[which(grepl('win', names(scenarios)))],
        floor = c(FALSE, TRUE, FALSE, FALSE)),
   DeltaMultipleBenefits::update_pwater,
-  waterdat = 'GIS/landscape_rasters/pwater/water_win_mean.tif',
+  waterdat = 'GIS/landscape_rasters/water_win_mean.tif',
   mask = 'GIS/boundaries/delta.tif',
-  pathout = 'GIS/landscape_rasters',
+  pathout = 'GIS/SDM_predictors',
   SDM = 'waterbird_win',
   overwrite = TRUE,
   baseline_landscape = scenarios$baseline_win)
@@ -130,9 +130,9 @@ purrr::pmap(
     landscape_name = c(names(scenarios)[which(!grepl('win', names(scenarios)) &
                                                 grepl('_alt', names(scenarios)))])),
   DeltaMultipleBenefits::update_pwater,
-  waterdat = 'GIS/landscape_rasters/pwater/water_fall_mean.tif',
+  waterdat = 'GIS/landscape_rasters/water_fall_mean.tif',
   mask = 'GIS/boundaries/delta.tif',
-  pathout = 'GIS/landscape_rasters',
+  pathout = 'GIS/SDM_predictors',
   SDM = 'waterbird_fall',
   overwrite = TRUE,
   baseline_landscape = scenarios$baseline,
@@ -146,9 +146,9 @@ purrr::pmap(
     landscape_name = c(names(scenarios)[which(grepl('win', names(scenarios)) &
                                                 grepl('_alt', names(scenarios)))])),
   DeltaMultipleBenefits::update_pwater,
-  waterdat = 'GIS/landscape_rasters/pwater/water_win_mean.tif',
+  waterdat = 'GIS/landscape_rasters/water_win_mean.tif',
   mask = 'GIS/boundaries/delta.tif',
-  pathout = 'GIS/landscape_rasters',
+  pathout = 'GIS/SDM_predictors',
   SDM = 'waterbird_win',
   overwrite = TRUE,
   baseline_landscape = scenarios$baseline_win,
@@ -165,16 +165,16 @@ purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
              unsuitable = c(11:19, 60, 70:79, 100:120),
              proportion = 0.2,
              roosts = 'GIS/original_source_data/Ivey/Select_recent_roosts_Ivey_utm.shp',
-             pathout = 'GIS/landscape_rasters/crane_roosts',
+             pathout = 'GIS/SDM_predictors/crane_roosts',
              overwrite = TRUE
            ))
 # then use python to calculate distance to roost from every pixel in each landscape
 purrr::map(
   names(scenarios)[-which(grepl('win', names(scenarios)))],
   ~DeltaMultipleBenefits::python_dist(
-    pathin = 'GIS/landscape_rasters/crane_roosts',
+    pathin = 'GIS/SDM_predictors/crane_roosts',
     landscape_name = .x,
-    pathout = 'GIS/landscape_rasters',
+    pathout = 'GIS/SDM_predictors',
     SDM = 'waterbird_fall',
     filename = 'droost_km.tif',
     scale = 'km',
@@ -182,17 +182,17 @@ purrr::map(
     overwrite = TRUE))
 # copy to winter directories as well:
 writeRaster(
-  rast('GIS/landscape_rasters/waterbird_fall/baseline/droost_km.tif'),
-  filename = 'GIS/landscape_rasters/waterbird_win/baseline_win/droost_km.tif')
+  rast('GIS/SDM_predictors/waterbird_fall/baseline/droost_km.tif'),
+  filename = 'GIS/SDM_predictors/waterbird_win/baseline_win/droost_km.tif')
 writeRaster(
-  rast('GIS/landscape_rasters/waterbird_fall/scenario1_restoration/droost_km.tif'),
-  filename = 'GIS/landscape_rasters/waterbird_win/scenario1_restoration_win/droost_km.tif')
+  rast('GIS/SDM_predictors/waterbird_fall/scenario1_restoration/droost_km.tif'),
+  filename = 'GIS/SDM_predictors/waterbird_win/scenario1_restoration_win/droost_km.tif')
 writeRaster(
-  rast('GIS/landscape_rasters/waterbird_fall/scenario2_perennialexpand/droost_km.tif'),
-  filename = 'GIS/landscape_rasters/waterbird_win/scenario2_perennialexpand_win/droost_km.tif')
+  rast('GIS/SDM_predictors/waterbird_fall/scenario2_perennialexpand/droost_km.tif'),
+  filename = 'GIS/SDM_predictors/waterbird_win/scenario2_perennialexpand_win/droost_km.tif')
 writeRaster(
-  rast('GIS/landscape_rasters/waterbird_fall/scenario3_combo/droost_km.tif'),
-  filename = 'GIS/landscape_rasters/waterbird_win/scenario3_combo_win/droost_km.tif')
+  rast('GIS/SDM_predictors/waterbird_fall/scenario3_combo/droost_km.tif'),
+  filename = 'GIS/SDM_predictors/waterbird_win/scenario3_combo_win/droost_km.tif')
 
 
 # alt:
@@ -203,15 +203,15 @@ purrr::map(names(scenarios)[which(!grepl('win', names(scenarios)) & grepl('_alt'
              unsuitable = c(11:19, 60, 70:79, 100:120),
              proportion = 0.2,
              roosts = 'GIS/original_source_data/Ivey/Select_recent_roosts_Ivey_utm.shp',
-             pathout = 'GIS/landscape_rasters/crane_roosts',
+             pathout = 'GIS/SDM_predictors/crane_roosts',
              overwrite = TRUE
            ))
 purrr::map(names(scenarios)[which(!grepl('win', names(scenarios)) &
                                     grepl('_alt', names(scenarios)))],
   ~DeltaMultipleBenefits::python_dist(
-    pathin = 'GIS/landscape_rasters/crane_roosts',
+    pathin = 'GIS/SDM_predictors/crane_roosts',
     landscape_name = .x,
-    pathout = 'GIS/landscape_rasters',
+    pathout = 'GIS/SDM_predictors',
     SDM = 'waterbird_fall',
     filename = 'droost_km.tif',
     scale = 'km',
@@ -220,11 +220,11 @@ purrr::map(names(scenarios)[which(!grepl('win', names(scenarios)) &
   ))
 # copy to winter directories as well:
 writeRaster(
-  rast('GIS/landscape_rasters/waterbird_fall/scenario2_perennialexpand_alt/droost_km.tif'),
-  filename = 'GIS/landscape_rasters/waterbird_win/scenario2_perennialexpand_alt_win/droost_km.tif')
+  rast('GIS/SDM_predictors/waterbird_fall/scenario2_perennialexpand_alt/droost_km.tif'),
+  filename = 'GIS/SDM_predictors/waterbird_win/scenario2_perennialexpand_alt_win/droost_km.tif')
 writeRaster(
-  rast('GIS/landscape_rasters/waterbird_fall/scenario3_combo_alt/droost_km.tif'),
-  filename = 'GIS/landscape_rasters/waterbird_win/scenario3_combo_alt_win/droost_km.tif')
+  rast('GIS/SDM_predictors/waterbird_fall/scenario3_combo_alt/droost_km.tif'),
+  filename = 'GIS/SDM_predictors/waterbird_win/scenario3_combo_alt_win/droost_km.tif')
 
 # FOCAL STATS---------
 # summarizing landcover stats within a moving window surrounding each focal
@@ -246,15 +246,15 @@ purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
              landscape = scenarios[[.x]],
              landscape_name = .x,
              SDM = 'riparian',
-             pathout = 'GIS/landscape_rasters/cover',
+             pathout = 'GIS/SDM_predictors/cover',
              overwrite = TRUE))
 
 # waterbird_fall
-pwater_list = list.files('GIS/landscape_rasters/pwater', 'pwater.tif',
+pwater_list = list.files('GIS/SDM_predictors/pwater', 'pwater.tif',
                          recursive = TRUE, full.names = TRUE)
 pwater_fall =  pwater_list[-which(grepl('_win', pwater_list))] %>% rast()
 names(pwater_fall) = pwater_list[-which(grepl('_win', pwater_list))] %>%
-  gsub('GIS/landscape_rasters/pwater/|/pwater.tif', '', .)
+  gsub('GIS/SDM_predictors/pwater/|/pwater.tif', '', .)
 
 purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
            ~DeltaMultipleBenefits::python_focal_prep(
@@ -263,14 +263,14 @@ purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
              SDM = 'waterbird_fall',
              mask = pwater_fall[[.x]],
              pixel_value = 0.09,
-             pathout = 'GIS/landscape_rasters/cover',
+             pathout = 'GIS/SDM_predictors/cover',
              suffix = c('_area', '_pfld'),
              overwrite = TRUE))
 
 # waterbird_win
 pwater_win =  pwater_list[which(grepl('_win', pwater_list))] %>% rast()
 names(pwater_win) = pwater_list[which(grepl('_win', pwater_list))] %>%
-  gsub('GIS/landscape_rasters/pwater/|/pwater.tif', '', .)
+  gsub('GIS/SDM_predictors/pwater/|/pwater.tif', '', .)
 
 purrr::map(names(scenarios)[which(grepl('win', names(scenarios)))],
            ~DeltaMultipleBenefits::python_focal_prep(
@@ -279,10 +279,54 @@ purrr::map(names(scenarios)[which(grepl('win', names(scenarios)))],
              SDM = 'waterbird_win',
              mask = pwater_win[[.x]],
              pixel_value = 0.09,
-             pathout = 'GIS/landscape_rasters/cover',
+             pathout = 'GIS/SDM_predictors/cover',
              suffix = c('_area', '_pfld'),
              overwrite = TRUE))
 
+### alt---------
+# riparian
+purrr::map(names(scenarios)[which(!grepl('win', names(scenarios)) & grepl('_alt', names(scenarios)))],
+           ~DeltaMultipleBenefits::python_focal_prep(
+             landscape = scenarios[[.x]],
+             landscape_name = .x,
+             SDM = 'riparian',
+             pathout = 'GIS/SDM_predictors/cover',
+             overwrite = TRUE))
+
+# waterdat for waterbirds
+pwater_list = list.files('GIS/SDM_predictors/pwater', 'pwater.tif',
+                         recursive = TRUE, full.names = TRUE)
+fall = which(!grepl('_win', pwater_list) & grepl('_alt', pwater_list))
+pwater_fall_alt =  pwater_list[fall] %>% rast()
+names(pwater_fall_alt) = pwater_list[fall] %>%
+  gsub('GIS/SDM_predictors/pwater/|/pwater.tif', '', .)
+
+win = which(grepl('_win', pwater_list) & grepl('_alt', pwater_list))
+pwater_win_alt =  pwater_list[win] %>% rast()
+names(pwater_win_alt) = pwater_list[win] %>%
+  gsub('GIS/SDM_predictors/pwater/|/pwater.tif', '', .)
+
+# waterbird_fall
+purrr::map(names(scenarios)[fall],
+           ~DeltaMultipleBenefits::python_focal_prep(
+             landscape = scenarios[[.x]],
+             landscape_name = .x,
+             SDM = 'waterbird_fall',
+             mask = pwater_fall_alt[[.x]],
+             pixel_value = 0.09,
+             pathout = 'GIS/SDM_predictors/cover',
+             suffix = c('_area', '_pfld')))
+
+# waterbird_win
+purrr::map(names(scenarios)[win],
+           ~DeltaMultipleBenefits::python_focal_prep(
+             landscape = scenarios[[.x]],
+             landscape_name = .x,
+             SDM = 'waterbird_win',
+             mask = pwater_win_alt[[.x]],
+             pixel_value = 0.09,
+             pathout = 'GIS/SDM_predictors/cover',
+             suffix = c('_area', '_pfld')))
 
 ## run Python focal stats------------
 # for faster compilation of focal stats, use python and arcpy (requires python
@@ -313,54 +357,92 @@ combos_python = bind_rows(
 # riparian: total pixels within buffer
 combos_python %>% filter(SDM == 'riparian') %>%
   purrr::pmap(DeltaMultipleBenefits::python_focal_run,
-              pathin = 'GIS/landscape_rasters/cover',
-              pathout = 'GIS/landscape_rasters/focal_stats',
+              pathin = 'GIS/SDM_predictors/cover',
+              pathout = 'GIS/SDM_predictors/focal_stats',
               fun = 'SUM')
 
 # waterbirds: fall and winter, total area within buffer, requires regex
 combos_python %>% filter(SDM != 'riparian') %>%
   purrr::pmap(DeltaMultipleBenefits::python_focal_run,
-              pathin = 'GIS/landscape_rasters/cover',
-              pathout = 'GIS/landscape_rasters/focal_stats',
+              pathin = 'GIS/SDM_predictors/cover',
+              pathout = 'GIS/SDM_predictors/focal_stats',
               regex = '*_area.tif', fun = 'SUM')
 
 # waterbirds: fall and winter, mean pfld within buffer, requires regex
 combos_python %>% filter(SDM != 'riparian') %>%
   purrr::pmap(DeltaMultipleBenefits::python_focal_run,
-              pathin = 'GIS/landscape_rasters/cover',
-              pathout = 'GIS/landscape_rasters/focal_stats',
+              pathin = 'GIS/SDM_predictors/cover',
+              pathout = 'GIS/SDM_predictors/focal_stats',
+              regex = '*_pfld.tif', fun = 'MEAN')
+
+### alt-------
+combos_python_alt = bind_rows(
+  expand_grid(SDM = 'riparian',
+              landscape_name = names(scenarios)[which(!grepl('win', names(scenarios)) &
+                                                        grepl('_alt', names(scenarios)))],
+              scale = c('50', '2000')),
+  expand_grid(SDM = 'waterbird_fall',
+              landscape_name = names(scenarios)[which(!grepl('win', names(scenarios)) &
+                                                         grepl('_alt', names(scenarios)))],
+              scale = c('2000', '5000', '10000')),
+  expand_grid(SDM = 'waterbird_win',
+              landscape_name = names(scenarios)[which(grepl('win', names(scenarios)) &
+                                                        grepl('_alt', names(scenarios)))],
+              scale = c('5000', '10000')))
+
+# riparian: total pixels within buffer
+combos_python_alt %>% filter(SDM == 'riparian') %>%
+  purrr::pmap(DeltaMultipleBenefits::python_focal_run,
+              pathin = 'GIS/SDM_predictors/cover',
+              pathout = 'GIS/SDM_predictors/focal_stats',
+              fun = 'SUM')
+
+# waterbirds: fall and winter, total area within buffer, requires regex
+combos_python_alt %>% filter(SDM != 'riparian') %>%
+  purrr::pmap(DeltaMultipleBenefits::python_focal_run,
+              pathin = 'GIS/SDM_predictors/cover',
+              pathout = 'GIS/SDM_predictors/focal_stats',
+              regex = '*_area.tif', fun = 'SUM')
+
+# waterbirds: fall and winter, mean pfld within buffer, requires regex
+combos_python_alt %>% filter(SDM != 'riparian') %>%
+  purrr::pmap(DeltaMultipleBenefits::python_focal_run,
+              pathin = 'GIS/SDM_predictors/cover',
+              pathout = 'GIS/SDM_predictors/focal_stats',
               regex = '*_pfld.tif', fun = 'MEAN')
 
 ## finalize predictors----------
 # convert riparian pixel counts to proportion area; fix predictor names to match
 # inputs expected by SDMs; mask by study area boundary
+purrr::pmap(combos_python, # can filter/subset as needed
+            DeltaMultipleBenefits::python_focal_finalize,
+            pathin = 'GIS/SDM_predictors/focal_stats',
+            pathout = 'GIS/SDM_predictors',
+            mask = 'GIS/boundaries/delta.tif',
+            cover = TRUE,
+            overwrite = TRUE)
 
-combos_finalize = combos_python %>%
-  mutate(
-    pathout = case_when(
-      SDM == 'riparian' ~ 'GIS/landscape_rasters/predictors_riparian',
-      SDM == 'waterbird_fall' ~ 'GIS/landscape_rasters/predictors_waterbird_fall',
-      SDM == 'waterbird_win' ~ 'GIS/landscape_rasters/predictors_waterbird_win'))
-
-combos_finalize %>% filter(SDM == 'riparian') %>% #filter/subset as needed
-  purrr::pmap(DeltaMultipleBenefits::python_focal_finalize,
-              pathin = 'GIS/landscape_rasters/focal_stats',
-              maskpath = 'GIS/boundaries/delta.tif',
-              cover = TRUE,
-              overwrite = TRUE)
+### alt------
+purrr::pmap(combos_python_alt %>% filter(SDM != 'riparian'),
+            DeltaMultipleBenefits::python_focal_finalize,
+            pathin = 'GIS/SDM_predictors/focal_stats',
+            pathout = 'GIS/SDM_predictors',
+            mask = 'GIS/boundaries/delta.tif',
+            cover = TRUE,
+            overwrite = TRUE)
 
 ## compare predictors---------
 # compare scenarios to baseline in case of any substantial deviation
 
 ### riparian----
 riparian = list(
-  baseline = list.files('GIS/landscape_rasters/predictors_riparian/baseline/',
+  baseline = list.files('GIS/SDM_predictors/riparian/baseline/',
                         '.tif$', full.names = TRUE) %>% rast(),
-  scenario1 = list.files('GIS/landscape_rasters/predictors_riparian/scenario1_restoration/',
+  scenario1 = list.files('GIS/SDM_predictors/riparian/scenario1_restoration/',
                          '.tif$', full.names = TRUE) %>% rast(),
-  scenario2 = list.files('GIS/landscape_rasters/predictors_riparian/scenario2_perennialexpand/',
+  scenario2 = list.files('GIS/SDM_predictors/riparian/scenario2_perennialexpand/',
                          '.tif$', full.names = TRUE) %>% rast(),
-  scenario3 = list.files('GIS/landscape_rasters/predictors_riparian/scenario3_combo/',
+  scenario3 = list.files('GIS/SDM_predictors/riparian/scenario3_combo/',
                          '.tif$', full.names = TRUE) %>% rast())
 
 rip_stats = purrr::map_df(
@@ -389,13 +471,13 @@ rip_stats %>%
 
 ### waterbird_fall----
 waterbird_fall = list(
-  baseline = list.files('GIS/landscape_rasters/predictors_waterbird_fall/baseline/',
+  baseline = list.files('GIS/SDM_predictors/waterbird_fall/baseline/',
                         '.tif$', full.names = TRUE) %>% rast(),
-  scenario1 = list.files('GIS/landscape_rasters/predictors_waterbird_fall/scenario1_restoration/',
+  scenario1 = list.files('GIS/SDM_predictors/waterbird_fall/scenario1_restoration/',
                          '.tif$', full.names = TRUE) %>% rast(),
-  scenario2 = list.files('GIS/landscape_rasters/predictors_waterbird_fall/scenario2_perennialexpand/',
+  scenario2 = list.files('GIS/SDM_predictors/waterbird_fall/scenario2_perennialexpand/',
                          '.tif$', full.names = TRUE) %>% rast(),
-  scenario3 = list.files('GIS/landscape_rasters/predictors_waterbird_fall/scenario3_combo/',
+  scenario3 = list.files('GIS/SDM_predictors/waterbird_fall/scenario3_combo/',
                          '.tif$', full.names = TRUE) %>% rast())
 
 fall_stats = purrr::map_df(
@@ -468,13 +550,13 @@ fall_stats %>%
 
 ### waterbird_win-----
 waterbird_win = list(
-  baseline = list.files('GIS/landscape_rasters/predictors_waterbird_win/baseline_win/',
+  baseline = list.files('GIS/SDM_predictors/waterbird_win/baseline_win/',
                         '.tif$', full.names = TRUE) %>% rast(),
-  scenario1 = list.files('GIS/landscape_rasters/predictors_waterbird_win/scenario1_restoration_win/',
+  scenario1 = list.files('GIS/SDM_predictors/waterbird_win/scenario1_restoration_win/',
                          '.tif$', full.names = TRUE) %>% rast(),
-  scenario2 = list.files('GIS/landscape_rasters/predictors_waterbird_win/scenario2_perennialexpand_win/',
+  scenario2 = list.files('GIS/SDM_predictors/waterbird_win/scenario2_perennialexpand_win/',
                          '.tif$', full.names = TRUE) %>% rast(),
-  scenario3 = list.files('GIS/landscape_rasters/predictors_waterbird_win/scenario3_combo_win/',
+  scenario3 = list.files('GIS/SDM_predictors/waterbird_win/scenario3_combo_win/',
                          '.tif$', full.names = TRUE) %>% rast())
 
 win_stats = purrr::map_df(
@@ -503,7 +585,7 @@ load('data/waterbirds/BRT_models_final.RData')
 # riparian
 purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
            ~DeltaMultipleBenefits::fit_SDM(
-             pathin = 'GIS/landscape_rasters/predictors_riparian',
+             pathin = 'GIS/SDM_predictors/riparian',
              landscape_name = .x,
              modlist = BRT_riparian,
              constants = data.frame(region = 1,
@@ -511,7 +593,7 @@ purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
              unsuitable = 90, #open water
              landscape = scenarios[[.x]] %>%
                mask(rast('GIS/boundaries/delta.tif')),
-             pathout = 'GIS/prediction_rasters/riparian',
+             pathout = 'GIS/SDM_results/riparian',
              overwrite = TRUE
            ))
 
@@ -521,7 +603,7 @@ purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
 # crane, geese:
 purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
            ~DeltaMultipleBenefits::fit_SDM(
-             pathin = 'GIS/landscape_rasters/predictors_waterbird_fall',
+             pathin = 'GIS/SDM_predictors/waterbird_fall',
              landscape_name = .x,
              modlist = waterbird_mods_fall[c('crane', 'geese')],
              constants = data.frame(offset = 3.709),
@@ -532,14 +614,14 @@ purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
              unsuitable = c(10:19, 60, 130), #perennial crops, urban, barren
              landscape = scenarios[[.x]] %>%
                mask(rast('GIS/boundaries/delta.tif')),
-             pathout = 'GIS/prediction_rasters/waterbird_fall',
+             pathout = 'GIS/SDM_results/waterbird_fall',
              overwrite = TRUE
            ))
 
 # dblr, shore, cicon:
 purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
            ~DeltaMultipleBenefits::fit_SDM(
-             pathin = 'GIS/landscape_rasters/predictors_waterbird_fall',
+             pathin = 'GIS/SDM_predictors/waterbird_fall',
              landscape_name = .x,
              modlist = waterbird_mods_fall[c('dblr', 'cicon', 'shore')],
              constants = data.frame(offset = 4.435),
@@ -550,7 +632,7 @@ purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
              unsuitable = c(10:19, 60, 130), #perennial crops, urban, barren
              landscape = scenarios[[.x]] %>%
                mask(rast('GIS/boundaries/delta.tif')),
-             pathout = 'GIS/prediction_rasters/waterbird_fall',
+             pathout = 'GIS/SDM_results/waterbird_fall',
              overwrite = TRUE
            ))
 # beepr::beep(1)
@@ -558,7 +640,7 @@ purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
 # waterbird_win: one offset for all, so can do together
 purrr::map(names(scenarios)[which(grepl('win', names(scenarios)))],
            ~DeltaMultipleBenefits::fit_SDM(
-             pathin = 'GIS/landscape_rasters/predictors_waterbird_win',
+             pathin = 'GIS/SDM_predictors/waterbird_win',
              landscape_name = .x,
              modlist = waterbird_mods_win,
              constants = data.frame(offset = 3.617),
@@ -571,7 +653,7 @@ purrr::map(names(scenarios)[which(grepl('win', names(scenarios)))],
              unsuitable = c(10:19, 60, 130), #perennial crops, urban, barren
              landscape = scenarios[[.x]] %>%
                mask(rast('GIS/boundaries/delta.tif')),
-             pathout = 'GIS/prediction_rasters/waterbird_win',
+             pathout = 'GIS/SDM_results/waterbird_win',
              overwrite = TRUE))
 
 ## thresholds---------
@@ -580,29 +662,166 @@ purrr::map(names(scenarios)[which(grepl('win', names(scenarios)))],
 purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
            ~DeltaMultipleBenefits::transform_SDM(
              modlist = BRT_riparian,
-             pathin = 'GIS/prediction_rasters',
+             pathin = 'GIS/SDM_results',
              SDM = 'riparian',
              landscape_name = .x,
              stat = 'equal_sens_spec',
-             pathout = 'GIS/prediction_rasters_threshold'))
+             pathout = 'GIS/SDM_results_threshold'))
 
 purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
            ~DeltaMultipleBenefits::transform_SDM(
              modlist = waterbird_mods_fall,
-             pathin = 'GIS/prediction_rasters',
+             pathin = 'GIS/SDM_results',
              SDM = 'waterbird_fall',
              landscape_name = .x,
              stat = 'equal_sens_spec',
-             pathout = 'GIS/prediction_rasters_threshold'))
+             pathout = 'GIS/SDM_results_threshold'))
 
 purrr::map(names(scenarios)[which(grepl('win', names(scenarios)))],
            ~DeltaMultipleBenefits::transform_SDM(
              modlist = waterbird_mods_win,
-             pathin = 'GIS/prediction_rasters',
+             pathin = 'GIS/SDM_results',
              SDM = 'waterbird_win',
              landscape_name = .x,
              stat = 'equal_sens_spec',
-             pathout = 'GIS/prediction_rasters_threshold'))
+             pathout = 'GIS/SDM_results_threshold'))
+
+## alt-------
+# riparian
+purrr::map(names(scenarios)[which(!grepl('win', names(scenarios)) &
+                                    grepl('_alt', names(scenarios)))],
+           ~DeltaMultipleBenefits::fit_SDM(
+             pathin = 'GIS/SDM_predictors',
+             SDM = 'riparian',
+             landscape_name = .x,
+             modlist = BRT_riparian,
+             constants = data.frame(region = 1,
+                                    area.ha = 3.141593),
+             unsuitable = 90, #open water
+             landscape = scenarios[[.x]] %>%
+               mask(rast('GIS/boundaries/delta.tif')),
+             pathout = 'GIS/SDM_results',
+             overwrite = TRUE
+           ))
+
+# waterbird_fall -- note different offset values for cranes & geese vs. others
+# crane, geese:
+purrr::map(names(scenarios)[which(!grepl('win', names(scenarios)) &
+                                    grepl('_alt', names(scenarios)))],
+           ~DeltaMultipleBenefits::fit_SDM(
+             pathin = 'GIS/SDM_predictors',
+             SDM = 'waterbird_fall',
+             landscape_name = .x,
+             modlist = waterbird_mods_fall[c('crane', 'geese')],
+             constants = data.frame(offset = 3.709),
+             factors = list(list('covertype' = c('Alfalfa',
+                                                 'Irrigated pasture',
+                                                 'Rice',
+                                                 'Wetland'))),
+             unsuitable = c(10:19, 60, 130), #perennial crops, urban, barren
+             landscape = scenarios[[.x]] %>%
+               mask(rast('GIS/boundaries/delta.tif')),
+             pathout = 'GIS/SDM_results',
+             overwrite = TRUE))
+
+# dblr, shore, cicon:
+purrr::map(names(scenarios)[which(!grepl('win', names(scenarios)) & grepl('_alt', names(scenarios)))],
+           ~DeltaMultipleBenefits::fit_SDM(
+             pathin = 'GIS/SDM_predictors',
+             SDM = 'waterbird_fall',
+             landscape_name = .x,
+             modlist = waterbird_mods_fall[c('dblr', 'cicon', 'shore')],
+             constants = data.frame(offset = 4.435),
+             factors = list(list('covertype' = c('Alfalfa',
+                                                 'Irrigated pasture',
+                                                 'Rice',
+                                                 'Wetland'))),
+             unsuitable = c(10:19, 60, 130), #perennial crops, urban, barren
+             landscape = scenarios[[.x]] %>%
+               mask(rast('GIS/boundaries/delta.tif')),
+             pathout = 'GIS/SDM_results',
+             overwrite = TRUE))
+# beepr::beep(1)
+
+# waterbird_win: one offset for all, so can do together
+purrr::map(names(scenarios)[which(grepl('win', names(scenarios)) & grepl('_alt', names(scenarios)))],
+           ~DeltaMultipleBenefits::fit_SDM(
+             pathin = 'GIS/SDM_predictors',
+             SDM = 'waterbird_win',
+             landscape_name = .x,
+             modlist = waterbird_mods_win,
+             constants = data.frame(offset = 3.617),
+             factors = list(list('covertype' = c('Alfalfa',
+                                                 'Corn',
+                                                 'Irrigated pasture',
+                                                 'Rice',
+                                                 'Wetland',
+                                                 'Winter wheat'))),
+             unsuitable = c(10:19, 60, 130), #perennial crops, urban, barren
+             landscape = scenarios[[.x]] %>%
+               mask(rast('GIS/boundaries/delta.tif')),
+             pathout = 'GIS/SDM_results',
+             overwrite = TRUE))
+
+## thresholds:
+
+# purrr::pmap(sets,
+#             DeltaMultipleBenefits::transform_SDM,
+#             stat = 'equal_sens_spec',
+#             pathin = 'GIS/prediction_rasters',
+#             pathout = 'GIS/prediction_rasters_threshold')
+
+
+purrr::map(names(scenarios)[which(!grepl('win', names(scenarios)) & grepl('_alt', names(scenarios)))],
+           ~DeltaMultipleBenefits::transform_SDM(
+             modlist = BRT_riparian,
+             pathin = 'GIS/SDM_results',
+             SDM = 'riparian',
+             landscape_name = .x,
+             stat = 'equal_sens_spec',
+             pathout = 'GIS/SDM_results_threshold'))
+
+purrr::map(names(scenarios)[which(!grepl('win', names(scenarios)) & grepl('_alt', names(scenarios)))],
+           ~DeltaMultipleBenefits::transform_SDM(
+             modlist = waterbird_mods_fall,
+             pathin = 'GIS/SDM_results',
+             SDM = 'waterbird_fall',
+             landscape_name = .x,
+             stat = 'equal_sens_spec',
+             pathout = 'GIS/SDM_results_threshold'))
+
+purrr::map(names(scenarios)[which(grepl('win', names(scenarios)) & grepl('_alt', names(scenarios)))],
+           ~DeltaMultipleBenefits::transform_SDM(
+             modlist = waterbird_mods_win,
+             pathin = 'GIS/SDM_results',
+             SDM = 'waterbird_win',
+             landscape_name = .x,
+             stat = 'equal_sens_spec',
+             pathout = 'GIS/SDM_results_threshold'))
+
+# SUMMARIZE TOTAL HABITAT---------
+# total suitable habitat for each landscape, predicted from SDMs
+
+## probability of presence:
+habitat = DeltaMultipleBenefits::sum_habitat(
+  pathin = 'GIS/SDM_results',
+  subtype = 'distributions',
+  rollup = TRUE,
+  key = 'output/TABLE_species_key.csv',
+  scale = 0.09) %>%
+  mutate(UNIT = 'ha')
+write_csv(habitat, 'output/scenario_habitat.csv')
+
+## binary presence/absence (using thresholds):
+habitat_binary = DeltaMultipleBenefits::sum_habitat(
+  pathin = 'GIS/SDM_results_threshold',
+  subtype = 'habitat',
+  rollup = TRUE,
+  key = 'output/TABLE_species_key.csv',
+  scale = 0.09) %>%
+  mutate(UNIT = 'ha')
+write_csv(habitat_binary, 'output/scenario_habitat_binary.csv')
+
 
 # CALCULATE CHANGE MAPS--------
 # ideally distinguish between areas that never were habitat and still aren't
@@ -612,11 +831,11 @@ purrr::map(names(scenarios)[which(grepl('win', names(scenarios)))],
 purrr::map(c('scenario1_restoration',
              'scenario2_perennialexpand',
              'scenario3_combo'),
-           ~calc_change_SDM(pathin = 'GIS/prediction_rasters_threshold',
+           ~calc_change_SDM(pathin = 'GIS/SDM_results_threshold',
                             SDM = 'riparian',
                             baseline_name = 'baseline',
                             scenario_name = .x,
-                            pathout = 'GIS/change_rasters',
+                            pathout = 'GIS/SDM_results_diff',
                             differentiate = TRUE,
                             overwrite = TRUE))
 
@@ -624,11 +843,11 @@ purrr::map(c('scenario1_restoration',
 purrr::map(c('scenario1_restoration',
              'scenario2_perennialexpand',
              'scenario3_combo'),
-           ~calc_change_SDM(pathin = 'GIS/prediction_rasters_threshold',
+           ~calc_change_SDM(pathin = 'GIS/SDM_results_threshold',
                             SDM = 'waterbird_fall',
                             baseline_name = 'baseline',
                             scenario_name = .x,
-                            pathout = 'GIS/change_rasters',
+                            pathout = 'GIS/SDM_results_diff',
                             differentiate = TRUE,
                             overwrite = TRUE))
 
@@ -636,155 +855,29 @@ purrr::map(c('scenario1_restoration',
 purrr::map(c('scenario1_restoration_win',
              'scenario2_perennialexpand_win',
              'scenario3_combo_win'),
-           ~calc_change_SDM(pathin = 'GIS/prediction_rasters_threshold',
+           ~calc_change_SDM(pathin = 'GIS/SDM_results_threshold',
                             SDM = 'waterbird_win',
                             baseline_name = 'baseline_win',
                             scenario_name = .x,
-                            pathout = 'GIS/change_rasters',
+                            pathout = 'GIS/SDM_results_diff',
                             differentiate = TRUE,
                             overwrite = TRUE))
 
-# PLOT CHANGE MAPS---------
-# Note: these plots are slow to produce!
+## alt-----
+combos = bind_rows(
+  expand_grid(scenario_name = names(scenarios)[which(!grepl('win', names(scenarios)) &
+                                                       grepl('_alt', names(scenarios)))],
+              SDM = c('riparian', 'waterbird_fall'),
+              baseline_name = 'baseline'),
+  expand_grid(scenario_name = names(scenarios)[which(grepl('win', names(scenarios)) &
+                                                       grepl('_alt', names(scenarios)))],
+              SDM = 'waterbird_win',
+              baseline_name = 'baseline_win')
+)
 
-spp_key = read_csv('output/TABLE_species_key.csv')
-
-delta_shp = read_sf('GIS/boundaries/Legal_Delta_Boundary.shp') %>%
-  st_transform(crs = st_crs(32610))
-
-water = scenarios$baseline %>% mask(rast('GIS/boundaries/delta.tif'))
-levels(water) <- NULL #have to do this for subst to work? otherwise doesn't seem to recognize numeric values
-water = water %>% subst(c(0:89,91:135), NA)
-
-library(showtext)
-font_add_google('Source Sans Pro', 'sourcesans')
-
-library(tidyterra)
-
-## riparian
-# --> should be able to use purrr for multiple scenarios, but was getting errors
-# with new device issues with ggsave
-
-plot_change_map(pathin = 'GIS/change_rasters',
-                SDM = 'riparian',
-                landscape_name = 'scenario1_restoration',
-                key = spp_key,
-                ncol = 5,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_riparian_scenario1.png',
-                height = 7, width = 10,
-                legend.position = c(1, 0),
-                legend.justification = c(1, 0))
-
-plot_change_map(pathin = 'GIS/change_rasters',
-                SDM = 'riparian',
-                landscape_name = 'scenario2_perennialexpand',
-                key = spp_key,
-                ncol = 5,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_riparian_scenario2.png',
-                height = 7, width = 10,
-                legend.position = c(1, 0),
-                legend.justification = c(1, 0))
-
-plot_change_map(pathin = 'GIS/change_rasters',
-                SDM = 'riparian',
-                landscape_name = 'scenario3_combo',
-                key = spp_key,
-                ncol = 5,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_riparian_scenario3.png',
-                height = 7, width = 10,
-                legend.position = c(1, 0),
-                legend.justification = c(1, 0))
-
-## waterbird_fall
-plot_change_map(pathin = 'GIS/change_rasters',
-                SDM = 'waterbird_fall',
-                landscape_name = 'scenario1_restoration',
-                key = spp_key,
-                ncol = 3,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_waterbird_fall_scenario1.png',
-                height = 7, width = 7.5)
-
-plot_change_map(pathin = 'GIS/change_rasters',
-                SDM = 'waterbird_fall',
-                landscape_name = 'scenario2_perennialexpand',
-                key = spp_key,
-                ncol = 3,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_waterbird_fall_scenario2.png',
-                height = 7, width = 7.5)
-
-plot_change_map(pathin = 'GIS/change_rasters',
-                SDM = 'waterbird_fall',
-                landscape_name = 'scenario3_combo',
-                key = spp_key,
-                ncol = 3,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_waterbird_fall_scenario3.png',
-                height = 7, width = 7.5)
-
-## waterbird_winter
-plot_change_map(pathin = 'GIS/change_rasters',
-                SDM = 'waterbird_win',
-                landscape_name = 'scenario1_restoration_win',
-                key = spp_key,
-                ncol = 3,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_waterbird_win_scenario1.png',
-                height = 7, width = 7.5)
-
-plot_change_map(pathin = 'GIS/change_rasters',
-                SDM = 'waterbird_win',
-                landscape_name = 'scenario2_perennialexpand_win',
-                key = spp_key,
-                ncol = 3,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_waterbird_win_scenario2.png',
-                height = 7, width = 7.5)
-
-plot_change_map(pathin = 'GIS/change_rasters',
-                SDM = 'waterbird_win',
-                landscape_name = 'scenario3_combo_win',
-                key = spp_key,
-                ncol = 3,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_waterbird_win_scenario3.png',
-                height = 7, width = 7.5)
-
-showtext_auto(F)
-
-# SUMMARIZE TOTAL HABITAT---------
-# total suitable habitat for each landscape, predicted from SDMs
-
-## probability of presence:
-habitat = DeltaMultipleBenefits::sum_habitat(
-  pathin = 'GIS/prediction_rasters',
-  subtype = 'distributions',
-  rollup = TRUE,
-  key = 'output/TABLE_species_key.csv',
-  scale = 0.09) %>%
-  mutate(UNIT = 'ha')
-write_csv(habitat, 'output/scenario_habitat.csv')
-
-
-## binary presence/absence (using thresholds):
-habitat_binary = DeltaMultipleBenefits::sum_habitat(
-  pathin = 'GIS/prediction_rasters_threshold',
-  subtype = 'habitat',
-  rollup = TRUE,
-  key = 'output/TABLE_species_key.csv',
-  scale = 0.09) %>%
-  mutate(UNIT = 'ha')
-write_csv(habitat_binary, 'output/scenario_habitat_binary.csv')
+purrr::pmap(combos,
+            calc_change_SDM,
+            pathin = 'GIS/SDM_results_threshold',
+            pathout = 'GIS/SDM_results_diff',
+            differentiate = TRUE,
+            overwrite = TRUE)
