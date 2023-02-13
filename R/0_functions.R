@@ -1500,14 +1500,14 @@ plot_change_bar = function(dat) {
           panel.spacing = unit(1, 'lines'))
 }
 
-plot_change_lollipop = function(dat) {
+plot_change_lollipop = function(dat, digits) {
   dat %>% mutate(METRIC = gsub('\n', ' ', METRIC)) %>%
     ggplot(aes(net_change, METRIC, fill = bin, color = bin)) +
     facet_wrap(~scenario, ncol = 3) +
     geom_vline(xintercept = 0, color = 'gray30') +
     geom_col(width = 0.25) +
     geom_point(size = 10) +
-    geom_text(aes(label = round(net_change, digits = 0)),
+    geom_text(aes(label = round(net_change, digits = digits)),
               color = 'black', size = 4) +
     scale_fill_manual(values = pointblue.palette[c(1,3)]) +
     scale_color_manual(values = pointblue.palette[c(1,3)]) +

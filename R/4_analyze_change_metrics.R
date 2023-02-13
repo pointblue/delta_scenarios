@@ -42,7 +42,7 @@ scores = DeltaMultipleBenefits::sum_metrics(
   areadat = landcover %>%
     filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))) %>%
     filter(!grepl('win', scenario))) %>%
-  bind_rows(habitat, habitat_binary) %>%
+  bind_rows(habitat_binary) %>% #exclude habitat/distribution data
   mutate(scenario = gsub('_win', '', scenario)) %>% #rename in habitat metrics
   arrange(scenario, METRIC_CATEGORY, METRIC) %>%
   mutate(UNIT = gsub('/ha', '', UNIT)) # now scores are not per ha
@@ -66,7 +66,9 @@ scores_table = scores %>% filter(is.na(METRIC_SUBTYPE) | grepl('habitat', METRIC
                              c('Water Quality', 'Climate Change Resilience') ~
                              round(., digits = 2) %>% format(nsmall = 2),
                            TRUE ~ round(., digits = 0) %>% format(nsmall = 0)))) %>%
-  select(scenario, METRIC_CATEGORY, METRIC, UNIT, SCORE_TOTAL, SCORE_TOTAL_SE) %>%
+  select(scenario, METRIC_CATEGORY, METRIC, UNIT, SCORE_TOTAL, SCORE_TOTAL_SE)
+
+scores_table_wide = scores_table %>%
   pivot_wider(names_from = scenario,
               values_from = c(SCORE_TOTAL, SCORE_TOTAL_SE)) %>%
   select(METRIC_CATEGORY, METRIC, UNIT, ends_with('baseline'),
@@ -111,6 +113,7 @@ spplist = c(
 
 netchange = read_csv('output/netchange_scores.csv', col_types = cols()) %>%
   filter(METRIC %in% metriclist & !grepl('distributions', METRIC_SUBTYPE)) %>%
+  filter(scenario %in% c('scenario1_restoration', 'scenario2_perennialexpand_alt', 'scenario3_combo_alt')) %>%
   mutate(
     # rescale metrics for readability
     across(c(BASELINE, BASELINE_SE, SCENARIO, SCENARIO_SE, net_change, net_change_se),
@@ -143,18 +146,14 @@ netchange = read_csv('output/netchange_scores.csv', col_types = cols()) %>%
     bin = if_else(net_change > 0, 'benefit', 'trade-off')) %>%
   mutate(scenario = factor(scenario,
                            levels = c('scenario1_restoration',
-                                      'scenario2_perennialexpand',
-                                      'scenario3_combo'),
+                                      'scenario2_perennialexpand_alt',
+                                      'scenario3_combo_alt'),
                            labels = c('Scenario 1:\nHabitat restoration',
                                       'Scenario 2:\nPerennial crop\nexpansion',
                                       'Scenario 3:\nCombination')))
 
 ## for manuscript-----
 # barchart with error bars
-
-
-
-
 part1 = netchange %>%
   filter(METRIC_CATEGORY == 'Agricultural Livelihoods') %>%
   plot_change_bar() +
@@ -192,25 +191,25 @@ showtext_auto(FALSE)
 
 part1 = netchange %>%
   filter(METRIC_CATEGORY == 'Agricultural Livelihoods') %>%
-  plot_change_lollipop() +
+  plot_change_lollipop(digits = 0) +
   labs(x = NULL, y = NULL, title = 'Agricultural Livelihoods') +
   xlim(-600, 600)
 
 part2 = netchange %>%
   filter(METRIC_CATEGORY == 'Water Quality') %>%
-  plot_change_lollipop() +
+  plot_change_lollipop(digits = 0) +
   labs(x = NULL, y = NULL, title = 'Water Quality') +
   xlim(-75, 75)
 
 part3 = netchange %>%
   filter(METRIC_CATEGORY == 'Climate Change Resilience') %>%
-  plot_change_lollipop() +
+  plot_change_lollipop(digits = 1) +
   labs(x = NULL, y = NULL, title = 'Climate Change Resilience') +
   xlim(-0.3, 0.3)
 
 part4 = netchange %>%
   filter(METRIC_CATEGORY == 'Biodiversity Support') %>%
-  plot_change_lollipop() +
+  plot_change_lollipop(digits = 0) +
   facet_wrap(~scenario, ncol = 3, strip.position = 'bottom') +
   labs(x = NULL, y = NULL, title = 'Biodiversity Support') +
   xlim(-7000, 7000) +
@@ -220,7 +219,8 @@ part4 = netchange %>%
 showtext_auto()
 showtext_opts(dpi = 300) #default for ggsave
 part1/part2/part3/part4
-ggsave('fig/netchange_lollipop_all3.png', height = 7.5, width = 11, units = 'in')
+ggsave('fig/presentations/netchange_lollipop.png',
+       height = 7.5, width = 11, units = 'in')
 showtext_auto(FALSE)
 
 
