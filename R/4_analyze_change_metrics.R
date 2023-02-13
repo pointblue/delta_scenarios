@@ -68,12 +68,21 @@ scores_table = scores %>% filter(is.na(METRIC_SUBTYPE) | grepl('habitat', METRIC
                            TRUE ~ round(., digits = 0) %>% format(nsmall = 0)))) %>%
   select(scenario, METRIC_CATEGORY, METRIC, UNIT, SCORE_TOTAL, SCORE_TOTAL_SE)
 
+# define metric category order
+categorylist = c('Agricultural Livelihoods',
+                 'Water Quality',
+                 'Climate Change Resilience',
+                 'Biodiversity Support')
+
 scores_table_wide = scores_table %>%
+  filter(grepl('baseline|scenario1|_alt', scenario)) %>%
   pivot_wider(names_from = scenario,
               values_from = c(SCORE_TOTAL, SCORE_TOTAL_SE)) %>%
   select(METRIC_CATEGORY, METRIC, UNIT, ends_with('baseline'),
-         ends_with('restoration'), ends_with('expand'), ends_with('combo'))
-write_csv(scores_table, 'output/TABLE_scores_summary.csv')
+         ends_with('restoration'), ends_with('expand_alt'), ends_with('combo_alt')) %>%
+  mutate(METRIC_CATEGORY = factor(METRIC_CATEGORY, levels = categorylist)) %>%
+  arrange(METRIC_CATEGORY)
+write_csv(scores_table_wide, 'output/TABLE_scores_summary.csv')
 
 ## net change-------
 # compare each scenario to baseline

@@ -1,73 +1,13 @@
-scenario,METRIC_CATEGORY,METRIC,UNIT,SCORE_TOTAL,SCORE_TOTAL_SE
-baseline,Agricultural Livelihoods,Agricultural Jobs,FTE/yr,  2514,  144
-baseline,Agricultural Livelihoods,Annual Wages,USD/FTE, 38727,  614
-baseline,Agricultural Livelihoods,Gross Production Value,USD/yr (thousands),814558,20702
-baseline,Biodiversity Support,Total,ha,201883,   NA
-baseline,Biodiversity Support,Total (fall),ha, 25068,   NA
-baseline,Biodiversity Support,Total (winter),ha, 55603,   NA
-baseline,Climate Change Resilience,Drought,"qualitative score, 1-10",     5.62,    0.05
-baseline,Climate Change Resilience,Flood,"qualitative score, 1-10",     5.90,    0.05
-baseline,Climate Change Resilience,Heat,"qualitative score, 1-10",     6.94,    0.06
-baseline,Water Quality,Critical Pesticides,MT/yr,   125.43,    9.89
-baseline,Water Quality,Groundwater Contaminant,MT/yr,    16.24,    2.13
-baseline,Water Quality,Risk to Aquatic Organisms,MT/yr,   392.86,   16.78
-scenario1_restoration,Agricultural Livelihoods,Agricultural Jobs,FTE/yr,  2458,  142
-scenario1_restoration,Agricultural Livelihoods,Annual Wages,USD/FTE, 38698,  613
-scenario1_restoration,Agricultural Livelihoods,Gross Production Value,USD/yr (thousands),797689,20401
-scenario1_restoration,Biodiversity Support,Total,ha,207878,   NA
-scenario1_restoration,Biodiversity Support,Total (fall),ha, 28955,   NA
-scenario1_restoration,Biodiversity Support,Total (winter),ha, 59447,   NA
-scenario1_restoration,Climate Change Resilience,Drought,"qualitative score, 1-10",     5.56,    0.05
-scenario1_restoration,Climate Change Resilience,Flood,"qualitative score, 1-10",     5.96,    0.05
-scenario1_restoration,Climate Change Resilience,Heat,"qualitative score, 1-10",     6.94,    0.06
-scenario1_restoration,Water Quality,Critical Pesticides,MT/yr,   122.35,    9.67
-scenario1_restoration,Water Quality,Groundwater Contaminant,MT/yr,    15.98,    2.09
-scenario1_restoration,Water Quality,Risk to Aquatic Organisms,MT/yr,   382.44,   16.38
-scenario2_perennialexpand,Agricultural Livelihoods,Agricultural Jobs,FTE/yr,  2989,  215
-scenario2_perennialexpand,Agricultural Livelihoods,Annual Wages,USD/FTE, 38487,  573
-scenario2_perennialexpand,Agricultural Livelihoods,Gross Production Value,USD/yr (thousands),956472,30432
-scenario2_perennialexpand,Biodiversity Support,Total,ha,197463,   NA
-scenario2_perennialexpand,Biodiversity Support,Total (fall),ha, 24216,   NA
-scenario2_perennialexpand,Biodiversity Support,Total (winter),ha, 54366,   NA
-scenario2_perennialexpand,Climate Change Resilience,Drought,"qualitative score, 1-10",     5.41,    0.05
-scenario2_perennialexpand,Climate Change Resilience,Flood,"qualitative score, 1-10",     5.83,    0.06
-scenario2_perennialexpand,Climate Change Resilience,Heat,"qualitative score, 1-10",     6.69,    0.06
-scenario2_perennialexpand,Water Quality,Critical Pesticides,MT/yr,   129.00,    9.10
-scenario2_perennialexpand,Water Quality,Groundwater Contaminant,MT/yr,    18.74,    2.07
-scenario2_perennialexpand,Water Quality,Risk to Aquatic Organisms,MT/yr,   441.99,   17.85
-scenario2_perennialexpand_alt,Agricultural Livelihoods,Agricultural Jobs,FTE/yr,  2958,  205
-scenario2_perennialexpand_alt,Agricultural Livelihoods,Annual Wages,USD/FTE, 38488,  574
-scenario2_perennialexpand_alt,Agricultural Livelihoods,Gross Production Value,USD/yr (thousands),951670,29015
-scenario2_perennialexpand_alt,Biodiversity Support,Total,ha,197488,   NA
-scenario2_perennialexpand_alt,Biodiversity Support,Total (fall),ha, 24245,   NA
-scenario2_perennialexpand_alt,Biodiversity Support,Total (winter),ha, 54270,   NA
-scenario2_perennialexpand_alt,Climate Change Resilience,Drought,"qualitative score, 1-10",     5.43,    0.05
-scenario2_perennialexpand_alt,Climate Change Resilience,Flood,"qualitative score, 1-10",     5.83,    0.06
-scenario2_perennialexpand_alt,Climate Change Resilience,Heat,"qualitative score, 1-10",     6.69,    0.06
-scenario2_perennialexpand_alt,Water Quality,Critical Pesticides,MT/yr,   128.96,    9.12
-scenario2_perennialexpand_alt,Water Quality,Groundwater Contaminant,MT/yr,    19.18,    2.08
-scenario2_perennialexpand_alt,Water Quality,Risk to Aquatic Organisms,MT/yr,   437.10,   17.54
-scenario3_combo,Agricultural Livelihoods,Agricultural Jobs,FTE/yr,  2881,  207
-scenario3_combo,Agricultural Livelihoods,Annual Wages,USD/FTE, 38474,  575
-scenario3_combo,Agricultural Livelihoods,Gross Production Value,USD/yr (thousands),923077,29303
-scenario3_combo,Biodiversity Support,Total,ha,206024,   NA
-scenario3_combo,Biodiversity Support,Total (fall),ha, 27983,   NA
-scenario3_combo,Biodiversity Support,Total (winter),ha, 57692,   NA
-scenario3_combo,Climate Change Resilience,Drought,"qualitative score, 1-10",     5.36,    0.05
-scenario3_combo,Climate Change Resilience,Flood,"qualitative score, 1-10",     5.91,    0.05
-scenario3_combo,Climate Change Resilience,Heat,"qualitative score, 1-10",     6.72,    0.06
-scenario3_combo,Water Quality,Critical Pesticides,MT/yr,   125.03,    8.90
-scenario3_combo,Water Quality,Groundwater Contaminant,MT/yr,    18.17,    2.02
-scenario3_combo,Water Quality,Risk to Aquatic Organisms,MT/yr,   425.64,   17.29
-scenario3_combo_alt,Agricultural Livelihoods,Agricultural Jobs,FTE/yr,  2856,  198
-scenario3_combo_alt,Agricultural Livelihoods,Annual Wages,USD/FTE, 38474,  575
-scenario3_combo_alt,Agricultural Livelihoods,Gross Production Value,USD/yr (thousands),918840,28076
-scenario3_combo_alt,Biodiversity Support,Total,ha,206046,   NA
-scenario3_combo_alt,Biodiversity Support,Total (fall),ha, 28092,   NA
-scenario3_combo_alt,Biodiversity Support,Total (winter),ha, 57809,   NA
-scenario3_combo_alt,Climate Change Resilience,Drought,"qualitative score, 1-10",     5.37,    0.05
-scenario3_combo_alt,Climate Change Resilience,Flood,"qualitative score, 1-10",     5.91,    0.05
-scenario3_combo_alt,Climate Change Resilience,Heat,"qualitative score, 1-10",     6.72,    0.06
-scenario3_combo_alt,Water Quality,Critical Pesticides,MT/yr,   125.14,    8.92
-scenario3_combo_alt,Water Quality,Groundwater Contaminant,MT/yr,    18.58,    2.03
-scenario3_combo_alt,Water Quality,Risk to Aquatic Organisms,MT/yr,   421.55,   17.02
+METRIC_CATEGORY,METRIC,UNIT,SCORE_TOTAL_baseline,SCORE_TOTAL_SE_baseline,SCORE_TOTAL_scenario1_restoration,SCORE_TOTAL_SE_scenario1_restoration,SCORE_TOTAL_scenario2_perennialexpand_alt,SCORE_TOTAL_SE_scenario2_perennialexpand_alt,SCORE_TOTAL_scenario3_combo_alt,SCORE_TOTAL_SE_scenario3_combo_alt
+Agricultural Livelihoods,Agricultural Jobs,FTE/yr,  2514,  144,  2458,  142,  2958,  205,  2856,  198
+Agricultural Livelihoods,Annual Wages,USD/FTE, 38727,  614, 38698,  613, 38488,  574, 38474,  575
+Agricultural Livelihoods,Gross Production Value,USD/yr (thousands),814558,20702,797689,20401,951670,29015,918840,28076
+Water Quality,Critical Pesticides,MT/yr,   125.43,    9.89,   122.35,    9.67,   128.96,    9.12,   125.14,    8.92
+Water Quality,Groundwater Contaminant,MT/yr,    16.24,    2.13,    15.98,    2.09,    19.18,    2.08,    18.58,    2.03
+Water Quality,Risk to Aquatic Organisms,MT/yr,   392.86,   16.78,   382.44,   16.38,   437.10,   17.54,   421.55,   17.02
+Climate Change Resilience,Drought,"qualitative score, 1-10",     5.62,    0.05,     5.56,    0.05,     5.43,    0.05,     5.37,    0.05
+Climate Change Resilience,Flood,"qualitative score, 1-10",     5.90,    0.05,     5.96,    0.05,     5.83,    0.06,     5.91,    0.05
+Climate Change Resilience,Heat,"qualitative score, 1-10",     6.94,    0.06,     6.94,    0.06,     6.69,    0.06,     6.72,    0.06
+Biodiversity Support,Total,ha,201883,   NA,207878,   NA,197488,   NA,206046,   NA
+Biodiversity Support,Total (fall),ha, 25068,   NA, 28955,   NA, 24245,   NA, 28092,   NA
+Biodiversity Support,Total (winter),ha, 55603,   NA, 59447,   NA, 54270,   NA, 57809,   NA
