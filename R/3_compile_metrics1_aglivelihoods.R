@@ -306,6 +306,8 @@ edat_subset = edat_raw %>%
              # 924120 #conservation programs
            ))
 
+#for more info on NAICS codes: https://www.naics.com/search/
+
 ## classify landcovers---------
 edat_classify = edat_subset %>% codify_edd() %>%
   select(CODE_NAME, SUBCLASS, industry, county, year, est:wages_total)
