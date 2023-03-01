@@ -8,6 +8,7 @@
 # PACKAGES & FUNCTIONS
 source('R/0_packages.R')
 source('R/0_functions.R')
+library(tidyterra)
 library(patchwork)
 library(showtext)
 font_add_google('Source Sans Pro', 'sourcesans')
@@ -49,29 +50,31 @@ change_summary = bind_rows(
     # lump other classes
     mutate(LABEL = case_when(grepl('ORCHARD_|VINEYARD', CODE_NAME) ~ 'Perennial Crops',
                              grepl('GRAIN|HAY', CODE_NAME) ~ 'Grain & Hay',
-                             grepl('FIELD_CORN', CODE_NAME) ~ 'Corn', #specify so it doesn't combine with field & row
+                             # grepl('FIELD_CORN', CODE_NAME) ~ 'Corn', #specify so it doesn't combine with field & row
                              grepl('FIELD|ROW', CODE_NAME) ~ 'Field & Row Crops',
-                             grepl('ALFALFA', CODE_NAME) ~ 'Alfalfa',
+                             # grepl('ALFALFA', CODE_NAME) ~ 'Alfalfa',
                              grepl('GRASS|PASTURE', CODE_NAME) ~ 'Grassland & Pasture',
+                             grepl('WOODLAND|SCRUB', CODE_NAME) ~ 'Woodland & Scrub',
+                             grepl('WETLAND', CODE_NAME) ~ 'Wetland',
                              TRUE ~ LABEL),
            LABEL = factor(LABEL,
                           levels = c('Perennial Crops', 'Grain & Hay',
-                                     'Field & Row Crops', 'Corn', 'Rice',
-                                     'Idle', 'Grassland & Pasture', 'Alfalfa',
-                                     'Urban', 'Riparian', 'Managed Wetland',
-                                     'Tidal Wetland', 'Other Wetland',
-                                     'Woodland', 'Scrub', 'Barren') %>%
+                                     'Field & Row Crops', #'Corn',
+                                     'Rice', 'Grassland & Pasture', #'Alfalfa',
+                                     'Idle', 'Urban', 'Riparian',
+                                     'Wetland',
+                                     'Woodland & Scrub', 'Barren') %>%
                             rev())) %>%
     group_by(scenario, LABEL) %>%
     summarize(net_change = sum(net_change),
               change_pct = net_change/sum(BASELINE) * 100,
               .groups = 'drop') %>%
     # filter(!LABEL %in% c('Urban', 'Barren', 'Water', 'Woodland', 'Scrub')) %>%
-    mutate(bin = if_else(net_change > 0, 'increase', 'decrease'),
+    mutate(bin = if_else(net_change >= 0, 'increase', 'decrease'),
            group = 'Major classes') %>%
     arrange(scenario, LABEL),
   # wetland and riparian subclass detail
-  landcover_change %>% filter(grepl('RIPARIAN_|WETLAND_MANAGED_|ORCHARD|VINEYARD', CODE_NAME)) %>%
+  landcover_change %>% filter(grepl('RIPARIAN_|WETLAND_|ORCHARD|VINEYARD', CODE_NAME)) %>%
     filter(CODE_NAME != 'WETLAND_MANAGED') %>%
     mutate(LABEL = factor(LABEL,
                           levels = c('Orchard - Deciduous Fruits & Nuts',
@@ -93,81 +96,79 @@ change_summary = bind_rows(
               change_pct = net_change/sum(BASELINE) * 100,
               .groups = 'drop') %>%
     # filter(!LABEL %in% c('Urban', 'Barren', 'Water', 'Woodland', 'Scrub')) %>%
-    mutate(bin = if_else(net_change > 0, 'increase', 'decrease'),
+    mutate(bin = if_else(net_change >= 0, 'increase', 'decrease'),
            group = 'Subclasses') %>%
-    arrange(scenario, LABEL)
-) %>%
-  mutate(scenario = recode(scenario,
-                           'scenario1_restoration' = 'Scenario 1:\nHabitat restoration',
-                           'scenario2_perennialexpand_alt' = 'Scenario 2:\nPerennial crop\nexpansion',
-                           'scenario3_combo_alt' = 'Scenario 3:\nCombination'))
+    arrange(scenario, LABEL))
 
 ## for manuscript---------
-part1 = change_summary %>% filter(group == 'Major classes') %>%
-  ggplot(aes(net_change/1000, LABEL)) +
-  facet_wrap(~scenario, ncol = 3) +
-  geom_col(fill = 'gray60') +
-  geom_text(data = change_summary %>% filter(group == 'Major classes' & bin == 'increase'),
-            aes(x = net_change/1000 + 2,
-                label = paste0(round(change_pct, digits = 0), '%')), size = 2) +
-  geom_text(data = change_summary %>% filter(group == 'Major classes' & bin == 'decrease'),
-            aes(x = net_change/1000 - 2,
-                label = paste0(round(change_pct, digits = 0), '%')), size = 2) +
-  labs(y = NULL,
-       x = NULL,
-       title = 'A'
-       ) +
-  xlim(-7, 20) +
-  geom_vline(xintercept = 0, size = 0.2) +
-  theme_bw() +
-  theme(
-    strip.placement = 'outside',
-        # strip.text = element_blank(),
-        strip.text = element_text(family = 'sourcesans', size = 9, vjust = 0),
-        strip.background = element_blank(),
-        plot.title = element_text(family = 'sourcesans', size = 10),
-        panel.grid = element_blank(),
-        axis.text.x = element_blank(),
-        axis.text.y = element_text(family = 'sourcesans', size = 8, hjust = 1),
-        axis.title = element_text(family = 'sourcesans', size = 8),
-        legend.position = 'none')
+change_major = change_summary %>% filter(group == 'Major classes') %>%
+  mutate(scenario = recode(scenario,
+                           'scenario1_restoration' = 'A',
+                           'scenario2_perennialexpand_alt' = 'B',
+                           'scenario3_combo_alt' = 'C'))
 
-part2 = change_summary %>% filter(group != 'Major classes') %>%
-  ggplot(aes(net_change/1000, LABEL)) +
+part1 = ggplot(change_major, aes(net_change/1000, LABEL)) +
   facet_wrap(~scenario, ncol = 3) +
-  geom_col(fill = 'gray60') +
-  geom_text(data = change_summary %>% filter(group != 'Major classes' & bin == 'increase'),
-            aes(x = net_change/1000 + 2,
-                label = paste0(round(change_pct, digits = 0), '%')), size = 2) +
-  geom_text(data = change_summary %>% filter(group != 'Major classes' & bin == 'decrease'),
-            aes(x = net_change/1000 - 2,
-                label = paste0(round(change_pct, digits = 0), '%')), size = 2) +
-  labs(x = expression(paste(Delta, ' total area (ha, thousands)')),
-       y = NULL,
-       title = 'B'
-       ) +
-  xlim(-7, 20) +
+  geom_col(aes(fill = bin)) +
+  scale_fill_manual(values = c(pointblue.palette[c(3, 1)])) +
+  geom_text(data = change_major %>% filter(group == 'Major classes' & bin == 'increase'),
+            aes(x = net_change/1000 + 3,
+                label = paste0(round(change_pct, digits = 0), '%')), size = 2.5) +
+  geom_text(data = change_major %>% filter(group == 'Major classes' & bin == 'decrease'),
+            aes(x = net_change/1000 - 3,
+                label = paste0(round(change_pct, digits = 0), '%')), size = 2.5) +
+  labs(y = NULL, x = NULL) +
+  xlim(-12, 20) +
   geom_vline(xintercept = 0, size = 0.2) +
   theme_bw() +
   theme(
     strip.placement = 'outside',
-        strip.text = element_blank(),
-        # strip.text = element_text(family = 'sourcesans', size = 10, vjust = 1),
-        strip.background = element_blank(),
-        panel.grid = element_blank(),
-        axis.text = element_text(family = 'sourcesans', size = 8),
-        axis.text.y = element_text(hjust = 1),
-        axis.title = element_text(family = 'sourcesans', size = 8),
-        plot.title = element_text(family = 'sourcesans', size = 10),
-        legend.position = 'none')
+    strip.text = element_text(family = 'sourcesans', size = 9, vjust = 0, hjust = 0, face = 'bold'),
+    strip.background = element_blank(),
+    panel.grid = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_text(family = 'sourcesans', size = 9, hjust = 1),
+    axis.title = element_text(family = 'sourcesans', size = 9),
+    plot.title = element_text(family = 'sourcesans', size = 9, face = 'bold'),
+    legend.position = 'none')
+
+change_minor = change_summary %>% filter(group != 'Major classes') %>%
+  mutate(scenario = recode(scenario,
+                           'scenario1_restoration' = 'D',
+                           'scenario2_perennialexpand_alt' = 'E',
+                           'scenario3_combo_alt' = 'F'))
+
+part2 = change_minor %>%
+  ggplot(aes(net_change/1000, LABEL)) +
+  facet_wrap(~scenario, ncol = 3) +
+  geom_col(aes(fill = bin)) +
+  scale_fill_manual(values = c(pointblue.palette[c(3, 1)])) +
+  geom_text(data = change_minor %>% filter(bin == 'increase'),
+            aes(x = net_change/1000 + 3.5,
+                label = paste0(round(change_pct, digits = 0), '%')), size = 2.5) +
+  geom_text(data = change_minor %>% filter(bin == 'decrease'),
+            aes(x = net_change/1000 - 3,
+                label = paste0(round(change_pct, digits = 0), '%')), size = 2.5) +
+  labs(x = expression(paste(Delta, ' total area (ha, thousands)')),
+       y = NULL) +
+  xlim(-12, 20) +
+  geom_vline(xintercept = 0, size = 0.2) +
+  theme_bw() +
+  theme(
+    strip.placement = 'outside',
+    strip.text = element_text(family = 'sourcesans', size = 9, vjust = 0, hjust = 0, face = 'bold'),
+    strip.background = element_blank(),
+    panel.grid = element_blank(),
+    axis.text = element_text(family = 'sourcesans', size = 9, hjust = 1),
+    axis.title = element_text(family = 'sourcesans', size = 9),
+    plot.title = element_text(family = 'sourcesans', size = 9, face = 'bold'),
+    legend.position = 'none')
 
 showtext_auto()
 showtext_opts(dpi = 300) #default for ggsave
-part1/part2 + plot_layout(heights = c(0.55, 0.45))
-  # plot_annotation(tag_levels = 'A') &
-  # theme(plot.tag = element_text(family = 'sourcesans', size = 10))
+part1/part2 + plot_layout(heights = c(0.4, 0.6))
 ggsave('fig/netchange_land_cover.jpg',
-       height = 6, width = 6.5, units = 'in', dpi = 300)
+       height = 5, width = 6.5, units = 'in', dpi = 300)
 showtext_auto(FALSE)
 
 
@@ -178,16 +179,16 @@ change_summary %>% filter(group == 'Major classes') %>%
   ggplot(aes(net_change/1000, LABEL)) + facet_wrap(~scenario) +
   geom_col(aes(fill = bin)) +
   geom_text(data = change_summary %>% filter(group == 'Major classes' & bin == 'increase'),
-            aes(x = net_change/1000 + 1.5,
+            aes(x = net_change/1000 + 2,
                 label = paste0(round(change_pct, digits = 0), '%')), size = 3.5) +
   geom_text(data = change_summary %>% filter(group == 'Major classes' & bin == 'decrease'),
-            aes(x = net_change/1000 - 1.5,
+            aes(x = net_change/1000 - 2.25,
                 label = paste0(round(change_pct, digits = 0), '%')), size = 3.5) +
   scale_fill_manual(values = c(pointblue.palette[c(3, 1)])) +
   labs(x = expression(paste(Delta, ' total area (ha, thousands)')),
        y = NULL) +
   geom_vline(xintercept = 0, size = 0.2) +
-  xlim(-7, 20) +
+  xlim(-10, 20) +
   theme_bw() +
   theme(strip.text = element_text(family = 'sourcesans', size = 18, hjust = 0, face = 'bold'),
         strip.background = element_blank(),
@@ -196,7 +197,7 @@ change_summary %>% filter(group == 'Major classes') %>%
         axis.text.y = element_text(hjust = 1),
         axis.title = element_text(family = 'sourcesans', size = 18),
         legend.position = 'none')
-ggsave('fig/netchange_land_cover_presentation.jpg',
+ggsave('fig/presentations/netchange_land_cover.jpg',
        height = 5, width = 10, units = 'in', dpi = 300)
 showtext_auto(FALSE)
 
@@ -217,30 +218,36 @@ scenarios = terra::rast(fl[!grepl('win', fl)])
 
 key = readxl::read_excel('GIS/VEG_key.xlsx')
 
-label.order = key %>% select(CODE_NAME, LABEL) %>% distinct() %>%
-  filter(!CODE_NAME %in% c(
-    'PERENNIAL_CROPS', 'ANNUAL_CROPS', 'GRAIN&HAY', 'FIELD',
-    'GRASSLAND&PASTURE', 'WOODLAND&SCRUB', 'WATER', 'WETLAND',
-    'WETLAND_MANAGED_PERENNIAL', 'WETLAND_MANAGED_SEASONAL')) %>%
-  filter(!grepl('RIPARIAN_', CODE_NAME) & !is.na(CODE_NAME)) %>%
-  pull(LABEL) %>% unique()
-label.order = label.order[c(1:9, 11:13, 10, 14:22)]
+# label.order = key %>% select(CODE_NAME, LABEL) %>% distinct() %>%
+#   filter(!CODE_NAME %in% c(
+#     'PERENNIAL_CROPS', 'ANNUAL_CROPS', 'GRAIN&HAY', 'FIELD',
+#     'GRASSLAND&PASTURE', 'WOODLAND&SCRUB', 'WATER', 'WETLAND',
+#     'WETLAND_MANAGED_PERENNIAL', 'WETLAND_MANAGED_SEASONAL')) %>%
+#   filter(!grepl('RIPARIAN_', CODE_NAME) & !is.na(CODE_NAME)) %>%
+#   pull(LABEL) %>% unique()
+# label.order = key %>% select(CODE_NAME, LABEL) %>% distinct() %>%
+#   filter(CODE_NAME %in% c(
+#     'PERENNIAL_CROPS', 'GRAIN&HAY', 'FIELD', 'RICE', 'IDLE',
+#     'GRASSLAND&PASTURE', 'URBAN', 'RIPARIAN', 'WETLAND_MANAGED',
+#     'WETLAND_TIDAL', 'WETLAND_OTHER', 'WATER', 'WOODLAND&SCRUB', 'BARREN')) %>%
+#   pull(LABEL) %>% unique()
+#
+# label.order = label.order[c(1:9, 11:13, 10, 14:22)]
+
 # simplify baseline to major land cover classes for manuscript
 baseline_simple = classify(scenarios$baseline,
                            rcl = matrix(
                              c(10.5, 19.5, 10, #Perennial crops
                                21.5, 24.5, 21, #Grain & hay
-                               24.5, 25.5, 25, #Field & row
-                               26.5, 28.5, 25, #Field & row
-                               50.5, 51.5, 50, #Grassland & pasture
-                               52.5, 57.5, 50, #Grassland & pasture
+                               24.5, 28.5, 25, #Field & row (incl Corn)
+                               49.5, 57.5, 50, #Grassland & pasture (incl Alfalfa)
                                70.5, 79.5, 70, #Riparian
-                               80.5, 89.5, 80), #Wetlands
+                               80.5, 89.5, 80, #Wetlands
+                               99.5, 120.5, 100), #woodland & scrub
                              byrow = TRUE, ncol = 3)
 )
 levels(baseline_simple) <- key %>% select(CODE_BASELINE, LABEL) %>%
-  filter(CODE_BASELINE %in% c(10, 21, 25, 26, 30, 40, 50, 52, 60, 70, 80, 90,
-                              110, 120, 130)) %>%
+  filter(CODE_BASELINE %in% c(10, 21, 25, 30, 40, 50, 60, 70, 80, 90, 100, 130)) %>%
   mutate(LABEL = if_else(LABEL == 'Field Crops', 'Field & Row Crops', LABEL)) %>%
   as.data.frame()
 # coltab(baseline_simple) <- key %>% select(CODE_BASELINE, COLOR) %>% drop_na() %>%
@@ -282,11 +289,11 @@ coltab(scenario1_added) <- data.frame(CODE_BASELINE = c(70, 80, 90),
 plot(scenario1_added)
 
 ## scenario 2
-scenario2_added = rast('GIS/scenario_rasters/scenario2_perennialexpand.tif') %>%
-  mask(rast('GIS/scenario_inputs/perex_added.tif')) %>%
+scenario2_added = rast('GIS/scenario_rasters/scenario2_perennialexpand_alt.tif') %>%
+  mask(rast('GIS/scenario_inputs/perex_added_alt.tif')) %>%
   cover(water)
-levels(scenario2_added) <- NULL
-scenario2_added = subst(scenario2_added, c(10:19), 10)
+scenario2_added = classify(scenario2_added,
+  rcl = data.frame(from = c(10:19), to = 10) %>% as.matrix())
 levels(scenario2_added) <- data.frame(CODE_BASELINE = c(10, 90),
                                       LABEL = c('Perennial Crops', 'Water'))
 coltab(scenario2_added) <- data.frame(CODE_BASELINE = c(10, 90),
@@ -303,36 +310,7 @@ coltab(scenario3_added) <- data.frame(CODE_BASELINE = c(10, 70, 80, 90),
   complete(CODE_BASELINE = c(0:255)) %>% pull(COLOR)
 plot(scenario3_added)
 
-
-## combine all:
-mapset = c(baseline_simple, scenario1_added, scenario2_added, scenario3_added)
-names(mapset) = c('A', 'B', 'C', 'D')
-
-pal = freq(mapset$A) %>%
-  mutate(COLOR = case_when(value == 'Perennial Crops' ~ '#aa66cd',
-                           value == 'Riparian' ~ '#ff0000',
-                           value == 'Wetland' ~ '#004da8',
-                           value == 'Grain & Hay' ~ '#ffebaf',
-                           value == 'Field & Row Crops' ~ '#ff844c',
-                           value == 'Corn' ~ '#ffff00',
-                           value == 'Rice' ~ '#e600a9',
-                           value == 'Idle' ~ '#ffa77f',
-                           value == 'Grassland & Pasture' ~ '#D2D59A',
-                           value == 'Alfalfa' ~ '#00a884',
-                           value == 'Urban' ~ '#474747',
-                           value == 'Riparian' ~ '#004da8',
-                           value == 'Wetland' ~ '#004da8',
-                           value == 'Water' ~ 'white',
-                           value == 'Woodland' ~ '#737300',
-                           value == 'Scrub' ~ '#734c00',
-                           value == 'Barren' ~ '#e9ffbe'))
-pal2 = pal %>%
-  mutate(COLOR = if_else(value == 'Water', '#bee8ff', COLOR))
-
-pal = structure(pal$COLOR, names = as.character(pal$value))
-pal2 = structure(pal2$COLOR, names = as.character(pal2$value))
-
-
+# city labels
 library(maps)
 citydat = us.cities
 citydat = citydat %>% filter(country.etc == 'CA') %>%
@@ -344,11 +322,38 @@ st_crs(citydat) <- 4326
 citydat = citydat %>% st_transform(crs = st_crs(delta_shp))
 citydat = bind_cols(citydat, st_coordinates(citydat) %>% as_tibble())
 
-library(tidyterra)
-library(showtext)
-font_add_google('Source Sans Pro', 'sourcesans')
-showtext_auto()
-showtext_opts(dpi = 300) #default for ggsave
+
+## combine all:
+mapset = c(baseline_simple, scenario1_added, scenario2_added, scenario3_added)
+names(mapset) = c('A', 'B', 'C', 'D')
+
+## for manuscript--------
+pal = freq(mapset$A) %>%
+  mutate(COLOR = case_when(value == 'Perennial Crops' ~ '#9939ca',
+                           value == 'Riparian' ~ '#ff0000',
+                           value == 'Wetland' ~ '#004da8',
+                           value == 'Grain & Hay' ~ '#ffebaf',
+                           #value == 'Field & Row Crops' ~ '#ff844c',
+                           value == 'Field & Row Crops' ~ '#ffffa6',
+                           #value == 'Corn' ~ '#ffff00',
+                           #value == 'Rice' ~ '#e600a9',
+                           value == 'Rice' ~ '#f163cc',
+                           value == 'Idle' ~ '#ffddce',
+                           value == 'Grassland & Pasture' ~ '#D2D59A',
+                           #value == 'Alfalfa' ~ '#00a884',
+                           value == 'Urban' ~ '#474747',
+                           value == 'Riparian' ~ '#004da8',
+                           value == 'Wetland' ~ '#004da8',
+                           value == 'Water' ~ 'white',
+                           value == 'Woodland & Scrub' ~ '#737300',
+                           #value == 'Scrub' ~ '#734c00',
+                           value == 'Barren' ~ '#ddccac'))
+pal2 = pal %>%
+  mutate(COLOR = if_else(value == 'Water', '#bee8ff', COLOR))
+
+pal = structure(pal$COLOR, names = as.character(pal$value))
+pal2 = structure(pal2$COLOR, names = as.character(pal2$value))
+
 
 p1 = ggplot() +
   geom_sf(data = delta_shp, fill = 'gray80', color = 'black', size = 0.4) +
@@ -392,7 +397,10 @@ p4 = ggplot() +
   labs(x = NULL, y = NULL, fill = 'Land cover') +
   theme_void()
 
-library(patchwork)
+
+showtext_auto()
+showtext_opts(dpi = 300) #default for ggsave
+
 patchwork = (p1 + p2)/(p3 + p4)
 patchwork +
   plot_annotation(tag_levels = 'A') +
@@ -411,6 +419,26 @@ patchwork +
 ggsave(filename = 'fig/map_scenarios.jpg',
        height = 8, width = 6, units = 'in', dpi = 300)
 showtext_auto(FALSE)
+
+## for presentation-------
+patchwork2 = p1 | p2 | p3 | p4
+patchwork2 +
+  plot_annotation(tag_levels = 'A') +
+  plot_layout(guides = 'collect') &
+  theme_void() +
+  theme(aspect.ratio = 1.4,
+        legend.position = 'bottom',
+        legend.title = element_text(family = 'sourcesans', face = 'bold',
+                                    size = 9.5),
+
+        legend.text = element_text(family = 'sourcesans', size = 8),
+        legend.key.size = unit(9, 'pt'),
+        panel.spacing = unit(-1, "lines"),
+        plot.tag = element_text(size = 9, family = 'sourcesans', face = 'bold'))
+
+ggsave(filename = 'fig/presentations/map_scenarios.jpg',
+       height = 5, width = 10, units = 'in', dpi = 300)
+
 
 # WRITE METADATA--------
 # original landscape maps:
