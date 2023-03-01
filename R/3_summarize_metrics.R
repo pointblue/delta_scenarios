@@ -120,16 +120,16 @@ metrics %>%
       METRIC = c(
         `Agricultural Jobs` = 'Agricultural Jobs\n(FTE / 100 ha)',
         `Annual Wages` = 'Annual Wages\n(USD, thousands)',
-        `Gross Production Value` = 'Gross Crop Production Value\n(USD / ha, thousands)'))) +
+        `Gross Production Value` = 'Gross Production Value\n(USD / ha, thousands)'))) +
   labs(x = NULL, y = NULL) +
   theme_bw() +
-  theme(axis.text = element_text(family = 'sourcesans', size = 10),
-        axis.title = element_text(family = 'sourcesans', size = 12),
-        strip.text = element_text(family = 'sourcesans', size = 10,
-                                  hjust = 0, vjust = 1),
+  theme(axis.text.x = element_text(family = 'sourcesans', size = 12),
+        axis.text.y = element_text(family = 'sourcesans', size = 14),
+        axis.title = element_text(family = 'sourcesans', size = 16),
+        strip.text = element_text(family = 'sourcesans', size = 16, hjust = 0, vjust = 1),
         strip.background = element_blank(),
         legend.position = 'none')
-ggsave('fig/metrics_aglivelihoods.png', height = 4, width = 8)
+ggsave('fig/presentations/metrics_aglivelihoods.png', height = 5, width = 10)
 
 ## water quality-----
 metrics %>%
@@ -140,16 +140,22 @@ metrics %>%
   geom_errorbar(aes(xmin = SCORE_MEAN - SCORE_SE,
                     xmax = SCORE_MEAN + SCORE_SE),
                 width = 0.5) +
-  facet_wrap(~METRIC, scale = 'free_x') +
+  facet_wrap(~METRIC, scale = 'free_x',
+             labeller = labeller(
+               METRIC = c(
+                 `Critical Pesticides` = 'Critical Pesticides',
+                 `Groundwater Contaminant` = 'Groundwater\nContaminants',
+                 `Risk to Aquatic Organisms` = 'High or Moderate Risk\nto Aquatic Organisms'))) +
   # scale_fill_gradient(low = palette[5], high = palette[7]) +
   labs(x = 'Pesticide application rate (kg/ha/yr)', y = NULL) +
   theme_bw() +
-  theme(axis.text = element_text(family = 'sourcesans', size = 10),
-        axis.title = element_text(family = 'sourcesans', size = 11),
-        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+  theme(axis.text.x = element_text(family = 'sourcesans', size = 12),
+        axis.text.y = element_text(family = 'sourcesans', size = 14),
+        axis.title = element_text(family = 'sourcesans', size = 16),
+        strip.text = element_text(family = 'sourcesans', size = 16, hjust = 0, vjust = 0),
         strip.background = element_blank(),
         legend.position = 'none')
-ggsave('fig/metrics_waterquality.png', height = 4, width = 8)
+ggsave('fig/presentations/metrics_waterquality.png', height = 5, width = 10)
 
 ## climate change resilience---------
 metrics %>%
@@ -167,13 +173,13 @@ metrics %>%
   facet_wrap(~METRIC, ncol = 3, scale = 'free_x') +
   labs(x = 'Climate change resilience score', y = NULL) +
   theme_bw() +
-  theme(axis.text.x = element_text(family = 'sourcesans', size = 9),
-        axis.text.y = element_text(family = 'sourcesans', size = 10),
-        axis.title = element_text(family = 'sourcesans', size = 11),
-        strip.text = element_text(family = 'sourcesans', size = 10, hjust = 0),
+  theme(axis.text.x = element_text(family = 'sourcesans', size = 12),
+        axis.text.y = element_text(family = 'sourcesans', size = 14),
+        axis.title = element_text(family = 'sourcesans', size = 16),
+        strip.text = element_text(family = 'sourcesans', size = 16, hjust = 0),
         strip.background = element_blank(),
         legend.position = 'none')
-ggsave('fig/metrics_climate.png', height = 4, width = 8)
+ggsave('fig/presentations/metrics_climate.png', height = 5, width = 10)
 
 ## vineyard example--------
 # just for presentation purposes -- one of each metric for vineyards
