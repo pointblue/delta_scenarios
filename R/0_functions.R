@@ -150,88 +150,92 @@ codify_baseline = function(sf, codekey) {
 }
 
 codify_NASS = function(NASSraster, season = 'fall', codekey) {
+  nasskey = cats(NASSraster)[[1]] %>% select(VALUE, CLASS_NAME) %>% drop_na()
+  activeCat(NASSraster) <- 'CLASS_NAME' #so freq will return classes
+
   # build classification matrix
-  mat = freq(NASSraster) %>% select(code_orig = value, label_orig = label) %>%
-    mutate(code_orig = as.numeric(code_orig),
-           CLASS = case_when(
-      label_orig %in% c('Corn', 'Sorghum', 'Pop or Orn Corn', 'Sweet Corn') ~
-        'FIELD_CORN',
-      label_orig == 'Rice' ~ 'RICE',
-      label_orig %in%
-        c('Spring Wheat', 'Winter Wheat', 'Durum Wheat', 'Triticale') ~
-        'GRAIN&HAY_WHEAT',
-      label_orig %in% c('Barley', 'Rye', 'Oats', 'Speltz', 'Other Small Grains') ~
-        'GRAIN&HAY_OTHER',
-      label_orig %in%
-        c('Cotton', 'Sunflower', 'Safflower', 'Dry Beans', 'Vetch', 'Millet',
-          'Canola', 'Flaxseed', 'Rape Seed', 'Mustard', 'Camelina', 'Buckwheat',
-          'Other Crops') ~ 'FIELD_OTHER',
-      label_orig %in%
-        c('Mint', 'Sugarbeets', 'Potatoes', 'Misc Vegs & Fruits', 'Watermelons',
-          'Onions', 'Cucumbers', 'Peas', 'Tomatoes', 'Herbs', 'Carrots',
-          'Garlic', 'Cantaloupes', 'Honeydew Melons', 'Peppers', 'Greens',
-          'Strawberries', 'Squash', 'Pumpkins', 'Blueberries', 'Soybeans',
-          'Peanuts', 'Tobacco', 'Cucumbers', 'Chick Peas', 'Lentils',
-          'Caneberries', 'Hops', 'Christmas Trees', 'Asparagus', 'Broccoli',
-          'Lettuce', 'Cabbage', 'Cauliflower', 'Celery', 'Radishes', 'Turnips',
-          'Eggplants', 'Gourds', 'Cranberries', 'Sweet Potatoes') ~
-        'ROW',
-      label_orig == 'Alfalfa' ~ 'PASTURE_ALFALFA',
-      label_orig %in%
-        c('Other Hay/Non Alfalfa', 'Clover/Wildflowers', 'Sod/Grass Seed',
-          'Switchgrass') ~
-        'PASTURE_OTHER',
-      label_orig == 'Fallow/Idle Cropland' ~ 'IDLE',
-      label_orig %in% c('Cherries', 'Peaches', 'Apples', 'Pecans', 'Almonds',
-                        'Walnuts', 'Pears', 'Pistachios', 'Pomegranates',
-                        'Plums', 'Prunes', 'Nectarines', 'Apricots',
-                        'Other Tree Crops') ~
-        'ORCHARD_DECIDUOUS',
-      label_orig %in% c('Citrus', 'Olives', 'Oranges', 'Avocados') ~
-        'ORCHARD_CITRUS&SUBTROPICAL',
-      label_orig == 'Grapes' ~ 'VINEYARD',
-      label_orig %in% c('Water', 'Open Water', 'Aquaculture') ~ 'WATER',
-      label_orig %in%
-        c('Developed', 'Developed/Open Space', 'Developed/Low Intensity',
-          'Developed/Med Intensity', 'Developed/High Intensity') ~ 'URBAN',
-      label_orig %in% c('Barren', 'Perennial Ice/Snow') ~ 'BARREN',
-      label_orig %in%
-        c('Deciduous Forest', 'Evergreen Forest', 'Mixed Forest', 'Shrubland',
-          'Forest') ~ 'WOODLAND',
-      label_orig == 'Shrubland' ~ 'SCRUB',
-      label_orig == 'Grassland/Pasture' ~ 'GRASSLAND',
-      label_orig == 'Woody Wetlands' ~ 'RIPARIAN',
-      label_orig %in% c('Wetlands', 'Herbaceous Wetlands') ~ 'WETLAND',
-      season == 'fall' & label_orig %in%
-        c('Dbl Crop WinWht/Corn', 'Dbl Crop Oats/Corn',
-          'Dbl Crop Triticale/Corn',
-          'Dbl Crop WinWht/Sorghum', 'Dbl Crop Barley/Corn',
-          'Dbl Crop Corn/Soybeans', 'Dbl Crop Durum Wht/Sorghum') ~ 'FIELD_CORN',
-      season == 'fall' & label_orig %in%
-        c('Dbl Crop WinWht/Soybeans', 'Dbl Crop Barley/Soybeans',
-          'Dbl Crop Lettuce/Durum Wht', 'Dbl Crop Soybeans/Oats',
-          'Dbl Crop Lettuce/Barley') ~ 'ROW',
-      season == 'fall' & label_orig %in%
-        c('Dbl Crop WinWht/Cotton') ~ 'FIELD_OTHER',
-      season == 'winter' & label_orig %in%
-        c('Dbl Crop WinWht/Corn', 'Dbl Crop WinWht/Sorghum',
-          'Dbl Crop WinWht/Soybeans', 'Dbl Crop Triticale/Corn',
-          'Dbl Crop Lettuce/Durum Wht', 'Dbl Crop Durum Wht/Sorghum',
-          'Dbl Crop WinWht/Cotton') ~ 'GRAIN&HAY_WHEAT',
-      season == 'winter' & label_orig %in%
-        c('Dbl Crop Oats/Corn', 'Dbl Crop Barley/Corn',
-          'Dbl Crop Barley/Soybeans', 'Dbl Crop Soybeans/Oats',
-          'Dbl Crop Lettuce/Barley') ~ 'GRAIN&HAY_OTHER',
-      season == 'fall' & label_orig %in%
-        c('Dbl Corn/Soybeans') ~ 'ROW',
-      label_orig %in% c('Background', 'Clouds/No Data', 'Nonag/Undefined') ~ NA_character_)) %>%
-  left_join(codekey %>% select(CLASS = CODE_NAME, CODE_BASELINE),
+  mat = freq(NASSraster) %>% select(label_orig = value) %>%
+    mutate(
+      CLASS = case_when(
+        label_orig %in% c('Corn', 'Sorghum', 'Pop or Orn Corn', 'Sweet Corn') ~
+          'FIELD_CORN',
+        label_orig == 'Rice' ~ 'RICE',
+        label_orig %in%
+          c('Spring Wheat', 'Winter Wheat', 'Durum Wheat', 'Triticale') ~
+          'GRAIN&HAY_WHEAT',
+        label_orig %in% c('Barley', 'Rye', 'Oats', 'Speltz', 'Other Small Grains') ~
+          'GRAIN&HAY_OTHER',
+        label_orig %in%
+          c('Cotton', 'Sunflower', 'Safflower', 'Dry Beans', 'Vetch', 'Millet',
+            'Canola', 'Flaxseed', 'Rape Seed', 'Mustard', 'Camelina', 'Buckwheat',
+            'Other Crops') ~ 'FIELD_OTHER',
+        label_orig %in%
+          c('Mint', 'Sugarbeets', 'Potatoes', 'Misc Vegs & Fruits', 'Watermelons',
+            'Onions', 'Cucumbers', 'Peas', 'Tomatoes', 'Herbs', 'Carrots',
+            'Garlic', 'Cantaloupes', 'Honeydew Melons', 'Peppers', 'Greens',
+            'Strawberries', 'Squash', 'Pumpkins', 'Blueberries', 'Soybeans',
+            'Peanuts', 'Tobacco', 'Cucumbers', 'Chick Peas', 'Lentils',
+            'Caneberries', 'Hops', 'Christmas Trees', 'Asparagus', 'Broccoli',
+            'Lettuce', 'Cabbage', 'Cauliflower', 'Celery', 'Radishes', 'Turnips',
+            'Eggplants', 'Gourds', 'Cranberries', 'Sweet Potatoes') ~
+          'ROW',
+        label_orig == 'Alfalfa' ~ 'PASTURE_ALFALFA',
+        label_orig %in%
+          c('Other Hay/Non Alfalfa', 'Clover/Wildflowers', 'Sod/Grass Seed',
+            'Switchgrass') ~
+          'PASTURE_OTHER',
+        label_orig == 'Fallow/Idle Cropland' ~ 'IDLE',
+        label_orig %in% c('Cherries', 'Peaches', 'Apples', 'Pecans', 'Almonds',
+                          'Walnuts', 'Pears', 'Pistachios', 'Pomegranates',
+                          'Plums', 'Prunes', 'Nectarines', 'Apricots',
+                          'Other Tree Crops') ~
+          'ORCHARD_DECIDUOUS',
+        label_orig %in% c('Citrus', 'Olives', 'Oranges', 'Avocados') ~
+          'ORCHARD_CITRUS&SUBTROPICAL',
+        label_orig == 'Grapes' ~ 'VINEYARD',
+        label_orig %in% c('Water', 'Open Water', 'Aquaculture') ~ 'WATER',
+        label_orig %in%
+          c('Developed', 'Developed/Open Space', 'Developed/Low Intensity',
+            'Developed/Med Intensity', 'Developed/High Intensity') ~ 'URBAN',
+        label_orig %in% c('Barren', 'Perennial Ice/Snow') ~ 'BARREN',
+        label_orig %in%
+          c('Deciduous Forest', 'Evergreen Forest', 'Mixed Forest', 'Shrubland',
+            'Forest') ~ 'WOODLAND',
+        label_orig == 'Shrubland' ~ 'SCRUB',
+        label_orig == 'Grassland/Pasture' ~ 'GRASSLAND',
+        label_orig == 'Woody Wetlands' ~ 'RIPARIAN',
+        label_orig %in% c('Wetlands', 'Herbaceous Wetlands') ~ 'WETLAND',
+        season == 'fall' & label_orig %in%
+          c('Dbl Crop WinWht/Corn', 'Dbl Crop Oats/Corn',
+            'Dbl Crop Triticale/Corn',
+            'Dbl Crop WinWht/Sorghum', 'Dbl Crop Barley/Corn',
+            'Dbl Crop Corn/Soybeans', 'Dbl Crop Durum Wht/Sorghum') ~ 'FIELD_CORN',
+        season == 'fall' & label_orig %in%
+          c('Dbl Crop WinWht/Soybeans', 'Dbl Crop Barley/Soybeans',
+            'Dbl Crop Lettuce/Durum Wht', 'Dbl Crop Soybeans/Oats',
+            'Dbl Crop Lettuce/Barley') ~ 'ROW',
+        season == 'fall' & label_orig %in%
+          c('Dbl Crop WinWht/Cotton') ~ 'FIELD_OTHER',
+        season == 'winter' & label_orig %in%
+          c('Dbl Crop WinWht/Corn', 'Dbl Crop WinWht/Sorghum',
+            'Dbl Crop WinWht/Soybeans', 'Dbl Crop Triticale/Corn',
+            'Dbl Crop Lettuce/Durum Wht', 'Dbl Crop Durum Wht/Sorghum',
+            'Dbl Crop WinWht/Cotton') ~ 'GRAIN&HAY_WHEAT',
+        season == 'winter' & label_orig %in%
+          c('Dbl Crop Oats/Corn', 'Dbl Crop Barley/Corn',
+            'Dbl Crop Barley/Soybeans', 'Dbl Crop Soybeans/Oats',
+            'Dbl Crop Lettuce/Barley') ~ 'GRAIN&HAY_OTHER',
+        season == 'fall' & label_orig %in%
+          c('Dbl Corn/Soybeans') ~ 'ROW',
+        label_orig %in% c('Background', 'Clouds/No Data', 'Nonag/Undefined') ~ NA_character_)) %>%
+    left_join(nasskey, by = c('label_orig' = 'CLASS_NAME')) %>%
+    left_join(codekey %>% select(CLASS = CODE_NAME, CODE_BASELINE),
             by = 'CLASS')
 
   terra::classify(NASSraster,
-                  rcl = mat %>% select(from = code_orig, to = CODE_BASELINE) %>%
+                  rcl = mat %>% select(from = VALUE, to = CODE_BASELINE) %>%
                     as.matrix(),
-                  othersNA = TRUE)
+                  others = NA)
 }
 
 codify_waterbird = function(df) {
@@ -499,7 +503,7 @@ codify_edd <- function(df) {
         NAICS_code == 111150 ~ 'FIELD_CORN', #corn
         NAICS_code == 111160 ~ 'RICE', #rice
         NAICS_code == 111120 ~ 'FIELD_OTHER', #oilseed (SUNFLOWER, SAFFLOWER OIL SEEDS)
-        NAICS_code == 111940 ~ 'PASTURE', #hay farming (probably includes alfalfa?)
+        NAICS_code == 111940 ~ 'PASTURE', #hay farming (alfalfa, clover, grass, hay, mixed hay)
         NAICS_code %in% c(111191, 111199) ~ 'GRAIN&HAY_OTHER', #oilseed and grain combo; all other grain farming
         NAICS_code %in% c(111331, 111335, 111336, 111339) ~ 'ORCHARD_DECIDUOUS', #apple, tree nut, fruit/treenut combo, and "other noncitrus fruit"
         NAICS_code == 111332 ~ 'VINEYARD',
@@ -1477,13 +1481,11 @@ plot_change_map = function(pathin, SDM, landscape_name, key,
   ggsave(filename = pathout, plot = p, ...)
 }
 
-plot_change_bar = function(dat) {
-  ggplot(dat, aes(net_change, METRIC)) +
+plot_change_bar = function(dat, errorbar = TRUE, label = TRUE) {
+  p = ggplot(dat, aes(net_change, METRIC)) +
     facet_wrap(~scenario, ncol = 3) +
     # ggforce::facet_col(~METRIC_CATEGORY, scales = 'free', space = 'free') +
     geom_col(aes(fill = bin)) +
-    geom_errorbar(aes(xmin = net_change - net_change_se,
-                      xmax = net_change + net_change_se), width = 0.25) +
     scale_fill_manual(values = pointblue.palette[c(1,3)]) +
     geom_vline(xintercept = 0, color = 'gray30') +
     theme_minimal() +
@@ -1498,10 +1500,31 @@ plot_change_bar = function(dat) {
           strip.background = element_blank(),
           legend.position = 'none',
           panel.spacing = unit(1, 'lines'))
+
+  if (errorbar) {
+    p = p +
+      geom_errorbar(aes(xmin = lcl,
+                        xmax = ucl), width = 0.25)
+    if (label) {
+      p = p +
+        geom_text(data = dat %>% filter(bin == 'benefit'),
+                  aes(x = ucl + 3,
+                      label = paste0(round(change_pct, digits = 0), '%')), size = 2.5) +
+        geom_text(data = dat %>% filter(bin == 'trade-off'),
+                  aes(x = lcl - 3,
+                      label = paste0(round(change_pct, digits = 0), '%')), size = 2.5)
+    }
+  }
+
+  print(p)
 }
 
-plot_change_lollipop = function(dat, digits) {
-  dat %>% mutate(METRIC = gsub('\n', ' ', METRIC)) %>%
+plot_change_lollipop = function(dat, digits, wrapy = FALSE) {
+
+  if (!wrapy) {
+    dat = dat %>% mutate(METRIC = gsub('\n', ' ', METRIC))
+  }
+  dat %>%
     ggplot(aes(net_change, METRIC, fill = bin, color = bin)) +
     facet_wrap(~scenario, ncol = 3) +
     geom_vline(xintercept = 0, color = 'gray30') +
