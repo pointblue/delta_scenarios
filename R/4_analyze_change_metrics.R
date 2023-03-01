@@ -122,14 +122,15 @@ spplist = c(
 
 netchange = read_csv('output/netchange_scores.csv', col_types = cols()) %>%
   filter(METRIC %in% metriclist & !grepl('distributions', METRIC_SUBTYPE)) %>%
-  filter(scenario %in% c('scenario1_restoration', 'scenario2_perennialexpand_alt', 'scenario3_combo_alt')) %>%
+  filter(grepl('scenario1|_alt', scenario)) %>%
   mutate(
     # rescale metrics for readability
-    across(c(BASELINE, BASELINE_SE, SCENARIO, SCENARIO_SE, net_change, net_change_se),
+    across(c(BASELINE, BASELINE_SE, SCENARIO, SCENARIO_SE, net_change,
+             net_change_se, U, lcl, ucl),
            ~case_when(
-             METRIC_CATEGORY == 'Water Quality' ~ ./1000, #kg to MT
-             # METRIC == 'Annual Wages' ~ .*1000, #thousands to dollars
-             METRIC == 'Gross Production Value' ~ ./1000/1000, #USD to thousands to millions
+             METRIC_CATEGORY == 'Water Quality' ~ ./1000, #kg to MT per yr
+             # METRIC == 'Annual Wages' ~ ./100, #USD to hundreds per FTE
+             METRIC == 'Gross Production Value' ~ ./1000000, #USD to hundred-thousands per yr
              TRUE ~ .)),
     METRIC_CATEGORY = factor(METRIC_CATEGORY, levels = categorylist),
     METRIC = factor(METRIC, levels = rev(metriclist)),
@@ -149,8 +150,8 @@ netchange = read_csv('output/netchange_scores.csv', col_types = cols()) %>%
       `Total (fall)` = 'Waterbird habitat,\nfall (ha)',
       `Total (winter)` = 'Waterbird habitat,\nwinter (ha)'),
     # invert water quality scores
-    net_change = if_else(METRIC_CATEGORY == 'Water Quality',
-                         -1 * net_change, net_change),
+    across(c(net_change, lcl, ucl),
+           ~if_else(METRIC_CATEGORY == 'Water Quality', -1 * ., .)),
     # define benefits and trade-offs for color coding
     bin = if_else(net_change > 0, 'benefit', 'trade-off')) %>%
   mutate(scenario = factor(scenario,
@@ -165,21 +166,22 @@ netchange = read_csv('output/netchange_scores.csv', col_types = cols()) %>%
 # barchart with error bars
 part1 = netchange %>%
   filter(METRIC_CATEGORY == 'Agricultural Livelihoods') %>%
+  mutate(change_pct = net_change / BASELINE) %>%
   plot_change_bar() +
   labs(x = NULL, y = NULL, title = 'A') +
-  xlim(-1100, 1100)
+  xlim(-2100, 2100)
 
 part2 = netchange %>%
   filter(METRIC_CATEGORY == 'Water Quality') %>%
   plot_change_bar() +
   labs(x = NULL, y = NULL, title = 'B') +
-  xlim(-75, 75)
+  xlim(-100, 100)
 
 part3 = netchange %>%
   filter(METRIC_CATEGORY == 'Climate Change Resilience') %>%
   plot_change_bar() +
   labs(x = NULL, y = NULL, title = 'C') +
-  xlim(-0.4, 0.4)
+  xlim(-0.5, 0.5)
 
 part4 = netchange %>%
   filter(METRIC_CATEGORY == 'Biodiversity Support') %>%
@@ -192,46 +194,150 @@ part4 = netchange %>%
 showtext_auto()
 showtext_opts(dpi = 300) #default for ggsave
 part1/part2/part3/part4
-ggsave('fig/netchange_barchart_all.png', height = 6.5, width = 6.5, units = 'in')
+ggsave('fig/netchange_barchart.png', height = 6.5, width = 6.5, units = 'in')
 showtext_auto(FALSE)
 
-## lollipop chart overview---------
+# ## for presentation
+# # results by scenario with species details
+#
+# netchange2 = read_csv('output/netchange_scores.csv', col_types = cols()) %>%
+#   filter(!METRIC %in% metriclist & !grepl('distributions', METRIC_SUBTYPE)) %>%
+#   filter(grepl('scenario1|_alt', scenario)) %>%
+#   # define benefits and trade-offs for color coding
+#   mutate(bin = if_else(net_change > 0, 'benefit', 'trade-off'),
+#          METRIC = factor(METRIC, levels = rev(spplist)))
+#
+# part1a = netchange %>%
+#   filter(grepl(1, scenario)) %>%
+#   plot_change_bar() +
+#   facet_wrap(~METRIC_CATEGORY, ncol = 1, drop = TRUE, scales = 'free_y') +
+#   labs(x = NULL, y = NULL) +
+#   xlim(-2100, 2100) +
+#   theme(strip.text = element_text(family = 'sourcesans', size = 14, hjust = 0, face = 'bold'))
+# part1b = netchange2 %>%
+#   filter(grepl(1, scenario)) %>%
+#   plot_change_bar() +
+#   facet_wrap(~METRIC_SUBTYPE, ncol = 1, drop = TRUE, scales = 'free_y') +
+#   labs(x = NULL, y = NULL) +
+#   xlim(-500, 1500) +
+#   theme(strip.text = element_text(family = 'sourcesans', size = 14, hjust = 0, face = 'bold'))
+# part1a|part1b
+# ggsave('fig/presentations/netchange_barchart_scenario1.png', height = 5, width = 10, units = 'in')
+
+## for presentation---------
+
+### lollipop chart------
 # simple version for presentations with larger fonts and without error bars
 
 part1 = netchange %>%
   filter(METRIC_CATEGORY == 'Agricultural Livelihoods') %>%
-  plot_change_lollipop(digits = 0) +
+  plot_change_lollipop(digits = 0, wrapy = TRUE) +
   labs(x = NULL, y = NULL, title = 'Agricultural Livelihoods') +
   xlim(-600, 600)
 
 part2 = netchange %>%
   filter(METRIC_CATEGORY == 'Water Quality') %>%
-  plot_change_lollipop(digits = 0) +
+  plot_change_lollipop(digits = 0, wrapy = TRUE) +
   labs(x = NULL, y = NULL, title = 'Water Quality') +
   xlim(-75, 75)
 
 part3 = netchange %>%
   filter(METRIC_CATEGORY == 'Climate Change Resilience') %>%
-  plot_change_lollipop(digits = 1) +
+  plot_change_lollipop(digits = 1, wrapy = TRUE) +
   labs(x = NULL, y = NULL, title = 'Climate Change Resilience') +
   xlim(-0.3, 0.3)
 
 part4 = netchange %>%
   filter(METRIC_CATEGORY == 'Biodiversity Support') %>%
-  plot_change_lollipop(digits = 0) +
+  plot_change_lollipop(digits = 0, wrapy = TRUE) +
   facet_wrap(~scenario, ncol = 3, strip.position = 'bottom') +
   labs(x = NULL, y = NULL, title = 'Biodiversity Support') +
-  xlim(-7000, 7000) +
-  theme(strip.text = element_text(family = 'sourcesans', size = 16, vjust = 1))
+  xlim(-7000, 7000)
+# +
+  # theme(strip.text = element_text(family = 'sourcesans', size = 16, vjust = 1))
 
 
 showtext_auto()
 showtext_opts(dpi = 300) #default for ggsave
 part1/part2/part3/part4
-ggsave('fig/presentations/netchange_lollipop.png',
-       height = 7.5, width = 11, units = 'in')
+ggsave('fig/presentations/netchange_lollipop_all.png',
+       height = 8, width = 10, units = 'in')
 showtext_auto(FALSE)
 
+### simple bars-------
+# no error bars
+
+part1 = netchange %>%
+  filter(METRIC_CATEGORY == 'Agricultural Livelihoods') %>%
+  plot_change_bar(errorbar= FALSE) +
+  labs(x = NULL, y = NULL, title = 'Agricultural Livelihoods') +
+  xlim(-600, 600) +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_text(family = 'sourcesans', size = 14, lineheight = 0.8),
+        plot.title = element_text(family = 'sourcesans', size = 16, hjust = 0))
+
+part2 = netchange %>%
+  filter(METRIC_CATEGORY == 'Water Quality') %>%
+  plot_change_bar(errorbar = FALSE) +
+  labs(x = NULL, y = NULL, title = 'Water Quality') +
+  xlim(-75, 75) +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_text(family = 'sourcesans', size = 14, lineheight = 0.8),
+        plot.title = element_text(family = 'sourcesans', size = 16, hjust = 0))
+
+part3 = netchange %>%
+  filter(METRIC_CATEGORY == 'Climate Change Resilience') %>%
+  plot_change_bar(errorbar = FALSE) +
+  labs(x = NULL, y = NULL, title = 'Climate Change Resilience') +
+  xlim(-0.3, 0.3) +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_text(family = 'sourcesans', size = 14, lineheight = 0.8),
+        plot.title = element_text(family = 'sourcesans', size = 16, hjust = 0))
+
+part4 = netchange %>%
+  filter(METRIC_CATEGORY == 'Biodiversity Support') %>%
+  plot_change_bar(errorbar = FALSE) +
+  facet_wrap(~scenario, ncol = 3, strip.position = 'bottom') +
+  labs(x = NULL, y = NULL, title = 'Biodiversity Support') +
+  xlim(-7000, 7000) +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_text(family = 'sourcesans', size = 14, lineheight = 0.8),
+        plot.title = element_text(family = 'sourcesans', size = 16, hjust = 0))
+
+part1/part2/part3/part4
+ggsave('fig/presentations/netchange_barchart_simple.png',
+       height = 6.5, width = 11, units = 'in')
+
+# option for separate panels for each category:
+netchange %>%
+  filter(METRIC_CATEGORY == 'Agricultural Livelihoods') %>%
+  plot_change_lollipop(digits = 0, wrapy = FALSE) +
+  labs(x = NULL, y = NULL) +
+  xlim(-600, 600) +
+  theme(strip.text = element_text(family = 'sourcesans', size = 18, hjust = 0, face = 'bold'),
+        axis.text = element_text(family = 'sourcesans', size = 16))
+ggsave('fig/presentations/netchange_lollipop_aglivelihoods.png',
+       height = 4, width = 10, units = 'in')
+
+netchange %>%
+  filter(METRIC_CATEGORY == 'Water Quality') %>%
+  plot_change_lollipop(digits = 0, wrapy = FALSE) +
+  labs(x = NULL, y = NULL) +
+  xlim(-75, 75) +
+  theme(strip.text = element_text(family = 'sourcesans', size = 18, hjust = 0, face = 'bold'),
+        axis.text = element_text(family = 'sourcesans', size = 16))
+ggsave('fig/presentations/netchange_lollipop_waterquality.png',
+       height = 4, width = 10, units = 'in')
+
+netchange %>%
+  filter(METRIC_CATEGORY == 'Climate Change Resilience') %>%
+  plot_change_lollipop(digits = 0, wrapy = FALSE) +
+  labs(x = NULL, y = NULL) +
+  xlim(-0.3, 0.3) +
+  theme(strip.text = element_text(family = 'sourcesans', size = 18, hjust = 0, face = 'bold'),
+        axis.text = element_text(family = 'sourcesans', size = 16))
+ggsave('fig/presentations/netchange_lollipop_climatechange.png',
+       height = 4, width = 10, units = 'in')
 
 # COUNTY-SPECIFIC ESTIMATES---------
 #
