@@ -281,9 +281,9 @@ delta_shp = read_sf('GIS/boundaries/Legal_Delta_Boundary.shp') %>%
   st_transform(crs = st_crs(32610))
 
 water = terra::rast('GIS/scenario_rasters/baseline.tif') %>%
-  mask(rast('GIS/boundaries/delta.tif')) %>%
-  classify(rcl = data.frame(from = 90, to = 0) %>% as.matrix(),
-           others = NA)
+  mask(rast('GIS/boundaries/delta.tif'))
+levels(water) = NULL
+water = subst(water, from = c(1:89, 91:150), to = NA)
 plot(water, col = 'blue')
 
 library(showtext)
@@ -307,29 +307,29 @@ plot_change_map(pathin = 'GIS/SDM_results_diff',
                 legend.position = c(1, 0),
                 legend.justification = c(1, 0))
 
-plot_change_map(pathin = 'GIS/SDM_results_diff',
-                SDM = 'riparian',
-                landscape_name = 'scenario2_perennialexpand',
-                key = spp_key,
-                ncol = 5,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_riparian_scenario2.png',
-                height = 7, width = 10,
-                legend.position = c(1, 0),
-                legend.justification = c(1, 0))
-
-plot_change_map(pathin = 'GIS/SDM_results_diff',
-                SDM = 'riparian',
-                landscape_name = 'scenario3_combo',
-                key = spp_key,
-                ncol = 5,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_riparian_scenario3.png',
-                height = 7, width = 10,
-                legend.position = c(1, 0),
-                legend.justification = c(1, 0))
+# plot_change_map(pathin = 'GIS/SDM_results_diff',
+#                 SDM = 'riparian',
+#                 landscape_name = 'scenario2_perennialexpand',
+#                 key = spp_key,
+#                 ncol = 5,
+#                 studyarea = delta_shp,
+#                 watermask = water,
+#                 pathout = 'fig/changemap_riparian_scenario2.png',
+#                 height = 7, width = 10,
+#                 legend.position = c(1, 0),
+#                 legend.justification = c(1, 0))
+#
+# plot_change_map(pathin = 'GIS/SDM_results_diff',
+#                 SDM = 'riparian',
+#                 landscape_name = 'scenario3_combo',
+#                 key = spp_key,
+#                 ncol = 5,
+#                 studyarea = delta_shp,
+#                 watermask = water,
+#                 pathout = 'fig/changemap_riparian_scenario3.png',
+#                 height = 7, width = 10,
+#                 legend.position = c(1, 0),
+#                 legend.justification = c(1, 0))
 
 ## waterbird_fall
 plot_change_map(pathin = 'GIS/SDM_results_diff',
@@ -342,25 +342,25 @@ plot_change_map(pathin = 'GIS/SDM_results_diff',
                 pathout = 'fig/changemap_waterbird_fall_scenario1.png',
                 height = 7, width = 7.5)
 
-plot_change_map(pathin = 'GIS/SDM_results_diff',
-                SDM = 'waterbird_fall',
-                landscape_name = 'scenario2_perennialexpand',
-                key = spp_key,
-                ncol = 3,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_waterbird_fall_scenario2.png',
-                height = 7, width = 7.5)
-
-plot_change_map(pathin = 'GIS/SDM_results_diff',
-                SDM = 'waterbird_fall',
-                landscape_name = 'scenario3_combo',
-                key = spp_key,
-                ncol = 3,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_waterbird_fall_scenario3.png',
-                height = 7, width = 7.5)
+# plot_change_map(pathin = 'GIS/SDM_results_diff',
+#                 SDM = 'waterbird_fall',
+#                 landscape_name = 'scenario2_perennialexpand',
+#                 key = spp_key,
+#                 ncol = 3,
+#                 studyarea = delta_shp,
+#                 watermask = water,
+#                 pathout = 'fig/changemap_waterbird_fall_scenario2.png',
+#                 height = 7, width = 7.5)
+#
+# plot_change_map(pathin = 'GIS/SDM_results_diff',
+#                 SDM = 'waterbird_fall',
+#                 landscape_name = 'scenario3_combo',
+#                 key = spp_key,
+#                 ncol = 3,
+#                 studyarea = delta_shp,
+#                 watermask = water,
+#                 pathout = 'fig/changemap_waterbird_fall_scenario3.png',
+#                 height = 7, width = 7.5)
 
 ## waterbird_winter
 plot_change_map(pathin = 'GIS/SDM_results_diff',
@@ -373,25 +373,25 @@ plot_change_map(pathin = 'GIS/SDM_results_diff',
                 pathout = 'fig/changemap_waterbird_win_scenario1.png',
                 height = 7, width = 7.5)
 
-plot_change_map(pathin = 'GIS/SDM_results_diff',
-                SDM = 'waterbird_win',
-                landscape_name = 'scenario2_perennialexpand_win',
-                key = spp_key,
-                ncol = 3,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_waterbird_win_scenario2.png',
-                height = 7, width = 7.5)
-
-plot_change_map(pathin = 'GIS/SDM_results_diff',
-                SDM = 'waterbird_win',
-                landscape_name = 'scenario3_combo_win',
-                key = spp_key,
-                ncol = 3,
-                studyarea = delta_shp,
-                watermask = water,
-                pathout = 'fig/changemap_waterbird_win_scenario3.png',
-                height = 7, width = 7.5)
+# plot_change_map(pathin = 'GIS/SDM_results_diff',
+#                 SDM = 'waterbird_win',
+#                 landscape_name = 'scenario2_perennialexpand_win',
+#                 key = spp_key,
+#                 ncol = 3,
+#                 studyarea = delta_shp,
+#                 watermask = water,
+#                 pathout = 'fig/changemap_waterbird_win_scenario2.png',
+#                 height = 7, width = 7.5)
+#
+# plot_change_map(pathin = 'GIS/SDM_results_diff',
+#                 SDM = 'waterbird_win',
+#                 landscape_name = 'scenario3_combo_win',
+#                 key = spp_key,
+#                 ncol = 3,
+#                 studyarea = delta_shp,
+#                 watermask = water,
+#                 pathout = 'fig/changemap_waterbird_win_scenario3.png',
+#                 height = 7, width = 7.5)
 
 ## alt-------
 plot_change_map(pathin = 'GIS/SDM_results_diff',
