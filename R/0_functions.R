@@ -1451,18 +1451,46 @@ plot_change_map = function(pathin, SDM, landscape_name, key,
     crop(vect(studyarea))
 
   layernames = names(df)
+  pixelarea = res(df)[1] * res(df)[2]/10000
+  net = NULL
 
   for (i in c(1:nlyr(df))) { # doesn't work with purrr for some reason
     levels(df)[[i]] = data.frame(ID = c(-1, 0, 1, 90),
                                  label = names(palette))
+    net[i] = freq(df[[i]]) %>%
+      summarize(net = count[value == 'gain'] - count[value == 'loss']) %>%
+      mutate(net = net * pixelarea) %>% pull(net)
   }
-  names(df) = key$label[match(layernames, key$spp)] #reassign with labels from key
-  df = subset(df, subset = key$label[key$label %in% names(df)]) #reorder
+  # reassign with labels from key
+  names(df) = key$label[match(layernames, key$spp)]
+  names(net) = names(df)
+
+  # set up text annotations:
+  labels = tibble::enframe(net) %>% rename(lyr = name) %>%
+    mutate(label = if_else(value > 0,
+                           paste0('+',
+                                  format(round(value, digits = 0),
+                                         big.mark = ',', trim = TRUE),
+                                  ' ha'),
+                           paste0(format(round(value, digits = 0),
+                                         big.mark = ',', trim = TRUE),
+                                  ' ha')))
+
+  # reorder species
+  df = subset(df, subset = key$label[key$label %in% names(df)])
+  labels = mutate(labels,
+                  lyr = factor(lyr, levels = names(df))) %>%
+    arrange(lyr)
+
+  xmin = ext(df)[1]
+  ymax = ext(df)[4]
 
   p = ggplot() +
     geom_sf(data = studyarea, fill = 'gray80', color = 'black', size = 0.2) +
     geom_spatraster(data = df) +
     geom_sf(data = studyarea, fill = NA, color = 'black', size = 0.2) +
+    geom_text(data = labels, aes(x = xmin, y = ymax, label = label),
+              hjust = 0, size = (5/14)*9, family = 'sourcesans') +
     facet_wrap(~lyr, ncol = ncol) +
     scale_fill_manual(values = palette, na.value = 'transparent',
                       breaks = names(palette)[1:3]) +
