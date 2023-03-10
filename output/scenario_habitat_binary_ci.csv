@@ -1,0 +1,93 @@
+scenario,METRIC_CATEGORY,METRIC_SUBTYPE,METRIC,SCORE_TOTAL,UNIT,se,lcl,ucl
+baseline,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,4375.26,ha,200.95946152147405,2475.8415,7950.152249999998
+baseline,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,3246.75,ha,281.85475626162713,1934.8245,9507.865499999996
+baseline,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,41817.33,ha,1518.2175389674644,29331.32175,68730.48449999999
+baseline,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,39753.18,ha,2509.5325877396776,13.26375,42903.7425
+baseline,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,1755.45,ha,92.74821126282639,1142.8919999999998,3637.5412499999993
+baseline,Biodiversity Support,Riparian landbird habitat,Song Sparrow,155695.86,ha,4351.708176083185,76753.764,191260.82924999998
+baseline,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,14180.4,ha,2067.0671509417957,14673.872249999999,69087.21074999998
+baseline,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,309.87,ha,2254.1580773868227,0.4657500000000002,61740.13499999998
+baseline,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,7303.32,ha,1273.2725184854405,2438.78625,31575.496499999997
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,8072.1,ha,261.0041731119725,5188.203,12135.91275
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,6190.83,ha,448.74106454961026,4157.0595,15847.184249999998
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,46343.25,ha,1485.1611411183308,33764.109749999996,71081.07299999999
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,39816.81,ha,2503.842131677509,82.40175,43388.253
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,5181.75,ha,172.80137029909483,3327.6105,8142.324749999999
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Song Sparrow,156442.68,ha,4092.6863953858447,81449.3835,191077.15724999993
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,20113.83,ha,2134.4539798708593,21049.553249999997,76543.93574999999
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,325.8,ha,2213.599463380455,3.5122500000000003,62048.058749999975
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,8118.27,ha,1256.337704502116,2770.0245,34013.9025
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,3785.13,ha,181.30880474510093,2109.72375,7121.837249999997
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,2846.3399999999997,ha,257.70834574995104,1659.9982499999999,8704.45575
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,39812.76,ha,1440.8130952837116,27116.547749999998,66763.54124999998
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,39587.85,ha,2507.4502913132287,4.9095,42883.699499999995
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,1292.85,ha,72.62222886322094,839.6707499999999,2776.6034999999993
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Song Sparrow,150028.74,ha,4264.795548517689,75713.59125,192375.96975
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,15243.48,ha,2754.6804622485456,15769.10025,87099.00074999999
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,293.58,ha,1838.0228882473002,0.020250000000000008,49944.76199999998
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,7599.96,ha,1280.8964570853757,2269.755,33145.114499999996
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,7978.23,ha,258.4952692863615,5264.712,12307.1175
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,6129.45,ha,447.481001080242,4211.424,15728.273999999998
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,44351.55,ha,1401.0458342791424,31702.31775,68688.52424999999
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,39751.02,ha,2493.359021158329,71.43075,43276.74975
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,4671.54,ha,169.79634146348525,2850.6127500000002,7466.462999999998
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Song Sparrow,152490.15,ha,3969.355315452575,81506.3355,192031.44749999998
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,23172.93,ha,2705.3891103531173,24406.72425,93677.52825
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,316.17,ha,1772.7978116230365,2.6055,48193.51274999999
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,8976.96,ha,1273.3871184299628,2924.14725,34023.51224999999
+baseline,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),18866.61,ha,780.7034242534995,5680.8945,28389.89475
+baseline,Biodiversity Support,Waterbird habitat,Cranes (fall),4921.47,ha,218.08205338044814,1529.1675,7459.557749999999
+baseline,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),8602.92,ha,238.86507577000918,4950.861749999999,12398.114249999999
+baseline,Biodiversity Support,Waterbird habitat,Geese (fall),3321.18,ha,247.45028442429003,356.14574999999996,6701.168249999999
+baseline,Biodiversity Support,Waterbird habitat,Shorebirds (fall),15871.41,ha,213.11501200374963,11678.94225,17150.2515
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),22864.77,ha,881.6281384611406,7501.92075,31160.71575
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Cranes (fall),5064.12,ha,216.94792912120357,1560.024,7400.067749999999
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),12397.95,ha,291.8393718063652,8627.1345,16902.161999999997
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Geese (fall),3907.8,ha,266.8279312424379,351.80775,6923.133
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Shorebirds (fall),19196.1,ha,217.59107595108728,14889.275999999998,20319.3855
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),18049.5,ha,750.8818260566188,4850.23275,28250.813249999992
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Cranes (fall),5512.41,ha,220.04419544351276,1757.9160000000002,7373.866499999999
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),8219.07,ha,192.07040041606342,4851.42075,10339.60725
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Geese (fall),4829.49,ha,407.77932930693214,379.56374999999997,10834.609499999995
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Shorebirds (fall),15260.04,ha,198.85290028402235,11245.142249999999,16315.094249999998
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),22056.3,ha,863.8254663912837,6536.954250000001,30672.904499999997
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Cranes (fall),5677.92,ha,222.05484568891384,1854.054,7405.744499999999
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),11863.08,ha,243.08964709983525,8542.03275,15120.99675
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Geese (fall),6647.94,ha,479.57478266942746,363.465,12094.366499999998
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Shorebirds (fall),18674.64,ha,207.03328608629724,14517.4905,19783.91475
+baseline_win,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),38090.16,ha,2840.870020201469,6528.010499999999,69540.79049999999
+baseline_win,Biodiversity Support,Waterbird habitat,Cranes (winter),15093.54,ha,992.1945692959007,2549.85975,24893.068499999998
+baseline_win,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),26160.57,ha,597.089646235337,17188.16625,34000.04925
+baseline_win,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),9211.86,ha,412.9262203331007,2889.70425,12986.705249999997
+baseline_win,Biodiversity Support,Waterbird habitat,Geese (winter),18400.41,ha,1142.968739930266,5845.1355,34866.14849999999
+baseline_win,Biodiversity Support,Waterbird habitat,Shorebirds (winter),22959.54,ha,842.878734487194,7499.3445,29564.743499999997
+scenario1_restoration_win,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),43031.34,ha,2842.0011205416185,8908.4115,75149.64675
+scenario1_restoration_win,Biodiversity Support,Waterbird habitat,Cranes (winter),14301.81,ha,969.4025992812085,2407.86,24539.42925
+scenario1_restoration_win,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),29608.56,ha,619.5364234674147,20332.642499999998,36787.0545
+scenario1_restoration_win,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),11770.2,ha,474.4753693418086,3769.902,15724.802249999999
+scenario1_restoration_win,Biodiversity Support,Waterbird habitat,Geese (winter),18775.17,ha,1197.362107665012,5492.81475,36700.940249999985
+scenario1_restoration_win,Biodiversity Support,Waterbird habitat,Shorebirds (winter),25778.97,ha,876.1332007376345,9496.179,31858.60275
+scenario2_perennialexpand_alt_win,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),40183.2,ha,2627.4245121598697,7662.6630000000005,65832.51825
+scenario2_perennialexpand_alt_win,Biodiversity Support,Waterbird habitat,Cranes (winter),13692.15,ha,885.9441520628071,2249.7659999999996,22613.38425
+scenario2_perennialexpand_alt_win,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),25415.46,ha,554.7866856317867,17007.5205,32153.856749999995
+scenario2_perennialexpand_alt_win,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),9209.07,ha,387.95282310072344,3517.75125,12273.835500000001
+scenario2_perennialexpand_alt_win,Biodiversity Support,Waterbird habitat,Geese (winter),21317.4,ha,1130.5722575130362,6637.08375,35963.12249999999
+scenario2_perennialexpand_alt_win,Biodiversity Support,Waterbird habitat,Shorebirds (winter),22709.52,ha,850.2373238041155,7268.76675,29531.646
+scenario3_combo_alt_win,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),44958.24,ha,2619.187663086774,10357.26075,71315.325
+scenario3_combo_alt_win,Biodiversity Support,Waterbird habitat,Cranes (winter),12826.53,ha,866.2868273377361,2061.54,21679.43175
+scenario3_combo_alt_win,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),28855.62,ha,580.5172796655909,20383.614,35039.074499999995
+scenario3_combo_alt_win,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),11649.33,ha,455.1635963695035,3728.2275,15421.936499999998
+scenario3_combo_alt_win,Biodiversity Support,Waterbird habitat,Geese (winter),21325.68,ha,1179.002207209026,6147.5445,37382.498999999996
+scenario3_combo_alt_win,Biodiversity Support,Waterbird habitat,Shorebirds (winter),25538.76,ha,897.4214679283498,9303.0975,32470.375499999995
+baseline,Biodiversity Support,Riparian landbird habitat,Total,201883.05,ha,3841.685724234621,126826.96275,228443.21549999996
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Total,207878.04,ha,3624.3724031065135,138568.365,232923.57749999998
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Total,197488.35,ha,3716.8833758599853,130248.92474999999,230662.6515
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Total,206045.91,ha,3447.0435597141786,145430.3835,234960.61949999997
+baseline,Biodiversity Support,Waterbird habitat,Total (fall),25067.879999999997,ha,509.8990224412833,19536.3585,31429.7145
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Total (fall),28955.25,ha,543.2837235102731,22721.075999999997,35377.54425
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Total (fall),24245.28,ha,490.1234855022117,19018.85625,30468.575249999998
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Total (fall),28092.24,ha,532.1493172867746,22467.618,34307.64675
+baseline_win,Biodiversity Support,Waterbird habitat,Total (winter),55602.99,ha,1649.5747209299645,34237.143,73150.4835
+scenario1_restoration_win,Biodiversity Support,Waterbird habitat,Total (winter),59447.43,ha,1633.2191850696881,37828.09125,78083.85149999999
+scenario2_perennialexpand_alt_win,Biodiversity Support,Waterbird habitat,Total (winter),54270.27,ha,1488.8713508600533,34438.167,68546.2185
+scenario3_combo_alt_win,Biodiversity Support,Waterbird habitat,Total (winter),57809.07,ha,1471.3148075500371,37761.5475,73461.33899999999
