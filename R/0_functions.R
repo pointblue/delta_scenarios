@@ -1509,7 +1509,8 @@ plot_change_map = function(pathin, SDM, landscape_name, key,
   ggsave(filename = pathout, plot = p, ...)
 }
 
-plot_change_bar = function(dat, errorbar = TRUE, label = TRUE) {
+plot_change_bar = function(dat, errorbar = TRUE, label = FALSE, nudge = 0,
+                           star = NULL) {
   p = ggplot(dat, aes(net_change, METRIC)) +
     facet_wrap(~scenario, ncol = 3) +
     # ggforce::facet_col(~METRIC_CATEGORY, scales = 'free', space = 'free') +
@@ -1520,8 +1521,8 @@ plot_change_bar = function(dat, errorbar = TRUE, label = TRUE) {
     theme(axis.line.x = element_line(color = 'gray30'),
           axis.text = element_text(family = 'sourcesans', size = 8.5),
           axis.title = element_text(family = 'sourcesans', size = 10),
-          panel.grid.major.y = element_blank(),
-          plot.title = element_text(family = 'sourcesans', size = 10),
+          panel.grid = element_blank(),
+          plot.title = element_text(family = 'sourcesans', size = 9),
           strip.placement = 'outside',
           # strip.text = element_text(family = 'sourcesans', size = 10, vjust = 1),
           strip.text = element_blank(),
@@ -1530,18 +1531,36 @@ plot_change_bar = function(dat, errorbar = TRUE, label = TRUE) {
           panel.spacing = unit(1, 'lines'))
 
   if (errorbar) {
+    dat = dat %>%
+      # reverse ucl & lcl for water quality
+      mutate(upper = if_else(METRIC_CATEGORY == 'Water Quality', lcl, ucl),
+             lower = if_else(METRIC_CATEGORY == 'Water Quality', ucl, lcl))
     p = p +
       geom_errorbar(aes(xmin = lcl,
-                        xmax = ucl), width = 0.25)
+                        xmax = ucl), width = 0.25, linewidth = 0.4)
     if (label) {
       p = p +
         geom_text(data = dat %>% filter(bin == 'benefit'),
-                  aes(x = ucl + 3,
-                      label = paste0(round(change_pct, digits = 0), '%')), size = 2.5) +
+                  aes(x = upper + nudge,
+                      label = paste0(' +', round(prop_change * 100, digits = 0), '% ')),
+                  size = 2.5, hjust = 0) +
         geom_text(data = dat %>% filter(bin == 'trade-off'),
-                  aes(x = lcl - 3,
-                      label = paste0(round(change_pct, digits = 0), '%')), size = 2.5)
+                  aes(x = lower - nudge,
+                      label = paste0(' ', round(prop_change * 100, digits = 0), '%  ')),
+                  size = 2.5, hjust = 1)
     }
+    if (!is.null(star)) {
+      dat = dat %>%
+        mutate(meaningful = if_else(round(abs(prop_change), 2) >= star, TRUE, FALSE))
+      p = p +
+        geom_text(data = dat %>% filter(bin == 'benefit' & meaningful),
+                  aes(x = upper + nudge, label = '*'), size = 2.5, hjust = 0, vjust = 0.7) +
+        geom_text(data = dat %>% filter(bin == 'trade-off' & meaningful),
+                  aes(x = lower - nudge, label = '*'), size = 2.5, hjust = 0, vjust = 0.7)
+    }
+    p = p +
+      ggplot2::geom_blank(data = dat, ggplot2::aes(x = -(upper+nudge))) +
+      ggplot2::geom_blank(data = dat, ggplot2::aes(x = -(lower-nudge)))
   }
 
   print(p)
