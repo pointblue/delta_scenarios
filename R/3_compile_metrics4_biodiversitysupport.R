@@ -881,3 +881,151 @@ purrr::pmap(combos,
             pathout = 'GIS/SDM_results_diff',
             differentiate = TRUE,
             overwrite = TRUE)
+
+# BOOTSTRAP----------
+# resample original survey data, refit BRT, predict to all landscapes, and
+# calculate total area of suitable habitat
+scenarios = list.files('GIS/scenario_rasters', '.tif$', full.names = TRUE) %>%
+  terra::rast()
+source("R/0_bootstrap_SDM.R")
+
+## riparian-------
+load('data/riparian_landbirds/BRT_models_riparian_final.RData')
+# set up mask (if needed)
+watermask = terra::classify(scenarios$baseline %>%
+                         terra::mask(terra::rast('GIS/boundaries/delta.tif')),
+                       rcl = data.frame(from = 90,
+                                        to = 0) %>% as.matrix(),
+                       others = NA)
+# read in riparian predictors
+predictors = list(
+  baseline = c(list.files('GIS/SDM_predictors/riparian', pattern = '.tif$', full.names = TRUE),
+               list.files('GIS/SDM_predictors/riparian/baseline', pattern = '.tif$',
+                          full.names = TRUE)) %>% terra::rast(),
+  scenario1 = c(list.files('GIS/SDM_predictors/riparian', pattern = '.tif$', full.names = TRUE),
+                list.files('GIS/SDM_predictors/riparian/scenario1_restoration/', pattern = '.tif$',
+                           full.names = TRUE)) %>% terra::rast(),
+  scenario2_alt = c(list.files('GIS/SDM_predictors/riparian', pattern = '.tif$', full.names = TRUE),
+                    list.files('GIS/SDM_predictors/riparian/scenario2_perennialexpand_alt/', pattern = '.tif$',
+                               full.names = TRUE)) %>% terra::rast(),
+  scenario3_alt = c(list.files('GIS/SDM_predictors/riparian', pattern = '.tif$', full.names = TRUE),
+                    list.files('GIS/SDM_predictors/riparian/scenario3_combo_alt/', pattern = '.tif$',
+                               full.names = TRUE)) %>% terra::rast())
+
+bootrip50 = bootstrap_SDM(
+  modlist = BRT_riparian,
+  n = c(1:50), #number of the bootstrap sample to run for each model
+  predictors = predictors,
+  constants = data.frame(region = 1,
+                         area.ha = 3.141593),
+  factors = NULL,
+  unsuitable = watermask,
+  stat = 'equal_sens_spec',
+  rollup = TRUE)
+write_csv(bootrip50, 'output/bootstrap_riparian50.csv')
+
+## boot win------
+load('data/waterbirds/BRT_models_final.RData')
+waterbirdmask = terra::classify(scenarios$baseline %>%
+                                  terra::mask(terra::rast('GIS/boundaries/delta.tif')),
+                                rcl = data.frame(from = c(10:19, 60, 130),
+                                                 to = 0) %>% as.matrix(),
+                                others = NA)
+
+waterbird_win = list(
+  baseline = list.files('GIS/SDM_predictors/waterbird_win/baseline_win/',
+                        '.tif$', full.names = TRUE) %>% rast(),
+  scenario1 = list.files('GIS/SDM_predictors/waterbird_win/scenario1_restoration_win/',
+                         '.tif$', full.names = TRUE) %>% rast(),
+  scenario2_alt = list.files('GIS/SDM_predictors/waterbird_win/scenario2_perennialexpand_alt_win/',
+                             '.tif$', full.names = TRUE) %>% rast(),
+  scenario3_alt = list.files('GIS/SDM_predictors/waterbird_win/scenario3_combo_alt_win/',
+                             '.tif$', full.names = TRUE) %>% rast())
+
+bootwin50 = bootstrap_SDM(
+  modlist = waterbird_mods_win,
+  n = c(1:50), #number of the bootstrap sample to run for each model
+  predictors = waterbird_win,
+  constants = data.frame(offset = 3.617),
+  factors = list(list('covertype' = c('Alfalfa',
+                                      'Corn',
+                                      'Irrigated pasture',
+                                      'Rice',
+                                      'Wetland',
+                                      'Winter wheat'))),
+  unsuitable = waterbirdmask,
+  stat = 'equal_sens_spec',
+  rollup = TRUE)
+write_csv(bootwin50, 'output/bootstrap_waterbirds_win_50.csv')
+
+
+## boot fall-------
+
+waterbird_fall = list(
+  baseline = list.files('GIS/SDM_predictors/waterbird_fall/baseline/',
+                        '.tif$', full.names = TRUE) %>% rast(),
+  scenario1 = list.files('GIS/SDM_predictors/waterbird_fall/scenario1_restoration/',
+                         '.tif$', full.names = TRUE) %>% rast(),
+  scenario2_alt = list.files('GIS/SDM_predictors/waterbird_fall/scenario2_perennialexpand_alt/',
+                         '.tif$', full.names = TRUE) %>% rast(),
+  scenario3_alt = list.files('GIS/SDM_predictors/waterbird_fall/scenario3_combo_alt/',
+                         '.tif$', full.names = TRUE) %>% rast())
+
+bootfall50 = bootstrap_SDM2(
+  modlist = waterbird_mods_fall,
+  n = c(1:50), #number of the bootstrap sample to run for each model
+  predictors = waterbird_fall,
+  constants = list('crane' = data.frame(offset = 3.709),
+                   'geese' = data.frame(offset = 3.709),
+                   'dblr' = data.frame(offset = 4.435),
+                   'cicon' = data.frame(offset = 4.435),
+                   'shore' = data.frame(offset = 4.435)),
+  factors = list(list('covertype' = c('Alfalfa',
+                                      'Irrigated pasture',
+                                      'Rice',
+                                      'Wetland'))),
+  unsuitable = waterbirdmask,
+  stat = 'equal_sens_spec',
+  rollup = TRUE)
+write_csv(bootfall50, 'output/bootstrap_waterbirds_fall_50.csv')
+
+
+## compile--------
+# add habitat totals to habitat change estimates from above
+sppkey = read_csv('output/TABLE_species_key.csv')
+
+bootrip50 = read_csv('output/bootstrap_riparian50.csv')
+bootfall50 = read_csv('output/bootstrap_waterbirds_fall_50.csv')
+bootwin50 = read_csv('output/bootstrap_waterbirds_win_50.csv')
+
+boot_totals = bind_rows(bootrip50 %>% mutate(group = 'riparian'),
+                        bootfall50 %>% mutate(group = 'fall'),
+                        bootwin50 %>% mutate(group = 'win')) %>%
+  left_join(sppkey %>% select(spp, METRIC = label), by = 'spp') %>%
+  mutate(METRIC = case_when(group == 'fall' ~ paste0(METRIC, ' (fall)'),
+                            group == 'win' ~ paste0(METRIC, ' (winter)'),
+                            TRUE ~ METRIC),
+         METRIC_SUBTYPE = if_else(group == 'riparian',
+                                  'Riparian landbird habitat',
+                                  'Waterbird habitat'),
+         scenario = case_when(scenario == 'scenario1' ~ 'scenario1_restoration',
+                              scenario == 'scenario2_alt' ~ 'scenario2_perennialexpand_alt',
+                              scenario == 'scenario3_alt' ~ 'scenario3_combo_alt',
+                              TRUE ~ scenario),
+         scenario = if_else(group == 'win', paste0(scenario, '_win'), scenario)) %>%
+  select(scenario, spp, METRIC_SUBTYPE, METRIC, n, value)
+write_csv(boot_totals, 'output/scenario_habitat_binary_bootstrap.csv')
+
+boot_totals_sum = boot_totals %>%
+  group_by(scenario, spp, METRIC_SUBTYPE, METRIC) %>%
+  summarize(median = median(value) * 0.09, #convert to ha
+            se = sd(value)/sqrt(50) * 0.09,
+            lcl = quantile(value, 0.025) * 0.09,
+            ucl = quantile(value, 0.975) * 0.09,
+            .groups = 'drop')
+
+habitat_binary_ci = read_csv('output/scenario_habitat_binary.csv') %>%
+  right_join(boot_totals_sum %>% select(scenario, METRIC, se, lcl, ucl),
+            by = c('scenario', 'METRIC'))
+write_csv(habitat_binary_ci, 'output/scenario_habitat_binary_ci.csv')
+# >> SPTO CI does not include original predicted values for any scenario!
