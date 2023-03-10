@@ -10,8 +10,9 @@ source('R/0_functions.R')
 key = readxl::read_excel('GIS/VEG_key.xlsx')
 metrics = read_csv('output/metrics.csv')
 habitat = read_csv('output/scenario_habitat.csv')
-habitat_binary = read_csv('output/scenario_habitat_binary.csv')
-
+habitat_binary_ci = read_csv('output/scenario_habitat_binary_ci.csv')
+bootstrap = read_csv('output/scenario_habitat_binary_bootstrap.csv')
+landcover = read_csv('output/landcover_totals.csv') # land cover totals
 
 # METRICS CHANGE--------
 
@@ -33,19 +34,18 @@ habitat_binary = read_csv('output/scenario_habitat_binary.csv')
 metrics %>% select(METRIC_CATEGORY, METRIC, UNIT) %>%
   distinct() %>% print(width = Inf)
 
-# land cover totals
-landcover = read_csv('output/landcover_totals.csv')
-
 scores = DeltaMultipleBenefits::sum_metrics(
   metricdat = metrics %>%
     filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))),
   areadat = landcover %>%
     filter(!(grepl('RIPARIAN_|WETLAND_MANAGED_|WETLAND_TIDAL|WATER', CODE_NAME))) %>%
-    filter(!grepl('win', scenario))) %>%
-  bind_rows(habitat_binary) %>% #exclude habitat/distribution data
+    filter(!grepl('win', scenario)))  %>%
+  mutate(UNIT = gsub('/ha', '', UNIT)) %>% # now scores are not per ha
+  bind_rows(habitat_binary_ci %>%
+              select(scenario, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, UNIT,
+                     SCORE_TOTAL, SCORE_TOTAL_SE = se)) %>%
   mutate(scenario = gsub('_win', '', scenario)) %>% #rename in habitat metrics
-  arrange(scenario, METRIC_CATEGORY, METRIC) %>%
-  mutate(UNIT = gsub('/ha', '', UNIT)) # now scores are not per ha
+  arrange(scenario, METRIC_CATEGORY, METRIC)
 write_csv(scores, 'output/scenario_scores.csv')
 
 # check updated units:
@@ -86,8 +86,36 @@ write_csv(scores_table_wide, 'output/TABLE_scores_summary.csv')
 
 ## net change-------
 # compare each scenario to baseline
-scores_change = DeltaMultipleBenefits::sum_change(scores)
-write_csv(scores_change, 'output/netchange_scores.csv')
+scores_change = DeltaMultipleBenefits::sum_change(
+  scores %>% filter(METRIC_CATEGORY != 'Biodiversity Support')) %>%
+  mutate(prop_change = net_change / BASELINE_VALUE)
+
+# but calculate bootstrap CI for biodiversity support
+scores_change_biodiversity = left_join(
+  bootstrap %>% mutate(scenario = gsub('_win', '', scenario)) %>%
+    filter(!grepl('baseline', scenario)) %>%
+    select(scenario:n, SCENARIO_VALUE = value),
+  bootstrap %>% mutate(scenario = gsub('_win', '', scenario)) %>%
+    filter(grepl('baseline', scenario)) %>%
+    select(spp:n, BASELINE_VALUE = value),
+  by = c('spp', 'METRIC_SUBTYPE', 'METRIC', 'n')) %>%
+  mutate(METRIC_CATEGORY = 'Biodiversity Support',
+         diff = (SCENARIO_VALUE - BASELINE_VALUE) * 0.09) %>%  #convert to ha
+  group_by(scenario, spp, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC) %>%
+  summarize(BASELINE_VALUE = mean(BASELINE_VALUE) * 0.09, #convert to ha
+            net_change = mean(diff),
+            lcl = quantile(diff, 0.025),
+            ucl = quantile(diff, 0.975),
+            .groups = 'drop') %>%
+  mutate(prop_change = net_change / BASELINE_VALUE)
+
+# combine:
+scores_change_all = bind_rows(
+  scores_change %>%
+    select(scenario, METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, UNIT, net_change, lcl, ucl, prop_change),
+  scores_change_biodiversity %>%
+    select(-spp, -BASELINE_VALUE))
+write_csv(scores_change_all, 'output/netchange_scores.csv')
 
 # PLOT CHANGE----------
 library(patchwork)
@@ -121,16 +149,16 @@ spplist = c(
 )
 
 netchange = read_csv('output/netchange_scores.csv', col_types = cols()) %>%
-  filter(METRIC %in% metriclist & !grepl('distributions', METRIC_SUBTYPE)) %>%
+  # filter(METRIC %in% metriclist & !grepl('distributions', METRIC_SUBTYPE)) %>%
   filter(grepl('scenario1|_alt', scenario)) %>%
   mutate(
     # rescale metrics for readability
-    across(c(BASELINE, BASELINE_SE, SCENARIO, SCENARIO_SE, net_change,
-             net_change_se, U, lcl, ucl),
+    across(c(net_change, lcl, ucl),
            ~case_when(
              METRIC_CATEGORY == 'Water Quality' ~ ./1000, #kg to MT per yr
-             # METRIC == 'Annual Wages' ~ ./100, #USD to hundreds per FTE
+             METRIC == 'Annual Wages' ~ ./100, #USD to hundreds per FTE
              METRIC == 'Gross Production Value' ~ ./1000000, #USD to hundred-thousands per yr
+             METRIC_CATEGORY == 'Biodiversity Support' ~ ./1000, #ha to thousands of ha
              TRUE ~ .)),
     METRIC_CATEGORY = factor(METRIC_CATEGORY, levels = categorylist),
     METRIC = factor(METRIC, levels = rev(metriclist)),
@@ -138,7 +166,7 @@ netchange = read_csv('output/netchange_scores.csv', col_types = cols()) %>%
     METRIC = recode(
       METRIC,
       'Agricultural Jobs' = 'Agricultural Jobs\n(FTE/yr)',
-      'Annual Wages' = 'Annual Wages\n(USD/FTE)',
+      'Annual Wages' = 'Annual Wages\n(USD/FTE, hundreds)',
       'Gross Production Value' = 'Gross Production Value\n(USD/yr, millions)',
       'Critical Pesticides' = 'Critical Pesticides\n(MT/yr)',
       'Groundwater Contaminant' = 'Groundwater Contaminants\n(MT/yr)',
@@ -146,11 +174,11 @@ netchange = read_csv('output/netchange_scores.csv', col_types = cols()) %>%
       Drought = 'Drought\n(mean score)',
       Flood = 'Flood\n(mean score)',
       Heat = 'Heat\n(mean score)',
-      Total = 'Riparian landbird\nhabitat (ha)',
-      `Total (fall)` = 'Waterbird habitat,\nfall (ha)',
-      `Total (winter)` = 'Waterbird habitat,\nwinter (ha)'),
+      Total = 'Riparian landbird habitat\n(ha, thousands)',
+      `Total (fall)` = 'Waterbird habitat, fall\n(ha, thousands)',
+      `Total (winter)` = 'Waterbird habitat, winter\n(ha, thousands)'),
     # invert water quality scores
-    across(c(net_change, lcl, ucl),
+    across(c(net_change, lcl, ucl, prop_change),
            ~if_else(METRIC_CATEGORY == 'Water Quality', -1 * ., .)),
     # define benefits and trade-offs for color coding
     bin = if_else(net_change > 0, 'benefit', 'trade-off')) %>%
@@ -158,43 +186,52 @@ netchange = read_csv('output/netchange_scores.csv', col_types = cols()) %>%
                            levels = c('scenario1_restoration',
                                       'scenario2_perennialexpand_alt',
                                       'scenario3_combo_alt'),
-                           labels = c('Scenario 1:\nHabitat restoration',
-                                      'Scenario 2:\nPerennial crop\nexpansion',
-                                      'Scenario 3:\nCombination')))
+                           labels = c('A',
+                                      'B',
+                                      'C')))
+  # mutate(scenario = factor(scenario,
+  #                          levels = c('scenario1_restoration',
+  #                                     'scenario2_perennialexpand_alt',
+  #                                     'scenario3_combo_alt'),
+  #                          labels = c('Scenario 1:\nHabitat restoration',
+  #                                     'Scenario 2:\nPerennial crop\nexpansion',
+  #                                     'Scenario 3:\nCombination')))
 
 ## for manuscript-----
 # barchart with error bars
 part1 = netchange %>%
   filter(METRIC_CATEGORY == 'Agricultural Livelihoods') %>%
-  mutate(change_pct = net_change / BASELINE) %>%
-  plot_change_bar() +
-  labs(x = NULL, y = NULL, title = 'A') +
-  xlim(-2100, 2100)
+  plot_change_bar(star = 0.05, nudge = 80) +
+  labs(x = NULL, y = NULL, title = 'Agricultural Livelihoods') +
+  facet_wrap(~scenario, ncol = 3, strip.position = 'top') +
+  theme(strip.text = element_text(family = 'sourcesans', size = 9, vjust = 0, hjust = 0, face = 'bold'),
+        strip.placement = 'outside')
+  # xlim(-1000, 1000)
 
 part2 = netchange %>%
   filter(METRIC_CATEGORY == 'Water Quality') %>%
-  plot_change_bar() +
-  labs(x = NULL, y = NULL, title = 'B') +
-  xlim(-100, 100)
+  plot_change_bar(star = 0.05, nudge = 10) +
+  labs(x = NULL, y = NULL, title = 'Water Quality')
+  # xlim(-100, 100)
 
 part3 = netchange %>%
   filter(METRIC_CATEGORY == 'Climate Change Resilience') %>%
-  plot_change_bar() +
-  labs(x = NULL, y = NULL, title = 'C') +
-  xlim(-0.5, 0.5)
+  plot_change_bar(star = 0.05, nudge = 0.03) +
+  labs(x = NULL, y = NULL, title = 'Climate Change Resilience') +
+  xlim(-1, 1)
 
 part4 = netchange %>%
-  filter(METRIC_CATEGORY == 'Biodiversity Support') %>%
-  plot_change_bar() +
-  labs(x = NULL, y = NULL, title = 'D') +
-  xlim(-7000, 7000) +
-  facet_wrap(~scenario, ncol = 3, strip.position = 'bottom') +
-  theme(strip.text = element_text(family = 'sourcesans', size = 10, vjust = 1))
+  filter(METRIC_CATEGORY == 'Biodiversity Support' & !is.na(METRIC)) %>%
+  plot_change_bar(star = 0.05, nudge = 1) +
+  labs(x = NULL, y = NULL, title = 'Biodiversity Support')
+  # xlim(-25, 25) +
+  # facet_wrap(~scenario, ncol = 3, strip.position = 'bottom') +
+  # theme(strip.text = element_text(family = 'sourcesans', size = 10, vjust = 1))
 
 showtext_auto()
 showtext_opts(dpi = 300) #default for ggsave
 part1/part2/part3/part4
-ggsave('fig/netchange_barchart.png', height = 6.5, width = 6.5, units = 'in')
+ggsave('fig/netchange_barchart_perc.png', height = 6.5, width = 6.5, units = 'in')
 showtext_auto(FALSE)
 
 # ## for presentation
