@@ -23,7 +23,13 @@ This repository represents part of a larger project funded by Proposition 1 Delt
 
 Task 4 of this larger project entailed developing and analyzing the impacts of alternative landscapes representing the potential magnitude and spatial distribution of land cover change in the Delta resulting from two major drivers of landscape change: (1) restoration of riparian and nontidal wetland habitat to meet objectives in the Delta plan, and (2) continued expansion of perennial crops. A third alternative combined both of these drivers of landscape change. We developed each of these alternative landscapes and estimated the net change that would result from a recent baseline landscape for multiple metrics representing several categories ecosystem benefits of interest in the Delta: agricultural livelihoods, water quality, climate change resilience, and biodiversity support.
 
-This repository documents the development of each of these alternative landscapes, metrics, and analysis of the net changes from baseline. It was developed in parallel with the `DeltaMultipleBenefits` R package, which contains the functions necessary to running these analyses. 
+This repository documents the development of each of these alternative landscapes, metrics, and analysis of the net changes from baseline. It was developed in parallel with the `DeltaMultipleBenefits` R package, which contains the functions necessary to running these analyses. This repository contains only the primary scripts and outputs not otherwise available in the R package or other data archives and repositories (linked below). Additional related data are stored on Point Blue’s server (Z:/Terrestrial/programs_and_projects/delta_multiple_benefits/delta-scenarios), including: source data available elsewhere too large to store on Github, other earlier and intermediate versions of scripts and outputs, output figures, and related GIS data.
+
+# Related repositories
+
+[<img src="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/arrow-up-right-from-square.svg" width="18" height="18">](https://github.com/pointblue/DeltaMultipleBenefits/){target="_blank"} Dybala K (2025). DeltaMultipleBenefits: Projecting the Multiple Benefits of Land Cover Change in the Sacramento-San Joaquin River Delta. R package version 1.0.0, https://pointblue.github.io/DeltaMultipleBenefits/, https://github.com/pointblue/DeltaMultipleBenefits.
+
+[<img src="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/arrow-up-right-from-square.svg" width="18" height="18">](https://github.com/pointblue/delta-riparian){target="_blank"} Central Valley riparian landbird distribution modeling *(development of the distribution models developed in this project)*
 
 # Supporting data
 

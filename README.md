@@ -35,7 +35,30 @@ biodiversity support.
 This repository documents the development of each of these alternative
 landscapes, metrics, and analysis of the net changes from baseline. It
 was developed in parallel with the `DeltaMultipleBenefits` R package,
-which contains the functions necessary to running these analyses.
+which contains the functions necessary to running these analyses. This
+repository contains only the primary scripts and outputs not otherwise
+available in the R package or other data archives and repositories
+(linked below). Additional related data are stored on Point Blue’s
+server
+(Z:/Terrestrial/programs_and_projects/delta_multiple_benefits/delta-scenarios),
+including: source data available elsewhere too large to store on Github,
+other earlier and intermediate versions of scripts and outputs, output
+figures, and related GIS data.
+
+# Related repositories
+
+<a href="https://github.com/pointblue/DeltaMultipleBenefits/"
+target="_blank"><img src="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/arrow-up-right-from-square.svg" width="18" height="18"></a>
+Dybala K (2025). DeltaMultipleBenefits: Projecting the Multiple Benefits
+of Land Cover Change in the Sacramento-San Joaquin River Delta. R
+package version 1.0.0,
+<https://pointblue.github.io/DeltaMultipleBenefits/>,
+<https://github.com/pointblue/DeltaMultipleBenefits>.
+
+<a href="https://github.com/pointblue/delta-riparian"
+target="_blank"><img src="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/arrow-up-right-from-square.svg" width="18" height="18"></a>
+Central Valley riparian landbird distribution modeling *(development of
+the distribution models developed in this project)*
 
 # Supporting data
 
