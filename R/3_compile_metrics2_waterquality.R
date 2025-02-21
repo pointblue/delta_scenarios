@@ -48,7 +48,10 @@ ag_details = read_csv('data/baseline_area.csv')
 # https://www.epa.gov/ingredients-used-pesticide-products/brief-overviews-about-individual-pesticides
 # PubChem notes: https://pubchem.ncbi.nlm.nih.gov/ Pyrethroids:
 # https://www.epa.gov/ingredients-used-pesticide-products/registration-review-pyrethrins-and-pyrethroids
-
+#
+# 2024 possible addition: N loading from fertilizer
+# https://ucanr.edu/sites/groundwaternitrate/files/383510.pdf
+# (Harter et al. 2017 report)
 
 
 
@@ -544,3 +547,105 @@ pur_details_subclass %>%
   geom_col(position = 'dodge')
 # within these classes, highest rates are for potato/sweet potato, pears, apples, vineyard
 
+# N LOADING-----------
+# original data from https://ucanr.edu/sites/groundwaternitrate/files/383510.pdf
+# >> Table 11.24 on page 138 for crops, and Table 11.3 on page 80 for
+# county-specific estimates from urban areas (excluding separate estimates for
+# golf courses)
+# >> highest is corn by far
+
+nload = tibble(crop = c('alfalfa/clover', 'corn/sorghum/sudan', 'cotton',
+                        'field crops', 'grain/hay', 'nuts', 'olives', 'rice',
+                        'subtropical', 'tree fruit', 'vegetables/berries',
+                        'vineyards'),
+               nload.2005 = c(30, 320, 148, 75, 195, 98, 26, 19, 124, 100, 84,
+                              39)) |>
+  codify_nload() |> # classify to match key
+  mutate(
+    METRIC_CATEGORY = 'water quality',
+    METRIC_SUBTYPE = 'N loading',
+    METRIC = 'N loading',
+    UNIT = 'kg per ha') %>%
+  select(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, SCORE_MEAN = nload.2005, UNIT, orig_crop = crop)
+
+## handle multiple values for one crop class-------
+# weight by relative area in baseline landscape
+
+nload |> arrange(CODE_NAME, orig_crop)
+# multiple distinct values for:
+# - FIELD_OTHER (cotton higher than general field crops), but cotton not
+# expected in the Delta? (mostly SAFFLOWER)
+# - ORCHARD_CITRUS&SUBTROPICAL (olives much lower than general "subtropical"),
+# but Delta is mostly olives (by far)
+# - ORCHARD_DECIDUOUS (but very similar values for nuts and tree fruits)
+
+# regroup subclasses in ag_details to match nload data and calculate proportions
+# of each subclass
+ag_prop = ag_details |>
+  mutate(
+    group = case_when(
+      SUBCLASS %in% c('ALMONDS', 'WALNUTS') ~ 'nuts',
+      SUBCLASS %in% c('APPLES', 'PEARS', 'POMEGRANATES', 'STONE FRUIT',
+                      'MISCELLANEOUS DECIDUOUS') ~ 'tree fruit',
+      CLASS == 'FIELD_OTHER' ~ 'field crops', # as oppposed to cotton
+      SUBCLASS == 'OLIVES' ~ 'olives',
+      SUBCLASS == 'MISCELLANEOUS SUBTROPICAL FRUIT' ~ 'subtropical',
+      )) |>
+  drop_na() |>
+  group_by(group, CLASS, CLASS_AREA) |>
+  summarize(SUBCLASS_AREA = sum(SUBCLASS_AREA), .groups = 'drop') |>
+  mutate(subclass_prop = SUBCLASS_AREA/CLASS_AREA)
+# 2/3 nuts over treefruit; 97% olives over other subtropical; entirely field
+# crops over cotton
+
+nload_avg = left_join(nload, ag_prop |> select(orig_crop = group, subclass_prop),
+                      by = 'orig_crop') |>
+  # fill NA with 1
+  mutate(subclass_prop = replace_na(subclass_prop, replace = 1)) |>
+  group_by(METRIC_CATEGORY, METRIC_SUBTYPE, METRIC, CODE_NAME, UNIT) |>
+  summarize(SCORE_MEAN = sum(SCORE_MEAN * subclass_prop),
+            .groups = 'drop')
+
+
+## fill missing values-----
+nload_avg |>
+  mutate(CODE_NAME = factor(CODE_NAME, levels = key %>% pull(CODE_NAME))) |>
+  complete(CODE_NAME) %>% print(n = 40)
+
+nload_fill = nload_avg |>
+  bind_rows(
+    #apply values from more general categories to each subclass
+    nload_avg |> filter(CODE_NAME == 'GRAIN&HAY') |>
+      mutate(CODE_NAME = 'GRAIN&HAY_WHEAT'),
+    nload_avg |> filter(CODE_NAME == 'GRAIN&HAY') |>
+      mutate(CODE_NAME = 'GRAIN&HAY_OTHER'),
+    nload_avg |> filter(CODE_NAME == 'PASTURE') |>
+      mutate(CODE_NAME = 'PASTURE_ALFALFA'),
+    nload_avg |> filter(CODE_NAME == 'PASTURE') |>
+      mutate(CODE_NAME = 'PASTURE_OTHER'),
+    # ADD VALUE FOR URBAN (SEE PAGE 80 OF REPORT): "The estimated combined,
+    # uniform leaching rate in urban areas is 20 kg N per ha per year (17.8 lb
+    # per acre per year)."
+    nload_avg |> filter(CODE_NAME == 'PASTURE') |>
+      mutate(CODE_NAME = 'URBAN',
+             SCORE_MEAN = 20),
+    # fill others with 0
+    expand_grid(
+      tibble(CODE_NAME = c('GRASSLAND', 'RIPARIAN', 'RIPARIAN_FOREST_POFR',
+                           'RIPARIAN_FOREST_QULO', 'RIPARIAN_FOREST_SALIX',
+                           'RIPARIAN_FOREST_MIXED', 'RIPARIAN_SCRUB_INTRO',
+                           'RIPARIAN_SCRUB_SALIX', 'RIPARIAN_SCRUB_MIXED',
+                           'WETLAND_MANAGED', 'WETLAND_MANAGED_PERENNIAL',
+                           'WETLAND_MANAGED_SEASONAL', 'WETLAND_TIDAL',
+                           'WETLAND_OTHER', 'WOODLAND', 'SCRUB', 'BARREN',
+                           'WATER', 'IDLE')),
+      nload_avg |> filter(CODE_NAME == 'VINEYARD') |> mutate(SCORE_MEAN = 0) |>
+        select(-CODE_NAME))
+  ) |>
+  # drop super categories that are no longer needed
+  filter(!CODE_NAME %in% c('GRAIN&HAY', 'PASTURE'))
+
+write_csv(nload_fill, 'data/nitrogen_loading.csv')
+
+nload_fill |> arrange(desc(SCORE_MEAN)) |>
+  ggplot(aes(SCORE_MEAN, CODE_NAME)) + geom_col()

@@ -3,113 +3,123 @@ scenario1_restoration,Agricultural Livelihoods,NA,Agricultural Jobs,FTE/yr,-55.4
 scenario1_restoration,Agricultural Livelihoods,NA,Annual Wages,USD/FTE,-29.34016156436701,-1764.9711004877738,1706.2907773590398,-7.576182489650132e-4
 scenario1_restoration,Agricultural Livelihoods,NA,Gross Production Value,USD/yr,-16869161.008942127,-75000196.08498295,41261874.06709869,-0.020709579684465004
 scenario1_restoration,Climate Change Resilience,NA,Drought,"qualitative score, 1-10",-0.06731929096291989,-0.2145260655046774,0.07988748357883763,-0.011972427803819755
-scenario1_restoration,Climate Change Resilience,NA,Flood,"qualitative score, 1-10",0.06392050085859147,-0.08944634649812727,0.2172873482153102,0.01083246644529122
+scenario1_restoration,Climate Change Resilience,NA,Flood,"qualitative score, 1-10",0.06392050085859147,-0.08944634649812724,0.21728734821531018,0.01083246644529122
 scenario1_restoration,Climate Change Resilience,NA,Heat,"qualitative score, 1-10",0.0014944338003024527,-0.16798907955343165,0.17097794715403655,2.153257203436831e-4
-scenario1_restoration,Water Quality,NA,Critical Pesticides,kg/yr,-3076.5071761777654,-30740.96932217614,24587.95496982061,-0.02452751333040937
-scenario1_restoration,Water Quality,NA,Groundwater Contaminant,kg/yr,-258.21490671299944,-6236.724911829618,5720.295098403619,-0.01590055896456663
+scenario1_restoration,Water Quality,NA,Critical Pesticides,kg/yr,-3076.5071761777654,-30740.96932217614,24587.95496982061,-0.024527513330409367
+scenario1_restoration,Water Quality,NA,Groundwater Contaminant,kg/yr,-258.2149067129976,-6236.724911829616,5720.295098403621,-0.01590055896456652
+scenario1_restoration,Water Quality,NA,N loading,kg/yr,-520979.2180230953,NA,NA,-0.023171924677398897
 scenario1_restoration,Water Quality,NA,Risk to Aquatic Organisms,kg/yr,-10424.848788750009,-57332.42844602533,36482.730868525316,-0.02653546555975569
 scenario2_perennialexpand,Agricultural Livelihoods,NA,Agricultural Jobs,FTE/yr,475.68154076618566,-41.95099881766134,993.3140803500327,0.18923124933639288
 scenario2_perennialexpand,Agricultural Livelihoods,NA,Annual Wages,USD/FTE,-239.564497358675,-1919.5371899599281,1440.4081952425781,-0.006186006665467337
 scenario2_perennialexpand,Agricultural Livelihoods,NA,Gross Production Value,USD/yr,141913198.72329104,68301026.33430842,215525371.11227366,0.17422103539585676
-scenario2_perennialexpand,Climate Change Resilience,NA,Drought,"qualitative score, 1-10",-0.2115274958697606,-0.36294060282505775,-0.06011438891446347,-0.03761919706222715
+scenario2_perennialexpand,Climate Change Resilience,NA,Drought,"qualitative score, 1-10",-0.2115274958697606,-0.3629406028250577,-0.060114388914463496,-0.03761919706222715
 scenario2_perennialexpand,Climate Change Resilience,NA,Flood,"qualitative score, 1-10",-0.06777176104299709,-0.22376379300058474,0.08822027091459056,-0.011485131023310599
 scenario2_perennialexpand,Climate Change Resilience,NA,Heat,"qualitative score, 1-10",-0.25307725334967124,-0.42859117278257647,-0.07756333391676601,-0.03646467435967382
-scenario2_perennialexpand,Water Quality,NA,Critical Pesticides,kg/yr,3568.0521136803873,-23318.398314454324,30454.502541815098,0.02844636491003402
-scenario2_perennialexpand,Water Quality,NA,Groundwater Contaminant,kg/yr,2496.2386121406817,-3446.404730730357,8438.88195501172,0.15371532862774365
+scenario2_perennialexpand,Water Quality,NA,Critical Pesticides,kg/yr,3568.0521136803727,-23318.398314454338,30454.502541815084,0.0284463649100339
+scenario2_perennialexpand,Water Quality,NA,Groundwater Contaminant,kg/yr,2496.2386121406835,-3446.4047307303554,8438.881955011722,0.15371532862774376
+scenario2_perennialexpand,Water Quality,NA,N loading,kg/yr,-451049.0515501909,NA,NA,-0.020061596099731387
 scenario2_perennialexpand,Water Quality,NA,Risk to Aquatic Organisms,kg/yr,49125.489457760705,123.70680562549387,98127.27210989592,0.12504428217887414
 scenario2_perennialexpand_alt,Agricultural Livelihoods,NA,Agricultural Jobs,FTE/yr,444.14404590254117,-56.702507260086634,944.9905990651689,0.17668529360227928
 scenario2_perennialexpand_alt,Agricultural Livelihoods,NA,Annual Wages,USD/FTE,-239.25636908930028,-1920.2942163822515,1441.781478203651,-0.00617805021303308
-scenario2_perennialexpand_alt,Agricultural Livelihoods,NA,Gross Production Value,USD/yr,137111761.63922393,65825040.466549516,208398482.81189835,0.16832650727796616
-scenario2_perennialexpand_alt,Climate Change Resilience,NA,Drought,"qualitative score, 1-10",-0.19604040519347699,-0.34778356574158686,-0.04429724464536708,-0.03486488886377708
+scenario2_perennialexpand_alt,Agricultural Livelihoods,NA,Gross Production Value,USD/yr,137111761.6392238,65825040.4665494,208398482.81189823,0.168326507277966
+scenario2_perennialexpand_alt,Climate Change Resilience,NA,Drought,"qualitative score, 1-10",-0.19604040519347699,-0.34778356574158686,-0.044297244645367106,-0.03486488886377708
 scenario2_perennialexpand_alt,Climate Change Resilience,NA,Flood,"qualitative score, 1-10",-0.06749314991471778,-0.2239021128457906,0.08891581301635504,-0.011437915409261404
 scenario2_perennialexpand_alt,Climate Change Resilience,NA,Heat,"qualitative score, 1-10",-0.24815072088748025,-0.42383749950597044,-0.07246394226899006,-0.035754834184081485
-scenario2_perennialexpand_alt,Water Quality,NA,Critical Pesticides,kg/yr,3527.4828113983094,-23381.14770910994,30436.11333190656,0.02812292535811809
-scenario2_perennialexpand_alt,Water Quality,NA,Groundwater Contaminant,kg/yr,2940.6467306988816,-3018.2224639113165,8899.515925309079,0.18108143844463684
+scenario2_perennialexpand_alt,Water Quality,NA,Critical Pesticides,kg/yr,3527.482811398295,-23381.147709109955,30436.113331906545,0.028122925358117973
+scenario2_perennialexpand_alt,Water Quality,NA,Groundwater Contaminant,kg/yr,2940.6467306988834,-3018.2224639113147,8899.515925309082,0.18108143844463698
+scenario2_perennialexpand_alt,Water Quality,NA,N loading,kg/yr,-522632.3027542867,NA,NA,-0.023245449980427064
 scenario2_perennialexpand_alt,Water Quality,NA,Risk to Aquatic Organisms,kg/yr,44238.54328956921,-4317.304011439774,92794.39059057819,0.1126050234072393
 scenario3_combo,Agricultural Livelihoods,NA,Agricultural Jobs,FTE/yr,367.4180388105392,-136.85155812165164,871.68763574273,0.1461628601371786
-scenario3_combo,Agricultural Livelihoods,NA,Annual Wages,USD/FTE,-252.40309698908823,-1934.5181642134603,1429.7119702352838,-0.0065175234960688925
-scenario3_combo,Agricultural Livelihoods,NA,Gross Production Value,USD/yr,108518325.40055048,36761830.78499843,180274820.01610255,0.13322351395639068
-scenario3_combo,Climate Change Resilience,NA,Drought,"qualitative score, 1-10",-0.2621886406938607,-0.4114301927613093,-0.11294708862641209,-0.04662904981304536
+scenario3_combo,Agricultural Livelihoods,NA,Annual Wages,USD/FTE,-252.4030969890955,-1934.5181642134676,1429.7119702352766,-0.00651752349606908
+scenario3_combo,Agricultural Livelihoods,NA,Gross Production Value,USD/yr,108518325.4005506,36761830.78499855,180274820.01610267,0.13322351395639082
+scenario3_combo,Climate Change Resilience,NA,Drought,"qualitative score, 1-10",-0.2621886406938607,-0.4114301927613093,-0.11294708862641212,-0.04662904981304536
 scenario3_combo,Climate Change Resilience,NA,Flood,"qualitative score, 1-10",0.011844003545808945,-0.14201027876085423,0.16569828585247212,0.002007177185168145
 scenario3_combo,Climate Change Resilience,NA,Heat,"qualitative score, 1-10",-0.22512168615011152,-0.39883426247553044,-0.0514091098246926,-0.03243669222781682
-scenario3_combo,Water Quality,NA,Critical Pesticides,kg/yr,-398.9487839996582,-27015.016781719936,26217.11921372062,-0.003180626943916096
-scenario3_combo,Water Quality,NA,Groundwater Contaminant,kg/yr,1927.3678330400035,-3952.3134326563923,7807.049098736399,0.11868496000397155
+scenario3_combo,Water Quality,NA,Critical Pesticides,kg/yr,-398.9487839996873,-27015.016781719965,26217.11921372059,-0.003180626943916328
+scenario3_combo,Water Quality,NA,Groundwater Contaminant,kg/yr,1927.3678330400053,-3952.3134326563904,7807.049098736401,0.11868496000397168
+scenario3_combo,Water Quality,NA,N loading,kg/yr,-1022764.8234408237,NA,NA,-0.045490162815694776
 scenario3_combo,Water Quality,NA,Risk to Aquatic Organisms,kg/yr,32775.15594516817,-15413.392566883049,80963.70445721938,0.083426056283634
 scenario3_combo_alt,Agricultural Livelihoods,NA,Agricultural Jobs,FTE/yr,342.04825972036997,-147.86834721971326,831.9648666604533,0.13607048828501805
 scenario3_combo_alt,Agricultural Livelihoods,NA,Annual Wages,USD/FTE,-252.35717415430554,-1935.2681836891281,1430.553835380517,-0.006516337681955386
-scenario3_combo_alt,Agricultural Livelihoods,NA,Gross Production Value,USD/yr,104281805.76139021,34515879.70249353,174047731.82028687,0.12802251190267366
-scenario3_combo_alt,Climate Change Resilience,NA,Drought,"qualitative score, 1-10",-0.24916505932059074,-0.39864956692397535,-0.09968055171720613,-0.04431286546962245
+scenario3_combo_alt,Agricultural Livelihoods,NA,Gross Production Value,USD/yr,104281805.76139021,34515879.70249355,174047731.82028687,0.12802251190267366
+scenario3_combo_alt,Climate Change Resilience,NA,Drought,"qualitative score, 1-10",-0.24916505932059074,-0.39864956692397535,-0.09968055171720616,-0.04431286546962245
 scenario3_combo_alt,Climate Change Resilience,NA,Flood,"qualitative score, 1-10",0.011390217809848835,-0.14278629137385881,0.16556672699355648,0.0019302751163152384
 scenario3_combo_alt,Climate Change Resilience,NA,Heat,"qualitative score, 1-10",-0.22135164990315292,-0.39516816955523465,-0.0475351302510712,-0.03189348598446642
-scenario3_combo_alt,Water Quality,NA,Critical Pesticides,kg/yr,-295.00082170026144,-26932.46686050036,26342.465217099838,-0.002351899791673619
-scenario3_combo_alt,Water Quality,NA,Groundwater Contaminant,kg/yr,2337.767511281665,-3556.3218718733688,8231.8568944367,0.14395687155233838
+scenario3_combo_alt,Water Quality,NA,Critical Pesticides,kg/yr,-295.00082170029054,-26932.46686050039,26342.46521709981,-0.002351899791673851
+scenario3_combo_alt,Water Quality,NA,Groundwater Contaminant,kg/yr,2337.767511281667,-3556.321871873367,8231.8568944367,0.1439568715523385
+scenario3_combo_alt,Water Quality,NA,N loading,kg/yr,-1084482.7706832662,NA,NA,-0.048235231285359066
 scenario3_combo_alt,Water Quality,NA,Risk to Aquatic Organisms,kg/yr,28681.904712981835,-19130.28158271849,76494.09100868215,0.07300707282400613
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,NA,3542.5656,1961.604,5223.3727499999995,0.7823542833882308
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,NA,3626.865,1506.21525,6668.887500000001,0.7876726787418972
-scenario1_restoration,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),NA,3296.7162,1537.4655,6270.187499999998,0.17625709716429083
-scenario1_restoration,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),NA,3214.431,558.51975,6939.123749999999,0.08354339705207657
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,NA,3832.4772,1994.6025,5726.81925,0.09165376941588142
-scenario1_restoration,Biodiversity Support,Waterbird habitat,Cranes (fall),NA,78.2802,-186.093,349.98074999999994,0.019271699994460753
-scenario1_restoration,Biodiversity Support,Waterbird habitat,Cranes (winter),NA,-520.5456,-1193.976,-84.21075,-0.042574146502397374
-scenario1_restoration,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),NA,3851.8541999999998,3379.005,5421.701249999998,0.48084285505634383
-scenario1_restoration,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),NA,3463.9757999999997,2452.5855,4366.394999999999,0.14051368299677475
-scenario1_restoration,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),NA,2387.601,691.434,3455.0324999999993,0.2722120604485641
-scenario1_restoration,Biodiversity Support,Waterbird habitat,Geese (fall),NA,174.6162,-37.777499999999996,651.9825,0.08115273032688969
-scenario1_restoration,Biodiversity Support,Waterbird habitat,Geese (winter),NA,586.1934,-1226.7247499999999,2198.6887499999993,0.03224990584869025
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,NA,454.734,-969.9615,2603.9092499999997,0.03220411773681652
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,NA,3340.8233999999998,2140.90875,4579.36875,1.6862390772266649
-scenario1_restoration,Biodiversity Support,Waterbird habitat,Shorebirds (fall),NA,3324.9798,2917.2082499999997,4178.142,0.236457657024768
-scenario1_restoration,Biodiversity Support,Waterbird habitat,Shorebirds (winter),NA,2340.8802,-580.266,3692.6324999999993,0.1218668909923535
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Song Sparrow,NA,2324.9411999999998,-3877.4092499999997,7982.752499999999,0.018135561438178436
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,NA,6889.878,4607.79075,10267.998749999999,0.2116676532888805
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Total,NA,7543.5372,2638.5795,12746.672999999995,0.04268758848994143
-scenario1_restoration,Biodiversity Support,Waterbird habitat,Total (fall),NA,3917.3147999999997,2453.9377499999996,5954.29875,0.1568407600934233
-scenario1_restoration,Biodiversity Support,Waterbird habitat,Total (winter),NA,3003.777,1218.5324999999998,5750.378999999999,0.05438355011711545
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,NA,-36.76499999999999,-1826.5252499999997,810.8707499999998,-0.0052656110867344745
-scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,NA,672.1344,-1341.9405,2817.8099999999995,0.05606824383127394
-scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,NA,-622.6254,-1260.81,-242.03249999999997,-0.13750307083552962
-scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,NA,-526.4838,-1208.37375,58.42574999999968,-0.11434032010020038
-scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),NA,-1156.1976,-2582.2485,368.94824999999935,-0.06181546131399477
-scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),NA,436.6314,-3708.2722499999995,4028.4517499999997,0.011348095639820567
-scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,NA,-2189.322,-4974.705,-795.7755,-0.05235767971825543
-scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Cranes (fall),NA,290.1168,-337.74749999999995,1024.0762499999996,0.07142347532266106
-scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Cranes (winter),NA,-690.1092,-2857.6147499999997,1008.0517499999992,-0.056442337008423944
-scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),NA,-484.2792,-1784.3895,-57.82725000000001,-0.06045457098879863
-scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),NA,-579.9366,-1432.548,555.2707499999993,-0.023524710412418978
-scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),NA,-145.1592,-918.3734999999999,628.3349999999998,-0.016549701949808704
-scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Geese (fall),NA,1227.6828,14.670000000000005,4376.290499999999,0.5705645363681082
-scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Geese (winter),NA,1389.2759999999998,-974.9114999999999,4206.246749999999,0.07643214713411137
-scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,NA,-220.4172,-1797.3269999999998,247.44599999999974,-0.015609876235380321
-scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,NA,-474.93899999999996,-824.5732499999999,-221.45850000000002,-0.23971955569365175
-scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Shorebirds (fall),NA,-543.8718,-865.1362499999999,103.68674999999979,-0.038677724162367304
-scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Shorebirds (winter),NA,166.91039999999998,-1447.7445,3070.27125,0.008689403038348616
-scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Song Sparrow,NA,-2383.4952,-12441.48975,10925.621999999994,-0.018592308329003503
-scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,NA,6823.5444,588.7755,20142.731249999993,0.20962978303251262
-scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Total,NA,575.7839999999999,-9739.83375,11481.556499999995,0.003258263305322128
-scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Total (fall),NA,-938.5434,-1882.2554999999998,517.995,-0.03757723536455784
-scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Total (winter),NA,-1732.338,-4604.264999999999,595.1092499999997,-0.031364076109106485
-scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,NA,-1050.219,-10967.301,1123.6342499999987,-0.1504160155011341
-scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,NA,385.3026,-1392.3135,3627.45,0.03214125050826711
-scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,NA,3476.0303999999996,1863.4702499999999,5673.257999999998,0.7676603850688621
-scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,NA,3568.2498,1443.7057499999999,6600.6359999999995,0.7749427889889035
-scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),NA,2289.6,342.61199999999997,5935.441499999999,0.1224121899444545
-scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),NA,3541.0553999999997,-1756.5502499999998,8881.18875,0.09203239928485005
-scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,NA,1745.1306,-1153.9845,4342.666499999999,0.041734833442192115
-scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Cranes (fall),NA,369.1116,-286.63424999999995,1262.1015,0.09087110175594085
-scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Cranes (winter),NA,-1239.9227999999998,-3346.06725,611.5139999999996,-0.10141024136763954
-scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),NA,3353.1929999999998,2554.3822499999997,4402.973249999999,0.4185929196580044
-scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),NA,2868.5699999999997,1843.866,4355.514,0.11636147562984075
-scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),NA,2137.3343999999997,615.2085,2944.3477499999995,0.24367899028840892
-scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Geese (fall),NA,1846.4166,-3.494249999999994,5461.217999999998,0.8581205432880371
-scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Geese (winter),NA,1904.9814,-1073.2185,5049.945,0.1048040984315179
-scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,NA,284.8302,-2071.98,2621.60325,0.020171584477520918
-scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,NA,2890.647,1642.266,4207.743,1.4590181360283896
-scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Shorebirds (fall),NA,2870.1558,2414.4525,3598.23825,0.20411261318461202
-scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Shorebirds (winter),NA,2560.9662,-1077.28425,5846.6565,0.1333246309360478
-scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Song Sparrow,NA,613.5677999999999,-12420.985499999999,14947.026749999997,0.004786098045571208
-scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,NA,15122.0412,7881.653249999999,26181.19574999999,0.46457237323240935
-scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Total,NA,9279.1836,-1378.08675,22440.401999999995,0.05250931499872676
-scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Total (fall),NA,3107.79,1232.90325,4959.063,0.12442914871450719
-scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Total (winter),NA,1072.962,-2417.7735000000002,4502.135249999999,0.019426036853188645
-scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,NA,-1146.0276,-11874.087,1214.8829999999991,-0.1641380562019231
-scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,NA,1213.1442,-2066.00175,5858.903249999999,0.10119830915973911
+scenario1_restoration,Climate Change Resilience,NA,Landscape diversity,Shannon index,0.70543180725738,NA,NA,0.043324860339765466
+scenario2_perennialexpand,Climate Change Resilience,NA,Landscape diversity,Shannon index,-0.12910498042865726,NA,NA,-0.00792912254408587
+scenario2_perennialexpand_alt,Climate Change Resilience,NA,Landscape diversity,Shannon index,-0.07270641151876234,NA,NA,-0.004465343201779677
+scenario3_combo,Climate Change Resilience,NA,Landscape diversity,Shannon index,0.6680439040570967,NA,NA,0.04102864167215733
+scenario3_combo_alt,Climate Change Resilience,NA,Landscape diversity,Shannon index,0.7261511194026085,NA,NA,0.04459735939040795
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,NA,3696.84,1961.604,5223.3727499999995,0.8449417863166989
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,NA,2944.08,1506.21525,6668.887500000001,0.9067775467775467
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,NA,4525.919999999998,1994.6025,5726.81925,0.10823072635196934
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,NA,63.62999999999738,-969.9615,2603.9092499999997,0.0016006266668477183
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,NA,3426.3,2140.90875,4579.36875,1.9518072289156627
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Song Sparrow,NA,746.820000000007,-3877.4092499999997,7982.752499999999,0.004796659333138383
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,NA,5933.430000000002,4607.79075,10267.998749999999,0.4184247270880936
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Total,NA,5994.99000000002,2638.5795,12746.672999999995,0.029695360754654836
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Total (fall),NA,3887.3700000000026,2453.9377499999996,5954.29875,0.15507374377091335
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Total (winter),NA,3844.4400000000023,1218.5324999999998,5750.378999999999,0.06914088612860572
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,NA,15.930000000000007,-1826.5252499999997,810.8707499999998,0.05140865524252108
+scenario1_restoration,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,NA,814.9500000000007,-1341.9405,2817.8099999999995,0.11158623749199005
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),NA,3998.16,1537.4655,6270.187499999998,0.21191724427440858
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),NA,4941.179999999993,558.51975,6939.123749999999,0.12972326711150578
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Cranes (fall),NA,142.64999999999964,-186.093,349.98074999999994,0.02898524221421641
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Cranes (winter),NA,-791.7300000000014,-1193.976,-84.21075,-0.052454891297866596
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),NA,3795.0300000000007,3379.005,5421.701249999998,0.4411327781729925
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),NA,3447.9900000000016,2452.5855,4366.394999999999,0.13180102727119483
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),NA,2558.34,691.434,3455.0324999999993,0.2777224143658284
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Geese (fall),NA,586.6200000000003,-37.777499999999996,651.9825,0.17662999295431153
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Geese (winter),NA,374.7599999999984,-1226.7247499999999,2198.6887499999993,0.020366937475849636
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Shorebirds (fall),NA,3324.6899999999987,2917.2082499999997,4178.142,0.20947666275397073
+scenario1_restoration,Biodiversity Support,Waterbird habitat,Shorebirds (winter),NA,2819.4300000000003,-580.266,3692.6324999999993,0.12279993414502208
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,NA,-590.1300000000001,-1260.81,-242.03249999999997,-0.13487884148599172
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,NA,-400.4100000000003,-1208.37375,58.42574999999968,-0.12332640332640342
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,NA,-2004.5699999999997,-4974.705,-795.7755,-0.04793634600774367
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,NA,-165.33000000000175,-1797.3269999999998,247.44599999999974,-0.004158912570013311
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,NA,-462.60000000000014,-824.5732499999999,-221.45850000000002,-0.26352217380158943
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Song Sparrow,NA,-5667.119999999995,-12441.48975,10925.621999999994,-0.036398655686798585
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,NA,1063.08,588.7755,20142.731249999993,0.07496826605737497
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Total,NA,-4394.6999999999825,-9739.83375,11481.556499999995,-0.021768543718751934
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Total (fall),NA,-822.5999999999985,-1882.2554999999998,517.995,-0.03281490098085672
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Total (winter),NA,-1332.7200000000012,-4604.264999999999,595.1092499999997,-0.023968495219411783
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,NA,-16.29000000000002,-10967.301,1123.6342499999987,-0.05257043276212612
+scenario2_perennialexpand_alt,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,NA,296.6400000000003,-1392.3135,3627.45,0.04061714398383206
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),NA,-817.1100000000006,-2582.2485,368.94824999999935,-0.04330984739706818
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),NA,2093.0399999999936,-3708.2722499999995,4028.4517499999997,0.054949624784983664
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Cranes (fall),NA,590.9399999999996,-337.74749999999995,1024.0762499999996,0.1200738803650128
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Cranes (winter),NA,-1401.3900000000012,-2857.6147499999997,1008.0517499999992,-0.09284700607014665
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),NA,-383.85000000000036,-1784.3895,-57.82725000000001,-0.044618571368791105
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),NA,-745.1100000000006,-1432.548,555.2707499999993,-0.02848217756723193
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),NA,-2.790000000000873,-918.3734999999999,628.3349999999998,-3.028704300761055e-4
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Geese (fall),NA,1508.31,14.670000000000005,4376.290499999999,0.45414882662186334
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Geese (winter),NA,2916.9900000000016,-974.9114999999999,4206.246749999999,0.15852853278812817
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Shorebirds (fall),NA,-611.369999999999,-865.1362499999999,103.68674999999979,-0.038520207089351166
+scenario2_perennialexpand_alt,Biodiversity Support,Waterbird habitat,Shorebirds (winter),NA,-250.02000000000044,-1447.7445,3070.27125,-0.010889590993547799
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Ash-throated Flycatcher,NA,3602.9699999999993,1863.4702499999999,5673.257999999998,0.8234870613403544
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Black-headed Grosbeak,NA,2882.7,1443.7057499999999,6600.6359999999995,0.8878724878724878
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Common Yellowthroat,NA,2534.220000000001,-1153.9845,4342.666499999999,0.06060214748287375
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Lazuli Bunting,NA,-2.1600000000034925,-2071.98,2621.60325,-5.433527581953173e-5
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Nuttall's Woodpecker,NA,2916.09,1642.266,4207.743,1.6611638041527814
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Song Sparrow,NA,-3205.709999999992,-12420.985499999999,14947.026749999997,-0.02058956480923765
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Spotted Towhee,NA,8992.53,7881.653249999999,26181.19574999999,0.6341520690530592
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Total,NA,4162.860000000015,-1378.08675,22440.401999999995,0.02062015607551013
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Total (fall),NA,3024.360000000004,1232.90325,4959.063,0.1206468197550014
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Total (winter),NA,2206.0800000000017,-2417.7735000000002,4502.135249999999,0.03967556420976645
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Yellow-breasted Chat,NA,6.300000000000011,-11874.087,1214.8829999999991,0.02033110659308746
+scenario3_combo_alt,Biodiversity Support,Riparian landbird habitat,Yellow Warbler,NA,1673.6399999999994,-2066.00175,5858.903249999999,0.2291615320155764
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Herons/Egrets (fall),NA,3189.6899999999987,342.61199999999997,5935.441499999999,0.16906534878284962
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Herons/Egrets (winter),NA,6868.0799999999945,-1756.5502499999998,8881.18875,0.18031113547435856
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Cranes (fall),NA,756.4499999999998,-286.63424999999995,1262.1015,0.153704076221129
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Cranes (winter),NA,-2267.01,-3346.06725,611.5139999999996,-0.15019736920563367
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Dabbling Ducks (fall),NA,3260.16,2554.3822499999997,4402.973249999999,0.3789597020546512
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Dabbling Ducks (winter),NA,2695.0499999999993,1843.866,4355.514,0.10301954429892006
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Diving Ducks (winter),NA,2437.4699999999993,615.2085,2944.3477499999995,0.26460128573382563
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Geese (fall),NA,3326.7599999999998,-3.494249999999994,5461.217999999998,1.0016801257384422
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Geese (winter),NA,2925.2700000000004,-1073.2185,5049.945,0.15897852276117763
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Shorebirds (fall),NA,2803.2299999999996,2414.4525,3598.23825,0.17662135878286803
+scenario3_combo_alt,Biodiversity Support,Waterbird habitat,Shorebirds (winter),NA,2579.2199999999975,-1077.28425,5846.6565,0.11233761652019149

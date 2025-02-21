@@ -23,7 +23,10 @@ label.order = label.order[c(1:9, 11:13, 10, 14:22)]
 waterquality = read_csv('data/pesticide_exposure.csv', col_types = cols()) %>%
   filter(METRIC %in%
            c('Risk to Aquatic Organisms', 'Critical Pesticides',
-             'Groundwater Contaminant'))
+             'Groundwater Contaminant')) |>
+  bind_rows(
+    read_csv('data/nitrogen_loading.csv')
+  )
 
 economy = bind_rows(
   read_csv('data/crop_production_value.csv', col_types = cols()),
@@ -87,6 +90,7 @@ metrics_table = metrics_format %>%
   select(LABEL,
          contains('Jobs'), contains('Wages'), contains('Gross'),
          contains('Critical'), contains('Groundwater'), contains('Aquatic'),
+         contains('N loading'),
          contains('Drought'), contains('Flood'), contains('Heat'))
 write_csv(metrics_table, 'output/TABLE_metrics_summary.csv')
 

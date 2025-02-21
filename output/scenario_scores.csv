@@ -23,13 +23,14 @@ baseline,Biodiversity Support,Spotted Towhee,ha,14180.4,2067.0671509417957,Ripar
 baseline,Biodiversity Support,Total,ha,201883.05,3841.685724234621,Riparian landbird habitat
 baseline,Biodiversity Support,Total (fall),ha,25067.879999999997,509.8990224412833,Waterbird habitat
 baseline,Biodiversity Support,Total (winter),ha,55602.99,1649.5747209299643,Waterbird habitat
-baseline,Biodiversity Support,Yellow-breasted Chat,ha,309.87,2254.1580773868227,Riparian landbird habitat
 baseline,Biodiversity Support,Yellow Warbler,ha,7303.32,1273.2725184854403,Riparian landbird habitat
+baseline,Biodiversity Support,Yellow-breasted Chat,ha,309.87,2254.1580773868227,Riparian landbird habitat
 baseline,Climate Change Resilience,Drought,"qualitative score, 1-10",5.622860464561911,0.052613122278864194,NA
 baseline,Climate Change Resilience,Flood,"qualitative score, 1-10",5.900826112078765,0.05482511731135953,NA
 baseline,Climate Change Resilience,Heat,"qualitative score, 1-10",6.9403404197007905,0.06027309577951836,NA
 baseline,Water Quality,Critical Pesticides,kg/yr,125430.86348519039,9894.388055570847,NA
 baseline,Water Quality,Groundwater Contaminant,kg/yr,16239.360345030305,2134.819885805276,NA
+baseline,Water Quality,N loading,kg/yr,22483208.679304942,NA,NA
 baseline,Water Quality,Risk to Aquatic Organisms,kg/yr,392864.74040842074,16782.85648396496,NA
 scenario1_restoration,Agricultural Livelihoods,Agricultural Jobs,FTE/yr,2458.302966673759,142.09091772547887,NA
 scenario1_restoration,Agricultural Livelihoods,Annual Wages,USD/FTE,38697.50096778908,613.3768124229931,NA
@@ -55,13 +56,14 @@ scenario1_restoration,Biodiversity Support,Spotted Towhee,ha,20113.83,2134.45397
 scenario1_restoration,Biodiversity Support,Total,ha,207878.04,3624.3724031065135,Riparian landbird habitat
 scenario1_restoration,Biodiversity Support,Total (fall),ha,28955.25,543.2837235102731,Waterbird habitat
 scenario1_restoration,Biodiversity Support,Total (winter),ha,59447.43,1633.219185069688,Waterbird habitat
-scenario1_restoration,Biodiversity Support,Yellow-breasted Chat,ha,325.8,2213.599463380455,Riparian landbird habitat
 scenario1_restoration,Biodiversity Support,Yellow Warbler,ha,8118.27,1256.337704502116,Riparian landbird habitat
+scenario1_restoration,Biodiversity Support,Yellow-breasted Chat,ha,325.8,2213.599463380455,Riparian landbird habitat
 scenario1_restoration,Climate Change Resilience,Drought,"qualitative score, 1-10",5.555541173598991,0.05147152593246329,NA
 scenario1_restoration,Climate Change Resilience,Flood,"qualitative score, 1-10",5.964746612937357,0.053614867143642456,NA
 scenario1_restoration,Climate Change Resilience,Heat,"qualitative score, 1-10",6.941834853501093,0.0595677702271484,NA
 scenario1_restoration,Water Quality,Critical Pesticides,kg/yr,122354.35630901263,9666.007524444682,NA
 scenario1_restoration,Water Quality,Groundwater Contaminant,kg/yr,15981.145438317306,2092.412369847355,NA
+scenario1_restoration,Water Quality,N loading,kg/yr,21962229.461281847,NA,NA
 scenario1_restoration,Water Quality,Risk to Aquatic Organisms,kg/yr,382439.8916196707,16383.405798689806,NA
 scenario2_perennialexpand,Agricultural Livelihoods,Agricultural Jobs,FTE/yr,2989.439402822972,214.91119036668331,NA
 scenario2_perennialexpand,Agricultural Livelihoods,Annual Wages,USD/FTE,38487.27663199477,573.3275564218338,NA
@@ -71,6 +73,7 @@ scenario2_perennialexpand,Climate Change Resilience,Flood,"qualitative score, 1-
 scenario2_perennialexpand,Climate Change Resilience,Heat,"qualitative score, 1-10",6.687263166351119,0.06378430766127428,NA
 scenario2_perennialexpand,Water Quality,Critical Pesticides,kg/yr,128998.91559887078,9100.625756612193,NA
 scenario2_perennialexpand,Water Quality,Groundwater Contaminant,kg/yr,18735.598957170987,2066.7115256640723,NA
+scenario2_perennialexpand,Water Quality,N loading,kg/yr,22032159.62775475,NA,NA
 scenario2_perennialexpand,Water Quality,Risk to Aquatic Organisms,kg/yr,441990.22986618144,17850.19338859975,NA
 scenario2_perennialexpand_alt,Agricultural Livelihoods,Agricultural Jobs,FTE/yr,2957.9019079593277,204.7260991899672,NA
 scenario2_perennialexpand_alt,Agricultural Livelihoods,Annual Wages,USD/FTE,38487.584760264144,574.1075561155634,NA
@@ -96,13 +99,14 @@ scenario2_perennialexpand_alt,Biodiversity Support,Spotted Towhee,ha,15243.48,27
 scenario2_perennialexpand_alt,Biodiversity Support,Total,ha,197488.35,3716.883375859986,Riparian landbird habitat
 scenario2_perennialexpand_alt,Biodiversity Support,Total (fall),ha,24245.28,490.1234855022117,Waterbird habitat
 scenario2_perennialexpand_alt,Biodiversity Support,Total (winter),ha,54270.27,1488.871350860053,Waterbird habitat
-scenario2_perennialexpand_alt,Biodiversity Support,Yellow-breasted Chat,ha,293.58,1838.0228882473,Riparian landbird habitat
 scenario2_perennialexpand_alt,Biodiversity Support,Yellow Warbler,ha,7599.96,1280.8964570853757,Riparian landbird habitat
+scenario2_perennialexpand_alt,Biodiversity Support,Yellow-breasted Chat,ha,293.58,1838.0228882473,Riparian landbird habitat
 scenario2_perennialexpand_alt,Climate Change Resilience,Drought,"qualitative score, 1-10",5.426820059368434,0.05466585824215741,NA
 scenario2_perennialexpand_alt,Climate Change Resilience,Flood,"qualitative score, 1-10",5.8333329621640475,0.05576869581664156,NA
 scenario2_perennialexpand_alt,Climate Change Resilience,Heat,"qualitative score, 1-10",6.69218969881331,0.06390316870460026,NA
 scenario2_perennialexpand_alt,Water Quality,Critical Pesticides,kg/yr,128958.3462965887,9116.999732811444,NA
 scenario2_perennialexpand_alt,Water Quality,Groundwater Contaminant,kg/yr,19180.007075729187,2078.3586251628817,NA
+scenario2_perennialexpand_alt,Water Quality,N loading,kg/yr,21960576.376550656,NA,NA
 scenario2_perennialexpand_alt,Water Quality,Risk to Aquatic Organisms,kg/yr,437103.28369798994,17542.89899128307,NA
 scenario3_combo,Agricultural Livelihoods,Agricultural Jobs,FTE/yr,2881.1759008673257,206.81613774886523,NA
 scenario3_combo,Agricultural Livelihoods,Annual Wages,USD/FTE,38474.438032364356,574.8958164980576,NA
@@ -112,6 +116,7 @@ scenario3_combo,Climate Change Resilience,Flood,"qualitative score, 1-10",5.9126
 scenario3_combo,Climate Change Resilience,Heat,"qualitative score, 1-10",6.715218733550679,0.06253933736902423,NA
 scenario3_combo,Water Quality,Critical Pesticides,kg/yr,125031.91470119073,8899.710889719638,NA
 scenario3_combo,Water Quality,Groundwater Contaminant,kg/yr,18166.72817807031,2021.1895016835113,NA
+scenario3_combo,Water Quality,N loading,kg/yr,21460443.85586412,NA,NA
 scenario3_combo,Water Quality,Risk to Aquatic Organisms,kg/yr,425639.8963535889,17287.85065192356,NA
 scenario3_combo_alt,Agricultural Livelihoods,Agricultural Jobs,FTE/yr,2855.8061217771565,198.00386025211745,NA
 scenario3_combo_alt,Agricultural Livelihoods,Annual Wages,USD/FTE,38474.48395519914,575.4778809689682,NA
@@ -137,11 +142,18 @@ scenario3_combo_alt,Biodiversity Support,Spotted Towhee,ha,23172.93,2705.3891103
 scenario3_combo_alt,Biodiversity Support,Total,ha,206045.91,3447.043559714178,Riparian landbird habitat
 scenario3_combo_alt,Biodiversity Support,Total (fall),ha,28092.24,532.1493172867746,Waterbird habitat
 scenario3_combo_alt,Biodiversity Support,Total (winter),ha,57809.07,1471.3148075500371,Waterbird habitat
-scenario3_combo_alt,Biodiversity Support,Yellow-breasted Chat,ha,316.17,1772.7978116230363,Riparian landbird habitat
 scenario3_combo_alt,Biodiversity Support,Yellow Warbler,ha,8976.96,1273.3871184299628,Riparian landbird habitat
+scenario3_combo_alt,Biodiversity Support,Yellow-breasted Chat,ha,316.17,1772.7978116230363,Riparian landbird habitat
 scenario3_combo_alt,Climate Change Resilience,Drought,"qualitative score, 1-10",5.37369540524132,0.053087323038799684,NA
 scenario3_combo_alt,Climate Change Resilience,Flood,"qualitative score, 1-10",5.912216329888614,0.054192301185815486,NA
 scenario3_combo_alt,Climate Change Resilience,Heat,"qualitative score, 1-10",6.718988769797638,0.06261149695657847,NA
 scenario3_combo_alt,Water Quality,Critical Pesticides,kg/yr,125135.86266349013,8915.701556682689,NA
 scenario3_combo_alt,Water Quality,Groundwater Contaminant,kg/yr,18577.12785631197,2031.6536292699031,NA
+scenario3_combo_alt,Water Quality,N loading,kg/yr,21398725.908621676,NA,NA
 scenario3_combo_alt,Water Quality,Risk to Aquatic Organisms,kg/yr,421546.6451214026,17024.600372176843,NA
+baseline,Climate Change Resilience,Landscape diversity,Shannon index,2.7900834958308427,NA,NA
+scenario1_restoration,Climate Change Resilience,Landscape diversity,Shannon index,2.8324960906017216,NA,NA
+scenario2_perennialexpand,Climate Change Resilience,Landscape diversity,Shannon index,2.7821227706295173,NA,NA
+scenario2_perennialexpand_alt,Climate Change Resilience,Landscape diversity,Shannon index,2.785608153205767,NA,NA
+scenario3_combo,Climate Change Resilience,Landscape diversity,Shannon index,2.830292798699166,NA,NA
+scenario3_combo_alt,Climate Change Resilience,Landscape diversity,Shannon index,2.833715004980973,NA,NA

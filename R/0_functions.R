@@ -621,6 +621,22 @@ codify_pur = function(df) {
           CODE_NAME))
 }
 
+codify_nload = function(df) {
+  df |>
+    mutate(
+      CODE_NAME = case_when(
+        crop %in% c('tree fruit', 'nuts') ~ 'ORCHARD_DECIDUOUS',
+        crop == 'vineyards' ~ 'VINEYARD',
+        crop %in% c('subtropical', 'olives') ~ 'ORCHARD_CITRUS&SUBTROPICAL',
+        crop == 'grain/hay' ~ 'GRAIN&HAY',
+        crop == 'corn/sorghum/sudan' ~ 'FIELD_CORN',
+        crop %in% c('cotton', 'field crops') ~ 'FIELD_OTHER',
+        crop == 'vegetables/berries' ~ 'ROW',
+        crop == 'rice' ~ 'RICE',
+        crop == 'alfalfa/clover' ~ 'PASTURE'))
+}
+
+
 codify_ccv = function(df) {
   df %>%
     mutate(CODE_NAME = case_when(
@@ -1509,20 +1525,21 @@ plot_change_map = function(pathin, SDM, landscape_name, key,
   ggsave(filename = pathout, plot = p, ...)
 }
 
-plot_change_bar = function(dat, errorbar = TRUE, label = FALSE, nudge = 0,
-                           star = NULL) {
+plot_change_bar = function(dat, errorbar = TRUE, label = FALSE, nudge_star = 0, nudge_plus = 0.01,
+                           star = NULL, plus = NULL, textsize = 2.5, errorwidth = 0.25,
+                           linewidth = 0.4, axistext = 8.5, axistitletext = 10, titletext = 9) {
   p = ggplot(dat, aes(net_change, METRIC)) +
     facet_wrap(~scenario, ncol = 3) +
     # ggforce::facet_col(~METRIC_CATEGORY, scales = 'free', space = 'free') +
     geom_col(aes(fill = bin)) +
     scale_fill_manual(values = pointblue.palette[c(1,3)]) +
-    geom_vline(xintercept = 0, color = 'gray30') +
+    geom_vline(xintercept = 0, color = 'gray30', linewidth = linewidth) +
     theme_minimal() +
     theme(axis.line.x = element_line(color = 'gray30'),
-          axis.text = element_text(family = 'sourcesans', size = 8.5),
-          axis.title = element_text(family = 'sourcesans', size = 10),
+          axis.text = element_text(family = 'sourcesans', size = axistext),
+          axis.title = element_text(family = 'sourcesans', size = axistitletext),
           panel.grid = element_blank(),
-          plot.title = element_text(family = 'sourcesans', size = 9),
+          plot.title = element_text(family = 'sourcesans', size = titletext),
           strip.placement = 'outside',
           # strip.text = element_text(family = 'sourcesans', size = 10, vjust = 1),
           strip.text = element_blank(),
@@ -1531,47 +1548,69 @@ plot_change_bar = function(dat, errorbar = TRUE, label = FALSE, nudge = 0,
           panel.spacing = unit(1, 'lines'))
 
   if (errorbar) {
+    # reverse ucl & lcl for water quality
     dat = dat %>%
-      # reverse ucl & lcl for water quality
       mutate(upper = if_else(METRIC_CATEGORY == 'Water Quality', lcl, ucl),
              lower = if_else(METRIC_CATEGORY == 'Water Quality', ucl, lcl))
     p = p +
       geom_errorbar(aes(xmin = lcl,
-                        xmax = ucl), width = 0.25, linewidth = 0.4)
+                        xmax = ucl), width = errorwidth, linewidth = linewidth)
     if (label) {
       p = p +
         geom_text(data = dat %>% filter(bin == 'benefit'),
                   aes(x = upper + nudge,
                       label = paste0(' +', round(prop_change * 100, digits = 0), '% ')),
-                  size = 2.5, hjust = 0) +
+                  size = textsize, hjust = 0) +
         geom_text(data = dat %>% filter(bin == 'trade-off'),
                   aes(x = lower - nudge,
                       label = paste0(' ', round(prop_change * 100, digits = 0), '%  ')),
-                  size = 2.5, hjust = 1)
+                  size = textsize, hjust = 1)
     }
+
     if (!is.null(star)) {
-      dat = dat %>%
-        mutate(meaningful = if_else(round(abs(prop_change), 2) >= star, TRUE, FALSE))
+      # check for missing ucl and lcl for placement
+      dat = dat |>
+        mutate(upper = if_else(is.na(upper), net_change, upper),
+               lower = if_else(is.na(lower), net_change, lower))
+      p = p +
+        geom_text(data = dat |> filter(bin == 'benefit' & sig),
+                  aes(x = upper + nudge_star, label = '*'),
+                  size = textsize, hjust = 0, vjust = 0.7) +
+        geom_text(data = dat |> filter(bin == 'trade-off' & sig),
+                  aes(x = lower - nudge_star, label = '*'),
+                  size = textsize, hjust = 1, vjust = 0.7)
+    }
+
+    if (!is.null(plus)) {
+      # check for missing ucl and lcl for placement; mark "meaningful"
+      dat = dat |>
+        mutate(upper = if_else(is.na(upper), net_change, upper),
+               lower = if_else(is.na(lower), net_change, lower)) %>%
+        mutate(meaningful = if_else(round(abs(prop_change), 2) >= plus, TRUE, FALSE))
       p = p +
         geom_text(data = dat %>% filter(bin == 'benefit' & meaningful),
-                  aes(x = upper + nudge, label = '*'), size = 2.5, hjust = 0, vjust = 0.7) +
+                  aes(x = upper + nudge_plus, label = '+'),
+                  size = textsize-0.25, hjust = 0, vjust = 0.5) +
         geom_text(data = dat %>% filter(bin == 'trade-off' & meaningful),
-                  aes(x = lower - nudge, label = '*'), size = 2.5, hjust = 0, vjust = 0.7)
+                  aes(x = lower - nudge_plus, label = '+'),
+                  size = textsize-0.25, hjust = 1, vjust = 0.5)
     }
-    p = p +
-      ggplot2::geom_blank(data = dat, ggplot2::aes(x = -(upper+nudge))) +
-      ggplot2::geom_blank(data = dat, ggplot2::aes(x = -(lower-nudge)))
   }
+
+
+  p = p +
+    ggplot2::geom_blank(data = dat, ggplot2::aes(x = -(upper+nudge_plus))) +
+    ggplot2::geom_blank(data = dat, ggplot2::aes(x = -(lower-nudge_plus)))
 
   print(p)
 }
 
-plot_change_lollipop = function(dat, digits, wrapy = FALSE) {
+plot_change_lollipop = function(dat, digits, wrapy = FALSE, star = NULL, nudge = 0) {
 
   if (!wrapy) {
     dat = dat %>% mutate(METRIC = gsub('\n', ' ', METRIC))
   }
-  dat %>%
+  p = dat %>%
     ggplot(aes(net_change, METRIC, fill = bin, color = bin)) +
     facet_wrap(~scenario, ncol = 3) +
     geom_vline(xintercept = 0, color = 'gray30') +
@@ -1591,7 +1630,22 @@ plot_change_lollipop = function(dat, digits, wrapy = FALSE) {
           strip.text = element_blank(),
           strip.background = element_blank(),
           legend.position = 'none',
-          panel.spacing = unit(1, 'lines'))
+          panel.spacing = unit(1, 'lines')) +
+    geom_blank(aes(x = -net_change + nudge)) +
+    geom_blank(aes(x = net_change + nudge))
+
+  if (!is.null(star)) {
+    dat = dat %>%
+      mutate(meaningful = if_else(round(abs(prop_change), 2) >= star, TRUE, FALSE))
+    p = p +
+      geom_text(data = dat %>% filter(bin == 'benefit' & meaningful),
+                aes(x = net_change + nudge, label = '*'),
+                size = 4, hjust = 0, vjust = 0.7, color = 'black') +
+      geom_text(data = dat %>% filter(bin == 'trade-off' & meaningful),
+                aes(x = net_change - nudge, label = '*'),
+                size = 4, hjust = 0, vjust = 0.7, color = 'black')
+  }
+  print(p)
 }
 # analyze_metrics = function(metrics_df, baseline, scenario = NULL) {
 #   if (!'METRIC' %in% names(metrics_df) | !"SCORE" %in% names(metrics_df)) {

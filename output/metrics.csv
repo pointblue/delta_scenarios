@@ -244,6 +244,37 @@ Water Quality,Groundwater Contaminant,kg/ha/yr,WATER,Water,0,NA
 Water Quality,Groundwater Contaminant,kg/ha/yr,WOODLAND,Woodland,0,NA
 Water Quality,Groundwater Contaminant,kg/ha/yr,SCRUB,Scrub,0,NA
 Water Quality,Groundwater Contaminant,kg/ha/yr,BARREN,Barren,0,NA
+Water Quality,N loading,kg/ha/yr,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,98.70826686312864,NA
+Water Quality,N loading,kg/ha/yr,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,28.78491152303906,NA
+Water Quality,N loading,kg/ha/yr,VINEYARD,Vineyard,39,NA
+Water Quality,N loading,kg/ha/yr,GRAIN&HAY_WHEAT,Wheat,195,NA
+Water Quality,N loading,kg/ha/yr,GRAIN&HAY_OTHER,Other Grains,195,NA
+Water Quality,N loading,kg/ha/yr,FIELD_CORN,Corn,320,NA
+Water Quality,N loading,kg/ha/yr,FIELD_OTHER,Other Field Crops,223,NA
+Water Quality,N loading,kg/ha/yr,ROW,Row Crops,84,NA
+Water Quality,N loading,kg/ha/yr,RICE,Rice,19,NA
+Water Quality,N loading,kg/ha/yr,IDLE,Idle,0,NA
+Water Quality,N loading,kg/ha/yr,PASTURE_ALFALFA,Alfalfa,30,NA
+Water Quality,N loading,kg/ha/yr,PASTURE_OTHER,Other Pasture,30,NA
+Water Quality,N loading,kg/ha/yr,GRASSLAND,Grassland,0,NA
+Water Quality,N loading,kg/ha/yr,URBAN,Urban,20,NA
+Water Quality,N loading,kg/ha/yr,RIPARIAN,Riparian,0,NA
+Water Quality,N loading,kg/ha/yr,RIPARIAN_FOREST_POFR,Riparian - Cottonwood,0,NA
+Water Quality,N loading,kg/ha/yr,RIPARIAN_FOREST_QULO,Riparian - Valley Oak,0,NA
+Water Quality,N loading,kg/ha/yr,RIPARIAN_FOREST_SALIX,Riparian - Willow,0,NA
+Water Quality,N loading,kg/ha/yr,RIPARIAN_FOREST_MIXED,Riparian - Mixed Forest,0,NA
+Water Quality,N loading,kg/ha/yr,RIPARIAN_SCRUB_INTRO,Riparian - Introduced Scrub,0,NA
+Water Quality,N loading,kg/ha/yr,RIPARIAN_SCRUB_SALIX,Riparian - Willow Shrub,0,NA
+Water Quality,N loading,kg/ha/yr,RIPARIAN_SCRUB_MIXED,Riparian - Mixed Shrub,0,NA
+Water Quality,N loading,kg/ha/yr,WETLAND_MANAGED,Managed Wetland,0,NA
+Water Quality,N loading,kg/ha/yr,WETLAND_MANAGED_PERENNIAL,Managed Wetland - Perennial,0,NA
+Water Quality,N loading,kg/ha/yr,WETLAND_MANAGED_SEASONAL,Managed Wetland - Seasonal,0,NA
+Water Quality,N loading,kg/ha/yr,WETLAND_TIDAL,Tidal Wetland,0,NA
+Water Quality,N loading,kg/ha/yr,WETLAND_OTHER,Other Wetland,0,NA
+Water Quality,N loading,kg/ha/yr,WATER,Water,0,NA
+Water Quality,N loading,kg/ha/yr,WOODLAND,Woodland,0,NA
+Water Quality,N loading,kg/ha/yr,SCRUB,Scrub,0,NA
+Water Quality,N loading,kg/ha/yr,BARREN,Barren,0,NA
 Water Quality,Risk to Aquatic Organisms,kg/ha/yr,ORCHARD_DECIDUOUS,Orchard - Deciduous Fruits & Nuts,6.195785736420012,0.42134886428464746
 Water Quality,Risk to Aquatic Organisms,kg/ha/yr,ORCHARD_CITRUS&SUBTROPICAL,Orchard - Citrus & Subtropical,5.2502304853961395,0.6824221266491314
 Water Quality,Risk to Aquatic Organisms,kg/ha/yr,VINEYARD,Vineyard,2.4645189647690797,0.18876230100449953

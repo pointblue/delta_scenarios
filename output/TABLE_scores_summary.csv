@@ -4,10 +4,12 @@ Agricultural Livelihoods,Annual Wages,USD/FTE, 38727,  614, 38698,  613, 38488, 
 Agricultural Livelihoods,Gross Production Value,USD/yr (thousands),814558,20702,797689,20401,951670,29015,918840,28076
 Water Quality,Critical Pesticides,MT/yr,   125.43,    9.89,   122.35,    9.67,   128.96,    9.12,   125.14,    8.92
 Water Quality,Groundwater Contaminant,MT/yr,    16.24,    2.13,    15.98,    2.09,    19.18,    2.08,    18.58,    2.03
+Water Quality,N loading,100 MT/yr,   224.83,      NA,   219.62,      NA,   219.61,      NA,   213.99,      NA
 Water Quality,Risk to Aquatic Organisms,MT/yr,   392.86,   16.78,   382.44,   16.38,   437.10,   17.54,   421.55,   17.02
 Climate Change Resilience,Drought,"qualitative score, 1-10",     5.62,    0.05,     5.56,    0.05,     5.43,    0.05,     5.37,    0.05
 Climate Change Resilience,Flood,"qualitative score, 1-10",     5.90,    0.05,     5.96,    0.05,     5.83,    0.06,     5.91,    0.05
 Climate Change Resilience,Heat,"qualitative score, 1-10",     6.94,    0.06,     6.94,    0.06,     6.69,    0.06,     6.72,    0.06
+Climate Change Resilience,Landscape diversity,Shannon index,     2.79,      NA,     2.83,      NA,     2.79,      NA,     2.83,      NA
 Biodiversity Support,Total,ha,201883, 3842,207878, 3624,197488, 3717,206046, 3447
 Biodiversity Support,Total (fall),ha, 25068,  510, 28955,  543, 24245,  490, 28092,  532
 Biodiversity Support,Total (winter),ha, 55603, 1650, 59447, 1633, 54270, 1489, 57809, 1471

@@ -24,7 +24,8 @@
 # PACKAGES & FUNCTIONS
 source('R/0_packages.R')
 source('R/0_functions.R')
-reticulate::use_python('C:/Python27/ArcGISx6410.8/python.exe', required = TRUE)
+#reticulate::use_python('C:/Python27/ArcGISx6410.8/python.exe', required = TRUE)
+reticulate::use_python('C:/Program Files/ArcGIS/Pro/bin/Python/envs/arcgispro-py3/python.exe', required = TRUE)
 
 # reference data:
 key = readxl::read_excel('GIS/VEG_key.xlsx')
@@ -158,19 +159,22 @@ purrr::pmap(
 # not specific to a seasonal SDM and unnecessary to repeat for each season since
 # "unsuitable" land cover classes aren't dynamic and changing seasonally; output
 # to a general crane_roosts folder
-purrr::map(names(scenarios)[-which(grepl('win', names(scenarios)))],
+data(roosts_original)
+
+i = which(grepl('baseline|scenario1|_alt', names(scenarios)) & !grepl('win', names(scenarios)))
+purrr::map(names(scenarios)[i],
            ~DeltaMultipleBenefits::update_roosts(
              landscape = scenarios[[.x]],
              landscape_name = .x,
              unsuitable = c(11:19, 60, 70:79, 100:120),
              proportion = 0.2,
-             roosts = 'GIS/original_source_data/Ivey/Select_recent_roosts_Ivey_utm.shp',
+             roosts = terra::vect(roosts_original),
              pathout = 'GIS/SDM_predictors/crane_roosts',
              overwrite = TRUE
            ))
 # then use python to calculate distance to roost from every pixel in each landscape
 purrr::map(
-  names(scenarios)[-which(grepl('win', names(scenarios)))],
+  names(scenarios)[i],
   ~DeltaMultipleBenefits::python_dist(
     pathin = 'GIS/SDM_predictors/crane_roosts',
     landscape_name = .x,
