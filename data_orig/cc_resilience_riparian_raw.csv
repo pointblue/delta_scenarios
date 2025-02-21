@@ -1,0 +1,58 @@
+scorer,FACTOR_TYPE,FACTOR,CODE_NAME,LANDCOVER,SCORE
+ripmod,RESILIENCE,drought,RIPARIAN_FOREST_MIXED,Acer negundo,10
+ripmod,RESILIENCE,flood,RIPARIAN_FOREST_MIXED,Acer negundo,2
+ripmod,RESILIENCE,salinity,RIPARIAN_FOREST_MIXED,Acer negundo,6
+ripmod,RESILIENCE,drought,RIPARIAN_FOREST_MIXED,Alnus rhombifolia,2
+ripmod,RESILIENCE,flood,RIPARIAN_FOREST_MIXED,Alnus rhombifolia,4
+ripmod,RESILIENCE,salinity,RIPARIAN_FOREST_MIXED,Alnus rhombifolia,2
+ripmod,RESILIENCE,drought,RIPARIAN_SCRUB_MIXED,Cephalanthus occidentalis,6
+ripmod,RESILIENCE,flood,RIPARIAN_SCRUB_MIXED,Cephalanthus occidentalis,10
+ripmod,RESILIENCE,salinity,RIPARIAN_SCRUB_MIXED,Cephalanthus occidentalis,4
+ripmod,RESILIENCE,drought,RIPARIAN_FOREST_MIXED,Fraxinus latifolia,4
+ripmod,RESILIENCE,flood,RIPARIAN_FOREST_MIXED,Fraxinus latifolia,6
+ripmod,RESILIENCE,salinity,RIPARIAN_FOREST_MIXED,Fraxinus latifolia,2
+ripmod,RESILIENCE,drought,RIPARIAN_FOREST_MIXED,"Juglans hindsii(based on Juglans major in USDA)",6
+ripmod,RESILIENCE,flood,RIPARIAN_FOREST_MIXED,"Juglans hindsii(based on Juglans major in USDA)",4
+ripmod,RESILIENCE,salinity,RIPARIAN_FOREST_MIXED,"Juglans hindsii(based on Juglans major in USDA)",2
+ripmod,RESILIENCE,drought,RIPARIAN_FOREST_MIXED,Platanus racemosa,6
+ripmod,RESILIENCE,flood,RIPARIAN_FOREST_MIXED,Platanus racemosa,6
+ripmod,RESILIENCE,salinity,RIPARIAN_FOREST_MIXED,Platanus racemosa,2
+ripmod,RESILIENCE,drought,RIPARIAN_FOREST_POFR,Populus fremontii,6
+ripmod,RESILIENCE,flood,RIPARIAN_FOREST_POFR,Populus fremontii,6
+ripmod,RESILIENCE,salinity,RIPARIAN_FOREST_POFR,Populus fremontii,4
+ripmod,RESILIENCE,drought,RIPARIAN_FOREST_QULO,Quercus lobata,6
+ripmod,RESILIENCE,flood,RIPARIAN_FOREST_QULO,Quercus lobata,2
+ripmod,RESILIENCE,salinity,RIPARIAN_FOREST_QULO,Quercus lobata,2
+ripmod,RESILIENCE,drought,RIPARIAN_SCRUB_SALIX,Salix exigua,6
+ripmod,RESILIENCE,flood,RIPARIAN_SCRUB_SALIX,Salix exigua,10
+ripmod,RESILIENCE,salinity,RIPARIAN_SCRUB_SALIX,Salix exigua,4
+ripmod,RESILIENCE,drought,RIPARIAN_FOREST_SALIX,Salix gooddingii,6
+ripmod,RESILIENCE,flood,RIPARIAN_FOREST_SALIX,Salix gooddingii,10
+ripmod,RESILIENCE,salinity,RIPARIAN_FOREST_SALIX,Salix gooddingii,2
+ripmod,RESILIENCE,drought,RIPARIAN_FOREST_SALIX,Salix laevigata,2
+ripmod,RESILIENCE,flood,RIPARIAN_FOREST_SALIX,Salix laevigata,10
+ripmod,RESILIENCE,salinity,RIPARIAN_FOREST_SALIX,Salix laevigata,8
+ripmod,RESILIENCE,drought,RIPARIAN_SCRUB_SALIX,Salix lasiolepis,2
+ripmod,RESILIENCE,flood,RIPARIAN_SCRUB_SALIX,Salix lasiolepis,10
+ripmod,RESILIENCE,salinity,RIPARIAN_SCRUB_SALIX,Salix lasiolepis,2
+ripmod,RESILIENCE,drought,RIPARIAN_SCRUB_SALIX,Salix lucida,4
+ripmod,RESILIENCE,flood,RIPARIAN_SCRUB_SALIX,Salix lucida,6
+ripmod,RESILIENCE,salinity,RIPARIAN_SCRUB_SALIX,Salix lucida,2
+ripmod,RESILIENCE,drought,RIPARIAN_SCRUB_MIXED,Toxicodendron diversilobum,NA
+ripmod,RESILIENCE,flood,RIPARIAN_SCRUB_MIXED,Toxicodendron diversilobum,NA
+ripmod,RESILIENCE,salinity,RIPARIAN_SCRUB_MIXED,Toxicodendron diversilobum,NA
+ripmod,RESILIENCE,drought,RIPARIAN_SCRUB_MIXED,Vitis californica,6
+ripmod,RESILIENCE,flood,RIPARIAN_SCRUB_MIXED,Vitis californica,4
+ripmod,RESILIENCE,salinity,RIPARIAN_SCRUB_MIXED,Vitis californica,NA
+ripmod,RESILIENCE,drought,RIPARIAN_SCRUB_INTRO,Arundo Donax,4
+ripmod,RESILIENCE,flood,RIPARIAN_SCRUB_INTRO,Arundo Donax,6
+ripmod,RESILIENCE,salinity,RIPARIAN_SCRUB_INTRO,Arundo Donax,2
+ripmod,RESILIENCE,drought,RIPARIAN_SCRUB_INTRO,Rubus discolor,NA
+ripmod,RESILIENCE,flood,RIPARIAN_SCRUB_INTRO,Rubus discolor,NA
+ripmod,RESILIENCE,salinity,RIPARIAN_SCRUB_INTRO,Rubus discolor,NA
+ripmod,RESILIENCE,drought,RIPARIAN_SCRUB_INTRO,Tamarix parviflora (2),10
+ripmod,RESILIENCE,flood,RIPARIAN_SCRUB_INTRO,Tamarix parviflora (2),10
+ripmod,RESILIENCE,salinity,RIPARIAN_SCRUB_INTRO,Tamarix parviflora (2),10
+ripmod,RESILIENCE,drought,RIPARIAN_SCRUB_INTRO,Tamarix ramosissima (2),10
+ripmod,RESILIENCE,flood,RIPARIAN_SCRUB_INTRO,Tamarix ramosissima (2),10
+ripmod,RESILIENCE,salinity,RIPARIAN_SCRUB_INTRO,Tamarix ramosissima (2),10

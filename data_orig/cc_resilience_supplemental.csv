@@ -1,0 +1,13 @@
+scorer,FACTOR,FACTOR_TYPE,LANDCOVER,SCORE_MEAN,CODE_NAME
+DeltaAdapts,salinity,RESILIENCE,truck crops,3,ROW
+DeltaAdapts,salinity,RESILIENCE,corn,3,FIELD_CORN
+DeltaAdapts,salinity,RESILIENCE,alfalfa,3,PASTURE_ALFALFA
+DeltaAdapts,salinity,RESILIENCE,vineyard,1,VINEYARD
+DeltaAdapts,salinity,RESILIENCE,orchard,1,ORCHARD_DECIDUOUS
+DeltaAdapts,salinity,RESILIENCE,grain,8,GRAIN&HAY
+DeltaAdapts,salinity,RESILIENCE,rice,8,RICE
+DeltaAdapts,salinity,RESILIENCE,field crops,8,FIELD_OTHER
+DeltaAdapts,salinity,RESILIENCE,olives,8,ORCHARD_CITRUS&SUBTROPICAL
+medellin,salinity,RESILIENCE,irrigated pasture,3,PASTURE_OTHER
+medellin,salinity,RESILIENCE,dryland pasture,3,GRASSLAND
+CVSALTS,salinity,RESILIENCE,wetland,9,WETLAND_MANAGED
