@@ -1,0 +1,545 @@
+STUDY,CITATION,LEVEL,STATE,REGION,COUNTY,LANDCOVER_CAT1,LANDCOVER_CAT2,ES1,ES2,METRIC,MIN,MAX,MEAN,UNIT,TREATMENTS,NOTES,NOTES2,SOURCE,CONVERSIONS,ANNOTATE,FLUXTYPE
+1,smart et al. 2011,1,california,SV,colusa,orchard crop,almond,climate regulation,,N2O flux,49,191,111.25,g N2O-N ha-1,"irrigation method, season",spring season,,Table 2,N2O emission over 25 days. No N or SD - values are from numeric integration of instantaneous emission over space/time ,,25 days
+2,steenwerth and belina 2008,1,california,CC,monterey,vineyard,,climate regulation,,CO2 flux,153,291,237,g CO2-C m-2 yr-1,"tillage, cover crop",,,Table 4,,,annual
+3,steenwerth and belina 2008,1,california,SV,yolo,vineyard,,climate regulation,,N2O flux,467,694,575.33,g N2O-N ha-1 yr-1,cover crop,annual,,Fig 4,,,annual
+4,burger et al. 2005,1,california,SV,yolo,tomato,,climate regulation,,CO2 flux,17.9,22.6,20.2,kg CO2-C ha-1 day-1,conventional/organic,growing season,,Table 2,converted from mg C m-2 hr-1,,daily
+5,barrios-masias et al. 2010,1,california,SV,yolo,tomato,,climate regulation,,CO2 flux,24,36,30,kg CO2-C ha-1 day-1,cover crop mix,growing season,,Fig 2,converted from mg C m-2 hr-1,,daily
+5,barrios-masias et al. 2010,1,california,SV,yolo,tomato,,climate regulation,,N2O flux,2,91,24.8,g N2O-N ha-1 day-1,cover crop mix,growing season,,Fig 2,converted from mg C m-2 hr-1,,daily
+6,kallenbach et al. 2010,1,california,SV,yolo,tomato,,climate regulation,,CO2 flux,24,85,48.5,kg CO2 ha-1 day-1,"tillage, irrigation method, cover crop",growing season or winter,,Fig 10,converted from mg C m-2 hr-1,,daily
+6,kallenbach et al. 2010,1,california,SV,yolo,tomato,,climate regulation,,N2O flux,5,44,19,g N2O ha-1 day-1,"tillage, irrigation method, cover crop",growing season or winter,,Fig 6,converted from ug N m-2 hr-1,,daily
+7,lee et al. 2009,1,california,SV,yolo,tomato,,climate regulation,,CO2 flux,10,18,14.625,Mg CO2-C ha-1 yr-1,"tillage, bed position",growing season,,fig 5,,,annual
+8,steenwerth et al. 2010 SSSA,1,california,SV,napa,vineyard,,climate regulation,,CO2 flux,8.4,11,9.45,Mg CO2-C ha-1 yr-1,cover crop management,annual,,text,,,annual
+9,garland et al. 2011,1,california,SV,yolo,vineyard,,climate regulation,,N2O flux,0.13,0.22,0.17,kg N2O-N ha-1 season-1,"tillage, sampling location",growing season,,fig 5,,,seasonal
+7,lee et al. 2009,1,california,SV,yolo,corn,,climate regulation,,N2O flux,2,18,6.625,kg N2O-N ha-1 yr-1,"tillage, bed position",annual,,Fig 7,,,annual
+10,suddick et al. 2011,1,california,SV,yolo,orchard crop,almond,climate regulation,,N2O flux,11.6,18.7,15.2,g N2O-N ha-1 day-1,irrigation method,growing season,,Table 10.3 Halvorson et al. 2012,,,daily
+11,alsina et al. 2013,1,california,SV,colusa,orchard crop,almond,climate regulation,,N2O flux,0.6,1.6,1.1,kg N2O-N ha-1 yr-1,irrigation method,growing season,,table 2,,,annual
+11,alsina et al. 2013,1,california,SV,colusa,orchard crop,almond,climate regulation,,CH4 flux,0,0.2,0.1,kg CH4 ha-1 yr-1,irrigation method,growing season,,table 2,,,annual
+12,morande et al. 2017,1,california,SV,sacramento,vineyard,,climate regulation,,C storage,,,8.9,Mg C ha-1,,"in perennial portions (roots, trunk, cordons); 1 vineyard",,table 1,,,
+13,decock et al. 2017,1,california,SV,colusa,orchard crop,almond,climate regulation,,N2O flux,0.5,0.7,0.6,kg N2O-N ha-1 yr-1,,annual,,table 2,,,annual
+14,schellenberg et al. 2012,1,california,SJV,kern,orchard crop,almond,climate regulation,,N2O flux,0.56,0.8,0.68,kg N2O-N ha-1 yr-1,,,,table 5,,,annual
+15,hatala et al. 2012 ,1,california,SSJDelta,various,rice,,climate regulation,,CO2 flux,-118,-43,-84,g CO2-C m-2 yr-1,,eddy covariance method,,table 3,,x,annual
+15,hatala et al. 2012 ,1,california,SSJDelta,various,rice,,climate regulation,,CH4 flux,2.1,2.9,2.5,g CH4-C m-2 yr-1,,eddy covariance method,,table 3,,,annual
+15,hatala et al. 2012 ,1,california,SSJDelta,various,rice,,climate regulation,,CO2e flux,-63,-29,-22,g CO2e-C m-2 yr-1,,CO2 and CH4 combined,CH4 GWP 25,table 3,,,annual
+15,hatala et al. 2012 ,1,california,SSJDelta,various,rice,,climate regulation,,CO2 flux,-344,-226,-283,g CO2-C m-2 yr-1,,eddy covariance method,,table 3,,x,annual
+15,hatala et al. 2012 ,1,california,SSJDelta,various,rice,,climate regulation,,CH4 flux,6.1,7,6.6,g CH4-C m-2 yr-1,,eddy covariance method,,table 3,,,annual
+15,hatala et al. 2012 ,1,california,SSJDelta,various,rice,,climate regulation,,CO2e flux,-192,-52,-119,g CO2e-C m-2 yr-1,,CO2 and CH4 combined,CH4 GWP 25,table 3,,,annual
+15,hatala et al. 2012 ,1,california,SSJDelta,various,pasture,grazed,climate regulation,,CO2 flux,222,373,299,g CO2-C m-2 yr-1,,eddy covariance method,,table 3,,x,annual
+15,hatala et al. 2012 ,1,california,SSJDelta,various,pasture,grazed,climate regulation,,CH4 flux,2.8,3.9,3.3,g CH4-C m-2 yr-1,,eddy covariance method,,table 3,,,annual
+15,hatala et al. 2012 ,1,california,SSJDelta,various,pasture,grazed,climate regulation,,CO2e flux,293,471,382,g CO2e-C m-2 yr-1,,CH4 GWP 25,,table 3,,,annual
+15,hatala et al. 2012 ,1,california,SSJDelta,various,pasture,grazed,climate regulation,,CO2 flux,113,233,174,g CO2-C m-2 yr-1,,eddy covariance method,,table 3,,x,annual
+16,fares et al. 2012,1,california,SJV,tulare,citrus,,air quality,,ozone formation,,,-7.2,g m-2 yr-1,,orchards are an ozone sink. ES = phytoremediation of air quality,annual,text,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,alfalfa,,climate regulation,,N2O flux,,,0,kg N2O ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,annual
+17,underwood et al. 2017,4,california,Cosumnes,various,cereal,,climate regulation,,N2O flux,,,2.81,kg N2O ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,annual
+17,underwood et al. 2017,4,california,Cosumnes,various,rice,,climate regulation,,N2O flux,,,0.69,kg N2O ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,annual
+17,underwood et al. 2017,4,california,Cosumnes,various,row crop,,climate regulation,,N2O flux,,,2.93,kg N2O ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,annual
+17,underwood et al. 2017,4,california,Cosumnes,various,orchard crop,,climate regulation,,N2O flux,,,2.03,kg N2O ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,annual
+17,underwood et al. 2017,4,california,Cosumnes,various,vineyard,,climate regulation,,N2O flux,,,0.61,kg N2O ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,annual
+17,underwood et al. 2017,4,california,Cosumnes,various,pasture,,climate regulation,,N2O flux,,,0.2,kg N2O ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,annual
+17,underwood et al. 2017,4,california,Cosumnes,various,alfalfa,,soil quality,climate regulation,C storage,,,7,t C ha-1,,"above & below ground; calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,cereal,,soil quality,climate regulation,C storage,,,7.1,t C ha-1,,"above & below ground; calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,rice,,soil quality,climate regulation,C storage,,,10.4,t C ha-1,,"above & below ground; calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,row crop,,soil quality,climate regulation,C storage,,,35.9,t C ha-1,,"above & below ground; calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,orchard crop,,soil quality,climate regulation,C storage,,,3.8,t C ha-1,,"above & below ground; calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,vineyard,,soil quality,climate regulation,C storage,,,1.8,t C ha-1,,"above & below ground; calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,pasture,,soil quality,climate regulation,C storage,,,3.5,t C ha-1,,"above & below ground; calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,grassland,,soil quality,climate regulation,C storage,,,3.5,t C ha-1,,"above & below ground; calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,chaparral,shrubland,soil quality,climate regulation,C storage,,,30,t C ha-1,,"above & below ground; calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,wetland,,climate regulation,,C storage,,,4.1,t C ha-1,,"aboveground only; calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,riparian,SALIX,climate regulation,,C storage,,,79.7,t C ha-1,,aboveground only,,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,riparian,POFR,climate regulation,,C storage,,,49.8,t C ha-1,,aboveground only,,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,riparian,QULO,climate regulation,,C storage,,,132,t C ha-1,,aboveground only,,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,alfalfa,,water quality,,N leaching,,,0,kg N ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,x,
+17,underwood et al. 2017,4,california,Cosumnes,various,cereal,,water quality,,N leaching,,,48.01,kg N ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,rice,,water quality,,N leaching,,,22.5,kg N ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,row crop,,water quality,,N leaching,,,164.76,kg N ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,riparian,,water quality,,N leaching,,,0,kg N ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,wetland,,water quality,,N leaching,,,0,kg N ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,orchard crop,,water quality,,N leaching,,,69.52,kg N ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,vineyard,,water quality,,N leaching,,,16.7,kg N ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,pasture,,water quality,,N leaching,,,4.49,kg N ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,
+17,underwood et al. 2017,4,california,Cosumnes,various,grassland,,water quality,,N leaching,,,0,kg N ha-1 yr-1,,"calculated based on IPCC methodologies for C, n2o",,table 3,,,
+18,gentner et al. 2014,1,california,SJV,tulare,citrus,,air quality,,ozone formation,-4,22,0.3,nmol m-2 s-1,,net weekly ozone effect,measured over a year,fig 10b,,,
+19,matios and burney 2017,2,california,SJV,fresno,alfalfa,,water supply,,water use,,,1100,m3 900 m-2,,modeled - InVEST,annual,table 1,,x,
+19,matios and burney 2017,2,california,SJV,fresno,orchard crop,almond,water supply,,water use,,,900,m3 900 m-2,,2010-2015 average,annual,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,cereal,barley,water supply,,water use,,,250,m3 900 m-2,,annual,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,cotton,,water supply,,water use,,,500,m3 900 m-2,,annual,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,vineyard,,water supply,,water use,,,600,m3 900 m-2,,annual,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,citrus,,water supply,,water use,,,700,m3 900 m-2,,annual,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,orchard crop,peach,water supply,,water use,,,700,m3 900 m-2,,annual,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,orchard crop,pistachio,water supply,,water use,,,900,m3 900 m-2,,annual,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,tomato,,water supply,,water use,,,450,m3 900 m-2,,annual,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,cereal,wheat,water supply,,water use,,,400,m3 900 m-2,,annual,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,alfalfa,,water supply,,water productivity,,,1.3,kg m-3,,,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,orchard crop,almond,water supply,,water productivity,,,0.3,kg m-3,,,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,cereal,barley,water supply,,water productivity,,,1.3,kg m-3,,,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,cotton,,water supply,,water productivity,,,0.8,kg m-3,,,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,vineyard,,water supply,,water productivity,,,2.1,kg m-3,,,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,citrus,,water supply,,water productivity,,,4.2,kg m-3,,,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,orchard crop,peach,water supply,,water productivity,,,3.2,kg m-3,,,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,orchard crop,pistachio,water supply,,water productivity,,,0.3,kg m-3,,,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,tomato,,water supply,,water productivity,,,22.5,kg m-3,,,,table 1,,,
+19,matios and burney 2017,2,california,SJV,fresno,cereal,wheat,water supply,,water productivity,,,2.5,kg m-3,,,,table 1,,,
+20,ransom et al. 2018,2,california,CV,various,citrus,,water quality,,N load,35.7,113.8,64.5,kg N ha-1 yr-1,,bayesian inference,,table 2,,,
+20,ransom et al. 2018,2,california,CV,various,orchard crop,fruit,water quality,,N load,4.6,26.2,12.2,kg N ha-1 yr-1,,,,table 2,,,
+20,ransom et al. 2018,2,california,CV,various,orchard crop,nut,water quality,,N load,12.6,46.9,24.8,kg N ha-1 yr-1,,,,table 2,,,
+20,ransom et al. 2018,2,california,CV,various,cotton,,water quality,,N load,4.6,28.1,12.7,kg N ha-1 yr-1,,,,table 2,,,
+20,ransom et al. 2018,2,california,CV,various,field crops,,water quality,,N load,10.7,70.1,31.6,kg N ha-1 yr-1,,,,table 2,,,
+20,ransom et al. 2018,2,california,CV,various,rice,,water quality,,N load,0.9,12.7,4.1,kg N ha-1 yr-1,,,,table 2,,,
+20,ransom et al. 2018,2,california,CV,various,alfalfa,,water quality,,N load,0.2,13.2,3.7,kg N ha-1 yr-1,,,,table 2,,,
+20,ransom et al. 2018,2,california,CV,various,pasture,,water quality,,N load,0.2,13.2,3.7,kg N ha-1 yr-1,,,,table 2,,,
+20,ransom et al. 2018,2,california,CV,various,vineyard,,water quality,,N load,12.6,44.1,24.1,kg N ha-1 yr-1,,,,table 2,,,
+20,ransom et al. 2018,2,california,CV,various,vegetables & berries,,water quality,,N load,18.7,102.8,49.1,kg N ha-1 yr-1,,,,table 2,,,
+20,ransom et al. 2018,2,california,CV,various,urban,,water quality,,N load,6.6,26.8,13.9,kg N ha-1 yr-1,,,,table 2,,,
+20,ransom et al. 2018,2,california,CV,various,water & natural,,water quality,,N load,4,2.1,7.4,kg N ha-1 yr-1,,,,table 2,,,
+21,lockhart et al. 2013,1,california,SJV,various,citrus,,water quality,,groundwater nitrate,,,11.4,mg N L-1,,,,table 4,,,
+21,lockhart et al. 2013,1,california,SJV,various,orchard crop,,water quality,,groundwater nitrate,,,9.3,mg N-N L-1,,,,table 4,,,
+21,lockhart et al. 2013,1,california,SJV,various,pasture,,water quality,,groundwater nitrate,,,1.7,mg N-N L-1,,,,table 4,,,
+21,lockhart et al. 2013,1,california,SJV,various,vineyard,,water quality,,groundwater nitrate,,,2.1,mg N-N L-1,,,,table 4,,,
+22,baram et al. 2016,2,california,SJV,madera,orchard crop,almond,water quality,,N leaching,43,239,124,kg N ha-1 yr-1,"different modeling methods (mass balance, Darcy, HYDRUS)",,,fig 5,,,
+23,wolff et al. 2017,1,california,SJV,kern,orchard crop,almond,climate regulation,,N2O flux,511,1036,776,g N2O-N ha-1 season-1,fertigation method,during growing season,244 days,table 2,,,seasonal
+24,wolff et al. 2018,1,california,SV,napa,vineyard,,soil quality,climate regulation,C storage,18,24,19.8,Mg C ha-1,"tillage, cover crop",GWP and GHGI methods,,table 2,,,
+24,wolff et al. 2018,1,california,SV,napa,vineyard,,climate regulation,,N2O flux,0.2,0.32,0.26,kg N2O ha-1 yr-1,"tillage, cover crop",GWP and GHGI methods,,table 2,,x,annual
+24,wolff et al. 2018,1,california,SV,napa,vineyard,,climate regulation,,CH4 flux,-0.5,-0.2,-0.4,kg CH4 ha-1 yr-1,"tillage, cover crop",GWP and GHGI methods,,table 2,,,annual
+25,suddick et al. 2013,1,california,SV,colusa,orchard crop,almond,soil quality,climate regulation,C storage,16.4,42.7,26.4,Mg C ha-1,conventional/organic,LTM protocol and explanation of difficulties of SC monitoring in ag,average of three depths,table 3,,x,
+25,suddick et al. 2013,1,california,SV,amador,vineyard,,soil quality,climate regulation,C storage,11,36.4,24.2,Mg C ha-1,"tillage, cover crop",SD and N were included,average of three depths,table 3,,,
+25,suddick et al. 2013,1,california,SV,amador,other,oak woodland,soil quality,climate regulation,C storage,15.1,43.9,28,Mg C ha-1,,,average of three depths,table 3,,,
+25,suddick et al. 2013,1,california,SV,amador,grassland,,soil quality,climate regulation,C storage,6.2,39.8,23.6,Mg C ha-1,,,average of three depths,table 3,,,
+25,suddick et al. 2013,1,california,SV,solano,orchard crop,walnut,soil quality,climate regulation,C storage,33.2,57,45.4,Mg C ha-1,"conventional/organic, OM amendment",,average of three depths,table 3,,,
+25,suddick et al. 2013,1,california,SV,napa,vineyard,,soil quality,climate regulation,C storage,32,51.8,43.1,Mg C ha-1,"cover crop, clean cultivation, dry farming",,average of three depths,table 3,,,
+26,ruark et al. 2010,1,california,SV,yuba,rice,,water quality,,DOC,33.6,378,137.3,g DOC ha-1 day-1,"water management (flooding), residue management",higher values during winter when fields are flooded,"seasonal fluxes, growing seas and winter",table 3,converted from kg ha-1 for winter or growing season,,
+26,ruark et al. 2010,1,california,SV,yuba,rice,,water quality,,TDS,281.8,3796,1287.4,g TDS ha-1 day-1,,winter 250 days; gs 110 days,"seasonal fluxes, growing seas and winter",table 3,converted from kg ha-1 for winter or growing season,,
+26,ruark et al. 2010,1,california,SV,butte,rice,,water quality,,DOC,2,808,249.9,g DOC ha-1 day-1,,,"seasonal fluxes, growing seas and winter",table 3,converted from kg ha-1 for winter or growing season,,
+26,ruark et al. 2010,1,california,SV,butte,rice,,water quality,,TDS,20.8,3100,1885.2,g TDS ha-1 day-1,,,"seasonal fluxes, growing seas and winter",table 3,converted from kg ha-1 for winter or growing season,,
+26,ruark et al. 2010,1,california,SV,colusa,rice,,water quality,,DOC,0,220,86.8,g DOC ha-1 day-1,,,"seasonal fluxes, growing seas and winter",table 3,converted from kg ha-1 for winter or growing season,,
+26,ruark et al. 2010,1,california,SV,colusa,rice,,water quality,,TDS,0,5827.3,1710.1,g TDS ha-1 day-1,,,"seasonal fluxes, growing seas and winter",table 3,converted from kg ha-1 for winter or growing season,,
+26,ruark et al. 2010,1,california,SV,glenn,rice,,water quality,,DOC,0,124.5,55.3,g DOC ha-1 day-1,,,"seasonal fluxes, growing seas and winter",table 3,converted from kg ha-1 for winter or growing season,,
+26,ruark et al. 2010,1,california,SV,glenn,rice,,water quality,,TDS,0,2900,1255.1,g TDS ha-1 day-1,,,"seasonal fluxes, growing seas and winter",table 3,converted from kg ha-1 for winter or growing season,,
+27,jeong et al. 2012,2,california,SV,various,rice,,climate regulation,,CH4 flux,0,3.6,1.3,Tg CO2eq yr-1,,assumes GWP of 21 g CO2eq g CH4-1; ,region R06,text,,,annual
+27,jeong et al. 2012,2,california,SV,various,wetland,,climate regulation,,CH4 flux,0.1,1.1,0.6,Tg CO2eq yr-1,,estimates from flux tower measurements and DNDC model,,text,,,annual
+28,knox et al. 2016,1,california,SV,sacramento,rice,,climate regulation,,CO2 flux,-396,316,-33.7,g CO2-C m-2 yr-1,,eddy covariance tower,,table 2,,,annual
+28,knox et al. 2016,1,california,SV,sacramento,rice,,climate regulation,,CH4 flux,6.4,19.3,11,g CH4-C m-2 yr-1,,,,table 2,,,annual
+29,adviento-borbe et al. 2015,1,california,SV,butte,rice,,climate regulation,,CH4 flux,142,2464,641,g CH4-C ha-1 day-1,,growing season,120 days,fig 1,,,daily
+29,adviento-borbe et al. 2015,1,california,SV,sutter,rice,,climate regulation,,CH4 flux,142,6019,1583,g CH4-C ha-1 day-1,fertilization rate,growing season,60 days,fig 1,,,daily
+29,adviento-borbe et al. 2015,1,california,SV,colusa,rice,,climate regulation,,CH4 flux,143,3095,1000,g CH4-C ha-1 day-1,fertilization rate,growing season,60 days,fig 1,,,daily
+29,adviento-borbe et al. 2015,1,california,SV,butte,rice,,climate regulation,,N2O flux,0,13,0.7,g N2O-N ha-1 day-1,,post-drainage growing season only,,fig 1,,,daily
+29,adviento-borbe et al. 2015,1,california,SV,sutter,rice,,climate regulation,,N2O flux,0,0,0,g N2O-N ha-1 day-1,fertilization rate,,,fig 1,,,daily
+29,adviento-borbe et al. 2015,1,california,SV,colusa,rice,,climate regulation,,N2O flux,0,61,6.7,g N2O-N ha-1 day-1,fertilization rate,,,fig 1,,,daily
+30,adviento-borbe et al. 2016,1,california,SV,yolo,rice,,climate regulation,,CH4 flux,6.29,13.6,10.7,kg CH4-C ha-1 season-1,fertilization rate; fertilizer application method,includes GWP and NUE,165 days in the season,table 3,,,seasonal
+30,adviento-borbe et al. 2016,1,california,SV,yuba,rice,,climate regulation,,CH4 flux,231,297,265.67,kg CH4-C ha-1 season-1,fertilization rate; fertilizer application method,includes GWP and NUE,165 days in the season,table 3,,,seasonal
+30,adviento-borbe et al. 2016,1,california,SV,butte,rice,,climate regulation,,CH4 flux,62.4,133,103.47,kg CH4-C ha-1 season-1,fertilization rate; fertilizer application method,includes GWP and NUE,165 days in the season,table 3,,,seasonal
+30,adviento-borbe et al. 2016,1,california,SV,yolo,rice,,climate regulation,,N2O flux,-0.05,-0.014,-0.03,g N2O-N ha-1 season-1,fertilization rate; fertilizer application method,includes GWP and NUE,165 days in the season,table 3,,,seasonal
+30,adviento-borbe et al. 2016,1,california,SV,yuba,rice,,climate regulation,,N2O flux,-0.075,0.01,-0.026,g N2O-N ha-1 season-1,fertilization rate; fertilizer application method,includes GWP and NUE,165 days in the season,table 3,,,seasonal
+30,adviento-borbe et al. 2016,1,california,SV,butte,rice,,climate regulation,,N2O flux,-0.107,-0.063,-0.08,g N2O-N ha-1 season-1,fertilization rate; fertilizer application method,includes GWP and NUE,165 days in the season,table 3,,,seasonal
+31,simmonds et al. 2015,1,california,SV,butte,rice,,climate regulation,,CH4 flux,58,69,62.33,kg CH4-C ha-1 season-1,cultivar,includes GWP,150 days,table 5,,,seasonal
+31,simmonds et al. 2015,1,california,SV,yolo,rice,,climate regulation,,CH4 flux,6.7,14,10.74,kg CH4-C ha-1 season-1,,,150 days,table 5,,,seasonal
+31,simmonds et al. 2015,1,california,SV,butte,rice,,climate regulation,,N2O flux,0.05,0.06,0.06,kg N2O-N ha-1 season-1,,,150 days,table 5,,,seasonal
+31,simmonds et al. 2015,1,california,SV,yolo,rice,,climate regulation,,N2O flux,-0.19,-0.11,-0.15,kg N2O-N ha-1 season-1,,,150 days,table 5,,,seasonal
+32,pittelkow et al. 2014,1,california,SV,butte,rice,,climate regulation,,CH4 flux,183,355,294.3,kg CH4-C ha-1 yr-1,seeding method,inclues GS and fallow period flux,,fig 3,,,annual
+33,pittelkow et al. 2013,1,california,SV,colusa,rice,,climate regulation,,CH4 flux,54,200,142.3,kg CH4-C ha-1 yr-1,fertilization rate,also has seasonal fluxes,,table 2,,,annual
+33,pittelkow et al. 2013,1,california,SV,colusa,rice,,climate regulation,,N2O flux,238,1301,564.4,g N2O-N ha-1 yr-1,fertilization rate,,,table 2,,,annual
+34,horwath and  burger 2013,1,california,SV,colusa,orchard crop,almond,air quality,,NOx flux,0.1,0.4,0.2,g NOx-N ha-1 h-1,row position,,,table 7,,x,hourly
+34,horwath and  burger 2013,1,california,SV,yolo,alfalfa,,air quality,,NOx flux,0.2,0.5,0.4,g NOx-N ha-1 h-1,age of stand,,,table 7,,,hourly
+34,horwath and  burger 2013,1,california,SV,yolo,tomato,,air quality,,NOx flux,0.1,2.8,0.6,g NOx-N ha-1 h-1,"irrigation method, cover crop, fertilization rate",,,table 7,,,hourly
+34,horwath and  burger 2013,1,california,SV,solano,cereal,wheat,air quality,,NOx flux,,,0,g NOx-N ha-1 h-1,,,,table 7,,,hourly
+34,horwath and  burger 2013,1,california,SJV,stanislaus,corn,,air quality,,NOx flux,0.4,2,1.3,g NOx-N ha-1 h-1,fertilization rate,,,table 7,,,hourly
+34,horwath and  burger 2013,1,california,SV,sacramento,corn,,air quality,,NOx flux,,,1.6,g NOx-N ha-1 h-1,fertilization rate,,,table 7,,,hourly
+34,horwath and  burger 2013,1,california,SV,yolo,alfalfa,,climate regulation,,N2O flux,1.7,3.1,2.4,g N2O-N ha-1 h-1,age of stand,,,table 7,,,hourly
+34,horwath and  burger 2013,1,california,SV,yolo,tomato,,climate regulation,,N2O flux,0.1,1.2,0.5,g N2O-N ha-1 h-1,"irrigation method, cover crop, fertilization rate",,,table 7,,,hourly
+34,horwath and  burger 2013,1,california,SV,solano,cereal,wheat,climate regulation,,N2O flux,,,0.1,g N2O-N ha-1 h-1,,,,table 7,,,hourly
+34,horwath and  burger 2013,1,california,SJV,stanislaus,corn,,climate regulation,,N2O flux,1.7,4.8,3.5,g N2O-N ha-1 h-1,,,,table 7,,,hourly
+34,horwath and  burger 2013,1,california,SJV,sacramento,corn,,climate regulation,,N2O flux,,,6.8,g N2O-N ha-1 h-1,,,,table 7,,,hourly
+35,peischl et al. 2012,2,california,SV,various,rice,,climate regulation,,CH4 flux,78000,93000,85500,t CH4 yr-1,,for the entire sacramento valley rice production,,text,converted from g yr-1,,annual
+36,liang et al. 2014,1,california,SV,various,rice,,water quality,,groundwater nitrate,0,3.8,0.4,mg NO2 + NO3-N L-1,,USGS RICE monitoring wells,also has mg L-1 yr-1,table 6,,,
+36,liang et al. 2014,1,california,SV,various,rice,,water quality,,groundwater nitrate,0,18,1.1,mg NO2 + NO3-N L-1,,USGS NAWQA shallow domestic wells 2008,means are medians,table 6,,,
+36,liang et al. 2014,1,california,SV,various,rice,,water quality,,groundwater nitrate,0.1,7.5,0.8,mg NO3-N L-1,,USGS GAMA production wells in rice areas 2006,,table 6,,,
+36,liang et al. 2014,1,california,SV,various,rice,,water quality,,groundwater nitrate,0,1.3,0.2,mg NO3-N L-1,,USGS GAMA flow path wells in rice areas 2006,,table 6,,,
+37,krupa et al. 2012,1,california,SV,various,rice,,water quality,,DOC load,-8.7,38.8,9.7,kg DOC ha-1,,growing season load,,table 1,,,
+37,krupa et al. 2012,1,california,SV,various,rice,,water quality,,DOC flux,50,414,191.9,g DOC ha-1 day-1,,median,,fig 2,,,
+38,linquist et al. 2014,1,california,SV,various,rice,,water quality,,P load,-9.8,1.3,-0.4,kg PO4-P ha-1 yr-1,,also has seasonal fluxes of nutrient,"negative load indicates field was a source of the nutrient, pos indicates it was a sink",fig 4,,,
+38,linquist et al. 2014,1,california,SV,various,rice,,water quality,,TSS,-822.7,289.7,-30.2,kg TSS ha-1 yr-1,,,,fig 2,,,
+38,linquist et al. 2014,1,california,SV,various,rice,,water quality,,NO3 flux,0.4,1.9,0.9,g NO3-N ha-1 day-1,straw management,gs and winter season both 180 days,,table 5,converted from kg ha-1 for 180-day season,,
+38,linquist et al. 2014,1,california,SV,various,rice,,water quality,,PO4 flux,0.9,14.4,4.9,g PO4-P ha-1 day-1,straw management,gs and winter season both 180 days,,table 5,converted from kg ha-1 for 180-day season,,
+38,linquist et al. 2014,1,california,SV,various,rice,,water quality,,TSS flux,505.6,1372.2,816.7,g TSS ha-1 day-1,straw management,gs and winter season both 180 days,,table 5,converted from kg ha-1 for 180-day season,,
+39,krupa et al. 2011,1,california,SV,various,rice,,water quality,,P load,,,0.3,kg PO4-P ha-1 yr-1,,net; pos value is a source,,table 4,,,
+40,kirk et al. 2015,4,california,SV,sacramento,rice,,soil quality,,subsidence reversal,2527,12759,7643,kg soil C ha-1 yr-1,,Prevented soil C loss when compared to neighboring peatlands growing upland crops,,text,,,
+41,silver et al. 2010,1,california,SV,yuba,rangeland,,soil quality,,C storage,60,136,79,t C ha-1,to 50 cm,soil carbon,quant lit review of other studies,fig 4,,,
+42,kroodsma and field 2006,2,california,CV,various,orchard crop,,soil quality,,C storage,5,32,16.6,g C m-2 yr-1,,older study from 2006 using data from 1980-2000,14 counties in SJV + imperial (top ag counties),fig 4,,,
+42,kroodsma and field 2006,2,california,CV,various,orchard crop,,climate regulation,,C storage,,,26,g C m-2 yr-1,,soil and woody biomass,,text,,,
+42,kroodsma and field 2006,2,california,CV,various,vineyard,,soil quality,,C storage,,,24,g C m-2 yr-1,,soil and woody biomass,,text,,,
+43,roberts et al. 2011,1,california,SJV,various,cotton,,soil quality,,Microbial biomass,28.6,38.4,34.3,nmol lipids g-1 soil,rotation,kings and fresno counties,PFLA method,table 2,,,
+43,roberts et al. 2011,1,california,SJV,various,cotton,,soil quality,biodiversity,Microbial community composition,33,32.4,32.7,nmol gram pos biomarkers g-1 soil,fertilization rate,,,table 4,,,
+43,roberts et al. 2011,1,california,SJV,various,cotton,,soil quality,biodiversity,Microbial community composition,3.9,4,3.9,nmol aerobic bac biomarkers g-1 soil,fertilization rate,,,table 4,,,
+43,roberts et al. 2011,1,california,SJV,various,cotton,,soil quality,biodiversity,Microbial community composition,3.5,3.9,3.7,nmol fungi biomarkers g-1 soil,fertilization rate,,,table 4,,,
+43,roberts et al. 2011,1,california,SJV,various,cotton,,soil quality,biodiversity,Microbial community diversity,29.3,30.7,30,nmol microbial diversity biomarkers g-1 soil,fertilization rate,diversity indicator is number of different lipids,,table 4,,,
+44,esch et al. 2013,1,california,CC,santa clara,grassland,serpentine,soil quality,,Microbial activity - respiration,9,12,10.5,ug CO2-C g-1 day-1,"fertilization rate, grazing",,,fig 1,,,
+45,mayzelle et al. 2015,2,california,SJV,various,orchard crop,tree fruit,water quality,,N leaching,,,92,kg N ha-1 yr-1,,ag buffers within 1000 m of disadvantaged communities,,table 5,,,
+45,mayzelle et al. 2015,2,california,SJV,various,orchard crop,nut,water quality,,N leaching,,,81,kg N ha-1 yr-1,,,,table 5,,,
+45,mayzelle et al. 2015,2,california,SJV,various,cotton,,water quality,,N leaching,,,101,kg N ha-1 yr-1,,,,table 5,,,
+45,mayzelle et al. 2015,2,california,SJV,various,corn,,water quality,,N leaching,,,6,kg N ha-1 yr-1,,,,table 5,,,
+45,mayzelle et al. 2015,2,california,SJV,various,field crops,,water quality,,N leaching,,,41,kg N ha-1 yr-1,,,,table 5,,,
+45,mayzelle et al. 2015,2,california,SJV,various,grain and hay,,water quality,,N leaching,,,41,kg N ha-1 yr-1,,,,table 5,,,
+45,mayzelle et al. 2015,2,california,SJV,various,alfalfa,,water quality,,N leaching,,,30,kg N ha-1 yr-1,,alfalfa not considered major leaching source because no N applied,,table 5,,,
+45,mayzelle et al. 2015,2,california,SJV,various,vegetables & berries,,water quality,,N leaching,,,115,kg N ha-1 yr-1,,,,table 5,,,
+45,mayzelle et al. 2015,2,california,SJV,various,vineyard,,water quality,,N leaching,,,31,kg N ha-1 yr-1,,,,table 5,,,
+46,viers et al. 2012,1,california,SJV,various,citrus,,water quality,,N leaching,41,148,96.9,kg N ha-1 yr-1,,from older cited studies,,appendix table 1,,,
+46,viers et al. 2012,1,california,SJV,various,corn,,water quality,,N leaching,14.6,154,52.6,kg N ha-1 yr-1,,,,appendix table 1,,,
+46,viers et al. 2012,1,california,SJV,various,cotton,,water quality,,N leaching,26,35,30.5,kg N ha-1 yr-1,,,,appendix table 1,,,
+46,viers et al. 2012,1,california,SJV,various,orchard crop,almond,water quality,,N leaching,,,71,kg N ha-1 yr-1,,,,appendix table 1,,,
+46,viers et al. 2012,1,california,SJV,various,orchard crop,fruit,water quality,,N leaching,57,275,166,kg N ha-1 yr-1,,,,appendix table 1,,,
+46,viers et al. 2012,1,california,SJV,various,alfalfa,,water quality,,N leaching,4,67,29.8,kg N ha-1 yr-1,,,,appendix table 1,,,
+46,viers et al. 2012,1,california,SJV,various,cereal,wheat,water quality,,N leaching,7,26,16.5,kg N ha-1 yr-1,,,,appendix table 1,,,
+47,luo and zhang 2010,1,california,CV,various,orchard crop,almond,human health,,pesticide application,,,155,t yr-1,,modeled estimates for the entire CV,,table 4,,,
+47,luo and zhang 2010,1,california,CV,various,cotton,,human health,,pesticide application,,,100,t yr-1,,,,table 4,,,
+47,luo and zhang 2010,1,california,CV,various,citrus,,human health,,pesticide application,,,94,t yr-1,,,,table 4,,,
+47,luo and zhang 2010,1,california,CV,various,orchard crop,nut,human health,,pesticide application,,,87,t yr-1,,,,table 4,,,
+47,luo and zhang 2010,1,california,CV,various,alfalfa,,human health,,pesticide application,,,83,t yr-1,,,,table 4,,,
+47,luo and zhang 2010,1,california,CV,various,vineyard,,human health,,pesticide application,,,41,t yr-1,,,,table 4,,,
+48,dahlke et al. 2018,4,california,SV,yolo,alfalfa,,water supply,,groundwater recharge,4.9,83.3,56.5,in yr-1,deep percolation,includes percolation from rain,,table 2,,x,
+48,dahlke et al. 2018,4,california,SV,yolo,alfalfa,,water supply,,groundwater recharge,92,98,95.3,% deep percolation of applied water,,,,table 2,,,
+49,schauer and senay 2019,2,california,CV,various,orchard crop,almond,water supply,,water use,,,8590.7,m3 ha-1,,2008-2018 average for entire CV,,table 4,converted from ha-m with mean crop areas given in table 2,,
+49,schauer and senay 2019,2,california,CV,various,rice,,water supply,,water use,,,10490,m3 ha-1,,2008-2018 average for entire CV,,table 4,converted from ha-m with mean crop areas given in table 2,,
+49,schauer and senay 2019,2,california,CV,various,alfalfa,,water supply,,water use,,,7619.9,m3 ha-1,,2008-2018 average for entire CV,,table 4,converted from ha-m with mean crop areas given in table 2,,
+49,schauer and senay 2019,2,california,CV,various,vineyard,,water supply,,water use,,,5149,m3 ha-1,,2008-2018 average for entire CV,,table 4,converted from ha-m with mean crop areas given in table 2,,
+49,schauer and senay 2019,2,california,CV,various,orchard crop,walnut,water supply,,water use,,,8537.9,m3 ha-1,,2008-2018 average for entire CV,,table 4,converted from ha-m with mean crop areas given in table 2,,
+49,schauer and senay 2019,2,california,CV,various,cotton,,water supply,,water use,,,6548.7,m3 ha-1,,2008-2018 average for entire CV,,table 4,converted from ha-m with mean crop areas given in table 2,,
+49,schauer and senay 2019,2,california,CV,various,cereal,wheat,water supply,,water use,,,4010.8,m3 ha-1,,2008-2018 average for entire CV,,table 4,converted from ha-m with mean crop areas given in table 2,,
+49,schauer and senay 2019,2,california,CV,various,orchard crop,pistachio,water supply,,water use,,,4716.8,m3 ha-1,,2008-2018 average for entire CV,,table 4,converted from ha-m with mean crop areas given in table 2,,
+49,schauer and senay 2019,2,california,CV,various,corn,,water supply,,water use,,,6379.4,m3 ha-1,,2008-2018 average for entire CV,,table 4,converted from ha-m with mean crop areas given in table 2,,
+49,schauer and senay 2019,2,california,CV,various,citrus,,water supply,,water use,,,6597.3,m3 ha-1,,2008-2018 average for entire CV,,table 4,converted from ha-m with mean crop areas given in table 2,,
+50,kennedy et al. 2013,1,california,SV,yolo,tomato,,climate regulation,,N2O flux,0.8,3.9,2.1,kg N2O-N ha-1 yr-1,conventional vs. integrated fertility,,,fig 4,,,annual
+51,burger et al. 2016,1,california,SV,yolo,alfalfa,,climate regulation,,N2O flux,2.3,5.3,3.8,kg N2O-N ha-1 yr-1,stand age,,,table 3,,,annual
+52,guo et al. 2011,2,california,CV,various,alfalfa,,climate regulation,,N2O flux,,,4.1,kg N2O-N ha-1 yr-1,,averages for 2000-2008 for 49 california counties,DNDC model results,table 2,,,annual
+52,guo et al. 2011,2,california,CV,various,corn,,climate regulation,,N2O flux,,,5.3,kg N2O-N ha-1 yr-1,,,,table 2,,,annual
+52,guo et al. 2011,2,california,CV,various,cotton,,climate regulation,,N2O flux,,,15.4,kg N2O-N ha-1 yr-1,,,,table 2,,,annual
+52,guo et al. 2011,2,california,CV,various,orchard crop,,climate regulation,,N2O flux,,,0.5,kg N2O-N ha-1 yr-1,,,,table 2,,,annual
+52,guo et al. 2011,2,california,CV,various,citrus,,climate regulation,,N2O flux,,,0.1,kg N2O-N ha-1 yr-1,,,,table 2,,,annual
+52,guo et al. 2011,2,california,CV,various,cereal,oat,climate regulation,,N2O flux,,,0.7,kg N2O-N ha-1 yr-1,,,,table 2,,,annual
+52,guo et al. 2011,2,california,CV,various,rice,,climate regulation,,N2O flux,,,0,kg N2O-N ha-1 yr-1,,,,table 2,,,annual
+52,guo et al. 2011,2,california,CV,various,sunflower,,climate regulation,,N2O flux,,,1.9,kg N2O-N ha-1 yr-1,,,,table 2,,,annual
+52,guo et al. 2011,2,california,CV,various,other,horticultural,climate regulation,,N2O flux,,,2.4,kg N2O-N ha-1 yr-1,,,,table 2,,,annual
+52,guo et al. 2011,2,california,CV,various,vineyard,,climate regulation,,N2O flux,,,0.6,kg N2O-N ha-1 yr-1,,,,table 2,,,annual
+52,guo et al. 2011,2,california,CV,various,cereal,wheat,climate regulation,,N2O flux,,,1.3,kg N2O-N ha-1 yr-1,,,,table 2,,,annual
+53,dzurella et al. 2015,4,california,SJV,various,alfalfa,,water quality,,Nitrate Hazard Index,,,1,unitless,,"1 is low risk, 4 is high risk","based on rooting depth, overall N requirement, proportion N incorporated into aboveground biomass, correspondence of peak N demand with harvest",,,x,
+53,dzurella et al. 2015,4,california,SJV,various,vineyard,,water quality,,Nitrate Hazard Index,,,1,unitless,,,,,,,
+53,dzurella et al. 2015,4,california,SJV,various,field crops,,water quality,,Nitrate Hazard Index,,,2,unitless,,,,,,,
+53,dzurella et al. 2015,4,california,SJV,various,grain and hay,,water quality,,Nitrate Hazard Index,,,2,unitless,,,,,,,
+53,dzurella et al. 2015,4,california,SJV,various,orchard crop,,water quality,,Nitrate Hazard Index,,,2,unitless,,,,,,,
+53,dzurella et al. 2015,4,california,SJV,various,vegetables,,water quality,,Nitrate Hazard Index,,,2,unitless,,,,,,,
+53,dzurella et al. 2015,4,california,SJV,various,corn,,water quality,,Nitrate Hazard Index,,,3,unitless,,,,,,,
+53,dzurella et al. 2015,4,california,SJV,various,vegetables & berries,,water quality,,Nitrate Hazard Index,,,4,unitless,,,,,,,
+54,de gryze et al. 2010,2,california,SV,yolo,corn,,climate regulation,,N2O flux,0.6,4.1,2.6,kg N2O-N ha-1 yr-1,"field, tillage, cover crp",DAYCENT modeled estimates,,table 4,,,annual
+54,de gryze et al. 2010,2,california,SV,yolo,cotton,,climate regulation,,N2O flux,,,3.6,kg N2O-N ha-1 yr-1,,,,table 4,,,annual
+54,de gryze et al. 2010,2,california,SV,yolo,sunflower,,climate regulation,,N2O flux,,,3.2,kg N2O-N ha-1 yr-1,,,,table 4,,,annual
+54,de gryze et al. 2010,2,california,SV,yolo,tomato,,climate regulation,,N2O flux,2.1,4.4,3.6,kg N2O-N ha-1 yr-1,,,,table 4,,,annual
+54,de gryze et al. 2010,2,california,SV,yolo,cereal,wheat,climate regulation,,N2O flux,1.3,1.9,1.6,kg N2O-N ha-1 yr-1,,,,table 4,,,annual
+55,garland et al. 2014,1,california,SV,colusa,vineyard,,climate regulation,,N2O flux,0.5,3.5,2,lbs N2O-N acre-1 yr-1,"N application method, cover crop",cited in verhoeven et al. 2017,,table 1,,,annual
+56,verhoeven and six 2014,1,california,SV,sacramento,vineyard,,climate regulation,,N2O flux,1.4,1.8,1.6,lbs N2O-N acre-1 yr-1,"N application method, cover crop",cited in verhoeven et al. 2017,,table 1,,,annual
+57,burger (unpublished),4,california,SV,colusa,orchard crop,almond,climate regulation,,N2O flux,0.6,1.2,0.9,lbs N2O-N acre-1 yr-1,,cited in verhoeven et al. 2017,,table 1,,,annual
+58,pereira et al. 2016,1,california,SV,yolo,orchard crop,walnut,climate regulation,,N2O flux,1.1,1.6,1.4,lbs N2O-N acre-1 yr-1,fertilization rate,cited in verhoeven et al. 2017,,table 1,,,annual
+59,verhoeven et al (unpublished),4,california,SV,yolo,orchard crop,fruit,climate regulation,,N2O flux,,,1,lbs N2O-N acre-1 yr-1,,cited in verhoeven et al. 2017,,table 1,,,annual
+60,burger (unpublished),4,california,SV,yolo,tomato,,climate regulation,,N2O flux,,,1.7,lbs N2O-N acre-1 yr-1,,cited in verhoeven et al. 2017,,table 1,,,annual
+61,lazcano et al. 2016,1,california,SV,various,pasture,dairy forage,climate regulation,,N2O flux,5.5,12.4,7.9,lbs N2O-N acre-1 yr-1,rate of manure application,cited in verhoeven et al. 2017,,table 1,,,annual
+62,angst et al. 2014,1,california,NC,sonoma,pasture,dairy forage,climate regulation,,N2O flux,,,17,lbs N2O-N acre-1 yr-1,,cited in verhoeven et al. 2017,,table 1,,,annual
+63,zhu-barker et al. 2015,1,california,SV,solano,cereal,wheat,climate regulation,,N2O flux,1.2,1.9,1.5,lbs N2O-N acre-1 yr-1,,cited in verhoeven et al. 2017,,table 1,,,annual
+64,gaffney and yu 2003,4,california,SJV,various,corn,,air quality,,PM10 emissions,,,2998,tons yr-1,,california-wide,sum of land prep and harvest across the year,,,x,
+64,gaffney and yu 2003,4,california,SJV,various,alfalfa,,air quality,,PM10 emissions,,,4011,tons yr-1,,,,,,,
+64,gaffney and yu 2003,4,california,SJV,various,rice,,air quality,,PM10 emissions,,,6461,tons yr-1,,,7413,,,,
+64,gaffney and yu 2003,4,california,SJV,various,tomato,,air quality,,PM10 emissions,,,1789,tons yr-1,,,7442,,,,
+64,gaffney and yu 2003,4,california,SJV,various,vineyard,,air quality,,PM10 emissions,,,548,tons yr-1,,,634,,,,
+64,gaffney and yu 2003,4,california,SJV,various,cotton,,air quality,,PM10 emissions,,,5914,tons yr-1,,,605,,,,
+64,gaffney and yu 2003,4,california,SJV,various,citrus,,air quality,,PM10 emissions,,,290,tons yr-1,,,16094,,,,
+64,gaffney and yu 2003,4,california,SJV,various,orchard crop,almond,air quality,,PM10 emissions,,,16094,tons yr-1,,,,,,,
+65,krupa et al. 2011,1,california,SV,various,rice,,water quality,,NH4 load,-0.1,0.5,0.1,net kg NH4-N ha-1,,,,,,,
+65,krupa et al. 2011,1,california,SV,various,rice,,water quality,,PO4 load,-0.2,0.6,0,net kg PO4-P ha-1,,,,,,,
+65,krupa et al. 2011,1,california,SV,various,rice,,water quality,,DON load,-0.8,2.5,0.3,net kg DON ha-1,,,,,,,
+66,anderson et al. 2018,2,california,SSJDelta,various,tomato,,water supply,,annual ET,245,260,252.5,mm yr-1,,consumptive water use measured as ET,,,,x,
+66,anderson et al. 2018,2,california,SSJDelta,various,citrus,,water supply,,annual ET,750,761,755.5,mm yr-1,,,,,,,
+66,anderson et al. 2018,2,california,SSJDelta,various,vineyard,,water supply,,annual ET,261,263,262,mm yr-1,,,,,,,
+66,anderson et al. 2018,2,california,SSJDelta,various,sunflower,,water supply,,annual ET,800,804,802,mm yr-1,,,,,,,
+66,anderson et al. 2018,2,california,SSJDelta,various,corn,,water supply,,annual ET,215,279,247,mm yr-1,,,,,,,
+66,anderson et al. 2018,2,california,SSJDelta,various,alfalfa,,water supply,,annual ET,284,300,292,mm yr-1,,,,,,,
+66,anderson et al. 2018,2,california,SSJDelta,various,orchard crop,almond,water supply,,annual ET,392,605,498.5,mm yr-1,,,,,,,
+66,anderson et al. 2018,2,california,SSJDelta,various,rice,,water supply,,annual ET,591,623,607,mm yr-1,,,,,,,
+66,anderson et al. 2018,2,california,SSJDelta,various,riparian,,water supply,,annual ET,667,705,686,mm yr-1,,,,,,,
+66,anderson et al. 2018,2,california,SSJDelta,various,orchard crop,nut,water supply,,annual ET,467,683,584.5,mm yr-1,,not including almond,,,,,
+66,anderson et al. 2018,2,california,SSJDelta,various,pasture,,water supply,,annual ET,405,433,419,mm yr-1,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,grassland,,livestock production,,forage production,,,309,g m-2,,measured as peak herbaceous biomass,,,,x,
+67,eastburn et al. 2017,1,california,SV,yuba,other,savanna,livestock production,,forage production,,,203,g m-2,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,other,woodland,livestock production,,forage production,,,133,g m-2,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,grassland,,biodiversity,,species richness,,,11.7,count,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,other,savanna,biodiversity,,species richness,,,15.5,count,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,other,woodland,biodiversity,,species richness,,,16.5,count,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,grassland,,biodiversity,,species diversity,,,1.7,H,,shannon-weiner index,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,other,savanna,biodiversity,,species diversity,,,2.1,H,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,other,woodland,biodiversity,,species diversity,,,2.3,H,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,grassland,,biodiversity,,native richness,,,2.3,count,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,other,savanna,biodiversity,,native richness,,,4,count,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,other,woodland,biodiversity,,native richness,,,5.4,count,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,grassland,,water supply,soil quality,infiltration,,,28.9,cm hr-1,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,other,savanna,water supply,soil quality,infiltration,,,76.1,cm hr-1,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,other,woodland,water supply,soil quality,infiltration,,,109.6,cm hr-1,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,grassland,,soil quality,climate regulation,C storage,,,25.1,g kg-1,,total carbon in A horizon ,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,other,savanna,soil quality,climate regulation,C storage,,,41.4,g kg-1,,,,,,,
+67,eastburn et al. 2017,1,california,SV,yuba,other,woodland,soil quality,climate regulation,C storage,,,50.2,g kg-1,,,,,,,
+68,stein et al. 2014,1,california,SV,yuba,grassland,native,livestock production,,forage production,220.5,468.1,328.4,g m-2,,"different grazing treatments for each grassland type, including non-grazed treatment",,,,,
+68,stein et al. 2014,1,california,SV,yuba,grassland,native,biodiversity,,native cover,14.5,33.5,22.3,%,,,,,,,
+68,stein et al. 2014,1,california,SV,yuba,grassland,native,biodiversity,,species diversity,1.4,2.1,1.7,H,,,,,,,
+68,stein et al. 2014,1,california,SV,yuba,grassland,native,soil quality,,belowground net primary productivity,35.4,65.3,49.1,mg 250 cm-3,,,,,,,
+68,stein et al. 2014,1,california,SV,yuba,grassland,native,soil quality,,decomposition,0,72.8,16.4,mg day-1,,,,,,,
+68,stein et al. 2014,1,california,SV,yuba,grassland,native,soil quality,,C mineralization,72.1,501.9,311.3,umol CO2 min-1 g-1 soil,,,,,,,
+68,stein et al. 2014,1,california,SV,yuba,grassland,native,soil quality,,N mineralization,0,0.4,0.2,g N g soil-1 day-1,,,,,,,
+68,stein et al. 2014,1,california,SV,yuba,grassland,non-native forage,livestock production,,forage production,122.6,959.6,371.7,g m-2,,,,,,,
+68,stein et al. 2014,1,california,SV,yuba,grassland,non-native forage,biodiversity,,native cover,0,4.5,1.9,%,,,,,,,
+68,stein et al. 2014,1,california,SV,yuba,grassland,non-native forage,biodiversity,,species diversity,0.9,1.8,1.2,H,,,,,,,
+68,stein et al. 2014,1,california,SV,yuba,grassland,non-native forage,soil quality,,belowground net primary productivity,16.4,76.3,33,mg 250 cm-3,,,,,,,
+68,stein et al. 2014,1,california,SV,yuba,grassland,non-native forage,soil quality,,decomposition,0.7,92.1,21.1,mg day-1,,,,,,,
+68,stein et al. 2014,1,california,SV,yuba,grassland,non-native forage,soil quality,,C mineralization,68,632.3,297,umol CO2 min-1 g-1 soil,,,,,,,
+68,stein et al. 2014,1,california,SV,yuba,grassland,non-native forage,soil quality,,N mineralization,0.1,0.3,0.2,g N g soil-1 day-1,,,,,,,
+69,andreini et al. 2018,4,california,SV,yuba,rangeland,,water supply,,blue water use,,,10070624,m3 blue water,,"blue water is used for drinking, alfalfa/hay production, irrigated pasture, and can come from various sources",,,,,
+69,andreini et al. 2018,4,california,SV,yuba,rangeland,,water supply,,blue water productivity,,,12784,L blue water/kg live weight,,"green water is only that used by growing plants, only comes from rain. Green water use is essentially = ET when rainfall exceeds potential ET",,,,,
+69,andreini et al. 2018,4,california,SV,yuba,rangeland,,water supply,,blue water productivity,,,28106,L green water/kg live weight,,LW is cull cows and calves,,,,,
+69,andreini et al. 2018,4,california,SV,yuba,rangeland,,water supply,,green water consumption,,,12,% green water consumed by animal,,static modeling approach,,,,,
+69,andreini et al. 2018,4,california,SJV,madera,rangeland,,water supply,,blue water use,,,15477744,m3 blue water,,,,,,,
+69,andreini et al. 2018,4,california,SJV,madera,rangeland,,water supply,,blue water productivity,,,9104,L blue water/kg live weight,,,,,,,
+69,andreini et al. 2018,4,california,SJV,madera,rangeland,,water supply,,green water productivity,,,22102,L green water/kg live weight,,,,,,,
+69,andreini et al. 2018,4,california,SJV,madera,rangeland,,water supply,,green water consumption,,,17,% green water consumed by animal,,,,,,,
+70,salls et al. 2018,2,california,CV,various,rangeland,,soil quality,,erosion control,0,0.3,0.1,tons soil acre-1 yr-1 erosion potential,3 residual dry matter treatments (grazing intensity),Revised Universal Soil Loss Equation method,,,,,
+70,salls et al. 2018,2,california,CV,various,rangeland,,soil quality,,erosion control,0.1,4.6,1.2,proportion of land area where erosion potential exceeds T factor,,for rangeland productivity zones 3 (sac valley foothills) and 5 (scattered central and S California),,,,,
+71,grismer and asato 2012,2,california,NC,sonoma,vineyard,,water supply,,groundwater recharge,-153,241,18.7,mm groundwater use -yr,,groundwater use = irrigation requiremtn - deep percolation,,,,,
+71,grismer and asato 2012,2,california,NC,sonoma,vineyard,,water supply,,groundwater recharge,181,528,373.8,mm deep percolation -yr,,,,,,,
+71,grismer and asato 2012,2,california,NC,sonoma,other,oak woodland,water supply,,groundwater recharge,43.9,350.2,201.2,mm net groundwater use -yr,,for oak trees only (not woodland),,,,,
+71,grismer and asato 2012,2,california,NC,sonoma,other,oak woodland,water supply,,groundwater recharge,0,175.8,71.1,mm deep percolation -yr,,,,,,,
+71,grismer and asato 2012,2,california,NC,sonoma,grassland,,water supply,,groundwater recharge,52.3,283,179.8,mm deep percolation -yr,,,,,,,
+72,becchetti et al. 2016,1,california,SV,yuba,rangeland,,livestock production,,forage production,1071,4696,2971.4,lb ac-1 yr-1,,mean annual production,,table 4,,,
+72,becchetti et al. 2016,1,california,SJV,madera,rangeland,,livestock production,,forage production,,,2229,lb ac-1 yr-1,,mean annual production,,table 4,,,
+72,becchetti et al. 2016,1,california,SV,shasta,rangeland,,livestock production,,forage production,,,1498,lb ac-1 yr-1,,mean annual production,,table 4,,,
+72,becchetti et al. 2016,1,california,SJV,merced,rangeland,,livestock production,,forage production,639,2542,1613.3,lb ac-1 yr-1,,mean annual production,,table 4,,,
+72,becchetti et al. 2016,1,california,SJV,san joaquin,rangeland,,livestock production,,forage production,573,3843,1888.5,lb ac-1 yr-1,,mean annual production,,table 4,,,
+72,becchetti et al. 2016,1,california,SJV,fresno,rangeland,,livestock production,,forage production,829,1804,1185.8,lb ac-1 yr-1,,mean annual production,,table 4,,,
+72,becchetti et al. 2016,1,california,SV,tehama,rangeland,,livestock production,,forage production,521,2423,1260.7,lb ac-1 yr-1,,mean annual production,,table 4,,,
+72,becchetti et al. 2016,1,california,SV,solano,rangeland,,livestock production,,forage production,4001,5185,4593,lb ac-1 yr-1,,mean annual production,,table 4,,,
+72,becchetti et al. 2016,1,california,SV,napa,rangeland,,livestock production,,forage production,3454,5225,4588,lb ac-1 yr-1,,mean annual production,,table 4,,,
+72,becchetti et al. 2016,1,california,SV,yolo,rangeland,,livestock production,,forage production,1900,3094,2423.8,lb ac-1 yr-1,,mean annual production,,table 4,,,
+73,silver et al. 2018,1,california,SJV,tulare,rangeland,,soil quality,climate regulation,C storage,,,23.1,Mg C ha-1,,parameters used to calibrate DayCent - long term impact of C application,,,,,
+73,silver et al. 2018,1,california,SV,solano,rangeland,,soil quality,climate regulation,C storage,,,23.8,Mg C ha-1,,,,,,,
+73,silver et al. 2018,1,california,SV,yuba,rangeland,,soil quality,climate regulation,C storage,,,22.3,Mg C ha-1,,,,,,,
+73,silver et al. 2010,2,california,CV,various,rangeland,,soil quality,climate regulation,C storage,11,152,33,Mg C ha-1,0-10 cm,modeled with quadratic function,SE included,survey of measurements performed in CA rangelands,,,
+73,silver et al. 2010,2,california,CV,various,rangeland,,soil quality,climate regulation,C storage,16,158,58,Mg C ha-1,0-25 cm,,,,,,
+73,silver et al. 2010,2,california,CV,various,rangeland,,soil quality,climate regulation,C storage,28,200,90,Mg C ha-1,0-50 cm,,,,,,
+73,silver et al. 2010,2,california,CV,various,rangeland,,soil quality,climate regulation,C storage,47,246,140,Mg C ha-1,0-100 cm,,,,,,
+73,silver et al. 2010,2,california,CV,various,rangeland,woody,soil quality,climate regulation,C storage,,,101,Mg C ha-1,0-50 cm,,,,,,
+73,silver et al. 2010,2,california,CV,various,rangeland,nonwoody,soil quality,climate regulation,C storage,,,71,Mg C ha-1,0-50 cm,,,,,,
+73,silver et al. 2010,2,california,CV,various,rangeland,grazed,soil quality,climate regulation,C storage,,,89,Mg C ha-1,0-50 cm,,,,,,
+73,silver et al. 2010,2,california,CV,various,rangeland,ungrazed,soil quality,climate regulation,C storage,,,80,Mg C ha-1,0-50 cm,,,,,,
+74,huntsinger and oviedo 2014,1,california,CV,various,vernal pool,grazed,biodiversity,,change in native spp richness,-0.6,1.8,0.9,change in native spp richness over 2 years,"continuous, dry season, wet season, or no grazing @ pool edge, pool, or upland",adapted from marty 2005,,,,,
+74,huntsinger and oviedo 2015,1,california,CV,various,vernal pool,ungrazed,biodiversity,,change in native spp richness,-1.3,0.1,-0.6,change in native spp richness over 2 years,,,,,,,
+75,chaplin-kramer et al. 2011,4,california,CV,various,rangeland,,crop production,,pollination,,,2.5,billion $ 2007,value of pollination services from wild pollinators,,,,,x,
+75,chaplin-kramer et al. 2011,4,california,CV,various,rangeland,,crop production,,pollination,,,6.3,billion $ 2007,value of pollination services from all pollinators,,,,,,
+76,byrd et al. 2015,2,california,CV,various,rangeland,,soil quality,climate regulation,C storage,16.4,237.3,45,Mg C ha-1,,baseline ES for all rangeland habitat,,,,,
+76,byrd et al. 2015,2,california,CV,various,grassland,,soil quality,climate regulation,C storage,21.8,33.7,27.5,Mg C ha-1,,,,,,x,
+76,byrd et al. 2015,2,california,CV,various,rangeland,,water supply,,basin recharge,71,244,166.2,10x6 m3,,,,,,,
+76,byrd et al. 2015,2,california,CV,various,rangeland,,water supply,,runoff to basin,58,179,119.8,10x6 m3,,,,,,,
+78,brauer et al. 2015,1,california,SJV,various,wetland,,water quality,,% removal,,,75,% NO3-N removed,,,,,,,
+77,diaz et al. 2010,1,california,SJV,various,wetland,constructed,water quality,,% removal,86.9,96.3,93.2,% removal enterococci,differed in hydraulic residence time,,,,,,
+77,diaz et al. 2010,1,california,SJV,various,wetland,constructed,water quality,,% removal,68.8,95.2,81.4,% removal E. coli,,,,,,,
+78,brauer et al. 2015,1,california,SJV,various,wetland,,water quality,,denitrification potential,,702,151,mg NO3-N m-2 soil day-1,denitrification potential at 10 cm depth with no amendments,,,,,,
+79,diaz et al. 2012,1,california,CV,various,wetland,constructed,water quality,,% removal,-20,87,32.1,% removal total nitrogen,7 different cons wetlands in SJV,,,,,x,
+79,diaz et al. 2012,1,california,CV,various,wetland,constructed,water quality,,% removal,23,99,70.6,% removal NO3-N,,,,,,,
+79,diaz et al. 2012,1,california,CV,various,wetland,constructed,water quality,,% removal,-587,45,-114.1,% removal NH4-N,,,,,,,
+79,diaz et al. 2012,1,california,CV,various,wetland,constructed,water quality,,% removal,-20,66,11.1,% removal total phosphorus,,,,,,,
+79,diaz et al. 2012,1,california,CV,various,wetland,constructed,water quality,,% removal,-72,55,-2.6,% removal phosphate-P,,,,,,,
+79,diaz et al. 2012,1,california,CV,various,wetland,constructed,water quality,,% removal,-59,77,-7.6,% removal DOC,,,,,,,
+79,diaz et al. 2012,1,california,CV,various,wetland,constructed,water quality,,% removal,31,96,62,% removal total suspended solids,,,,,,,
+79,diaz et al. 2012,1,california,CV,various,wetland,constructed,water quality,,% removal,-1210,61,-187.7,% removal chlorophyll-a,,,,,,,
+79,diaz et al. 2012,1,california,CV,various,wetland,constructed,water quality,,% removal,-7,86,37.9,% removal volatile suspended solids,,,,,,,
+79,diaz et al. 2012,1,california,CV,various,wetland,constructed,water quality,,% removal,-2265,21,-386.7,% removal phaeophytin-a,,,,,,,
+79,diaz et al. 2012,1,california,CV,various,wetland,constructed,water quality,,% removal,-82,84,6.4,% removal turbidity,,,,,,,
+79,diaz et al. 2012,1,california,CV,various,wetland,constructed,water quality,,% removal,-550,95,-105,% removal E. coli,,,,,,,
+80,maynard et al. 2011,1,california,SJV,various,wetland,constructed,water quality,,% removal,-10,-4,-7,% removal DOC,,,,,,,
+80,maynard et al. 2011,1,california,SJV,various,wetland,constructed,water quality,,% removal,48,75,61.5,% removal particulate organic carbon,,,,,,,
+80,maynard et al. 2011,1,california,SJV,various,wetland,constructed,water quality,,% removal,-769,-221,-495,% removal chlorophyll-a,,,,,,,
+80,maynard et al. 2011,1,california,SJV,various,wetland,constructed,water quality,,% removal,82,98,90,% removal total suspended solids,,,,,,,
+80,maynard et al. 2011,1,california,SJV,various,wetland,constructed,water quality,climate regulation,C storage,2.7,10,6.4,kg m-2 yr-1,,average sediment accumulation rate,,table 2,,,
+80,maynard et al. 2011,1,california,SJV,various,wetland,constructed,water quality,climate regulation,C storage,0.2,0.3,0.2,kg m-2 yr-1,,average sediment carbon acuumulation rate,,table 2,,,
+80,maynard et al. 2011,1,california,SJV,various,wetland,constructed,water quality,climate regulation,C storage,,,16.5,kg m-2 yr-1,,long term average annual sedimentation rate,,table 2,,,
+81,linquist et al. 2011,1,california,CV,various,rice,,water quality,,total P,377,435,406,ug g-1,"conventional, organic",total P in soil,,,,,
+81,linquist et al. 2011,1,california,CV,various,wetland,,water quality,,total P,,,419,ug g-1,,total P in soil,,,,,
+82,reiter et al. 2015,2,california,SV,various,wetland,,biodiversity,,abundance,5,177,66.8,shorebird abundance,"wetland types - seasonally flooded marsh, summer water, watergrass, unmanaged freshwater wetland",point count surveys,,table 4,,,
+82,reiter et al. 2015,2,california,SV,various,vernal pool,,biodiversity,,abundance,,,14,shorebird abundance,,,,table 4,,,
+82,reiter et al. 2015,2,california,SV,various,wetland,,biodiversity,,species richness,13,67,35,shorebird richness,,,,table 4,,,
+82,reiter et al. 2015,2,california,SV,various,vernal pool,,biodiversity,,species richness,,,11,shorebird richness,,,,table 4,,,
+87,hemes et al. 2019,1,california,SSJDelta,,wetland,restored,climate regulation,,CH4 flux,40,48,44,g CH4-C m-2 yr-1,,all wetland sites,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,wetland,restored,climate regulation,,CO2 flux,,,-282,g CH4-C m-2 yr-1,,all wetland sites,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,wetland,restored,climate regulation,,CO2e flux,,,620,g CO2e-C m-2 yr-1,,CH4 GWP 28,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,wetland,restored,climate regulation,,Sustained Global Warming Potential,,,1785,g CO2e-C m-2 yr-1,,CH4 GWP 45,2017-18 data,,,,
+87,hemes et al. 2019,1,california,SSJDelta,,rice,,climate regulation,,CO2 flux,,,126,g CO2-C m-2 yr-1,,accounting for CO2 and CH4,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,rice,,climate regulation,,CH4 flux,,,12,g CH4-C m-2 yr-1,,accounting for CO2 and CH4,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,rice,,climate regulation,,CO2e flux,,,426,g CO2e-C m-2 yr-1,,CH4 GWP 25,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,rice,,climate regulation,,Global Warming Potential,,,1735,g CO2e-C m-2 yr-1,,CH4 GWP 28; includes harvest,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,pasture,,climate regulation,,CO2 flux,,,306,g CO2-C m-2 yr-1,,accounting for CO2 and CH4,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,pasture,,climate regulation,,CH4 flux,,,9,g CH4-C m-2 yr-1,,accounting for CO2 and CH4,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,pasture,,climate regulation,,CO2e flux,,,531,g CO2e-C m-2 yr-1,,CH4 GWP 25,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,pasture,,climate regulation,,Global Warming Potential,,,1460,g CO2e-C m-2 yr-1,,CH4 GWP 28; includes harvest,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,corn,Twitchell,climate regulation,,CO2 flux,,,292,g CO2-C m-2 yr-1,,accounting for CO2 and CH4,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,corn,Bouldin,climate regulation,,CO2 flux,,,826,g CO2-C m-2 yr-1,,accounting for CO2 and CH4,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,corn,Bouldin,climate regulation,,CH4 flux,,,2,g CH4-C m-2 yr-1,,accounting for CO2 and CH4,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,corn,Bouldin,climate regulation,,CO2e flux,,,876,g CO2e-C m-2 yr-1,,CH4 GWP 25,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,corn,Bouldin,climate regulation,,Global Warming Potential,,,5719,g CO2e-C m-2 yr-1,,CH4 GWP 28; includes harvest,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,alfalfa,Twitchell,climate regulation,,CO2 flux,,,-249,g CO2-C m-2 yr-1,,accounting for CO2 and CH4,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,alfalfa,Bouldin,climate regulation,,CO2 flux,,,-396,g CO2-C m-2 yr-1,,accounting for CO2 and CH4,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,alfalfa,Bouldin,climate regulation,,CH4 flux,,,1,g CH4-C m-2 yr-1,,accounting for CO2 and CH4,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,alfalfa,Bouldin,climate regulation,,CO2e flux,,,-371,g CO2e-C m-2 yr-1,,CH4 GWP 25,2017-18 data,,,,annual
+87,hemes et al. 2019,1,california,SSJDelta,,alfalfa,Bouldin,climate regulation,,Global Warming Potential,,,775,g C m-2 yr-1,,CH4 GWP 28; includes harvest,2017-18 data,,,,annual
+84,bachand et al. 2014,1,california,SV,yolo,rice,,water quality,,Net Ecosystem Production,1,1.1,1.1,NEP DOC,,"> 1 means source, <1 means sink",medians,fig 2,,,
+84,bachand et al. 2014,1,california,SV,yolo,rice,,water quality,,Net Ecosystem Production,0.5,1,0.7,NEP suspended particulate matter,,,,fig 2,,,
+84,bachand et al. 2014,1,california,SV,yolo,rice,,water quality,,Net Ecosystem Production,1.2,1.7,1.4,NEP MeHg,filtered and unfiltered,,,fig 2,,,
+84,bachand et al. 2014,1,california,SV,yolo,rice,,water quality,,Net Ecosystem Production,0.9,1,1,NEP u-THg,unfiltered total mercury,,,fig 2,,,
+84,bachand et al. 2014,1,california,SV,yolo,rice,,water quality,,MeHg load,0,1,0.4,g m-2 yr-1,,from this study and Heim et al. 2009),exported in surface water,,,,
+84,bachand et al. 2014,1,california,SV,yolo,corn,,water quality,,MeHg load,0.2,2.5,1.4,g m-2 yr-2,,from sassone et al. 2008,exported in surface water,,,,
+84,bachand et al. 2014,1,california,SV,yolo,tomato,,water quality,,MeHg load,0.3,1,0.7,g m-2 yr-3,,from heim et al. 2009,exported in surface water,,,,
+84,bachand et al. 2014,1,california,SV,yolo,wetland,,water quality,,MeHg load,0.2,5,2.1,g m-2 yr-4,,"from sassone et al. 2008, bergamaschi et al. 2011, and heim et al. 2009",exported in surface water,,,,
+85,ye et al. 2016,1,california,SV,sacramento,rice,,climate regulation,,CH4 flux,140,1927,564.5,kg CH4-C ha-1 yr-1,"SOC content, fertilization",,,table 2,,,annual
+85,ye et al. 2016,1,california,SV,sacramento,rice,,climate regulation,,N2O flux,1.6,10,5.3,kg N2O-N ha-1 yr-1,,,,table 2,,,annual
+86,chamberlain et al. 2018,1,california,SV,sacramento,wetland,,climate regulation,,CH4 flux,29,58,45.5,g CH4-C m-2 yr-1,"soil types, multiple years, wetland age (recently restored vs. mature)",,,,,,annual
+86,chamberlain et al. 2018,1,california,SV,sacramento,wetland,,climate regulation,,Sustained Global Warming Potential,-367,2656,1257.3,g CO2 eq m-2 yr-1,,sustained global warming potential for CH4,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CO2 flux,,,-448.6,g CO2-C m-2 yr-1,,,,,,,annual
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CO2 flux,,,-43.3,g CO2-C m-2 yr-1,,,,,,,annual
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CO2 flux,,,-565.3,g CO2-C m-2 yr-1,,,,,,,annual
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CO2 flux,,,-300,g CO2-C m-2 yr-1,,,,,,,annual
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CO2 flux,,,-314.5,g CO2-C m-2 yr-1,,,,,,,annual
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CO2 flux,,,-562.4,g CO2-C m-2 yr-1,,,,,,,annual
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CO2 flux,,,-362.7,g CO2-C m-2 yr-1,,,,,,,annual
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CO2 flux,,,-217.6,g CO2-C m-2 yr-1,,,,,,,annual
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CO2 flux,,,-553.6,g CO2-C m-2 yr-1,,,,,,,annual
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CO2 flux,,,-9.8,g CO2-C m-2 yr-1,,,,,,,annual
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CO2 flux,,,-411.9,g CO2-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CO2 flux,,,-442.1,g CO2-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CO2 flux,,,-467.7,g CO2-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CO2 flux,,,-737.5,g CO2-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CH4 flux,,,63.4,g CH4-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CH4 flux,,,58.8,g CH4-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CH4 flux,,,34,g CH4-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CH4 flux,,,57.2,g CH4-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CH4 flux,,,48.8,g CH4-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CH4 flux,,,27.7,g CH4-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CH4 flux,,,58.3,g CH4-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CH4 flux,,,55.7,g CH4-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CH4 flux,,,34.6,g CH4-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CH4 flux,,,45.7,g CH4-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CH4 flux,,,47,g CH4-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CH4 flux,,,49.3,g CH4-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CH4 flux,,,32.6,g CH4-C m-2 yr-1,,,,,,,
+83,hemes et al. 2018,1,california,SSJDelta,,wetland,vegetated,climate regulation,,CH4 flux,,,38.8,g CH4-C m-2 yr-1,,,,,,,
+88,tanner et al. 2017,1,california,SV,various,rice,,water quality,,MeHg load,4,21,10.6,g day-1,,unfiltered MeHg,,,,,
+89,windham-myers 2014,1,california,SV,yolo,rice,,water quality,,Net Ecosystem Accumulation,,,50,ng MeHg m-2 day-1,,during the summer,,,,,
+89,windham-myers 2014,1,california,SV,yolo,wetland,permanent,water quality,,Net Ecosystem Accumulation,,,5,ng MeHg m-2 day-1,,summer,,,,,
+89,windham-myers 2014,1,california,SV,yolo,rice,,water quality,,Net Ecosystem Accumulation,,,2,ng MeHg m-2 day-1,,winter,,,,,
+89,windham-myers 2014,1,california,SV,yolo,wetland,permanent,water quality,,Net Ecosystem Accumulation,,,1,ng MeHg m-2 day-1,,winter,,,,,
+89,windham-myers 2014,1,california,SV,yolo,wetland,seasonal,water quality,,Net Ecosystem Accumulation,,,2,ng MeHg m-2 day-1,,winter,,,,,
+90,stringfellow et al. 2010,1,california,SJV,stanislaus,riparian,,water quality,,% removal,-56,60,0.4,% TSS,riparian function by CRAM criteria,calculated from % of inlet concentration,,,,,
+90,stringfellow et al. 2010,1,california,SJV,stanislaus,riparian,,water quality,,% removal,1,65,29,% soluble reactive phosphate ,,,,,,,
+90,stringfellow et al. 2010,1,california,SJV,stanislaus,riparian,,water quality,,% removal,-47,29,5.8,% NO3-N,,,,,,,
+91,ackerman et al. 2010,1,california,SV,yolo,rice,,water quality,,bioaccumulation,0.6,1.5,0.9,ug MeHg g-1 dw,"white vs. wild rice, measurement location, corixidae vs. notonectidae",invertebrate concentration,,,,,
+91,ackerman et al. 2010,1,california,SV,yolo,wetland,,water quality,,bioaccumulation,0.8,2.6,1.4,ug MeHg g-1 dw,,invertebrate concentration,,,,,
+92,springborn et al. 2011,1,california,SV,yolo,wetland,,water quality,,Hg flux,-40.9,384.9,55.9,kg Hg yr-1,,annual mass flux,,,,,
+92,springborn et al. 2011,1,california,SV,yolo,wetland,,water quality,,TSS flux,-49.5,88.2,-1.3,10^4 t TSS yr-1,,annual mass flux,,,,,
+93,duffy and kahara 2011,4,california,CV,various,wetland,,water supply,,potential flood storage capacity,,,4159,10^6 m^3,,,,,,,
+93,duffy and kahara 2011,4,california,CV,various,riparian,,water supply,,potential flood storage capacity,,,2182,10^6 m^3,,,,,,,
+93,duffy and kahara 2011,4,california,CV,various,vernal pool,,water supply,,potential flood storage capacity,,,2140,10^6 m^3,,,,,,,
+93,duffy and kahara 2011,4,california,CV,various,wetland,,water quality,,denitrification potential,,,349,kg day-1,,NO3-N attenuation,,,,,
+94,eichelmann et al. 2018,1,california,SV,sacramento,wetland,,water supply,,annual ET,903,1251,1069.8,mm yr-1,,average 2013-2016,,table 5,,x,
+94,eichelmann et al. 2018,1,california,SV,sacramento,rice,,water supply,,annual ET,911,1031,974.8,mm yr-1,,,,table 5,,,
+94,eichelmann et al. 2018,1,california,SV,sacramento,alfalfa,,water supply,,annual ET,877,924,901.7,mm yr-1,,,,table 5,,,
+94,eichelmann et al. 2018,1,california,SV,sacramento,pasture,grazed,water supply,,annual ET,560,745,652.5,mm yr-1,,,,table 5,,,
+95,miller et al. 2008,1,california,SV,sacramento,wetland,,soil quality,,subsidence reversal,-0.1,6.1,3.5,cm yr-1,wetland structure; flooding depth (25 cm or 55 cm),sediment accretion rate,,,,,
+96,baldocchi et al. 2016,1,california,SV,sacramento,rice,,water supply,,annual ET,982,1155,1064.7,mm yr-1,flooded area,,,,,,
+97,marvin-dipasquale et al. 2014,1,california,CV,various,rice,,water quality,,accumulation in sediment,,,330,ng THg g-1 dw,,,,,,,
+97,marvin-dipasquale et al. 2014,1,california,CV,various,rice,,water quality,,accumulation in sediment,,,2.2,ng MeHg g-1 dw,,,,,,,
+97,marvin-dipasquale et al. 2014,1,california,CV,various,wetland,,water quality,,accumulation in sediment,,,142,ng THg g-1 dw,,,,,,,
+97,marvin-dipasquale et al. 2014,1,california,CV,various,wetland,,water quality,,accumulation in sediment,,,1.5,ng MeHg g-1 dw,,,,,,,
+98,dybala et al. 2019,1,california,SV,sacramento,riparian,,climate regulation,,C storage,68.6,114.8,87.9,Mg C ha-1,remnant forest vs. planted forest vs. regenerating,comparison to baseline of recently replanted forest,biomass carbon,table 2,,,
+98,dybala et al. 2019,1,california,SV,sacramento,riparian,,soil quality,climate regulation,C storage,25,38.7,31.9,Mg C ha-1,,soil carbon,,table 2,,,
+98,dybala et al. 2019,1,california,SV,sacramento,riparian,,biodiversity,,bird density index,22.9,31.5,26.5,individuals ha-1,,,,table 2,,,
+98,dybala et al. 2019,1,california,SV,sacramento,riparian,,biodiversity,,species diversity,7.5,12.1,9.3,inverse Simpson,,,,table 2,,,
+99,matzek et al. 2016,1,california,SV,various,riparian,,soil quality,climate regulation,C storage,25.7,43.2,32.3,Mg C ha-1,reforested stand age and remnant,soil carbon,,,,,
+99,matzek et al. 2016,1,california,SV,various,riparian,,soil quality,,soil N stock,2.1,2.9,2.4,Mg ha-1,,,,,,,
+99,matzek et al. 2016,1,california,SV,various,riparian,,soil quality,,N mineralization,586,1180,938.8,ug N g-1 N day-1,,rate of production of available N per unit soil N over 60 days,,,,,
+100,williams 2011,1,california,SV,tehama,riparian,,crop production,,pollination,19,58,40.6,Bee species richness,remnant vs. restored riparian,"areas for sampling sites differed, but richness/abundance indices by area could be calculated as areas are provided",,table 2,,,
+100,williams 2011,1,california,SV,tehama,riparian,,crop production,,pollination,225,702,418.4,Bee abundance,,net survey and pan traps,,table 2,,,
+100,williams 2011,1,california,SV,tehama,riparian,,crop production,,pollination,21,47,33.7,Flower species richness,,"values for flower richness/abundance seemed swapped, I corrected here",,table 2,,,
+100,williams 2011,1,california,SV,tehama,riparian,,crop production,,pollination,317,2458,1101.9,Flower abundance,,quadrats,,table 2,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,species diversity,1.5,1.5,1.5,Plant H,sampling treatment riparian bench or canal edge,Shannon diversity index,,table 1,,x,
+101,young-mathews et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,species richness,8.4,20,13,Plant species richness,cropland v rangeland adjacent,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,native cover,2.1,5.1,3.6,% cover herbaceous natives,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,weed cover,29.7,69.2,43.2,% cover noxious weeds,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,species diversity,1.8,1.9,1.9,Nematode H,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,species richness,15.4,16,15.7,Nematode taxa richness,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,abundance,309,431,370,100 nematodes g-1 soil,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,species diversity,3.1,3.1,3.1,PLFA biomarker H,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,species richness,36,39.6,37.8,PLFA biomarker richness,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,other,cropland,biodiversity,,species diversity,,,0.8,Plant H,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,other,cropland,biodiversity,,species richness,,,4.5,Plant species richness,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,rangeland,,biodiversity,,species richness,,,8.8,Plant species richness,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,other,cropland,biodiversity,,native cover,,,0.6,% cover herbaceous natives,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,other,cropland,biodiversity,,weed cover,,,5.8,% cover noxious weeds,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,rangeland,,biodiversity,,weed cover,,,59,% cover noxious weeds,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,other,cropland,biodiversity,,species diversity,,,1.8,Nematode H,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,other,cropland,biodiversity,,species richness,,,16,Nematode taxa richness,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,other,cropland,biodiversity,,abundance,,,592,100 nematodes g-1 soil,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,other,cropland,biodiversity,,species diversity,,,3.1,PLFA biomarker H,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,other,cropland,biodiversity,,species richness,,,39.9,PLFA biomarker richness,,,,table 1,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,riparian,,climate regulation,soil quality,C storage,114,192,153,Mg C ha-1,,above and belowground combined,,table 2,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,other,cropland,climate regulation,soil quality,C storage,,,89,Mg C ha-1,,,,table 2,,,
+101,young-mathews et al. 2010,1,california,SV,yolo,rangeland,,climate regulation,soil quality,C storage,,,105,Mg C ha-1,,,,table 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,species diversity,0.4,0.6,0.5,Plant H,multiple years,riparian corridor part of an organic farmscape,,table 1,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,biodiversity,,species diversity,0.1,0.3,0.2,Plant H,,,,table 1,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,species richness,,,10,Plant species richness,,,,table 1,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,biodiversity,,species richness,8,10,9,Plant species richness,,,,table 1,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,species diversity,0.1,0.1,0.1,Earthworm H,,,,table 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,biodiversity,,species diversity,0,0.3,0.1,Earthworm H,,,,table 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,species richness,1,1,1,Earthworm richness,,,,table 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,biodiversity,,species richness,0,3,1.5,Earthworm richness,,,,table 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,species diversity,,,0.2,Nematode H,,,,table 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,biodiversity,,species diversity,0.2,0.3,0.2,Nematode H,,,,table 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,species richness,,,15,Nematode richness,,,,table 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,biodiversity,,species richness,13,13,13,Nematode richness,,,,table 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,species richness,,,43,PLFA biomarker richness,,,,table 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,biodiversity,,species richness,40,45,42.5,PLFA biomarker richness,,,,table 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,native cover,,,153,Plant % cover,,,,fig 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,biodiversity,,native cover,95,100,97.5,Plant % cover,,,,fig 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,abundance,,,294,Earthworms m-2,,,,fig 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,biodiversity,,abundance,55,118,86.5,Earthworms m-2,,,,fig 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,abundance,,,373,100 nematodes g-1 soil,,,,fig 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,biodiversity,,abundance,728,859,793.5,100 nematodes g-1 soil,,,,fig 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,biodiversity,,abundance,,,49,nmol PLFA biomarkers g dry soil-1,,,,fig 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,biodiversity,,abundance,35,37,36,nmol PLFA biomarkers g dry soil-1,,,,fig 2,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,climate regulation,soil quality,C storage,,,159,Mg C ha-1,,above and belowground,,table 3,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,climate regulation,soil quality,C storage,43,43,43,Mg C ha-1,,,,table 3,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,soil quality,climate regulation,C storage,26.8,32.3,29.6,Mg C ha-1,0-15 and 15-30cm depths,total soil C,,table 3,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,soil quality,climate regulation,C storage,20.2,22.4,21.3,Mg C ha-1,,,,table 3,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,soil quality,,aggregation,,,1077,um,,Mean Weight Diameter,,table 3,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,soil quality,,aggregation,965,982,973.5,um,,,,table 3,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,soil quality,,Potentially Mineralizable N,9.4,83.4,35.9,ug N g-1,0-15 and 15-30cm depths,,,table 4,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,soil quality,,Potentially Mineralizable N,3.5,24.5,10.8,ug N g-1,,,,table 4,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,soil quality,,Microbial biomass C,138.4,380.1,259.3,ug g-1,0-15 and 15-30cm depths,,,table 4,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,soil quality,,Microbial biomass C,184.7,242.3,213.1,ug g-1,,,,table 4,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,climate regulation,,CO2 flux,107.7,112.5,110.1,mg CO2-C m-2 hr-1,,,,fig 5,,,hourly
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,climate regulation,,CO2 flux,48,161.5,113,mg CO2-C m-2 hr-1,,,,fig 5,,,hourly
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,climate regulation,,N2O flux,,,4.8,ug N2O-N m-2 hr-1,,,,fig 5,,,hourly
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,climate regulation,,N2O flux,5.2,8.7,7,ug N2O-N m-2 hr-1,,,,fig 5,,,hourly
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,water supply,soil quality,infiltration,,,2.3,cm min-1,,,,fig 6,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,water supply,soil quality,infiltration,0.5,0.7,0.6,cm min-1,,,,fig 6,,,
+102,smukler et al. 2010,1,california,SV,yolo,riparian,,water quality,,DOC,12,22.4,17.9,mg L-1,30cm and 60cm,lysimeter,,fig 6,,,
+102,smukler et al. 2010,1,california,SV,yolo,tomato,,water quality,,DOC,0.5,13.1,8.7,mg L-1,,,,fig 6,,,
+103,webster et al. 2018,1,california,SV,various,riparian,,water quality,,denitrification potential,,,188.6,ng N [g dry substrate]-1 h-1,,"varying SOM, % cover, bank slope",,,,,
+104,kochendorfer et al. 2011,1,california,SJV,san joaquin,riparian,,water supply,,annual ET,,,1095,mm yr-1,,,,text,,,
+104,kochendorfer et al. 2011,1,california,SJV,san joaquin,riparian,,climate regulation,,CO2 flux,,,-310,g CO2-C m-2 yr-1,,cumulative net ecosystem exchange,,text,,,
+105,hogg and daane 2011,1,california,SV,napa,riparian,,biodiversity,,abundance,7,15,11,spiders sample-1,,transect on various sampling dates,,,,,
+105,hogg and daane 2011,1,california,SV,napa,vineyard,,biodiversity,,abundance,2,7,4.5,spiders sample-1,,,,,,,
+105,hogg and daane 2011,1,california,SV,napa,riparian,,biodiversity,,species richness,,,35,spider species richness,,,,,,,
+105,hogg and daane 2011,1,california,SV,napa,vineyard,,biodiversity,,species richness,,,36,spider species richness,,,,,,,
+106,hinshaw and dahlgren 2016,1,california,SJV,stanislaus,riparian,,climate regulation,,N2O flux,0.9,3.8,2.6,mg N2O m-2 h-1,3 sites,"sample location inside riparian, outside riparian, bank, benthic sediment",,fig 2,,,hourly
+107,homyak and sickman 2014,1,california,SJV,tulare,chaparral,,air quality,,NOx flux,0.4,1.4,0.9,kg NO-N ha-1 yr-1,,,,,,,annual
+108,nahlik and fennessy 2016,,western U.S.,,,wetland,,soil quality,climate regulation,C storage,,,216,Mg C ha-1,0-120 cm,,,,,,
+109,valach et al. 2020,,california,SSJDelta,various,wetland,marsh,climate regulation,,CO2 flux,,,-562,g C m-2 yr-1,,rapid trajectory wetlands in year 2,,,,,
+109,valach et al. 2020,,california,SSJDelta,various,wetland,marsh,climate regulation,,CO2 flux,,,-133,g C m-2 yr-1,,slow trajectory wetlands (with deeper water or larger open channels) in year 2,,,,,
