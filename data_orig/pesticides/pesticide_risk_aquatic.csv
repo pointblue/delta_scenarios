@@ -1,0 +1,39 @@
+ChemName,Pesticides Type,Toxicity (ug/L),Rank of Toxicity,Rank of Water solubility,Rank of Koc,Rank of Sediment,aquatic_risk
+(S)-METOLACHLOR,Herbicide,8,High,High,Moderate,Possible,high
+ABAMECTIN,Insecticide,0.21,Very high,Low,High,Potential,high
+BIFENTHRIN,Insecticide,0.00397,Very high,Very Low,Very High,Potential,high
+CHLOROTHALONIL,Fungicide,26.3,High,Very Low,High,Potential,high
+CHLORPYRIFOS,Insecticide,0.035,Very high,Low,High,Potential,high
+CYFLUTHRIN,Insecticide,0.002,Very high,Very Low,Very High,Potential,high
+CYPERMETHRIN,Insecticide,0.0047,Very high,Very Low,Very High,Potential,high
+DELTAMETHRIN,Insecticide,0.0017,Very high,Very Low,Very High,Potential,high
+DIAZINON,Insecticide,2,Very high,Moderate,High,Potential,high
+DIURON,Herbicide,2.4,High,Moderate,Moderate,Possible,high
+ESFENVALERATE,Insecticide,0.07,Very high,Very Low,High,Potential,high
+FIPRONIL,Insecticide,0.14,Very high,Low,Moderate,Possible,high
+LAMBDA-CYHALOTHRIN,Insecticide,0.0041,Very high,Very Low,Very High,Potential,high
+MALATHION,Insecticide,0.5,Very high,High,High,Potential,high
+MANCOZEB,Fungicide,9.5,High,Low,High,Potential,high
+MANEB,Fungicide,33,High,Low,Moderate,Possible,high
+OXYFLUORFEN,Herbicide,0.29,Very high,Very Low,Very High,Potential,high
+PARAQUAT DICHLORIDE,Herbicide,0.55,Very high,Very high,Very High,Potential,high
+PENDIMETHALIN,Herbicide,5.2,High,Very Low,Very High,Potential,high
+PERMETHRIN,Insecticide,0.019,Very high,Very Low,Very High,Potential,high
+PROPANIL,Herbicide,16,High,High,Moderate,Possible,high
+PROPARGITE,Insecticide,31,High,Very Low,High,Potential,high
+PYRACLOSTROBIN,Fungicide,4.16,High,Low,High,Potential,high
+SIMAZINE,Herbicide,36,High,Low,Moderate,Possible,high
+TRIFLURALIN,Herbicide,8.4,High,Very Low,High,Potential,high
+ZIRAM,Fungicide,8,High,Moderate,Moderate,Possible,high
+PHMB*,Fungicide,25.4,High,,,Unlikely,high
+Tralomethrin*,Insecticide,1.6,High,Very Low,Very High,Potential,high
+BROMACIL,Herbicide,6.8,High,High,Low,Unlikely,moderate
+CAPTAN,Fungicide,26.2,High,Low,Moderate,Possible,moderate
+CARBARYL,Insecticide,1.7,High,High,Moderate,Possible,moderate
+DIMETHOATE,Insecticide,43,High,Very high,Low,Unlikely,moderate
+HEXAZINONE,Herbicide,6.8,High,Very high,Low,Unlikely,moderate
+IMIDACLOPRID,Insecticide,38,High,High,Moderate,Possible,moderate
+INDOXACARB,Insecticide,24,High,Very Low,High,Potential,moderate
+METHOMYL,Insecticide,19,High,Very high,Low,Unlikely,moderate
+NALED,Insecticide,8,High,Low,Moderate,Possible,moderate
+NORFLURAZON,Herbicide,9.7,High,Moderate,Moderate,Possible,moderate
