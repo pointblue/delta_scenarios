@@ -6,6 +6,7 @@
 .httr-oauth
 .DS_Store
 *.pdf
+*.zip
 
 # GIS data & figures too large to store on Github
 GIS/
