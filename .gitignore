@@ -1,11 +1,27 @@
 .Rproj.user*
+.Rproj.user
 .Rhistory
 .Rdata
 .RDataTmp
 .httr-oauth
 .DS_Store
+*.pdf
+
+# GIS data & figures too large to store on Github
 GIS/
 fig/
+
+#model objects & supporting data stored elsewhere
+data/riparian_landbirds/
+data/waterbirds/
+data_to_share/
+data_orig/pesticides/pur2014/
+data_orig/pesticides/pur2015/
+data_orig/pesticides/pur2016/
+data_orig/pesticides/pur2017/
+data_orig/pesticides/pur2018/
+
+# tmp and intermediate files
+archive/
 R/devel/
-data_orig/
-.Rproj.user
+output/orig_Task4_results/
