@@ -158,6 +158,7 @@ write_csv(scores_change_all, 'output/netchange_scores.csv')
 # PLOT CHANGE----------
 library(patchwork)
 library(showtext)
+library(ggtext)
 font_add_google('Source Sans Pro', 'sourcesans')
 
 # define metric category order
@@ -193,13 +194,13 @@ netchange = read_csv('output/netchange_scores.csv', col_types = cols()) %>%
     # clarify metric labels
     METRIC = recode(
       METRIC,
-      'Agricultural Jobs' = 'Agricultural Jobs\n(FTE/yr)',
-      'Annual Wages' = 'Annual Wages\n(USD/FTE, hundreds)',
-      'Gross Production Value' = 'Gross Production Value\n(USD/yr, millions)',
-      'Critical Pesticides' = 'Critical Pesticides\n(MT/yr)',
-      'Groundwater Contaminant' = 'Groundwater Contaminants\n(MT/yr)',
-      'Risk to Aquatic Organisms' = 'Risk to Aquatic Organisms\n(MT/yr)',
-      'N loading' = 'Nitrogen loading\n(MT/yr, hundreds)',
+      'Agricultural Jobs' = 'Agricultural Jobs\n(FTE per yr)',
+      'Annual Wages' = 'Annual Wages\n(USD per FTE, hundreds)',
+      'Gross Production Value' = 'Gross Production Value\n(USD per yr, millions)',
+      'Critical Pesticides' = 'Critical Pesticides<br>(MT yr<sup>-1</sup>)',
+      'Groundwater Contaminant' = 'Groundwater Contaminants<br>(MT yr<sup>-1</sup>)',
+      'Risk to Aquatic Organisms' = 'Risk to Aquatic Organisms<br>(MT yr<sup>-1</sup>)',
+      'N loading' = 'Nitrogen loading<br>(MT yr<sup>-1</sup>, hundreds)',
       Drought = 'Drought\n(mean score)',
       Flood = 'Flood\n(mean score)',
       Heat = 'Heat\n(mean score)',
@@ -283,7 +284,8 @@ part1 = netchange %>%
 part2 = netchange %>%
   filter(METRIC_CATEGORY == 'Water Quality') %>%
   plot_change_bar(plus = 0.05, nudge_plus = 10, nudge_star = 5, star = TRUE) +
-  labs(x = NULL, y = NULL, title = 'Water Quality')
+  labs(x = NULL, y = NULL, title = 'Water Quality') +
+  theme(axis.text.y = ggtext::element_markdown())
   # xlim(-100, 100)
 
 part3 = netchange %>%
